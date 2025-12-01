@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Series Index</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <h1>Series Index</h1>
+    <p class="subtitle">
+      Browse all entries grouped by <code>series</code>. Each entry shows its title,
+      sequence, number, and date, and links to the detail view.
+    </p>
+
+    <div id="seriesContainer"></div>
+  </main>
+
+  <script>
+    async function loadIndex() {
+      const container = document.getElementById("seriesContainer");
+
+      let entries;
+      try {
+        const res = await fetch("sample_entries.json");
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+        entries = await res.json();
+      } catch (e) {
+        console.error(e);
+        container.textContent =
+          "Failed to load sample_entries.json. Ensure it is in the same folder and served over HTTP.";
+        return;
+      }
+
+      // Group by series
+      const bySeries = new Map();
+      for (const e of entries) {
+        const series = e.series || "(no series)";
+        if (!bySeries.has(series)) bySeries.set(series, []);
+        bySeries.get(series).push(e);
+      }
+
+      const seriesNames = Array.from(bySeries.keys()).sort((a, b) =>
+        a.localeCompare(b)
+      );
+
+      for (const series of seriesNames) {
+        const section = document.createElement("section");
+        section.className = "series-block";
+
+        const h2 = document.createElement("h2");
+        h2.textContent = series;
+        section.appendChild(h2);
+
+        const list = document.createElement("ul");
+        list.className = "index-list";
+
+        const items = bySeries.get(series).slice().sort((a, b) => {
+          const sa = a.seq != null ? Number(a.seq) : Number.POSITIVE_INFINITY;
+          const sb = b.seq != null ? Number(b.seq) : Number.POSITIVE_INFINITY;
+          if (sa !== sb) return sa - sb;
+          return String(a.id).localeCompare(String(b.id));
+        });
+
+        for (const item of items) {
+          const li = document.createElement("li");
+          li.className = "index-entry";
+
+          const a = document.createElement("a");
+          a.className = "index-link";
+          a.href = "detail.html?id=" + encodeURIComponent(String(item.id));
+
+          const titleDiv = document.createElement("div");
+          titleDiv.className = "index-title";
+
+          const number = item.number != null ? String(item.number).trim() : "";
+          const title = item.title || item.id || "(untitled)";
+          const heading = (number ? number + " " : "") + title;
+          titleDiv.textContent = heading;
+
+          const metaDiv = document.createElement("div");
+          metaDiv.className = "index-meta";
+          const seqText = item.seq != null ? item.seq : "∅";
+          const numText = number || "∅";
+          const dateText = item.date || "∅";
+
+          metaDiv.textContent =
+            "Seq: " + seqText + " · No: " + numText + " · Date: " + dateText;
+
+          a.appendChild(titleDiv);
+          a.appendChild(metaDiv);
+          li.appendChild(a);
+          list.appendChild(li);
+        }
+
+        section.appendChild(list);
+        container.appendChild(section);
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", loadIndex);
+  </script>
+</body>
+</html>

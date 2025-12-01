@@ -216,3 +216,53 @@ body.lines-hidden .line-num {
 }
 
 span {display: none}
+
+/*----Browse-----*/
+
+/* Series index page */
+.series-block {
+  margin-bottom: 28px;
+}
+
+.series-block h2 {
+  margin: 12px 0 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.index-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.index-entry {
+  margin-bottom: 6px;
+}
+
+.index-link {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.1s ease, box-shadow 0.1s ease;
+}
+
+.index-link:hover {
+  background: #fafafa;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.index-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.index-meta {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2px;
+}
