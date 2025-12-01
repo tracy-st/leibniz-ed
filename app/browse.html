@@ -48,12 +48,33 @@
 
       for (const series of seriesNames) {
         const section = document.createElement("section");
-        section.className = "series-block";
+        section.className = "series-block collapsed"; // start collapsed
 
-        const h2 = document.createElement("h2");
-        h2.textContent = series;
-        section.appendChild(h2);
+        // Header with toggle button
+        const header = document.createElement("button");
+        header.type = "button";
+        header.className = "series-toggle";
+        header.setAttribute("aria-expanded", "false");
 
+        const arrow = document.createElement("span");
+        arrow.className = "series-arrow";
+        arrow.textContent = "▶";
+
+        const label = document.createElement("span");
+        label.className = "series-label";
+        label.textContent = series;
+
+        header.appendChild(arrow);
+        header.appendChild(label);
+
+        header.addEventListener("click", () => {
+          const collapsed = section.classList.toggle("collapsed");
+          header.setAttribute("aria-expanded", String(!collapsed));
+        });
+
+        section.appendChild(header);
+
+        // List of entries in this series
         const list = document.createElement("ul");
         list.className = "index-list";
 

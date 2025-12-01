@@ -215,7 +215,8 @@ body.lines-hidden .line-num {
   display: none;
 }
 
-span {display: none}
+/*----Hide Encoding----*/
+.line-text span {display: none}
 
 /*----Browse-----*/
 
@@ -266,3 +267,90 @@ span {display: none}
   color: #666;
   margin-top: 2px;
 }
+
+/* Series index page (collapsible) */
+.series-block {
+  margin-bottom: 20px;
+}
+
+/* Toggle header */
+.series-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 4px;
+  border: none;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.series-toggle:hover {
+  background: #efeff2;
+  border-radius: 4px;
+}
+
+.series-arrow {
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: transform 0.15s ease;
+}
+
+.series-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* Rotate arrow when expanded (i.e., not collapsed) */
+.series-block:not(.collapsed) .series-arrow {
+  transform: rotate(90deg);
+}
+
+/* Hide list when collapsed */
+.series-block.collapsed .index-list {
+  display: none;
+}
+
+/* Existing index styles (for context; keep as you had them)
+   Adjust if you want tighter spacing when expanded. */
+.index-list {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+}
+
+.index-entry {
+  margin-bottom: 6px;
+}
+
+.index-link {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.1s ease, box-shadow 0.1s ease;
+}
+
+.index-link:hover {
+  background: #fafafa;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.index-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.index-meta {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2px;
+}
+
