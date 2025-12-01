@@ -24,6 +24,10 @@
         <input type="checkbox" id="caseSensitive" />
         Case sensitive
       </label>
+      <label>
+        <input type="checkbox" id="toggleLineNumbers" checked />
+        Show line numbers
+      </label>
     </div>
 
     <div id="status" class="muted">Loading data…</div>
@@ -162,7 +166,6 @@
         const lineNum = extractLineNum(rawLine);
         const cleanLine = stripLineNum(rawLine);
 
-        // line row with number + text
         const row = document.createElement("div");
         row.className = "line-row";
 
@@ -186,11 +189,28 @@
             q: query,
             cs: caseSensitive ? "1" : "0",
           });
-          window.location.href = "detail.html?" + params.toString();
+          const hash = lineNum ? "#" + encodeURIComponent(lineNum) : "";
+          window.location.href = "detail.html?" + params.toString() + hash;
         });
 
         list.appendChild(li);
       });
+    }
+
+    function setupLineToggle(initialShow) {
+      const toggle = document.getElementById("toggleLineNumbers");
+      const applyState = () => {
+        if (toggle.checked) {
+          document.body.classList.remove("lines-hidden");
+        } else {
+          document.body.classList.add("lines-hidden");
+        }
+      };
+      if (typeof initialShow === "boolean") {
+        toggle.checked = initialShow;
+      }
+      toggle.addEventListener("change", applyState);
+      applyState();
     }
 
     function setupSearch(initialQuery, initialCaseSensitive) {
@@ -233,6 +253,7 @@
       const { q, caseSensitive } = getParams();
       await loadData();
       setupSearch(q, caseSensitive);
+      setupLineToggle(true); // default: show line numbers
     });
   </script>
 </body>

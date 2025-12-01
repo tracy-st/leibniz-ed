@@ -122,6 +122,11 @@ h1 {
   user-select: none;
 }
 
+.line-num-clickable {
+  cursor: pointer;
+  text-decoration: underline dotted;
+}
+
 .line-text {
   white-space: pre-wrap;
   font-size: 0.95rem;
@@ -171,4 +176,35 @@ mark {
 .btn svg {
   width: 14px;
   height: 14px;
+}
+
+/* Detail header (back + toggle) */
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.line-toggle-label {
+  font-size: 0.85rem;
+  color: #444;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Active (linked) line highlight */
+.line-row.active-line {
+  background: #fffbe6;
+}
+
+/* Show/hide line numbers via body class */
+body.lines-hidden .line-row {
+  grid-template-columns: 1fr;
+}
+
+body.lines-hidden .line-num {
+  display: none;
 }

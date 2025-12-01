@@ -7,16 +7,25 @@
 </head>
 <body>
   <main>
-    <a id="backLink" class="btn" href="search.html">
-      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-        <path d="M10.5 3L5 8l5.5 5"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-width="1.4" />
-      </svg>
-      Back to search
-    </a>
+    <div class="detail-header">
+      <a id="backLink" class="btn" href="search.html">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path
+            d="M10.5 3L5 8l5.5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.4"
+          />
+        </svg>
+        Back to search
+      </a>
+
+      <label class="line-toggle-label">
+        <input type="checkbox" id="toggleLineNumbersDetail" checked />
+        Show line numbers
+      </label>
+    </div>
 
     <h1 id="detailTitle">Entry</h1>
     <div id="detailMeta"></div>
@@ -25,6 +34,8 @@
   </main>
 
   <script>
+    let lineIndex = {};
+
     function getParams() {
       const params = new URLSearchParams(window.location.search);
       return {
@@ -32,6 +43,12 @@
         q: params.get("q") || "",
         caseSensitive: params.get("cs") === "1",
       };
+    }
+
+    function getHashLine() {
+      const raw = window.location.hash || "";
+      if (!raw) return "";
+      return decodeURIComponent(raw.slice(1));
     }
 
     function escapeHtml(str) {
@@ -83,6 +100,38 @@
       return line.replace(/\[\[(.*?)]]\s*/, "");
     }
 
+    // Fallback extractors for number/title/date from the text markup
+    function extractNumberFromText(text) {
+      const m = text.match(/<nr>\s*(.*?)\s*<\/nr>/);
+      return m ? m[1] : "";
+    }
+
+    function extractTitleFromText(text) {
+      const m = text.match(/<tit>(.*?)<\/tit>/);
+      return m ? m[1] : "";
+    }
+
+    function extractDateFromText(text) {
+      const m = text.match(/<dat>(.*?)<\/dat>/);
+      return m ? m[1] : "";
+    }
+
+    function clearActiveLine() {
+      document.querySelectorAll(".line-row.active-line").forEach((row) => {
+        row.classList.remove("active-line");
+      });
+    }
+
+    function activateLineByNumber(lineNum, scroll = false) {
+      if (!lineNum || !lineIndex[lineNum]) return;
+      clearActiveLine();
+      const row = lineIndex[lineNum];
+      row.classList.add("active-line");
+      if (scroll) {
+        row.scrollIntoView({ block: "center" });
+      }
+    }
+
     async function loadEntry() {
       const { id, q, caseSensitive } = getParams();
       const statusEl = document.getElementById("status");
@@ -103,7 +152,7 @@
           throw new Error("HTTP " + res.status);
         }
         const entries = await res.json();
-        const entry = entries.find(e => String(e.id) === String(id));
+        const entry = entries.find((e) => String(e.id) === String(id));
 
         if (!entry) {
           statusEl.textContent = "Entry not found for id: " + id;
@@ -115,29 +164,65 @@
           ? `Showing full text for "${id}" with matches for "${q}".`
           : `Showing full text for "${id}".`;
 
-        titleEl.textContent = entry.id || "Entry";
-        metaEl.textContent =
-          "ID: " +
-          (entry.id || "∅") +
-          " · Series: " +
-          (entry.series || "∅") +
-          " · Seq: " +
-          (entry.seq != null ? entry.seq : "∅");
-
         const full = entry.text || "";
+
+        // Prefer explicit JSON fields; fall back to parsing from text
+        const number =
+          (entry.number != null && String(entry.number).trim() !== "")
+            ? String(entry.number).trim()
+            : extractNumberFromText(full);
+        const title =
+          (entry.title != null && String(entry.title).trim() !== "")
+            ? String(entry.title).trim()
+            : extractTitleFromText(full) || entry.id || "Entry";
+        const date =
+          (entry.date != null && String(entry.date).trim() !== "")
+            ? String(entry.date).trim()
+            : extractDateFromText(full);
+
+        // Heading: "19. De Possibilitate Gratiae Divinae"
+        const heading =
+  (number ? number + " " : "") + (title || entry.id || "Entry");
+        titleEl.textContent = heading;
+
+        // Meta line: Date + ID + Series + Seq
+        const metaParts = [];
+        if (date) metaParts.push("Date: " + date);
+        metaParts.push("ID: " + (entry.id || "∅"));
+        metaParts.push("Series: " + (entry.series || "∅"));
+        metaParts.push("Seq: " + (entry.seq != null ? entry.seq : "∅"));
+        metaEl.textContent = metaParts.join(" · ");
+
         const lines = full.split(/\r?\n/);
 
         textContainer.innerHTML = "";
+        lineIndex = {};
 
-        lines.forEach(line => {
-          if (!line.trim()) return; // skip empty lines if desired
+        lines.forEach((line) => {
+          if (!line.trim()) return;
 
+          const ln = extractLineNum(line);
           const row = document.createElement("div");
           row.className = "line-row";
+          if (ln) {
+            row.id = "line-" + ln;
+          }
 
           const numEl = document.createElement("div");
           numEl.className = "line-num";
-          numEl.textContent = extractLineNum(line);
+          numEl.textContent = ln || "";
+          if (ln) {
+            numEl.classList.add("line-num-clickable");
+            numEl.title = "Click to link to line " + ln;
+            numEl.addEventListener("click", (ev) => {
+              ev.stopPropagation();
+              const hash = "#" + encodeURIComponent(ln);
+              if (window.location.hash !== hash) {
+                history.replaceState(null, "", hash);
+              }
+              activateLineByNumber(ln, false);
+            });
+          }
 
           const textEl = document.createElement("div");
           textEl.className = "line-text";
@@ -146,7 +231,16 @@
           row.appendChild(numEl);
           row.appendChild(textEl);
           textContainer.appendChild(row);
+
+          if (ln) {
+            lineIndex[ln] = row;
+          }
         });
+
+        const hashLine = getHashLine();
+        if (hashLine && lineIndex[hashLine]) {
+          activateLineByNumber(hashLine, true);
+        }
       } catch (e) {
         console.error(e);
         statusEl.textContent =
@@ -166,8 +260,32 @@
       back.href = "search.html" + (params.toString() ? "?" + params.toString() : "");
     }
 
+    function setupLineToggle() {
+      const toggle = document.getElementById("toggleLineNumbersDetail");
+      const applyState = () => {
+        if (toggle.checked) {
+          document.body.classList.remove("lines-hidden");
+        } else {
+          document.body.classList.add("lines-hidden");
+        }
+      };
+      toggle.addEventListener("change", applyState);
+      applyState();
+    }
+
+    function setupHashListener() {
+      window.addEventListener("hashchange", () => {
+        const ln = getHashLine();
+        if (ln) {
+          activateLineByNumber(ln, true);
+        }
+      });
+    }
+
     window.addEventListener("DOMContentLoaded", async () => {
       setupBackLink();
+      setupLineToggle();
+      setupHashListener();
       await loadEntry();
     });
   </script>
