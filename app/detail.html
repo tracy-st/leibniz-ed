@@ -116,6 +116,41 @@
       return m ? m[1] : "";
     }
 
+    // Strip inline markup from a title-like string
+    function stripMarkup(str) {
+      if (!str) return "";
+      return str
+        .replace(/<[^>]+>/g, "")   // remove all tags
+        .replace(/\s+/g, " ")      // collapse whitespace
+        .trim();
+    }
+
+    // Title-case with Latin-friendly small words
+    function toTitleCaseLatin(str) {
+      if (!str) return "";
+      const smallWords = new Set([
+        "de","et","ad","in","ex","cum","sub","per","a","an","the",
+        "of","for","to","or","nor"
+      ]);
+      const lower = str.toLowerCase();
+      const words = lower.split(" ");
+      const cased = words.map((w, i) => {
+        if (!w) return "";
+        if (i > 0 && smallWords.has(w)) {
+          return w; // keep small word lowercase (not first)
+        }
+        return w.charAt(0).toUpperCase() + w.slice(1);
+      });
+      return cased.join(" ").trim();
+    }
+
+    // Full normalization pipeline for titles
+    function normalizeTitle(raw) {
+      const stripped = stripMarkup(raw);
+      if (!stripped) return "";
+      return toTitleCaseLatin(stripped);
+    }
+
     function clearActiveLine() {
       document.querySelectorAll(".line-row.active-line").forEach((row) => {
         row.classList.remove("active-line");
@@ -171,18 +206,21 @@
           (entry.number != null && String(entry.number).trim() !== "")
             ? String(entry.number).trim()
             : extractNumberFromText(full);
-        const title =
+
+        const rawTitle =
           (entry.title != null && String(entry.title).trim() !== "")
-            ? String(entry.title).trim()
-            : extractTitleFromText(full) || entry.id || "Entry";
+            ? String(entry.title)
+            : extractTitleFromText(full);
+
+        const normalizedTitle = normalizeTitle(rawTitle) || entry.id || "Entry";
+
         const date =
           (entry.date != null && String(entry.date).trim() !== "")
             ? String(entry.date).trim()
             : extractDateFromText(full);
 
-        // Heading: "19. De Possibilitate Gratiae Divinae"
-        const heading =
-  (number ? number + " " : "") + (title || entry.id || "Entry");
+        // Heading: "19 De Possibilitate Gratiae Divinae" (no trailing period)
+        const heading = (number ? number + " " : "") + normalizedTitle;
         titleEl.textContent = heading;
 
         // Meta line: Date + ID + Series + Seq
