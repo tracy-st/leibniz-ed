@@ -98,17 +98,18 @@
 
           const number = item.number != null ? String(item.number).trim() : "";
           const title = item.title || item.id || "(untitled)";
-          const heading = (number ? number + " " : "") + title;
+          const seqText = item.seq != null ? item.seq : "∅";
+          const heading = (number ? number + " " : "") + title + " (" +  seqText + ")" ;
           titleDiv.textContent = heading;
 
           const metaDiv = document.createElement("div");
           metaDiv.className = "index-meta";
-          const seqText = item.seq != null ? item.seq : "∅";
+          const seqText2 = item.seq != null ? item.seq : "∅";
           const numText = number || "∅";
           const dateText = item.date || "∅";
 
           metaDiv.textContent =
-            "Seq: " + seqText + " · No: " + numText + " · Date: " + dateText;
+            "Date: " + dateText;
 
           a.appendChild(titleDiv);
           a.appendChild(metaDiv);
