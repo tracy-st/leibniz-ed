@@ -6,15 +6,36 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main>
-    <h1>Series Index</h1>
-    <p class="subtitle">
-      Browse all entries grouped by <code>series</code>. Each entry shows its title,
-      sequence, number, and date, and links to the detail view.
-    </p>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-header">
+          <span class="sidebar-title">Navigation</span>
+          <button id="sidebarCollapseBtn" class="sidebar-collapse-btn" type="button">
+            ⟨
+          </button>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="search.html" data-page="search">Search</a>
+          <a href="browse.html" data-page="index">Series Index</a>
+        </nav>
+      </div>
+    </aside>
 
-    <div id="seriesContainer"></div>
-  </main>
+    <main>
+      <button id="sidebarExpandBtn" class="sidebar-expand-btn" type="button">
+        ☰
+      </button>
+
+      <h1>Series Index</h1>
+      <p class="subtitle">
+        Browse all entries grouped by <code>series</code>. Each entry shows its title,
+        sequence, number, and date, and links to the detail view.
+      </p>
+
+      <div id="seriesContainer"></div>
+    </main>
+  </div>
 
   <script>
     async function loadIndex() {
@@ -98,18 +119,17 @@
 
           const number = item.number != null ? String(item.number).trim() : "";
           const title = item.title || item.id || "(untitled)";
-          const seqText = item.seq != null ? item.seq : "∅";
-          const heading = (number ? number + " " : "") + title + " (" +  seqText + ")" ;
+          const heading = (number ? number + " " : "") + title;
           titleDiv.textContent = heading;
 
           const metaDiv = document.createElement("div");
           metaDiv.className = "index-meta";
-          const seqText2 = item.seq != null ? item.seq : "∅";
+          const seqText = item.seq != null ? item.seq : "∅";
           const numText = number || "∅";
           const dateText = item.date || "∅";
 
           metaDiv.textContent =
-            "Date: " + dateText;
+            "Seq: " + seqText + " · No: " + numText + " · Date: " + dateText;
 
           a.appendChild(titleDiv);
           a.appendChild(metaDiv);
@@ -122,7 +142,40 @@
       }
     }
 
-    window.addEventListener("DOMContentLoaded", loadIndex);
+    function setupSidebar(currentPageKey) {
+      const collapseBtn = document.getElementById("sidebarCollapseBtn");
+      const expandBtn = document.getElementById("sidebarExpandBtn");
+      const navLinks = document.querySelectorAll(".sidebar-nav a");
+
+      function setActiveLink() {
+        navLinks.forEach((link) => {
+          const page = link.getAttribute("data-page");
+          if (page === currentPageKey) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
+
+      function collapse() {
+        document.body.classList.add("sidebar-collapsed");
+      }
+
+      function expand() {
+        document.body.classList.remove("sidebar-collapsed");
+      }
+
+      if (collapseBtn) collapseBtn.addEventListener("click", collapse);
+      if (expandBtn) expandBtn.addEventListener("click", expand);
+
+      setActiveLink();
+    }
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      await loadIndex();
+      setupSidebar("index");
+    });
   </script>
 </body>
 </html>

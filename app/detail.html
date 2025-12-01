@@ -6,32 +6,53 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main>
-    <div class="detail-header">
-      <a id="backLink" class="btn" href="search.html">
-        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-          <path
-            d="M10.5 3L5 8l5.5 5"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-width="1.4"
-          />
-        </svg>
-        Back to search
-      </a>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-header">
+          <span class="sidebar-title">Navigation</span>
+          <button id="sidebarCollapseBtn" class="sidebar-collapse-btn" type="button">
+            ⟨
+          </button>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="search.html" data-page="search">Search</a>
+          <a href="index.html" data-page="index">Series Index</a>
+        </nav>
+      </div>
+    </aside>
 
-      <label class="line-toggle-label">
-        <input type="checkbox" id="toggleLineNumbersDetail" checked />
-        Show line numbers
-      </label>
-    </div>
+    <main>
+      <button id="sidebarExpandBtn" class="sidebar-expand-btn" type="button">
+        ☰
+      </button>
 
-    <h1 id="detailTitle">Entry</h1>
-    <div id="detailMeta"></div>
-    <div id="status"></div>
-    <div id="detailText"></div>
-  </main>
+      <div class="detail-header">
+        <a id="backLink" class="btn" href="search.html">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path
+              d="M10.5 3L5 8l5.5 5"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="1.4"
+            />
+          </svg>
+          Back to search results
+        </a>
+
+        <label class="line-toggle-label">
+          <input type="checkbox" id="toggleLineNumbersDetail" checked />
+          Show line numbers
+        </label>
+      </div>
+
+      <h1 id="detailTitle">Entry</h1>
+      <div id="detailMeta"></div>
+      <div id="status"></div>
+      <div id="detailText"></div>
+    </main>
+  </div>
 
   <script>
     let lineIndex = {};
@@ -51,37 +72,45 @@
       return decodeURIComponent(raw.slice(1));
     }
 
-    
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, function (c) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        }[c];
+      });
+    }
 
     function normalize(text, caseSensitive) {
       return caseSensitive ? text : text.toLowerCase();
     }
 
-    // Escape user query for use in a RegExp
-function escapeRegExp(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
+    function highlightAll(text, query, caseSensitive) {
+      if (!query) return escapeHtml(text);
 
-// Highlight ALL matches, preserving HTML tags already in `text`
-function highlightAllHTML(text, query, caseSensitive) {
-  if (!query) return text; // trust `text` as HTML
+      const normText = normalize(text, caseSensitive);
+      const normQuery = normalize(query, caseSensitive);
+      if (!normQuery) return escapeHtml(text);
 
-  const flags = caseSensitive ? "g" : "gi";
-  const pattern = new RegExp(escapeRegExp(query), flags);
+      let result = "";
+      let i = 0;
 
-  return text.replace(pattern, "<mark>$&</mark>");
-}
+      while (true) {
+        const idx = normText.indexOf(normQuery, i);
+        if (idx === -1) {
+          result += escapeHtml(text.slice(i));
+          break;
+        }
+        result += escapeHtml(text.slice(i, idx));
+        result += "<mark>" + escapeHtml(text.slice(idx, idx + query.length)) + "</mark>";
+        i = idx + query.length;
+      }
 
-// Highlight FIRST match only (for search results line preview)
-function highlightFirstHTML(text, query, caseSensitive) {
-  if (!query) return text;
-
-  const flags = caseSensitive ? "" : "i";
-  const pattern = new RegExp(escapeRegExp(query), flags);
-
-  return text.replace(pattern, "<mark>$&</mark>");
-}
-
+      return result;
+    }
 
     function extractLineNum(line) {
       const m = line.match(/\[\[(.*?)]]/);
@@ -188,7 +217,7 @@ function highlightFirstHTML(text, query, caseSensitive) {
         }
 
         statusEl.textContent = q
-          ? `Showing matches for "${q}".`
+          ? `Showing full text for "${id}" with matches for "${q}".`
           : `Showing full text for "${id}".`;
 
         const full = entry.text || "";
@@ -218,9 +247,10 @@ function highlightFirstHTML(text, query, caseSensitive) {
         // Meta line: Date + ID + Series + Seq
         const metaParts = [];
         if (date) metaParts.push("Date: " + date);
+        metaParts.push("ID: " + (entry.id || "∅"));
         metaParts.push("Series: " + (entry.series || "∅"));
         metaParts.push("Seq: " + (entry.seq != null ? entry.seq : "∅"));
-        metaEl.textContent = metaParts.join("   |   ");
+        metaEl.textContent = metaParts.join(" · ");
 
         const lines = full.split(/\r?\n/);
 
@@ -255,8 +285,7 @@ function highlightFirstHTML(text, query, caseSensitive) {
 
           const textEl = document.createElement("div");
           textEl.className = "line-text";
-textEl.innerHTML = highlightAllHTML(stripLineNum(line), q, caseSensitive);
-
+          textEl.innerHTML = highlightAll(stripLineNum(line), q, caseSensitive);
 
           row.appendChild(numEl);
           row.appendChild(textEl);
@@ -312,10 +341,43 @@ textEl.innerHTML = highlightAllHTML(stripLineNum(line), q, caseSensitive);
       });
     }
 
+    function setupSidebar(currentPageKey) {
+      const collapseBtn = document.getElementById("sidebarCollapseBtn");
+      const expandBtn = document.getElementById("sidebarExpandBtn");
+      const navLinks = document.querySelectorAll(".sidebar-nav a");
+
+      function setActiveLink() {
+        navLinks.forEach((link) => {
+          const page = link.getAttribute("data-page");
+          if (page === currentPageKey) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
+
+      function collapse() {
+        document.body.classList.add("sidebar-collapsed");
+      }
+
+      function expand() {
+        document.body.classList.remove("sidebar-collapsed");
+      }
+
+      if (collapseBtn) collapseBtn.addEventListener("click", collapse);
+      if (expandBtn) expandBtn.addEventListener("click", expand);
+
+      if (currentPageKey) {
+        setActiveLink();
+      }
+    }
+
     window.addEventListener("DOMContentLoaded", async () => {
       setupBackLink();
       setupLineToggle();
       setupHashListener();
+      setupSidebar(null); // no active nav item for detail page
       await loadEntry();
     });
   </script>

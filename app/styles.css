@@ -354,3 +354,200 @@ body.lines-hidden .line-num {
   margin-top: 2px;
 }
 
+/* Layout with sidebar */
+.layout {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  border-right: 1px solid #ddd;
+  background: #f0f2f5;
+  padding: 10px 8px;
+  box-sizing: border-box;
+}
+
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.sidebar-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.sidebar-collapse-btn {
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.sidebar-collapse-btn:hover {
+  background: #e9e9ef;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 6px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.sidebar-nav a:hover {
+  background: #e3e5ec;
+}
+
+.sidebar-nav a.active {
+  background: #d7defa;
+  color: #1f3c88;
+  font-weight: 600;
+}
+
+/* Main content with sidebar */
+.layout > main {
+  flex: 1;
+  max-width: none; /* override previous max-width for main */
+  padding: 24px 16px 40px;
+  position: relative;
+}
+
+/* Sidebar collapsed state */
+body.sidebar-collapsed .sidebar {
+  width: 0;
+  padding: 0;
+  border-width: 0;
+  overflow: hidden;
+}
+
+.sidebar-expand-btn {
+  position: absolute;
+  top: 10px;
+  left: 8px;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 0.9rem;
+  padding: 4px 10px;
+  cursor: pointer;
+  display: none;
+}
+
+.sidebar-expand-btn:hover {
+  background: #f0f0f5;
+}
+
+/* Show expand button only when sidebar is collapsed */
+body.sidebar-collapsed .sidebar-expand-btn {
+  display: inline-flex;
+}
+
+/* Add a little left padding to content to avoid overlapping with expand button */
+body.sidebar-collapsed .layout > main {
+  padding-top: 36px;
+}
+
+/* Existing index styles for context (you may already have these) */
+.series-block {
+  margin-bottom: 20px;
+}
+
+.series-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 4px;
+  border: none;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.series-toggle:hover {
+  background: #efeff2;
+  border-radius: 4px;
+}
+
+.series-arrow {
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: transform 0.15s ease;
+}
+
+.series-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.series-block:not(.collapsed) .series-arrow {
+  transform: rotate(90deg);
+}
+
+.series-block.collapsed .index-list {
+  display: none;
+}
+
+.index-list {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+}
+
+.index-entry {
+  margin-bottom: 6px;
+}
+
+.index-link {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.1s ease, box-shadow 0.1s ease;
+}
+
+.index-link:hover {
+  background: #fafafa;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.index-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.index-meta {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2px;
+}
