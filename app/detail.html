@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Entry Detail</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f7;
+      color: #222;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+    h1 {
+      margin: 12px 0 8px;
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+    #detailMeta {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 12px;
+    }
+    #detailText {
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      padding: 12px 14px;
+    }
+    mark {
+      background: #ffe58f;
+      padding: 0 1px;
+      border-radius: 2px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #ccc;
+      background: #f9f9fb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .btn:hover {
+      background: #f0f0f3;
+    }
+    .btn svg {
+      width: 14px;
+      height: 14px;
+    }
+    #status {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 4px;
+      min-height: 1.2em;
+    }
+    .error {
+      color: #b00020;
+    }
+    /* Line-numbered row */
+.line-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.line-num {
+  font-family: monospace;
+  font-size: 0.8rem;
+  text-align: right;
+  color: #777;
+  padding-right: 6px;
+  user-select: none;
+}
+
+.line-text {
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+  </style>
+</head>
+<body>
+  <main>
+    <a id="backLink" class="btn" href="search.html">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M10.5 3L5 8l5.5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4"/>
+      </svg>
+      Back to search
+    </a>
+
+    <h1 id="detailTitle">Entry</h1>
+    <div id="detailMeta"></div>
+    <div id="status"></div>
+    <div id="detailText"></div>
+  </main>
+
+  <script>
+    function extractLineNum(line) {
+  const m = line.match(/\[\[(.*?)]]/);
+  return m ? m[1] : "";
+}
+
+function stripLineNum(line) {
+  return line.replace(/\[\[(.*?)]]\s*/, "");
+}
+
+
+    function getParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        id: params.get("id") || "",
+        q: params.get("q") || "",
+        caseSensitive: params.get("cs") === "1",
+      };
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, function (c) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        }[c];
+      });
+    }
+
+    function normalize(text, caseSensitive) {
+      return caseSensitive ? text : text.toLowerCase();
+    }
+
+    function highlightAll(text, query, caseSensitive) {
+      if (!query) return escapeHtml(text);
+
+      const normText = normalize(text, caseSensitive);
+      const normQuery = normalize(query, caseSensitive);
+      if (!normQuery) return escapeHtml(text);
+
+      let result = "";
+      let i = 0;
+
+      while (true) {
+        const idx = normText.indexOf(normQuery, i);
+        if (idx === -1) {
+          result += escapeHtml(text.slice(i));
+          break;
+        }
+        result += escapeHtml(text.slice(i, idx));
+        result += "<mark>" + escapeHtml(text.slice(idx, idx + query.length)) + "</mark>";
+        i = idx + query.length;
+      }
+
+      return result;
+    }
+
+    async function loadEntry() {
+      const { id, q, caseSensitive } = getParams();
+      const statusEl = document.getElementById("status");
+      const titleEl = document.getElementById("detailTitle");
+      const metaEl = document.getElementById("detailMeta");
+      const textEl = document.getElementById("detailText");
+
+      if (!id) {
+        statusEl.textContent = "Missing id parameter.";
+        statusEl.classList.add("error");
+        return;
+      }
+
+      try {
+        statusEl.textContent = "Loading data…";
+        const res = await fetch("sample_entries.json");
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+        const entries = await res.json();
+        const entry = entries.find(e => String(e.id) === String(id));
+
+        if (!entry) {
+          statusEl.textContent = "Entry not found for id: " + id;
+          statusEl.classList.add("error");
+          return;
+        }
+
+        statusEl.textContent = q
+          ? `Showing full text for "${id}" with matches for "${q}".`
+          : `Showing full text for "${id}".`;
+
+        titleEl.textContent = entry.id || "Entry";
+        metaEl.textContent =
+          "ID: " +
+          (entry.id || "∅") +
+          " · Series: " +
+          (entry.series || "∅") +
+          " · Seq: " +
+          (entry.seq != null ? entry.seq : "∅");
+
+        const full = entry.text || "";
+const lines = full.split(/\r?\n/);
+
+textEl.innerHTML = ""; // clear
+
+lines.forEach(line => {
+  if (!line.trim()) return;  // skip empty lines if desired
+
+  const row = document.createElement("div");
+  row.className = "line-row";
+
+  const numEl = document.createElement("div");
+  numEl.className = "line-num";
+  numEl.textContent = extractLineNum(line);
+
+  const textEl2 = document.createElement("div");
+  textEl2.className = "line-text";
+  textEl2.innerHTML = highlightAll(stripLineNum(line), q, caseSensitive);
+
+  row.appendChild(numEl);
+  row.appendChild(textEl2);
+  textEl.appendChild(row);
+});
+
+      } catch (e) {
+        console.error(e);
+        statusEl.textContent =
+          "Failed to load sample_entries.json. Ensure it is in the same folder and served over HTTP.";
+        statusEl.classList.add("error");
+      }
+    }
+
+    function setupBackLink() {
+      const { q, caseSensitive } = getParams();
+      const back = document.getElementById("backLink");
+      const params = new URLSearchParams();
+
+      if (q) params.set("q", q);
+      if (caseSensitive) params.set("cs", "1");
+
+      // If you later wire search.html to read these params, this will preserve state.
+      back.href = "search.html" + (params.toString() ? "?" + params.toString() : "");
+    }
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      setupBackLink();
+      await loadEntry();
+    });
+  </script>
+</body>
+</html>
