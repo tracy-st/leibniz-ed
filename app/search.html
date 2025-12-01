@@ -144,10 +144,10 @@ function highlightFirstHTML(text, query, caseSensitive) {
 
         const meta = document.createElement("div");
         meta.className = "result-meta";
-        meta.textContent =
-          (item.series || "∅ series") +
-          " · seq " +
-          (item.seq != null ? item.seq : "∅");
+        meta.innerHTML = `
+  <div>${item.series || "∅ series"}</div>
+  <div class="title-meta">${item.title || "∅ title"} (${item.seq != null ? item.seq : "∅"})</div>
+`;
 
         const fullText = item.text || "";
         const rawLine = getMatchedLine(fullText, query, caseSensitive);
