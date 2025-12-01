@@ -196,7 +196,7 @@
         }
 
         statusEl.textContent = q
-          ? `Showing full text for "${id}" with matches for "${q}".`
+          ? `Showing matches for "${q}".`
           : `Showing full text for "${id}".`;
 
         const full = entry.text || "";
@@ -226,10 +226,9 @@
         // Meta line: Date + ID + Series + Seq
         const metaParts = [];
         if (date) metaParts.push("Date: " + date);
-        metaParts.push("ID: " + (entry.id || "∅"));
         metaParts.push("Series: " + (entry.series || "∅"));
         metaParts.push("Seq: " + (entry.seq != null ? entry.seq : "∅"));
-        metaEl.textContent = metaParts.join(" · ");
+        metaEl.textContent = metaParts.join("   |   ");
 
         const lines = full.split(/\r?\n/);
 
