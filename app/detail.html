@@ -51,45 +51,37 @@
       return decodeURIComponent(raw.slice(1));
     }
 
-    function escapeHtml(str) {
-      return str.replace(/[&<>"']/g, function (c) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;",
-        }[c];
-      });
-    }
+    
 
     function normalize(text, caseSensitive) {
       return caseSensitive ? text : text.toLowerCase();
     }
 
-    function highlightAll(text, query, caseSensitive) {
-      if (!query) return escapeHtml(text);
+    // Escape user query for use in a RegExp
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
-      const normText = normalize(text, caseSensitive);
-      const normQuery = normalize(query, caseSensitive);
-      if (!normQuery) return escapeHtml(text);
+// Highlight ALL matches, preserving HTML tags already in `text`
+function highlightAllHTML(text, query, caseSensitive) {
+  if (!query) return text; // trust `text` as HTML
 
-      let result = "";
-      let i = 0;
+  const flags = caseSensitive ? "g" : "gi";
+  const pattern = new RegExp(escapeRegExp(query), flags);
 
-      while (true) {
-        const idx = normText.indexOf(normQuery, i);
-        if (idx === -1) {
-          result += escapeHtml(text.slice(i));
-          break;
-        }
-        result += escapeHtml(text.slice(i, idx));
-        result += "<mark>" + escapeHtml(text.slice(idx, idx + query.length)) + "</mark>";
-        i = idx + query.length;
-      }
+  return text.replace(pattern, "<mark>$&</mark>");
+}
 
-      return result;
-    }
+// Highlight FIRST match only (for search results line preview)
+function highlightFirstHTML(text, query, caseSensitive) {
+  if (!query) return text;
+
+  const flags = caseSensitive ? "" : "i";
+  const pattern = new RegExp(escapeRegExp(query), flags);
+
+  return text.replace(pattern, "<mark>$&</mark>");
+}
+
 
     function extractLineNum(line) {
       const m = line.match(/\[\[(.*?)]]/);
@@ -263,7 +255,8 @@
 
           const textEl = document.createElement("div");
           textEl.className = "line-text";
-          textEl.innerHTML = highlightAll(stripLineNum(line), q, caseSensitive);
+textEl.innerHTML = highlightAllHTML(stripLineNum(line), q, caseSensitive);
+
 
           row.appendChild(numEl);
           row.appendChild(textEl);

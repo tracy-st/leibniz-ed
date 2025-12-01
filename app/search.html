@@ -68,41 +68,31 @@
       return caseSensitive ? text : text.toLowerCase();
     }
 
-    function escapeHtml(str) {
-      return str.replace(/[&<>"']/g, function (c) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;",
-        }[c];
-      });
-    }
+    // Escape user query for use in a RegExp
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
-    function highlightFirst(text, query, caseSensitive) {
-      if (!query) return escapeHtml(text);
+// Highlight ALL matches, preserving HTML tags already in `text`
+function highlightAllHTML(text, query, caseSensitive) {
+  if (!query) return text; // trust `text` as HTML
 
-      const normText = normalize(text, caseSensitive);
-      const normQuery = normalize(query, caseSensitive);
-      const idx = normText.indexOf(normQuery);
+  const flags = caseSensitive ? "g" : "gi";
+  const pattern = new RegExp(escapeRegExp(query), flags);
 
-      if (idx === -1) {
-        return escapeHtml(text);
-      }
+  return text.replace(pattern, "<mark>$&</mark>");
+}
 
-      const before = text.slice(0, idx);
-      const match = text.slice(idx, idx + query.length);
-      const after = text.slice(idx + query.length);
+// Highlight FIRST match only (for search results line preview)
+function highlightFirstHTML(text, query, caseSensitive) {
+  if (!query) return text;
 
-      return (
-        escapeHtml(before) +
-        "<mark>" +
-        escapeHtml(match) +
-        "</mark>" +
-        escapeHtml(after)
-      );
-    }
+  const flags = caseSensitive ? "" : "i";
+  const pattern = new RegExp(escapeRegExp(query), flags);
+
+  return text.replace(pattern, "<mark>$&</mark>");
+}
+
 
     function getMatchedLine(fullText, query, caseSensitive) {
       if (!fullText) return "";
@@ -173,7 +163,8 @@
 
         const textEl = document.createElement("div");
         textEl.className = "line-text";
-        textEl.innerHTML = highlightFirst(cleanLine, query, caseSensitive);
+textEl.innerHTML = highlightFirstHTML(cleanLine, query, caseSensitive);
+
 
         row.appendChild(numEl);
         row.appendChild(textEl);
