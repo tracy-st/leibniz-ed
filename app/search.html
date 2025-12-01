@@ -3,129 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>JSON Text Search</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f5f7;
-      color: #222;
-    }
-    main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 24px 16px 40px;
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 1.6rem;
-      font-weight: 600;
-    }
-    .subtitle {
-      margin: 0 0 16px;
-      font-size: 0.9rem;
-      color: #666;
-    }
-    .search-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .search-bar input[type="text"] {
-      flex: 1 1 220px;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 0.95rem;
-      outline: none;
-    }
-    .search-bar input[type="text"]:focus {
-      border-color: #0070f3;
-      box-shadow: 0 0 0 1px rgba(0, 112, 243, 0.15);
-    }
-    .search-bar label {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.85rem;
-      color: #444;
-      user-select: none;
-    }
-    #status {
-      font-size: 0.85rem;
-      color: #555;
-      margin-bottom: 10px;
-      min-height: 1.2em;
-    }
-    #results {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .result {
-      background: #fff;
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin-bottom: 8px;
-      border: 1px solid #e0e0e0;
-      cursor: pointer;
-      transition: background 0.1s ease, box-shadow 0.1s ease;
-    }
-    .result:hover {
-      background: #fafafa;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-    }
-    .result-meta {
-      font-size: 0.8rem;
-      color: #777;
-      margin-bottom: 4px;
-    }
-    .result-text {
-      white-space: pre-wrap;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-    mark {
-      background: #ffe58f;
-      padding: 0 1px;
-      border-radius: 2px;
-    }
-    .error {
-      color: #b00020;
-    }
-    .muted {
-      color: #999;
-    }
-    /* Line-numbered row */
-.line-row {
-  display: grid;
-  grid-template-columns: 60px 1fr;
-  gap: 12px;
-  padding: 4px 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.line-num {
-  font-family: monospace;
-  font-size: 0.8rem;
-  text-align: right;
-  color: #777;
-  padding-right: 6px;
-  user-select: none;
-}
-
-.line-text {
-  white-space: pre-wrap;
-  font-size: 0.95rem;
-  line-height: 1.45;
-}
-
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main>
@@ -238,6 +116,15 @@
       return lines[0] || "";
     }
 
+    function extractLineNum(line) {
+      const m = line.match(/\[\[(.*?)]]/);
+      return m ? m[1] : "";
+    }
+
+    function stripLineNum(line) {
+      return line.replace(/\[\[(.*?)]]\s*/, "");
+    }
+
     function renderResults(items, query, caseSensitive) {
       const list = document.getElementById("results");
       const status = document.getElementById("status");
@@ -270,42 +157,28 @@
           " · seq " +
           (item.seq != null ? item.seq : "∅");
 
-        const rawLine = getMatchedLine(fullText, query, caseSensitive);
-const lineNum = extractLineNum(rawLine);
-const cleanLine = stripLineNum(rawLine);
-
-// Build sidebar row
-const row = document.createElement("div");
-row.className = "line-row";
-
-const numEl = document.createElement("div");
-numEl.className = "line-num";
-numEl.textContent = lineNum || "";
-
-const textEl = document.createElement("div");
-textEl.className = "line-text";
-textEl.innerHTML = highlightFirst(cleanLine, query, caseSensitive);
-
-row.appendChild(numEl);
-row.appendChild(textEl);
-li.appendChild(row);
-
         const fullText = item.text || "";
-        const line = getMatchedLine(fullText, query, caseSensitive);
-        // Extract a line number, e.g., [[4.16]]
-function extractLineNum(line) {
-  const m = line.match(/\[\[(.*?)]]/);
-  return m ? m[1] : "";
-}
+        const rawLine = getMatchedLine(fullText, query, caseSensitive);
+        const lineNum = extractLineNum(rawLine);
+        const cleanLine = stripLineNum(rawLine);
 
-// Remove [[4.16]] from the displayed text
-function stripLineNum(line) {
-  return line.replace(/\[\[(.*?)]]\s*/, "");
-}
+        // line row with number + text
+        const row = document.createElement("div");
+        row.className = "line-row";
 
+        const numEl = document.createElement("div");
+        numEl.className = "line-num";
+        numEl.textContent = lineNum || "";
+
+        const textEl = document.createElement("div");
+        textEl.className = "line-text";
+        textEl.innerHTML = highlightFirst(cleanLine, query, caseSensitive);
+
+        row.appendChild(numEl);
+        row.appendChild(textEl);
 
         li.appendChild(meta);
-        li.appendChild(textDiv);
+        li.appendChild(row);
 
         li.addEventListener("click", () => {
           const params = new URLSearchParams({
@@ -346,13 +219,11 @@ function stripLineNum(line) {
       input.addEventListener("input", onSearch);
       caseBox.addEventListener("change", onSearch);
 
-      // Initialize from URL params, if present
       if (initialQuery) {
         input.value = initialQuery;
       }
       caseBox.checked = !!initialCaseSensitive;
 
-      // If there is an initial query, perform an initial search
       if (initialQuery) {
         onSearch();
       }
