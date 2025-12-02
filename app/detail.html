@@ -10,10 +10,15 @@
     <aside class="sidebar">
       <div class="sidebar-inner">
         <div class="sidebar-header">
-          <span class="sidebar-title">Navigation</span>
-          <button id="sidebarCollapseBtn" class="sidebar-collapse-btn" type="button">
-            ⟨
-          </button>
+           <span class="sidebar-title"></span>
+           <div class="nav-button">
+                <button id="sidebarExpandBtn" class="sidebar-expand-btn" type="button">
+                    ☰
+                </button>
+                <button id="sidebarCollapseBtn" class="sidebar-collapse-btn" type="button">
+                    ☰
+                </button>
+           </div>
         </div>
         <nav class="sidebar-nav">
           <a href="search.html" data-page="search">Search</a>
@@ -23,9 +28,6 @@
     </aside>
 
     <main>
-      <button id="sidebarExpandBtn" class="sidebar-expand-btn" type="button">
-        ☰
-      </button>
 
       <div class="detail-header">
         <a id="backLink" class="btn" href="search.html">
@@ -72,45 +74,34 @@
       return decodeURIComponent(raw.slice(1));
     }
 
-    function escapeHtml(str) {
-      return str.replace(/[&<>"']/g, function (c) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;",
-        }[c];
-      });
+   function normalize(text, caseSensitive) {
+  return caseSensitive ? text : text.toLowerCase();
+}
+
+function highlightAll(text, query, caseSensitive) {
+  if (!query) return text;
+
+  const normText = normalize(text, caseSensitive);
+  const normQuery = normalize(query, caseSensitive);
+  if (!normQuery) return text;
+
+  let result = "";
+  let i = 0;
+
+  while (true) {
+    const idx = normText.indexOf(normQuery, i);
+    if (idx === -1) {
+      result += text.slice(i);
+      break;
     }
+    result += text.slice(i, idx);
+    result += "<mark>" + text.slice(idx, idx + query.length) + "</mark>";
+    i = idx + query.length;
+  }
 
-    function normalize(text, caseSensitive) {
-      return caseSensitive ? text : text.toLowerCase();
-    }
+  return result;
+}
 
-    function highlightAll(text, query, caseSensitive) {
-      if (!query) return escapeHtml(text);
-
-      const normText = normalize(text, caseSensitive);
-      const normQuery = normalize(query, caseSensitive);
-      if (!normQuery) return escapeHtml(text);
-
-      let result = "";
-      let i = 0;
-
-      while (true) {
-        const idx = normText.indexOf(normQuery, i);
-        if (idx === -1) {
-          result += escapeHtml(text.slice(i));
-          break;
-        }
-        result += escapeHtml(text.slice(i, idx));
-        result += "<mark>" + escapeHtml(text.slice(idx, idx + query.length)) + "</mark>";
-        i = idx + query.length;
-      }
-
-      return result;
-    }
 
     function extractLineNum(line) {
       const m = line.match(/\[\[(.*?)]]/);

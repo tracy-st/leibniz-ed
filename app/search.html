@@ -6,14 +6,19 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="layout">
+   <div class="layout">
     <aside class="sidebar">
       <div class="sidebar-inner">
         <div class="sidebar-header">
-          <span class="sidebar-title">Navigation</span>
-          <button id="sidebarCollapseBtn" class="sidebar-collapse-btn" type="button">
-            ⟨
-          </button>
+           <span class="sidebar-title"></span>
+           <div class="nav-button">
+                <button id="sidebarExpandBtn" class="sidebar-expand-btn" type="button">
+                    ☰
+                </button>
+                <button id="sidebarCollapseBtn" class="sidebar-collapse-btn" type="button">
+                    ☰
+                </button>
+           </div>
         </div>
         <nav class="sidebar-nav">
           <a href="search.html" data-page="search">Search</a>
@@ -23,9 +28,6 @@
     </aside>
 
     <main>
-      <button id="sidebarExpandBtn" class="sidebar-expand-btn" type="button">
-        ☰
-      </button>
 
       <h1>Search Leibniz Texts</h1>
       <p class="subtitle">
