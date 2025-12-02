@@ -72,7 +72,7 @@
     async function loadData() {
       const statusEl = document.getElementById("status");
       try {
-        const res = await fetch("sample_entries.json");
+        const res = await fetch("app/sample_entries.json");
         if (!res.ok) {
           throw new Error("HTTP " + res.status);
         }
