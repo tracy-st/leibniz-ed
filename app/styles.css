@@ -200,7 +200,7 @@ mark {
     width: 100%;
 }*/
 
-.line-toggle-label {
+.line-toggle-label, .html-toggle-label {
   font-size: 0.85rem;
   color: #444;
   display: inline-flex;

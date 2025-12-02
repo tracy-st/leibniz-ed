@@ -30,34 +30,42 @@
     <main>
 
       <div class="detail-header">
-        <a id="backLink" class="btn" href="search.html">
-          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-            <path
-              d="M10.5 3L5 8l5.5 5"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-width="1.4"
-            />
-          </svg>
-          Back to search results
-        </a>
+  <a id="backLink" class="btn" href="search.html">
+    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+      <path
+        d="M10.5 3L5 8l5.5 5"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-width="1.4"
+      />
+    </svg>
+    Back to search results
+  </a>
 
-        <label class="line-toggle-label">
-          <input type="checkbox" id="toggleLineNumbersDetail" checked />
-          Show line numbers
-        </label>
-      </div>
+  <label class="line-toggle-label">
+    <input type="checkbox" id="toggleLineNumbersDetail" checked />
+    Show line numbers
+  </label>
+
+  <!-- NEW: HTML render toggle, default ON -->
+  <label class="html-toggle-label">
+    <input type="checkbox" id="toggleRenderHtml" checked />
+    Render HTML
+  </label>
+</div>
 
       <h1 id="detailTitle">Entry</h1>
       <div id="detailMeta"></div>
       <div id="status"></div>
+      
       <div id="detailText"></div>
     </main>
   </div>
 
   <script>
     let lineIndex = {};
+    let renderHtml = true;
 
     function getParams() {
       const params = new URLSearchParams(window.location.search);
@@ -74,16 +82,36 @@
       return decodeURIComponent(raw.slice(1));
     }
 
-   function normalize(text, caseSensitive) {
+   function escapeHtml(str) {
+  return str.replace(/[&<>"']/g, function (c) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    }[c];
+  });
+}
+
+function normalize(text, caseSensitive) {
   return caseSensitive ? text : text.toLowerCase();
 }
 
-function highlightAll(text, query, caseSensitive) {
-  if (!query) return text;
+/**
+ * @param {string}  text         Original text (may contain HTML)
+ * @param {string}  query        Search string to highlight
+ * @param {boolean} caseSensitive
+ * @param {boolean} renderHtml   true = render HTML; false = escape HTML
+ */
+function highlightAll(text, query, caseSensitive, renderHtml) {
+  const process = (s) => (renderHtml ? s : escapeHtml(s));
+
+  if (!query) return process(text);
 
   const normText = normalize(text, caseSensitive);
   const normQuery = normalize(query, caseSensitive);
-  if (!normQuery) return text;
+  if (!normQuery) return process(text);
 
   let result = "";
   let i = 0;
@@ -91,11 +119,17 @@ function highlightAll(text, query, caseSensitive) {
   while (true) {
     const idx = normText.indexOf(normQuery, i);
     if (idx === -1) {
-      result += text.slice(i);
+      result += process(text.slice(i));
       break;
     }
-    result += text.slice(i, idx);
-    result += "<mark>" + text.slice(idx, idx + query.length) + "</mark>";
+
+    // text before match
+    result += process(text.slice(i, idx));
+
+    // matched part
+    const matched = text.slice(idx, idx + query.length);
+    result += "<mark>" + process(matched) + "</mark>";
+
     i = idx + query.length;
   }
 
@@ -282,8 +316,9 @@ function highlightAll(text, query, caseSensitive) {
           }
 
           const textEl = document.createElement("div");
-          textEl.className = "line-text";
-          textEl.innerHTML = highlightAll(stripLineNum(line), q, caseSensitive);
+textEl.className = "line-text";
+textEl.innerHTML = highlightAll(stripLineNum(line), q, caseSensitive, renderHtml);
+
 
           row.appendChild(numEl);
           row.appendChild(textEl);
@@ -330,6 +365,20 @@ function highlightAll(text, query, caseSensitive) {
       applyState();
     }
 
+    function setupHtmlRenderToggle() {
+  const toggle = document.getElementById("toggleRenderHtml");
+  if (!toggle) return;
+
+  // Initialize from checkbox state (checked by default)
+  renderHtml = toggle.checked;
+
+  toggle.addEventListener("change", () => {
+    renderHtml = toggle.checked;
+    loadEntry(); // re-render entry with new mode
+  });
+}
+
+
     function setupHashListener() {
       window.addEventListener("hashchange", () => {
         const ln = getHashLine();
@@ -370,14 +419,15 @@ function highlightAll(text, query, caseSensitive) {
         setActiveLink();
       }
     }
+   window.addEventListener("DOMContentLoaded", async () => {
+  setupBackLink();
+  setupLineToggle();
+  setupHashListener();
+  setupSidebar(null); // no active nav item for detail page
+  setupHtmlRenderToggle(); // NEW
+  await loadEntry();
+});
 
-    window.addEventListener("DOMContentLoaded", async () => {
-      setupBackLink();
-      setupLineToggle();
-      setupHashListener();
-      setupSidebar(null); // no active nav item for detail page
-      await loadEntry();
-    });
   </script>
 </body>
 </html>
