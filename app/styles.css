@@ -138,6 +138,8 @@ h1 {
   line-height: 1.45;
 }
 
+p {margin: 0;}
+
 /* Highlight */
 mark {
   background: #ffe58f;
@@ -424,6 +426,7 @@ body.lines-hidden .line-num {
   max-width: none; /* override previous max-width for main */
   padding: 24px 16px 40px 24px;
   position: relative;
+  margin: 0 auto;
 }
 
 /* Sidebar collapsed state */
