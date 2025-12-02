@@ -3,14 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <title>JSON Text Search</title>
-  </head>
-  <body>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+   <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-header">
+           <span class="sidebar-title"></span>
+           <div class="nav-button">
+                <button id="sidebarExpandBtn" class="sidebar-expand-btn" type="button">
+                    ☰
+                </button>
+                <button id="sidebarCollapseBtn" class="sidebar-collapse-btn" type="button">
+                    ☰
+                </button>
+           </div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="search.html" data-page="search">Search</a>
+          <a href="browse.html" data-page="browse">Series Index</a>
+          <a href="index.html" data-page="index">Home</a>
+        </nav>
+      </div>
+    </aside>
 
-    <ul>
-        <li><a href="single.html">Single Page</a></li>
-        <li><a href="search.html">Search with Detail Page</a></li>
-    </ul>
+    <main>
 
+      <h1>Search Leibniz Texts</h1>
+      <p class="subtitle">
+        Search and translate Leibniz texts.
+      </p>
 
-  </body>
-  </html>
+      </main>
+    </div>
+    </body>
+    </html>
