@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JSON Text Search</title>
+  <link rel="stylesheet" href="app/styles.css" />
+</head>
+<body>
+   <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-header">
+           <span class="sidebar-title"></span>
+           <div class="nav-button">
+                <button id="sidebarExpandBtn" class="sidebar-expand-btn" type="button">
+                    ☰
+                </button>
+                <button id="sidebarCollapseBtn" class="sidebar-collapse-btn" type="button">
+                    ☰
+                </button>
+           </div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="app/search.html" data-page="search">Search</a>
+          <a href="app/browse.html" data-page="index">Series Index</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main>
+
+      <h1>Search Leibniz Texts</h1>
+      <p class="subtitle">
+        Searches across the <code>text</code> fields in <code>sample_entries.json</code>.
+        Results show only the matching line; click to open the full entry.
+      </p>
+
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Type to search in text fields…"
+          autocomplete="off"
+        />
+        <label>
+          <input type="checkbox" id="caseSensitive" />
+          Case sensitive
+        </label>
+        <label>
+          <input type="checkbox" id="toggleLineNumbers" checked />
+          Show line numbers
+        </label>
+      </div>
+
+      <div id="status" class="muted">Loading data…</div>
+
+      <ul id="results"></ul>
+    </main>
+  </div>
+
+  <script>
+    let entries = [];
+
+    function getParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        q: params.get("q") || "",
+        caseSensitive: params.get("cs") === "1",
+      };
+    }
+
+    async function loadData() {
+      const statusEl = document.getElementById("status");
+      try {
+        const res = await fetch("sample_entries.json");
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+        entries = await res.json();
+        statusEl.textContent = "Data loaded. Type a search term to see results.";
+        statusEl.classList.remove("muted");
+      } catch (e) {
+        console.error(e);
+        statusEl.textContent =
+          "Failed to load sample_entries.json. Ensure it is in the same folder and served over HTTP.";
+        statusEl.classList.add("error");
+      }
+    }
+
+    function normalize(text, caseSensitive) {
+      return caseSensitive ? text : text.toLowerCase();
+    }
+
+    // If you are rendering HTML in text fields, use the HTML-aware highlighter.
+    function escapeRegExp(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    function highlightFirstHTML(text, query, caseSensitive) {
+      if (!query) return text;
+      const flags = caseSensitive ? "" : "i";
+      const pattern = new RegExp(escapeRegExp(query), flags);
+      return text.replace(pattern, "<mark>$&</mark>");
+    }
+
+    function getMatchedLine(fullText, query, caseSensitive) {
+      if (!fullText) return "";
+      const lines = fullText.split(/\r?\n/);
+      const normQuery = normalize(query, caseSensitive);
+
+      for (const line of lines) {
+        if (normalize(line, caseSensitive).includes(normQuery)) {
+          return line;
+        }
+      }
+      for (const line of lines) {
+        if (line.trim()) return line;
+      }
+      return lines[0] || "";
+    }
+
+    function extractLineNum(line) {
+      const m = line.match(/\[\[(.*?)]]/);
+      return m ? m[1] : "";
+    }
+
+    function stripLineNum(line) {
+      return line.replace(/\[\[(.*?)]]\s*/, "");
+    }
+
+    function renderResults(items, query, caseSensitive) {
+      const list = document.getElementById("results");
+      const status = document.getElementById("status");
+      list.innerHTML = "";
+
+      if (!query) {
+        status.textContent = "Type a search term to see results.";
+        status.classList.remove("error");
+        status.classList.add("muted");
+        return;
+      }
+
+      status.textContent =
+        items.length === 0
+          ? "No results."
+          : items.length + " result" + (items.length === 1 ? "" : "s") + " found.";
+      status.classList.remove("error");
+      status.classList.remove("muted");
+
+      items.forEach((item) => {
+        const li = document.createElement("li");
+        li.className = "result";
+
+        const meta = document.createElement("div");
+        meta.className = "result-meta";
+        meta.innerHTML = `
+          <div>${item.series || "∅ series"}</div>
+          <div>${item.title || "∅ title"}</div>
+          <div>Seq: ${item.seq != null ? item.seq : "∅"}</div>
+        `;
+
+        const fullText = item.text || "";
+        const rawLine = getMatchedLine(fullText, query, caseSensitive);
+        const lineNum = extractLineNum(rawLine);
+        const cleanLine = stripLineNum(rawLine);
+
+        const row = document.createElement("div");
+        row.className = "line-row";
+
+        const numEl = document.createElement("div");
+        numEl.className = "line-num";
+        numEl.textContent = lineNum || "";
+
+        const textEl = document.createElement("div");
+        textEl.className = "line-text";
+        textEl.innerHTML = highlightFirstHTML(cleanLine, query, caseSensitive);
+
+        row.appendChild(numEl);
+        row.appendChild(textEl);
+
+        li.appendChild(meta);
+        li.appendChild(row);
+
+        li.addEventListener("click", () => {
+          const params = new URLSearchParams({
+            id: item.id != null ? String(item.id) : "",
+            q: query,
+            cs: caseSensitive ? "1" : "0",
+          });
+          const hash = lineNum ? "#" + encodeURIComponent(lineNum) : "";
+          window.location.href = "detail.html?" + params.toString() + hash;
+        });
+
+        list.appendChild(li);
+      });
+    }
+
+    function setupLineToggle(initialShow) {
+      const toggle = document.getElementById("toggleLineNumbers");
+      const applyState = () => {
+        if (toggle.checked) {
+          document.body.classList.remove("lines-hidden");
+        } else {
+          document.body.classList.add("lines-hidden");
+        }
+      };
+      if (typeof initialShow === "boolean") {
+        toggle.checked = initialShow;
+      }
+      toggle.addEventListener("change", applyState);
+      applyState();
+    }
+
+    function setupSearch(initialQuery, initialCaseSensitive) {
+      const input = document.getElementById("searchInput");
+      const caseBox = document.getElementById("caseSensitive");
+
+      function onSearch() {
+        const q = input.value.trim();
+        const caseSensitive = caseBox.checked;
+
+        if (!q) {
+          renderResults([], q, caseSensitive);
+          return;
+        }
+
+        const normQuery = normalize(q, caseSensitive);
+
+        const filtered = entries.filter((e) => {
+          const text = e.text || "";
+          return normalize(text, caseSensitive).includes(normQuery);
+        });
+
+        renderResults(filtered, q, caseSensitive);
+      }
+
+      input.addEventListener("input", onSearch);
+      caseBox.addEventListener("change", onSearch);
+
+      if (initialQuery) {
+        input.value = initialQuery;
+      }
+      caseBox.checked = !!initialCaseSensitive;
+
+      if (initialQuery) {
+        onSearch();
+      }
+    }
+
+    function setupSidebar(currentPageKey) {
+      const collapseBtn = document.getElementById("sidebarCollapseBtn");
+      const expandBtn = document.getElementById("sidebarExpandBtn");
+      const navLinks = document.querySelectorAll(".sidebar-nav a");
+
+      function setActiveLink() {
+        navLinks.forEach((link) => {
+          const page = link.getAttribute("data-page");
+          if (page === currentPageKey) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
+
+      function collapse() {
+        document.body.classList.add("sidebar-collapsed");
+      }
+
+      function expand() {
+        document.body.classList.remove("sidebar-collapsed");
+      }
+
+      if (collapseBtn) collapseBtn.addEventListener("click", collapse);
+      if (expandBtn) expandBtn.addEventListener("click", expand);
+
+      setActiveLink();
+    }
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      const { q, caseSensitive } = getParams();
+      await loadData();
+      setupSearch(q, caseSensitive);
+      setupLineToggle(true);
+      setupSidebar("search");
+    });
+  </script>
+</body>
+</html>
