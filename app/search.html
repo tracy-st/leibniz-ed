@@ -78,7 +78,7 @@
           throw new Error("HTTP " + res.status);
         }
         entries = await res.json();
-        statusEl.textContent = "Data loaded. Type a search term to see results.";
+        statusEl.textContent = "Data loaded (1908 entries). Type a search term to see results.";
         statusEl.classList.remove("muted");
       } catch (e) {
         console.error(e);
