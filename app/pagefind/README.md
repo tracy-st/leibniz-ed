@@ -65,6 +65,9 @@ The search interface expects data in `sample_entries.json` with the following st
 
 - **Full-text search**: Search across all entry content using Pagefind
 - **Browse interface**: View all entries organized by series
+- **Translation-friendly**: Two viewing modes for each entry:
+  - **Translation View**: Continuous text optimized for browser translators
+  - **Scholarly View**: Original format with line number annotations
 - **Metadata filtering**: Results show series, dates, and other metadata
 - **Excerpt highlighting**: Search terms are highlighted in results
 - **Individual entry pages**: Each result links to a detailed view with full text
@@ -97,3 +100,34 @@ The project uses:
 - **Vanilla CSS** with custom properties for theming
 
 To add new entries, update `sample_entries.json` and re-run `node generate-pages.mjs`.
+
+## Translation Support
+
+Each entry page offers two viewing modes optimized for different use cases:
+
+### 📖 Translation View
+- **Purpose**: Optimized for browser translation tools (Google Translate, etc.)
+- **Features**: 
+  - Continuous text without line break interruptions
+  - Clean formatting that doesn't confuse translators
+  - Line numbers preserved as reference metadata
+  - `translate="yes"` attribute for explicit translation support
+
+### 📚 Scholarly View  
+- **Purpose**: Academic research and citation
+- **Features**:
+  - Original text formatting preserved
+  - Line number annotations visible `[[4.1]]`, `[[4.2]]`, etc.
+  - HTML formatting maintained for italic/bold text
+  - Suitable for precise scholarly reference
+
+### Using Browser Translation
+1. Navigate to any entry page (e.g., `/entries/harvard_ii1_212_212/`)
+2. Click "Translation View" (default)
+3. Use your browser's translate feature:
+   - **Chrome**: Right-click → "Translate to English"
+   - **Firefox**: Address bar translate icon
+   - **Safari**: Smart Search field → Translate
+   - **Edge**: Address bar translate icon
+
+The continuous text format ensures accurate translation without fragmentation from line numbers.

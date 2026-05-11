@@ -44,12 +44,39 @@ const entry = {
       </div>
     </header>
 
+    <!-- View Toggle -->
+    <div class="view-controls">
+      <button id="translation-view-btn" class="view-btn active">Translation View</button>
+      <button id="scholarly-view-btn" class="view-btn">Scholarly View</button>
+    </div>
+
     <div class="entry-content" data-pagefind-meta="excerpt:116. CLAUDE NICAISE AN LEIBNIZ Dijon, 23. Mai 1697. [114.119.] Dijon le 23. May 1697 C'est Am Kopf der Seite von Leibniz' Hand: repondu contre mon gré monsieur que je tarde tant à vous écrire; l'eveque de Coutance et les correspondants, que je vous destinois qui m'ont manqué en sont cause. Je n'ay r...">
-      <div class="text-content">
-        {entry.text.split('\n').map(paragraph =>
-          paragraph.trim() && <p set:html={paragraph} />
-        )}
+
+      <!-- Translation-friendly continuous text -->
+      <div id="translation-view" class="text-view active">
+        <div class="translation-notice">
+          <p><strong>📖 Translation View:</strong> Continuous text optimized for browser translation tools.</p>
+        </div>
+        <div class="continuous-text" translate="yes" lang="unknown" id="continuous-text">
+          <!-- Will be populated by JavaScript -->
+        </div>
+        <div class="line-numbers-reference" id="line-numbers-ref">
+          <!-- Will be populated by JavaScript -->
+        </div>
       </div>
+
+      <!-- Detailed scholarly view with line numbers -->
+      <div id="scholarly-view" class="text-view">
+        <div class="scholarly-notice">
+          <p><strong>📚 Scholarly View:</strong> Original text with line number annotations preserved.</p>
+        </div>
+        <div class="annotated-text" id="annotated-text">
+          {entry.text.split('\n').map(paragraph =>
+            paragraph.trim() && <p set:html={paragraph} />
+          )}
+        </div>
+      </div>
+
     </div>
   </article>
 
@@ -139,9 +166,218 @@ const entry = {
     text-decoration: underline;
   }
 
+  /* View Toggle Controls */
+  .view-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+  }
+
+  .view-btn {
+    background: transparent;
+    border: 2px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+
+  .view-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .view-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+
+  /* Text Views */
+  .text-view {
+    display: none;
+  }
+
+  .text-view.active {
+    display: block;
+  }
+
+  /* Translation View */
+  .translation-notice, .scholarly-notice {
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  .continuous-text {
+    background: var(--surface);
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    padding: 25px;
+    line-height: 1.8;
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 15px;
+  }
+
+  .line-numbers-reference {
+    color: var(--text-secondary);
+    font-size: 13px;
+    padding: 10px;
+    background: var(--background);
+    border-radius: 4px;
+  }
+
+  /* Scholarly View */
+  .annotated-text {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .text-line {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    gap: 12px;
+  }
+
+  .line-refs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+
+  .line-num {
+    background: var(--primary);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: monospace;
+  }
+
+  .line-content {
+    flex: 1;
+    line-height: 1.6;
+  }
+
+  .line-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .line-content :global(i) {
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
   @media (min-width: 768px) {
     .entry-meta {
       grid-template-columns: repeat(2, 1fr);
     }
   }
+
+  @media (max-width: 768px) {
+    .view-controls {
+      flex-direction: column;
+    }
+
+    .text-line {
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .line-refs {
+      min-width: auto;
+    }
+  }
 </style>
+
+<script>
+  // Process text for translation view
+  function processTextForTranslation(text) {
+    if (!text) return { translationText: '', lineNumbers: [] };
+
+    const lines = text.split('\n');
+    let translationText = '';
+    const lineNumbers = [];
+
+    lines.forEach(line => {
+      const trimmedLine = line.trim();
+      if (!trimmedLine) return;
+
+      // Extract line numbers
+      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      const extractedNumbers = lineNumberMatch ?
+        lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
+
+      // Remove line number markers and HTML tags for continuous text
+      let contentOnly = trimmedLine
+        .replace(/\[\[\d+\.\d+\]\]/g, '')
+        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      if (contentOnly) {
+        if (translationText) translationText += ' ';
+        translationText += contentOnly;
+        lineNumbers.push(...extractedNumbers);
+      }
+    });
+
+    return {
+      translationText: translationText.trim(),
+      lineNumbers: lineNumbers
+    };
+  }
+
+  // View switching and text processing
+  document.addEventListener('DOMContentLoaded', () => {
+    const translationBtn = document.getElementById('translation-view-btn');
+    const scholarlyBtn = document.getElementById('scholarly-view-btn');
+    const translationView = document.getElementById('translation-view');
+    const scholarlyView = document.getElementById('scholarly-view');
+    const continuousTextDiv = document.getElementById('continuous-text');
+    const lineNumbersRef = document.getElementById('line-numbers-ref');
+
+    // Process the text for translation view
+    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
+      const processed = processTextForTranslation(entry.text);
+      continuousTextDiv.textContent = processed.translationText;
+
+      if (processed.lineNumbers.length > 0) {
+        lineNumbersRef.innerHTML = `<small><strong>Line numbers:</strong> ${processed.lineNumbers.join(', ')}</small>`;
+      }
+    }
+
+    // View switching functionality
+    if (translationBtn && scholarlyBtn && translationView && scholarlyView) {
+      translationBtn.addEventListener('click', () => {
+        translationBtn.classList.add('active');
+        scholarlyBtn.classList.remove('active');
+        translationView.classList.add('active');
+        scholarlyView.classList.remove('active');
+      });
+
+      scholarlyBtn.addEventListener('click', () => {
+        scholarlyBtn.classList.add('active');
+        translationBtn.classList.remove('active');
+        scholarlyView.classList.add('active');
+        translationView.classList.remove('active');
+      });
+    }
+  });
+</script>
