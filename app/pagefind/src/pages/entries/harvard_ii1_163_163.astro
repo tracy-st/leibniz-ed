@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_163",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 163,
+  "text": "<p> [[541.1]] <b>147. ARNOLD ECKHARD AN LEIBNIZ</p>\n<p> [[541.2]] Rinteln, 7. (17.) Juni 1677. [146.148.]</b></p>\n<p> [[541.14]] Nobilissime et Amplissime Domine </p>\n<p> [[541.15]] Literis Tuis responsum aliquod paravi, quod a reduce Reverendissimo Abbate Loccensi,\n[[541.16]] ad quem illud jam ante miseram, accipies. Prolixior fortasse fui, quam sat erat: sed quoniam a\n[[541.17]] primis principiis omnia arcessere, omnesque, quibus usus sum, terminos definire volui, brevior\n[[541.18]] esse non potui. Si ex principiis solo naturae lumine cognitis demonstrari potest existentia Dei,\n[[541.19]] non puto alio modo illud fieri posse, quam quo id facere tentavi. Sed Tuam ea super re\n[[541.20]] sententiam audire gestio. Vale, Vir Nobilissime, faveque </p>\n<p> [[541.21]] Nobiliss. Amplitud. T. </p>\n<p> [[541.22]] Obsequentiss. A. Eckhardo. </p>\n<p> [[541.23]] Rintel. d. 7. Jun. 1677. </p>\n",
+  "number": "147.",
+  "title": "ARNOLD ECKHARD AN LEIBNIZ",
+  "date": "Rinteln, 7. (17.) Juni 1677. [146.148.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:147. ARNOLD ECKHARD AN LEIBNIZ Rinteln, 7. (17.) Juni 1677. [146.148.] Nobilissime et Amplissime Domine Literis Tuis responsum aliquod paravi, quod a reduce Reverendissimo Abbate Loccensi, ad quem illud jam ante miseram, accipies. Prolixior fortasse fui, quam sat erat: sed quoniam a primis principii...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

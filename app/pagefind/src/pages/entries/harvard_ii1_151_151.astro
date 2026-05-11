@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_151",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 151,
+  "text": "<p> [[474.10]] <b>135. GEORG HERMANN SCHULLER AN LEIBNIZ</p>\n<p> [[474.11]] Amsterdam, 6. Februar 1677. [136.]</b></p>\n<p> [[474.26]] [ ... ] D. B. de S. vereor, ut brevi nos derelicturus sit, cum phthisis (morbus ipsi\n[[474.27]] haereditarius) indies ingravescere videatur. Demonstrationem, quam petis, circa propositionem,\n[[474.28]] <b>quod in rerum Natura non possunt dari duae aut plures substantiae ejusdem\n[[474.29]] Naturae sive attributi</b> hic addo: <i>Si darentur plures distinctae, deberent inter se distingui,\n[[475.1]] vel ex diversitate attributorum, vel ex diversitate affectionum (per prop. 4.); Si tantum ex\n[[475.2]] diversitate attributorum, concedetur ergo non dari nisi una ejusdem attributi. At si ex diversitate\n[[475.3]] affectionum, cum substantia sit prior Natura suis affectionibus (per prop. 1.) depositis\n[[475.4]] ergo affectionibus, et in se considerata, h.e. (per def. 3. et [axiom.] 6.) vere considerata, non\n[[475.5]] poterit concipi ab alia distingui, h.e. (per prop. 4.) non poterunt dari plures, sed tantum una,\n[[475.6]] Q.E.D.</i> </p>\n<p> [[475.7]] Objectiones tuas si reddere proximis dignaberis, sedulo curabo, ut clarius atque distinctius\n[[475.8]] solvantur, dummodo possibile. [ ... ] </p>\n<p> [[475.9]] Dabam Amstelodami 6 Februar. 1677. </p>\n<p> [[475.10]] <i>A Monsieur Monsieur Leibniz Conseiller de S.A.S. de Hannover. Hannover.</i> </p>\n",
+  "number": "135.",
+  "title": "GEORG HERMANN SCHULLER AN LEIBNIZ",
+  "date": "Amsterdam, 6. Februar 1677. [136.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:135. GEORG HERMANN SCHULLER AN LEIBNIZ Amsterdam, 6. Februar 1677. [136.] [ ... ] D. B. de S. vereor, ut brevi nos derelicturus sit, cum phthisis (morbus ipsi haereditarius) indies ingravescere videatur. Demonstrationem, quam petis, circa propositionem, quod in rerum Natura non possunt dari duae aut...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_262",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 262,
+  "text": "[[1028.11]] <b>219.  Aus und zu einem Brief von Descartes an Mersenne [1678 bis 1682 (?)]</b>\n [[1028.12]] <tab/>[1678 bis 1682 (?)] </p>\n<p> [[1029.6]] <i>Il y a moyen d'inventer une langue ou écriture au moins, dont les caracteres et mots\n[[1029.7]] primitifs seroient faits</i> en sorte, qu'elle pouroit estre enseignée en fort peu de tems, et ce\n[[1029.8]] par le moyen de l'ordre, c'est a dire, établissant un ordre entre toutes les pensées qui\n[[1029.9]] peuvent entrer en l'Esprit humain, de mesme qu'il y en a un naturellement étably entre les\n[[1029.10]] nombres; Et comme on peut aprendre en un iour à nommer tous les nombres iusques à\n[[1029.11]] l'infini, et à les écrire, en une langue inconnuë, qui sont toutesfois une infinité de mots\n[[1029.12]] differens; qu'on pûst faire le mesme de tous les autres choses qui tombent; en l'Esprit des\n[[1029.13]] hommes; si cela estoit executé, ie ne doute point que cette langue n'eust bien tost cours\n[[1029.14]] parmy le monde, car il y a force gens qui employeroient volontiers cinq ou six jours de\n[[1029.15]] tems pour se pouvoir faire entendre par tous les hommes. L'invention de cette langue\n[[1029.16]] dépend de la vraye Philosophie; car il est impossible autrement de dénombrer toutes les\n[[1029.17]] pensées des hommes, et de les mettre par ordre; ny seulement de les distinguer en sorte\n[[1029.18]] qu'elles soient claires et simples; qui est à mon advis le plus grand secret qu'on puisse\n[[1029.19]] avoir pour acquerir la bonne science; et si quelqu'un avoit bien expliqué quelles sont les\n[[1029.20]] idées simples qui sont en l'imagination des hommes, desquelles se compose tout ce qu'ils\n[[1029.21]] pensent, et que cela fust receu par tout le monde, i'oserois esperer ensuite une langue\n[[1029.22]] universelle fort aisé à aprendre, à prononcer, et à [écrire] et ce qui est le principal, qui\n[[1029.23]] ayderoit au iugement, luy representant si distinctement toutes choses, qu'il luy seroit\n[[1029.24]] presque impossible de se tromper; au lieu que tout au rebours, les mots que nous avons\n[[1029.25]] n'ont quasi que des significations confuses, ausquelles l'Esprit des hommes s'estant\n[[1029.26]] acoutumé de longue main, cela est cause qu'il n'entend presque rien parfaitement. Or ie\n[[1030.1]] tiens que cette langue est possible, et qu'on peut trouver la science de qui elle dépend, par\n[[1030.2]] le moyen de laquelle les Paysans pouroient mieux iuger de la verité des choses, que ne\n[[1030.3]] font maintenant les Philosophes. </p>\n<p> [[1030.4]] <i>Cependant quoyque cette langue dépende de la vraye philosophie, elle ne depend\n[[1030.5]] pas de sa perfection. C'est à dire cette langue peut estre établie, quoyque la philosophie\n[[1030.6]] ne soit pas parfaite: et à mesure que la science des hommes croistra, cette langue\n[[1030.7]] croistra aussi. En attendant elle sera d'un secours merveilleux et pour se servir de ce que\n[[1030.8]] nous sçavons, et pour voir ce qui nous manque, et pour inventer les moyens d'y arriver,\n[[1030.9]] mais sur tout pour exterminer les controverses, dans les matieres qui dependent du\n[[1030.10]] raisonnement. Car alors raisonner et calculer sera la même chose.</i> </p>\n",
+  "number": "219.",
+  "title": "Aus und zu einem Brief von Descartes an Mersenne",
+  "date": "[1678 bis 1682 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:219. Aus und zu einem Brief von Descartes an Mersenne [1678 bis 1682 (?)] [1678 bis 1682 (?)] Il y a moyen d'inventer une langue ou écriture au moins, dont les caracteres et mots primitifs seroient faits en sorte, qu'elle pouroit estre enseignée en fort peu de tems, et ce par le moyen de l'ordre, c'...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

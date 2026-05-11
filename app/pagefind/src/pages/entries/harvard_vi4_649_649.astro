@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_649",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 649,
+  "text": "[[2812.8]] <b>498.  De tribus praeceptis aeternae legis tres partes justitiae complectentibus [Sommer bis Winter 1678/79 (?)]</b>\n [[2812.10]] <tab/>[Sommer bis Winter 1678/79 (?)] </p>\n<p> [[2812.17]] <b>Juris</b> est (amplissimo sensu) quicquid rationis est in regenda circa aliorum bona\n[[2812.18]] malaque voluntate, id est quicquid sapiens praescriberet, cui omnium felicitas curae esset,\n[[2812.19]] ita etiam misericordia qua poenae non sine ratione remittuntur, et caritas qua egentibus\n[[2812.20]] prudenter succuritur ad justitiam pertinent. Nec tantum primum aeternae legis praecep\n[[2813.1]] tum est <b>neminem laedere</b> sive damno dato sive lucro intercepto, sed et proximum\n[[2813.2]] huic, juvare omnes, plus tamen minusve hos aut illos prout exigit majus commune\n[[2813.3]] bonum, unde aestimandum est quid cuique congruat, seu quis sit secundi praecepti\n[[2813.4]] sensus, quod <b>suum cuique tribuere</b> jubet. Denique quia interest rei communis\n[[2813.5]] singulis bene esse, justitia id est alieni boni sapiens cura, exigit, ut quisque etiam bonum\n[[2813.6]] proprium curet, itaque <b>honeste vivere</b>, tertium est summumque praeceptum, quod\n[[2813.7]] etiam priora involvit, huc tendens ut quisque virtutem colat, id est voluntatem assuefaciat\n[[2813.8]] ad rationis obsequium cuique felicitatis suae viam monstrantis. Atque hoc est quod vulgo\n[[2813.9]] fertur virtutes omnes justitia contineri. Tertium enim hoc praeceptum <b>justitiae</b> est\n[[2813.10]] <b>universalis</b>, quae inter caeteras virtutes etiam particularem justitiam binaque ejus\n[[2813.11]] priora praecepta, alterum <b>commutativae</b> justitiae alterum <b>distributivae</b>, complectitur.\n[[2813.12]] Nam in optima republica, cujus rector Deus est, nihil negligitur, nihil fit impune aut\n[[2813.13]] gratis. Quare caeterorum interest, ut quantum in ipsis est, ego sim felix; mea, ut quantum\n[[2813.14]] in me est, felices sint ipsi.\n[[2813.15]] <tit2><b>Pars prima De justitia commutativa</b></tit2> </p>\n<p> [[2813.16]] Regula prima: Si quis damnum dedit malo animo, datur laeso actio ad omne quod\n[[2813.17]] sua interest. </p>\n<p> [[2814.1]] Exceptio prima est si etiam in laeso malus animus fuerit, ita actio cessat. Dubito an\n[[2814.2]] pars tantum restituetur. Hic alterius malus animus non dat mihi actionem, dat ei exceptionem.\n[[2814.3]] Uti pactum nudum, ita dolus nudus dabit exceptionem, non actionem. Ad actionem\n[[2814.4]] opus est ut accedat synallagma, voluntarium vel invitum. </p>\n<p> [[2814.5]] Exceptio secunda si in laeso culpa fuerit, ita actio minuitur. </p>\n<p> [[2814.6]] Exceptio tertia si casus interveniens, qui non facile poterat timeri, damnum majus\n[[2814.7]] fecerit quam laedentem voluisse apparet, ob excessum damni non amplius petetur quam\n[[2814.8]] laedens commode facere possit. </p>\n<p> [[2814.9]] An qui malum aliquod voluisse videtur, etiam de illis tenebitur malis quae singulari\n[[2814.10]] casu, qui timeri facile non poterat, inde sunt nata? Videtur considerandum an aliquis\n[[2814.11]] animo lucrandi, an simpliciter malevole seu animo nocendi laeserit. Item an ex damno\n[[2814.12]] utilitatem ceperit, sive extet lucrum, sive sit consumtum, et vel in rem versum vel secus.\n[[2814.13]] Cum quis ex damno dato lucratus non est, actio ex parte laesi est rei persecutoria[e], ex\n[[2814.14]] parte laedentis est poenalis. Actio poenalis non debet extendi ad eversionem Rei, cum\n[[2814.15]] actor salvus esse potest nisi gravissima sit malitia rei. </p>\n",
+  "number": "498.",
+  "title": "De tribus praeceptis aeternae legis tres partes justitiae complectentibus",
+  "date": "[Sommer bis Winter 1678/79 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:498. De tribus praeceptis aeternae legis tres partes justitiae complectentibus [Sommer bis Winter 1678/79 (?)] [Sommer bis Winter 1678/79 (?)] Juris est (amplissimo sensu) quicquid rationis est in regenda circa aliorum bona malaque voluntate, id est quicquid sapiens praescriberet, cui omnium felicit...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

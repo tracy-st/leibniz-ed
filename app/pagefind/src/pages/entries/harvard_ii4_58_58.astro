@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_58",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 58,
+  "text": "<p> [[193.12]] <b>58. ISAAC JAQUELOT AN LEIBNIZ</p>\n<p> [[193.13]] [Berlin,] 2. Februar 1704. [50.59.] </b></p>\n<p> [[193.22]] J'ai <Fn><i>Am Kopf der Seite notiert Leibniz zunächst folgende Bemerkung, streicht sie aber wieder</i>: vers la fin de janvier 1704</Fn> fait réfléxion plus d'une fois, Monsieur, sur votre <b>harmonie préétablie</b>, depuis le\n[[193.23]] tems qu'une santé infirme me retient au coin de mon feu: et je ne saurois m'addresser à d'autre\n[[193.24]] qu'à vous, pour me tirer des difficultez, que j'y trouve. Je suppose le corps et l'ame comme\n[[193.25]] <b>deux pendules</b> etc. </p>\n<p> [[194.1]] 1.^#'o L'Ame a-t-elle reçu du Créateur la vertu de produire ses pensées? Ou Dieu les produit\n[[194.2]] il immédiatement dans l'ame? Ce dernier parti sera le systême des causes occasionnelles pour\n[[194.3]] peu qu'on y suppose de rapport au corps. Mais votre sentiment est que l'ame a la vertu de\n[[194.4]] produire ses pensées. </p>\n<p> [[194.5]] 2^#'o Que si l'Ame produit ses pensées, le fait elle avec le secours, ou du moins à la présence\n[[194.6]] des idées corporelles? Ou bien les produit elle, indépendamment de ces idées, et sans aucun\n[[194.7]] rapport nécessaire à elles? Si c'est à la présence de ces idées, on retombe, ou peu s'en faut, dans\n[[194.8]] les causes occasionnelles. Si c'est avec leur secours, il faudra savoir comment cela se fait; ce\n[[194.9]] qui paroit incompréhensible. </p>\n<p> [[194.10]] Si l'Ame produit ses pensées indépendamment des idées corporelles, et sans aucun rapport\n[[194.11]] nécessaire, à elles, je demande 1^#'o comment il est possible que l'Ame forme ses pensées, sans y\n[[194.12]] estre excitée, par aucun objet? Cela me semble un miracle aussi grand que la création: former la\n[[194.13]] pensée d'un Elephant, sans avoir jamais vu d'Eléphant; c'est plus qu'un miracle. </p>\n<p> [[194.14]] 2^#'o D'où vient que cette Ame ne forme pas de pensées dans un Enfant d'un an, si elle n'a\n[[194.15]] pas besoin du corps de l'Enfant, pour cet effet. Est ce que pendant ce tems là, Dieu retient dans\n[[194.16]] l'inaction, la vertu qu'il lui a donnée de penser? </p>\n<p> [[194.17]] 3^#'o D'où vient que l'Ame forme des pensées extravagantes, lors que le cerveau est troublé\n[[194.18]] par quelque transport? Pourquoi l'Ame dérangeroit elle ses pensées, à cause du trouble du\n[[194.19]] cerveau, si elle agit indépendamment de cet organe et sans y avoir aucun rapport? </p>\n<p> [[194.20]] 4^#'o D'où vient qu'il y a des peuples si indociles, comme les Hotentos etc. Est ce que leurs\n[[194.21]] ames sont d'une autre espéce, incapable de produire une suite de pensées raisonnables et bien\n[[194.22]] liées? </p>\n<p> [[194.23]] 5^#'o D'où vient qu'il y a des actions du corps qui paroissent toujours agir sur l'Ame, comme\n[[194.24]] les sons, les objets qui frappent la vue, et quelques petits sentimens de douleur et qui n'y font\n[[194.25]] pourtant aucune impression, lors qu'elle est fort appliquée à quelque méditation? De sorte que\n[[194.26]] cette idée corporelle est comme un coup perdu, une idée errante qui n'a ni suite, ni compagne,\n[[194.27]] dans cette harmonie. </p>\n<p> [[194.28]] 6^#'o Si les idées corporelles en vertu de cette harmonie vont toujours du pair avec les\n[[194.29]] pensées de l'Ame, pourquoi concevons nous tant de choses par la force du raisonnement, dont\n[[194.30]] nous ne pouvons nous former d'idées dans l'imagination. </p>\n<p> [[194.31]] Je ne prétens pas combattre votre opinion je n'ai d'autre dessein que de la bien comprendre\n[[194.32]] et de m'instruire mieux de votre systême. Je suis avec toute l'estime qui vous est due et\n[[194.33]] avec respect, </p>\n<p> [[194.34]] Monsieur Votre tres humble et tres obéïssant serviteur Jaquelot </p>\n<p> [[194.35]] Du 2 fevr. 1704 </p>\n<p> [[195.1]] J'ai appris qu'on faisoit votre portrait. Si j'avois quelque crédit chez le peintre je ne\n[[195.2]] voudrois pas qu'on mit autre chose au dessous de votre nom et de vos qualitez que ces trois\n[[195.3]] mots\n [[195.4]] <b>cui non notus</b>? </p>\n<p> [[195.5]] Je vous supplie d'assurer Monsieur l'Abbé Molanus, de mon amitié et de mes tres\n[[195.6]] humbles services. </p>\n",
+  "number": "58.",
+  "title": "ISAAC JAQUELOT AN LEIBNIZ",
+  "date": "[Berlin,] 2. Februar 1704. [50.59.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:58. ISAAC JAQUELOT AN LEIBNIZ [Berlin,] 2. Februar 1704. [50.59.] J'ai Am Kopf der Seite notiert Leibniz zunächst folgende Bemerkung, streicht sie aber wieder: vers la fin de janvier 1704 fait réfléxion plus d'une fois, Monsieur, sur votre harmonie préétablie, depuis le tems qu'une santé infirme me ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_7",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 7,
+  "text": "<p> [[29.11]] <b>7. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[29.12]] Dijon, 11. Juli 1701. [5.8.] </b></p>\n<p> [[30.1]] Dijon le XI. Jüillet <b>1701</b> </p>\n<p> [[30.2]] J'oubliay <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: Mons. l'Abbé Nicaise</Fn> monsieur de vous dire dans la derniere que j'ay eû l'honneur de vous écrire une\n[[30.3]] nouvelle qui ne sera pas tout à faict desagreable à m^#'r Ludolfe. C'est touchant le p. Bonjour,\n[[30.4]] dont les lettres luy paroissoient un peu trop seches et trop steriles: ce pere me mande qu'il a\n[[30.5]] abandonné les Antiquités d'Egypte[;] ses superieurs luy ayant ordonné une autre étude plus\n[[30.6]] conforme à son étât de Religieux, il a cependant faict une Grammaire en langue Copte, ainsy\n[[30.7]] mons^#'r voilà le champ des Antiquités d'Egypte abandonné à mons^#'r l'abbé de la Charmoye\n[[30.8]] autrement le Rev. p. Pezron de l'ordre de Cisteaux qui nous promet bientost son <i>Antiquité des\n[[30.9]] Nations</i>, après nous avoir donné celles <i>des tems</i>; il m'a écrit qu'il y fournie beaucoup de\n[[30.10]] Recherches sur la Langue Celtique, pourveû qu'il ne donne pas dans le Goust de Goropius\n[[30.11]] Becanus et de Schrickius qui nous ont donné de grandes Recueils sur cette Langue et sur la\n[[30.12]] Belgique à la bonne heure; ce que je ne croy pas de ce judicieux ecrivain qui nous decouvrira\n[[30.13]] asseurement de belles et agreables choses à sa maniere. Je croy que m^#'r Pinsson vous aura\n[[30.14]] envoyé le journal de Trevoux du mois de may et de Juin dernier où vous aurés veu ce qu'il y est\n[[30.15]] dit d'une nouvelle edition du Suidas par m^#'r Neocorus qui profitera du travail du scavant m^#'r\n[[30.16]] Pearson sur ce beau Lexicon. Il y a long tems que je n'ay recû des nouvelles de Rome; j'en\n[[30.17]] attends incessamment avec les Antiquités de Neffane de l'abbé della Torre, où il a renfermé\n[[30.18]] quantité de choses qui regardent la belle Antiquité, je ne scay aucunes nouvelles de nostre cher\n[[31.1]] et important amy mons^#'r de Spanheim; voilà un petit mot que je prends la liberté de vous\n[[31.2]] adresser pour luy aussi bien que pour m^#'r Morel: mons^#'r d'Avranches faict imprimer à Roüen <i>les\n[[31.3]] Antiquités de la ville de Caën</i>; pour toujours monsieur à vostre chere et pretieuse amitié. Tout a\n[[31.4]] vous </p>\n<p> [[31.5]] Nicaise </p>\n",
+  "number": "7.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Dijon, 11. Juli 1701. [5.8.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:7. CLAUDE NICAISE AN LEIBNIZ Dijon, 11. Juli 1701. [5.8.] Dijon le XI. Jüillet 1701 J'oubliay Am Kopf des Briefes von Leibniz' Hand: Mons. l'Abbé Nicaise monsieur de vous dire dans la derniere que j'ay eû l'honneur de vous écrire une nouvelle qui ne sera pas tout à faict desagreable à m^#'r Ludolfe...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

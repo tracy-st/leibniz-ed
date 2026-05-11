@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_224",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 224,
+  "text": "<p> [[682.12]] <b>224. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[682.13]] Leipzig, 5. November 1707. [220.230.] </b></p>\n<p> [[682.19]] Vir Illustris et Excellentissime,\n [[682.20]] Patrone omni observantia devenerande! </p>\n<p> [[682.21]] Recte <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: resp.</Fn> accepi Tuas, speroque etiam Excellentiam Tuam a Dno. Forstero accepisse meas\n[[682.22]] rerum apud nos gestarum nuncias. </p>\n<p> [[683.1]] Carpzovii Spartam nactus est Magnificus noster Seligmannus. Magnificus Dn. D. Ittigius\n[[683.2]] de variis Collectionum Scriptorum Ecclesiasticorum editionibus pro more suo erudite commentatus\n[[683.3]] est. Dn. D. Rivinus novam suam Plantarum collectionem sedulo continuat, et postquam\n[[683.4]] Plantarum flore irregulari monopetalo tetrapetalo et pentapetalo Ordinem absolvit,\n[[683.5]] Appendices jam adjungere apud se constituit. </p>\n<p> [[683.6]] Dn. Junckerus Curtium aliosque bonae latinitatis auctores notis suis illustrat. De reditu Dn.\n[[683.7]] Junii multi mira hic loquuntur, sed forte adhuc incerta. De Dn. Tentzelio autem tale nihil audivi.\n[[683.8]] Editio Numismatum Morelliana aegre procedit, cum alia tractet Dn. Slegelius. </p>\n<p> [[683.9]] Tractatulus meus proximis forte nundinis lucem videbit publicam, <angle bracket>in</angle bracket> hanc prodire non\n[[683.10]] ausus nisi Tuo stipatus judicio, quod omnibus aliorum censuris longissime antepono. </p>\n<p> [[683.11]] Mox etiam specimen dabo Physico-mathematicum de Lacrymis, tentaturus phaenomena\n[[683.12]] Lacrymarum ex hypothesi demonstrare mechanico-hydraulica, simul ac occasio dabitur, cogitata\n[[683.13]] circa texturam glandularum et tubulorum lacrymalium viros experimentis roborandi. </p>\n<p> [[683.14]] Dicere n. non possum, quanto in haec studia amore ferar, quibus omne tempus omnesque\n[[683.15]] facultates meas, si liceret, impendere vellem. Hunc enim in finem non tantum praeterito anno\n[[683.16]] sub ductu privatissimo felicissimi nostri Anatomici Dn. D. Naboth Anatomiam absolvi, sed ex\n[[683.17]] praesenti huc anno hujus ex Celeb. Bohnii manuductione in Chymia utor, sine qua neminem in\n[[683.18]] corporum natura et proprietatibus indagandis operae pretium facere posse persuasus sum. </p>\n<p> [[684.1]] At enim vero facultates meae tenues et jam maximam partem Academicis studiis insumtae,\n[[684.2]] his studiis cum fructu continuandis non sufficiunt. Beneficium etiam quo fruor in Collegio\n[[684.3]] hujus Academiae Mariano sup[p]ortationi meae necessariae impendendum est. Quocirca venit\n[[684.4]] nuper in mentem Tuo me et consilio et auxilio posse frui. Nimirum cum essem Hanoverae\n[[684.5]] aditum etiam nactus sum apud supremum Ecclesiarum Vestrarum Directorem Reverendiss.\n[[684.6]] Gerardum Molanum, quem elegantiorum litterarum, et inprimis scientiae naturalis omniumque\n[[684.7]] huic ad nobilitatem generis humani promovendam sedulo studentium amantissimum expertus\n[[684.8]] sum. Quare Tuam, si fas est, sollicitarer indulgentiam, ut Reverendiss. Abbati mea studia\n[[684.9]] commendare, et utrum ex Coenobio Loccumensi ad continuanda illa aliquid commodi in me\n[[684.10]] quoque redundare queat, data occasione explorare, ne dedigneris. Quo ipso faciet Excellentia\n[[684.11]] Tua rem mihi gratissimam omnibusque obsequiorum generibus vicissim demerendam </p>\n<p> [[684.12]] Illustri atque Excellentissi[mi] Nominis Tui Cultor perpetuus </p>\n<p> [[684.13]] Mich. Gottl. Hanschius. </p>\n<p> [[684.14]] Lipsiae MDCCVII d. 5. Nov. </p>\n<p> [[684.15]] NB A Son Excellence Monseigneur de Leibniz Conseiller privé à Son Altesse Electorale\n[[684.16]] de Brounsvic et Lunebourg à Hannover </p>\n",
+  "number": "224.",
+  "title": "MICHAEL GOTTLIEB HANSCH AN LEIBNIZ",
+  "date": "Leipzig, 5. November 1707. [220.230.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:224. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ Leipzig, 5. November 1707. [220.230.] Vir Illustris et Excellentissime, Patrone omni observantia devenerande! Recte Am Kopf des Briefes von Leibniz' Hand: resp. accepi Tuas, speroque etiam Excellentiam Tuam a Dno. Forstero accepisse meas rerum apud nos gestaru...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

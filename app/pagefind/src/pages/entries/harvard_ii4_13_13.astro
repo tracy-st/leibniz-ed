@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_13",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 13,
+  "text": "<p> [[42.5]] <b>13. LEIBNIZ AN PIERRE BAYLE</p>\n<p> [[42.6]] Berlin, 27. Dezember 1701. [10.25.] </b></p>\n<p> [[42.18]] Extrait de ma reponse Berlin 27 Xbr. 1701 </p>\n<p> [[42.19]] Si je ne m'estois imaginé que la communication de vos nouvelles considerations estoit\n[[42.20]] sans difficulté, je n'aurois eu garde de vous en importuner. On pourra se servir de l'expedient\n[[42.21]] dont je me suis servi deja avec permission de M. de Bauval. Mais mon principal but estant\n[[42.22]] d'approfondir les choses, et de decouvrir la verité, je suis bien faché d'avoir esté privé si long\n[[42.23]] temps de vos pensées, qui m'auroient servi beaucoup sans doute, et de n'en pouvoir estre\n[[42.24]] instruit que par la voye des libraires. Car en connoissant le prix, et estant convaincu de vostre\n[[42.25]] grande penetration, il me tardera de voir encor un autre ouvrage de vostre part, si je ne pourray\n[[42.26]] apprendre que par là ce que vous penserés sur ce que je pourray faire mettre dans l'<i>Histoire des\n[[42.27]] ouvrages des savans</i>. Il est vray que je souhaitte assez sans cela que vous enrichiés le public de\n[[42.28]] vos productions, mais je doute que je sois tousjours homme à les attendre. Je me souviens\n[[43.1]] d'avoir remarqué qu'en parlant de Payva Andradius vous le supposés peu connu, et croyés\n[[43.2]] qu'on ne le cite gueres que sur le rapport de Kemnitius. Je vous avoue Monsieur, qu'il n'est que\n[[43.3]] peu connu aujourdhuy; mais il l'estoit beaucoup du siecle passé. Ses ouvrages publiés en Italie,\n[[43.4]] ayant esté reimprimés à Cologne et nos controversistes appelloient Andradiens ceux qui le\n[[43.5]] suivoient. Pour moy, j'ay eu son livre à la main, lorsque je le citois en ecrivant à feu\n[[43.6]] M. Pelisson, car il se trouve chez nous. Ce que je dis pour n'estre pas enveloppé dans\n[[43.7]] l'accusation generale. </p>\n<p> [[43.8]] J'ay esté icy quelques mois durant par ordre de la Reine de Prusse et avec permission de\n[[43.9]] Monsg^#'r l'Electeur son frere, le Roy de Prusse ayant voulu aussi que je contribue à mettre un peu\n[[43.10]] en ordre ce qui regarde la nouvelle societé des sciences que sa Mté vient de fonder, faisant\n[[43.11]] bastir un observatoire à Berlin, et faisant regler quelques autres choses necessaires pour le but\n[[43.12]] qu'on se propose. Je ne neglige pas entierement le service de l'Electeur cependant; mais je me\n[[43.13]] dispose pourtant à retourner bientost chez moy. La Reine m'a dit de vous avoir vû en personne,\n[[43.14]] et qu'elle eût souhaité de vous pouvoir entretenir plus long temps. Cependant elle vous connoist\n[[43.15]] bien mieux par vos ouvrages comme aussi Mad. l'Electrice sa Mere. </p>\n",
+  "number": "13.",
+  "title": "LEIBNIZ AN PIERRE BAYLE",
+  "date": "Berlin, 27. Dezember 1701. [10.25.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:13. LEIBNIZ AN PIERRE BAYLE Berlin, 27. Dezember 1701. [10.25.] Extrait de ma reponse Berlin 27 Xbr. 1701 Si je ne m'estois imaginé que la communication de vos nouvelles considerations estoit sans difficulté, je n'aurois eu garde de vous en importuner. On pourra se servir de l'expedient dont je me s...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

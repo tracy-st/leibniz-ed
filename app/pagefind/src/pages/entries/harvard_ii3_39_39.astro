@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_39",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 39,
+  "text": "<p> [[108.15]] <b>39. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[108.16]] Is sur Tille, 20. November 1695. [34.45.]</b></p>\n\n<p> [[109.1]] Is sur Tille le 20. 9^#'b^#'r^#'e <b>1695</b> </p>\n<p> [[109.2]] Vous reconnoistrés monsieur par le style dont j'écris à mons^#'r Morel combien j'ay eu de\n[[109.3]] Joye de recevoir la sienne aussi bien que la vostre; J'ay faict part à mons^#'r le president Boisot de ce\n[[109.4]] que vous m'avés ecrit sur son chapitre et Je l'ay instruit de vos intentions. Je ne doubte nullement\n[[109.5]] qu'il ne travaille actuellement au memoire que vous desirés de luy. La reflexion que vous faictes\n[[109.6]] sur [la] <i>Bibliotheca pontificia</i> est tres juste aussi bien que celle sur les devoirs de pieté que l'on\n[[109.7]] doit aux deffuncts, éloignée de la raillerie; cependant nostre philosophe platonicien mons^#'r Foucher\n[[109.8]] n'en estoit pas persuadé au commencement, car il trouvoit cette raillerie sur m^#'r Lantin\n[[109.9]] admirable à ce qu'il m'ecrivit; il en est pourtant revenû. Je croy que m^#'r Toinard qui l'a faict mettre\n[[109.10]] dans le <i>journal des scavants</i> reconnoistra à la fin qu'il n'a pas rendû <i>officium pietatis</i> au deffunct\n[[109.11]] et ancore moins à son amy vivant, qui l'a faict, et dont il couvrît la reputation, le seigneur chatie\n[[109.12]] les passions illicites des hommes par des tenebres espaisses dont il les offusque la plus part du\n[[109.13]] têms, <i>spargit poenales coecitates super illicitas Cupiditates</i>. M^#'r le president Cousin en a esté un\n[[109.14]] peu offusqué aussi bien que les autres; demandés un peu à mons^#'r l'abbé Foucher le subject de\n[[109.15]] cette offuscation, l'histoire du cabinet sur le 3^#'e^#'m^#'e tome des oeuvres de Juste Lipse, m^#'r Toinard la\n[[109.16]] scait aussi parfaictement. Cet abbé ne vous dira rien de m^#'r Lantin que ce qu'il aura veû dans\n[[109.17]] l'eloge que j'en ay faict et qu'il a gardé prés de deux mois sens l'envoyer en Hollande à mons^#'r\n[[109.18]] Basnage ce qui est cause qu'on ne l'a point veû dans le tems qu'on devoit; mons^#'r Basnage\n[[109.19]] suppleera par son journal au silence du nostre et vous apprendrés par luy ce que vous pouvés\n[[109.20]] souhaitter de ce cher deffunct et de ce genre merveilleux; J'attends ancore des memoires pour\n[[109.21]] l'eloge de m^#'r Ouvrard, j'ecrivis hier à son frere Minime à Rome à la trinité du mont. </p>\n<p> [[109.22]] Ne doubtés pas mons^#'r qu'on ne travaille à des memoires pour l'histoire du Roy; Je croy\n[[109.23]] bien que m^#'r Pelisson vostre bon amy et le nostre en a laissé, et que d'autres gens que les\n[[110.1]] ministres memes s'y occupent qui donneront lieu à bien des Anecdotes dans le têms; Je veux un\n[[110.2]] peu de mal à nostre s^#'t pere d'estre si long à nous donner des cardinaux et de differer si longtems\n[[110.3]] le plaisir que nous aurions de voir dans ce nombre le p. Noris qui ne nous ecrit plus depuis\n[[110.4]] longtems, et qui attend cette promotion pour le taire comme nous le mande mons^#'r l'abbé de\n[[110.5]] Gondy son bon amy et le nostre, secretaire d'etat de mons^#'r le Grand Duc; Je n'ay point veû le\n[[110.6]] <i>dessein du dictionnaire</i> de mons^#'r Chapuzeau dont vous me parlés; celluy de m^#'r Bayle s'avance\n[[110.7]] fort, l'on en est au second volume; m^#'r Leers y employe les mêmes caracteres et le meme papier\n[[110.8]] qui a esté mis en oeuvre pour le Junius <i>de pictura veterum</i>. Je suis mons^#'r avec tout le Respect\n[[110.9]] possible </p>\n<p> [[110.10]] Tout à vous Nicaise\n[[110.11]] <yi>Pour Vous Monsieur </p></p>\n",
+  "number": "39.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Is sur Tille, 20. November 1695. [34.45.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:39. CLAUDE NICAISE AN LEIBNIZ Is sur Tille, 20. November 1695. [34.45.] Is sur Tille le 20. 9^#'b^#'r^#'e 1695 Vous reconnoistrés monsieur par le style dont j'écris à mons^#'r Morel combien j'ay eu de Joye de recevoir la sienne aussi bien que la vostre; J'ay faict part à mons^#'r le president Boisot...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

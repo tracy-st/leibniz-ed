@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_43",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 43,
+  "text": "<p> [[122.1]] <b>43. LEIBNIZ AN [HENRI BASNAGE DE BAUVAL]</p>\n<p> [[122.2]] [Hannover, 13. Januar 1696.] [42.53.]</b></p>\n\n<p> [[122.17]] Vous sçavés, Monsieur, que ce qu'on appelle les Pietistes fait presque autant de bruit en\n[[122.18]] Allemagne que le Quietisme en a fait en Italie. Mais comme on en parle fort differemment\n[[122.19]] selon les passions des gens, je ne sçay si on vous en aura donné une idée bien nette. Voicy ce\n[[122.20]] qui m'en semble en peu de mots. Quelques personnes, que je croiray tousjours bien intentionnées\n[[122.21]] tant qu'il me le sera permis, ayant travaillé au redressement des moeurs, et à l'étude de\n[[122.22]] l'ecriture, et s'estant servi pour cet effect de certaines assemblées reglées; quelques uns s'y\n[[122.23]] mêlerent qui manquoient de jugement, et peut estre aussi de droiture. Ce qui fit qu'on en\n[[122.24]] apprehenda les suites en quelques endroits sur tout lors que le Chiliasme; et les visions y\n[[122.25]] survinrent, et obligerent des puissances d'en arrester le cours. Mais quelques uns qui\n[[122.26]] monstroient du zele pour cela, tournerent leur efforts contre quelques Theologiens moderés et\n[[123.1]] habiles, qui ne desapprouvoient pas ces <i>Collegia Pietatis</i> ou assemblées, supposé qu'elles\n[[123.2]] fussent bien conduites. Là dessus on leur appliqua le nom de Pietistes, particulierement à\n[[123.3]] M. Spener cy devant premier Theologien du pays de l'Electeur de Saxe et maintenant dans le\n[[123.4]] pays de Brandebourg à l'egard de ceux qui y tiennent la confession d'Augsbourg. On l'accusa\n[[123.5]] d'avoir agi trop mollement contre les Bohmistes, Visionnaires et Chiliastes, et on crut trouver je\n[[123.6]] ne sçay combien d'erreurs dans ses écrits. On luy attribua d'entretenir une espece de cabale, et\n[[123.7]] un Theologien qui ne manque pas d'esprit, publia un livre intitulé <i>Itinerarium Pietisticum</i> où en\n[[123.8]] faisant recit de son voyage aux eaux de Pirmont, il raconte les conversations qu'il a eues\n[[123.9]] touchant les pretendus pietistes, mais d'une maniere un peu passionnée contre M. Spener, et\n[[123.10]] dont quelques uns se plaignent. Enfin la Faculté Theologique de Witenberg en Saxe, qui tient la\n[[123.11]] chaîre de Luther ecrivit contre M. Spener. Mais celuy cy ayant rendu compte de ses sentimens,\n[[123.12]] et le tout ne paroissant fondé que sur des soubçons eloignés, les Electeurs de Saxe et de\n[[123.13]] Brandebourg y ont mis le holà par leur defenses. Nous verrons si la chose en demeurera là. </p>\n",
+  "number": "43.",
+  "title": "LEIBNIZ AN [HENRI BASNAGE DE BAUVAL]",
+  "date": "[Hannover, 13. Januar 1696.] [42.53.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:43. LEIBNIZ AN [HENRI BASNAGE DE BAUVAL] [Hannover, 13. Januar 1696.] [42.53.] Vous sçavés, Monsieur, que ce qu'on appelle les Pietistes fait presque autant de bruit en Allemagne que le Quietisme en a fait en Italie. Mais comme on en parle fort differemment selon les passions des gens, je ne sçay si...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

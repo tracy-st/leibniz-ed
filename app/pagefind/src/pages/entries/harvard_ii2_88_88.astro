@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_88",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 88,
+  "text": "<p> [[353.4]] <b>89. LEIBNIZ AN HENRI JUSTEL</p>\n<p> [[353.5]] Hannover, 10./20. Oktober 1690. [162.]</b></p>\n<p> [[354.1]] [ ... ] Mons. Hugens de Zulichem a publié son excellent ouvrage <i>de la lumière</i>, où il a\n[[354.2]] effacé à mon avis ce que des Cartes avoit donné là dessus. Il m'a fait l'honneur dans la préface\n[[354.3]] et dans son ouvrage même de parler de quelques decouvertes Mathematiques que j'avois faites.\n[[354.4]] Vostre Mons. Neuton m'a fait [le] même honneur dans le sien, peutestre en consideration de\n[[354.5]] l'avantage que j'ay depuis long temps d'estre un membre indigne de la Société Royale\n[[354.6]] d'Angleterre. Sans doute ces deux ouvrages de Messieurs Hugens et Neuton sont les plus\n[[354.7]] importans en ce genre que nous ayions depuis des Cartes, dont ils redressent même les erreurs,\n[[354.8]] et (qui plus est) nous font passer plus avant. Les pauvres Cartesiens ne font que copier et\n[[354.9]] paraphraser eternellement les pensées de leur maistre. Mais pour avancer au de là de ce qu'il a\n[[354.10]] dit, point de nouvelles. C'est là le fruit de l'esprit de secte, du quel la Societé Royale s'est\n[[354.11]] affranchie par son: <i>nullius in verba</i>. En France et en Hollande bien des curieux sont trop\n[[354.12]] Cartesiens ordinairement, c'est pourquoy, remplis qu'ils sont de certaines manieres de penser\n[[354.13]] prises de leur grand auteur, ils ne sçauroient elever aisement l'esprit à donner des nouvelles\n[[354.14]] ouvertures. </p>\n<p> [[354.15]] Cependant il me semble qu'on ne doit pas entierement rejetter les Tourbillons (<i>vortices</i>),\n[[354.16]] dont Leucippe, et Jordan le Brun, et Kepler ont parlé long temps avant des Cartes. Et sans eux\n[[354.17]] comment peut on expliquer la pesanteur et le magnetisme, qualités qui se recontrent toutes deux\n[[354.18]] non seulement en terre, mais encor dans le ciel à l'egard de la disposition des planetes envers un\n[[354.19]] certain centre et certaines directions des axes. De sorte que je croy que les Tourbillons ne sont\n[[354.20]] pas si coupables que Mons. Neuton les fait. J'avois déja donné autres fois des demonstrations\n[[354.21]] dans les Actes de Leipzig, qui pourront peut estre servir maintenant à concilier les Tourbillons\n[[354.22]] avec les belles demonstrations de Mons. Neuton. Et j'ay demonstré qu'on peut donner un\n[[354.23]] certain mouvement fort naturel à l'Ether deferant des planetes, qui satisfait aux regles que\n[[355.1]] nostre Kepler a divinement bien inventées sur les observations de Tycho. Et sans un Ether\n[[355.2]] deferant commun, d'où vient que toutes les planetes d'un même systeme vont à peu prés le\n[[355.3]] même chemin, et du même costé? Ce qu'on observe non seulement dans les planetes ou\n[[355.4]] satellites du soleil, mais encor dans ceux de Jupiter et de Saturne. [ ... ] </p>\n",
+  "number": "89.",
+  "title": "LEIBNIZ AN HENRI JUSTEL",
+  "date": "Hannover, 10./20. Oktober 1690. [162.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:89. LEIBNIZ AN HENRI JUSTEL Hannover, 10./20. Oktober 1690. [162.] [ ... ] Mons. Hugens de Zulichem a publié son excellent ouvrage de la lumière, où il a effacé à mon avis ce que des Cartes avoit donné là dessus. Il m'a fait l'honneur dans la préface et dans son ouvrage même de parler de quelques de...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

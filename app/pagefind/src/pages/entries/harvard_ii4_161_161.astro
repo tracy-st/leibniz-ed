@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_161",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 161,
+  "text": "<p> [[512.10]] <b>161. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[512.11]] Aschersleben, 29. Oktober 1706. [104.164.] </b></p>\n<p> [[512.17]] Wolgebohrner Herr Hoher Gönner </p>\n<p> [[512.18]] Nachdem ich an der deütsch. <i>Weltweisen Geschicht</i> so weit kommen, daß ich one di <i>Acta\n[[512.19]] Erud.</i>, <i>Ephem. Nat. Cur.</i> u.d.g. durch zulaufen, nicht weiter fort kan, wenn ich meinen Zweck,\n[[513.1]] Spraten einzuholen, erreichen wil, so habe nun größere lust, das <i>reale</i> Wörterbuch so Si mir etl.\n[[513.2]] mal vorgeschlagen, zu versuchen: hätte ich dises eher auf mich genommen, wäre ich mit meiner\n[[513.3]] <i>Weltweisen Geschicht</i> nimmer dahin kommen, da ich izt bin. Derowegen habe vernemen\n[[513.4]] wollen, ob Si noch gesonnen, mir gelegenh. zu selbem wörterbuch zu geben, so wolte mich auf\n[[513.5]] befehl gleich einstellen; ich würde doch one zweif. di <i>Ephem.</i> u. <i>Acta Er.</i> meine Geschicht zu\n[[513.6]] volfüren, daneben haben können. So bitte nun gehorsamst, mir hirauf bald antw. zu gönnen,\n[[513.7]] damit mich danach richten könne u. verbl. </p>\n<p> [[513.8]] Wohlgebohr. Herr, Dero gehorsamster </p>\n<p> [[513.9]] Gabriel Wagner. </p>\n<p> [[513.10]] Aschersleben 29. Weinm. [1]706. </p>\n",
+  "number": "161.",
+  "title": "GABRIEL WAGNER AN LEIBNIZ",
+  "date": "Aschersleben, 29. Oktober 1706. [104.164.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:161. GABRIEL WAGNER AN LEIBNIZ Aschersleben, 29. Oktober 1706. [104.164.] Wolgebohrner Herr Hoher Gönner Nachdem ich an der deütsch. Weltweisen Geschicht so weit kommen, daß ich one di Acta Erud., Ephem. Nat. Cur. u.d.g. durch zulaufen, nicht weiter fort kan, wenn ich meinen Zweck, Spraten einzuhole...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

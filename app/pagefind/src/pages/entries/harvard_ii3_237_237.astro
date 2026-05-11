@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_237",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 237,
+  "text": "<p> [[639.1]] <b>237. LEIBNIZ AN CLAUDE NICAISE</p>\n<p> [[639.2]] [Ende Mai bis Mitte Juli 1700.] [236.239.]</b></p>\n\n<p> [[639.15]] Extrait de ma reponse </p>\n<p> [[639.16]] Je crois que Mons. Ludovici en donnant les lettres de Languetus sans la vie, aura suivi en\n[[639.17]] cela comme aussi à l'egard du titre plustost le goust du libraire que le sien. Il valoit mieux de\n[[639.18]] faire paroistre les lettres de Languetus toutes nues sans preface, sans argumens et sans index\n[[639.19]] que les laisser croupir plus long temps dans la poussiere. Quand la vie paroistra on pourra\n[[639.20]] donner une meilleure edition de l'un et de l'autre. </p>\n<p> [[639.21]] On n'a point voulu croire icy ce que vous me mandés de Mons. le Vassor. Je n'approuve\n[[639.22]] point ces manieres hardies des particuliers qui s'erigent temerairement en censeurs des Actions\n[[639.23]] des princes jusqu'à perdre le respect. Cependant le chastiment dont vous parlès, Monsieur\n[[639.24]] seroit un peu trop fort, et trop prejudiciable à la liberté publique. Et il sembleroit qu'il y\n[[639.25]] entreroit un peu de la haine de religion. Sa preface mise au devant des lettres de Vargas m'a\n[[639.26]] paru passable, et vos Messieurs de Trente avec leur mommerie de Concile, meritent bien qu'on\n[[639.27]] les releve de temps en temps. </p>\n<p> [[640.1]] Les Benedictins non seulement, mais encor tous les anciens moines comme Chanoines de\n[[640.2]] S. Augustin, Cisteaux et autres, et même les Chanoines seculiers des Eglises Cathedrales et\n[[640.3]] Collegiates ont bien souvent falsifié les titres, de sorte qu'il ne me paroist pas qu'il y a de\n[[640.4]] l'equité de charger les Benedictins d'un mal commun de ce temps là. Leur travaux d'ailleurs, et\n[[640.5]] plus que tout autre chose ce qu'on doit au P. Mabillon merite qu'on les menage. Il me semble\n[[640.6]] que le public et les lettres surtout doivent des remercimens à cet illustre Benedictin de ce qu'il\n[[640.7]] les a defendues contre les attaques d'une devotion mal entendüe au moins en ce point là. Car je\n[[640.8]] vous avoue que les desseins de M. l'Abbé de la Trappe de vouloir reduire les moines au seul\n[[640.9]] travail des mains, et les detourner de l'etude, m'ont paru indignes des lumieres de nostre siecle.\n[[640.10]] Cela n'empeche point cependant que je n'estime infiniment Mons. l'Abbé de la Trappe pour\n[[640.11]] autre chose. Je crois que la S^#'t^#'e Larme de Vendome vaut bien la S^#'t^#'e Epine de Port Royal. Nous\n[[640.12]] avons à Hanover des reliques qui valent bien les vostres, les anciens Princes de Bronsvic en ont\n[[640.13]] apportées du Levant, et c'est dommage que nous n'avons pas un P. Mabillon pour les faire\n[[640.14]] valoir. S'il estoit plus jeune, nous le prierions de nous rendre visite pour cet effect. </p></p>\n",
+  "number": "237.",
+  "title": "LEIBNIZ AN CLAUDE NICAISE",
+  "date": "[Ende Mai bis Mitte Juli 1700.] [236.239.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:237. LEIBNIZ AN CLAUDE NICAISE [Ende Mai bis Mitte Juli 1700.] [236.239.] Extrait de ma reponse Je crois que Mons. Ludovici en donnant les lettres de Languetus sans la vie, aura suivi en cela comme aussi à l'egard du titre plustost le goust du libraire que le sien. Il valoit mieux de faire paroistre...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_38",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 38,
+  "text": "<p> [[115.9]] <b>33a. LEIBNIZ AN PHILIPP JAKOB SPENER</p>\n<p> [[115.10]] Mainz, 11./21. Dezember 1670. [16b.]</b></p>\n<p> [[115.20]] [ ... ] Quod me speciminis hujus juris naturalis participem reddidisti, gratias ago ingentes.\n[[115.21]] Valde delector auctoris non bona tantum voluntate, sed et intelligentia argumenti, quod sumsit\n[[115.22]] in manus. Grotium certe diligenter legit et cum fructu. Video dictionem etiam esse non paulo\n[[115.23]] puriorem, quam qua vulgo uti solent, quod apud me eruditionis semper indicium est. Methodi\n[[115.24]] duo semper genera agnovi, alteram <b>divisivam</b>, alteram <b>scientificam</b> atque, ut sic dicam\n[[115.25]] <b>demonstrativam</b>; illa Rami est, haec Euclidis, utraque suo loco utilis. Ac <b>demonstrativam</b>\n[[115.26]] quidem hactenus in moralibus praeter Thomam Hobbium, sed qui in multis ingenio suo\n[[115.27]] abusus est, adhibuit nemo. <b>Divisiva</b> in hoc specimine non ineleganter expressa est. <b>Divisiva</b>\n[[115.28]] connectit <b>terminos</b> per divisiones, <b>demonstrativa</b> connectit <b>propositiones</b> per\n[[116.1]] demonstrationes. Ceterum an auctor specimen hoc uberiore aliquando tractatione vestire velit,\n[[116.2]] discere ex ipso specimine non possum. Si hoc ei consilium est; potero fortasse, si tanti putat,\n[[116.3]] communicare meum ei in nonnullis, non quidem consilium, hoc enim parum decet non rogatum,\n[[116.4]] sed saltem hortamentum praebere. </p>\n<p> [[116.5]] Celeberrimi Puffendorffii Corpus juris naturalis sub praelo sudare dudum mihi perscriptum\n[[116.6]] est. Vidi et schedam, qua methodus ejus adumbrabatur. Musaei Chiloniensis <i>liber de\n[[116.7]] syncretismo fugiendo</i> prodiit, et audio Wittebergenses jam ad refutationem accinctos. [ ... ] </p>\n",
+  "number": "33a.",
+  "title": "LEIBNIZ AN PHILIPP JAKOB SPENER",
+  "date": "Mainz, 11./21. Dezember 1670. [16b.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:33a. LEIBNIZ AN PHILIPP JAKOB SPENER Mainz, 11./21. Dezember 1670. [16b.] [ ... ] Quod me speciminis hujus juris naturalis participem reddidisti, gratias ago ingentes. Valde delector auctoris non bona tantum voluntate, sed et intelligentia argumenti, quod sumsit in manus. Grotium certe diligenter le...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

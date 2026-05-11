@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_143",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 143,
+  "text": "<p> [[466.21]] <b>143. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[466.22]] [Mitte September 1706]. [142.150.] </b></p>\n<p> [[467.1]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[467.2]] Il <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> Sig^#'r^#'e Zanovelli m'hà consegnato l'umani^#'m^#'o foglio di V. S. Illu^#'m^#'a in data 2 7^#'b^#'r^#'e che m'è\n[[467.3]] stato di sommo contento e per l'ottime nuove, che mi da della sua salute, e per la sicurezza che\n[[467.4]] mi da dell'autorevole e stimati^#'m^#'o suo patrocinio. Qui gratie a Dio si vive con grand^#'m^#'o giubilo per\n[[467.5]] la liberatione di Torino coll'intiera disfatta dell'esercito francese, che ora ci fà sperare di vedere\n[[467.6]] ben presto la nostra Italia libera dall'intolerabile giogo della Francia, ed il nostro Stato sgravato\n[[467.7]] dall'armi straniere che l'hanno molto oppresso, e possiamo con ragione dire <i>laqueus contritus\n[[467.8]] est, et nos liberati sumus</i>. Tutto ciò grandemente conferirà per terminare l'affare del nostro\n[[467.9]] dilettissimo Sig^#'r^#'e Herman, per cui io hò tutta l'attentione possibile, e mi lusingo che si possa\n[[467.10]] finalmente mettere la sua parte in Senato per il venturo mese, il che mi preme a tal segno, che\n[[467.11]] non sò partirmi da Venetia prima di vedere perfettionato quest'affare, che hò con tanta difficolta\n[[467.12]] cominciato. Il P. Olivetano, che pretendeva la catedra matematica, stampò sono alcuni mesi un\n[[467.13]] opuscolo, in cui intende avere trovata la Quadratura del Circolo, che è inserito nella <i>Galleria di\n[[467.14]] Minerva</i>, pieno però di sbagli, e sofismi così grossi, che l'hà fatto conoscere per un debole ed\n[[467.15]] infelice Geometra. Sono ormai due settimane che insieme con una mia lettera consegnai al\n[[467.16]] Sig^#'r^#'e Zanovelli alcuni semi di Mori bianchi raccolti in Padova e Modona, n'aspettava da\n[[467.17]] Modona e Reggio una gran quantità, ma la guerra accesa in quei Paesi hà rotte tutte le mie\n[[467.18]] misure. Prometto all'V. S. Ill^#'m^#'a d'usare a tal'oggetto una maggiore diligenza per l'anno venturo,\n[[467.19]] ed ora che concepisco meglio il suo bisogno non mancherò certamente di servirla secondo il\n[[467.20]] suo desiderio. L'avvertimento dott^#'m^#'o che V. S. Ill^#'m^#'a mi dà della differenza del Calcolo Differentiale\n[[467.21]] dall'Integrale m'è stato di grandissimo lume. Piacesse a Dio che potessi starle da vicino\n[[467.22]] per mag[g]iormente approfittarmi dell'elevata e profonda sua dottrina, che la rende ora con\n[[467.23]] giustitia il più celebre letterato del Secolo e divotamente riverendola mi resto </p>\n<p> [[467.24]] Il suo Fardella </p>\n<p> [[467.25]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. <b>Hannover</b> </p>\n",
+  "number": "143.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "[Mitte September 1706]. [142.150.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:143. MICHEL ANGELO FARDELLA AN LEIBNIZ [Mitte September 1706]. [142.150.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Am Kopf der Seite von Leibniz' Hand: resp. Sig^#'r^#'e Zanovelli m'hà consegnato l'umani^#'m^#'o foglio di V. S. Illu^#'m^#'a in data 2 7^#'b^#'r^#'e che m'è stato di s...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

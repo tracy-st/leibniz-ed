@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_236",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 236,
+  "text": "<p> [[712.14]] <b>236. BARTHÉLEMY DES BOSSES AN LEIBNIZ</p>\n<p> [[712.15]] Hildesheim, 23. Dezember 1707. [232.237.] </b></p>\n<p> [[712.27]] Illustrissime vir, patrone Colendissime </p>\n<p> [[712.28]] Cum praeter spem ac vota mea Hannoveram excurrere nequeam, adeoque nec optatissimo\n[[712.29]] tuo colloquio frui, cogor litteris agere tecum ea quae coram dicturus fueram, si licuisset. </p>\n<p> [[713.1]] Litteras tuas ad P. Orbanum heri curavi Dusseldorpium uti jusseras. De clarissimo\n[[713.2]] Hartsoeckero apud aulam Palatinam nunc commorante, cum sermo incidisset, narrat Orbanus\n[[713.3]] Virum hunc alias valde bonum et honestum inter caetera philosophiae suae paradoxa, omnem\n[[713.4]] corporum coelestium in sublunaria influxum, miracula omnia, et tantum non omnes diabolos\n[[713.5]] eorumque praestigias et maleficia pernegare. </p>\n<p> [[713.6]] Remitto alterum ex manuscriptis, vetus nempe, una cum descriptione usque ad annum 47\n[[713.7]] inclusive ultra quem non se extendit vetus manuscriptum, cum recens alterum et diffusius, quod\n[[713.8]] hic retinui, annos aliquanto plures complectatur, qui anni facile quintam totius operis partem\n[[713.9]] conficiunt. Nec librarium compellere possum ut pro pretio pacto pensum reliquum praestet,\n[[713.10]] causatur enim se ea lege novum manuscriptum describendum ista mercede suscepisse, ut Veteri\n[[713.11]] responderet. At ego, ut jusseras, pecuniam ipsi per vices numeravi totam, ignarus novum plura\n[[713.12]] quam vetus complecti. Quod postea sed serius adverti. Tu videbis an aliquid mercedi partae\n[[713.13]] addendum sit quo caetera extorqueam. Caeterum nactus sum virum alium commodiorem, et in\n[[713.14]] lingua latina gallicaque versatum magis, cui committere imposterum possis si quae praeterea\n[[713.15]] describenda habes. Expecto tua super hac re mandata. </p>\n<p> [[713.16]] Si gallicos libellos quorum titulus <i>Le veritable esprit des nouveaux disciples de ­S. Augustin</i>\n[[713.17]] pervolvisti satis, optem eos ad me remitti, nec enim mei sunt, et puto Dominum eos a me brevi\n[[713.18]] repetiturum. </p>\n<p> [[713.19]] Addo excerptum locum ex Antonio Perez de quo alias. </p>\n<p> [[713.20]] Cum nuper coram innueris gratum fore si versiculi in his regionibus nostris nati mittantur\n[[713.21]] ad te, mitto quos recenter in Rempium lusit nonnemo. Si hominem et scripta ejus vetera juxta\n[[713.22]] ac novissima vidisti, judicabis an imago prototypo respondeat. </p>\n<p> [[713.23]] Latori harum, ex nostris uni, post festa redituro ad nos, committere poteris si quid\n[[713.24]] curandum habes. Quod reliquum est Vale Vir summe, et novum annum feliciter auspicare.\n[[713.25]] Dabam Hildesii 23 Decembris 1707 </p>\n<p> [[713.26]] Illustrissimae dominationis tuae Servus obsequentissimus </p>\n<p> [[713.27]] Bartholomaeus des Bosses S J </p>\n",
+  "number": "236.",
+  "title": "BARTHÉLEMY DES BOSSES AN LEIBNIZ",
+  "date": "Hildesheim, 23. Dezember 1707. [232.237.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:236. BARTHÉLEMY DES BOSSES AN LEIBNIZ Hildesheim, 23. Dezember 1707. [232.237.] Illustrissime vir, patrone Colendissime Cum praeter spem ac vota mea Hannoveram excurrere nequeam, adeoque nec optatissimo tuo colloquio frui, cogor litteris agere tecum ea quae coram dicturus fueram, si licuisset. Litte...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

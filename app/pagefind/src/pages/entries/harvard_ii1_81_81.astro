@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_81",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 81,
+  "text": "<p> [[222.1]] <b>68a. FRANCESCO DE LANA AN LEIBNIZ</p>\n<p> [[222.2]] [Rom, Juni 1671.] [93.]</b></p>\n<p> [[222.17]] Ill^#'m^#'o et Exc^#'m^#'o Dⁿ^#'o Dⁿ^#'o Gottfredo Guilielmo Leibnitio </p>\n<p> [[222.18]] J.U. Doct. et Consil. Mag. Fran^#'c^#'u^#'s Lana Soc. Jesu. S.P.D. <Fn><i>Auf Bl. 1 von Leibniz' Hand</i>: Castagna</Fn> </p>\n<p> [[222.19]] Nihil mihi magis ex voto accidere potuisse pro certo habeat Ill^#'m^#'a Dom^#'t^#'i^#'o V^#'r^#'a quam\n[[222.20]] hujusmodi occasionem nancisci, qua possim animum maxima tibi benevolentia devinctum\n[[222.21]] testari, acutissimum ingenium tuum admirari, et plurimum ex maximo licet minimae molis\n[[222.22]] libello in rerum naturalium scientia proficere. Statim ac illum accepi, attentissime ingeniosissimam,\n[[222.23]] qua passim refertus doctrinam meditari coepi, ac liquidissima voluptate perfusus est\n[[222.24]] animus adeo, ut plurimum somni (tempus erat nocturnae quieti destinatum) sensibus alioquin\n[[222.25]] defatigatis jucundissime subtraxerim: nimirum perspicax et acerrimum ingenium tuum genio\n[[222.26]] meo tanta respondebat conformitate, ut nullum unquam auctorem legerim, vel audiverim,\n[[222.27]] ingenue fateor, quocum opinionibus magis consentiam; Et quamvis nullam adhuc hypothesim\n[[222.28]] determinaverim, totusque nunc sim in captandis experimentis in omni rerum naturalium genere,\n[[222.29]] quibus deinde aliquam hypothesim stabilire possim, iisdem non repugnantem; tua tamen mihi\n[[222.30]] maxime arridet, cum per illam summa rerum capita facile explicentur. </p>\n<p> [[223.1]] Itaque antequam opus a me promissum in <i>prodromo</i>, in lucem edam, vel saltem aliquam\n[[223.2]] ejus partem, quam jam in promptu habeo, decrevi prius aliqua principia experimentis firmare,\n[[223.3]] ex quibus caetera deducantur. Interim ne otiari videar libellum fortasse typis mandabo, in quo\n[[223.4]] nova quaedam inventa longitudinis nauticae proponam examinanda. Transmutationem <ju> in ^&.za <Leibniz special character>\n[[223.5]] feci per quendam meum manipulatorem, et sunt hic testes oculati, qui deinde suis-met manibus\n[[223.6]] illud idem fecerunt experimentum; <ju> tamen adhibuimus calcinatum, et post aliquas ablutiones\n[[223.7]] iterum redactum in corpus. </p>\n<p> [[223.8]] Quod refers de machina hydraulica aquam ejaculante, sine dubio fit per compressionem,\n[[223.9]] et hujus specimen aliquod vidi, ni fallor, in <i>magia naturali</i> P. Gaspari Schotti; robustae tamen\n[[223.10]] vires requiruntur; sed debiles etiam machinamento aliquo roborari posse quid vetat, ut sic\n[[223.11]] compressio valida fieri possit a puero. Idem auctor lib. 6. cap. 3. <i>Technicae</i> exhibet navim quae\n[[223.12]] quolibet vento etiam contrario provehi possit, quae tamen non caret difficultate; an ea quam\n[[223.13]] memoras hujusmodi sit libenter noscerem. Distantias autem, seu altitudines metiri <b>geometrice</b>\n[[223.14]] unica statione reputo omnino impossibile; non ita <b>Physice</b> v.g. per mensuram temporis\n[[223.15]] quo propagatur sonus ab uno loco ad alium; vel quo cadit grave a data altitudine; vel etiam\n[[223.16]] geometrico-optice per speculum etc. Caeterum multo majora a te expectamus; ex Hypothesi\n[[223.17]] enim, velut ex ungue Leonem, conjicere licuit acutissimum ingenium tuum, sapientiam, eruditionem;\n[[223.18]] adeo ut exclamare cogar, et antiquum illud repetere: <i>Talis</i> <i>cum sis, utinam noster\n[[223.19]] esses.</i> Vale, meque famulorum maxime tibi devotorum numero adscribe. </p>\n<p> [[223.20]] Nobili Clar^#'m^#'o et Consult^#'m^#'o Dⁿ^#'o Gottfredo Guilielmo Leibnitio U. J. Doctori, et Consiliario\n[[223.21]] Moguntino, Dⁿ^#'o mihi plurimum Observ^#'d^#'o. Moguntiam. </p>\n",
+  "number": "68a.",
+  "title": "FRANCESCO DE LANA AN LEIBNIZ",
+  "date": "[Rom, Juni 1671.] [93.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:68a. FRANCESCO DE LANA AN LEIBNIZ [Rom, Juni 1671.] [93.] Ill^#'m^#'o et Exc^#'m^#'o Dⁿ^#'o Dⁿ^#'o Gottfredo Guilielmo Leibnitio J.U. Doct. et Consil. Mag. Fran^#'c^#'u^#'s Lana Soc. Jesu. S.P.D. Auf Bl. 1 von Leibniz' Hand: Castagna Nihil mihi magis ex voto accidere potuisse pro certo habeat Ill^#'...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

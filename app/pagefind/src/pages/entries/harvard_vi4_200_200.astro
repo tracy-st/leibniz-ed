@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_200",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 200,
+  "text": "[[736.1]] <b>164.  De Vero et Falso, Affirmatione et Negatione, et de Contradictoriis [April bis Oktober 1686 (?)]</b>\n [[736.3]] <tab/>[April bis Oktober 1686 (?)]\n[[736.21]] <b>De Vero et Falso, Affirmatione et\n [[736.22]] Negatione, et de Contradictoriis</i> </p>\n<p> [[736.23]] 1) <b>Vera</b> Enuntiatio est, quae vel percipi vel intelligi potest, vel partim percipi\n[[736.24]] partim intelligi; prout est facti vel rationis, vel partim facti partim rationis. </p>\n<p> [[736.25]] 2) Enuntiatio <b>falsa</b> est quae non est vera. </p>\n<p> [[737.1]] 3) Aequipollent (seu se mutuo inferunt): Enuntiatio est vera, et Enuntiatio potest\n[[737.2]] poni, poni autem intelligo absolute, alioqui possum referre, quod non probo. </p>\n<p> [[737.3]] 4) <b>Affirmatio</b> est enuntiatio de enuntiatione, dicens eam esse veram. </p>\n<p> [[737.4]] 5) <b>Negatio</b> est enuntiatio de enuntiatione dicens eam non esse veram. </p>\n<p> [[737.5]] 6) Enuntiatio et affirmatio enuntiationis aequipollent seu ipsa per se enuntiatio jubet\n[[737.6]] affirmari sui veritatem. </p>\n<p> [[737.7]] 7) Aequivalet enuntiatio vera, et enuntiatio quae potest affirmari. Nam aequivalet\n[[737.8]] vera, ei quae potest poni <i>per 3.</i> Et haec ei quae potest affirmari <i>per 6.</i> </p>\n<p> [[737.9]] 8) Aequivalet enuntiatio falsa et enuntiatio quae potest negari. Nam si <greek>e</greek> est falsa,\n[[737.10]] Ergo <i>per 3.</i> <greek>e</greek> esse falsam est verum. Ergo (<i>per 7</i>) <greek>e</greek> esse falsam potest dici seu (<i>per 5</i>) <greek>e</greek>\n[[737.11]] potest negari. Vicissim si <greek>e</greek> potest negari, ergo (<i>per 5</i>) <greek>e</greek> esse falsam potest dici. Ergo (<i>per\n[[737.12]] 7</i>) <greek>e</greek> esse falsam est verum. Ergo <i>per 3</i> <greek>e</greek> est falsa. Itaque se mutuo inferunt <greek>e</greek> esse falsam,\n[[737.13]] et <greek>e</greek> posse negari, id est haec aequipollent. </p>\n<p> [[738.1]] 9) Affirmatio et negatio negationis aequipollent. Est <b>axioma</b> fluens ex ipso significatu\n[[738.2]] <greek>toỹ</greek> non, seu particulae negativae, cujus hic est usus, ut geminatione semet ipsam\n[[738.3]] tollat. </p>\n<p> [[738.4]] 10) Si affirmatio est vera, negatio non est vera. Nam si affirmatio vera est seu (<i>per 9</i>)\n[[738.5]] negatio negationis, potest (<i>per 3</i>) negatio negari seu (<i>per 5</i>) dici non vera. Ergo (<i>per 8</i>)\n[[738.6]] non est vera. </p>\n<p> [[738.7]] 11) Si affirmatio non est vera negatio est vera. Nam si affirmatio non est vera, etiam\n[[738.8]] (<i>per 6</i>) enuntiatio non est vera. Ergo (<i>per 3</i>) potest poni enuntiationem non esse veram.\n[[738.9]] Quod est (<i>per 5</i>) posse poni ejus negationem, id est (<i>per 3</i>) negationem esse veram.\n[[738.10]] Aliter: si affirmatio propositi non est vera etiam (<i>per 7</i>) negationis propositi negatio non\n[[738.11]] est vera seu (<i>per 8</i>) potest negari, sed negationis propositi ipsam negationem posse negari\n[[738.12]] est negationem propositi posse affirmari (<i>per 9</i>). Id est (<i>per 6</i>) propositum posse negari. </p>\n<p> [[738.13]] 12) Si positis enuntiationibus sequatur nova et haec sit falsa, etiam aliqua ex illis erit\n[[738.14]] falsa. Hoc est axioma. <Fn><i>Am Rande</i>: NB.</Fn> </p>\n<p> [[738.15]] 13) Si negatio est vera, affirmatio non est vera. </p>\n<p> [[738.16]] 14) Si negatio non est vera, affirmatio est vera. Hae duae propositiones sequuntur 13\n[[738.17]] ex 10, et 14 ex 11 ope 12. </p>\n<p> [[738.18]] 15) <b>Contradictoriae</b> sunt quarum una affirmat, quod alia negat. </p>\n<p> [[738.19]] 16) Contradictoriae non possunt simul esse verae et falsae, sequitur ex 15 per\n[[738.20]] num. 10, 11, 13, 14. </p>\n",
+  "number": "164.",
+  "title": "De Vero et Falso, Affirmatione et Negatione, et de Contradictoriis",
+  "date": "[April bis Oktober 1686 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:164. De Vero et Falso, Affirmatione et Negatione, et de Contradictoriis [April bis Oktober 1686 (?)] [April bis Oktober 1686 (?)] De Vero et Falso, Affirmatione et Negatione, et de Contradictoriis 1) Vera Enuntiatio est, quae vel percipi vel intelligi potest, vel partim percipi partim intelligi; pro...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

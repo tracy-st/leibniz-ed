@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_33",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 33,
+  "text": "<p> [[98.11]] <b>33. ISAAC JAQUELOT AN LEIBNIZ</p>\n<p> [[98.12]] Berlin, 20. November 1702. [34.] </b></p>\n<p> [[99.9]] La conversation que j'ai eu l'honneur d'avoir avec vous, m'a fait prendre la plume\n[[99.10]] Monsieur, pour mettre quelques argumens en forme, que je vous envoie, afin de les reformer à\n[[99.11]] la plus sévére logique s'ils en sont éloignez. Jettez y l'oeil à votre loisir je vous en supplie,\n[[99.12]] Monsieur, et d'estre persuadé que je me ferai toujours un honneur et un plaisir de me dire </p>\n<p> [[99.13]] Monsieur Votre tres humble et tres obeïssant Serviteur Jaquelot </p>\n<p> [[99.14]] Lundi matin. <Fn><i>Leibniz bemerkt am Fuß von Blatt 5 r^#'o</i> : 20 Novembr 1702. Berlin j'ay repondu le soir</Fn> </p>\n<p> [[99.15]] A Monsieur Monsieur de Leibnitz Conseiller </p>\n",
+  "number": "33.",
+  "title": "ISAAC JAQUELOT AN LEIBNIZ",
+  "date": "Berlin, 20. November 1702. [34.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:33. ISAAC JAQUELOT AN LEIBNIZ Berlin, 20. November 1702. [34.] La conversation que j'ai eu l'honneur d'avoir avec vous, m'a fait prendre la plume Monsieur, pour mettre quelques argumens en forme, que je vous envoie, afin de les reformer à la plus sévére logique s'ils en sont éloignez. Jettez y l'oei...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

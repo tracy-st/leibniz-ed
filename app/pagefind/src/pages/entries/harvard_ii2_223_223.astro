@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_223",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 223,
+  "text": "<p> [[713.14]] <b>226. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[713.15]] [Wolfenbüttel, Ende Juni 1693.] [225.230.]</b></p>\n<p> [[714.6]] On doit estre bien aise, Monsieur, que vous donnés un sens raisonnable aux doutes des\n[[714.7]] <b>Academiciens</b>. C'est la meilleure Apologie, que vous pouviez faire pour eux. Je seray ravi\n[[714.8]] de voir un jour leur sentimens digerés et éclaircis par vos soins. Mais vous serés obligé de\n[[714.9]] temps en temps de leur prester quelque rayon de vos lumieres, comme vous avés commencé. </p>\n<p> [[714.10]] Il est vray que j'avois fait deux petits discours, il y a vingt ans, l'un de la <i>Theorie du\n[[714.11]] mouvement abstrait</i>, où je l'avois consideré hors du systeme comme si c'estoit une chose\n[[714.12]] purement mathematique; l'autre de <i>l'Hypothese du mouvement concret et systematique</i>, tel\n[[714.13]] qu'il se rencontre effectivement dans la nature. Ils peuvent avoir quelque chose de bon, puisque\n[[714.14]] vous le jugés ainsi, Monsieur, avec d'autres. Cependant il y a plusieurs endroits sur les quels je\n[[714.15]] crois d'estre mieux instruit presentement; et entre autres, je m'explique tout autrement aujourdhuy\n[[714.16]] sur les indivisibles. C'estoit l'essay d'un jeune homme, qui n'avoit pas encor approfondi\n[[714.17]] les mathematiques. Les loix du mouvement abstrait, que j'avois données alors, deuvroient avoir\n[[714.18]] lieu effectivement, si dans le corps il n'y avoit autre chose, que ce qu'on y conçoit selon des\n[[714.19]] Cartes, et même selon Gassendi. Mais comme j'ay trouvé que la nature en use tout autrement à\n[[714.20]] l'egard du mouvement, c'est un de mes argumens contre la notion receue de la nature du corps.\n[[714.21]] Comme j'ay indiqué dans le journal. <Fn><i>In E^#'1</i> : Journal des Sçavants du second Juin 1692.</Fn> </p>\n<p> [[714.22]] Quant aux <b>indivisibles</b>, lorsqu'on entend par là les simples extremités du temps ou de\n[[714.23]] la ligne, on n'y sçauroit concevoir [de] nouvelles extremités, ny des parties, actuelles ny\n[[714.24]] potentielles. Ainsi les points sont ny gros ny petits, et il ne faut point de saut pour les passer.\n[[714.25]] Cependant le continu, quoyqu'il ait partout [de] tels indivisibles, n'en est point composé,\n[[715.1]] comme il semble que les objections des Sceptiques le supposent, qui, à mon avis, n'ont rien\n[[715.2]] d'insurmontable, comme on trouvera en les redigeant en forme. Le P. Gregoire de S. Vincent a\n[[715.3]] fort bien monstré par le calcul même de la divisibilité à l'infini, l'endroit où Achille doit\n[[715.4]] [attraper] la tortue, qui le devance, selon la proportion des vistesses. Ainsi la Geometrie sert à\n[[715.5]] dissiper ces difficultés apparentes. </p>\n<p> [[715.6]] Je suis tellement pour <b>l'infini actuel</b>, qu'au lieu d'admettre que la nature l'abhorre,\n[[715.7]] comme l'on dit vulgairement, je tiens qu'elle l'affecte partout, pour mieux marquer les perfections\n[[715.8]] de son auteur. Ainsi je crois qu'il n'y a aucune partie de la matiere, qui ne soit, je ne dis\n[[715.9]] pas divisible mais actuellement divisée, et par consequent la moindre particelle doit estre\n[[715.10]] considerée comme un monde plein d'une infinité de creatures differentes. </p>\n",
+  "number": "226.",
+  "title": "LEIBNIZ AN SIMON FOUCHER",
+  "date": "[Wolfenbüttel, Ende Juni 1693.] [225.230.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:226. LEIBNIZ AN SIMON FOUCHER [Wolfenbüttel, Ende Juni 1693.] [225.230.] On doit estre bien aise, Monsieur, que vous donnés un sens raisonnable aux doutes des Academiciens. C'est la meilleure Apologie, que vous pouviez faire pour eux. Je seray ravi de voir un jour leur sentimens digerés et éclaircis...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

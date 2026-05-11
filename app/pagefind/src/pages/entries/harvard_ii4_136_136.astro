@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_136",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 136,
+  "text": "<p> [[453.7]] <b>136. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[453.8]] Venedig, 6. August 1706. [130.137.] </b></p>\n<p> [[454.6]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[454.7]] In <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> questa settimana mi capitò il benign^#'m^#'o foglio di V. S. Ill^#'m^#'a che mi pervenne da Padova,\n[[454.8]] ove l'aveva mandato il Sig^#'r^#'e Zanovelli figurandosi che io fossi colà, nell'istesso tempo che\n[[454.9]] m'era trasferito in Venetia, ove ora mi trovo. Io godo infinitamente dell'ottima salute di V. S.\n[[454.10]] Ill^#'m^#'a tanto necessaria e proficua all'accrescimento e riforma delle buone lettere, e poi tanto da\n[[454.11]] me sospirata, mentre in V. S. Ill^#'m^#'a non solamente adoro il maggiore letterato che abbia il Secolo,\n[[454.12]] ma anche il mio maggiore e piu benefico Amico e Protettore. Il Sig^#'r^#'e Ramazzini e Valsinieri\n[[454.13]] dott^#'m^#'i Professori di Padova hanno è molto tempo scritto a Modona e Reg[g]io per avere diversi\n[[454.14]] semi de Celsi Mori, che cola assai abbondano, ma con i strepiti ora degli eserciti, rendendosi\n[[454.15]] difficile il comercio, non l'averemo che tardi. Io hò gia scritto al mio Servitore in Padova accio\n[[454.16]] mi mandi subito i semi che aveva gia preparato, ed in averli tutti le saranno da me con ogni\n[[454.17]] cautela e diligenza trasmessi. Ho nuovamente scritto al Sig^#'r^#'e Herman in Basilea assicurandolo\n[[454.18]] della ferma deliberatione e nomina degli Ecc^#'m^#'i Riformatori che nella prima congiuntura porteranno\n[[454.19]] la parte nell'Ecc^#'m^#'o Senato, non essendosi ciò ancora fatto per l'angustie e strettezze in\n[[454.20]] cui s'è trovata la Republica per la guerra presente. Ora che gli eserciti stranieri si vano\n[[454.21]] allontanando speriamo che lo Studio possa alquanto respirare, e che il Sig^#'r^#'e Herman sia per\n[[454.22]] essere presto chiamato per prendere possesso in Padova della Catedra che gli è stata gia\n[[454.23]] assegnata, e che ora niuno gli[e]la può levare. Coll'ordinario venturo risponderò a quello essa\n[[454.24]] s'è degnata scrivermi intorno alle cose letterarie, non avendo ora tempo di farlo per le molte\n[[454.25]] occupationi in cui mi tengono questi miei Ecc^#'m^#'i Padroni. Le rendo infinite gratie dell'onore de\n[[454.26]] suoi stimat^#'m^#'i caratteri, e la prego persuadersi, che con tutta veneratione sono e sarò </p>\n<p> [[454.27]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[454.28]] Venetia 6 Agosto 1706.\n[[454.29]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. Hannover </p>\n",
+  "number": "136.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 6. August 1706. [130.137.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:136. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 6. August 1706. [130.137.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o In Am Kopf der Seite von Leibniz' Hand: resp. questa settimana mi capitò il benign^#'m^#'o foglio di V. S. Ill^#'m^#'a che mi pervenne da Padova, ove l'aveva mandato il S...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

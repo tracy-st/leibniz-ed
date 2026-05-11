@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_78",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 78,
+  "text": "<p> [[262.1]] <b>78. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[262.2]] Berlin, 27. Juli 1704. [103.] </b></p>\n<p> [[263.15]] Hochwolgebohrner Herr Hochgebitender Hr. GeheimRaht </p>\n<p> [[263.16]] Wi das glück allenthalben, also ists auch hir ungütig mit mir umgangen. Der Hr. General\n[[263.17]] braucht keine solche person, wovon geredet: Er hat mir zwar einen aufenthalt zu Buckau\n[[263.18]] angetragen, bis Si hiher kämen, da Si mir denn ohn Zweif. zur Professur bei hisiger Academie,\n[[263.19]] indem man noch 2. personen suchte, verhelfen würden: meine hofnung aber ist klein, weil ich\n[[263.20]] des glüks <i>ceremonien</i> gegen mich kenne, Si mir auch davon nichts entdekt, u. ich vor 2. jaren\n[[263.21]] schon dazu wäre fertig gewest. Unterdeßen sind 12. Thl bald fort; 9 ^#'1/₂ hat di reise, 2. di\n[[263.22]] verweilung alhir verzehrt; reise ich wider zurük, so gehen noch 10. darauf. Auf ersetzung darf\n[[263.23]] ich nicht hoffen, weil man meiner hir nicht bedarf, u. der bloße aufenthalt schon eine gnade ist. </p>\n<p> [[263.24]] Dise umstände dräuen mir einen Hannöverschen winter, da kälte und teürung meister sein\n[[263.25]] werden. Dises habe gehorsamst berichten, u. guten raht erwarten wollen, </p>\n<p> [[263.26]] verharrend Hochwolgebohr. Hr., dero gehorsamster G Wagner. </p>\n<p> [[263.27]] Berlin 27. Jul. 1704. </p>\n<p> [[263.28]] Dem Hochwolgebohrenen Hern, Hern Von Leibniz, Ihr. Kön. Maj. Von Preüßen OberDirector\n[[263.29]] der Berlinis. Academie Ihr. Kurf. durchl. zu Brunsw. Geheim. Justiz-Rath, u.a.m.\n[[263.30]] Wolfenbüttel. </p>\n",
+  "number": "78.",
+  "title": "GABRIEL WAGNER AN LEIBNIZ",
+  "date": "Berlin, 27. Juli 1704. [103.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:78. GABRIEL WAGNER AN LEIBNIZ Berlin, 27. Juli 1704. [103.] Hochwolgebohrner Herr Hochgebitender Hr. GeheimRaht Wi das glück allenthalben, also ists auch hir ungütig mit mir umgangen. Der Hr. General braucht keine solche person, wovon geredet: Er hat mir zwar einen aufenthalt zu Buckau angetragen, b...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

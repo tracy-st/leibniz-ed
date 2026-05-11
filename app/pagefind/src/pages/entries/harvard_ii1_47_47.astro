@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_47",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 47,
+  "text": "<p> [[134.9]] <b>41. LEIBNIZ AN MARTIN FOGEL</p>\n<p> [[134.10]] Mainz, 3./13. Februar 1671. [38.52.]</b></p>\n<p> [[134.19]] Vir Nobiliss^#'e et Experientissime, Fautor Honoratissime. </p>\n<p> [[134.20]] Credo Te recte accepisse literas meas quas ad Nobil^#'m^#'u^#'m Wedderkopf Antecessorem Chiloniensem\n[[134.21]] destinaram. Collocutus sum nuper cum Eximio illo Mauritio egregiae prorsus doctrinae\n[[134.22]] et humanitatis viro, qui mirifico Tui amore omnes, quibuscum occasio fert, ac certe inter\n[[134.23]] eos me, implet implevitque. Quis sit Ravianorum Orientalium successus nosse desidero, si\n[[134.24]] libros quos memorat, habet, thesaurum profecto possidet ingentem. Ludovicum de Compiegne\n[[134.25]] Judaeum Metensem susceptore Rege Galliae baptizatum Heidelbergae nunc professorem fore\n[[134.26]] Edzardo scripsi. Mauritius memoravit <greek>sxedíasma</greek> quoddam meum de motu, in acidulis Svalbacensibus\n[[135.1]] raptim effusum Tibi in Angliam curandum dedisse, Te in nonnullis dissentire visum.\n[[135.2]] Quod ego adeo non aegre fero, ut magnopere sententiam tuam desiderem ac nunc quidem etiam\n[[135.3]] efflagitem. Quis enim in argumento tanti momenti tumultuarie tractato non facile lapsum\n[[135.4]] fateatur. Unde si nondum Anglis misisti, differri missionem gratum erit. Videbis mox, ut spero,\n[[135.5]] jam enim sub praelo calet, <greek>sxedíasma</greek> aliud paulo elaboratius de Hypothesi unici cujusdam\n[[135.6]] motus in Tellure nostra suppositi, <b>nec Tychonicis nec Copernicanis aspernandi</b>, ex\n[[135.7]] quo omnium naturae phaenomenorum ratio pendeat, et quia hortatore celeberrimo Oldenburgero\n[[135.8]] Societatis Regiae Secretario, publico, societati ipsi inscribendum duxi. Quae sint motus\n[[135.9]] Leges ex <b>Jungii</b> (quem ego virum, ut saepe testari soleo, inter illustria Germaniae sidera,\n[[135.10]] quomodo alterius argumenti librum Browerus inscripsit, numero) sententia per Te nosse opto,\n[[135.11]] quemadmodum et quo sint loco caetera ejus viri, quae reliquiarum instar sancte asservari,\n[[135.12]] publice interest. Florentinam Academiam a pristino ardore valde remisisse ajunt. Tu rectius\n[[135.13]] noveris, quemadmodum et caetera quae Italiae foecunditas quotidie profert, a nemine rectius\n[[135.14]] quam Te sciri posse constat. Si rescribere cum Ampl^#'m^#'o Edzardo dignaris poterit literis mihi\n[[135.15]] inscriptis operculum aliud hoc titulo circumdari: A Monsieur Monsieur Lasser Conseiller de\n[[135.16]] Son Altesse Electorale de Mayence, a Mayence. Quod restat vale faveque </p>\n<p> [[135.17]] Vir Ampl^#'m^#'e Cultori Tuo Gottfredo Guilielmo Leibnitio J.U.D. </p>\n<p> [[135.18]] Mog. 3/13 Feb. 1671. et Consil. Moguntino. </p>\n<p> [[135.19]] Nobil^#'m^#'o et Experientiss^#'o Dⁿ^#'o Vogelio, Medico et polyhistori celeberrimo, Fautori meo\n[[135.20]] Eximio. Hamburg. <i>par couvert.</i> </p>\n",
+  "number": "41.",
+  "title": "LEIBNIZ AN MARTIN FOGEL",
+  "date": "Mainz, 3./13. Februar 1671. [38.52.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:41. LEIBNIZ AN MARTIN FOGEL Mainz, 3./13. Februar 1671. [38.52.] Vir Nobiliss^#'e et Experientissime, Fautor Honoratissime. Credo Te recte accepisse literas meas quas ad Nobil^#'m^#'u^#'m Wedderkopf Antecessorem Chiloniensem destinaram. Collocutus sum nuper cum Eximio illo Mauritio egregiae prorsus ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

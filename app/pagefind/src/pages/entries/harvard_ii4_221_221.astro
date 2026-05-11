@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_221",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 221,
+  "text": "<p> [[677.6]] <b>221. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[677.7]] Padua, 19. Oktober [1707]. [215.235.] </b></p>\n<p> [[677.17]] Padova 19 8bre\n [[677.18]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[677.19]] Ricevei <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> nella settimana caduta l'umani^#'m^#'o foglio di V. S. Ill^#'m^#'a 8 del caduto in cui sento\n[[677.20]] quanto di vantaggio ha essa operato a mio favore, ottenendomi in oltre il venerato patrocinio\n[[677.21]] dell'Eccell^#'m^#'o Sig^#'r^#'e Marchese Querini che s'è degnato anche in suo riguardo di raccomandarmi\n[[677.22]] nella sua dimora in Bronsvich alla Principessa madre della futura Regina, e benche cotesto\n[[678.1]] generosissimo Cavaliere abbia ciò fatto per l'amore e stima che professa a V. S. Ill^#'m^#'a, nondimeno\n[[678.2]] ridondando tutto in mio beneficio, mi conosco indispensabilmente tenuto a rendergliene\n[[678.3]] con una ossequiosa mia le dovute gratie, ma non avendo io merito veruno appresso l'Eccell^#'m^#'o\n[[678.4]] Sig^#'r^#'e Marchese, non hò coraggio di farlo, se prima non me ne dà il consiglio e la permissione\n[[678.5]] V. S. Ill^#'m^#'a che tanto può con cotesto Cavaliere riveritissimo, percio la prego scrivermi sopra\n[[678.6]] questo particolare il suo sentimento. Gli Amici m'avvisano da Venetia che si trovi colà\n[[678.7]] incognito il Seren^#'m^#'o Principe Elettorale Ernesto, e dicesi sia per accompagnare a suo tempo la\n[[678.8]] futura Regina nel suo viaggio per Spagna, se ciò fosse io mi prenderei l'ardire di supplicare\n[[678.9]] nuovamente V. S. Ill^#'m^#'a per una efficace raccomandatione per la mia persona a Sua Altezza,\n[[678.10]] acciò mi sostenesse e protegesse appresso la Principessa Regnante, e mi rendesse facilissimo\n[[678.11]] l'accesso a Sua Maesta quando nel suo arrivo in Italia mi portero ad inchinarla, alche anche\n[[678.12]] molto mi gioverebbe una raccomandatione calda del Sig^#'r^#'e Marchese Querini alla Dama sua\n[[678.13]] confidente Madame de Benvigler di cui V. S. Ill^#'m^#'a me ne diede un cenno in una sua, e ciò\n[[678.14]] massimamente accio sappià a chi mi devo indirizzare nel caso che capiti in queste parti la futura\n[[678.15]] Regina, ed in questa maniera raccorre copiosamente il frutto di quanto V. S. Ill^#'m^#'a con incomparabile\n[[678.16]] beneficenza hà fatto per me, e già che hà cosi bene incominciato, è riverentemente\n[[678.17]] supplicata di volere perfettionare questo mio affare colle gratie che ora le chiedo. Oggi scrivo al\n[[678.18]] Sig^#'r^#'e Zanovelli che fra due giorni gli manderò un sacchetto di semi conservati nel suo frutto di\n[[678.19]] peso libre, 6, in circa, acciò m'avvisi se hà la maniera pronta di trasmetterle subito a V. S. Ill^#'m^#'a,\n[[678.20]] a cui anche penso se averò mai il commodo di mandarle alcuni libri matematici stampati in\n[[678.21]] Italia, i di cui titoli leggerà nell'inclusa. Io poi sono sempre più contento di avere in casa mia il\n[[678.22]] Sig^#'r^#'e Herman, che sempre più ammiro ed amo per il suo profondo sapere, e santissimo costume,\n[[678.23]] da cui hò gia la tanta sospirata sorte d'apprendere il suo tanto celebrato e sublime metodo\n[[678.24]] differentiale e <angle bracket>divotamente</angle bracket> riverendola mi resto </p>\n<p> [[678.25]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n",
+  "number": "221.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 19. Oktober [1707]. [215.235.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:221. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 19. Oktober [1707]. [215.235.] Padova 19 8bre Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Ricevei Am Kopf der Seite von Leibniz' Hand: resp nella settimana caduta l'umani^#'m^#'o foglio di V. S. Ill^#'m^#'a 8 del caduto in cui sento quanto di ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

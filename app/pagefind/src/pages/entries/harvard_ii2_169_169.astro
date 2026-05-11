@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_169",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 169,
+  "text": "<p> [[579.7]] <b>171. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[579.8]] Padua, 18. September [1692]. [170.173.]</b></p>\n<p> [[579.12]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[579.13]] Invio questa altra mia a V. S. Illu^#'m^#'a per mezo del Sig^#'r^#'e Mendelino, havendole indrizzata\n[[579.14]] un'altra, ricapitata in Venetia alli Sig^#'r^#'i Hopfer, e Bacmeister, affine di sapermi regolare per\n[[579.15]] l'avvenire per il sicuro ricapito delle nostre, volendo schivare il tormento, che mi cagiona il\n[[579.16]] vedermi per lungo tempo privo de' suoi pretiosissimi caratteri. Già nell'altre mie l' hò significato\n[[579.17]] abastanza i ragionevoli motivi, che mi han distolto dalla partenza da me fermamente\n[[579.18]] stabilita per questo autunno, che saranno senza fallo approvati da V. S. Illu^#'m^#'a, che sommamente\n[[579.19]] ama l'onore, e la gratitudine, perciò hò differito il viaggio per la ventura primavera, sperando\n[[579.20]] colla protettione di Dio trovarmi costì per il futuro prossimo aprile. Coll'Ordinario vegnente le\n[[579.21]] darò parte d'alcune cose litterate mentre farò più seria riflessione sopra quel che essa dottamente\n[[579.22]] m' hà scritto del Calcolo ed equationi [algebraiche]. Mi onori de' suoi comandi, ed\n[[579.23]] all'infretta mi resto\n [[579.24]] / Di V. S. Ill^#'m^#'a Umil^#'m^#'o Oblig^#'m^#'o Divoti^#'m^#'o S^#'r^#'e vero Fardella\n [[579.25]] / Padova 18 Settembre </p>\n",
+  "number": "171.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 18. September [1692]. [170.173.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:171. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 18. September [1692]. [170.173.] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o Invio questa altra mia a V. S. Illu^#'m^#'a per mezo del Sig^#'r^#'e Mendelino, havendole indrizzata un'altra, ricapitata in Venetia alli Sig^#'r^#'i Hopfer...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

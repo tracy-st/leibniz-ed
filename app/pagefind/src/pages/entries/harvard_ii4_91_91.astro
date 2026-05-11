@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_91",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 91,
+  "text": "<p> [[297.5]] <b>91. LEIBNIZ AN DAMARIS LADY MASHAM</p>\n<p> [[297.6]] Lietzenburg, 7. Oktober 1704. [90.96.] </b></p>\n<p> [[297.18]] Luzebourg 7 Octobr. n. st. 1704.\n [[297.19]] Mylady </p>\n<p> [[297.20]] J'espere que la lettre par laquelle j'ay eu l'honneur de repliquer à la vostre du 8 Aoust\n[[297.21]] vous aura eté rendue. Maintenant m'etant avisé d'un point que j'ay oublié; je vous diray,\n[[297.22]] Madame, d'avoir remarqué dans l'Essay de M. Locke livre 4 chap. 10 une pensée qui paroist\n[[297.23]] importante, qu'il semble n'avoir pas voulu profaner, mais qu'il ne faudroit point laisser\n[[298.1]] echapper, puisque nous jouons encor de cet excellent homme. C'est sur la maniere de concevoir\n[[298.2]] comment la matiere a eté produite, et comment il est plus malaisé de produire des esprits. Car\n[[298.3]] cela paroist important pour entrer dans le fonds des choses. Vostre credit aupres de luy me fait\n[[298.4]] esperer que nous en pourrons profiter pour obtenir quelque lumiere par vostre entremise. Je\n[[298.5]] serois ravi si elle pouvoit parvenir jusqu'à moy, et je suis avec respect, Milady, etc. </p>\n",
+  "number": "91.",
+  "title": "LEIBNIZ AN DAMARIS LADY MASHAM",
+  "date": "Lietzenburg, 7. Oktober 1704. [90.96.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:91. LEIBNIZ AN DAMARIS LADY MASHAM Lietzenburg, 7. Oktober 1704. [90.96.] Luzebourg 7 Octobr. n. st. 1704. Mylady J'espere que la lettre par laquelle j'ay eu l'honneur de repliquer à la vostre du 8 Aoust vous aura eté rendue. Maintenant m'etant avisé d'un point que j'ay oublié; je vous diray, Madame...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

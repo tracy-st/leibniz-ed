@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_189",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 189,
+  "text": "<p> [[474.9]] <b>189. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[474.10]] Is sur Tille, 23. November 1698. [184.195.]</b></p>\n\n<p> [[474.17]] Is sur Tille le 23. 9^#'b^#'r^#'e <b>1698</b> </p>\n<p> [[474.18]] Je <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: respondi</Fn> ne suis pas monsieur du sentiment de deffunct mons^#'r Foucher nostre amy, qui n'estoit\n[[474.19]] pas content, si l'on n'estoit du sien; Il fault laisser la liberté à un chacun de croire ce qui luy\n[[474.20]] plaist, et surtout à nos amis, sens que cela diminüe en rien de l'amitié que nous leur avons\n[[474.21]] voüée, s'ils ne sont pas du nostre; il faudroit dans un état bien policé laisser tout le monde dans\n[[474.22]] cette liberté; et c'estoit la pensée de mons. Pelisson qui avoit grande envie de l'etablir avant sa\n[[475.1]] mort; ainsy mons^#'r je ne suis pas moins vostre amy que celluy de m^#'r Morel si vous prenés le\n[[475.2]] parti de mons^#'r de Cambray plutost que celluy de m^#'r de Meaux: nous scaurons à quoy nous en\n[[475.3]] tenir sur la fin du mois où nous sommes; car l'on me mande de Rome qu'en ce tems là on\n[[475.4]] espere la decision de ce different; il fault en attendant vous faire un peû de part des nouvelles\n[[475.5]] qu'on m'en a ecrit le mois d'octobre dernier; elles vous seront mons^#'r d'autant plus agreables\n[[475.6]] que la derniere vous regarde, où il est parlé de vous dans un gros ouvrage de deux vol. in fol^#'o\n[[475.7]] qui est deja beaucoup avancé d'impression. Vous excuserés les fautes du copiste de l'extraict\n[[475.8]] que je vous envoye, qui est mon vallet peû corrêct; J'ay esté contraint de l'employer pour cela\n[[475.9]] me trouvant un peu indisposé extraordinairement de mes disuries. </p>\n<p> [[475.10]] Mons^#'r d'Avranches est maintenant à Paris depuis 15 jours fort courtizé des scavants et de\n[[475.11]] ses amis et surtout de mons. de Spanheim qui estoit chagriné de ne l'avoir point trouvé a Paris;\n[[475.12]] Je luy ay fait scavoir ce que vous m'avés mandé de la traduction en francois des lettres\n[[475.13]] Espagnoles du fiscal Vargas et de la preface qui y paroist de mons^#'r Le Vassor, jadis prestre de\n[[475.14]] l'oratoire. </p>\n<p> [[475.15]] Je luy ay mandé aussi qu'un Holla<angle bracket>ndois</angle bracket> ecrivoit contre luy sur <i>la situation du paradis\n[[475.16]] terrestre</i>, dont l'on m'envoyera l'ouvrage si tost qu'il paroistra. </p>\n<p> [[475.17]] Je croy que vous aurés veû un madrigal de m^#'r l'abbé Bosquillon nostre amy sur la\n[[475.18]] naissance du prince de Modene. Il y fust envoyé vers le mois de juillet dernier à une dame de\n[[475.19]] beaucoup de merite qui vouloit en faire sa cour. </p>\n<p> [[475.20]] Vous ne m'avés point accusé la reception de la lettre de m^#'r le president Boisot que je vous\n[[475.21]] ay envoyée où il vous retablissoit et vous parloit du moins du nouvau memoire que vous\n[[475.22]] desiriés. Je m'estonne de ne point recevoir des nouvelles de Rome du p. Bonjour sur la lettre\n[[475.23]] que je luy ay envoyée de mons^#'r Ludolfe. </p>\n<p> [[476.1]] Je crois vous avoir mandé dans ma derniere que m^#'r Zagaigna Bibliothecaire du Vatican\n[[476.2]] nous donnoit un second volume d'Anecdotes de cette Bibliotheque et qu'il nous donneroit\n[[476.3]] après cela l'histoire des Manicheens. </p>\n<p> [[476.4]] Le 2^#'d volume <i>de musivis</i> de monsig^#'r^#'e Ciampini demeure imparfait par sa mort. </p>\n<p> [[476.5]] L'on ne faict rien de considerable à Paris; l'amour pur et desinteressé en est cause, qui\n[[476.6]] partage les esprits et les occupe aux despens des belles lettres qui en patissent. Je suis mons^#'r du\n[[476.7]] meilleur de mon coeur tout à vous </p>\n<p> [[476.8]] Nicaise </p></p>\n",
+  "number": "189.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Is sur Tille, 23. November 1698. [184.195.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:189. CLAUDE NICAISE AN LEIBNIZ Is sur Tille, 23. November 1698. [184.195.] Is sur Tille le 23. 9^#'b^#'r^#'e 1698 Je Am Kopf des Briefes von Leibniz' Hand: respondi ne suis pas monsieur du sentiment de deffunct mons^#'r Foucher nostre amy, qui n'estoit pas content, si l'on n'estoit du sien; Il fault...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

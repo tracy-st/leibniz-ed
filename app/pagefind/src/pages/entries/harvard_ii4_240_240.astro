@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_240",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 240,
+  "text": "<p> [[735.1]] <b>240. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[735.2]] [Berlin, 6. Februar 1707 (?)]. [241.] </b></p>\n<p> [[735.18]] <petit> <k>Theorema VI.</k>\n [[735.19]] <i>Elementa rerum non sunt nisi Monades</i>.\n [[735.20]] Demonstratio\n[[735.21]] Ex Elementis, quae in partes compositi actu ingrediuntur, intelligi potest, cur partes in composito ita potius, quam\n[[735.22]] aliter existant [ ... ]. In existentia igitur Elementorum datur ratio ultima existentiae partium in compositis [ ... ].\n[[735.23]] Sed in existentia Monadum datur ratio ultima existentiae partium in compositis, [ ... ] consequenter et Mundi,\n[[735.24]] qui non est, nisi aggregatum omnium simplicium et compositorum, secundum locum et tempus inter se connexorum\n[[735.25]] [ ... ]. Ergo Elementa etiam rerum non sunt nisi Monades. [ ... ]\n[[735.26]] Scholion II. [ ... ] in Epistola, Berolino VI. Febr. MDCCVII. ad me data: </petit>\n [[735.27]] \" <b>Cartesii</b> <i>Materia triplicis elementi</i> est contra principium rationis sufficientis. Neque enim\n[[735.28]] datur ratio sufficiens materiam continuam dividendi in partes hujus potius quam alterius\n[[735.29]] magnitudinis.\" </p>\n",
+  "number": "240.",
+  "title": "LEIBNIZ AN MICHAEL GOTTLIEB HANSCH",
+  "date": "[Berlin, 6. Februar 1707 (?)]. [241.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:240. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH [Berlin, 6. Februar 1707 (?)]. [241.] Theorema VI. Elementa rerum non sunt nisi Monades. Demonstratio Ex Elementis, quae in partes compositi actu ingrediuntur, intelligi potest, cur partes in composito ita potius, quam aliter existant [ ... ]. In existentia ig...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

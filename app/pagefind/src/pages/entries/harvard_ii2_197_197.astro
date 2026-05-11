@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_197",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 197,
+  "text": "<p> [[645.1]] <b>199. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[645.2]] Hannover, 31. Dezember 1692 (10. Januar 1693). [190.220.]</b></p>\n<p> [[645.10]] [ ... ] De prophetia perplacet quod assentiris non posse eam quae ad specialia descendit,\n[[645.11]] nisi a perfectissima mente proficisci aut in aliam mentem imprimi, itaque omnis fatidica vis a\n[[645.12]] Deo est; et oracula vera rerum singularium a daemone malo proficisci non possunt, De\n[[645.13]] Apocalypseos vera interpretatione nondum habeo, quod dicam. Interim non improbabilis mihi\n[[645.14]] visa est Grotii sententia, praedictiones ejus dirigi in Romam Ethnicam. Tantum modo numerum\n[[645.15]] bestiae quem ille quaerit in voce <greek><i>OYLPIOS</i></greek> quasi in Trajano optime principe expressum, ego\n[[645.16]] cum veteribus malim quaerere in voce <greek><i>LATEINOS</i></greek> quae et ipsa hominis denominatio est. Grotii\n[[645.17]] interpretationem, sed interpolatam renovavit nuper Episcopus Meldensis in libro quem Jurio\n[[645.18]] opposuit. Vir quidam pereruditus et ingeniosus nuper casum Hierosolymorum et poenas a\n[[645.19]] judaica gente persecutrice piorum expetitas, in Apocalypsi visus est invenisse. Interea non\n[[645.20]] ausim me illis opponere, qui in eodem vaticinio etiam totius Ecclesiae statum futurum praefiguratum\n[[645.21]] arbitrantur. Et omnino de vaticiniis sentio esse tum demum intelligenda, cum fidem\n[[645.22]] faciet dies. </p>\n<p> [[645.23]] Minutiora autem, velut Caedem Regis Angliae Caroli I., obsidionem Bremae aliaque id\n[[645.24]] genus, velle in Apocalypsi quaerere est otio abuti, et nugas agere. Tecumque sentio has nugas\n[[645.25]] seria ducere in mala, nam simplicium animos movent, et saepe reipublicae quietem turbant,\n[[645.26]] subtiliores autem, sed non satis lectione sacra et rerum judicio munitos in magnas de religionis\n[[645.27]] veritate dubitationes conjiciunt, ut veros prophetas ejusdem cum novis istis somniatoribus\n[[645.28]] farinae fuisse suspicentur. Ignotae mihi fuere Bodani Amstelodamensis Ministri praedictiones\n[[646.1]] irritae contra Viennam. Similis Quirini Kuhlmanni audacia fuit apud Londinenses tum agentis.\n[[646.2]] Is Epistolis editis jactabundis, et a sana mente remotissimis tamen apud aliquos fidem invenit.\n[[646.3]] Domum Austriacum persecutricem sanctorum, et Romam erroris sedem ajebat per Gallos\n[[646.4]] delendam; His autem cessantibus per Turcas etc. Et cum mox respondere videretur eventus,\n[[646.5]] pulso Lotharingiae duce ad Petronellam, et Turcis sedem imperatoris obsidentibus, mira fuit\n[[646.6]] Kulmannianorum triumphatio, donec soluta obsidione pudefacti conticescere cogerentur. </p>\n<p> [[646.7]] Quod ais nihil videri contingere, quod non praesciatur a causa aliqua, de Deo assentior; de\n[[646.8]] caeteris substantiis, sic putem; praesentiri quidem ab omnibus sed non praesciri, sensum scilicet\n[[646.9]] esse confusum. Quin imo ita judico tantam esse rerum omnium connexionem, ut nihil mutationis\n[[646.10]] contingat in una substantia, quod non sentiant caeterae omnes quantumcunque remotae\n[[646.11]] tempore vel loco; ita tamen ut ipsae non animadvertant. Sunt in mundo ut in microcosmo ex\n[[646.12]] Hippocratis sententia, <greek><i>sýmpnoia pánta</i></greek>. Sed consistunt hae conspirationes in motibus insensibilibus.\n[[646.13]] An vero existant praeter Deum aliae mentes tantae perspicacitatis ut praedelineationes\n[[646.14]] illas mirificae ac prope immensae subtilitatis distincte legere possint, dicere non ausim, et secus\n[[646.15]] esse suspicor, vel ideo quod effectui cuivis singulari infinitae causae intercurrunt, quoniam\n[[646.16]] continuum in infinitum divisibile est, imo divisum actu. Quodsi universum constaret ex Atomorum\n[[646.17]] numero certo, tunc sagacitas creaturarum ad perfectam cognitionem universi pervenire\n[[646.18]] posset. [ ... ] </p>\n",
+  "number": "199.",
+  "title": "LEIBNIZ AN GERHARD MEIER (BREMEN)",
+  "date": "Hannover, 31. Dezember 1692 (10. Januar 1693). [190.220.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:199. LEIBNIZ AN GERHARD MEIER (BREMEN) Hannover, 31. Dezember 1692 (10. Januar 1693). [190.220.] [ ... ] De prophetia perplacet quod assentiris non posse eam quae ad specialia descendit, nisi a perfectissima mente proficisci aut in aliam mentem imprimi, itaque omnis fatidica vis a Deo est; et oracul...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

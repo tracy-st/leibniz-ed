@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_41",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 41,
+  "text": "<p> [[121.1]] <b>35a. LEIBNIZ AN JOHANN HEINRICH HORB</p>\n<p> [[121.2]] [Mainz,] 2.(12.) Januar 1671</b></p>\n<p> [[121.12]] Ex responsione ad literas Horbianas 2 Jan. 1671. Styl. vet. </p>\n<p> [[121.13]] Memorabile est quod de Joach. Stollii sudore lucido refers. Memini in Borelli <i>observationibus</i>\n[[121.14]] similia exempla legere, sed obiter, ac sine circumstantiarum luce relata. Constat et\n[[121.15]] Bartolinum peculiari opusculo <i>de animalium luce</i> disseruisse. Hyeme efflorescere, rationi\n[[121.16]] consentaneum est, quo tempore intestini caloris vis major. Saccarum collisum, pilos felium\n[[121.17]] mulcendo frictos, in tenebris micare, squamas etiam piscium nonnullorum lucere constat.\n[[121.18]] <b>Lucem</b> equidem certum est esse motum partium corporis lucidi intestinum tam fortem ut\n[[121.19]] partes emissae in omne circa punctum sensibile motum propagent, differreque a <b>calore</b> sola\n[[121.20]] subtilitate. Erit ergo flos quasi quidam caloris bene depurati. Nec refert, quod calor tactu non\n[[122.1]] sentitur, nam et cicindelae tactu frigidae sunt, quas tamen lucem longa ad solem apricatione\n[[122.2]] aestivis diebus colligere credibile est. Erit ergo sudor lucens, nihil aliud quam calor (ignis)\n[[122.3]] purus et subtilis, humori viscoso sed bene subacto et transparenti, uno verbo <b>Gelatinae</b>\n[[122.4]] mixtus. Gelatinae enim omnes die lucent, noctu non omnes. Stollianam autem etiam noctu\n[[122.5]] lucere ex tuis suspicor, quod discrimen in solo gradu consistit. </p>\n<p> [[122.6]] Cum diu multumque cogitassem de hypothesi quadam Physica struenda, quae phaenomenis\n[[122.7]] omnibus satisfaceret, visus sum mihi tandem pretium operae nonnullum fecisse, detexisse\n[[122.8]] enim mihi videor motum quendam universalem in globo nostro, ex quo solo quod mireris\n[[122.9]] pene omnium globi nostri phaenomenorum, directionum, attractionum, sympathiarum, antipathiarum,\n[[122.10]] reactionum, praecipitationum, gravitatis, vis Elasticae, ratio peti possit. Forte dicta\n[[122.11]] hic sunt quaedam quae hactenus a nullo. Non quod possim aut ego, aut quisquam, paucis\n[[122.12]] exceptis, in quibus ars naturam imitari potest (quod unicum causae proximae cognitae <greek>krith́rion</greek>\n[[122.13]] est), proximas atque plenas rerum naturalium causas exhibere. Nam qui hoc posset,\n[[122.14]] esset in natura omnipotens, quidlibet ex quolibet facturus: materia enim omnium eadem est.\n[[122.15]] Sed quod non contemnendus ad veram causam integram gradus sit, nosse veram causam\n[[122.16]] motricem, etsi omnes ejus determinationes, vias, gradus, combinationes, applicationes nosse\n[[122.17]] hactenus nemini mortalium datum sit. </p>\n",
+  "number": "35a.",
+  "title": "LEIBNIZ AN JOHANN HEINRICH HORB",
+  "date": "[Mainz,] 2.(12.) Januar 1671"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:35a. LEIBNIZ AN JOHANN HEINRICH HORB [Mainz,] 2.(12.) Januar 1671 Ex responsione ad literas Horbianas 2 Jan. 1671. Styl. vet. Memorabile est quod de Joach. Stollii sudore lucido refers. Memini in Borelli observationibus similia exempla legere, sed obiter, ac sine circumstantiarum luce relata. Consta...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

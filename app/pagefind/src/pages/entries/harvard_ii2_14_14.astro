@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_14",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 14,
+  "text": "<p> [[84.7]] <b>15. LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS</p>\n<p> [[84.8]] [12. August 1686.] [14.17.]</b></p>\n[[85.1]] <c05> <p>Monseigneur </p>\n<p> [[85.2]] J'espere que V.A.S. aura le livre qui estoit demeuré en arriere si long temps, et que j'ay\n[[85.3]] esté chercher moy même à Wolfenbutel afin de le luy faire ravoir, puisqu'Elle s'en prenoit à\n[[85.4]] moy. </p>\n<p> [[85.5]] J'avois pris la liberté d'y adjouter une lettre et quelques pieces pour Mons. Arnaud. Et j'ay\n[[85.6]] quelque esperance que lorsqu'il les aura lues, sa penetration et sa sincerité luy feront peutestre\n[[85.7]] approuver entierement ce qui luy estoit paru estrange au commencement. Car puisqu'il s'est\n[[85.8]] raddouci après avoir veu mon premier éclaircissement, il viendra peutestre jusqu'à l'approbation\n[[85.9]] après avoir vu le dernier qui à mon avis leve nettement les difficultés qu'il temoignoit\n[[85.10]] luy faire encor de la peine. Quoyqu'il en soit, je seray content, s'il juge au moins que ces\n[[85.11]] sentimens, quand ils seroient mêmes tres faux, n'ont rien qui soit directement contraire aux\n[[85.12]] definitions de l'Eglise, et par consequent sont tolerables, mêmes dans un catholique Romain.\n[[85.13]] Car V.A.S. sçait mieux que je ne luy sçaurois dire, qu'il y a des erreurs tolerables. Et même\n[[85.14]] qu'il y a des erreurs, dont on croit que les consequences detruisent les articles de foy, et\n[[85.15]] neantmoins on ne condamne pas ces erreurs, ny celuy qui les tient, parcequ'il n'approuve pas\n[[85.16]] ces consequences, par exemple les Thomistes tiennent que l'Hypothese des Molinistes detruit la\n[[85.17]] perfection de Dieu, et à l'encontre les Molinistes s'imaginent que la predetermination des\n[[85.18]] premiers detruit la liberté humaine. Cependant l'Eglise n'ayant rien encor determiné là dessus,\n[[85.19]] ny les uns ny les autres ne sçauroient passer pour heretiques, ny leur opinions pour des heresies.\n[[85.20]] Je croy qu'on peut dire la même chose de mes propositions, et je souhaiterois pour bien de\n[[85.21]] raisons d'apprendre, si Mons. Arnaud ne le reconnoist pas maintenant luy même. ll est fort\n[[85.22]] occupé, et son temps est trop pretieux pour que je pretende qu'il le doive employer à la\n[[85.23]] discussion de la matiere même touchant la verité ou fausseté de l'opinion. Mais il est aisé à luy\n[[85.24]] de juger de la tolerabilité ou intolerabilité, puisqu'il ne s'agit que de sçavoir si elles sont\n[[85.25]] contraires à quelques definitions de l'Eglise. </p>\n",
+  "number": "15.",
+  "title": "LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS",
+  "date": "[12. August 1686.] [14.17.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:15. LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS [12. August 1686.] [14.17.] Monseigneur J'espere que V.A.S. aura le livre qui estoit demeuré en arriere si long temps, et que j'ay esté chercher moy même à Wolfenbutel afin de le luy faire ravoir, puisqu'Elle s'en prenoit à moy. J'avois pris la libe...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

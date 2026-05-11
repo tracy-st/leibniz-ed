@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_171",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 171,
+  "text": "<p> [[531.8]] <b>171. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[531.9]] Berlin, 25. Januar 1707. [162.172.] </b></p>\n<p> [[531.18]] Vir Clarissime et doctissime </p>\n<p> [[531.19]] Recte accepi quae misisti, et quam bonum nomen fueris, ut par est, agnosco. Gratias\n[[531.20]] officium facienti non debes. </p>\n<p> [[532.1]] Dn. Wolfius mihi Berolini locutus est, professionis dignitatem Halae nactus est, non\n[[532.2]] dubito etiam emolumenta accessura. Erat cum eo juvenis eruditus Silesius, Mathematici studii\n[[532.3]] non expers. </p>\n<p> [[532.4]] Spero Lipsiensem Academiam paulatim ad pristinam statum redituram, etsi urbi et studiis\n[[532.5]] illic vulnus non facile sanabile fuisse inflictum satis appareat. </p>\n<p> [[532.6]] Ecce quid a TE petam, si vacat. Reverendissimus Meyerus Theologus Suediae Regis per\n[[532.7]] Germaniam Primarius a me accepit librum Manuscriptum R. P. Longi de Congregatione Oratorii\n[[532.8]] Parisina, in quo continetur Catalogus interpretum Scripturae sacrae Germanorum. Similem\n[[532.9]] confecit pro aliis nationibus. Hunc in Germaniam misit, ut suppleretur et corrigeretur. Id Dn.\n[[532.10]] Mayerus in se susceperat, sed multo jam tempore elapso Longus suum librum repetit. Rogo\n[[532.11]] ergo ut Dn. Mayerum si adhuc Lipsiae agit, meo nomine adeas ac perofficiose salutes, et petas\n[[532.12]] ut librum remittat, et si qua observata jam in eam rem habet, adjungat. Longus in eo jam est ut\n[[532.13]] ab Editionibus scripturae sacrae suum opus Bibliothecae scripturariae incipiat. Si qua ea in re\n[[532.14]] adhuc suppeditare potest Ampl^#'m^#'u^#'s Maierus vel alius amicus, rem gratam et utilem faciet. </p>\n<p> [[533.1]] Quaesivit etiam a me R. P. Longus, quo anno obierint Andr. Acoluthus Vratislaviae,\n[[533.2]] Matthias Beckius Augustae, Frider. Albertus, judaeus conversus, Elias Huterus, Marcus Meibomius,\n[[533.3]] Sebastianus Schmidius, Caspar Ulenbergius, David Wolderus Hamburgensis mihi\n[[533.4]] ignotus. Si in his succurrere potes per TE vel amicos rem gratam facies. </p>\n<p> [[533.5]] Si quid me voles, mitte quaeso Berolinum sub operculo <i>a Monsieur Monsieur Jablonski\n[[533.6]] secretaire du Roy</i>. Quod superest vale et me ama[.] Dabam Berolini 25 Januar 1707 </p>\n<p> [[533.7]] deditissimus G. G. Leibnitius </p>\n<p> [[533.8]] A Monsieur Monsieur Hansch Maistre ès arts et Collegiat à Leipzic </p>\n",
+  "number": "171.",
+  "title": "LEIBNIZ AN MICHAEL GOTTLIEB HANSCH",
+  "date": "Berlin, 25. Januar 1707. [162.172.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:171. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH Berlin, 25. Januar 1707. [162.172.] Vir Clarissime et doctissime Recte accepi quae misisti, et quam bonum nomen fueris, ut par est, agnosco. Gratias officium facienti non debes. Dn. Wolfius mihi Berolini locutus est, professionis dignitatem Halae nactus est, n...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

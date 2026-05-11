@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_146",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 146,
+  "text": "[[506.1]] <b>119.  De demonstratione axiomatum non identicorum [Mai 1682 bis Dezember 1684 (?)]</b>\n [[506.2]] <tab/>[Mai 1682 bis Dezember 1684 (?)] </p>\n<p> [[506.13]] Demonstrari possunt, non tantum theoremata, sed etiam ipsa Axiomata quae identica\n[[506.14]] non sunt. Ita demonstravi Axioma Euclideum: <b>Quod aequalia uni tertio, sunt\n[[506.15]] aequalia inter se</i>, per definitionem Aequalitatis. Talem autem assigno definitionem\n[[506.16]] Aequalitatis: <b>Aequalia</b> sunt quorum unum alteri substitui potest, salva circa magnitudinem\n[[506.17]] veritate. Demonstrandum jam esto Axioma, de aequalibus uni tertio etiam\n[[506.18]] aequalibus inter se, quod sic exponi potest more Geometrarum: Esto <i>a</i> aequale ipsi <i>b</i>, et\n[[506.19]] rursus esto <i>c</i> aequale ipsi <i>b</i>, ajo fore <i>a</i> et <i>c</i> aequalia inter se. Nam (primo) quia <i>a</i> = <i>b</i> ex\n[[506.20]] hypothesi, et (2do) <i>c</i> = <i>b</i>, itidem ex hypothesi, ergo in aequatione prima in locum <i>b</i>,\n[[506.21]] poterit substitui <i>c</i>, et fiet <i>a</i> = <i>c</i>. Quod erat dem. </p>\n<p> [[506.22]] <b>Definitio</b>. <k>Aequalia</k> sunt quae sibi substitui possunt salva magnitudine. </p>\n<p> [[506.23]] <b>Axioma identicum</b>. Unumquodque sibi ipsi aequale est.\n [[506.24]] Axioma demonstrabile reductum ad <b>Theorema</b>\n [[507.1]] <b>Si aequalibus addas aequalia, proveniunt aequalia.</b>\n [[507.2]] Ecthesis\n [[507.3]] Esto 1) <i>a</i> = <i>l</i> et (2do) esto <i>b</i> = <i>m</i>. Dico fore <i>a</i> + <i>b</i> = <i>l</i> + <i>m</i>.\n [[507.4]] Demonstratio\n [[507.5]] Nam quia (3tio) <i>a</i> + <i>b</i> = <i>a</i> + <i>b</i> per Axiom. ident. Ergo in dextro latere hujus aequalitatis\n[[507.6]] pro <i>a</i> substituendo <i>l</i> (ob aequ. 1), et pro <i>b</i> substituendo <i>m</i> (per aequ. 2) quod fieri potest\n[[507.7]] (per definit. Aequalium) habebimus <i>a</i> + <i>b</i> = <i>l</i> + <i>m</i>. Quod erat demonstrandum. </p>\n<p> [[507.8]] Simili ratione aliquando ostendi Logicas consequentias commode demonstrari per\n[[507.9]] veritates identicas. Exempli gratia haec consequentia: <i>Omnis homo est animal. Ergo\n[[507.10]] quidam homo est animal</i>, est Enthymema, quod perficitur et transit in syllogismum ope\n[[507.11]] suppletae propositionis identicae: <i>Omnis homo est animal. Quidam homo est homo. Ergo\n[[507.12]] quidam homo est animal.</i> Fateor nos non habere opus his demonstrationibus, sed tamen\n[[507.13]] utiles eas arbitror ad [<i>bricht ab</i>] </p>\n",
+  "number": "119.",
+  "title": "De demonstratione axiomatum non identicorum",
+  "date": "[Mai 1682 bis Dezember 1684 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:119. De demonstratione axiomatum non identicorum [Mai 1682 bis Dezember 1684 (?)] [Mai 1682 bis Dezember 1684 (?)] Demonstrari possunt, non tantum theoremata, sed etiam ipsa Axiomata quae identica non sunt. Ita demonstravi Axioma Euclideum: Quod aequalia uni tertio, sunt aequalia inter se, per defin...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

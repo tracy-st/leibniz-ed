@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_455",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 455,
+  "text": "[[2026.1]] <b>368.  De motu insensibili in barometro [Sommer bis Winter 1678/79 (?)]</b>\n [[2026.2]] <tab/>[Sommer bis Winter 1678/79 (?)] </p>\n<p> [[2026.11]] Cum motus corporis est insensibilis, ut non nisi progressu facto notari possit, potest\n[[2026.12]] tamen motus et directio ejus in liquido agnosci ex ipsa ejus figura. Ita in Barometro\n[[2026.13]] ascensus Hydrargyri vel descensus est insensibilis, et tamen ex inspectione ipsa judicari\n[[2026.14]] statim potest utrum et quorsum tendat, id est ascensumne an descensum moliatur. Nam si\n[[2026.15]] motus tendat sursum, superficies erit convexa, sin descendat, concava erit. Quoniam\n[[2026.16]] media minus extremis resistunt, quia ipsa interna tubi superficies contactu suo descensum\n[[2026.17]] moratur. Ex Mediis igitur procedentibus in ascensu intumescit superficies, in descensu\n[[2026.18]] excavatur. </p>\n",
+  "number": "368.",
+  "title": "De motu insensibili in barometro",
+  "date": "[Sommer bis Winter 1678/79 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:368. De motu insensibili in barometro [Sommer bis Winter 1678/79 (?)] [Sommer bis Winter 1678/79 (?)] Cum motus corporis est insensibilis, ut non nisi progressu facto notari possit, potest tamen motus et directio ejus in liquido agnosci ex ipsa ejus figura. Ita in Barometro ascensus Hydrargyri vel d...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

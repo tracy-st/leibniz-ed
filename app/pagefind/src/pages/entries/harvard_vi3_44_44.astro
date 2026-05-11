@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_44",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 44,
+  "text": "[[412.11]] <b>44. Analysis ad alias res quam quantitates applicata </b> <span>412.11;0:63:044:74       :L:l^</span>.\n[[412.24]] Analysis ad alias res quam quantitates applicata.\n[[412.26]] Quod omnium maxime quaero est Machina, quae pro nobis faciat operationes\n[[412.27]] analyticas, quemadmodum Arithmetica a me reperta facit numericas.\n[[413.1]] Sed video positis operandi formulis quibus utimur rem fieri non posse, quia transpositiones\n[[413.2]] sunt nimis variae nimisque frequentes; sed ego satis agnosco, his quibus\n[[413.3]] utimur signis, non satis exprimi operationes mentis. Nam omnes cogitationes non\n[[413.4]] sunt nisi simplices complicationes idearum; uti voces literarum alphabeti, res ergo ad\n[[413.5]] eam reducenda est simplicitatem, ut solis compositionibus huiusmodi transpositionibusque\n[[413.6]] in linea recta naturali plane ratione fiant, atque ita ut machina non tantum\n[[413.7]] multiplicationes, sed et divisiones et radicum extractiones facere possit; item divulsiones\n[[413.8]] in partes seu in formulas toto simpliciores, sive additione, sive multiplicatione,\n[[413.9]] sive divisione totum formantes. Sed quia ista nimis infinita sunt, suffecerit\n[[413.10]] machinam a proposita qualibet formula posse tollere fractiones si velis; item facere\n[[413.11]] multiplicationes divisionesque formularum propositarum per alias propositas. Nam\n[[413.12]] ut ipsamet inveniat veros divisores hoc est nimium postulare.\n[[413.13]] Restant aliae plane Analyses sive Combinationes, circa Ordines rerum, circa\n[[413.14]] qualitates, actiones, aliaque infinita, quae aliis plane modis (licet etiam per literas\n[[413.15]] simpliciave alia signa) exprimi debent quam quantitates, et cuius rei specimen video,\n[[413.16]] in literis meis, quibus usus sum ad signa ambigua exprimenda; ibi enim non quantitas,\n[[413.17]] sed relatio quaedam sive ordo, ad signorum analyticorum instar exprimitur. Sed\n[[413.18]] universalis analysis dependet a charactere universali, etsi interim in longis calculis\n[[413.19]] pro characteribus peculiaribus liceat adhibere generales seu literas alphabeticas, ut in\n[[413.20]] Geometria, sed re jam per particulares praeparata. Et ita ut postea facile ad particulares\n[[413.21]] possint reduci generales.\n[[413.22]] Ope Analyseos in pura mechanica, id est quae non pendet ab experimentis, eadem\n[[413.23]] fieri possunt, quae in Arithmetica et Geometria, scilicet in Statica, Hydrostatica,\n[[413.24]] Pneumatica, Pyrobolica, Elastica, Oscillatoria; Optica, Musica; Nautica, Astronomia,\n[[413.25]] Geographia generali; aliisque in infinitis quorum ideae atque formae a materia purgatae\n[[413.26]] analyticis characteribus exhiberi possunt, non ita docendi tradendique ac demonstrandi,\n[[413.27]] sed inveniendi causa. Unde patet re eo reducta quantus sit futurus usus\n[[413.28]] artis analyticae sive combinatoriae, cum formulae aequationesque quae nunc non nisi\n[[413.29]] numeros, et lineas aliaque sterilia et sicca repraesentant, spatia et motus, et tempora,\n[[413.30]] et vires, et effectus exhibebunt. Quando problema analyticum solvere, et aequationis\n[[413.31]] cuiusdam radices invenire, vel divisores, erit arcana naturae detegere, et machinas\n[[414.1]] vitae utiles dare; et quando constructiones elegantes invenire, erit compendia mechanica\n[[414.2]] vitae utilia exhibere. Combinatoriam ergo interim magis magisque perfici\n[[414.3]] interest generis humani, quantum enim (bricht ab)\n",
+  "number": "44.",
+  "title": "Analysis ad alias res quam quantitates applicata",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:44. Analysis ad alias res quam quantitates applicata 412.11;0:63:044:74 :L:l^. Analysis ad alias res quam quantitates applicata. Quod omnium maxime quaero est Machina, quae pro nobis faciat operationes analyticas, quemadmodum Arithmetica a me reperta facit numericas. Sed video positis operandi formu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

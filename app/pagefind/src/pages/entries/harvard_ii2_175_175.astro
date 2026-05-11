@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_175",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 175,
+  "text": "<p> [[591.6]] <b>177. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[591.7]] Padua, 8. Oktober [1692]. [173.179.]</b></p>\n<p> [[591.15]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[591.16]] Stimo, che già sia arrivato costì il Sig^#'re Abbate Stefani, onde haverà V. S. Illu^#'m^#'a ricevuto\n[[591.17]] un mio fagottino, come anche le lettere, che l' hò inviato per quattro ordinarii. Circa lo stato\n[[591.18]] delle mie cose non sò, che aggiongerle, essendomi abastanza spiegato, vivamente sperando, che\n[[591.19]] ella sia per approvare le mie risolutioni, come ragionevoli, ed oneste. Mi è capitato un libretto\n[[591.20]] della Teoria del moto astratto, e per quanto leggo nel suo frontispicio, mi accorgo, che è parto\n[[591.21]] del suo raro, e sublime ingegno, lo stò leggendo con attentione, e non dubito sia per cavarne\n[[591.22]] grandissimo profitto in tempo, che mi sono tutto immerso nelle speculationi fisiche, e dove non\n[[591.23]] intenderò, la supplicarò d'illuminarmi proponendole con il dovuto rispetto sinceramente i miei\n[[591.24]] dubii. Da Venetia un mio Amico mi hà mandato il <i>Sistema filosofico</i> del Regis in lingua\n[[591.25]] fra[n]cese, in cui vi trovo bellissime cose, però non ne resto interamente sodisfatto, né trovo\n[[591.26]] così lucida, e netta la sua definitione del moto, come esso se l'immagina. Mi tengono qui così\n[[592.1]] occupato questi Nobili che non posso seriamente applicarmi allo studio dell'Analisi per cui si\n[[592.2]] ricerca grandissima ritiratezza, e mi creda, che ancora non hò potuto riflettere sopra quello, che\n[[592.3]] V. S. Illu^#'m^#'a dottamente mi scrisse circa il calcolo, e l'equationi dell'Algebra; quando haverò un\n[[592.4]] poco d'otio, mi applicarò a meditare, e mi apparecchiarò per formare lo scritto da dettare, a Dio\n[[592.5]] piacendo, nell'Illustre Accademia di Wolfebutel. La priego scrivermi qualche cosa circa la\n[[592.6]] natura, origine, e propagatione del moto. <Fn><i>Dazu bemerkt Leibniz</i>: Le mouvement en luy même n'ayant jamais ses parties ensemble, non plus que le temps, ne sçauroit passer pour quelque estre reel. Ce qu'il y a de reel dans le mouvement est la force. Aussi ay je trouvé, que ce n'est pas la même quantité du mouvement, mais bien la même quantité de la force que Dieu conserve dans la nature. Cette force aussi est ce qu'il y a de physique dans le mouvement, le reste est de la pure Geometrie et ne sçauroit suffire pour determiner le vray sujet du mouvement ou du repos, puisque l'on sçait, qu'une infinité d'hypotheses [peuve] satisfaire à ce qu'il y a de mathematique dans les phenomenes.</Fn> Non mi scordo dell'Ongarello, e facendole profonda\n[[592.7]] riverenza mi resto </p>\n<p> [[592.8]] Di V. S. Illu^#'m^#'a Oblig^#'m^#'o Dev^#'m^#'o S^#'r^#'e vero Fardella </p>\n<p> [[592.9]] Padova 8 ottobre </p>\n<p> [[592.10]] All'Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Cole^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Sua Altezza.\n[[592.11]] Hannover </p>\n",
+  "number": "177.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 8. Oktober [1692]. [173.179.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:177. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 8. Oktober [1692]. [173.179.] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o Stimo, che già sia arrivato costì il Sig^#'re Abbate Stefani, onde haverà V. S. Illu^#'m^#'a ricevuto un mio fagottino, come anche le lettere, che l' hò inviat...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

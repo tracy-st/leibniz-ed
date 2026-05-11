@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_477",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 477,
+  "text": "[[2117.15]] <b>384₁.  Aus dem Journal des Sçavans 1689, XX und XXI\n [[2117.18]] <i>Censura Philosophiae Cartesianae Petri Danielis Huetii Episcopi Suessionensis destinati</i>.\n[[2117.19]] 12^#'o. Paris chez Dan. Horthemels 1689. </p>\n<p> [[2117.20]] <i>Je pense</i>, c'est à dire <i>je suis pensant</i>. Il suppose donc qu'il est. De plus il faut que\n[[2117.21]] cette pensée ait un objet, qui est une pensée precedente. Je ne pense pas à la pensée\n[[2117.22]] presente, mais à la precedente, <i>je pense que j'ay pensé</i>. Il faut inferer, <i>j'ay pensé, donc je\n[[2117.23]] suis</i>, ce qui n'est pas certain. M. de Soissons remarque que de faire <i>consister la nature de\n[[2117.24]] l'homme en ce qu'il pense, est une des heresies des 3 premiers siecles</i>. </p>\n<p> [[2117.25]] <i>Resolutions de plusieurs cas de conscience touchant la morale et la discipline de\n[[2117.26]] l'Eglise par feu M. de Saintebeuve docteur de la maison et societé de Sorbonne, professeur\n[[2117.27]] du Roy en Theologie</i>. In 4^#'o. <i>Tom. 1. Guill. Des Prez rue S. Jaques 1689</i>. Il n'est\n[[2117.28]] pas pour la frequente exposition du S. sacrement à l'autel ou dans les processions. </p>\n",
+  "number": "384₁.",
+  "title": "Aus dem Journal des Sçavans 1689, XX und XXI",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:384₁. Aus dem Journal des Sçavans 1689, XX und XXI Censura Philosophiae Cartesianae Petri Danielis Huetii Episcopi Suessionensis destinati. 12^#'o. Paris chez Dan. Horthemels 1689. Je pense, c'est à dire je suis pensant. Il suppose donc qu'il est. De plus il faut que cette pensée ait un objet, qui e...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

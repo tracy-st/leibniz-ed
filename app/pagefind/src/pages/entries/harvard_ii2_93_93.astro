@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_93",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 93,
+  "text": "<p> [[364.1]] <b>94. ANTONIO ALBERTI AN LEIBNIZ</p>\n<p> [[364.2]] Rom, 16. Dezember 1690. [83.106.]</b></p>\n<p> [[364.9]] Monsieur </p>\n<p> [[364.10]] J'embrasse avec Joye l'occasion que me presente m^#'r le Baron Bodeni de vous asseurer de\n[[364.11]] nouveau de mes tres humbles respects. Il est extrémément en peine de n'avoir point receu de\n[[364.12]] vos lettres depuis cinq ou six mois. Ce long silence m'auroit donné aussi beaucoup d'inquietude,\n[[364.13]] si je n'avois point eu le bonheur de veoir icy une de vos lettres. Ce qui fit que j'ecrivis\n[[364.14]] dernierement à m^#'r Bodeni que vous estiez en parfaite [santé], et qu'il devoit attribuer l'interruption\n[[364.15]] du commerce dont il se plaignoit à toute autre chose qu'à une maladie, ou à quelque\n[[364.16]] autre semblable accident. Nous n'avons Monsieur rien de nouveau à vous mander. Cet honnete\n[[364.17]] homme qui estoit auprés de m^#'r Le Duc de Roannez est mort depuis 7 ou 8 mois assez\n[[364.18]] Brusquement. C'est ainsi au moins qu'on l'a mandé de Flandres. Et je crois mesme que la\n[[364.19]] nouvelle est seure, à moins que mes correspondans ou moy même n'ayons equivoqué sur le\n[[364.20]] Nom de cet honnete homme; car je vous avoue que je ne m'en souviens plus, ainsi je vous prie\n[[364.21]] de me mander le nom de celuy dont vous desireriez sçavoir des Nouvelles; j'ay icy un de mes\n[[364.22]] amis qui sçait parfaitement bien la carte de ce pais et qui pourra me donner satisfaction, sans\n[[364.23]] etre obligé de recourir si loin. L'affaire de M^#'g^#'r Gabrieli est en etat d'estre bien-tost terminée; on\n[[365.1]] pretend mesme qu'il en sera quité à bon compte. Pour ce pere de L'oratoire de France, j'en ay\n[[365.2]] perdu la piste, tant parcequ'il a changé de Maison que parceque je n'ay plus de Commerce dans\n[[365.3]] ce pais-là. Ce n'est pas que dès qu'on aura reglé le passage des courriers par le Piémont, et\n[[365.4]] qu'ainsi j'auray sujet d'esperer que mes lettres ne se perdront plus comme elles ont fait jusqu'à\n[[365.5]] present, je ne manqueray point de renover mon commerce avec les amis que j'ay de ce costé là. </p>\n<p> [[365.6]] Vous m'obligeriez Monsieur sensiblement de vouloir bien me dire en peu de mots les\n[[365.7]] raisons que vous avez de ne pas croire que l'essence du corps soit la longueur, la largeur et la\n[[365.8]] profondeur. Comme je vois que beaucoup du monde est prevenu de cette idee, je seray\n[[365.9]] bien-aise de sçavoir precisément à quoy je m'en dois tenir. </p>\n<p> [[365.10]] Je suis avec tout le respect et l'estime possible </p>\n<p> [[365.11]] Monsieur Votre tres humble et tres obeissant serviteur Ant. Alberti </p>\n<p> [[365.12]] Ce 16 decembre à Rome. </p>\n<p> [[365.13]] A Monsieur Monsieur Leibnits Con^#'e^#'r de son Alt. S^#'m^#'e De Brunsvic. A Hannover. </p>\n",
+  "number": "94.",
+  "title": "ANTONIO ALBERTI AN LEIBNIZ",
+  "date": "Rom, 16. Dezember 1690. [83.106.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:94. ANTONIO ALBERTI AN LEIBNIZ Rom, 16. Dezember 1690. [83.106.] Monsieur J'embrasse avec Joye l'occasion que me presente m^#'r le Baron Bodeni de vous asseurer de nouveau de mes tres humbles respects. Il est extrémément en peine de n'avoir point receu de vos lettres depuis cinq ou six mois. Ce long...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

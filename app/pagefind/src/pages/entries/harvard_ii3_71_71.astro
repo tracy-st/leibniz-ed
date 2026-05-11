@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_71",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 71,
+  "text": "<p> [[190.1]] <b>71. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[190.2]] Venedig, 24. August [1696]. [69.72.]</b></p>\n\n<p> [[190.7]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[190.8]] Credo che V. S. Ill^#'m^#'a havrà ricevuto una mia in risposta alla sua, che mi capitò nel corrente\n[[190.9]] mese. Domani a Dio piacendo, mi portarò in Padova, da dove subito trasmetterò il manoscritto\n[[190.10]] dell'Ongarello in foglio al Sig^#'r^#'e Mendelino che lo consegnarà alla Sig^#'r^#'a Principessa già capitata\n[[190.11]] in questa città. Il manoscritto è perfetto, si è copiato all infretta per il timore d'esserci\n[[190.12]] domandato dal Padrone che vi l' hà imprestato per un solo mese. Farò diligenza per il Vergerio,\n[[190.13]] e ne farò una copia che le sarà incontanente inviata. Con questa istessa occasione le mando un\n[[190.14]] libro nuovamente stampato e non ancora publicato, intitolato <i>Phlebotomia Damnata</i>, del Sig^#'r^#'e\n[[190.15]] Domenico la Scala, mio antichissimo Amico. Come anche alcune altre bagatelle, che non le\n[[190.16]] saranno ingrate. L'Idea del mio libro è stata ben accolta in Roma, e nelle presenti congiunture si\n[[190.17]] rende necessaria in Italia. S'avvicina il tempo delle mie publiche lettioni, che versaranno\n[[190.18]] intorno alle Meteore di fuoco. Parlarò del Lampo, del Tuono, del Fulmine, e del Turbine. Se\n[[190.19]] V. S. Ill^#'m^#'a hà qualche cosa di particolare circa queste cose, la priego istruirmi, ed illuminarmi;\n[[190.20]] Come anche ricordarsi di parteciparmi in ristretto quel che ella hà meditato dell'Anima, e della\n[[190.21]] natura del Corpo. M'ami, mi comandi con libertà, e s'assicuri, che sarò in ogni tempo </p>\n<p> [[190.22]] Di V. S. Ill^#'m^#'a Oblig^#'m^#'o Div^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[190.23]] Venetia 24 Agosto </p>\n<p> [[191.1]] I Manoscritti del Monastero delle Carceri si trovano in Fondo della Secreta che è il luogo\n[[191.2]] ove si conservano le scritture che appartengono al Governo.\n[[191.3]] <yi>All'Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di S.A.E. <b>Hannover</b> </p>\n",
+  "number": "71.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 24. August [1696]. [69.72.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:71. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 24. August [1696]. [69.72.] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o Credo che V. S. Ill^#'m^#'a havrà ricevuto una mia in risposta alla sua, che mi capitò nel corrente mese. Domani a Dio piacendo, mi portarò in Padova, da dove subito tr...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

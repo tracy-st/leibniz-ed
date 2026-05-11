@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_148",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 148,
+  "text": "<p> [[479.1]] <b>148. BARTHÉLEMY DES BOSSES AN LEIBNIZ</p>\n<p> [[479.2]] Hildesheim, 29. September 1706. [146.149.] </b></p>\n<p> [[479.16]] Illustrissime Domine P[ax] C[hristi] </p>\n<p> [[479.17]] Plurimum <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> semper ex litteris tuis proficio, sive me doces, sive amanter objurgas. Quod in\n[[479.18]] dubitationibus alioqui facilibus haeream, noli mirari: nosti quam vim habeant hausta ex scholis\n[[479.19]] praejudicia, quibus fit ut ea quae scimus vel scire saltem possemus, saepe nesciamus. </p>\n<p> [[479.20]] Universale cum multorum in uno expressione confundendi ansam mihi dedit familiaris\n[[479.21]] scholis nostris partitio qua universale in objectivum et formale seu mentale dividimus quod\n[[479.22]] postremum in ipsa perceptione confusa multorum similium a plurimis constitui solet. Hujusmodi\n[[479.23]] perceptionem Entelechiis a te tribui non sane rebar, sed solum acutissimam tuam definitionem\n[[479.24]] ad captum meum elucidari cupiebam, ut discrimen animam rationalem inter et caeteras\n[[479.25]] Entelechias appareret. </p>\n<p> [[479.26]] Utrum Angelos esse incorporeos definitum apud nos habeatur, malo ex Patre Martino de\n[[479.27]] Esparsa magni nominis Theologo Romano, quam ex me intelligas. Ex eo, si forte ad manum\n[[479.28]] autor ille non esset, ea quae in adjecta schedula invenies ad verbum descripsi. Rationes\n[[479.29]] philosophicas quas pro sententia affirmativa affert perlustravi, quae, meo judicio, si quid\n[[480.1]] evincunt, hoc duntaxat probant, esse angelos quosdam incorporeos; non vero, omnes, videnturque\n[[480.2]] posse omnes eae rationes cum doctrina tua conciliari, si modo in subsidium vocare\n[[480.3]] libuerit S. Thomam ejusque sequaces qui Angelos <b>ministrantes</b> distinguunt ab <b>assistentibus</b>,\n[[480.4]] atque ministrantibus quidam actionem physicam in corpora tribuunt; assistentibus vero negant.\n[[480.5]] De quo videri potest S. Thomas prima parte qu[.] 112 articulis 2, 3 et 4. </p>\n<p> [[480.6]] Breviarium Philosophicum, cujus conficiendi jam dudum autor hortatorque es, lente\n[[480.7]] procedit quidem, ob temporis penuriam: procedit tamen, et quantum quotidianae lectiones\n[[480.8]] sinunt, quidquid occurrit quod ad scopum illum faciat colligo digeroque indies, atque verissime\n[[480.9]] dictum experior nebulas, quae restant, mutua rerum collustratione dissipari; sed multo magis\n[[480.10]] colloquio tuo, si eo frui interdum liceret dissipatum iri confiderem, nam fatale tibi est novam\n[[480.11]] rebus istis lucem afferre. </p>\n<p> [[480.12]] De Quesnelli et scriptorum ejus sorte audieram jam ante, an vero scripta ista in nostrorum\n[[480.13]] sint potestate, non intellexi. Missus est nobis abhinc semestri liber sat magnus jussu Archiepiscopi\n[[480.14]] Mechliniensis in lucem editus cum titulo: <i>Causa Quesnelliana</i> in quo passim extant\n[[480.15]] fragmenta ex interceptis Quesnelli scriptis excerpta, sed quia totus ad demonstrandam Archiepiscopalis\n[[480.16]] in Quesnellum actionis aequitatem conscriptus est, dubito, num ejusmodi sit qualem\n[[480.17]] optares. Si tamen illius videndi cupidus es, faxo ut accipias, quamprimum R[everen]dissimus\n[[480.18]] Suffraganeus noster, cui mutuum dedi, ab Ubiis ubi nunc est, fuerit reversus. Quod superest Vale\n[[480.19]] Illustrissime Domine, meque solita benevolentia prosequere. Dabam Hildesiae 29 Septembris\n[[480.20]] 1706. </p>\n<p> [[480.21]] Illustrissimae Dominationis tuae Humillimus et obedientissimus Servus in Christo </p>\n<p> [[480.22]] Bartholomaeus Des Bosses S J </p>\n",
+  "number": "148.",
+  "title": "BARTHÉLEMY DES BOSSES AN LEIBNIZ",
+  "date": "Hildesheim, 29. September 1706. [146.149.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:148. BARTHÉLEMY DES BOSSES AN LEIBNIZ Hildesheim, 29. September 1706. [146.149.] Illustrissime Domine P[ax] C[hristi] Plurimum Am Kopf der Seite von Leibniz' Hand: resp. semper ex litteris tuis proficio, sive me doces, sive amanter objurgas. Quod in dubitationibus alioqui facilibus haeream, noli mir...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

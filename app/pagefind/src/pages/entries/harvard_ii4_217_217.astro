@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_217",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 217,
+  "text": "<p> [[670.5]] <b>217. LEIBNIZ AN JOHANN FRANZ BUDDEUS</p>\n<p> [[670.6]]  Hannover, 27. September 1707. [168.] </b></p>\n<p> [[670.16]] Vir maxime Reverende et Amplissime Fautor Honoratissime </p>\n<p> [[670.17]] Cum totam hyemem Berolini trivissem, et vere invitante inde Lipsiam excurrissem ad\n[[670.18]] rarum sane trium Regum spectaculum factum est, ut non nisi in aestate redux fasciculum a TE\n[[670.19]] invenerim[,] nam fasciculi me expectarunt. Nunc oblata juvenis docti occasione ad responsionem\n[[670.20]] meam perferendam utor. </p>\n<p> [[671.1]] Pro eleganti et profutura <i>de theologia polemica</i> dissertatione gratias ago: multa ei insunt\n[[671.2]] monita salutaria, quae utinam observarent factis verbisque, qui haec sacra tractant. Sed plerumque\n[[671.3]] infeliciter evenit, ut qui ad meliora contendit, caeteris ipsa instituti dissimilitudine\n[[671.4]] suspectus reddatur. </p>\n[[671.5]] <petit>  <i>Den folgenden in Petit wiedergegebenen Passus hat Leibniz gestrichen, um ihn durch den nachfolgenden Absatz\n[[671.6]] zu ersetzen, da er inzwischen von Liebknechts Antritt der Professur erfahren hatte</i>:\n [[671.7]] Doctissimo Liebeknechtio tuo libenter prodesse velim; sed Gissae aut etiam Darmstadii cum nemine literarium\n[[671.8]] commercium colo. Facile equidem intelligis pro Tua prudentia non esse temere commendandum eum, quem non\n[[671.9]] satis noveris, ergo tamen Tuo et celeberrimi viri Georgi Alberti Hambergeri fretus judicio; data occasione non\n[[671.10]] deero. Cl. Wolfius per alios Giessensibus commendatus fuerat; ego postea eum erga aulicos quosdam laudaveram,\n[[671.11]] cum Serenissimus Landgravius Hanoverae esset. </petit>\n[[671.12]] Doctissimum Liebeknechtium <angle bracket>Mathematicum</angle bracket> apud Giessenses desideratum locum obtinuisse\n[[671.13]] intelligo eique gratulor, nec dubito quin spartam sit ornaturus, si se huic studio potissimum\n[[671.14]] dederit. </p>\n<p> [[671.15]] Ajunt maximum utilissimumque laborem quem in <i>Dictionario Historico</i> Germanico conficiendo\n[[671.16]] posuisti, magnos successus habuisse nec procul ab exitu abesse, de quo Tibi et\n[[671.17]] Germaniae nostrae gratulabor, et de caetero prospera omnia precor, ut plurimum et diu prosis. </p>\n<p> [[671.18]] Dabam Hanoverae 27 Septembr 1707 </p>\n<p> [[671.19]] Deditissimus </p>\n<p> [[671.20]] Godefridus Guilielmus Leibnitius </p>\n<p> [[671.21]] P. S. Cum Berolini essem de TE illuc vocando cogitabant Dn. Kraut camerae redituum\n[[671.22]] consiliarius, aliique viri insignes: nec desunt apud nos qui TE nobis expetant. Ego utrovis modo\n[[671.23]] propioris commercii occasionem nancisci gauderem. </p>\n",
+  "number": "217.",
+  "title": "LEIBNIZ AN JOHANN FRANZ BUDDEUS",
+  "date": "Hannover, 27. September 1707. [168.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:217. LEIBNIZ AN JOHANN FRANZ BUDDEUS Hannover, 27. September 1707. [168.] Vir maxime Reverende et Amplissime Fautor Honoratissime Cum totam hyemem Berolini trivissem, et vere invitante inde Lipsiam excurrissem ad rarum sane trium Regum spectaculum factum est, ut non nisi in aestate redux fasciculum ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

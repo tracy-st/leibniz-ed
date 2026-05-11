@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_277",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 277,
+  "text": "<p> [[848.13]] <b>242. VEIT LUDWIG VON SECKENDORFF AN LEIBNIZ</p>\n<p> [[848.14]] Meußelwitz, 30. August (9. September) 1683. [240.243.]</b></p>\n<p> [[849.5]] [ ... ] Approbare me saltem scias omnia illa Tua, et imprimis, quae de Pascalio et Huetio\n[[849.6]] scribis, gratiasque habeo, quod multa me docuisti. Incidi nuper, occasione <b>actorum Lipsiensium</b>,\n[[849.7]] in Librum Sorbonici Doctoris, <b>D'Irois</b>, cui titulus est: <i>Preuvez et prejugez pour la\n[[849.8]] religion Chrestienne et Catholique</i> reperiique multa, quae satis faciunt, aliqua etiam, ubi minus\n[[849.9]] accuratus est, et sectae suae servit. Nescio an non magis probem tractatum: <i>Mens immortalis</i>,\n[[849.10]] Joh. Eberh. Suelingii Bremensis, Viri, ut puto, non perfunctorie eruditi. Metaphysicas demonstrationes\n[[849.11]] dubito ut satis capiam: Hospes enim non inquilinus fui, in illa Musarum regione.\n[[849.12]] Itaque hucusque ea me tenuit opinio, plus effici (excepta divini spiritus operatione) argumentis\n[[849.13]] moralibus et exotericis: Metaphysicis autem, nisi a Scholasticis eruta essent, et hodie a novis\n[[849.14]] Philosophis resuscitarentur, careri, sine dispendio rei Christianae, potuisse. Sed ego multum\n[[849.15]] defero judicio Tuo, nec nego, adversus Pyrrhonicos subtiliores magnum eorum usum esse, si\n[[849.16]] non ad convincendum de vero, at saltem ad infirmandos, quos vocant, et retundendos scrupulos.\n[[849.17]] [ ... ] </p>\n<p> [[849.18]] Meußelwitz d. 30. Augusti. 1683. </p>\n<p> [[849.19]] <i>Dem HochEdlen, Vesten, Hochgelahrten, Herrn Gottfried Wilhelm Leibnitzen, J.U.D.,\n[[849.20]] Fürst. Braunschweig. Lüneburg. Hoffrath etc. Meinem Hochgeehrten Herrn. Hannover.</i> </p>\n<p> [[849.21]] <i>Herrn Joachim Gehringen in Leipzig recommendiret.</i> <Fn><i>Von fremder Hand</i>: franco p. Braunschweig.</Fn> </p>\n",
+  "number": "242.",
+  "title": "VEIT LUDWIG VON SECKENDORFF AN LEIBNIZ",
+  "date": "Meußelwitz, 30. August (9. September) 1683. [240.243.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:242. VEIT LUDWIG VON SECKENDORFF AN LEIBNIZ Meußelwitz, 30. August (9. September) 1683. [240.243.] [ ... ] Approbare me saltem scias omnia illa Tua, et imprimis, quae de Pascalio et Huetio scribis, gratiasque habeo, quod multa me docuisti. Incidi nuper, occasione actorum Lipsiensium, in Librum Sorbo...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

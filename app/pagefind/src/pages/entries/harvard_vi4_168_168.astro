@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_168",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 168,
+  "text": "[[574.9]] <b>136.  Divisiones [Sommer 1683 bis Winter 1685/86 (?)]</b>\n [[574.10]] <tab/>[Sommer 1683 bis Winter 1685/86 (?)]\n [[574.14]] Omne Vocabulum significans est vel Terminus, vel particula, vel ex his compositum. </p>\n<p> [[574.15]] Verbum componitur ex Nomine seu termino, et ex particula: <i>est</i>. Adverbium se\n[[574.16]] habet ad verbum ut adjectivum ad substantivum. Sub particulis et affixas seu vocum\n[[574.17]] partes separatim non significantes comprehendo, ut <i>re, tivus</i>.\n [[574.18]] Terminus omnis est vel Concretus vel Abstractus. </p>\n<p> [[574.19]] Placet autem abstracta nunc removere, quia illis si opus careri potest.\n [[574.20]] Terminus Concretus est vel substantia seu Res, vel accidens seu Modus, qui conceptum\n[[574.21]] perfectum non exhibet, nisi res subintelligatur. </p>\n<p> [[574.22]] Quia abstracta exclusi, exclusi etiam nomina substantiva, quae non substantiam sed\n[[574.23]] accidens significant. In concretis ergo omne substantivum significat substantiam,\n[[574.24]] omne adjectivum significat accidens. Ita <i>circulus</i> (substantivum) significat rem seu\n[[574.25]] substantiam circularem. Et semper sub adjectivo intelligitur [accidens,] nisi sub-\n[[575.1]] ­stantive intelligatur per Ellipsin.\n [[575.2]] Terminus concretus completus est, qui jam omnia comprehendit, quae de eodem subjecto\n[[575.3]] praedicari possunt, dicitur et <b>substantia singularis</b>. </p>\n<p> [[575.4]] Seu qui notionem singularis alicujus substantiae perfecte intelligeret jam omnia ejus\n[[575.5]] praedicata ex ea cognosceret. Ita in Petri Apostoli conceptu Deus omnia concipit\n[[575.6]] quae Petro huic unquam contigere aut contingent, ut in circulari omnia concipit quae\n[[575.7]] Geometrae de eo possunt demonstrare. Sed in circularis conceptu non concipit\n[[575.8]] omnia quae de circulari possunt enuntiari, quia non simul concipitur subjectum quod\n[[575.9]] circulare intelligi potest.\n [[575.10]] Substantia est Terminus qui de subjecto suo completo non potest praedicari per accidens\n[[575.11]] sed tantum per se. Accidens vero sua natura indefinitum est an per accidens an vero per\n[[575.12]] se praedicetur. </p>\n<p> [[575.13]] Ita cum dico <i>Homo, Animal, corpus, substantia</i> seu <i>Res</i>, eo ipso dico terminum hunc\n[[575.14]] esse de essentia eorum singularium de quibus dicitur, nam per se dicitur de Petro\n[[575.15]] esse hominem, esse animal etc., per accidens vero dicitur de Petro quod fuit peccator,\n[[575.16]] quod cruci suffixus, haec enim ex serie rerum externarum concurrente fluxerunt.\n[[575.17]] Ita habemus tandem dissolutum nodum, quem hactenus philosophi insolubilem\n[[575.18]] reliquere, neque enim ulla accurata notione hactenus explicuere, quomodo\n[[575.19]] substantia ab accidente distingueretur. At inquies <i>omnipotentia</i> non potest dici nisi\n[[575.20]] per se non enim dicitur nisi de Deo, responderi potest, dici et de Homine quem Deus\n[[576.1]] omnipotentem fecit. Propositio autem: <i>hic</i> <i>Homo est omnipotens</i>, utique est vera per\n[[576.2]] accidens.\n [[576.3]] Ens est aut reale aut apparens, </p>\n<p> [[576.4]] Reale ut sol, imaginarium ut parhelius vel iris aliave phaenomena.\n [[576.5]] Omnis Res est aut Ens per se, aut Ens per Accidens; Ens per se quod revera unum est, ut\n[[576.6]] Homo, Animal, Ens per Accidens, quod et dicitur Ens per aggregationem, ut multitudo\n[[576.7]] hominum, strues lignorum; Machina. </p>\n<p> [[576.8]] Si animalia sunt Machinae, si corpora carent forma substantiali, erunt Entia per\n[[576.9]] Accidens, imo tandem ostendi potest posito corpus omne esse Ens per accidens,\n[[576.10]] corpus fore rem imaginariam seu phaenomenon ad instar iridis.\n [[576.11]] Res omnis est aut perfecta seu absoluta quae dicitur <b>Deus</b>, aut limitata quae dicitur\n[[576.12]] <b>creatura</b>. </p>\n<p> [[576.13]] Hinc patet Deum ex ipsa definitione sua esse terminum completum seu substantiam\n[[576.14]] singularem adeoque esse unicum. </p>\n",
+  "number": "136.",
+  "title": "Divisiones",
+  "date": "[Sommer 1683 bis Winter 1685/86 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:136. Divisiones [Sommer 1683 bis Winter 1685/86 (?)] [Sommer 1683 bis Winter 1685/86 (?)] Omne Vocabulum significans est vel Terminus, vel particula, vel ex his compositum. Verbum componitur ex Nomine seu termino, et ex particula: est. Adverbium se habet ad verbum ut adjectivum ad substantivum. Sub ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

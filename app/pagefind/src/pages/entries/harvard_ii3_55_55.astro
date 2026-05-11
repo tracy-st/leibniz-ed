@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_55",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 55,
+  "text": "<p> [[156.12]] <b>55. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT</p>\n<p> [[156.13]] [Hannover, vor dem 17. April 1696.] [80.]</b></p>\n\n<p> [[156.15]] <i>L</i>Konzept: LBr 389, Bl. 24. 1 Bl. 4^#'o. 2 S. (Unsere Druckvorlage.) </p>\n<p> [[156.16]] <i>A</i>Abschrift von <i>L</i> von Schreiberhand: LBr 389, Bl. 23 u. 25. 1 Bog. 2^#'o. 3 ^#'1/₄ S. </p>\n<p> [[157.16]] Monsieur </p>\n<p> [[157.17]] Je <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Monsieur le Baron François Mercure d'Helmont presentement à Berlin.</Fn> ne prendrois pas facilement la liberté de Vous écrire, si la cy jointe ne m'y obligeoit.\n[[157.18]] Ce n'est pas que je ne tiendrois à grand honneur d'avoir l'avantage de vostre commerce, mais\n[[157.19]] ne sçachant point vos manieres et maximes là dessus, je n'osois point vous le demander de peur\n[[157.20]] d'importunité; bien que je souhaitte d'apprendre souvent des nouvelles de vostre santé et de\n[[157.21]] vostre satisfaction, que vous aurés trouvé sans doute à la cour où vous estes et où je souhaiterois\n[[157.22]] que vous vous puissiés arrester encore quelque temps, sur tout dans cette saison si rude et si\n[[157.23]] incommode pour les voyages. </p>\n<p> [[157.24]] La lettre que je vous envoye, Monsieur, est de Monsieur Knorr de Rosenroth fils de feu\n[[157.25]] Monsieur le directeur de Sulsbach, qui estoit vostre digne ami, et encore le mien. Ce jeune\n[[157.26]] Monsieur Knorr est gentilhomme de la Cour de Wolfenbutel. Je voy par celle qu'il m'écrit en\n[[158.1]] même temps, qu'il vous croyoit encore à Hanover, et il me fait sçavoir par ordre de Monseigneur\n[[158.2]] le duc Antoine Ulric, que S.A.S. souhaiteroit de vous voir et entretenir. Je me souviens,\n[[158.3]] de vous avoir dit icy, Monsieur, quoyque de moy même, que vous feriés sans doute un plaisir\n[[158.4]] singulier, à ce Prince, si vous passiés chez luy. Et je voy de n'avoir pas mal deviné. Cependant\n[[158.5]] vostre voyage de Berlin en aussi bonne compagnie que celle que vous avés eue, ne vous ayant\n[[158.6]] pas permis d'aller cette fois à Wolfenbutel, j'espere que ce sera une autre fois, lors que vous\n[[158.7]] repasserés chez nous. Je souhaitte, que vous le fassiés en bonne santé aussi tost que vostre\n[[158.8]] commodité le permettra, et que nous puissions jouir de vostre conversation des années entieres.\n[[158.9]] Madame l'Electrice de Bronsvic ne sçauroit recevoir un plus grand plaisir, puisque le Souvenir\n[[158.10]] même du peu de temps, que vous avés esté icy luy est agreable. Il est vray, qu'elle sera toujours\n[[158.11]] contente de le partager avec Madame l'Electrice de Brandebourg, qui n'a pas moins de goust\n[[158.12]] pour les choses et pour les personnes excellentes. </p>\n<p> [[158.13]] Au reste je me rapporte à nos discours, et je seray bien aise d'apprendre que vous ayiés\n[[158.14]] pris la resolution de communiquer bientost au monde quelques unes de vos belles et importantes\n[[158.15]] pensées. Et je suise avec zele </p>\n<p> [[158.16]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[158.17]] P.S. Si vous vouliés m'honnorer de quelques ordres pour Mr Knorr ou pour quelque autre\n[[158.18]] sujet, Monsieur le Secretaire Heusch, qui est à Berlin de la part de nostre Cour le pourroit faire\n[[158.19]] tenir. </p>\n",
+  "number": "55.",
+  "title": "LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT",
+  "date": "[Hannover, vor dem 17. April 1696.] [80.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:55. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT [Hannover, vor dem 17. April 1696.] [80.] LKonzept: LBr 389, Bl. 24. 1 Bl. 4^#'o. 2 S. (Unsere Druckvorlage.) AAbschrift von L von Schreiberhand: LBr 389, Bl. 23 u. 25. 1 Bog. 2^#'o. 3 ^#'1/₄ S. Monsieur Je Am Kopf der Seite von Leibniz' Hand: A Monsie...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

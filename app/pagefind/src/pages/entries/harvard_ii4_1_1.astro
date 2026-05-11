@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_1",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 1,
+  "text": "<p> [[3.1]] <b>1. JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ</p>\n<p> [[3.2]] Wildeshausen, 1. Februar 1701. [9.] </b></p>\n<p> [[3.10]] Vir Excellentissime, Patrone Colendissime </p>\n<p> [[3.11]] Eurer <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> Excellenz gehorsahmst auffzuwarten trage ich um so viel weniger bedencken, um\n[[3.12]] so viel mehr ich Eur. Excellenz Hohen Gunstzuneigung durch Höchstgeneigten ­Schrifft─wechsel\n[[3.13]] schon von Bremen auß versichert bin, absonderlich da es Gott so gefüget, daß bekandter maßen\n[[3.14]] unser Stadt und Ambt Wildeshausen unter Ihr. Churfl. Durchl. vollenkommenen Gehorsahm\n[[3.15]] gekommen ist. Ich weiß nicht ob Eur. Excellenz schon zu Augen gekommen ist ein kleiner\n[[3.16]] Auffsatz vom <i>Tempel zu Jerusalem</i>, da in denen notis, verhoffentl. mit dero hohen Erlaubnüß\n[[3.17]] etwas auß dero Tieffgelehrten Mst. <i>adversum Cartes. Princip.</i> vermuhtlich auch nach ihrem Sinn,\n[[3.18]] angeführet habe. Selbigen habe samt einer dissertation <i>de terra natante Tractus Waakhusani in\n[[4.1]] ducatu Bremensi</i>, zuletzt bey meinem bremischen Abzug ventiliret, an Ihr. Hochwürden Dhl.\n[[4.2]] Abt Molan gehorsahmst jetzo übersendet, und um deßen Communicirung an Eur. Excellenz,\n[[4.3]] weil kein Exemplar mehr zu handen ist, in dem wegen Mangel meines hiesigen Haußwesens\n[[4.4]] meine meiste Sachen noch in Bremen stehen, außgebeten. Eure Excellenz werffen ein gütiges\n[[4.5]] Auge auff dise Chartequen, empfehlen bey Gelegenheit Ihr. Churfl. Durchl. meinem Gnädigsten\n[[4.6]] Herrn, meine Geringe Persohn und zerfallenes Pfarrhauß unterthänigst, und bleiben nechst\n[[4.7]] Gottl. Obhut Hochstgeneigt gewogen </p>\n<p> [[4.8]] Eurer Excellenz Gebet u. Gehorsahm schüldigsten\n [[4.9]] M. J. C. Schulenburg, Past. Primar.\n [[4.10]] der Stadt u. des Ambts Wildshausen </p>\n<p> [[4.11]] Wildshausen ipsis Calend. Febr. 1701. </p>\n<p> [[4.12]] A Monsieur Monsieur Leibnütz Conseiller de S. A. Serenissime Electoral de B. et Lunebourg\n[[4.13]] bien humb. à <b>Hannover</b> </p>\n",
+  "number": "1.",
+  "title": "JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ",
+  "date": "Wildeshausen, 1. Februar 1701. [9.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:1. JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ Wildeshausen, 1. Februar 1701. [9.] Vir Excellentissime, Patrone Colendissime Eurer Am Kopf der Seite von Leibniz' Hand: resp. Excellenz gehorsahmst auffzuwarten trage ich um so viel weniger bedencken, um so viel mehr ich Eur. Excellenz Hohen Gunstzuneigung...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

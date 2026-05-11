@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_176",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 176,
+  "text": "<p> [[592.12]] <b>178. LEIBNIZ FÜR JACQUES-BENIGNE BOSSUET</p>\n<p> [[592.13]] [Hannover, 11. Oktober 1692.] [157.184.]</b></p>\n[[593.1]] <petit>\n[[593.21]] <b>Sur les Monothelites</b> </p>\n<p> [[593.22]] Je crois que sans la decision de l'Eglise les Scholastiques disputeroient jusqu'au jour du\n[[593.23]] jugement, s'il y a deux differentes actions completes dans la personne de Jesus Christ, ou s'il\n[[593.24]] n'y en a qu'une. Je sçay par experience que des personnes de bon esprit et d'ailleurs instruites\n[[593.25]] sur la foy, quand on leur a proposé cette question, si les deux Volontés sçavoir la divine et\n[[593.26]] l'humaine exercent ensemble un seul acte, ou deux, sans leur rien dire de ce qui s'est passé là\n[[593.27]] dessus dans l'Eglise, se sont trouvé[e]s embarrassé[e]s. Il ne s'agit (dit-on) que de sçavoir, s'il\n[[593.28]] y a une ame humaine en J[esus] C[hrist]. Mais les Monothelites ne le sçavoient ils pas? Les\n[[593.29]] facultés (dit-on) sont données pour l'acte. Mais les adversaires en pouvoient demeurer d'accord,\n[[593.30]] car ils pouvoient dire, que la faculté de l'ame concourt à l'acte commun des deux natures. </p>\n<p> [[594.1]] Plusieurs Scholastiques ont soutenu qu'il n'est pas vray que la matiere ou que la forme\n[[594.2]] agisse, mais que l'action appartient au composé; et ils l'ont entendu de même à l'egard du corps\n[[594.3]] et de l'ame dans l'estat de l'union naturelle. </p>\n<p> [[594.4]] Les Adversaires pouvoient dire aussi, qu'en vertu de l'union personnelle (qui fait que la\n[[594.5]] nature humaine n'a pas sa propre subsistence, qu'elle auroit sans cela naturellement), on doit\n[[594.6]] juger que des actions naturelles de l'ame humaine n'auront pas en elles ce qui les rend\n[[594.7]] completes, non plus que la nature qui est leur principe; et que ce complement tant du suppost\n[[594.8]] que de son action, se trouve dans le verbe. Et si les actions ne se doivent attribuer <i>in concreto</i>,\n[[594.9]] qu'au suppost, ils diront que l'action, qui s'attribue proprement à une nature abstraite, est\n[[594.10]] incomplete, et qu'ils n'entendent parler que de celle qui s'attribue proprement <i>in concreto</i>,\n[[594.11]] lorsqu'ils n'en admettent qu'une; que sans cela on viole l'union des natures, et qu'on établit le\n[[594.12]] Nestorianisme par consequence, et sans y penser. Aussi sçait-on que les Monothelites imputoient\n[[594.13]] autant le Nestorianisme à leur adversaires, que ceux-cy leur imputoient l'Eutychianisme.\n[[594.14]] Je tiens que les Monothelites ne raisonnoient pas exactement dans le fonds, mais je tiens aussi\n[[594.15]] qu'ils ne manquoient point d'apparences tres plausibles, ny même d'autorités, qu'on sçait,\n[[594.16]] qu'ils alleguoient. Car il est ordinaire qu'avant une question emüe et éclaircie les auteurs n'en\n[[594.17]] parlent pas avec toute l'exactitude qui seroit à desirer; témoin le Pelagianisme et autres erreurs.\n[[594.18]] ll y a mille difficultés chez les Philosophes à l'égard du concours de Dieu avec les creatures.\n[[594.19]] Quelques uns ont crû que la creature n'agissoit point du tout, d'autres ont crû que l'action de\n[[594.20]] Dieu devenoit celle des creatures par leur reception, et y trouvoit sa limitation. On a douté aussi\n[[594.21]] quel Estre pouvoit estre l'action de Dieu, si c'estoit un Estre créé ou incréé; ou si ce n'estoit pas\n[[594.22]] l'action même de la creature, en tant qu'elle depend de Dieu. Et la difficulté devient encor plus\n[[594.23]] grande lorsque Dieu concourt avec une creature qui luy est unie personnellement, et qui n'a\n[[594.24]] qu'en luy sa subsistance ou son suppost. </p>\n",
+  "number": "178.",
+  "title": "LEIBNIZ FÜR JACQUES-BENIGNE BOSSUET",
+  "date": "[Hannover, 11. Oktober 1692.] [157.184.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:178. LEIBNIZ FÜR JACQUES-BENIGNE BOSSUET [Hannover, 11. Oktober 1692.] [157.184.] Sur les Monothelites Je crois que sans la decision de l'Eglise les Scholastiques disputeroient jusqu'au jour du jugement, s'il y a deux differentes actions completes dans la personne de Jesus Christ, ou s'il n'y en a q...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

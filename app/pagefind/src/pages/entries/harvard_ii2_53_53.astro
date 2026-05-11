@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_53",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 53,
+  "text": "<p> [[227.14]] <b>54. LANDGRAF ERNST VON HESSEN-RHEINFELS AN LEIBNIZ</p>\n<p> [[227.15]] [Rheinfels, 11. September 1687.] [53.56.]</b></p>\n<p> [[228.6]] Mon cher Mons. Leibnitz </p>\n<p> [[228.7]] Il a bien raison de dire cela car si mesmes il y avoit des milliers entre les Protestants qui ne\n[[228.8]] sçavent ce qu'est droict ou gauche et qui ne peuvent estre reputez en comparaison de scavants\n[[228.9]] que pour des bestes et qui n'adherent que materiellement à l'heresie, certes que cela on ne peust\n[[228.10]] dire de vous, qui avez tant de lumieres et auquel s'il n'y avoit jamais eu aultre que moy seul, on\n[[228.11]] a faict tout ce qu'on a peu, pour vous faire sortir du schisme et vous representer ce qu'il y a en\n[[228.12]] fin à representer. Croyez vous bien (pour de mille ne vous dire qu'un seul article) que Christ\n[[228.13]] aye ainsi constitué son Eglise, que ce qu'un croit blanc l'aultre le croye noir et que pour le\n[[228.14]] Ministere Ecclesiastique il l'aye d'une telle et si faicte façon contradictoire constitué, comme\n[[228.15]] nous et les Protestants sont en cela en debat et comme nous croions et vous croyez? Par\n[[228.16]] exemple nous tenons touts vos Ministres pour laicques et usurpateurs du Ministere et je ne sçais\n[[228.17]] ce que vous pouvez croire des nostres aux vostres ainsi en cet article si opposez. </p>\n<p> [[228.18]] Oh mon cher Mons. Leibniz ne perdez pas ainsi le temps de grace et <i>hodie si vocem\n[[228.19]] Domini audieritis nolite obdurare corda vestra</i>. Christ et Belial ne conviennent ensemble, non\n[[228.20]] plus les Catholiques et les Protestants, et je ne me sçaurois rien promettre de vostre salut, si\n[[228.21]] vous ne vous faittes catholique. </p>\n",
+  "number": "54.",
+  "title": "LANDGRAF ERNST VON HESSEN-RHEINFELS AN LEIBNIZ",
+  "date": "[Rheinfels, 11. September 1687.] [53.56.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:54. LANDGRAF ERNST VON HESSEN-RHEINFELS AN LEIBNIZ [Rheinfels, 11. September 1687.] [53.56.] Mon cher Mons. Leibnitz Il a bien raison de dire cela car si mesmes il y avoit des milliers entre les Protestants qui ne sçavent ce qu'est droict ou gauche et qui ne peuvent estre reputez en comparaison de s...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_22",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 22,
+  "text": "<p> [[109.14]] <b>23. JOHANN VAGETIUS AN LEIBNIZ</p>\n<p> [[109.15]] Hamburg, 27. November (7. Dezember) 1686. [22.28.]</b></p>\n<p> [[110.1]] Clarissime Vir, Fautor plurimi faciende </p>\n<p> [[110.2]] Ad desiderata abs te consignata quae temporis ratio tulit, Dn. Lic. Placcio misi, is ultima\n[[110.3]] schedae meae verba cum legisset, monuit me, ferri tibi sine impensis, quae velis. Quare mitto\n[[110.4]] quae vides. Nam <i>Harmonicam</i> et <i>Isagogen Phytoscopicam</i>, credo tuis in manibus jampridem\n[[110.5]] esse. D. Capelli <b>amicitae</b> <Fn><i>Am Rande von Leibniz' Hand</i>: Pietatem laudo in Capellum.</Fn> datum est eorum quae mitto alterum. <i>Rariora</i> ejusdem <i>Becceleriana</i>\n[[110.6]] edita eodem nolente a me sunt, si non habes, dabo operam ut exemplar mittendum a\n[[110.7]] possessoribus nanciscar, vendere volunt, et 5000 imperialibus aestimare, comperi. Si quis\n[[110.8]] emptorem conciliet, credo, honorarium illi non defore. Jungianum hoc ita crudum ideo edidi, ut\n[[110.9]] patesceret desiderantibus scriptorum ejus copiam, non esse illa opera, sed variorum operum\n[[110.10]] materiam valde partialem, sed meo judicio, in minimis maximis, utilem alicubi. <i>Mineralia</i> enim\n[[110.11]] quae sub praelo jam pridem sunt, nescio quibus modis ita impediuntur, ut per triennium jam\n[[110.12]] singulis annis non nisi singuli quaterniones potuerint a typotheta obtineri, licet persoluto ante\n[[110.13]] operas pretio. Dupla misi, ut aliis ostendi possent, et si cui placent, illi alterum exemplar cedere,\n[[110.14]] significato tantum ejus mihi nomine, ne forte ei mittam quod jam habet, explebo statim locum,\n[[110.15]] et si expedire judicas, plus quam simplo. Si erunt, quibus, ut jacent, placere possunt (ego\n[[110.16]] quidem optime sic primam editionem curari magis indies magisque persuadeor), quantum per\n[[110.17]] typos hic loci fieri poterit, continuata opera lucem spectabit. </p>\n<p> [[110.18]] Deus te servet, et omnibus hic et aeternum profuturis quam prolixissime beet, ego, cum\n[[110.19]] occasio feret, faciam ut facto ipso deprehendar. </p>\n<p> [[110.20]] Tui cupientissimus cultor Joh. Vagetius </p>\n<p> [[110.21]] Hamb. 27 Nov. 1686.\n [[110.22]] <i>wohnhafft aufm Kattrepel</i>\n [[110.23]] /  Quae adjunxi ea rogo, ut Dn. Lic. <i>von Sode</i> tradantur, gratificaturus vicissim quac[unque]\n[[110.24]] re potero. </p>\n",
+  "number": "23.",
+  "title": "JOHANN VAGETIUS AN LEIBNIZ",
+  "date": "Hamburg, 27. November (7. Dezember) 1686. [22.28.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:23. JOHANN VAGETIUS AN LEIBNIZ Hamburg, 27. November (7. Dezember) 1686. [22.28.] Clarissime Vir, Fautor plurimi faciende Ad desiderata abs te consignata quae temporis ratio tulit, Dn. Lic. Placcio misi, is ultima schedae meae verba cum legisset, monuit me, ferri tibi sine impensis, quae velis. Quar...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

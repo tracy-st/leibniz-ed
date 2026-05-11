@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_254",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 254,
+  "text": "<p> [[794.3]] <b>225. LEIBNIZ AN CHRISTIAN PHILIPP</p>\n<p> [[794.4]] [8. März 1680.] [224.226.]</b></p>\n<p> [[794.15]] [ ... ] Il paroist bien que les excuses que M. Rabel donne pour sauver M. des Cartes ne\n[[794.16]] l'ont pas satisfait luy même, aussi sont elles incompatibles avec le sens et avec les paroles de\n[[794.17]] l'auteur. </p>\n<p> [[794.18]] Monsieur des Cartes donnant certaines figures et certains mouvemens aux parties de la\n[[794.19]] matiere, s'objecte luy même que cette hypothese pourroit estre fausse: mais il repond que cela\n[[794.20]] ne sçauroit nuire, et que nostre monde ne laisseroit [pas] d'en suivre à la fin, par ce que la\n[[794.21]] matiere reçoit successivement toutes les formes dont elle est capable. Et il ne s'agit pas icy de la\n[[794.22]] volonté de Dieu, mais de la suite naturelle des formes. Et de dire que la matiere n'est capable\n[[794.23]] que de bonnes formes, cela est inutile, puisque selon M. de Cartes rien est bon ou mauvais que\n[[794.24]] par là même que Dieu l'a fait, ainsi rien n'empeche que Dieu ne fasse des formes aussi bizarres\n[[794.25]] qu'on voudra feindre. Ce ne sera pas la nature de ces formes, car elles ne sont pas bonnes ou\n[[794.26]] mauvaises que par la volonté de Dieu, et ce ne sera pas la volonté de Dieu, car pour quoy Dieu\n[[794.27]] ne les voudroit il pas aussi bien que les autres. </p>\n",
+  "number": "225.",
+  "title": "LEIBNIZ AN CHRISTIAN PHILIPP",
+  "date": "[8. März 1680.] [224.226.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:225. LEIBNIZ AN CHRISTIAN PHILIPP [8. März 1680.] [224.226.] [ ... ] Il paroist bien que les excuses que M. Rabel donne pour sauver M. des Cartes ne l'ont pas satisfait luy même, aussi sont elles incompatibles avec le sens et avec les paroles de l'auteur. Monsieur des Cartes donnant certaines figure...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

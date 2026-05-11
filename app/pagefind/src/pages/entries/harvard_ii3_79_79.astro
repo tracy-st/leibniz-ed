@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_79",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 79,
+  "text": "<p> [[204.3]] <b>79. MENTET KETTWIG AN LEIBNIZ</p>\n<p> [[204.4]] Emden, 12. (22.) Oktober 1696. [63.]</b></p>\n\n<p> [[204.8]] Viro Illustri Godefrido Guilielmo Leibnitio Mecoenati suo magno\n [[204.9]] Mentetus Kettwigius S. D. P. </p>\n<p> [[204.10]] Nolui Te nescium esse, tandem aliquando <i>Codicem</i> tuum <i>J. G. diplomaticum</i>, scriptaque\n[[204.11]] Placciana ad me esse delata, doleo mihi prius nec lecta nec visa; sed uti huc usque illecta ac\n[[204.12]] incognita fuere, ita diligentia compensabo, quicquid hac in re a me peccatum. </p>\n<p> [[204.13]] Fateor Placcium veram et non simulatam profiteri philosophiam, Teque <i>codice</i> tuo genuinum\n[[204.14]] <i>juris gentium</i> usum digito quasi monstrasse veramque praxin, scientiae hujus, huc usque\n[[204.15]] umbratilis, docuisse. Mea interesse putabo, studium in id omne conferre, ut Tua in rem meam\n[[204.16]] vertam, quo, quid usus ac acta gentium a positis docentium principiis differant, penitius\n[[204.17]] cognoscam. Librum Tuum <i>de methodo docendae discendaeque jurisprudentiae</i>, cujus etiam\n[[204.18]] Placcius (: ut fugitivo oculo vidi :) in suo <i>IC^#'t^#'o perfecto</i> meminit, Bremae non repperi, dabo\n[[204.19]] tamen operam, num aliunde comparare possim. </p>\n<p> [[204.20]] In Feltmanni scripta, post obitum Ipsius, non incidi, hoc tamen ab Eodemmet me audiisse,\n[[204.21]] memini: Commentarium suum in pandectas quoad <greek>prṽta</greek> esse absolutum, posseque negotio\n[[204.22]] facili totum opus absolvi, si cui Viro erudito suum <i>corpus juris</i>, quo uti consuerat, communicaretur,\n[[204.23]] cumque ibidem notatis jungerentur editae ab Antonio Delrione et Petro Brossaeo ad\n[[204.24]] singulas leges ex Miscellaneorum Scriptoribus excerptae notae. Tum Historiam Ostfrisicam ubi\n[[205.1]] Emmius desiit, in haec nostra tempora deducere voluit, latet tamen, an opus hoc utilissimum ex\n[[205.2]] asse perfecerit. Quin ad L. Rhodiam de jactu et de jure (quod vocant) appulsus commentarium\n[[205.3]] perscripsit; Multasque res in Dicasterio nostro judicatas collegit, quae an elaborata sint, ego\n[[205.4]] quoque ignoro. </p>\n<p> [[205.5]] Filius ipsius num huic operi par sit, eaque, quae affecta sunt, absolvere queat, equidem\n[[205.6]] dubito. Solet hoc utplurimum esse Virorum eruditorum fatum! </p>\n<p> [[205.7]] Caetera omnem spem reconciliationis meae cum Illustri Avemanno in Te solum repositam\n[[205.8]] cum habeo, enixe flagito, ut aliquando in exarandis ad Ipsum litteris mei in bonam partem\n[[205.9]] meminisse velis. Paratus enim sum, culpam, si quam commisi, emendare omnem; ac reapse\n[[205.10]] praestare, nihil mihi sanctius et antiquius esse, quam Viros summos colere. Vale Vir Illustris, et\n[[205.11]] mihi favere perge. Dabam Embdae XII. Octobris M. DC. XCVI. </p>\n",
+  "number": "79.",
+  "title": "MENTET KETTWIG AN LEIBNIZ",
+  "date": "Emden, 12. (22.) Oktober 1696. [63.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:79. MENTET KETTWIG AN LEIBNIZ Emden, 12. (22.) Oktober 1696. [63.] Viro Illustri Godefrido Guilielmo Leibnitio Mecoenati suo magno Mentetus Kettwigius S. D. P. Nolui Te nescium esse, tandem aliquando Codicem tuum J. G. diplomaticum, scriptaque Placciana ad me esse delata, doleo mihi prius nec lecta ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_120",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 120,
+  "text": "[[399.1]] <b>98₂.  Zweiter Ansatz ZWEITER ANSATZ </p>\n<p> [[399.2]] Omnia quae cogitamus, his fere continentur quae sunt, <b>Generaliter</b>: Realitas,\n[[399.3]] Varietas, Consequentia, Ordo, Mutatio. <b>Medio loco</b> modi res discriminandi: Qualitas,\n[[399.4]] Quantitas et Positio. <b>Speciatim</b> ipsa discrimina: Extensio, Sensibilis Qualitas, Cogitatio. </p>\n<p> [[399.6]] <b>Realitas</b> complectitur possibile excluso impossibili, positivum excluso negativo.\n[[399.7]] Positivum autem rursus suos habet gradus, nam si completum sit, constituit substantiam,\n[[399.8]] sin minus accidens; si absolutum sit constituit Deum, sin limitatum sit, creaturam. <Fn><i>Am Rande</i>: Existentia seu praesentia ponenda videtur post realitatem.</Fn> </p>\n<p> [[399.9]] Ad <b>Varietatem</b> pertinent: idem et diversum, unum et plura. </p>\n<p> [[399.10]] Ad <b>Consequentiam</b> incompatibilia, inconnegabilia, opposita, conditio et conditionatum,\n[[399.11]] inferens et illatum; et haec quidem omnia vel absolute vel per se seu si nihil\n[[399.12]] impediat. </p>\n<p> [[399.13]] Ad <b>Ordinem</b>, scilicet naturalem, prius et posterius natura. Causa et Effectus. Nam\n[[399.14]] ex ordine et consequentia fit causa; ex causa enim tanquam natura priore sequitur\n[[399.15]] effectus. </p>\n<p> [[399.16]] Ad <b>Mutationem</b>, status, duratio, tempus; tempore prius, posterius et simul.\n[[399.17]] Agens, Patiens. Acturiens. </p>\n<p> [[399.18]] Ad <b>Qualitatem</b> Simile et Dissimile. </p>\n<p> [[399.19]] Ad <b>Quantitatem</b>, Proportio, totum, pars (seu continens contentum), Numeri. </p>\n<p> [[399.20]] Ad <b>Positionem</b> seu modum discernendi non per aliquid essentiam exprimens ut\n[[399.21]] qualitas et quantitas, sed per modum existendi, pertinent: Termini, continuum, contiguum,\n[[399.22]] intervalla. </p>\n<p> [[399.23]] Ad <b>Extensionem</b>, situs, distantia, motus, quies, vis, resistentia. </p>\n<p> [[399.24]] Ad <b>Sensiles Qualitates</b>, Color, Sonus, Odor, Sapor, Calor, aliaque tactus\n[[399.25]] objecta. </p>\n<p> [[400.1]] Ad <b>Cogitationem.</b> Conceptus, intellectio; sensus, perceptio, Memoria, Sententia,\n[[400.2]] Scientia, Voluntas, Voluptas et Dolor. Affectus; Habitus. </p>\n<p> [[400.3]] Videntur et res posse dividi in Metaphysicas, Mathematicas et Physicas. Metaphysicae\n[[400.4]] substantiae sunt, Deus, mens, anima, Entelechia prima seu forma substantialis.\n[[400.5]] <b>Mathematicae</b> tempus, spatium, motus. </p>\n",
+  "number": "98₂.",
+  "title": "Zweiter Ansatz",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:98₂. Zweiter Ansatz ZWEITER ANSATZ Omnia quae cogitamus, his fere continentur quae sunt, Generaliter: Realitas, Varietas, Consequentia, Ordo, Mutatio. Medio loco modi res discriminandi: Qualitas, Quantitas et Positio. Speciatim ipsa discrimina: Extensio, Sensibilis Qualitas, Cogitatio. Realitas comp...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

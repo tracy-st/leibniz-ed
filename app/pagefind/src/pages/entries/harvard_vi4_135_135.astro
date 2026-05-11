@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_135",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 135,
+  "text": "[[442.1]] <b>110.  Synopsis libri cui titulus erit: Initia et Specimina Scientiae novae Generalis pro Instauratione et Augmentis Scientiarum ad publicam felicitatem [Frühjahr 1682 (?)]</b>\n [[442.2]] <tab/>[Frühjahr 1682 (?)]\n [[442.8]] <b>Synopsis libri cui titulus erit:\n [[442.9]] Initia et Specimina Scientiae novae Generalis</i>\n [[442.10]] <b>pro Instauratione et Augmentis Scientiarum\n [[442.11]] ad publicam felicitatem</i> </p>\n<p> [[442.12]] Introductione praemissa, dicendum erit qua ratione inciderim in artis tam mirabilis\n[[442.13]] fundamentum. Dicendum erit quoque de statu praesenti eruditionis. </p>\n<p> [[442.14]] Ut appareat discrimen meorum principiorum a Cartesianis operae pretium erit praemittere\n[[442.15]] excerpta ex objectionibus virorum doctorum ad Cartesii <i>Meditationes</i>, Cartesiique\n[[442.16]] <i>responsionibus</i>, quibus subjiciam meas replicationes, et quomodo a me suppleantur quae\n[[442.17]] viri illi egregii a Cartesio frustra desiderabant. </p>\n<p> [[442.18]] Subjiciam et Analysin judiciorum humanorum vulgarem, seu principia quibus vulgo\n[[442.19]] hominum opiniones nituntur, non contemnenda quidem sed dialectica. Quae tamen non\n[[442.20]] adeo necesse esset revocare ad certiora, si nihil aliud quam jam nota confirmare propositum\n[[442.21]] esset, sed quia ab Analysi veritatis, seu correctione judiciorum nostrorum pendet\n[[442.22]] totum arcanum artis inveniendi, quo humana scientia in immensum produci posset, ideo\n[[442.23]] utile est nos ad ultimam usque analysin progredi. </p>\n<p> [[442.24]] Sequuntur ipsa Elementa veritatis aeternae, ubi exponitur modus in omnibus dandi\n[[442.25]] demonstrationes plane rigorosas et Mathematicis pares, imo superiores, quia Mathematici\n[[443.1]] multa supponunt, quae hic poterunt demonstrari. Itaque profertur hic calculus quidam\n[[443.2]] novus et mirificus, qui in omnibus nostris ratiocinationibus locum habet, et qui non minus\n[[443.3]] accurate procedit, quam Arithmetica aut Algebra. Quo adhibito semper terminari possunt\n[[443.4]] controversiae quantum ex datis eas determinari possibile est, manu tantum ad calamum\n[[443.5]] admota; ut sufficiat duos disputantes omissis verborum concertationibus sibi invicem\n[[443.6]] dicere: <b>calculemus</b>; ita enim perinde ac si duo Arithmetici disputarent de quodam\n[[443.7]] calculi errore, ipsa praescripta methodus etiam ignorantibus vel invitis exitum dabit.\n[[443.8]] Ostenditur etiam modus disputandi in forma, conveniens tractationi rerum, a taedio\n[[443.9]] Scholasticorum syllogismorum vacuus, et supra distinctiones illas positus, quibus in\n[[443.10]] scholis alter alterum eludit. </p>\n<p> [[443.11]] Specimina subjicienda erunt novae artis, nempe mea Mathesis generalis. Nova\n[[443.12]] Mechanica fundamenta hactenus incognita. Demonstrationes physicae generalis, et tentamenta\n[[443.13]] quaedam physicae specialis cum Medicina provisionali. Elementa Scientiae moralis\n[[443.14]] et civilis, jurisque naturae et utilitatis publicae. Ubi et de subditis onerum magna parte\n[[443.15]] levandis, majore principum utilitate, et scientia militari. Sequitur Metaphysica et Theologia\n[[443.16]] naturalis; denique fundamenta rei literariae seu humaniorum literarum et hinc\n[[443.17]] ductae demonstrationes Historicae pro Theologia revelata. Subjicitur paraenesis ad viros\n[[443.18]] dignitate doctrinaque egregios de humana felicitate exiguo tempore (si velimus modo) in\n[[443.19]] immensum augenda. </p>\n",
+  "number": "110.",
+  "title": "Synopsis libri cui titulus erit: Initia et Specimina Scientiae novae Generalis pro Instauratione et Augmentis Scientiarum ad publicam felicitatem",
+  "date": "[Frühjahr 1682 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:110. Synopsis libri cui titulus erit: Initia et Specimina Scientiae novae Generalis pro Instauratione et Augmentis Scientiarum ad publicam felicitatem [Frühjahr 1682 (?)] [Frühjahr 1682 (?)] Synopsis libri cui titulus erit: Initia et Specimina Scientiae novae Generalis pro Instauratione et Augmentis...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

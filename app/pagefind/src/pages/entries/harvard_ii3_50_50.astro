@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_50",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 50,
+  "text": "<p> [[144.7]] <b>50. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[144.8]] Dijon, 15. März 1696. [45.57.]</b></p>\n\n<p> [[144.21]] Dijon le 15. Mars <b>96</b> </p>\n<p> [[144.22]] Il y a desia quelque tems monsieur que J'ay recû la lettre de mons^#'r le president Boisot que\n[[144.23]] Je vous envoye; Je voulois l'accompagner de quelques empreintes de medailles pour nostre\n[[144.24]] amy mons^#'r Morel; mais ceux qui me les promettoient sont si lentes que j'ay crû ne devoir pas\n[[144.25]] differer davantage. </p>\n<p> [[145.1]] L'on ne parle plus de la lettre du P. Quesnel à mons^#'r de la Trappe faussement attribuée à ce\n[[145.2]] pere au subject de la reflexion que ce S^#'r abbé faisoit sur la mort de m^#'r Arnaud dans une lettre\n[[145.3]] qu'il m'ecrivit un peu de tems après. Cet auteur (qu'on a dit estre un moine chagrin) dit\n[[145.4]] beaucoup de choses fausses de moy parce qu'il ne me connoist pas si bien que m^#'r l'abbé de la\n[[145.5]] Trappe et que le P. Quesnel qui sont mes anciens et meilleurs amis. <i>Ce qui faict maintenant\n[[145.6]] l'entretien des scavants est le <b>Santolius poenitens, Santolius pendens,</b></i> <b>Santolius\n[[145.7]] in inferno, Santolius Redivivus, Comirii <i>Linguarium</i>, Santolii ad Linguarium\n[[145.8]] elegi, ad elegos Santolii alii versus, Cento ex Juvenale et Persio in\n[[145.9]] eandem materiam</b>, <i>et ces sortes d'ouvrages sur la lacheté qu'a eû Santeuil de desavouer\n[[145.10]] l'epitafe, qu'il avoit faict pour mons^#'r Arnaud; ce desaveû l'a deshonoré parmi les honnetes\n[[145.11]] Gens, et ce qu'a faict le P. Jouvency</i> Jesuite <i>pour luy faire faire cette mauvaise demarche ne\n[[145.12]] faict point honneur aux pp. Jesuites, dont la haine pour m^#'r Arn. semble par là n'estre pas ancor\n[[145.13]] éteinte, comme le reproche l'auteur du petit poëme <b>Santolius poenitens</b> qu'on attribue les</i>\n[[146.1]] <i>uns à m^#'r Langlêt, d'autres à m^#'r Rollin Recteur, d'autres à m^#'r Hersent; l'on pretend même qu'il\n[[146.2]] n'est plus question dans tout cecy de Jansenisme et de Molinisme; mais que c'est une querelle\n[[146.3]] entre les Jesuites et l'université et un combat de pure Litterature pour decider à qui des deux\n[[146.4]] partis l'on doibt adjuger le sceptre poetique: mess^#'r^#'s de l'université pretendent faire connoistre\n[[146.5]] au public, qu'ils font aussi bien des vers latins que les pp. Jouvency, La Rue, Comire etc. Et en\n[[146.6]] effect le seul <b>Santolius poenitens</b> peut estre opposé à tout ce qu'ont faict ces pp. de plus\n[[146.7]] beau dans ce genre. On en a faict plusieurs traductions françoises aussi bien que des autres\n[[146.8]] piêces qui se sont faictes de part et d'autres sur ce subject, qui se vendent imprimé</i>[<i>e</i>]<i>s et sous\n[[146.9]] le manteau</i>; si j'estois à Paris je les porteray chez m^#'r de Brosseau pour qu'il vous les envoyast\n[[146.10]] et que vous vous en divertissiés. Mandés moy si l'on ne vous les a point envoyés[,] ce petit\n[[146.11]] combat est asses agreable. Je feray porter chez m^#'r de Brosseau des exemplaires de la reponse\n[[146.12]] aux 4 Gordiens de nostre amy m^#'r Galland pour vous et pour m^#'r^#'s de Spanhem et Morel. Nostre\n[[146.13]] amy m^#'r Foucher veut ancore regratter la chronologie de Carneades contre m^#'r Lantin, qui n'i a\n[[146.14]] jamais pensé que parcequ'il luy a faict penser et qui m'a dict que m^#'r Foucher le fit mettre dans\n[[146.15]] le <i>journal des scavants</i> sur ce faict sans qu'il en eût aucune intention. Tout à vous. </p>\n<p> [[146.16]] Monseig^#'r d'Avranches vous salüe. </p></p>\n",
+  "number": "50.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Dijon, 15. März 1696. [45.57.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:50. CLAUDE NICAISE AN LEIBNIZ Dijon, 15. März 1696. [45.57.] Dijon le 15. Mars 96 Il y a desia quelque tems monsieur que J'ay recû la lettre de mons^#'r le president Boisot que Je vous envoye; Je voulois l'accompagner de quelques empreintes de medailles pour nostre amy mons^#'r Morel; mais ceux qui ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

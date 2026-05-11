@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_88",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 88,
+  "text": "<p> [[236.8]] <b>74. LEIBNIZ AN PIERRE DE CARCAVY</p>\n<p> [[236.9]] 17. August 1671. [70.88.]</b></p>\n<p> [[236.19]] In <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: Ad Carcavium 17. Aug. 1671</Fn> Hypothesi mea haec potissimum me praestitisse spero: </p>\n<p> [[236.20]] In <k>theoria motus abstracti</i>, evolutum compositionis continui labyrinthum, <b>fund.\n[[236.21]] praedemonst. 1.-5.</i> fund. 18.; demonstrationem veritatis <i>Geometricae indivisibilium</i> Cavalerii,\n[[236.22]] <b>fund. 5.</b>, quae hactenus ideo tantum probata est ad Hypotheseos cujusdam instar, quod\n[[236.23]] multa vera, nihil absurdi, ex ea recte usurpata, deduci possit; veram naturam conatus, <b>fund.\n[[236.24]] 6.-15.</i>; primam et intimam rationem cohaesionis seu firmitatis geometrica certitudine confectam,\n[[236.25]] <b>fund. 15. 16</b>. theor. 17.; verum discrimen mentis a corpore hactenus intactum, <b>fund.\n[[236.26]] 17.</i>; examen aequalitatis jactatae inter angulum incidentiae et reflexionis, <b>th. 7.</b>; constructionem\n[[237.1]] physicam id est exactam simul et realem rerum geometricarum, in problem.; ex meris\n[[237.2]] motibus rectis efficere curvum et contra, probl. 6. 7.; ex meris corporibus rectilineis efficere\n[[237.3]] cylindrum, conum, sphaeram, <b>probl. 17. 18. 19.</b>; corpora sectionum conicarum efficere,\n[[237.4]] <b>probl. 20.</b>; datum motum continue accelerare ac retardare, <b>probl. 24. 25.</b> </p>\n<p> [[237.5]] <k>In Theoria motus concreti</i>, demonstrationem motus terrae, hactenus a nullo datam,\n[[237.6]] nullo effugio evitabilem, <b>§. 2.</b>; rationem ex qua videtur sequi solem non luxisse ab aeterno,\n[[237.7]] <b>§. 5. 12.</b>; originem bullarum seu globorum particulari gyratione firmatorum, omnis consistentiae\n[[237.8]] et specierum fundamentum, <b>§. 7.</b>; originem perpetuae mutationis: generationis, corruptionis,\n[[237.9]] incrementi et decrementi alterationisque in rebus, a bullitione seu fluxu quodam\n[[237.10]] insensibili ab aetheris motu oriundo, nascentium, coalescentium, dissilientium, evanescentium\n[[237.11]] continuo bullarum repetitam, <b>§. 11.</b>; causam motuum maris statorum universalium, <b>§. 13.</b>;\n[[237.12]] vitri, §. 14.; gravitatis et incrementi motus gravium, <b>§ 16. 17. 18.</b>; reflexionis angulus cur in\n[[237.13]] motibus sensibilibus angulo incidentiae aequalis, <b>§. 22.</b>; reflexionis et refractionis regulas esse\n[[237.14]] ab Elaterio, <b>ibid.</b>; ab eodem vibrationem penduli et chordae, et vibrationum isochronismos,\n[[237.15]] <b>§. 23.</b>; cur motus violentus ad vestigium quoddam crescat, inde rursus decrescat, <b>ibid.</b>;\n[[237.16]] Experimenti Magdeburgici rationem a gravitate simul et elaterio aëris, §. 26.; sclopeti ventanei\n[[237.17]] ab Elaterio; gravitatis simul et Elaterii ab aetheris circulatione, <b>§. 27.</b>; Hypothesin de\n[[237.18]] differentiis colorum, <b>§. 31.</b>; Vaporum seu exhalationum ex terra sursum, indeque fontium,\n[[237.19]] mineralium, plantarum, meteororum rationem, <b>§. 28. 29.</b>; causam frigoris ex angiportuum\n[[237.20]] analogia, <b>§. 34.</b>; causam potissimorum phaenomenorum <k>magnetis</i> a duplici atmosphaerae\n[[237.21]] motu, uno in aequatore et parallelis, altero in meridianis, <b>§. 34.</b>; causam attractionis magneticae\n[[237.22]] et electricae, §. 35.; principia chemica activa seu utilia esse tantum duo, <b>37. 38.</b> gradu\n[[237.23]] rursus variantia; nihil repugnare mundos in mundis in infinitum, <b>43.</b>; veras acidi et alcali\n[[237.24]] definitiones effectusque ad mechanica principia revocatos, <b>45.</b>; de gradibus acidi et alcali, <b>50.\n[[237.25]] 52.</i>; de certo quodam eoque compendiosissimo fundamento methodi medendi, <b>53.</b>; de motu\n[[237.26]] musculorum, <b>57. fin.</b>; explicationem glomerabilitatis per annulos, tensionis per embolos,\n[[237.27]] lacrymarum vitri, ventorum, <b>§. 59.</b>; Spiritus mundi, liquoris alcahest, veneni et tincturae,\n[[237.28]] <b>§. 60.</b> </p>\n",
+  "number": "74.",
+  "title": "LEIBNIZ AN PIERRE DE CARCAVY",
+  "date": "17. August 1671. [70.88.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:74. LEIBNIZ AN PIERRE DE CARCAVY 17. August 1671. [70.88.] In Am Kopf der Seite von Leibniz' Hand: Ad Carcavium 17. Aug. 1671 Hypothesi mea haec potissimum me praestitisse spero: In theoria motus abstracti, evolutum compositionis continui labyrinthum, fund. praedemonst. 1.-5. fund. 18.; demonstratio...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

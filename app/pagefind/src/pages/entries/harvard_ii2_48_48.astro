@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_48",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 48,
+  "text": "<p> [[215.1]] <b>49. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[215.2]] [Ende Juli 1687.] [46.80.]</b></p>\n<p> [[215.13]] Non <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: Ad Vinc. Placcium.</Fn> dubito quin miratus sis, quid mihi in mentem venerit ut hominem pecuniolae\n[[215.14]] cujusdam accipiendae causa ad Te ablegarim, sed <Fn>sed ... discederet: <i>schräge doppelte Anstreichung mit Blei wohl von fremder Hand.</i></Fn> hoc ita accidit. Festinabat is cum a me\n[[215.15]] discederet, nec statim alius Hamburgi mihi succurrebat. Ego vero interim illic me futurum\n[[215.16]] sciebam credebamque aut eodem venturum illum me adhuc praesente, aut si serius accederet\n[[215.17]] posse me pecuniam illam tibi relinquere, vel tecum constituere, ut homo veniens ablegaretur ad\n[[215.18]] alium, qui meo nomine summam daret. Sed nescio quo casu negotii plane oblitus sum. Pro\n[[215.19]] certo enim habueram me adhuc praesente venturum. Rogo igitur ut hanc libertatem in optimam\n[[216.1]] partem accipias. Ego vero ex eo tempore jussi, ut per alium (Lazarum Daniel <i>Juden beym\n[[216.2]] altenauer thor</i>) ei pecunia solvatur. Spero tamen nondum a Te accepisse. Atque ideo scribi\n[[216.3]] curavi, ut ne ei detur quicquam nisi ostensa et tradita illa a me scheda, quae ad Te destinabatur,\n[[216.4]] ne scilicet forte bis capiat. </p>\n<p> [[216.5]] Valetudinem tuam puto meliore loco fore post aërem mutatum. Sed quia mali fomes non\n[[216.6]] nisi lentis remediis et vivendi genere expugnari potest, nosse velim, an vel Teophilum bibaculum,\n[[216.7]] vel Hydrochalybopotam agere constitueris. Quicquid elegeris (tute enim optime judicabis),\n[[216.8]] id faustum ac felix precor, ut laudabilissimas meditationes prosequi possis animo libero\n[[216.9]] nec corporeis malis interpellato. Ego nunc quibusdam juris publici, et Historiarum nostrarum\n[[216.10]] meditationibus (ex mandato partim) occupor, eamque [in] rem Archiva subinde inspicio. Incidi\n[[216.11]] nuper in Auream Bullam omnium quas vidi antiquissimam Imperatoris Henrici IV. Quod\n[[216.12]] superest temporis Analysi perficiendae impendo, cujus apud me fastigium est, efficere, ut\n[[216.13]] omnia characteribus et calculo confici possint in omni genere controversiarum quemadmodum\n[[216.14]] in Algebra et Numeris, saltem ex certis quibusdam positis, sive ab experientia, sive ab autoritate,\n[[216.15]] vel undecunque. Idque puto esse in nostra potestate, ita ut disputantes finire possint\n[[216.16]] controversiam, si tantum ad calculos sedere velint. Sed opus est praeparationibus quibusdam ad\n[[216.17]] rem tantam, quibus nondum absolutis nolim promiscua apud quosvis mentione cogitata ignaris\n[[216.18]] ridenda prostituere. </p>\n",
+  "number": "49.",
+  "title": "LEIBNIZ AN VINCENT PLACCIUS",
+  "date": "[Ende Juli 1687.] [46.80.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:49. LEIBNIZ AN VINCENT PLACCIUS [Ende Juli 1687.] [46.80.] Non Am Kopf des Briefes von Leibniz' Hand: Ad Vinc. Placcium. dubito quin miratus sis, quid mihi in mentem venerit ut hominem pecuniolae cujusdam accipiendae causa ad Te ablegarim, sed sed ... discederet: schräge doppelte Anstreichung mit Bl...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

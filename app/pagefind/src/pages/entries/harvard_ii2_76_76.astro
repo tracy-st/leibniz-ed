@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_76",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 76,
+  "text": "<p> [[309.1]] <b>77. ANTONIO ALBERTI AN LEIBNIZ</p>\n<p> [[309.2]] Rom, 11. März 1690. [76.83.]</b></p>\n<p> [[309.7]] Monsieur De Rome ce 11. Mars 1690 </p>\n<p> [[309.8]] Je vous suis extremement obligé de l'honneur de votre souvenir, et je n'aurois pas manqué\n[[309.9]] de vous faire sçavoir de mes nouvelles dans le temps que vous avés esté à Venise, si votre lettre\n[[309.10]] du 20 janvier ne m'avoit esté renduë un mois depuis sa Date. J'ay cru qu'il etoit plus à propos\n[[309.11]] d'attendre que vous feussiez arrivé au lieu de votre residence. </p>\n<p> [[309.12]] Je suis charmé que vous ayez trouvé à Florence des personnes de votre goût, et qui ayent\n[[309.13]] esté en etat de connoitre et d'estimer vos nouvelles decouvertes dans la physique et les\n[[309.14]] mechaniques. J'espere de veoir votre <i>Dunamica</i> dès qu'il sera arrivé en cette ville. </p>\n<p> [[309.15]] Je ne manque point de procurer par les amis que j'ay icy de faire revenir les Messieurs de\n[[309.16]] ce pais de leurs preventions contre le systeme de Copernic. Sur quoy je vous diray une chose\n[[309.17]] assez plaisante. C'est que l'autre jour Il Sig^#'r^#'e Pastrici professeur de Theologie dans le college de\n[[309.18]] la <i>propaganda fide</i> se trouvant chez le Cardinal Barbarigo archeveque de Padoue en compagnie\n[[309.19]] de quelques personnes habiles, et la conversation ayant tourné sur les systhemes de Copernich,\n[[309.20]] Ptolomee etc. ce Bon homme s'avisa de crier de toute sa force contre le sentiment du\n[[309.21]] mouvement de la Terre, mais cela ne luy reussit guere[,] car le Cardinal se moqua de luy et luy\n[[309.22]] donna en riant le nom de <i>Simplicius</i> ce qui le mortifia extremement. </p>\n<p> [[309.23]] Pour la denonciation de la nouvelle heresie je vous diray que l'opinion des Jesuites a esté\n[[309.24]] deferée au S^#'t office, mais comme les procedures de ce tribunal sont extremement lentes, on ne\n[[310.1]] sçait pas encore quelle sera la suite de cette affaire. Cependant il paroit une seconde denontiation\n[[310.2]] beaucoup plus ample que la premiere où l'on refute toutes les vaines subtilitez par\n[[310.3]] lesquelles le p. de Roeux Jesuite Flamand a voulu defendre la Doctrine de ses confreres. </p>\n<p> [[310.4]] Les Jesuites de France sont extremement allarmez de cette denontiation, et Ils font\n[[310.5]] travailler leur p. le Tellier sur cette affaire. Un p. Jesuite dont j'ay vu la lettre marque qu'il doit\n[[310.6]] commencer par un desaveu de cette doctrine: mais ce qu'il y a de fascheux c'est qu'elle se\n[[310.7]] trouve en 15 ou 16 Theses soustenues en divers colleges des pays Bas aussi bien que dans les\n[[310.8]] oeuvres de leur Cardinal <b>Delugo</b>. </p>\n<p> [[310.9]] M^#'r le Duc De Roanez n'est pas mort, mais Il me semble avoir ouy dire qu'il estoit relegué\n[[310.10]] en Bourgogne. Pour m^#'r De Billets je n'en ay pu encore rien decouvrir, je vous promets pourtant\n[[310.11]] de ne m'epargner pas pour vous en donner des nouvelles. </p>\n<p> [[310.12]] Les affaires sont icy fort Brouillées, la promotion de m^#'r Beauvais qui a adheré à l'appel au\n[[310.13]] futur Concile du 27 Sept. 1688 a fort mortifié tutti li Cardinali Zelanti et generalement toute\n[[310.14]] cette cour. Le Card. de Bouillon s'est avisé depuis quelques jours de nier que les Eveques dans\n[[310.15]] l'acte qu'ils firent à Paris le 30 de ce mesme mois ayent adheré audit appel. Mais on a fait un\n[[310.16]] ecrit où l'on montre clairement que ce Cardinal veut prendre pour Dupe cette cour, et luy faire\n[[310.17]] veoir le Blanc pour le noir. </p>\n<p> [[310.18]] On veust enfin paraitre icy le 3^#'e Tome de la <i>Morale pratique</i> où l'auteur de la <i>Defense des\n[[310.19]] nouveaux chretiens</i> c'est à dire le p. le Tellier est foudroyé d'une terrible maniere. Ce sont des\n[[311.1]] questions de fait dont Il s'agit. On y develope si clairement tout ce que ce pere a avancé de faux\n[[311.2]] et de ridicule que je croy qu'ils ne sont pas [longs] à se repentir d'avoir entrepris cette affaire si\n[[311.3]] mal à propos. Car cela donne occasion à son adversaire, de raporter divers actes et diverses\n[[311.4]] pieces autentiques par où les Jesuites sont clairement et evidemment convaincus de ce que leurs\n[[311.5]] ennemis leur avoient reproché dans les 2 1^#'e^#'r^#'s Tomes de la <i>morale pratique</i>. </p>\n<p> [[311.6]] Si vous voulez encore m'honorer de vos lettres je seray encore icy quelques mois. </p>\n<p> [[311.7]] M^#'r votre tres h. et tres ob. serviteur Alberti </p>\n",
+  "number": "77.",
+  "title": "ANTONIO ALBERTI AN LEIBNIZ",
+  "date": "Rom, 11. März 1690. [76.83.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:77. ANTONIO ALBERTI AN LEIBNIZ Rom, 11. März 1690. [76.83.] Monsieur De Rome ce 11. Mars 1690 Je vous suis extremement obligé de l'honneur de votre souvenir, et je n'aurois pas manqué de vous faire sçavoir de mes nouvelles dans le temps que vous avés esté à Venise, si votre lettre du 20 janvier ne m...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

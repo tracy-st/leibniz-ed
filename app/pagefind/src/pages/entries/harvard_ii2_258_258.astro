@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_258",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 258,
+  "text": "<p> [[799.1]] <b>261. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[799.2]] Hannover, 21. (31.) März 1694. [257.]</b></p>\n<p> [[799.12]] [ ... ] Betreffend das Letzte und wichtigste de comparandis auxiliis, so war Cartesii\n[[799.13]] modus nicht guth, er wolte nur mercenarios operarios, und geld dazu haben, aber darin stack\n[[799.14]] eine heimliche ambition, daß er alles allein wolte gethan haben. Man siehet es aus seinen\n[[799.15]] Episteln. Leüte so alle qualitaten hätten so M.h.H. meldet, sind hienieden nicht zu finden. Muß\n[[799.16]] man also mit einen theil zufrieden seyn. Und ist das Vohrnehmste ardor aliquid egregii\n[[799.17]] praestandi conjunctus cum animo erga alios aequo und muß man ihnen den stimulum gloriae\n[[799.18]] dabey laßen, qui etiam sapientissimis novissimus exuitur. Wenn bey denen (so nicht ad summum\n[[799.19]] sapientiae gradum kommen) gloriae amor nicht ist so sinds mercenarii oder carnales.\n[[799.20]] Wolte Gott ich wüste deren viele bey den[en] amor gloriae in laudabilibus quaerendae. Cicero\n[[799.21]] sagt, daß die philosophi so contra gloriam geschrieben ungern gesehen haben würden, wen man\n[[799.22]] ihre Nahmen nicht gewust hätte; war also bey ihnen protestatio factis contraria. Mit Societäten\n[[799.23]] ist es freylich auch schwehr, nehmlich wie wir es wündschen, es fehlet meist am anfang. Diese\n[[799.24]] zeiten laßen wenig von großen Herrn hoffen, so sonst wohl intentioniret seyn möchten. M.h.H.\n[[799.25]] methodus mit den Brenngläsern ist sehr guth pro initio fundi. Steckte etwas bey dem: <i>hic Plato\n[[799.26]] quiescere jubet</i>, so sie bey der mentione des diamanten angehänget, wäre es noch beßer pro\n[[799.27]] hominum captu, ich dencke auff ein novum et mirificum commercii genus, dadurch ein großes\n[[799.28]] zu thun, wenn man sich nur verduppeln köndte, daß ist, wenn man nur iemand an hand hätte\n[[799.29]] deßen man sich in so wichtigen dingen bedienen köndte vel hoc solum toti negotio sufficeret,\n[[799.30]] ist ganz leicht und absolute in potestate, tantum opus amico fido et intelligente, denn wan man\n[[799.31]] gebunden, so will [weder] die prudenz noch wohlstand dergleichen entreprisen leiden, so prima\n[[799.32]] fronte wunderlich scheinen. [ ... ] </p>\n",
+  "number": "261.",
+  "title": "LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS",
+  "date": "Hannover, 21. (31.) März 1694. [257.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:261. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS Hannover, 21. (31.) März 1694. [257.] [ ... ] Betreffend das Letzte und wichtigste de comparandis auxiliis, so war Cartesii modus nicht guth, er wolte nur mercenarios operarios, und geld dazu haben, aber darin stack eine heimliche ambition, daß er a...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

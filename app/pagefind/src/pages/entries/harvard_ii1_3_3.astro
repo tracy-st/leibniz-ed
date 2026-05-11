@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_3",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 3,
+  "text": "<p> [[6.16]] <b>3. LEIBNIZ FÜR JAKOB THOMASIUS</p>\n<p> [[6.17]] 16. (26.) Februar 1666. [1.8.]</b></p>\n<p> [[7.5]] <b>Conjectura,</b> </p>\n<p> [[7.6]] <b>cur Anaxagoras nivem nigram dicere potuisse videatur,</b> </p>\n<p> [[7.7]] <b>petenti Jac. Thomasio in scheda missa,</b> </p>\n<p> [[7.8]] <b>d. 16 Febr. 1666.</b> </p>\n<p> [[7.9]] Hypothesis 1. Omnis color est impressio in sensorium, non qualitas quaedam in rebus, sed\n[[7.10]] extrinseca denominatio, seu ut Th. Hobbes appellat, phantasma. </p>\n<p> [[7.11]] 2. Ergo nobis non sentientibus nullus est color. </p>\n<p> [[7.12]] 3. Nigredo est non tam color, quam coloris privatio, seu nigrum videre nos dicimus, cum\n[[7.13]] nihil videmus. </p>\n<p> [[7.14]] 4. Omnia opaca in se sunt nigra, per hypoth. 2, juncta 3. </p>\n<p> [[7.15]] Ergo etiam nix. Anaxagoras autem, quo mirabilius esset <greek>parádojon</greek> suum, de eo potissimum\n[[7.16]] subsumsit, quod pro albissimo habetur. </p>\n<p> [[7.17]] 5. Color est nihil aliud, quam impressio in oculum, quae fit ab atomis lucidis, a lucido\n[[7.18]] corpore in opacum impingentibus, et inde ad oculum reflexis. </p>\n<p> [[7.19]] 6. Tria sunt principia optica: ignis, cujus atomi pyramidales; aqua, quae dilatata fit aër,\n[[7.20]] cujus sphaericae; terra, cujus cubicae. </p>\n<p> [[7.21]] 7. Ignis est principium lucis, aqua nigredinis, terra coloris. Atomi enim pyramidales, sunt\n[[7.22]] subtilissimae, habent vim fodiendi, etc. quae sunt ignis propria. Ignis autem et lux materialiter\n[[7.23]] sunt idem. Atomi cubicae sibi ita jungi possunt, ne quid intercedat vacui. Sunt igitur caussa, cur\n[[7.24]] reflectantur atomi igneae, id est, per hypoth. 5, coloris. At inter sphaericas plurimum est vacui,\n[[7.25]] sunt igitur caussa non reflexionis (ubi enim nihil obstat, penetrant potius, quam reflectuntur),\n[[7.26]] seu non coloris, id est per hyp. 3, nigredinis. </p>\n<p> [[7.27]] 8. Quicquid rarum tale est, id condensatum magis est tale. Quia vis unita fortior. </p>\n<p> [[7.28]] 9. Nix est aqua condensata. </p>\n<p> [[7.29]] 10. Nix igitur quam maxime nigra etiam apparere debet, per hyp. 7, juncta 9, et 8. Q. E. D. </p>\n<p> [[7.30]] Tale igitur est argumentum hoc, quale Zenonis contra motum; vel ut sophistam gloriosum\n[[7.31]] convinceret Anaxagoras, vel ut ingenium suum quidvis probando et defendendo ostentaret; vel\n[[8.1]] ut scepticis patrocinaretur, divortium sensus et rationis ostendendo, ut alterutrum falli necesse\n[[8.2]] sit. Nigram autem etiam sibi apparere si dixit, joci gratia dixisse videtur, quia sciret, neminem\n[[8.3]] redarguere hoc <greek>parádojon</greek> posse. </p>\n",
+  "number": "3.",
+  "title": "LEIBNIZ FÜR JAKOB THOMASIUS",
+  "date": "16. (26.) Februar 1666. [1.8.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:3. LEIBNIZ FÜR JAKOB THOMASIUS 16. (26.) Februar 1666. [1.8.] Conjectura, cur Anaxagoras nivem nigram dicere potuisse videatur, petenti Jac. Thomasio in scheda missa, d. 16 Febr. 1666. Hypothesis 1. Omnis color est impressio in sensorium, non qualitas quaedam in rebus, sed extrinseca denominatio, se...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

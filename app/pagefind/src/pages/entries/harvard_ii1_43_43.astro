@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_43",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 43,
+  "text": "<p> [[124.1]] <b>37. JAKOB THOMASIUS AN LEIBNIZ</p>\n<p> [[124.2]] Leipzig, 7. (17.) Januar 1671. [35.50.]</b></p>\n<p> [[124.13]] Non merebantur <i>dialogi physici</i> mei elogium illud, quod iis tribuis. Majore merito\n[[124.14]] provocabit eruditorum plausus vel illud schediasma tuum, de quo scribis, cujusque veluti\n[[124.15]] summam literis tuis complecteris. In quo cum legerem aetherem illum, quem ais cum luce solis\n[[124.16]] circa terram ferri, videbar equidem agnoscere aliquid, si non idem, saltem forsan simile aetheri\n[[124.17]] de quo ago p. 46, 47, <i>physicorum</i>. Qua in re forte decipior, tamdiu tamen hic error me\n[[124.18]] delectabit, donec ipsam voluptatem alia depellat, ubi ex te didicero certiora. Pro carmine, quod\n[[124.19]] mittis, habeo gratias. Nunc disputatio quaedam habenda me praeside de feminarum eruditione\n[[124.20]] prelo tradita est. Eam occasione proxima mittam. </p>\n<p> [[124.21]] Cum jam in manibus ea esset typographi, notitia demum facta mihi est, libelli, cui titulus:\n[[124.22]] <i>Ehren-Preiß des Frauenzimmers</i>, auctore cancellario Fuldensi Schützio, cui personatus quidam\n[[124.23]] Poliandinus respondit, qui et inde libellum suum nominavit: <i>gestürzten Ehrenpreiß.</i> Ea re\n[[124.24]] factum, ut vix duobus verbis tangere licuerit in disputatione nostra hos duos libellos, vocandos\n[[124.25]] alioqui sub accuratiorem censuram. Decrevi tamen de iis aliquid, ut solemus, praefari. Schützium\n[[124.26]] intelligo apostatam esse, unde venit mihi in mentem suspicari, nomen Ignatii, quod cum\n[[125.1]] Wilhelmo praefert, ipsi inditum esse in professione religionis novae. Poliandinum ajunt, nescio\n[[125.2]] quem esse, Johannem Gorgiam, Transylvanum, hominem nescio an religionis nostrae, dissolutae\n[[125.3]] certe vitae, et e patria profugum, cum ancillae patris vitium intulisset. Ejusdem quoque\n[[125.4]] ajunt esse, <i>den Jungferlichen Zeit-Vertreiber</i>, nomine Veriphantoris editum, scriptum impurum.\n[[125.5]] Quae me res movit, ut crederem, feminei sexus dedignationem, qua plenum est scriptum ejus,\n[[125.6]] Schütziano oppositum, non ex alio fonte proficisci, quam quod feminas non aliunde aestimaret,\n[[125.7]] quam ex eo abusu, quo scorta impuri hominis humores foedos matularum instar excipiunt. Sic\n[[125.8]] vicissim impulsum Schützium credebam tenero quodam, sed coniugali in hunc sexum amore, et\n[[125.9]] misericordia versus eas, quae a viris duriter tractantur; nam in ejusmodi viros aculeum subinde\n[[125.10]] emittit; indignatione insuper in eos, qui optimo sexui convicia dicunt: Huc enim referebam\n[[125.11]] historiam de nescio quo nobili incivili, qui ex itinere Gallico nihil aliud retulerat domum, quam\n[[125.12]] in feminas convicia. Narro tibi somnia mea, ut ex te veriora sive de Schützio, sive de Poliandino\n[[125.13]] discam. Tametsi enim non exspectabit ista praefatio mea tuas literas, jucundum tamen\n[[125.14]] erit, hujus ut ita dicam, monomachiae historiam per te cognoscere. Ajunt esse Schützium\n[[125.15]] insigni munere affectum ab imperatrice, cui dedicavit libellum, tolerabilem, nisi Agrippam\n[[125.16]] secutus, quem semel citat, passim describit, altius levasset hunc sexum, quam eum locaverat\n[[125.17]] creator. </p>\n<p> [[125.18]] Est et aliud quiddam, in quo velim opera tua uti. Suntne tibi notae orationes Nicolai\n[[125.19]] Schoenbergii Cardinalis, coram Julio II. Pontifice, habitae, <i>de pugna Christi cum diabolo in\n[[125.20]] deserto</i>, quas <i>Bibliotheca</i> Gesneri memorat. Eas apud nos etiam a. 1511 editas esse didici e\n[[125.21]] postilla Bausthiana in illud Evangelium, sed frustra quaesivi in nostris bibliothecis: magnopere\n[[125.22]] tamen vellem, vel ipsas, vel apographon earum procurare possem ex illa familia maximo\n[[125.23]] cuidam viro. Quaeso, si me potes, adjuva. Bene vale amice optime, et Illustrissimo Boineburgio\n[[125.24]] fausta quaeque a me, in hunc et sequentes annos, quos et tibi felicissimos fluere iubeat Deus,\n[[125.25]] precare. Lips. d. 7 Jan. anni ineuntis, 1671. </p>\n",
+  "number": "37.",
+  "title": "JAKOB THOMASIUS AN LEIBNIZ",
+  "date": "Leipzig, 7. (17.) Januar 1671. [35.50.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:37. JAKOB THOMASIUS AN LEIBNIZ Leipzig, 7. (17.) Januar 1671. [35.50.] Non merebantur dialogi physici mei elogium illud, quod iis tribuis. Majore merito provocabit eruditorum plausus vel illud schediasma tuum, de quo scribis, cujusque veluti summam literis tuis complecteris. In quo cum legerem aethe...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

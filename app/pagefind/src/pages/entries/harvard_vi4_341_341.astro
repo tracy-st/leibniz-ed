@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_341",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 341,
+  "text": "[[1472.12]] <b>285.  Remarques sur les methodes des modernes pour la recherche de la verité [1683 bis 1685 (?)]</b>\n [[1472.14]] <tab/>[1683 bis 1685 (?)]\n [[1472.19]] <b>Remarques sur la <i>Methode</b> <b>de Mons. des Cartes\n [[1472.20]] et sur la <i>recherche de la verité</i> <b>du R. P. de Mallebranche,\n [[1472.21]] ou bien\n [[1472.22]] Remarques sur les methodes des modernes pour la recherche de la\n[[1472.23]] verité</i> </p>\n<p> [[1473.1]] M. des Cartes parle avec exactitude, le R. P. Mallebranche a revestu ses pensées\n[[1473.2]] d'un stile d'orateur, ce que je ne blame point; car quand on a une fois pensé juste, les\n[[1473.3]] expressions figurées sont utiles pour gagner ceux à qui les meditations abstraites font\n[[1473.4]] peine. Cependant quand on a de l'indulgence pour les metaphores, il faut se bien garder\n[[1473.5]] de ne pas donner dans les illusions. </p>\n",
+  "number": "285.",
+  "title": "Remarques sur les methodes des modernes pour la recherche de la verité",
+  "date": "[1683 bis 1685 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:285. Remarques sur les methodes des modernes pour la recherche de la verité [1683 bis 1685 (?)] [1683 bis 1685 (?)] Remarques sur la Methode de Mons. des Cartes et sur la recherche de la verité du R. P. de Mallebranche, ou bien Remarques sur les methodes des modernes pour la recherche de la verité M...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

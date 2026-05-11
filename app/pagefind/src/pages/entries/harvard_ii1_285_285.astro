@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_285",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 285,
+  "text": "<p> [[865.18]] <b>250. LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS</p>\n<p> [[865.19]] Hannover, 29. Dezember 1684 (8. Januar 1685). [246.251.]</b></p>\n<p> [[866.3]] Hanover 29 X^#'b^#'. 1684. </p>\n<p> [[866.4]] [ ... ] Je n'ay pas encor veu ny le livre du P. Malebranche des idées, ny les deux livres de\n[[866.5]] Mons. Arnaud sur ce sujet. Le P. Malebranche auteur <i>de la recherche de la verité</i> est tres\n[[866.6]] ingenieux et a quelques pensées tres bonnes et tres solides, mais il en a d'autres qui sont un peu\n[[866.7]] hyperboliques ou legerement conçues. Il suit en quelque façon les traces de des Cartes, mais des\n[[866.8]] Cartes mêmes ne me satisfait pas en ces matieres. Leur principe (que tout ce qu'on peut\n[[866.9]] conclure de l'idée qu'on a d'une chose luy peut estre attribué veritablement) est fort sujet à\n[[866.10]] caution, et à moins que de donner des marques d'une conception distincte, il est inutile de dire,\n[[866.11]] que tout ce qu'on conçoit clairement et distinctement est veritable. Cette Analyse de nos\n[[866.12]] pensées est de grande importance tant pour juger que pour inventer. Et j'ay dit ce qui m'en\n[[866.13]] semble dans un petit echantillon inseré <i>in Actis Eruditorum</i> de Leipzig mois de novembre 1684.\n[[866.14]] pag. 537. sur quoy je serois bien aise d'apprendre le sentiment de Mons. Arnaud. Je ne doute\n[[866.15]] point que V.A.S. ne reçoive ces actes de temps en temps. On en imprime tous les mois et ils\n[[866.16]] sont assez bien faits. Quelques uns de ceux qui y travaillent sont de mes amis. </p>\n",
+  "number": "250.",
+  "title": "LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS",
+  "date": "Hannover, 29. Dezember 1684 (8. Januar 1685). [246.251.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:250. LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS Hannover, 29. Dezember 1684 (8. Januar 1685). [246.251.] Hanover 29 X^#'b^#'. 1684. [ ... ] Je n'ay pas encor veu ny le livre du P. Malebranche des idées, ny les deux livres de Mons. Arnaud sur ce sujet. Le P. Malebranche auteur de la recherc...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

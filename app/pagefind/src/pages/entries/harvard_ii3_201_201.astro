@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_201",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 201,
+  "text": "<p> [[532.1]] <b>201. BURCHARD DE VOLDER AN LEIBNIZ</p>\n<p> [[532.2]] [28. Februar 1699.] [200.207.]</b></p>\n\n<p> [[532.11]] Humaniss[im]e communicavit mecum Clariss. Bernoullius, quaedam excerpta ex litteris,\n[[532.12]] quae inter vos hac de re ultro citroque missae sunt; in his reperio argumentum, quo concludis\n[[532.13]] vires corporis <i>L</i> easdem esse, sive continuo tractu ascendat ad altitudinem <i>PT</i>, sive ascendat\n[[532.14]] quatuor vicibus repetitis, <i>PQ</i>, <i>QR</i>, <i>RS</i>, <i>ST</i>, nova semper excitatione. Cujus argumenti vim\n[[532.15]] nescio qui fiat, quod non percipiam; culpam autem penes me\n[[532.16]] esse, eo facilius mihi persuadeo, quoniam et sagacissimum\n[[532.17]] Bernoullium acquiescere video. Addam tamen quid sit, quod\n[[532.18]] in eo desiderem, aut potius, quod non intelligam, ut pro tua\n[[532.19]] humanitate eo facilius me ab hoc scotomate liberare possis.\n[[532.20]] Dabo quidem facile, si pondus <i>L</i> descendens a <i>T</i> in <i>S</i> vires\n[[532.21]] habet, quibus stylus <i>F</i> superans elaterium <i>G</i> perveniat ex 1<i>F</i> in\n[[532.22]] 2<i>F</i>, illud idem descendens per <i>TP</i>, effecturum ut stylus ex 1<i>F</i>\n[[532.23]] superans 4 elateria perveniat in 5<i>F</i>, eademque elastra habere\n[[532.24]] vires, quibus corpus <i>L</i> novis quatuor excitationibus perducatur\n[[532.25]] ad <i>T</i>. Sed negabo vires simul sumtas, quibus ita descendit ex <i>T</i>\n[[532.26]] in <i>P</i>, aequipollens viribus quibus corpus <i>L</i> continuo tractu ascendere ex <i>P</i> in <i>T</i> posset. Nam cum\n[[532.27]] impetus, quem acquirit corpus ex <i>T</i> in <i>S</i> tollatur ab elaterio 1<i>F</i>, ille idem impetus quatuor\n[[532.28]] sumendus est ut perveniat a <i>T</i> in <i>P</i>, enim si impetus in <i>S</i> acquisitus conservetur, nec a contrario\n[[532.29]] tollatur, corpus <i>L</i> duplum impetum demum acquisiturus sit in <i>P</i>, non quadruplum; qui duplus\n[[532.30]] impetus sufficit ascensui corporis <i>L</i> ex <i>P</i> in <i>T</i>. </p>\n<p> [[532.31]] In iisdem illis excerptis, alterum video argumentum, quo uteris, metaphysicum a priori ex\n[[532.32]] natura actionis concludens tuam virium aestimationem; in quo admodum haereo, praesertim cum\n[[532.33]] illae voces <i>virtualiter</i>, et <i>formaliter</i>, quas adhibes, me turbent nec quid illis velis, clare perspiciam. <Fn><i>Am Rande wohl von Leibniz' Hand</i>: dicendum f</Fn>\n[[533.1]] <i>Actio</i>, ais, <i>faciens duplum tempore simplo est dupla (virtualiter) actionis facientis idem duplum\n[[533.2]] tempore duplo</i>. Id capio, priorem actionem qualibet parte sui, quo agit temporis, duplum certe\n[[533.3]] viae conficere ejus, quam aequali parte temporis conficit altera actio. Hinc concluderem,\n[[533.4]] actionem aequalibus illis temporis partibus, alteram alterius duplam esse, cum effectum duplum\n[[533.5]] sit (quae tamen actio ex tua opinione erit quadrupla) et tunc totum tempus, omnemque utriusque\n[[533.6]] actionem si spectes, priorem actionem posteriori aequalem esse. Si duo homines transferrent\n[[533.7]] duo corpora aequalia, ea ratione, ut alter continuo progrederetur tractu, alter vero per\n[[533.8]] vices nunc transferendo, nunc otiando tempus tereret, ea lege, ut tempus otii aequale quidem\n[[533.9]] foret tempori laboris, sed eo quo transfert tempore, adhiberet vires, quibus duplam viam\n[[533.10]] absolveret, nonne, postquam ambo corpora translata essent per idem spatium, vires illius qui\n[[533.11]] nulla interruptione effectum edidisset forent aequales viribus omnibus alterius simul sumtis?\n[[533.12]] Effectum equidem foret unum et idem. Et 2 + 0 ^&!|∝ 1 + 1, quod de 4 + 0 dici nequit. </p></p>\n",
+  "number": "201.",
+  "title": "BURCHARD DE VOLDER AN LEIBNIZ",
+  "date": "[28. Februar 1699.] [200.207.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:201. BURCHARD DE VOLDER AN LEIBNIZ [28. Februar 1699.] [200.207.] Humaniss[im]e communicavit mecum Clariss. Bernoullius, quaedam excerpta ex litteris, quae inter vos hac de re ultro citroque missae sunt; in his reperio argumentum, quo concludis vires corporis L easdem esse, sive continuo tractu asce...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

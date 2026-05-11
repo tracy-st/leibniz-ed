@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_51",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 51,
+  "text": "<p> [[170.9]] <b>51. BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ</p>\n<p> [[170.10]] Paris, 6. Juli 1703. [49.87.] </b></p>\n<p> [[170.29]] Monsieur </p>\n<p> [[170.30]] Je vous dirois, si j'osois, que je suis offensé des excuses que vous me faites sur vos\n[[170.31]] Commissions litteraires. Je me tiendrois trés honoré d'en être chargé, je vous le dis sans aucun\n[[171.1]] compliment, et avec une sincere envie d'être pris au mot. Qui est ce qui ne se feroit pas un\n[[171.2]] honneur d'être le Correspondant de M. Leibnits? Mais la vanité a part, je m'en ferois aussi un\n[[171.3]] sensible plaisir. Seulement je crains que les occasions d'avoir et cet honneur et ce plaisir là ne\n[[171.4]] fussent un peu rares. Pourveu qu'on vous envoye l'<i>Histoire de l'Academie des Sciences</i> de\n[[171.5]] chaque année, les Livres qui viendront des particuliers de la Compagnie, et les Journaux de\n[[171.6]] France et de Trevoux pour les petites piéces, vous aurés tout ce qui regarde les Mathematiques\n[[171.7]] et la Phisique, et du moins il ne s'echapera guere de chose d'ailleurs. </p>\n<p> [[171.8]] J'ai lu à l'Academie votre explication des lignes misterieuses de Fohi par le Calcul binaire,\n[[171.9]] et elle a paru trés ingenieuse, et trés heureuse. Elle sera imprimée dans l'<i>Histoire</i> de cette année,\n[[171.10]] qui le sera surement l'année qui vient, car on travaille tant qu'on peut a regagner le courant, et\n[[171.11]] on le regagne. </p>\n<p> [[171.12]] J'ai dit à M. Cassini l'offre de vôtre Astronome de Berlin, et la condition raisonnable qu'il\n[[171.13]] y met. Je ne doute pas que M. Cassini n'en ait déja profité, curieux comme il est de sa Science. </p>\n<p> [[171.14]] Votre Remarque sur l'Algebre de M. Ozanam a été imprimée dans un Journal de France.\n[[171.15]] Je la donnai pour cela a un de nos Mathematiciens. </p>\n<p> [[171.16]] M. le Marquis de l'Hopital, dont vous me demandés des nouvelles, a entrepris, comme\n[[171.17]] vous savés assurément, un <i>Traité des Coniques</i>, mais il me semble que l'ouvrage va lentement.\n[[171.18]] Il m'a dit que des affaires domestiques l'avoient fort interrompu. Aprés cela, il ne se donne pas\n[[171.19]] tant à la Geometrie qu'il neglige de suivre, et je ne puis croire qu'il ait grand tort. Un\n[[172.1]] Philosophe ou un Geometre est premierement un Homme. Pour le P. Mallebranche, il n'a pas\n[[172.2]] une santé bien robuste, il en prend soin comme de raison, et il n'y a guere lieu d'esperer que\n[[172.3]] desormais il se casse la teste à des recherches philosophiques. Il vient même assés peu à\n[[172.4]] l'Academie en Eté, par ce qu'il prend l'air à la campagne. </p>\n<p> [[172.5]] Quant à la Metaphisique que vous avés bien voulu m'exposer sur les Loix du mouvement,\n[[172.6]] j'en suis charmé. La sublimité de vos pensées m'a elevé, et j'aimerois fort a avoir un guide tel\n[[172.7]] que vous qui me menast dans cette haute region, car sans cela on court grand risque de s'y\n[[172.8]] égarer. J'ai pourtant encore quelque scrupule. Peutêtre la difformité des Loix contraires aux\n[[172.9]] nostres ne seroit elle que pour nous, mais je ne m'arresterai point à vous developer ce que je\n[[172.10]] veux dire, c'est bien assés pour moi d'avoir osé vous parler quelque autre fois sur de pareilles\n[[172.11]] matieres. Je vous supplie de me mander des nouvelles de cette indisposition que vous avés eüe,\n[[172.12]] et de me croire </p>\n<p> [[172.13]] Monsieur Votre trés humble et trés obeïssant serviteur Fontenelle </p>\n<p> [[172.14]] de Paris ce 6 Juil. 1703.\n[[172.15]] A Monsieur Monsieur Leibnits </p>\n",
+  "number": "51.",
+  "title": "BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ",
+  "date": "Paris, 6. Juli 1703. [49.87.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:51. BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ Paris, 6. Juli 1703. [49.87.] Monsieur Je vous dirois, si j'osois, que je suis offensé des excuses que vous me faites sur vos Commissions litteraires. Je me tiendrois trés honoré d'en être chargé, je vous le dis sans aucun compliment, et avec une sincer...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

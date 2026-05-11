@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_240",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 240,
+  "text": "<p> [[751.1]] <b>243. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[751.2]] Wolfenbüttel, 20. (30.) Oktober 1693. [220.246.]</b></p>\n<p> [[751.19]] Excerptum ex responsione. </p>\n<p> [[751.20]] Etiamsi concederetur spiritus separatos finitos non posse agere in corpora, nihil tamen\n[[751.21]] inde probaretur contra Angelos et Daemones, nam multi veterum credidere etiam ipsos ex\n[[751.22]] mente et corpore subtili constare. Neque id ego absurdum censeo, aut unquam ab Ecclesia\n[[751.23]] damnatum. Eaque opinio multas tolleret difficultates. Et de anima quoque separata dicendum\n[[751.24]] esset, nunquam eam omni corpore exui. Et magnae rationes sunt, quae suadent omnem substantiam\n[[751.25]] finitam corpore praeditam esse. </p>\n<p> [[751.26]] Quod rationis usum in Theologia attinet, fateor nihil debere credi, nisi aliquod credendi\n[[751.27]] fundamentum afferatur, ita ut saltem magna sit vis argumentorum, si non plane certitudo\n[[751.28]] moralis. Deo creditur sine argumentis, sed opus est argumentis ut sciamus Deum esse locutum.\n[[751.29]] Sherloki demonstrationes pro fide nostra non vidi. Ego ipse olim tale quid hortante Boineburgio\n[[751.30]] molitus eram ante 23 annos. Spizelius quiddam meum sed breviculum a Boineburgio per\n[[751.31]] Spenerum acceptum (sed autorem ignorans) suae <i>Epistolae de Atheismo eradicando</i> subjecit.\n[[752.1]] Sed tractabantur ibi tantum aliqua pertinentia ad Theologiam naturalem. Multa vero et de\n[[752.2]] revelata probare susceperam, item de possibilitate mysteriorum. Sed facilius est cogitare, quam\n[[752.3]] scribere. Vale aut potius convalesce quam primum. Id optat et sperat </p>\n<p> [[752.4]] 20 Octob. 1693. Cultor obsequentissimus Leibnitius. </p>\n",
+  "number": "243.",
+  "title": "LEIBNIZ AN GERHARD MEIER (BREMEN)",
+  "date": "Wolfenbüttel, 20. (30.) Oktober 1693. [220.246.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:243. LEIBNIZ AN GERHARD MEIER (BREMEN) Wolfenbüttel, 20. (30.) Oktober 1693. [220.246.] Excerptum ex responsione. Etiamsi concederetur spiritus separatos finitos non posse agere in corpora, nihil tamen inde probaretur contra Angelos et Daemones, nam multi veterum credidere etiam ipsos ex mente et co...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

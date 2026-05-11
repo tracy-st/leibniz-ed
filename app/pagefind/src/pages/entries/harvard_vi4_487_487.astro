@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_487",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 487,
+  "text": "[[2152.6]] <b>387₃.  Endgültige Fassung ENDGÜLTIGE FASSUNG\n[[2152.12]] <tit2><b>De obligatione credendi</b>\n [[2152.13]] Ratiocinatio quae pro demonstratione venditatur </tit2>\n[[2152.14]] <b>Definitiones</b> </p>\n<p> [[2152.15]] 1) <b>Obligatio</b> est necessitas imposita sub poenae justae metu. </p>\n<p> [[2152.16]] 2) <b>Credere</b> est conscium esse rationum nobis persuadentium. </p>\n<p> [[2152.17]] 3) <b>In potestate sunt</b>, quae fiunt si velis. </p>\n<p> [[2152.18]] 4) <b>Metus</b> est voluntas evitandi. </p>\n<p> [[2152.19]] 5) <b>Conscientia</b> est nostrarum actionum memoria.\n[[2153.1]] <b>Experimentum</b> </p>\n<p> [[2153.2]] Non est in potestate nostra nunc meminisse alicujus rei praeteritae, aut non meminisse.\n[[2153.4]] <b>Propositio I</b> </p>\n<p> [[2153.5]] <b>Conscientia non est in potestate.</b> </p>\n<p> [[2153.6]] <b>Demonstratio</b>: Nam conscientia est memoria <i>per defin. 5.</i> Memoria non est in\n[[2153.7]] potestate, <b>per experimentum praecedens.</b> Ergo nec conscientia in potestate est.\n[[2153.8]] <b>Propositio II</b> </p>\n<p> [[2153.9]] <b>Credere aliquid aut non credere non est in potestate.</b> </p>\n<p> [[2153.10]] <b>Demonstratio</b>: Nam credere est conscium esse rationum nobis id quod credendum\n[[2153.11]] est persuadentium <i>per def. 2.</i> Conscientia non est in potestate <i>per prop. 1.</i> Ergo nec\n[[2153.12]] credere in potestate est aut non credere.\n[[2153.13]] <b>Propositio III</b> </p>\n<p> [[2153.14]] <b>Eorum quae non sunt in potestate nulla</b> <b>obligatio est.</b> </p>\n<p> [[2154.1]] <b>Demonstratio</b>: Cum metus poenae nihil aliud sit, quam voluntas evitandi poenam\n[[2154.2]] <i>per defin. 4</i>, sequitur nihil aliud in obligato ad obligationis effectum contribuere posse\n[[2154.3]] poenam quam voluntatem ejus evitandae per obedientiam seu praestationem. Quoniam\n[[2154.4]] ergo hinc patet metum poenae nihil aliud efficere debere quam obediendi voluntatem; et\n[[2154.5]] vero obligatio est necessitas quam efficit metus poenae <i>per defin. 1.</i> sequitur obligationem\n[[2154.6]] non esse nisi ad obediendi voluntatem; ac proinde ad ea quae posita etiam obediendi\n[[2154.7]] voluntate non fiunt, seu quae <i>per defin. 3.</i> in potestate non sunt, nullam esse obligationem.\n[[2154.9]] <b>Propositio IV</b> </p>\n<p> [[2154.10]] <b>Nulla</b> <b>est obligatio credendi, sed tantum summo studio inquirendi.</b> </p>\n<p> [[2154.11]] Credere non est in potestate <i>per prop. 2.</i> quae non sunt in potestate, eorum nulla\n[[2154.12]] obligatio est, <i>per prop. 3.</i> Ergo nulla credendi obligatio est. Quod erat demonstrandum.\n[[2154.13]] <b>Corollar.</b> </p>\n<p> [[2154.14]] Hinc patet frustra aliquem juramento obligari ad aliquid imposterum credendum vel\n[[2154.15]] non credendum.\n[[2154.16]] <b>Scholium</b> </p>\n<p> [[2154.17]] Hinc colligo obligationem vel mandatum credendi, nihil aliud inferre quam summum\n[[2154.18]] credendi conatum, id est accuratissimam in credendi rationes inquisitionem: quae\n[[2154.19]] tamen ita moderanda est, ne ab aliquo majus studium desideremus quam cujus per rerum\n[[2154.20]] suarum statum vitaeque genus, capax est. Ut res clarius intelligatur: hoc momento\n[[2155.1]] praesenti non obligor ad credendum, sive ad reminiscendum aliquid, quia id a me non\n[[2155.2]] pendet. Obligor tamen aliquando ut coner invenire rationes, quarum imposterum meminisse,\n[[2155.3]] id est credere, liceat. Simili methodo pleraque in re morali ac naturali theologia\n[[2155.4]] demonstrari possent. Quod maximi foret momenti ad tranquillitatem animi. Sola enim\n[[2155.5]] demonstratio certitudinem parit, sola certitudo tranquillitatem durabilem, sola tranquillitas\n[[2155.6]] felicitatem. tranquillitas felicitatem. </p>\n",
+  "number": "387₃.",
+  "title": "Endgültige Fassung",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:387₃. Endgültige Fassung ENDGÜLTIGE FASSUNG De obligatione credendi Ratiocinatio quae pro demonstratione venditatur Definitiones 1) Obligatio est necessitas imposita sub poenae justae metu. 2) Credere est conscium esse rationum nobis persuadentium. 3) In potestate sunt, quae fiunt si velis. 4) Metus...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

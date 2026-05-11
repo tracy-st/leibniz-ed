@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_189",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 189,
+  "text": "<p> [[600.4]] <b>189. LEIBNIZ AN NICOLAS HARTSOEKER</p>\n<p> [[600.5]] Berlin, 9. April 1707. [187.193.] </b></p>\n<p> [[600.11]] Monsieur </p>\n<p> [[600.12]] Ce <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Monsieur Hartsoeker Conseiller et Medecin de S. A. E. à Dusseldorp</Fn> que M. Glauber appelloit la generation du Salpetre ou du Sel commun et que M. le\n[[600.13]] Chevalier Boyle a fait valoir d'avantage, est expliqué ordinairement comme s'il prouvoit\n[[600.14]] l'analyse et la composition de ces deux sels. Mais j'avoue que je suis encor un peu Chymiste\n[[600.15]] sceptique là dessus autant que M. Boyle l'estoit en bien d'autres choses dans son livre qui porte\n[[600.16]] ce titre. Il se peut que l'Esprit acide bien loin d'estre quelque chose de plus simple que le sel\n[[600.17]] dont il paroist estre tiré, soit une <b>decomposition</b> des parties du sel meme rendues tres petites\n[[600.18]] par le feu, et des parties ignées, le tout joint à quelque aquosité. Et puis ces petites parties se\n[[600.19]] rejoindront et en composeront de visibles, lorsque l'acide estranger qui les tient en suspens et\n[[600.20]] en division, sera mortifié par l'alcali du Tartre. Suivant cette hypothese nous ne produisons\n[[600.21]] point le sel et le salpetre, non plus que les metaux, nous ne les detruisons pas et nous n'y venons\n[[600.22]] pas à une veritable analyse. Si un acide et un alcali seuls principes et principes communs du Sel\n[[600.23]] commun et du Salpetre s'en pouvoient tirer, on pourroit changer l'un de ces Sels dans l'autre:\n[[600.24]] mais cela ne reussissant pas, c'est une marque que ce que nous en tirons, n'est pas un principe\n[[601.1]] commun, qui est specifie déja, et pourroit estre la chose même deguisée, ce qui est plus aisé à\n[[601.2]] expliquer que la destruction et generation du sel, dont on n'a aucune preuve. </p>\n<p> [[601.3]] Les miroirs spheriques fort grands ramasseront moins les rayons à proportion que les\n[[601.4]] petits, parce que les foyers qui au lieu d'estre des points, sont des surfaces notables, croissent\n[[601.5]] comme les quarrés des diametres de la sphere. Je crois qu'il y a un peu de difficulté à bien\n[[601.6]] étamer des miroirs de verre d'une figure differente du plan. </p>\n<p> [[601.7]] J'ay parlé non seulement du blanc qui vient de la multitude des couleurs de l'objet, mais\n[[601.8]] aussi de celuy des petits miroirs qui paroist le plus ordinaire: l'écume et la neige semblent estre\n[[601.9]] de cette nature. Si la Lune estoit un miroir elle nous paroistroit noire et ainsi quoyque les\n[[601.10]] miroirs fassent la blancheur par leur multitude neantmoins chaque miroir donne moins de\n[[601.11]] blancheur que s'il estoit un corps raboteux. </p>\n<p> [[601.12]] Ce que vous dites, Monsieur, touchant le changement de la couleur des rayons homogenes,\n[[601.13]] quand ils tombent sur les corps dont les couleurs sont fixes merite une discussion exacte, et je\n[[601.14]] souhaiterois que vous en conferassiés avec M. Newton luy meme, car sa maniere d'expliquer\n[[601.15]] les couleurs fixes est fondée sur l'immutabilité des rayons homogenes. </p>\n<p> [[601.16]] Les figures des petites parties des Sels principaux ne different point apparemment des\n[[601.17]] figures des parties notables de ces memes Sels, surtout dans le Sel commun dont la figure est si\n[[601.18]] simple. Cependant comme je ne suis point pour les Atomes, je crois que les dernieres parties\n[[601.19]] des sels sont formées par la nature et detruites dans les occasions; mais je doute que nous y\n[[601.20]] puissions arriver par nos operations, je n'asseure pourtant point que la chose est impossible non\n[[601.21]] plus que dans les metaux, et je ne m'y oppose que par provision, <b>donec probetur contrarium</b>. </p>\n<p> [[601.23]] Comme j'avois apprehendé que Ruggieri ne disparut un jour, j'ay insisté qu'on s'asseurât\n[[601.24]] des lettres en question sans differer, et M. le Comte de Wartenberg a esté ravi de trouver une\n[[601.25]] occasion de temoigner son zele à Monseigneur l'Electeur, qu'il souhaiteroit de pouvoir servir\n[[601.26]] en quelque chose de plus important. Il les a envoyées par la poste de voiture, parce que le\n[[601.27]] paquet estoit grand. De sorte que maintenant je ne doute point qu'elles n'ayent esté rendues. Je\n[[601.28]] suis entierement </p>\n<p> [[601.29]] Monsieur Vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[601.30]] Berlin ce 9 Avril 1707 </p>\n",
+  "number": "189.",
+  "title": "LEIBNIZ AN NICOLAS HARTSOEKER",
+  "date": "Berlin, 9. April 1707. [187.193.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:189. LEIBNIZ AN NICOLAS HARTSOEKER Berlin, 9. April 1707. [187.193.] Monsieur Ce Am Kopf der Seite von Leibniz' Hand: A Monsieur Hartsoeker Conseiller et Medecin de S. A. E. à Dusseldorp que M. Glauber appelloit la generation du Salpetre ou du Sel commun et que M. le Chevalier Boyle a fait valoir d'...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

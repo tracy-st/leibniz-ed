@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_485",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 485,
+  "text": "[[2149.4]] <b>387₁.  De obligatione credendi. Erste Fassung DE OBLIGATIONE CREDENDI. ERSTE FASSUNG\n[[2149.7]] <tit2><b>De obligatione credendi</b></tit2>\n[[2149.8]] <b>Definitiones</b> </p>\n<p> [[2149.9]] <b>Obligatio</b> est necessitas sub poenae justae metu. </p>\n<p> [[2149.10]] <b>Poena justa</b> est, quam infligeret sapientissimus ac potentissimus. </p>\n<p> [[2149.11]] <b>Sapientia</b> est scientia felicitatis. </p>\n<p> [[2149.12]] <b>Scientia</b> est cognitio certa. </p>\n<p> [[2149.13]] <b>Felicitas</b> est status voluptatis sine dolore. </p>\n<p> [[2149.14]] <b>Credere</b> est rationum quae persuadent conscium esse. </p>\n<p> [[2149.15]] <b>Probabilitas</b> est excessus rationum pro re de qua agitur facientium supra contrarias. </p>\n<p> [[2149.17]] Idem est esse <b>in tua potestate</b> sive pendere a voluntate tua, id est existere si\n[[2149.18]] velis.\n[[2149.19]] <b>Axiomata</b> </p>\n<p> [[2149.20]] Existit Ens sapientissimum et potentissimum. </p>\n<p> [[2149.21]] Nulla obligatio est ad ea quae non sunt in potestate.\n[[2150.1]] <b>Theorema I</b> </p>\n<p> [[2150.2]] Quoties de fide agitur sola attentio diligens pendet a voluntate nostra. </p>\n<p> [[2150.3]] Nam fides vel credere est rationum conscientia ut dixi ad rationum conscientiam\n[[2150.4]] opus est tum rationibus, tum earum conscientia sine sensu, rationes pendent a natura rei;\n[[2150.5]] solum ergo quod a nobis esse potest, est earum perceptio sine conscientia; ad eam autem\n[[2150.6]] pervenire possumus duobus modis, vel ut casu se offerant rationes, vel ut a nobis\n[[2150.7]] inquirantur, casus non pendet a voluntate nostra, inquisitio pendet ab attentione, sola ergo\n[[2150.8]] attentio cum de rationum conscientia id est fide agitur pendet a voluntate nostra quod\n[[2150.9]] ostendendum susceperamus.\n[[2150.10]] <b>Theorema II</b> </p>\n<p> [[2150.11]] Nulla est obligatio ad ea, quae non sunt in potestate. </p>\n<p> [[2151.1]] Quaecunque non sunt in potestate sapientis, ea non sunt necessaria sapienti, ergo si\n[[2151.2]] casu externo contingere hoc rerum statu non possunt, omnino contingere hoc rerum statu\n[[2151.3]] non possunt. Quae hoc rerum statu contingere impossibile, ea hoc rerum statu non\n[[2151.4]] contingere necessarium est, sive contrarium eorum est necessarium. </p>\n",
+  "number": "387₁.",
+  "title": "De obligatione credendi. Erste Fassung",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:387₁. De obligatione credendi. Erste Fassung DE OBLIGATIONE CREDENDI. ERSTE FASSUNG De obligatione credendi Definitiones Obligatio est necessitas sub poenae justae metu. Poena justa est, quam infligeret sapientissimus ac potentissimus. Sapientia est scientia felicitatis. Scientia est cognitio certa....">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_224",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 224,
+  "text": "<p> [[715.11]] <b>227. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[715.12]] [Wolfenbüttel, Ende Juni 1693.] [217.254.]</b></p>\n<p> [[715.22]] [ ... ] Alleine zu rechteren gebrauch der Cabbalae würde gehöhren eine Societät recht\n[[715.23]] gelehrter und wohlgesinter Leute. Ich verstehe aber eine societat nicht, wie sie ins gemein seyn,\n[[715.24]] auch wie die Englische und Naturae Curiosorum ist, so kein festes band, auch keinen\n[[715.25]] Nachdruck noch Daure haben; noch die von großer Herrn besoldungen unterhalten werden, wie\n[[716.1]] die Universitaten, Collegia und die Academie Royale zu Paris, denn da werden gemeiniglich\n[[716.2]] durch die hofleute allerhand Personen hinein geschoben, die nicht auß guthen eifer und\n[[716.3]] lobesbegierde sondern umbs geld arbeiten, ja hernach aus faulheit und neid das guthe verhindern,\n[[716.4]] sondern eine solche societät die ihren eignen fundum hätte, wie die Clöster und Orden der\n[[716.5]] Romischen Religion. Nun ist zwar bey den Evangelischen nichts dergleichen. Doch wäre es\n[[716.6]] nicht ohnmuglich wenn einige Reiche nur lachende Erben habende sonst verstandige wohlgesinte\n[[716.7]] Ehrliebende Personen beredet werden köndten, das ihrige zum theil, oder gänzlich zu\n[[716.8]] einen so wichtigen werck zu wiedmen, vermittelst deßen ich versichert bin, daß zum besten des\n[[716.9]] Menschlichen geschlechts in 10 jahren mehr außzurichten, als sonst in hunderten nicht geschehen\n[[716.10]] wird. Ich bin vor vielen jahren mit diesem Einfall schwanger gangen und sehe fast allein\n[[716.11]] diesen weg übrig etwas rechtes auszurichten, nachdem der andere an sich selbsten leichtere,\n[[716.12]] nehmlich einen großen fürsten, der dem werck allein gewachsen, dazu zu vermögen bey\n[[716.13]] gegenwartigen elenden Zeiten, da sie fast selbsten alle mit einander in weitlaufftigkeiten\n[[716.14]] vertieffet, nicht zu hoffen. Dieser vorschlag aber ist so bewand daß er mit einem geringen den\n[[716.15]] anfang nehmen, und bald zu etwas ansehnliches erwachsen köndte, denn etlicher Exempel\n[[716.16]] andere aufmuntern würden. In Holland glaub ich solten sich dergleichen leute finden, wiewohl\n[[716.17]] auch Teutschland einige an hand geben mochte. Ich weiß wie sehr mein hochwehrtigster H. sich\n[[716.18]] alle gemein-nüzige Dinge angelegen seyn laßen und wie leicht er alles begreiffe, habe also\n[[716.19]] dieses doch in vertrauen dero erwegung und urtheil unterwerffen wollen; bitte die gedancken\n[[716.20]] darauff gehen zu laßen, und mich einsmahls mit wiederantwort zu erfreuen; der ich dero\n[[716.21]] liebwertheste Person und trefliche gaben hochlich verehre, und lebenszeit verbleiben werde </p>\n<p> [[716.22]] Meines hochwehrtesten Herrn verbundenster gehorsamster Diener. </p>\n",
+  "number": "227.",
+  "title": "LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS",
+  "date": "[Wolfenbüttel, Ende Juni 1693.] [217.254.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:227. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS [Wolfenbüttel, Ende Juni 1693.] [217.254.] [ ... ] Alleine zu rechteren gebrauch der Cabbalae würde gehöhren eine Societät recht gelehrter und wohlgesinter Leute. Ich verstehe aber eine societat nicht, wie sie ins gemein seyn, auch wie die Englische...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

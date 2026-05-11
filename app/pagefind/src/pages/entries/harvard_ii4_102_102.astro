@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_102",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 102,
+  "text": "<p> [[319.14]] <b>102. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[319.15]] Venedig, 17. April 1705. [100.106.] </b></p>\n<p> [[319.20]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[319.21]] Mi figuro che V. S. Ill^#'m^#'a averà gia ricevuta una mia lettera, che per mezo del Sig^#'r^#'e\n[[319.22]] Zanovelli le trasmessi due settimane sono, in cui le participai quanto fin a quel tempo io aveva\n[[319.23]] operato per l'interesse del Sig^#'r^#'e Herman, da cui ultimamente ricevei una risposta ad una mia,\n[[319.24]] che hò gia presentata all'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Marcello Capo del Magistrato de gli Ecc^#'m^#'i\n[[319.25]] Riformatori dello Studio, e mi creda che hò posto in opra tutto il mio spirito e tutta la mia\n[[319.26]] diligenza per terminare l'affare con tutto il decoro ed utile del Sig^#'r^#'e Herman, per cui hò gia\n[[320.1]] formata una piccola scrittura, in cui descrivo e rappresento tutto il suo merito, il di cui\n[[320.2]] principale fondamento è l'attestato di V. S. Ill^#'m^#'a che qui gode quest'alto grado che gia corre dal\n[[320.3]] suo gran sapere in tutto il Mondo letterato. Ora tutta la difficolta si riduce a due cose, la prima è\n[[320.4]] stabilire lo stipendio che io procuro sia decoroso ed abondante, che nel caso volessero al loro\n[[320.5]] solito dargli poco, io non consigliarei al Sig^#'r^#'e Herman di portarsi in Padova. La seconda che\n[[320.6]] dovendosi rinovare e mutare nella ventura settimana quasi tutto il Magistrato i Riformatori\n[[320.7]] presenti non possono perfettionare questo affare, ma bisogna aspettare che s'eleggano i nuovi\n[[320.8]] Riformatori con i quali, a Dio piacendo rinoverò gli Uffici, e gia hò prevenuti i passi, e da canto\n[[320.9]] mio farò tutto, acciò il Sig^#'r^#'e Herman sia chiamato con tutto l'onore possibile, e questi Sig^#'r^#'i\n[[320.10]] Riformatori potranno attestare con che vigore ed attentione hò fin ora operato per quest'interesse.\n[[320.11]] Col venturo ordinario darò parte di tutto al Sig^#'r^#'e Herman, e divotamente riverendola con\n[[320.12]] tutta veneratione mi rassegno </p>\n<p> [[320.13]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[320.14]] Venetia 17 Aprile 1705 </p>\n",
+  "number": "102.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 17. April 1705. [100.106.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:102. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 17. April 1705. [100.106.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Mi figuro che V. S. Ill^#'m^#'a averà gia ricevuta una mia lettera, che per mezo del Sig^#'r^#'e Zanovelli le trasmessi due settimane sono, in cui le participai quanto fi...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

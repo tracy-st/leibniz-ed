@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_84",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 84,
+  "text": "[[582.84]] <b>84. Definitio Dei seu entis a se </b> <span>582.0;0:63:084:76?      :L:l^</span>.\n[[582.1]] point de volume. Principium autem meum est, quicquid existere potest, et aliis compatibile\n[[582.2]] est, id existere. Quia ratio existendi pro omnibus possibilibus non alia ratione\n[[582.3]] limitari debet, quam quod non omnia compatibilia. Itaque nulla alia ratio determinandi,\n[[582.4]] quam ut existant potiora, quae plurimum involvant realitatis.\n[[582.5]] Si omnia possibilia existerent, nulla opus esset existendi ratione, et sufficeret sola\n[[582.6]] possibilitas. Quare nec Deus foret nisi in quantum est possibilis. Sed talis Deus qualis\n[[582.7]] apud pios habetur non foret possibilis, si eorum opinio vera est, qui omnia possibilia\n[[582.8]] putant existere.\n[[582.9]] Dialogus de anima brutorum inter Pythagoram et Cartesium in Elysiis campis\n[[582.10]] sibi obviam factos.\n[[582.20]] Definitio Dei seu Entis a se\n[[582.21]] Deus est ens ex cuius possibilitate (seu essentia) sequitur ipsius existentia.\n[[582.22]] Si iam Deus hoc modo definitus est possibilis, sequitur quod existat.\n",
+  "number": "84.",
+  "title": "Definitio Dei seu entis a se",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:84. Definitio Dei seu entis a se 582.0;0:63:084:76? :L:l^. point de volume. Principium autem meum est, quicquid existere potest, et aliis compatibile est, id existere. Quia ratio existendi pro omnibus possibilibus non alia ratione limitari debet, quam quod non omnia compatibilia. Itaque nulla alia r...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

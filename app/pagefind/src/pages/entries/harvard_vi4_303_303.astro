@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_303",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 303,
+  "text": "[[1350.6]] <b>249.  De perfecta notione substantiarum [1677 (?)]</b>\n [[1350.7]] <tab/>[1677 (?)] </p>\n<p> [[1350.13]] Substantia est Ens quod omnia necessaria praedicata ejusdem subjecti involvit, ut\n[[1350.14]] <i>aër</i>. Adjunctum est quod non omnia involvit, ut <i>transparens</i>. Nam <i>aër</i> involvit <i>transparens,\n[[1350.15]] liquidum, subtile</i>, <i>elasticum</i> etc. neque aliud quicquam de ea re, de qua praedicatur\n[[1350.16]] <i>aër</i> necessario praedicatur, quod non jam in aëris notione contineatur. Daturque aut\n[[1350.17]] certe intelligi potest aër purus, id est Ens, de quo nihil aliud praedicari queat, quam quod\n[[1350.18]] aëris natura postulat; sed non potest dari transparens purum, id est Ens in quo sit\n[[1350.19]] transparentia et nihil ultra. Hinc videtur sequi substantias tantum appellari debere species\n[[1350.20]] infimas sive individuales, quarum notio scilicet perfecta sive talis est, ut in ea responsio\n[[1351.1]] ad omnia ea quae de re quaeri possunt contineatur. Animalis vero notio non est talis,\n[[1351.2]] quaeri enim adhuc potest, sitne rationale an brutum, quadrupes an bipes, quia alia\n[[1351.3]] animalia rationalia, alia bruta sunt. Nisi forte credamus dari posse animal purum, sive in\n[[1351.4]] quo nihil aliud reperiatur, quam quod praecise requiritur ad notionem animalis; atque\n[[1351.5]] ideo velimus animal appellare substantiam, quia ejus notio saltem per se subsistere possit.\n[[1351.6]] Sed an purum animal sit possibile, Ego valde dubito. Nam non tantum pedibus carebit,\n[[1351.7]] sed et sensu, quia notio animalis non exprimit quid sentire debeat. Itaque illi tantum\n[[1351.8]] termini generales, sunt substantiarum, qui homogenei sunt, et talis est conceptus Entis\n[[1351.9]] puri seu absoluti, sive Dei. </p>\n",
+  "number": "249.",
+  "title": "De perfecta notione substantiarum",
+  "date": "[1677 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:249. De perfecta notione substantiarum [1677 (?)] [1677 (?)] Substantia est Ens quod omnia necessaria praedicata ejusdem subjecti involvit, ut aër. Adjunctum est quod non omnia involvit, ut transparens. Nam aër involvit transparens, liquidum, subtile, elasticum etc. neque aliud quicquam de ea re, de...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

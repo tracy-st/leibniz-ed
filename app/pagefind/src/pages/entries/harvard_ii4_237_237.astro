@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_237",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 237,
+  "text": "<p> [[714.1]] <b>237. BARTHÉLEMY DES BOSSES FÜR LEIBNIZ</p>\n<p> [[714.2]] [Hildesheim, 23. Dezember 1707]. [236.238.] </b></p>\n<p> [[714.10]] Antonius Perez in 2^#'d^#'a^#'m 2^#'d^#'a^#'e Tract. IV. disputatione VI, caput 3. De Augmento charitatis. </p>\n<p> [[714.11]] 1. Duae sunt difficultates hic a nobis per angustias temporis brevissime attingendae. Prima\n[[714.12]] difficultas est utrum actibus remissis, et duratione libera actus caritatis augeatur meritorie\n[[714.13]] caritas. Existimo partem affirmantem satis aperte colligi ex sess. 6. Trident. cap. 10 et 16 et\n[[714.14]] Canone 24. Sed solet hic negotium facessere objectio quaedam vulgaris sumpta ex eo quod\n[[714.15]] videatur sequi ex qualibet duratione actus charitatis infinitum augmentum charitatis; nam in\n[[714.16]] ultimo instanti V. G. durationis aliquis gradus charitatis datur in praemium; at in quolibet\n[[714.17]] instanti praecedente datus est alius aut plures gradus non minores illo: cum ergo instantia sint\n[[714.18]] infinita, gradus acquisiti aequales erunt infiniti. </p>\n<p> [[714.19]] Omitto aliorum solutiones, quarum aliae negant infinitatem in continuo, aliae concessa\n[[714.20]] infinitate negant existere in continuo puncta et momenta actualia; aliae negant continuam\n[[714.21]] libertatem durationis, aliae dicunt in singulis momentis solum produci indivisibile praemii et\n[[714.22]] quasi punctum. Sed nos ne de his rebus quaestionem faciamus, admittimus continuam libertatem\n[[714.23]] durationis et disputationis gratia infinitatem momentorum, et in singulis momentis\n[[714.24]] acquiri plusquam indivisibile praemii. </p>\n<p> [[714.25]] Respondeo itaque ex propria sententia, plerosque authores in hac re latuisse quoddam\n[[714.26]] principium: est autem illud, quantitatem charitatis et qualitatis intensae non esse unicae dimensionis.\n[[714.27]] Quantitatem unicae dimensionis voco in qualitate illam quae est proportionalis lineae et\n[[714.28]] tempori; si enim quantitas qualitatis proportionalis lineae ponatur in loco et extendatur, solum\n[[714.29]] occupabit unam lineam spatii: quando autem potest occupare, si extendatur, locum correspondentem\n[[714.30]] superficiei tunc dico esse duplicis dimensionis, et esse proportionalem superficiei,\n[[715.1]] quando autem potest occupare locum solidum, tunc dico esse trinae dimensionis et proportionalem\n[[715.2]] corpori. Dico ergo concedi posse quolibet momento augeri charitatem augmento proportionali\n[[715.3]] lineari quantitati, et licet augeatur in singulis momentis aequaliter, inde solum sequi\n[[715.4]] augmentum finitum proportionale superficiei finitae continentis lineam infinities. Sic si charta\n[[715.5]] illuminetur a sole successive, ita ut in primo momento temporis illuminatur linea prima chartae,\n[[715.6]] et in sequentibus successive illuminentur caeterae, donec tota charta in fine temporis maneat\n[[715.7]] illuminata, non sequitur superficiem illuminatam seu quantitatem lucis extensam esse infinitam\n[[715.8]] in ratione superficiei, sed solum sequitur continere infinitas lineas sicut linea continet infinita\n[[715.9]] puncta, quod juxta sententiam continui quam supponimus, non censetur absurdum. </p>\n<p> [[715.10]] Si quid autem absurdum est in sententia nostra, tota absurditas consistit in suppositione\n[[715.11]] affirmante infinitam multitudinem punctorum actualium aut instar mathematicorum in quantitate\n[[715.12]] et tempore, quam ego existimo esse impossibilem etiam de potentia absoluta; nam licet\n[[715.13]] continuum sit in infinitum divisibile ut ego existimo et infinita contineat indivisibilia metaphysica,\n[[715.14]] mathematica tamen actualia non potest continere infinita actu sed solum in potentia.\n[[715.15]] Quomodo autem differat indivisibile metaphysicum, et indivisibile mathematicum actuale, et\n[[715.16]] indivisibile mathematicum potentiale alibi explicui; et in hac dinstinctione existimo consistere\n[[715.17]] solutionem difficultatis continui; sed ut dixi ad hunc locum non spectat haec quaestio. Sufficit\n[[715.18]] ostendisse ex affirmatione meriti durationis actus caritatis nullam difficultatem novam oriri\n[[715.19]] contra naturam continui. </p>\n<p> [[715.20]] Hucusque Ant. Perez. Caetera in eodem capite contenta non spectant ad hanc materiam. </p>\n",
+  "number": "237.",
+  "title": "BARTHÉLEMY DES BOSSES FÜR LEIBNIZ",
+  "date": "[Hildesheim, 23. Dezember 1707]. [236.238.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:237. BARTHÉLEMY DES BOSSES FÜR LEIBNIZ [Hildesheim, 23. Dezember 1707]. [236.238.] Antonius Perez in 2^#'d^#'a^#'m 2^#'d^#'a^#'e Tract. IV. disputatione VI, caput 3. De Augmento charitatis. 1. Duae sunt difficultates hic a nobis per angustias temporis brevissime attingendae. Prima difficultas est ut...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

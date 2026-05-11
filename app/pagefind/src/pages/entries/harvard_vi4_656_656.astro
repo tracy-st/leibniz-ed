@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_656",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 656,
+  "text": "[[2843.10]] <b>503₂.  De Scientia juris naturalis </p>\n<p> [[2843.15]] Scientiam Juris naturalis docere est, tradere Leges Optimae Reipublicae. </p>\n<p> [[2843.16]] Scientiam juris arbitrarii docere, est leges receptas cum legibus optimae Reipublicae\n[[2843.17]] conferre. </p>\n<p> [[2843.18]] Duae sunt partes juris, una de agendis, altera de actionum praemiis poenisque et\n[[2843.19]] generatim consequentiis, sive de bonis malisque quae vel ipso jure vel judicis officio,\n[[2843.20]] eoque vel proprio motu, vel ob postulationem alicujus explicato contingunt. Caeterum ea\n[[2844.1]] quae ipso jure contingunt non in re ipsa, sed in jure consistunt, ideoque denique in ea\n[[2844.2]] quae per ipsa judicis officio impetrari queunt, resolvuntur. </p>\n<p> [[2844.3]] Porro quaecunque Leges judicem etiam proprio motu facere volunt, ea nihilominus\n[[2844.4]] ab eo postulari possunt. </p>\n<p> [[2844.5]] Hinc tota jurisprudentia tradi potest, certa constantique methodo, ea ordine enumerando,\n[[2844.6]] quae a judice postulari possunt. </p>\n<p> [[2844.7]] Hinc duae sunt methodi jus tradendi, una secundum ordinem officiorum vitae, altera\n[[2844.8]] secundum ordinem Actionum seu postulationum in judicio. </p>\n",
+  "number": "503₂.",
+  "title": "De Scientia juris naturalis",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:503₂. De Scientia juris naturalis Scientiam Juris naturalis docere est, tradere Leges Optimae Reipublicae. Scientiam juris arbitrarii docere, est leges receptas cum legibus optimae Reipublicae conferre. Duae sunt partes juris, una de agendis, altera de actionum praemiis poenisque et generatim conseq...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_264",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 264,
+  "text": "<p> [[810.1]] <b>267. JUSTUS CHRISTOPH BÖHMER AN LEIBNIZ</p>\n<p> [[810.2]] Hannover, 12. (22.) Juni 1694. [270.]</b></p>\n<p> [[810.10]] Excellentissime Domine, Patrone omni observantia colende. </p>\n<p> [[810.11]] Humanitatem Tuam erga literarum cultores et eruditionem reconditam diu est quod sacro\n[[810.12]] silentio absens sum veneratus. Ex animo laetor quod quae ab Avunculo meo iterum iterumque\n[[810.13]] laudari, ab aliis audiveram insigniter extolli, coram videre mihi licuit. Pro Tua enim comitate\n[[810.14]] facilem mihi ad Te aditum haud ita pridem concessisti, quin imo exhibuisti mihi tantum\n[[810.15]] honoris, ut praesentia Tua exhilarares cum adversa valetudine conflictantem. Utrumque grato\n[[810.16]] agnoscam animo quamdiu futurus sum, utque hanc Tuam erga me benevolentiam nulla dies\n[[810.17]] minuat, humaniter oro. Ego cultu et pietate erga Te nulli ero secundus, utque literas, si non\n[[810.18]] tecum natas at tecum non parum morituras, salvus et sospes quam diutissime exornes, precabor.\n[[810.19]] Patere interim, Vir Excellentissime, ut quae circa sermonem Tuum nuper mecum habitum nova\n[[810.20]] dubia mihi sunt suborta, eruditis oculis Tuis offeram. Levia haec reputabis, nec immerito, ego\n[[810.21]] autem pro tenuitate mea me his exsolvere non possum. Dicebas inter alia (1) Cuilibet numero\n[[810.22]] respondere numerum quadratum (2) Si numerus omnium quadratorum est aequalis numero\n[[810.23]] omnium numerorum, pars erit aequalis toti, quod est absurdum. Nam numerus omnium quadratorum\n[[810.24]] est pars numeri omnium numerorum. Hic enim praeter quadratos, alios etiam includit\n[[810.25]] non quadratos. Pace Tua, Vir Summe, dixerim ad (1) Cuilibet numero Finito respondere posse\n[[810.26]] quadratum[,] sed numero omnium numerorum non item, <Fn><i>Dazu bemerkt Leibniz</i>: Nemo dicit numero omnium numerorum respondere quadratum.</Fn> et sic hypothesis illa erit frustranea.\n[[810.27]] Nam numerus omnium numerorum includit omnes numeros <Fn><i>Dazu bemerkt Leibniz</i>: Hoc est respondere ad conclusionem.</Fn> qui sunt et esse possunt, radices,\n[[810.28]] quadratos, cubos etc. Sicut vero numerus omnium numerorum non habet sibi aequalem aut\n[[810.29]] parem numerum, ita nec quadratum. His tamen concessis existimaverim me circa (2) ita posse\n[[810.30]] colligere. Si numerus omnium quadratorum Non est aequalis numero omnium numerorum, <Fn><i>Von</i> Si <i>bis</i> numerorum <i>am Rande angestrichen, dazu bemerkt Leibniz</i>: Hic satis bene proponitur argumentum.</Fn>\n[[811.1]] sequitur quod non cuilibet numero respondeat numerus aliquis quadratus. Hoc vero est contra\n[[811.2]] hypothesin. Si enim cuilibet numero respondere debet numerus quadratus, sequitur quod\n[[811.3]] numerus horum non possit non esse aequalis illi quantus quantus etiam fuerit. Tot enim erunt\n[[811.4]] radices quot quadrata, et tot quadrata quot radices, quia ex hypothesi unum alteri respondeat\n[[811.5]] necesse est. </p>\n<p> [[811.6]] Spero fore ut quando Te adeundi occasio dabitur qualiacunque haec dubia mihi eximantur.\n[[811.7]] Non dubito de certitudine demonstrationis Tuae, saltim tantillus ego evidentiam ejus non satis\n[[811.8]] sum assecutus quod ut meliorem in partem accipias enixe rogo. Sed illuc unde abii, redeo. Hoc\n[[811.9]] quidquid est literarum ad Te mitto ut meam observantiam declarem Tuumque erga me favorem\n[[811.10]] perpetuum esse exoptem. Oro Deum ut secunda vitae tempora Tibi indulgeat, quo inter aetatis\n[[811.11]] nostrae decora porro enitescas et posteritati exemplum praestes. Venturis enim ille seculis\n[[811.12]] merito laudatur qui excelluit in suo. Vale Vir Summe, bono patriae et meo, si id addi fas est,\n[[811.13]] bono. </p>\n<p> [[811.14]] Nominis Tui ad ornandas literas nati cultor devotus </p>\n<p> [[811.15]] Hanov. 12 Jun. 1694. Justus Christoph. Böhmer. </p>\n<p> [[811.16]] <i>A Monsieur Monsieur Leibniz Conseiller de S. A. Elect. de. Br. Luneb. etc.</i> </p>\n",
+  "number": "267.",
+  "title": "JUSTUS CHRISTOPH BÖHMER AN LEIBNIZ",
+  "date": "Hannover, 12. (22.) Juni 1694. [270.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:267. JUSTUS CHRISTOPH BÖHMER AN LEIBNIZ Hannover, 12. (22.) Juni 1694. [270.] Excellentissime Domine, Patrone omni observantia colende. Humanitatem Tuam erga literarum cultores et eruditionem reconditam diu est quod sacro silentio absens sum veneratus. Ex animo laetor quod quae ab Avunculo meo iteru...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

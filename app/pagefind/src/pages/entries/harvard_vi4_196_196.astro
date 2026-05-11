@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_196",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 196,
+  "text": "[[692.5]] <b>161₁.  Gestrichener Ansatz GESTRICHENER ANSATZ </p>\n<p> [[692.7]] Il est constant que de toutes les choses visibles l'homme est ce qui peut contribuer le\n[[692.8]] plus au bonheur de l'homme; mais le mal est, qu'on ne s'unit pas assez et que chacun\n[[692.9]] croit trouver son avantage par des routes particulieres, au lieu que s'ils travailloient tous\n[[692.10]] de concert au bien commun, chacun se trouveroit plus heureux sans comparaison qu'il ne\n[[692.11]] sçauroit estre dans cette confusion et même dans cette opposition de desseins. Nous\n[[692.12]] marchons dans les tenebres, et au lieu de nous tenir par la main pour nous entreguider, et\n[[692.13]] pour asseurer nostre chemin, nous courons confusement et heurtons les uns contre les\n[[692.14]] autres. Cependant j'avoue qu'il est plus aisé de remarquer ces desordres que d'y remedier.\n[[692.15]] La bonne intention d'un seul n'y suffit pas, plus il la fera connoistre et plus il\n[[692.16]] s'exposera à l'envie, ou au mepris; à moins qu'il n'ait des qualités fort extraordinaires ou\n[[692.17]] beaucoup d'autorité pour se faire aimer et considerer; mais on voit que ces sortes de\n[[692.18]] personnes sont ordinairement plus portées à l'ambition pour se distinguer qu'à la charité\n[[692.19]] pour s'unir avec les autres. Il faudroit donc que plusieurs se rencontrassent egalement\n[[693.1]] bien intentionnés et raisonnables, et qui se connussent assez pour se hazarder de s'ouvrir\n[[693.2]] l'un à l'autre. Mais on sçait qu'il n'y a rien de si rare, que de trouver deux amis\n[[693.3]] veritables, et cependant il faudroit qu'il y en eût beaucoup; ou du moins il faudroit que\n[[693.4]] l'interest les fit agir constamment comme s'ils l'estoient. Ce qui n'est pas aisé dans l'estat\n[[693.5]] où les hommes se trouvent par leur education negligée et par leur mauvaises habitudes,\n[[693.6]] qui les rendent emportés et incapables de toute application de longue haleine, lors qu'elle\n[[693.7]] n'est pas soutenue par la veue d'un interest present. </p>\n<p> [[693.8]] C'est pourquoy tout bien consideré, je croy que rien n'est plus avantageux aux\n[[693.9]] hommes, que d'estre sousmis à des princes, qui soyent egalement grands et éclairés. Un\n[[693.10]] prince est l'abregé de tout son peuple, on peut même dire en quelque façon qu'il est aux\n[[693.11]] autres ce que l'ame est aux corps, et qu'il fait plus que tout le reste. Et je trouve qu'un\n[[693.12]] poëte de mes amis, n'avoit pas grand tort de dire: </p>\n<p> [[693.13]] <i>Tu quoque nunc florens Ludovico Gallia rege</i> </p>\n<p> [[693.14]] <i>Acceptos uni disce referre Deos.</i>\n [[693.15]] Caligula souhaittoit que [tous] les Romains n'eussent qu'une teste afin de la pouvoir faire\n[[693.16]] trancher d'un seul coup à tout le peuple. Il le desiroit pour les rendre tous malheureux, et\n[[693.17]] nous le souhaitterons pour la felicité publique et nous nous rejouirons quand le vaste\n[[693.18]] corps d'une grande nation aura une teste dont les perfections fassent le commun bonheur.\n[[693.19]] Il ne faut qu'une ferme resolution d'un grand prince, pour faire reussir les plus beaux\n[[693.20]] desseins. Mais ces princes assez autorisés non seulement par leur merite mais encor par le\n[[693.21]] bonheur, c'est à dire par la providence sont fort rares. J'en ay familierement connu\n[[693.22]] d'infiniment éclairés, mais ils n'estoient ny assez puissans ny assez dégagés pour executer\n[[693.23]] les belles veues qu'ils avoient pour le soulagement de leur sujets et pour le bien de\n[[693.24]] tout le genre humain. </p>\n",
+  "number": "161₁.",
+  "title": "Gestrichener Ansatz",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:161₁. Gestrichener Ansatz GESTRICHENER ANSATZ Il est constant que de toutes les choses visibles l'homme est ce qui peut contribuer le plus au bonheur de l'homme; mais le mal est, qu'on ne s'unit pas assez et que chacun croit trouver son avantage par des routes particulieres, au lieu que s'ils travai...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

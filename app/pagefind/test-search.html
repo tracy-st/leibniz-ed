@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Leibniz Search</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .search-container {
+            margin: 20px 0;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Leibniz Search</h1>
+    <p>This is a simple test page to verify the search functionality works.</p>
+
+    <div class="search-container">
+        <div id="search"></div>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        // Test script to load pagefind
+        async function loadPagefind() {
+            try {
+                const { PagefindUI } = await import('./dist/pagefind/pagefind-ui.js');
+                new PagefindUI({
+                    element: '#search',
+                    showImages: false,
+                    showSubResults: true,
+                    excerptLength: 300
+                });
+                console.log('Pagefind loaded successfully');
+            } catch (error) {
+                console.error('Error loading pagefind:', error);
+                document.getElementById('results').innerHTML = '<p>Error loading search. Make sure you have built the project first with: npm run build</p>';
+            }
+        }
+
+        loadPagefind();
+    </script>
+</body>
+</html>

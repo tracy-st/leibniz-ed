@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_435",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 435,
+  "text": "[[1965.19]] <b>357.  De qualitatibus quae referuntur ad extensionem [1677 bis 1678 (?)]</b>\n [[1965.20]] <tab/>[1677 bis 1678 (?)] </p>\n<p> [[1966.1]] Considerare <Fn><i>Am Kopf</i>: Ens rat<angle bracket>ionis</angle bracket> realis effectio</Fn> possumus in rebus tum eas qualitates quae respondent quidem\n[[1966.2]] extensioni nihil tamen per se in ea mutant, quae sunt perceptio et voluntas, et alia id\n[[1966.3]] genus; tum vero eas quae referuntur ad extensionem. Haec sunt mutatio et conatus ad\n[[1966.4]] mutationem vel contra mutationem. Mutatio esse possit magnitudinis et situs; vel utriusque.\n[[1966.5]] Magnitudinis cum eadem materia in arctius vel amplius spatium ire fingitur. Situs\n[[1966.6]] seu loci cum fingimus materiae quantitate servata, esse motum, seu assumtis quibusdam\n[[1966.7]] partibus elementaribus fieri earum transpositionem; utriusque autem compositio est cum\n[[1966.8]] apparet quibus gradibus ab una magnitudine ad aliam sit transitum, et quod punctum\n[[1966.9]] cujusque situs cui respondeat. Nisus ad augendam vel minuendam magnitudinem intelligi\n[[1966.10]] potest proportionalis materiae compressae vel dilatatae. Potest tamen et alius fingi.\n[[1966.11]] Revera tamen hoc est Ens mathematicum, seu apparens, quod in omnibus suis partibus\n[[1966.12]] etiam minimis hoc modo in natura non reperitur, sed per spongiam explicari potest, quae\n[[1966.13]] idem praestat ad sensum. Possunt vero et aliae causae nisus ad dilatationem aut contractionem\n[[1966.14]] intelligi, quales calor et frigus. In tali autem nisu, vel etiam renisu, sequitur\n[[1966.15]] motus qui facillime effectus obtinetur nisi aliqua causa alium fieri jubeat. </p>\n<p> [[1966.16]] Si aliquod principium moveatur causa motus poni potest varia utcunque caetera\n[[1966.17]] autem ipsa connexione regantur; tunc nihil opus supponi quod non intelligatur in parte.\n[[1966.18]] Sed tamen et fingi possunt leges motus quarum efficiendarum ratio non constat quia\n[[1966.19]] tamen nihil illis inest impossibile, possunt assumi ut si diversi motus certa ratione\n[[1966.20]] contemperentur; causae motus variae intelligi possunt, seposita vi in materia mutandi,\n[[1966.21]] seposito item impulsu vel concursu; talis est attractio corporis ad corpus, item repulsus\n[[1966.22]] corporis a corpore; item adhaesio corporis ad corpus, quae referenda ad impedimenta\n[[1966.23]] tantum, si modo adhaesio nulla est, quae non revera sit attractio in exigua tamen distantia.\n[[1966.24]] Fingi etiam potest attractionem vel repulsionem valere in infinitum, aut contra certa\n[[1966.25]] distantia penitus evanescere. Fingi etiam possunt attractiones aut repulsus per lineas\n[[1966.26]] curvas. </p>\n<p> [[1967.1]] Haec quae de corpore diximus, possunt etiam fingi de ipso loco, quasi in puncto\n[[1967.2]] aliquo esset vis attrahendi, repellendi, retinendi. Idem de plaga aliqua concipi posset, ut\n[[1967.3]] in gravitate. Quod de loco idem est ac si fingeremus de corpore immobili. </p>\n<p> [[1967.4]] Licet etiam quasdam connexiones, inter se diversorum fingere, v.g. emissiones\n[[1967.5]] quasdam seu radiationes virtuales, ut cum ex sole emanat calor qui habet vim dilatandi,\n[[1967.6]] ex lumine lumen; huc suppositio de quovis puncto radii luminis rursus radiante. </p>\n",
+  "number": "357.",
+  "title": "De qualitatibus quae referuntur ad extensionem",
+  "date": "[1677 bis 1678 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:357. De qualitatibus quae referuntur ad extensionem [1677 bis 1678 (?)] [1677 bis 1678 (?)] Considerare Am Kopf: Ens rationis realis effectio possumus in rebus tum eas qualitates quae respondent quidem extensioni nihil tamen per se in ea mutant, quae sunt perceptio et voluntas, et alia id genus; tum...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_184",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 184,
+  "text": "<p> [[571.1]] <b>184. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[571.2]] Leipzig, 26. Februar 1707. [181.197.] </b></p>\n<p> [[571.7]] Vir Illustris et Excellentissime, Patrone longe gratiosissime. </p>\n<p> [[571.8]] Executus sum mandata Tua, et quod Bernardi MStum attinet Fritschium illud possidere\n[[571.9]] jam per literas d. 19. Febr. datas indicavi; ipsas vero Excellentiae Tuae Excellentissimi Baronis\n[[571.10]] de Schulenburg Secretario tradendas curavi, qui in eo jam erat ut se Dresdam conferret, ibique\n[[571.11]] Dnum Generalem expectaret, quem Dresdae per aliquod tempus moraturum esse putabat. Rex\n[[571.12]] etiam noster Serenissimus mutavit sedem, nec tam facile huc redibit. Causam ignoramus,\n[[571.13]] multique pacem haud diuturnam futuram esse augurantur. Alii tamen nihil inde mali verentur. </p>\n<p> [[571.14]] Academia nostra omni fere Studiosorum coetu orbata est, et si unquam, nunc certe feriae\n[[571.15]] nobis concessae sunt, sed haud gratae et proficuae, mihique tempus excursioni faciendae aptius\n[[571.16]] non posset contingere, si quidem commoda se offeret occasio, quam Tua me aliquando providentia\n[[571.17]] consecuturum esse confido. Caeterum quaecunque in posterum Excellentiae Tuae\n[[571.18]] gratia agam et non laboriosa mihi et jucunda videbuntur, qui me et mea studia cum omnibus\n[[571.19]] officiis atque obsequiis meis ex fide et formula antiqua lubens Excellentiae Tuae consecro et\n[[571.20]] dedico </p>\n<p> [[571.21]] Illustris atque Excellentissimi Nominis Tui Cultor perpetuus </p>\n<p> [[571.22]] M. G. Hanschius. </p>\n<p> [[571.23]] Dabam Lipsiae MDCCVII. IV. Calend. Martii. </p>\n<p> [[571.24]] A Son Excellence Monsieur de Leibniz Conseiller de sa Majesté le Roy de Prusse etc. à\n[[571.25]] Berlin </p>\n",
+  "number": "184.",
+  "title": "MICHAEL GOTTLIEB HANSCH AN LEIBNIZ",
+  "date": "Leipzig, 26. Februar 1707. [181.197.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:184. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ Leipzig, 26. Februar 1707. [181.197.] Vir Illustris et Excellentissime, Patrone longe gratiosissime. Executus sum mandata Tua, et quod Bernardi MStum attinet Fritschium illud possidere jam per literas d. 19. Febr. datas indicavi; ipsas vero Excellentiae Tuae E...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

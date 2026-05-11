@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_140",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 140,
+  "text": "<p> [[373.1]] <b>140. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[373.2]] Dijon, 29. August 1697. [138.147.]</b></p>\n\n<p> [[373.23]] Dijon le 29. Aoust <b>1697</b> </p>\n<p> [[373.24]] Il y a long tems monsieur que je n'ay recû de vos nouvelles, et que je n'ay eu l'honneur de\n[[373.25]] vous ecrire; Je me suis contenté de prier mons^#'r Pinsson de le faire et de vous envoyer les\n[[373.26]] ouvrages qui faisoient du bruit sur le Quietisme et surtout le livre de m^#'r de Meaux. Celluy de m^#'r\n[[373.27]] de Cambray ne se trouvant plus, il y en a adjousté quelques autres: ce demeslé entre ces deux\n[[373.28]] prelats faict toujours beaucoup de bruit. On me mande de Rome qu'on les amusera et qu'on ne\n[[373.29]] decidera Rien sur ce faict non plus que sur le livre du card^#'a^#'l Sfondrati; mons^#'r le card^#'a^#'l Noris\n[[374.1]] m'en parle ainsy dans sa lettre. <i>Antistites Cameracensis ac Meldensis suos Romam libros\n[[374.2]] miserunt, ac doctorum hominum judicia expetunt et expectant, privatas etiam ad me litteras\n[[374.3]] destinarunt, qui tamen nondum in partes abii, sed judicium sustineo. Haec nova concertatio\n[[374.4]] Rumores ex lectione libri Card^#'l^#'i^#'s Sfondrati exortos supressisse videtur in Galliis, uti etiam\n[[374.5]] Romae deferbuere, ubi nova subinde ingruentia negotia priora statim antiquant</i> etc. </p>\n<p> [[374.6]] On est dechaisné à Paris contre m^#'r de Cambray qui est relegué dans son archevesché;\n[[374.7]] beaucoup de dames de la cour ont eû ordre de se retirer pour le faict du Quietisme; Je croy\n[[374.8]] surtout que mons^#'r Pinsson vous aura envoyé les <i>journaux des scavants</i> qui vous regardent\n[[374.9]] comme je luy ay mandé et que je n'ay point ancor vû; le 1^#'e^#'r concerne l'extraict de la lettre que\n[[374.10]] vous m'aviés ecripte sur le systeme de mons^#'r des Cartes contraire à la Religion, et l'autre qui\n[[374.11]] vient de paroistre qui sont des reflexions sur cet extraict, qu'il presume estre de mons^#'r Regis.\n[[374.12]] Mons^#'r d'Avranches est de retour de Bourbon, où il n'a pas trouvé dans les eaux le meme\n[[374.13]] secours qu'il y a trouvé autrefois. Il en a rapporté le meme Rhumatisme qui l'y avoit mené, et\n[[374.14]] meme un peu plus violent, ce qu'il n'attendoit pas. Il est maintenant à Avranches, où il scaura\n[[374.15]] ce que l'on peut esperer de Coutances, pour ces actes du concile de Basle, et il le scaura avec\n[[374.16]] certitude. Il espere aussi d'achever là l'ouvrage, où il a eû occasion de parler des mots\n[[374.17]] saxoniques de Normandie; <i>Je vous supplie</i> me dit il entr'autres choses <i>de m'entretenir toujours\n[[374.18]] dans les bonnes graces de m^#'r Leibniz, pour le merite duquel je ne cede en estime à personne du\n[[374.19]] monde</i>; Il m'a écrit touchant mons^#'r Foucher (dont il ne scavoit pas la mort) dans les memes\n[[374.20]] sentimens que vous en aviés aussi bien que moy. Je ne scay mons^#'r si vous avés vû l'extraict que\n[[374.21]] m^#'r de Bauval a faict du livre de mons^#'r de Cambray dans son journal. M^#'r Bayle a mandé à un de\n[[374.22]] mes amis de Paris qu'on l'admiroit. Le fameux poete m^#'r Santeul de S^#'t Victor est venû mourir en\n[[374.23]] Bourgogne dans nostre ville de Dijon, on a faict mille epitaphes à son subjet et icy et à Paris. Je\n[[375.1]] l'ay faict comme les autres et son Cenotaphe aussi, car mess^#'r^#'s de S^#'t Victor nous l'enlevoient et\n[[375.2]] nous envient ce depost aussi bien que Paris. Il m'avoit promis des hymnes pour le S^#'t de nostre\n[[375.3]] village S^#'t Hermes martyr et prestre de Rome dont nous faisions hier la feste avec celle de\n[[375.4]] S^#'t Augustin. On ne me mande rien de Paris pour ce qui regarde les livres nouveaux si non une\n[[375.5]] edition nouvelle de Rabelais avec des notes et des observations de M^#'r Bernier de Blois auteur\n[[375.6]] de l'<i>Antimenagiana</i>. Mettés mons^#'r une enveloppe à ma lettre pour m^#'r de Spanheim. </p>\n<p> [[375.7]] Tout à vous Nicaise\n[[375.8]] <yi>Pour Vous Monsieur </p></p>\n",
+  "number": "140.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Dijon, 29. August 1697. [138.147.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:140. CLAUDE NICAISE AN LEIBNIZ Dijon, 29. August 1697. [138.147.] Dijon le 29. Aoust 1697 Il y a long tems monsieur que je n'ay recû de vos nouvelles, et que je n'ay eu l'honneur de vous ecrire; Je me suis contenté de prier mons^#'r Pinsson de le faire et de vous envoyer les ouvrages qui faisoient d...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

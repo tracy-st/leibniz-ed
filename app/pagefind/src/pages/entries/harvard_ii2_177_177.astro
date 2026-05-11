@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_177",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 177,
+  "text": "<p> [[595.1]] <b>179. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[595.2]] [Mitte Oktober 1692.] [177.186.]</b></p>\n<p> [[595.17]] Estratto della Risposta </p>\n<p> [[595.18]] Il Signor Abbate Stefani è al servitio del S^#'m^#'o Ernesto Augusto Duca d' Hanovera. Ma\n[[595.19]] l'Academia illustre di Wolfenbutel è nel dominio e sotto la protettione de due S^#'m^#'i fratelli\n[[595.20]] Rudolfo Augusto et Antonio Ulrico, conregenti. Il Signor Duca Antonio Ulrico favorisce\n[[595.21]] particolarmente l'Academia, essendo lui stesso versatissimo nelle lingue italiana e francese,\n[[595.22]] intelligentissimo nell' historia, poesia, musica, pittura, medaglie, machine, et havendo in\n[[595.23]] somma gusto finissimo di tutte le belle cose, per non parlar del governo, dove è gran maestro.\n[[595.24]] Tutti questi principi sono della S^#'m^#'a Casa di Bronsvic. </p>\n<p> [[595.25]] Quae de origine animae, de natura veritatum aeternarum, de principio motus quaeris,\n[[595.26]] facile intelligis breviter explicari satis non posse, cum totam pene philosophiam interiorem\n[[595.27]] involvant. Dicam tamen paucis in gratiam tuam, quid mihi verius videatur. </p>\n<p> [[595.28]] Si propagatio fit per decisionem partium, certum est animam ea ratione ex anima propagari\n[[595.29]] non posse, cum in indivisibili [consistat]. Quod si aliam propagandi rationem animo\n[[595.30]] designas, definitio ejus afferenda est, unde facile apparebit, utrum in animam quadrare possit. </p>\n<p> [[596.1]] Ideae creaturarum resultant ex idea Dei, ut idea numerorum ex idea unitatis. Itaque Deus\n[[596.2]] eo ipso dum sese intelligit, omnia possibilia mente complectitur, neque in ea re magis est\n[[596.3]] libertati locus, quam in derivatione numerorum ex repetitione unitatis, nec magis idea circuli\n[[596.4]] quam binarii aut ternarii arbitraria est. Assentior igitur Scholasticis non essentias creaturarum,\n[[596.5]] sed existentias esse contingentes; contra sentientium verba audio, mentem non capio. Recte ais\n[[596.6]] Deum sibi sufficere ut sit summe sapiens et felix; sed sciendum est creaturarum essentias nihil\n[[596.7]] aliud esse quam varias divinae perfectionis expressiones, quas nisi intelligeret Deus, nec se\n[[596.8]] ipsum satis intelligeret. Decretum liberum omne nascitur ex deliberatione, seu ex intellectu,\n[[596.9]] quae in Deo non quidem tempore, sed tamen signo rationis distinguuntur, et prius natura est\n[[596.10]] intelligere, quam velle. Deum autem posse suspendere cognitionem suam respectu certarum\n[[596.11]] creaturarum non magis credo, quam posse suae perfectioni limites praescribere; aut posse\n[[596.12]] numeros cognoscere tantum usque ad millenarium, non ultra. Quicquid Deus cognoscet aut\n[[596.13]] intelliget, semper cognovit, semper intellexit. </p>\n<p> [[596.14]] Prima origo motus est a potentia actrice rebus in ipsa creatione impressa, conservatio\n[[596.15]] eadem est, quae rerum. Omni substantiae inest intrinsecum agendi principium concreatum. In\n[[596.16]] omni corpore non tantum inest principium motus, sed et ipse motus actualis indefectibilis.\n[[596.17]] (: Qui <Fn>(: Qui ... videntur. :): <i>Dieser Satz wurde von Leibniz in eckige Klammern gesetzt.</i></Fn> corpora ut perfecte quiescentia concipere possunt, naturam eorum mihi intelligere non\n[[596.18]] videntur. :) De communicatione motus olim sententiam explicui. </p>\n",
+  "number": "179.",
+  "title": "LEIBNIZ AN MICHEL ANGELO FARDELLA",
+  "date": "[Mitte Oktober 1692.] [177.186.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:179. LEIBNIZ AN MICHEL ANGELO FARDELLA [Mitte Oktober 1692.] [177.186.] Estratto della Risposta Il Signor Abbate Stefani è al servitio del S^#'m^#'o Ernesto Augusto Duca d' Hanovera. Ma l'Academia illustre di Wolfenbutel è nel dominio e sotto la protettione de due S^#'m^#'i fratelli Rudolfo Augusto ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_630",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 630,
+  "text": "[[2764.7]] <b>492₅.  De his quae per se debita et illicita sunt\n[[2764.13]] <tit2><b>De his quae per se debita et illicita sunt</b> </tit2> </p>\n<p> [[2764.14]] Omne bonum malumve societatis per se debitum vel illicitum est.\n [[2764.15]] <tab/>Nam per accidens fieri potest, ut agenti necessarium vel impossibile sit, sive\n[[2764.16]] omnino, sive ex hypothesi miseriae aut felicitatis suae, quibus casibus utique\n[[2764.17]] praemiis poenisque in recte ratiocinante procurari impedirive non potest, per\n[[2764.18]] praecedentia. </p>\n<p> [[2764.19]] Ex quo sequitur malum cujusquam id per se illicitum est. </p>\n<p> [[2764.20]] Ex quo sequitur bonum cujusquam id per se debitum est. <Fn><i>Am Rande</i>: Unumquodque praesumitur licitum, unumquodque praesumitur indebitum.</Fn>\n [[2764.21]] <tab/>Nam (per definitiones bonorum malorumque societatis) malum bonumve\n[[2765.1]] ejus qui in societate est per se malum bonumve est societatis. Per se inquam.\n[[2765.2]] Nam per accidens fieri potest, ut alio alterius vel etiam hujus ipsius bono\n[[2765.3]] malove majore compensetur, quo casu non erit bonum malumve societatis. </p>\n<p> [[2765.4]] Quicquid debitum vel illicitum esse probabilius est, id per se debitum vel illicitum\n[[2765.5]] est.\n [[2765.6]] <tab/>Nam omne quod bonum malumve esse probabilius est, id per se procurare\n[[2765.7]] vel impedire bonum est. Idem est itaque de malo bonove societatis. Per se\n[[2765.8]] inquam, fieri enim potest, ut contrarium minus quidem verisimile, sed majus\n[[2765.9]] tamen bonum malumve sit.\n [[2765.10]] (In sequentibus cum aliquid debitum vel illicitum dicemus, subintelligemus: per se, nisi\n[[2765.11]] aliud appareat.) </p>\n",
+  "number": "492₅.",
+  "title": "De his quae per se debita et illicita sunt",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:492₅. De his quae per se debita et illicita sunt De his quae per se debita et illicita sunt Omne bonum malumve societatis per se debitum vel illicitum est. Nam per accidens fieri potest, ut agenti necessarium vel impossibile sit, sive omnino, sive ex hypothesi miseriae aut felicitatis suae, quibus c...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

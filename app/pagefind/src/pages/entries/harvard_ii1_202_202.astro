@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_202",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 202,
+  "text": "<p> [[638.14]] <b>184. LEIBNIZ AN CHRISTIAN PHILIPP</p>\n<p> [[638.15]] Hannover, 28. August (7. September) 1678. [216.]</b></p>\n<p> [[639.3]] à Hanover ce 28 d'Aoust 1678. </p>\n<p> [[639.4]] [ ... ] Je n'ay pas besoin de vous mander le détail de la <i>demonstration</i> de M. Römer\n[[639.5]] <i>touchant le mouvement de la lumiere</i>, puisque je la trouve dans le journal n^#'o 20. de l'anné[e]\n[[639.6]] 1676. et puisque vous avés maintenant tous ces journaux. Je serois bien aise d'apprendre là\n[[639.7]] dessus les sentimens de M. Hevelius. Car cette pensée est belle, et la matiere importante. Mons.\n[[639.8]] des Cartes avoue dans une de ses lettres que toute sa physique seroit renversée si l'on pouvoit\n[[639.9]] prouver que la lumiere demande du temps. [ ... ] </p>\n",
+  "number": "184.",
+  "title": "LEIBNIZ AN CHRISTIAN PHILIPP",
+  "date": "Hannover, 28. August (7. September) 1678. [216.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:184. LEIBNIZ AN CHRISTIAN PHILIPP Hannover, 28. August (7. September) 1678. [216.] à Hanover ce 28 d'Aoust 1678. [ ... ] Je n'ay pas besoin de vous mander le détail de la demonstration de M. Römer touchant le mouvement de la lumiere, puisque je la trouve dans le journal n^#'o 20. de l'anné[e] 1676. ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

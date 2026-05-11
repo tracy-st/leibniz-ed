@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_544",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 544,
+  "text": "[[2514.1]] <b>430.  Aus und zu Friedrich von Spee, Güldenes Tugend-buch [Mai 1677 bis August 1697 (?)]</b>\n [[2514.2]] <tab/>[Mai 1677 bis August 1697 (?)]\n[[2514.3]] <petit> <p>Leibniz hat bereits in seiner Mainzer Zeit Schriften von Spee, besonders aber dessen <i>Güldenes Tugend-Buch</i>,\n[[2514.4]] gekannt und hoch geschätzt (IV, 1 N. 43, S. 534). Kurfürst Johann Friedrich hatte ihm, wie er in einem\n[[2514.5]] Brief an Andreas Morell (20. Dezember 1696, I, 13 N. 259, S. 398 f.; vgl. ferner den Brief an Kurfürstin Sophie\n[[2514.6]] von Mitte August (?) 1697, I, 14 N. 26, S. 59) angibt, sein eigenes Exemplar für die Lektüre zur Verfügung\n[[2514.7]] gestellt. Die Wertschätzung kommt in verschiedenen Perioden seines Schaffens zum Ausdruck, so im Mai 1677\n[[2514.8]] in einer allgemeinen Beurteilung (N. 430₁), deren sorgfältige rhetorische Ausarbeitung auf einen größeren\n[[2514.9]] Rezipientenkreis hinweisen könnte. In diesem Zusammenhang könnte auch die kurze Notiz zu Spees Stil\n[[2514.10]] (N. 430₂) entstanden sein, für deren Datierung zwar keine konkreten Anhaltspunkte vorliegen, die jedoch\n[[2514.11]] inhaltliche Parallelen nicht nur in N. 430₁ besitzt, sondern auch viel später etwa in Briefen an Herzog Rudolf\n[[2514.12]] August (19. Mai 1693, I, 9 N. 34, S. 42) und den bereits genannten an Andreas Morell und Kurfürstin Sophie\n[[2514.13]] wieder anklingt. </p>\n<p> [[2514.14]] Bei N. 430₃ handelt es sich um eine von Leibniz angefertigte französische Übersetzung der Vorrede des\n[[2514.15]] <i>Güldenen Tugend-Buches</i>, deren Konzept nach Ausweis des in diesem Zeitraum häufig belegten Wasserzeichens\n[[2514.16]] im Jahre 1685 entstand. Von diesem Konzept ließ Leibniz im Jahre 1697 zwei Reinschriften anfertigen,\n[[2514.17]] um die Übersetzung Kurfürstin Sophie zugänglich zu machen. Sie dürfte Beilage zu seinem bereits oben\n[[2514.18]] erwähnten Brief wohl von Mitte August gewesen sein (I, 14 N. 26, S. 53-60), in dem er neben einer Bewertung\n[[2514.19]] Spees (S. 59) auch die Übersendung der zu einem früheren Zeitpunkt erstellten Arbeit vermeldet (que j'ay\n[[2514.20]] fait[e] autres fois,« S. 60). Die beiden heute erhaltenen Reinschriften - ob eine von ihnen an die Kurfürstin ging\n[[2514.21]] oder eine weitere, nicht mehr nachweisbare Reinschrift, ist nicht zu ermitteln - wurden auf demselben Papier\n[[2514.22]] und von derselben Schreiberhand wie der begleitende Brief an die Kurfürstin geschrieben und anschließend von\n[[2514.23]] Leibniz korrigiert. Die Art der vorgenommenen Korrekturen läßt darauf schließen, daß LH I 4, 8 Bl. 25-32 als\n[[2514.24]] Vorlage für LH I 4, 8 Bl. 19-24 (unsere Druckvorlage) fungierte. Bei der abschließenden Verbesserung der\n[[2514.25]] Reinschriften hat Leibniz ferner zusätzliche Korrekturen im Manuskript vorgenommen, die er ebenfalls nach <i>l^#'1</i>\n[[2514.26]] und <i>l^#'2</i> übernommen hat. </petit> </p>\n",
+  "number": "430.",
+  "title": "Aus und zu Friedrich von Spee, Güldenes Tugend-buch",
+  "date": "[Mai 1677 bis August 1697 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:430. Aus und zu Friedrich von Spee, Güldenes Tugend-buch [Mai 1677 bis August 1697 (?)] [Mai 1677 bis August 1697 (?)] Leibniz hat bereits in seiner Mainzer Zeit Schriften von Spee, besonders aber dessen Güldenes Tugend-Buch, gekannt und hoch geschätzt (IV, 1 N. 43, S. 534). Kurfürst Johann Friedric...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

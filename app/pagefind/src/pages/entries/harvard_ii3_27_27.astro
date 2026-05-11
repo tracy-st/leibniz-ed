@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_27",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 27,
+  "text": "<p> [[71.1]] <b>27. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[71.2]] [Hannover, Ende August 1695.] [26.31.]</b></p>\n\n<p> [[71.16]] Ex responsione: </p>\n<p> [[71.17]] Beasti me quod significas curaturum Te ne via posthuma edantur Tua. Sed rursus turbant,\n[[71.18]] quae de Testamento scribis. Scis neminem ultimae voluntatis suae meliorem esse curatorem\n[[71.19]] seipso. Valetudini Tuae optime ominor ex his quae scribis. Novi qui cum alvi duritie ad\n[[71.20]] magnam senectutem pervenere. Chocolaten quin sis expertus non dubito. Sed puto eam literarum\n[[71.21]] tuarum silentio damnari. Lacti tamen nihil aptius alias copulatur. </p>\n<p> [[71.22]] An vacaverit Tibi cum Bussingio communicare quae de <i>protogaeis</i> nuper scripsi, tum quid\n[[71.23]] de iis sentiat V. Cl. scire pervelim. Item quo loco sint M^#'s^#'a Hinkelmanni orientalia sed maxime\n[[71.24]] quid porro moliare. Doleo Jungii optima quaeque periisse. Utinam vir summus magis elaborasset\n[[71.25]] in stabiliendis propriis quam discutiendis alienis. Miror nihil pene medicum in schedis\n[[71.26]] ejus reperiri, magno indicio, etsi Medicinae doctorem, de arte utcunque constituenda desperasse. </p>\n",
+  "number": "27.",
+  "title": "LEIBNIZ AN VINCENT PLACCIUS",
+  "date": "[Hannover, Ende August 1695.] [26.31.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:27. LEIBNIZ AN VINCENT PLACCIUS [Hannover, Ende August 1695.] [26.31.] Ex responsione: Beasti me quod significas curaturum Te ne via posthuma edantur Tua. Sed rursus turbant, quae de Testamento scribis. Scis neminem ultimae voluntatis suae meliorem esse curatorem seipso. Valetudini Tuae optime omino...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

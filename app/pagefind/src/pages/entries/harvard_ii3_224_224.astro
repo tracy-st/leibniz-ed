@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_224",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 224,
+  "text": "<p> [[602.7]] <b>224. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[602.8]] Is sur Tille, 24. September 1699. [220.225.]</b></p>\n\n<p> [[602.15]] Is sur Tille le 24. 7^#'b^#'r^#'e <b>1699</b> </p>\n<p> [[602.16]] Vous reconnoistrés monsieur par l'incluse de mons^#'r le president Boisot, qu'il n'est point\n[[602.17]] entré dans ce que je luy ay écrit sur le dernier memoire perdû, ou qu'il n'i a point voulû entrer,\n[[602.18]] ce n'est pas faulte de luy avoir bien faict entendre; quel Remede à cela monsieur, sinon que\n[[602.19]] vous preniés la peine de le luy faire ancore entendre vous même. Il me tarde de scavoir des\n[[602.20]] nouvelles certaines de la santé de nostre cher mons^#'r Morel; j'ay mandé ce que vous nous en\n[[603.1]] avés dit à mons^#'r de Spanheim qui nous va bientost donner une scavante dissertation sur\n[[603.2]] quelques regles de la tragedie ancienne et sur les piêces dramatiques qu'il avoit commencée à\n[[603.3]] Paris à la priere de deffunct mons^#'r Menage, et qu'un de ses amis luy a faict tirer de son cabinet;\n[[603.4]] il y parlera par occasion de plusieurs choses et particulierement de l'année et des mois attiques\n[[603.5]] contre Gaza, Scaliger, le p. Petau et Samuel Petit. Il me mande que mons^#'r Dodwell a faict\n[[603.6]] imprimer à Oxford en 2 vol. 8^#'o les petits Geographes anciens avec des dissertations et des\n[[603.7]] remarques surtout sur le Scylax qui ne sont pas du goust de m^#'r Gronovius qui a faict imprimer\n[[603.8]] le dernier cet ouvrage, et qu'on mande de Hollande faire imprimer un livre contre m^#'r Dodwel,\n[[603.9]] rempli d'Invectives grossieres à son ordinaire. L'on me mande d'aillieurs que mons^#'r Dodwel\n[[603.10]] nous va donner les Antiquités de la Perse; vous ne me mandés point avoir recû <i>monumenta\n[[603.11]] coptica</i> du p. Bonjour que je vous ay envoyé il y a long tems, aussi bien qu'à monseig^#'r\n[[603.12]] d'Avranches dont j'attens les sentimens sur les ouvrages de ce pere et sur la lettre de mons^#'r\n[[603.13]] l'abbé de la Charmoye touchant l'origine des Nations et la Langue Celtique. Un de mes amis à\n[[604.1]] qui j'ay parlé du passage de Servet sur la circulation du sang dont vous m'avés ecrit; m'a\n[[604.2]] repondû en cette maniere: <i>Le passage de Servet touchant la Circulation du sang seroit bien\n[[604.3]] curieux à voir, envoyés le moy si vous l'avés: il fault qu'il soit tiré de quelqu'un de ses livres de\n[[604.4]] medecine, où il n'a mis que son nom de batême, et celluy de son pays Michael Villanovanus; la\n[[604.5]] question est de scavoir si on ne l'aura pas confondû avec le fameux Arnaud de Villeneuve</i> etc.\n[[604.6]] On travaille à la continuation de l'histoire Bizantine; c'est mons^#'r Boyvin nostre amy qui est à la\n[[604.7]] Bibliotheque du Roy, et qui est fort habile dans la langue Grecque. Je ne scay si mons^#'r Pinsson\n[[604.8]] vous aura envoyé l'histoire de <b>Ptolomée Auletes</b> de mons^#'r Baudelôt sur une Amethyst de\n[[604.9]] S.A.R. madame; les conjectures frequentes et agreables de cet Antiquaire vous auront diverti\n[[604.10]] autant que la varieté des flutes dont il parle avec profusion; il n'i en a point qui luy echappe\n[[604.11]] jusqu'aux Gascognes; c'est ainsy qu'il luy plaist d'expliquer ce mot <i>Vascas</i> qui est dans Solin.\n[[604.12]] Il a si peur de paroistre <greek>ămoýsow</greek>, qu'il ne craint pas de paroistre important et ennujeux, et\n[[604.13]] d'enfler son chalumeau quoy qu'<i>ex alieno</i> pour verifier le proverbe <i>Tibicinis vitam vivere</i>. </p>\n<p> [[604.14]] Le neveû du p. Pagi m'ecrit d'Aix en Provence qu'il travaille fort à mettre au nêt les\n[[604.15]] ouvrages de son oncle; je luy ay mandé de faire des reproches à mons^#'r Thomassin sur la\n[[604.16]] longueur à donner les lettres des scavants à mons^#'r de Peiresk qu'il promet il y a si longtems. </p>\n<p> [[604.17]] Nous aurons à la fin la vie de mons^#'r Saumaise par mons^#'r de La Mare; on m'ecrit de Dijon\n[[604.18]] qu'on la doit envoyer incessamment à mons^#'r de Spanheim pour la faire tenir en Hollande à m^#'r\n[[604.19]] Graevius qui la fera imprimer. Je suis mons^#'r tout à vous </p>\n<p> [[604.20]] <b>Nicaise</b>\n[[604.21]] <yi>Pour Monsieur Leibniz. <b>Hanovre</b> </p>\n",
+  "number": "224.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Is sur Tille, 24. September 1699. [220.225.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:224. CLAUDE NICAISE AN LEIBNIZ Is sur Tille, 24. September 1699. [220.225.] Is sur Tille le 24. 7^#'b^#'r^#'e 1699 Vous reconnoistrés monsieur par l'incluse de mons^#'r le president Boisot, qu'il n'est point entré dans ce que je luy ay écrit sur le dernier memoire perdû, ou qu'il n'i a point voulû e...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

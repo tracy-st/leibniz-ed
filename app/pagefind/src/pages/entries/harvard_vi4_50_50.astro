@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_50",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 50,
+  "text": "[[123.16]] <b>42.  De principiis [1679 bis 1685 (?)]</b>\n [[123.17]] <tab/>[1679 bis 1685 (?)]\n[[124.1]] <tit2><b>De principiis</b></tit2> </p>\n<p> [[124.2]] <p>Duo illa prima principia: unum rationis: <b>identica</b> <b>sunt vera, et contradictionem\n[[124.3]] implicantia sunt falsa</i>, alterum experientiae: <b>quod varia a me percipiantur</b>,\n[[124.4]] talia sunt, ut de iis demonstrari possit, primo demonstrationem eorum\n[[124.5]] impossibilem esse; secundo omnes alias propositiones ab ipsis pendere, sive si haec duo\n[[124.6]] principia non sunt vera, nullam omnino veritatem et cognitionem locum habere. Itaque\n[[124.7]] aut admittenda sunt sine difficultate, aut omni inquisitioni veritatis renuntiandum est.\n[[124.8]] Accedit quod nulla contra haec Principia afferri posset ratio dubitandi, quae non locum\n[[124.9]] habeat contra alias propositiones omnes. </p>\n<p> [[124.10]] Memini ingeniosum quendam virum (Episcopum Thiniensem) omnem evidentiam\n[[124.11]] revocare velle ad autoritatem, cui objiciebam etiam hominem solum posse habere scientiam.\n[[124.12]] Ille vero ita argumentabatur: Ea quae probantur seu evidentia redduntur vel ex\n[[124.13]] evidentibus probantur vel ex non evidentibus. Si ex non evidentibus, non poterunt inde\n[[124.14]] evidentia reddi. Sin ex jam evidentibus, de his iterum redibit quaestio, vel in infinitum,\n[[124.15]] nullaque erit evidentia; vel erunt quaedam per se evidentia. Sed unde sciemus ista per se\n[[124.16]] esse evidentia nisi hominum consensu, quae scilicet ab omnibus recipiuntur. <Fn><i>Unten auf Bl. 19 r^#'o</i>: Ego etsi concedam omnes homines plerisque in casibus duci autoritate (videatur S. Augustini libellus <i>de</i> [<i>utilitate</i>] <i>credendi</i>) et opinionem communem saepe ultimam esse analysin judiciorum nostrorum practicorum, puto tamen eum qui accurate meditari velit altiora reperturum judicandi principia.</Fn> Respondeo\n[[124.17]] ea per se evidentia esse, quibus sublatis omnis sublata est veritas. Et notabam praeterea\n[[124.18]] me aliqua demonstrare posse, nihil assumendo nisi concessa. Ut si quis opinionem\n[[124.19]] aliquam defendit, quam ego ostendere volo absurdam, assumam propositiones ab illo\n[[124.20]] concessas, et in legitima forma inde concludam contradictorium alicujus quod ipse\n[[124.21]] asseruit; ex quo sequitur falsitatem alicui ex propositionibus ab eo assumtis adesse, id est\n[[124.22]] eas non posse [esse] veras simul. Unde patet etiam non posse quenquam demonstrare\n[[125.1]] absurditatem nisi ejus propositionis quae plures assertiones sive concessiones involvit,\n[[125.2]] dum scilicet ex concessis argumentatus absurdum concludo. Unde revera omnis\n[[125.3]] demonstratio est ad absurdum deductio. Et demonstratio nullis indiget assumtis sive\n[[125.4]] principiis directis, sed tantum reflexis. Et ita cessat illa difficultas quae omnes torquet, de\n[[125.5]] modo quo ipsorum principiorum certi sumus, ex quibus demonstrationes ducuntur.\n[[125.6]] Dicendum enim est demonstrationes ex nullis assertionibus sed ex concessionibus sive\n[[125.7]] hypothesibus procedere, neque aliud agere, quam ut ostenda[n]t Hypotheses quasdam\n[[125.8]] inter se pugnare. Tantum ergo assumo principia reflexa seu indirecta vel formalia, primo\n[[125.9]] quod forma syllogistica sit bona, secundo quod contradictio sit absurda; principia vero\n[[125.10]] materialia seu materiae demonstrationis non alia adhibeo, quam illas ipsas hypotheses\n[[125.11]] adversarii quibus falsitatem inesse ostendo. Unde quodammodo omnis demonstratio est\n[[125.12]] ad hominem. </p>\n",
+  "number": "42.",
+  "title": "De principiis",
+  "date": "[1679 bis 1685 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:42. De principiis [1679 bis 1685 (?)] [1679 bis 1685 (?)] De principiis Duo illa prima principia: unum rationis: identica sunt vera, et contradictionem implicantia sunt falsa, alterum experientiae: quod varia a me percipiantur, talia sunt, ut de iis demonstrari possit, primo demonstrationem eorum im...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

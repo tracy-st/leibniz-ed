@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_93",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 93,
+  "text": "<p> [[299.1]] <b>93. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[299.2]] [Padua, Ende Oktober bis Anfang November 1704]. [92.99.] </b></p>\n<p> [[299.15]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[299.16]] Non <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> posso esprimere il dolore che fin ora m'ha cagionato il vedermi privo di sue risposte,\n[[299.17]] che io tanto bramava per sodisfare gli Ecc^#'m^#'i Signori Riformatori dello Studio, che vorrebbono\n[[299.18]] venire presto all'elettione del Publico Matematico, e fanno grand^#'m^#'o caso della propositione e\n[[299.19]] testimonianza di V. S. Ill^#'m^#'a, che oggi con giustitia hà il primo luogo ed il maggiore grido, non\n[[299.20]] dico fra soli Matematici, ma fra i piu celebri dotti e letterati del Secolo, ed infatti avendo un\n[[299.21]] Nobile proposto all'Ecc^#'m^#'o Magistrato un Soggetto suo partiale per la catedra delle Matematiche,\n[[299.22]] ed essendogli stato risposto che se gli offeriva un altro per l'istesso impiego proposto dal tanto\n[[299.23]] celebre Leibinitio; Quello tacque, e disse che non voleva piu altro, per la veneratione e stima\n[[299.24]] del nome di V. S. Ill^#'m^#'a. Or ecco oggi rasserenato il mio animo coll'improviso arrivo di due sue\n[[299.25]] lettere, che mi capitano in Padova, ove ora mi fermarò per le publiche lettioni, le quali con\n[[299.26]] sommo mio contento m'assicurano della continuatione del suo amore e stimati^#'m^#'o patrocinio, e\n[[299.27]] questa Universita, e comunicare alla nostra Italia quella meravigliosa e tanto profittevole mi\n[[299.28]] fanno vivamente sperare, che il Sig^#'r^#'e Herman possa ben presto venire ad erudire ed illustrare\n[[299.29]] Analise, che trae la sua prima origine dall'elevata, e profonda Mente di V. S. Ill^#'m^#'a. Io poi che\n[[299.30]] teneramente amo l'ingenua e candida natione alemana, e principalmente V. S. Ill^#'m^#'a, che\n[[299.31]] riguardo come mio grand^#'m^#'o ed affettuosissimo Benefattore, vederei qui molto volintieri il\n[[299.32]] dott^#'m^#'o Sig^#'r^#'e Herman per essere Alemano, e poi proposto da V. S. Ill^#'m^#'a, e gia penso di farlo\n[[300.1]] dimorare vicino alla mia casa, per goderlo e servirlo a mio modo nel caso che si risolvesse a\n[[300.2]] venire, con esibirgli tutto me stesso e l'istessa mia piccola casa con una vera e germana\n[[300.3]] cordialità, e potrà V. S. Ill^#'m^#'a assicurarlo, [che] sarò gelosissimo e partialissimo del suo onore, e\n[[300.4]] l'assisterò come se fosse me stesso. Prego dunque V. S. Ill^#'m^#'a solecitare fra tanto le risposte e\n[[300.5]] risolutioni del Sig^#'r^#'e Herman mentre io darò subito parte di quanto essa mi scrive a gli Ecc^#'m^#'i\n[[300.6]] Riformatori, e farò tenere vuota e sospesa la catedra fin a tanto che si riceva la sua deliberatione.\n[[300.7]] Il Sig^#'r^#'e Ramazzini sì trattiene ancora in Modona, al suo arrivo la servirò. La riverisco e mi resto </p>\n<p> [[300.8]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e M. A. Fardella </p>\n",
+  "number": "93.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "[Padua, Ende Oktober bis Anfang November 1704]. [92.99.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:93. MICHEL ANGELO FARDELLA AN LEIBNIZ [Padua, Ende Oktober bis Anfang November 1704]. [92.99.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Non Am Kopf der Seite von Leibniz' Hand: resp posso esprimere il dolore che fin ora m'ha cagionato il vedermi privo di sue risposte, che io tanto bram...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

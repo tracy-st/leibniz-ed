@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_262",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 262,
+  "text": "<p> [[804.1]] <b>265. LEIBNIZ AN MARIE DE BRINON</p>\n<p> [[804.2]] Wolfenbüttel, 30. Mai (9. Juni) 1694. [172.272.]</b></p>\n<p> [[804.16]] [ ... ] Car mettant la contrainte à part, l'experience a fait voir, qu'il est difficile et presque\n[[804.17]] impossible de venir à la conviction, quelques écrits qu'on publie, et quelques colloques ou\n[[804.18]] conferences qu'on tienne; puisqu'il y a maintenant de part et d'autre de tres habiles gens, et\n[[804.19]] d'argumens tres plausibles, soit qu'on se serve de l'écriture, ou des peres, ou de la raison; en\n[[804.20]] sorte qu'une seule controverse, si on vouloit s'opiniastrer à l'épuiser, pourroit devenir un\n[[804.21]] procés dont la discussion demanderoit la vie d'un homme, quand il ne voudroit faire que cela.\n[[804.22]] Et après tout il arriveroit ce qu'on voit dans des procés difficiles, qu'à la fin on se trouveroit\n[[804.23]] aussi embrouillé, et plus encor que dans les commencemens; et cela d'autant plus, que dans les\n[[804.24]] procés, les juges et les ordonnances tiennent la main à faire observer aux disputans un certain\n[[804.25]] ordre, au lieu que dans les controverses de religion chacun donnant aux choses un tour qui luy\n[[804.26]] paroist le plus avantageux pour son parti, il y a tant de routes et tant d'écarts, qu'on ne finira\n[[804.27]] jamais; à moins que de convenir d'une certaine nouvelle Logique, qui est encor à inventer, et\n[[804.28]] qui deuvroit faire dans les controverses ce que les ordonnances font dans les procés, et bien plus\n[[805.1]] encor; (: puisque <Fn>(: puisque ... opposées. :): <i>Diese Passage hat Leibniz in eckige Klammern gesetzt, wohl um sie von der Abfertigung auszuschließen.</i></Fn> cette Logique deuvroit nous donner une balance des raisons, inconnue\n[[805.2]] jusqu'icy, mais necessaire pour determiner visiblement quel parti on doit choisir, lors qu'il y a\n[[805.3]] de deux costés un grand nombre de vraisemblances plausibles, mais opposées. :) Ainsi pendant\n[[805.4]] que les esprits ne sont pas encor preparés, et qu'il n'y a point de gouvernement commun, qui les\n[[805.5]] lie ensemble, il ne faut point s'attendre à convaincre ses adversaires. [ ... ] </p>\n",
+  "number": "265.",
+  "title": "LEIBNIZ AN MARIE DE BRINON",
+  "date": "Wolfenbüttel, 30. Mai (9. Juni) 1694. [172.272.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:265. LEIBNIZ AN MARIE DE BRINON Wolfenbüttel, 30. Mai (9. Juni) 1694. [172.272.] [ ... ] Car mettant la contrainte à part, l'experience a fait voir, qu'il est difficile et presque impossible de venir à la conviction, quelques écrits qu'on publie, et quelques colloques ou conferences qu'on tienne; pu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

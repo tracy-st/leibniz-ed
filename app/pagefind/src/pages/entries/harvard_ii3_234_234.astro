@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_234",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 234,
+  "text": "<p> [[635.5]] <b>234. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[635.6]] Helmstedt, 16. April 1700. [233.235.]</b></p>\n\n<p> [[635.11]] Perillustris Domine, </p>\n<p> [[635.12]] Immatura morte oppressus est Caspar Cörberus, V. C. si tamen fas est mortem vocare, qua\n[[635.13]] viri mortalitas magis finita est, quam vita. Obiit enim, ut audio, placide. Ego, ne aut excessisse,\n[[635.14]] aut non implesse officii mei partes videar; constitui ad Perillustrem Potentissimi Electoris\n[[635.15]] Vestri Cancellarium hanc rem ea, qua par est, devotione, nec Te inscio, referre, ut mei aliqua\n[[635.16]] habeatur ratio. In literis enim, quibus quod nunc gero munus demandatum est, diserte legitur:\n[[635.17]] <i>Dagegen wir ihm im Nahmen unsers Chur- und Fürstl. Hauses hiemit die gnädigste Zusage\n[[635.18]] gethan, daß er bey befindenden seinem Fleis und guter unterweisung der jugend, wenn sich\n[[635.19]] über kurtz oder lang eine seinen studiis conforme vacanz bey dem ordinariorum Philosophiae\n[[635.20]] Professorum numero ereugnen wird, zu derselben verstattet, und mit dem salario, so Ihme\n[[635.21]] alsdann gebühren wird, versehen werden soll.</i> </p>\n<p> [[636.1]] Haec ego Tibi indicanda existimavi, Indulgentissime Here, ut aut consilium meum confirmare,\n[[636.2]] aut errorem emendare digneris. Vale. Deus Te salvum florentemque praestet. Scrib. d.\n[[636.3]] XVI. April. MDCC. Helmstadii. </p>\n<p> [[636.4]] Perill. Nom. T. subjectissimus, E. S. Cyprianus, Acad. Jul. Prof. Publ.\n[[636.5]] <yi><i>A Son Excellence Monsieur Leibnitzius, Conseiller privé de S.A.E. de Bronsvic et Lunebourg.\n[[636.6]] Hannover. par couvert.</i> </p>\n",
+  "number": "234.",
+  "title": "ERNST SALOMON CYPRIAN AN LEIBNIZ",
+  "date": "Helmstedt, 16. April 1700. [233.235.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:234. ERNST SALOMON CYPRIAN AN LEIBNIZ Helmstedt, 16. April 1700. [233.235.] Perillustris Domine, Immatura morte oppressus est Caspar Cörberus, V. C. si tamen fas est mortem vocare, qua viri mortalitas magis finita est, quam vita. Obiit enim, ut audio, placide. Ego, ne aut excessisse, aut non impless...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

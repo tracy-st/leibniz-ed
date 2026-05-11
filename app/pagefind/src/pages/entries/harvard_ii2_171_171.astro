@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_171",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 171,
+  "text": "<p> [[581.1]] <b>173. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[581.2]] Padua, 25. September [1692]. [171.177.]</b></p>\n<p> [[581.11]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[581.12]] L'altro giorno incontrandomi casualmente con il Sig^#'r^#'e Mendelino hebbi notitia, che qui era\n[[581.13]] capitato l'Abbate Stefani, che vive al servitio di cotesto Principe. Questo av[v]iso mi pervenne\n[[581.14]] tardi trovando il Sig^#'r^#'e Abbate in punto di partirsi, non havendo havuto tempo di mettere insieme\n[[581.15]] alcune scritture per inviarle a V. S. Ill^#'m^#'a attendendo dal Sig^#'r^#'e Marchese del Pozzo, che si\n[[581.16]] trattiene in Verona, l'Ongarello con alcune altre notitie circa la Casa Estense, solamente gli\n[[581.17]] consegnai le due <i>Gallerie</i> del Marino, con un Fulvio Testi, che mi furono da essa richieste, a cui\n[[581.18]] aggionsi un libretto per li Bombisti, nuovamente pubblicato dal Sig^#'r^#'e Alberghetti, come anche\n[[581.19]] alcune mie tesi, sostenute molti anni sono dal Sig^#'r^#'e Rozzini Nepote del Sig^#'r^#'e Procuratore\n[[581.20]] Rozzini, acciò V. S. Illu^#'m^#'a conosca con quanta buona volontà, ed attentione hò istruito questa\n[[581.21]] Nobiltà, attaccandomi sul principio alla Filosofia cartesiana non ostante il fremito de' Scolastici,\n[[581.22]] che non volevano ascoltare che il solo Aristotile. Mi sono informato dall'istesso Sig^#'r^#'e\n[[581.23]] Abbate Stefani della qualità di cotesto Clima, e dell'Illustre Accademia di Volfembutel, e ne\n[[581.24]] sono rimasto contentissimo, havendomi confermato, quanto essa mi accennò nell'ultima sua, il\n[[581.25]] che mi hà magiormente animato a sollecitare il mio viaggio, e fare tutto per indurre alcuni\n[[581.26]] Giovani nobili di questo Dominio a portarsi in una Accademia favorita con speciale protettione\n[[582.1]] da un Principe, non meno potente, che letterato, ove coll'insegnamento delle più belle arti\n[[582.2]] cavaleresche si coltivano a meraviglia l'ingegno, ed il costume. Il Sig^#'r^#'e Abbate mi hà detto tanto\n[[582.3]] bene di cotesto Paese, havendomi interamente capacitato dell'ottima Morale, e soavissima\n[[582.4]] indole di cotesta Gente, che sospiro il fine di questo reggimento, per eseguire quanto hò\n[[582.5]] promesso, e fermamente deliberato, piangendomi il cuore di dovere ancora passare l'inverno\n[[582.6]] qui, e mi creda, che non abadarei alli rigori del freddo, e mi partirei subito, se gl'onesti motivi,\n[[582.7]] che nelle mie passate l' hò esposto, non m'obligassero a trattenermi qui questi altri pochi mesi. </p>\n<p> [[582.8]] Vorrei sentire il parere di V. S. Illu^#'m^#'a circa l'origine dell'Anima nostra, an scilicet sit\n[[582.9]] immediate creata a Deo, an potius ex traduce per propagationem, etenim mihi non videtur\n[[582.10]] saltem improbabile Animam rationalem propagari, non more corporum, sed modo spirituali\n[[582.11]] pure intelligibili, qui non pugnet cum Animae immortalitate, et spiritualitate. Vellem etiam a te\n[[582.12]] scire, an in Deo praeter Ideam sui, eluceat aliqua Idea puta rerum possibilium, et producibilium,\n[[582.13]] quae sit etiam necessaria, et naturalis ante omne liberum decretum. Scholastici cum Aquinate,\n[[582.14]] et Scoto sustinent ante omne liberum Dei decretum dari in Deo Scientiam rerum possibilium,\n[[582.15]] quam Simplicis intelligentiae appellant; mihi autem videtur in Deo tantum Ideam sui esse\n[[582.16]] essentialem, naturalem, et necessariam, Ideas vero aliarum rerum, quae non sunt Deus, esse\n[[582.17]] contingentes, arbitrarias, a libero Dei decreto pendentes, cum Deo sufficiat Idea sui, ut sit\n[[582.18]] infinite sapiens, sicuti et amor sui, ut sit infinite felix. Hinc moveri potest quaestio an Deus\n[[582.19]] suspendere possit cognitionem alicujus creaturae existentis, ut de ipsa nil actu Deus cogitet.\n[[582.20]] Quid citra erroris suspicionem statuendum sit de origine motus prorsus ignoro, dubito enim an\n[[582.21]] Corpori insit intrinsecum principium motus, eo modo quo Menti inest intrinsecum principium\n[[582.22]] cogitandi, neque modum quo corporum motus propagatur et communicatur satis intelligo,\n[[582.23]] quidquid recenter Cartesianae Philosophiae sectatores asserant. </p>\n<p> [[582.24]] Coll'Ordinario vegnente le darò parte del profitto, che hò cavato dalla sua universalissima\n[[582.25]] regola per l'Equationi, mentre che adesso non hò tempo ed il Corriere si parte. </p>\n<p> [[582.26]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o S^#'r^#'e vero Fardella </p>\n<p> [[582.27]] Padova 25 Settembre </p>\n",
+  "number": "173.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 25. September [1692]. [171.177.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:173. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 25. September [1692]. [171.177.] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o L'altro giorno incontrandomi casualmente con il Sig^#'r^#'e Mendelino hebbi notitia, che qui era capitato l'Abbate Stefani, che vive al servitio di cotesto ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

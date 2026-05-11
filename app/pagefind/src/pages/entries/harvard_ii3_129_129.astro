@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_129",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 129,
+  "text": "<p> [[346.20]] <b>129. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[346.21]] Venedig, 12. Juli 1697. [128.130.]</b></p>\n\n<p> [[347.1]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o </p>\n<p> [[347.2]] Nella settimana passata consegnai al Sig^#'r^#'e Mendelino una mia lettera ove inclusi la copia\n[[347.3]] del diploma d'Enrico Duca di Sassonia per l'investitura d'una Contea fatta al Monastero delle\n[[347.4]] Carceri, e spero che già l' habbia ricevuta, perciò divotamente supplico V. S. Ill^#'m^#'a darmene\n[[347.5]] subito avviso per mia sicurezza, che non vorrei si smarrisse un'antichità cotanto ricercata, e\n[[347.6]] trovata con molto stento, e somma diligenza. Io ne tengo appresso di me un'altra copia per tutto\n[[347.7]] quel che potesse accadere. Se V. S. Ill^#'m^#'a desidera qualche altra cosa spettante a cotesta Serenissima\n[[347.8]] Casa, mi comandi pure liberamente che adoperarò tutto il mio talento per servirla. Io\n[[347.9]] metto in opera tutta la mia industria per ammassare soldo bastante a mettermi in viaggio, e\n[[347.10]] nessuna cosa più sospiro, quanto rivederla, e di presenza ringratiarla delle molte gratie che ella\n[[347.11]] m' hà compartite, e piacesse a Dio potessi in parte scoprirle la mia gratitudine. Il nostro\n[[347.12]] commune Amico la saluta, e si raccomanda al suo stimatissimo patrocinio, acciò potesse costà\n[[347.13]] stabilirsi colla quiete che desidera. Io gli do buone speranze, e lo consolo per la sicurezza che\n[[347.14]] hò dell'amore generoso, e tenero di V. S. Ill^#'m^#'a che così distintamente lo favorisce. Già si dà\n[[347.15]] principio alla stampa del mio libro sopra la natura dell'Anima secondo la mente di Sant'Agostino,\n[[347.16]] in cui leggerà quanto essa qui mi communicò sopra il sistema e costitutione delle cose\n[[347.17]] coll'elogio dovato al di lei raro e singolarissimo talento. A richiesta di questi Nobili stampo\n[[347.18]] dodici mie lettere sopra il vero metodo di studiare, e ciò a fine di introdurre lo studio delle\n[[347.19]] buone lettere, e svellere tanti pregiuditii che nodriscono con tanto detrimento della Verità le\n[[347.20]] Scuole. Ecco qui inclusa la prima lettera, a cui succederà la seconda in cui s'espongono gli\n[[347.21]] abusi e la corruttione dell'Eloquenza italiana. Il titolo si è <i>I Grammatici, e Rettorici alla\n[[347.22]] censura</i>; se lo stile le piace, di mano in mano che s'andarà stampando le mandarò i fogli che\n[[347.23]] seguono. Il Sig^#'r^#'e Conte Rinaldini s'è partito per Ancona sua Patria, havendo abbandonata la\n[[347.24]] catedra, e gli Ecc^#'m^#'i Riformatori dello Studio, mostrano genio di conferire a me il primo posto di\n[[347.25]] filosofo per l'assenza di questo celebre Uomo. La priego dell'onore de' suoi stimatissimi\n[[347.26]] comandi e persuadersi che inalterabilmente sono\n [[347.27]] /  Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Obg^#'m^#'o, Cord^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella\n [[347.28]] /  Venetia 12 Luglio 1697 </p>\n",
+  "number": "129.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 12. Juli 1697. [128.130.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:129. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 12. Juli 1697. [128.130.] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o Nella settimana passata consegnai al Sig^#'r^#'e Mendelino una mia lettera ove inclusi la copia del diploma d'Enrico Duca di Sassonia per l'investitura d'una Contea ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

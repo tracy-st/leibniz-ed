@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_56",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 56,
+  "text": "[[136.18]] <b>45₁.  Erster Ansatz ERSTER ANSATZ </p>\n<p> [[137.1]] Sapientiam nihil aliud esse arbitror, quam Scientiam foelicitatis, et veram eruditionem\n[[137.2]] tanquam apparatum ad sapientiam esse habitum animi plurimis ad bene beateque\n[[137.3]] vivendum notitiis instructi.\n [[137.4]] <petit> </p>\n<p> [[137.5]] <i>Leibniz hat den in Kleindruck folgenden Abschnitt durch die nachstehende Überarbeitung ersetzt</i>: </p>\n<p> [[137.6]] Sed cum maximum nobis sit commercium cum tota rerum natura, multaque nos juvare et laedere possint,\n[[137.7]] opus est nobis multiplici cognitione et nostrae Mentis et eorum quae in nos agere aut a nobis pati possunt; sed\n[[137.8]] maxime expetenda est scientia de Universo seu de causis rerum, ubi super omnia de Substantia perfectissima\n[[137.9]] quam Deum vocant (ex qua cum aliis omnibus nos quoque orimur et pendemus) summo studio cogitandum est.\n[[137.10]] Hoc enim cognito jam facilius et perfectius nostrae quoque naturae potentiam et limites, dignitatem et officium,\n[[137.11]] principia et fines discemus et quoniam corpore quoque praediti sumus, quod non tantum naturam cum aliis\n[[137.12]] corporibus communem habet, sed et multis modis expositum est aliorum auxiliis vel injuriis non tantum\n[[137.13]] proprietates corporum ratione cognoscendae sunt, quod <b>Mathematicae</b> scientiae est, sed et qualitates\n[[137.14]] quaedam confuse tantum cognitae experientia indagandae sunt, ubi ad multa particularia descendere cogimur,\n[[137.15]] quibus naturalis historia continetur et <b>physicae</b> atque denique praeter alias Artes <b>Medicina</b> inaedificatur.\n[[137.16]] Verum cum nihil Menti Humanae sit utilius quam aliae Mentes cogimur aliorum quoque hominum, et omnino\n[[137.17]] totius humani generis et quantum licet aliarumque quoque substantiarum spiritualium res cognoscere, quod\n[[137.18]] <b>Historiam Civilem</b> vocant, cui superstruitur et <b>Scientia Civilis</b>, qua non <b>politicen</b> tantum sed et\n[[137.19]] <b>jurisprudentiam</b>, et si historiam Ecclesiae addas etiam <b>Theologiam Christianam</b> comprehendo,\n[[137.20]] tanquam ejus reipublicae leges continentem cujus se Regem Deus ipse peculiari ratione ostendit. </petit> </p>\n<p> [[138.1]] Sed cum maximum nobis sit commercium cum tota rerum natura, multaque nos\n[[138.2]] juvare et laedere possint, opus est nobis multiplici cognitione et nostrae Mentis et eorum\n[[138.3]] quae in nos agere aut a nobis pati possunt; sed maxime expetenda est scientia de Universo\n[[138.4]] seu de causis rerum, inprimis de autore omnium Deo, a quo ut alia cuncta, ita et felicitas\n[[138.5]] nostra pendet, deinde de natura et statu aliarum mentium, denique de natura corporea,\n[[138.6]] variisque corporum qualitatibus. Haec enim omnia ad mala vitanda bonaque procuranda\n[[138.7]] aliquando conferre possunt. </p>\n<p> [[138.8]] Hinc sequitur interesse ad foelicitatem humani generis, ut condatur Encyclopaedia\n[[138.9]] quaedam, seu ordinata collectio Veritatum, quoad ejus fieri potest ad omnia utilia inde\n[[138.10]] deducenda sufficientium. Eaque erit instar aerarii publici, cui omnia praeclare inventa\n[[138.11]] atque observata inferri possint. Sed quia maximae molis futura esset, praesertim pro his\n[[138.12]] quae ad historiam civilem ac naturalem pertinent, interea opus est <b>Scientia</b> quadam\n[[138.13]] <b>Generali</b>, qua principia rationis atque experientiae primaria contineantur, quae virum\n[[138.14]] praestantem nosse decet, caeteris nimis minutis ac multiplicibus ad cujusque vitae generis\n[[138.15]] cultores nunc transmissis, saltemque in vasta illa inventaria relatis, accedente tamen\n[[138.16]] inveniendi judicandique Methodo, qua specialissima quaeque etiam ubi opus quantum in\n[[138.17]] humana potestate est, ex principiis illis non admodum vastis duci possint. Interdum enim\n[[138.18]] quae minuta videri possent, in re politica atque oeconomica, in re militari, in Medicina\n[[138.19]] maximae utilitatis fuere. </p>\n<p> [[138.20]] Atque haec intelligo de hominibus qui aliis quam maxime prodesse velint, nam qui\n[[138.21]] sibi fere soli vivere volet, plerisque istis carere potest; sufficit enim animae cognitio Dei\n[[138.22]] et sui, et paucae facilesque sed magnae veritates, et constans voluntas secundum illas\n[[139.1]] vivendi. Nec quicquam amplius requiritur ad perpetuam felicitatem quam Deum super\n[[139.2]] omnia amare, quod est unum necessarium, natura quoque nostra tam paucis contenta est,\n[[139.3]] ut homini in se reducto et saltem sanitate fruente ad vitam hanc etiam commode transigendam\n[[139.4]] magna scientia opus non sit. </p>\n<p> [[139.5]] Sed non ideo Scientiae piis viris spernendae sunt, quemadmodum enim sunt qui\n[[139.6]] terram colunt, arbores plantant, animalia educant instruuntque, ita esse oportet quibus\n[[139.7]] ipsius humani generis perfectionem augere et manifestata ubique Dei sapientia divino\n[[139.8]] amore accendere animos propria cura sit; et sane quanto quisque ingenio ac facultatibus\n[[139.9]] potior est, eo majora pulchrioraque tentare debet. </p>\n",
+  "number": "45₁.",
+  "title": "Erster Ansatz",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:45₁. Erster Ansatz ERSTER ANSATZ Sapientiam nihil aliud esse arbitror, quam Scientiam foelicitatis, et veram eruditionem tanquam apparatum ad sapientiam esse habitum animi plurimis ad bene beateque vivendum notitiis instructi. Leibniz hat den in Kleindruck folgenden Abschnitt durch die nachstehende ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

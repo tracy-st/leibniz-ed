@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_225",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 225,
+  "text": "<p> [[605.1]] <b>225. LEIBNIZ AN CLAUDE NICAISE</p>\n<p> [[605.2]] Hannover, 20./30. September 1699. [224.228.]</b></p>\n\n<p> [[605.11]] Lors que je plaignois le plus, Monsieur, la perte apparente de ce que vous m'aviés envoyé\n[[605.12]] dernierement de la part de Monsieur le President Boisot, dont on ne peut pas encor apprendre\n[[605.13]] des nouvelles; le bonheur a voulu que j'ay trouvé un moyen de la reparer en quelque facon, en\n[[605.14]] retrouvant le memoire ou Liste que Mons. le President m'avoit envoyé il y a quelques années\n[[605.15]] pour en choisir. Je luy écris donc là dessus, et vous supplie de recommander la lettre et son\n[[605.16]] contenu. </p>\n<p> [[605.17]] Monsieur Morel est encor allé aux eaux chaudes, mais c'est à celles de Carlsbad. Je\n[[605.18]] souhaitte, qu'il les trouve meilleures que celles de Töpliz. C'est Mons. le Comte de Schwarzbourg\n[[605.19]] (à qui il est) qui m'a dit son dessein à Bronsvic. Je ne crois pas qu'il soit encor en estat de\n[[605.20]] se servir de sa main pour écrire. Cependant son grand ouvrage ne laisse pas d'avancer, et\n[[605.21]] Monsieur le Comte m'a dit, qu'on tachera de donner au moins au plus tost une partie achevée,\n[[605.22]] et en estat de paroistre. S'il estoit assez aidé par quelques grands princes, peut-estre le pourroit\n[[605.23]] il encor donner tout entier, c'est ce que je souhaitte de tout mon coeur. </p>\n<p> [[605.24]] Vous aurés vû apparemment déja le volume des lettres d'Hubertus Languetus que Monsieur\n[[605.25]] Ludovici professeur en philosophie à Hall en Saxe (: qui est une Université fondée par\n[[605.26]] l'Electeur de Brandebourg presentement regnant :) a donné au public, comme je vous avois dit,\n[[606.1]] qu'il feroit. Il y a le pourtrait de Languetus en taille douce que l'Envoyé de France en\n[[606.2]] Wurtemberg parent de l'auteur, a fourni à l'Editeur, avec la vie de Languetus tirée des celebres\n[[606.3]] Bourguignons de Monsieur de la Mare. Comme vous estes comme je crois de ce pays là, cela\n[[606.4]] vous regarde. Mais pourquoy ne fait on pas imprimer l'ouvrage de Mons. de la Mare, achevé ou\n[[606.5]] non; et ce que se trouve encor de feu Mons. Lantin? </p>\n<p> [[606.6]] Vous m'aviés parlé un jour d'un sçavant homme, qui avoit travaillé <i>de re diplomatica</i>; n'y\n[[606.7]] at-il point d'esperance que cet ouvrage paroistra un jour? </p>\n<p> [[606.8]] Les lettres à Peireskius tardent fort à venir. </p>\n<p> [[606.9]] Vous sçaurés que dans la nouvelle Edition du <i>Corpus Byzantinum</i> qu'on entreprend en\n[[606.10]] Hollande, il y aura l'Histoire non encor imprimée de Genesius sur une copie que feu Mons.\n[[606.11]] Jean Andreas Bosius tres sçavant homme de Leipzic, avoit tiré du Manuscrit de la Bibliotheque\n[[606.12]] Pauline de cette ville, qui est peut estre l'unique Manuscrit qu'on en aye. </p>\n<p> [[606.13]] Je voudrois qu'on donnât en France un volume ou deux à part de ce que les libraires de\n[[606.14]] Hollande insereront de nouveau dans leur edition, à fin que ceux qui ont l'Edition de Paris\n[[606.15]] ayent tout par ce moyen. </p>\n<p> [[606.16]] On me mande que Mons. Fabretti rapporte et approuve dans son nouvel ouvrage quelque\n[[606.17]] chose de ce que je luy avois communiqué sur la Topographie de l'ancienne Rome, tiré d'un\n[[606.18]] vieux Manuscrit. </p>\n<p> [[606.19]] Au reste je me rapporte à ma precedente, estant avec zele </p>\n<p> [[606.20]] Monsieur Vostre tres humble et tres obeissant serviteur Leibniz\n [[606.21]] /  Hanover 20/30 septembr. 1699 </p>\n",
+  "number": "225.",
+  "title": "LEIBNIZ AN CLAUDE NICAISE",
+  "date": "Hannover, 20./30. September 1699. [224.228.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:225. LEIBNIZ AN CLAUDE NICAISE Hannover, 20./30. September 1699. [224.228.] Lors que je plaignois le plus, Monsieur, la perte apparente de ce que vous m'aviés envoyé dernierement de la part de Monsieur le President Boisot, dont on ne peut pas encor apprendre des nouvelles; le bonheur a voulu que j'a...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

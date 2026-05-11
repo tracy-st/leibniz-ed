@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_61",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 61,
+  "text": "<p> [[168.1]] <b>61. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[168.2]] Padua, 8. Juni 1696. [59.64.]</b></p>\n\n<p> [[168.8]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o </p>\n<p> [[168.9]] Coll'Ordinario passato scrissi una lunghissima lettera a V. S. Ill^#'m^#'a, con una inclusa diretta\n[[168.10]] ad un Conte Canonico in Salisburgo per ricuperare alcuni rari manoscritti intorno alla Cronologia\n[[168.11]] delle famiglie nobili di Padova, che l' havevo mandati sono quasi mesi otto. Con questa\n[[168.12]] torno a riverirla, e darle parte come è quasi perfettionata la copia dell'Ongarello, havendolo\n[[168.13]] diviso in sei parti, e datolo a diversi Scrittori, però con gran secretezza per la gelosia, che il\n[[168.14]] Padrone tiene di questo raro, e stimato manoscritto, onde aspetto gl'ordini di V. S. Ill^#'m^#'a per\n[[168.15]] trasmetterglielo subito. Con l'occasione che in Roma si è fatto il processo per la Beatificatione\n[[168.16]] di certa Monaca detta Elena Enselmini, che mori l'anno 1245 se non fallo, si sono ricercati i più\n[[168.17]] antichi archivii della Citta, e svegliate le memorie di molti Antichi Cronologisti di questo\n[[168.18]] Paese, le di cui opere non sono state mai stampate, e per mia fortuna hò contratta Amicitia con\n[[168.19]] certo Abbate Zacco eruditissimo, ed informatissimo dell'Antichità di questo Paese, che hà\n[[168.20]] veduto e letto quanto qui si trova di più raro, e richiedendolo de' principali Cronologisti che\n[[168.21]] han fatto mentione della Casa Estense m' hà soggerito trovarsi qui un vecchio opuscolo\n[[168.22]] stampato in foglio, intitolato <i>Monachi Paduani Chronicon, seu Gualbertini Musati Historia</i>, ed\n[[168.23]] incomincia dalla Era d'Este. Vi sono due manoscritti più antichi dell'Ongarello cioe a dire di\n[[169.1]] Giovanni di Nono, e di Fava Foschi, che scrivono delle famiglie nobili di Padova oltre il\n[[169.2]] manoscritto del Vergerio. Se V. S. Ill^#'m^#'a vorrà questi manoscritti, io farò tutto per haverli, e le\n[[169.3]] saranno senza dimora inviati. Mi dispiace che m'arrivano tardi queste notitie, non havendola\n[[169.4]] potuto servire prima, come bramavo, e dovevo. Io godo, gratie a Dio, buona salute, medito\n[[169.5]] incessantemente sopra la natura dell'Anima secondo la dottrina d'Agostino, e con questa\n[[169.6]] occasione illustro con note, e dissertationi il suo sottilissimo Trattato <i>De Animae Quantitate</i>. Il\n[[169.7]] libro sarà presto publicato. Piacesse a Dio che havessi V. S. Ill^#'m^#'a da vicino per riceverne quei\n[[169.8]] gran lumi, che dimorano nella sua vastissima Mente. M'ami, mi comandi con libertà, e mi resto </p>\n<p> [[169.9]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o, Aff^#'m^#'o Co^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[169.10]] Padova 8 Giugno <b>1696</b>\n[[169.11]] <yi>All'Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di S.A.E. <b>Hannover</b> </p>\n",
+  "number": "61.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 8. Juni 1696. [59.64.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:61. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 8. Juni 1696. [59.64.] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o Coll'Ordinario passato scrissi una lunghissima lettera a V. S. Ill^#'m^#'a, con una inclusa diretta ad un Conte Canonico in Salisburgo per ricuperare alcuni rari manoscrit...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

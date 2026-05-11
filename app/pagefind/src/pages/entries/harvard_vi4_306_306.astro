@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_306",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 306,
+  "text": "[[1353.5]] <b>252.  Demonstratio quod Deus omnia possibilia intelligit [1677 (?)]</b>\n [[1353.6]] <tab/>[1677 (?)] </p>\n<p> [[1353.12]] Deum intelligere non solum omnia quae sunt eruntque, sed et omnia possibilia sic\n[[1353.13]] egregie ostendi potest. </p>\n<p> [[1353.14]] Sit liquor aliquis pressus et qui exire conatur. Manifestum est tentari semper ab eo\n[[1353.15]] vias possibiles omnes, successum autem haberi tantum secundum viam omnium possibilium\n[[1353.16]] facillimam. Tentari autem omnes ex eo patet, quia ut quaeque oblata est commodior\n[[1353.17]] eam statim arripit: nec vero eligere posset commodissimam nisi eodem momento\n[[1353.18]] omnes tentarentur, neque enim determinatur commodissima nisi comparatione omnium.\n[[1353.19]] Constat autem naturam esse opus Dei, et quod natura tentat aliquid, id non nisi a\n[[1353.20]] voluntate Dei oriri, nam ipsa per se corpora actionum suarum causa non sunt, cum ne sint\n[[1353.21]] quidem eadem ultra momentum. </p>\n",
+  "number": "252.",
+  "title": "Demonstratio quod Deus omnia possibilia intelligit",
+  "date": "[1677 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:252. Demonstratio quod Deus omnia possibilia intelligit [1677 (?)] [1677 (?)] Deum intelligere non solum omnia quae sunt eruntque, sed et omnia possibilia sic egregie ostendi potest. Sit liquor aliquis pressus et qui exire conatur. Manifestum est tentari semper ab eo vias possibiles omnes, successum...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

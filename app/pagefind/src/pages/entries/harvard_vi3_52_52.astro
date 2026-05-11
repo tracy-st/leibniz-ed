@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_52",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 52,
+  "text": "[[434.15]] <b>52. De infinite parvis </b> <span>434.15;0:63:052:76!      :L:l^</span>.\n[[434.20]] Videndum exacte an demonstrari possit in quadraturis, quod differentia non\n[[434.21]] tamen sit infinite parva, sed quod omnino nulla, quod ostendetur, si constet eousque\n[[434.22]] inflecti semper posse polygonum, ut differentia assumta etiam infinite parva minor\n[[434.23]] fiat error. Quo posito sequitur non tantum errorem non esse infinite parvum, sed\n[[434.24]] omnino esse nullum. Quippe cum nullus assumi possit.\n[[434.25]] Indesignabilem voco quantitatem, cuius magnitudo nullis signis characteribus\n[[434.26]] sensibilibus exprimi potest. Omnis enim magnitudo designabilis quantacunque\n[[435.1]] poterit semper scribi in aliquo libro satis parvo ope compendiorum et repraesentationum.\n[[435.2]] Quod ut ostenderat Archimedes suscepit disquisitionem de Numero arenae.\n",
+  "number": "52.",
+  "title": "De infinite parvis",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:52. De infinite parvis 434.15;0:63:052:76! :L:l^. Videndum exacte an demonstrari possit in quadraturis, quod differentia non tamen sit infinite parva, sed quod omnino nulla, quod ostendetur, si constet eousque inflecti semper posse polygonum, ut differentia assumta etiam infinite parva minor fiat er...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

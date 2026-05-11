@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_196",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 196,
+  "text": "<p> [[516.9]] <b>196. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[516.10]] Hannover, 27. Dezember 1698 (6. Januar 1699). [179.]</b></p>\n\n<p> [[517.1]] Hannover ce 27 Decembr. v. st. 1698 </p>\n<p> [[517.2]] Vous remerciant de vos nouvelles literaires, et de la bonté que vous avés eue Monsieur, de\n[[517.3]] m'envoyer une lettre de l'excellent M. Bayle, à qui je vous supplie de faire tenir ma réponse; je\n[[517.4]] me rejouis de ce qu'une personne de vostre merite s'applique à perfectionner le <i>Dictionnaire</i> de\n[[517.5]] feu Mons. Furetiere. C'est un travail autant et plus important à mon avis, que celuy de\n[[517.6]] l'explication des noms propres. Ce que M. Cornelle avoit joint à celuy de l'Academie Françoise;\n[[517.7]] vous aura pû servir en quelque chose; mais il me sembloit en le regardant, qu'il y avoit\n[[517.8]] bien des fautes, outre qu'il y a une infinité de choses necessaires à sçavoir, qu'on ne voit ny\n[[517.9]] dans l'un ny dans l'autre. Ainsi vous aurés trouvé une ample moisson. J'espere que d'autres\n[[517.10]] Nations suivront l'exemple de la vostre. J'y ay exhorté mes compatriotes, aussi bien que les\n[[517.11]] Anglois et les Italiens. Ceux qui ont donné une nouvelle Edition <i>della crusca</i> obligeroient le\n[[517.12]] public bien d'avantage, s'ils y joignoient aussi les Termes des arts, en adoptant pour cela des\n[[517.13]] travaux de quelques habiles hommes, comme ont fait Messieurs de l'Academie Françoise. Si le\n[[517.14]] Pere Coronelli s'appliquoit à cela, il rendroit à mon avis un plus grand service au public qu'en\n[[517.15]] nous donnant le grand dictionnaire italien, qu'il promet, et qui comme je crois ne sera que\n[[517.16]] Moreri traduit et retouché. C'est la faute des libraires que les meilleurs livres de Hollande ne\n[[517.17]] viennent point icy, à moins qu'on ne l'ordonne exprés. Et de meme je ne m'etonne point que les\n[[517.18]] deux Tomes de mes <i>Accessiones Historicae</i>, ne sont pas encor allés en Hollande. Il faudra que\n[[517.19]] j'y mette ordre. </p>\n<p> [[517.20]] Ayant esté si peu maistre de mon temps, je ne suis point faché que vos libraires qui\n[[517.21]] donnent leur gros <i>Recueil</i> <i>de Traités</i> au public, m'ont dispensé de leur en fournir. </p>\n<p> [[518.1]] Je souhaitte que M. de Larrey, avant que d'achever son <i>Histoire</i> <i>d'Angleterre</i> ait vû le\n[[518.2]] premier Tome que M. Tyrell vient de donner au public de la sienne en Anglois. Il a envoyé ce\n[[518.3]] Tome à Mad. l'Electrice de Bronsvic, par mon entremise, et il me paroist qu'il s'attache à\n[[518.4]] representer exactement ce que disent des bons auteurs anciens. C'est le plus seur dans l'Histoire\n[[518.5]] des siecles eloignés de nous. Le second Tome paroistra aussi bientost, à ce qu'on me mande. </p>\n<p> [[518.6]] Ne donnerat-on point les inscriptions de feu M. Gudius? Ce seroit une piece des plus\n[[518.7]] considerables. J'apprends que M. Crescimbeni a publié un livre de la poësie italienne qu'on dit\n[[518.8]] estre fort curieux. </p>\n<p> [[518.9]] Je ne sçay pas encor, si vostre journal où ma reponse à M. Bayle doit estre inserée, a deja\n[[518.10]] paru, et si M. Bayle y a repliqué quelque chose, quoyque j'aye donné ordre aux libraires de me\n[[518.11]] le faire avoir promtement. </p>\n",
+  "number": "196.",
+  "title": "LEIBNIZ AN HENRI BASNAGE DE BAUVAL",
+  "date": "Hannover, 27. Dezember 1698 (6. Januar 1699). [179.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:196. LEIBNIZ AN HENRI BASNAGE DE BAUVAL Hannover, 27. Dezember 1698 (6. Januar 1699). [179.] Hannover ce 27 Decembr. v. st. 1698 Vous remerciant de vos nouvelles literaires, et de la bonté que vous avés eue Monsieur, de m'envoyer une lettre de l'excellent M. Bayle, à qui je vous supplie de faire ten...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

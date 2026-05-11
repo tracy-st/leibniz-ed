@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_143",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 143,
+  "text": "[[494.13]] <b>116.  De modis syllogisticis primariis atque secundariis [Mai 1682 bis Dezember 1684 (?)]</b>\n [[494.14]] <tab/>[Mai 1682 bis Dezember 1684 (?)] </p>\n<p> [[494.20]] Modi ejusdem figurae distingui possunt in primarios et secundarios. Primarii sunt,\n[[494.21]] qui ex aliis suae figurae modis non consequuntur; secundarii qui omnino. Et secundarii\n[[494.22]] rursus ex primariis consequuntur duobus, uno ex praemissa ad praemissam, altero ex\n[[495.1]] conclusione ad conclusionem. Modus ex praemissa ad praemissam est a particulari ad\n[[495.2]] universale, nam quod ex particulari sequitur praemissa multo magis sequetur ex universali.\n[[495.3]] Modus a conclusione ad conclusionem, est ab universali ad particulare, nam ex quo\n[[495.4]] sequitur conclusio universalis, ex eo multo magis seu facilius sequetur conclusio particularis. </p>\n<p> [[495.6]] Secundarii priore modo sic colliguntur: <b>Primo</b> ex <i>AII</i> infertur <i>AAI</i>. Hinc in prima\n[[495.7]] ex <i>Darii</i> fit <i>Barbari</i>, in tertia ex <i>Datisi</i> fit <i>Darapti</i>. <b>Secundo</b> ex <i>IAI</i> infertur <i>AAI</i>, hinc in\n[[495.8]] tertia ex <i>Disamis</i> fit iterum <i>Darapti</i>, et in quarta ex <i>Digami</i> fit <i>Balani</i>. <b>Tertio</b> ex <i>AOO</i>\n[[495.9]] infertur <i>AEO</i>. Ita in secunda ex <i>Baroco</i> fit <i>Camestros</i>. <b>Quarto</b> ex <i>OAO</i> infertur <i>EAO</i>, ita\n[[495.10]] in tertia ex <i>Bocardo</i> fit <i>Felapton</i>. <b>Quinto</b> ex <i>EIO</i> fit <i>EAO.</i> Hinc in prima ex <i>Ferio</i> fit\n[[495.11]] <i>Celaro</i>, in secunda ex <i>Festino</i> fit <i>Cesaro</i>, in tertia ex <i>Ferison</i> fit iterum <i>Felapton</i>, in\n[[495.12]] quarta ex <i>Fedilom</i> fit <i>Fegano.</i> Sed <i>IEO</i> in nulla datur figura unde nihil inde duci potest.\n[[495.13]] Patet hinc <i>Darapti</i> et <i>Felapton</i> bis esse secundarios modos primae speciei. Et primam\n[[495.14]] speciem secundariorum dare modos novos aliquot, nempe <i>Barbari</i>, <i>Camestros</i>, <i>Cesaro</i>,\n[[495.15]] <i>Celaro</i>. </p>\n<p> [[495.16]] Secundarii posteriore ratione sic colliguntur: <b>Primo</b> ex <i>AAA</i> fit <i>AAI</i>, ita in prima ex\n[[495.17]] <i>Barbara</i> fit <i>Barbari</i>. <b>Secundo</b> ex <i>EAE</i> fit <i>EAO</i>, ita in prima ex <i>Celarent</i> fit <i>Celaro</i>, in\n[[495.18]] secunda ex <i>Cesare</i> fit <i>Cesaro</i>. <b>Tertio</b> ex <i>AEE</i> fit <i>AEO</i>; ita in secunda ex <i>Camestres</i> fit\n[[495.19]] <i>Camestros</i>, in quarta ex <i>Cadere</i> fit <i>Cadero</i>. </p>\n<p> [[495.20]] Omnes Modi secundarii ratione posteriore collecti colliguntur et priore excepto uno\n[[495.21]] modo quartae <i>Cadero</i>.\n[[495.22]] <tab/>ADC <tab/>EBC <tab/>OBD\n [[495.23]] <tab/>ABD\n [[495.24]] <tab/><i>Celarent</i> <tab/>ECB <tab/>ADC <tab/>EDB\n [[495.25]] <tab/><i>Calmentes</i> <tab/>ADC <tab/>ECB <tab/>EBD\n [[495.26]] <tab/><i>Camestres</i> <tab/>ADC <tab/>EBC <tab/>EBD </p>\n",
+  "number": "116.",
+  "title": "De modis syllogisticis primariis atque secundariis",
+  "date": "[Mai 1682 bis Dezember 1684 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:116. De modis syllogisticis primariis atque secundariis [Mai 1682 bis Dezember 1684 (?)] [Mai 1682 bis Dezember 1684 (?)] Modi ejusdem figurae distingui possunt in primarios et secundarios. Primarii sunt, qui ex aliis suae figurae modis non consequuntur; secundarii qui omnino. Et secundarii rursus e...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

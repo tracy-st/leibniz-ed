@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_358",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 358,
+  "text": "[[1504.8]] <b>300.  De natura sive analogo animae [2. Hälfte 1683 bis Ende 1688 (?)]</b>\n [[1504.9]] <tab/>[2. Hälfte 1683 bis Ende 1688 (?)] </p>\n<p> [[1504.17]] Non adeo ineptae sunt sententiae Aristotelis [et] scholasticorum ac prima fronte\n[[1504.18]] videntur, scilicet in modo applicandi potissimum erratum ab illis. Lib. 2. <i>Phys.</i> text. 1.\n[[1504.19]] Aristoteles disserit Natura esse animalia partesque eorum, et plantas, et <k>Simplicia</k> corpora;\n[[1504.20]] ut terram ignem aërem aquam. Ea quae natura constant principium in se ipsis\n[[1504.21]] habere motus quietis, augmentationis diminutionis, alterationis. At lecticam vestem aliaque\n[[1504.22]] artificialia nullum habere principium mutationis nisi per accidens, quatenus ipsis\n[[1504.23]] accidit ut sint terrea, aut ab his quae principium in se habent mista. Itaque naturam esse\n[[1504.24]] principium et causam ut id moveatur et quiescat in quo primo, per se et non per accidens\n[[1505.1]] inest. Haec videntur absurda et inania, nisi illustrentur ex meis inventis, ex quo\n[[1505.2]] demonstravi, Unumquodque Ens per se seu vere unum habere aliquod in se principium ex\n[[1505.3]] quo omnia quae ipsi contingunt naturaliter et per se, consequuntur idque esse analogum\n[[1505.4]] animae, et hoc est quod Aristoteles naturam dixit. Et Entis per accidens negavit. Verum\n[[1505.5]] est natura cujusque rei individuali omnia consequi etiam quae ipsi accidunt, seu individuo\n[[1505.6]] nihil evenire per accidens, speciei tamen aliquid per accidens evenit, ut homini esse\n[[1505.7]] Musicum, non Petro. D. Thomas in hunc locum commentatus inquirensque quomodo\n[[1505.8]] principium motus gravium sit a natura gravis, ait gravitatem esse a forma substantiali,\n[[1505.9]] motorem vero esse generantem, haec recte intellecta probari possunt, in Metaphysico\n[[1505.10]] scilicet sensu; omnis enim substantia corporea omnes suas operationes exercet a principio\n[[1505.11]] interno, quod omnia involvit, sed primus autor seu motor est is qui substantiam rei\n[[1505.12]] produxit, hic autem revera non alius est nisi Deus, ostendi enim omnem substantiam\n[[1505.13]] veram non aliter quam creatione oriri posse. </p>\n",
+  "number": "300.",
+  "title": "De natura sive analogo animae",
+  "date": "[2. Hälfte 1683 bis Ende 1688 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:300. De natura sive analogo animae [2. Hälfte 1683 bis Ende 1688 (?)] [2. Hälfte 1683 bis Ende 1688 (?)] Non adeo ineptae sunt sententiae Aristotelis [et] scholasticorum ac prima fronte videntur, scilicet in modo applicandi potissimum erratum ab illis. Lib. 2. Phys. text. 1. Aristoteles disserit Nat...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

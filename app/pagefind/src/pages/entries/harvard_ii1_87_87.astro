@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_87",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 87,
+  "text": "<p> [[235.1]] <b>73. HEINRICH OLDENBURG AN LEIBNIZ</p>\n<p> [[235.2]] London, 5. (15.) August 1671. [68.81.]</b></p>\n<p> [[235.16]] Ampliss^#'e Vir, </p>\n<p> [[235.17]] Ante paucos dies Studioso cuidam Francofurtensi, Hamburgum hinc velificaturo, literas\n[[235.18]] ad Te datas commisi, satis, ut puto, prolixas, quas Tibi rite traditas jam esse dubitare nolim.\n[[235.19]] Continent illae, quid philosophorum nostratium nonnulli de Hypothesi tua sentiant, quidque\n[[235.20]] Ego de eadem in <i>Transactionibus philosophicis</i> commemorandum duxerim. Supersunt nonnulla\n[[235.21]] in literis tuis novissime ad me datis, quibus responsum debeo, quod tamen cum paratum\n[[235.22]] necdum habeam, in aliud tempus differre cogor. Interim dimittere harum gerulum nobilissimum\n[[235.23]] haud potui, quin Te salutarem, simul et fidem facerem, me reliqua, quae de me exspectas,\n[[235.24]] quamprimum fieri id poterit, confecturum. Caeterum cum eximius Helmontius, affectu mihi\n[[235.25]] conjunctissimus, propediem ad nos sit reversurus, poteris, si placet, ipsi tuto committere,\n[[235.26]] quaecunque forsan mihi scribenda vel communicanda occurrerint. </p>\n<p> [[235.27]] In novissimo Nundinarum Francofurtensium Catalogo unus alterve liber juridicus occurrit,\n[[235.28]] quorum tituli singulare quid spondere videntur. Sunt illi quidem, Strykii <i>Tractatus de Jure\n[[236.1]] Sensuum</i>, et Gutherii <i>Tractatus de Jure Manium</i>. Siquidem libros hos lectu dignos judicaveris,\n[[236.2]] ut mihi hac occasione transmittas, rogo, operam daturo, ut quibusdam authoribus hinc tibi\n[[236.3]] mittendis beneficium rependam. Vale, et raptim ex nimia festinatione scribenti ignosce\n [[236.4]] Tibi Addictissimo </p>\n<p> [[236.5]] Londini d. 5. Augusti 1671. H. Oldenburg. </p>\n<p> [[236.6]] Clariss^#'o et Ampliss^#'o Viro, Dⁿ^#'o Gothofredo Guilielmo Leibnitio J.U.D. et Consiliario\n[[236.7]] Moguntino. Maintz. </p>\n",
+  "number": "73.",
+  "title": "HEINRICH OLDENBURG AN LEIBNIZ",
+  "date": "London, 5. (15.) August 1671. [68.81.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:73. HEINRICH OLDENBURG AN LEIBNIZ London, 5. (15.) August 1671. [68.81.] Ampliss^#'e Vir, Ante paucos dies Studioso cuidam Francofurtensi, Hamburgum hinc velificaturo, literas ad Te datas commisi, satis, ut puto, prolixas, quas Tibi rite traditas jam esse dubitare nolim. Continent illae, quid philos...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

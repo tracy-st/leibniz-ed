@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_34",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 34,
+  "text": "[[386.34]] <b>34. Über Descartes Nachlaß </b> <span>386.0;0:63:034:76?      :L:f^</span>.\n[[386.18]] J'ay esté aujourdhuy avec Mons. de Tschirnhaus pour luy donner la connoissance\n[[386.19]] de Mons. Clerselier, et pour luy faire voir les restes de Mons. des Cartes. Il nous\n[[386.20]] montra un discours de Mons. des Cartes de la recherche de la verité, il y avoit environ\n[[386.21]] 22 regles expliquées et illustrées. En latin. Il y avoit un petit dialogue françois entre\n[[386.22]] Epistemon et Polyandre, qui n'estoit pas achevé. Item une Comedie, en françois\n[[386.23]] pousse, jusqu'au quatrieme acte. Les personnes sont Alixan, et Parthenie, qui s'ayment:\n[[386.24]] tous deux fils de Princes et tous deux se croyent l'un et l'autre bergers. Mais je\n[[386.25]] m'étonne d'une chose, que je remarquay en feuilletant. C'est qu'il decouvre d'abord\n[[387.1]] ce qui devvoit estre gardé jusqu'au dénouement, sçavoir Parthenie ayant appris\n[[387.2]] qu'elle est princesse en parle à soy méme, et delibere si elle doit aimer encore Alixan, et\n[[387.3]] conclut en sa faveur. Alixan est caché et entend cela; et va declarer sur le champ, qu'il\n[[387.4]] l'a entendu. Elle estoit princesse de l'isle heureuse d'Island, qui luy estoit ostée par le\n[[387.5]] Tyran de Stockholm; la scene est en Islande.\n[[387.6]] Mons. Clerselier a encor deux volumes de Miscellanea reliés, l'un en 4, l'autre\n[[387.7]] en 8, où il y a beaucoup de choses physiques; des experiences et observations anatomiques\n[[387.8]] de Mons. des Cartes, quelques experiences, sur les metaux, et en fait de\n[[387.9]] medecine. Je m'étonne pourtant, qu'il n'y a rien davantage de cette nature. Il y a encor\n[[387.10]] un traité de la lumiere. Voila son titre. Mais le traité méme est ce que Mons. des\n[[387.11]] Cartes appelle son Monde, ou Meditations physiques faites comme les Metaphysiques\n[[387.12]] d'un style familier; quoyqu'elles ne disent en substance que ce qui est dans ses principes\n[[387.13]] philosophiques.\n[[387.14]] In Miscellaneis, il y avoit quelques pensées, comme par exemple de faire paroistre\n[[387.15]] la muraille, verte, jaune; etc. par le moyen d'une lampe dont le verre vert, le\n[[387.16]] cotton vert; et dans l'huyle du ver de gris broyé. Item proposition pour faire paroistre\n[[387.17]] des chiffres et autres figures par le moyen des rayons du soleil, et des miroirs.\n",
+  "number": "34.",
+  "title": "Über Descartes Nachlaß",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:34. Über Descartes Nachlaß 386.0;0:63:034:76? :L:f^. J'ay esté aujourdhuy avec Mons. de Tschirnhaus pour luy donner la connoissance de Mons. Clerselier, et pour luy faire voir les restes de Mons. des Cartes. Il nous montra un discours de Mons. des Cartes de la recherche de la verité, il y avoit env...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

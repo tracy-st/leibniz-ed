@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_262",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 262,
+  "text": "<p> [[809.17]] <b>228a. LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE</p>\n<p> [[809.18]] [Hannover, 6. Januar 1681.] [227b.231a.]</b></p>\n<p> [[810.9]] Cl^#'m^#'o viro Theodoro Haakio </p>\n<p> [[810.10]] Gothofredus Gulielmus Leibnitius. </p>\n<p> [[810.11]] Schedam ab Ingeniosissimo ac merito suo celeberrimo Hookio vestro ad te scriptam\n[[810.12]] accepi. Gaudeoque ei probari sententiam meam de usu maximo ac pene incredibili quem\n[[810.13]] habitura esset lingua plane rationalis qua cogitationes nostrae distinctissime exprimerentur.\n[[810.14]] Non enim tantum commercio generis humani serviret, sed et ipsas cogitationes mirifice sublevaret\n[[810.15]] et calculum universalem exhiberet ad algebrae instar in omnibus Scientiis tractabilem.\n[[810.16]] Quem sane usum in hoc charactere R^#'m^#'u^#'s Episcopus Wilkinsius ne quidem animo designavit.\n[[810.17]] Nihilominus tentamen ejus magni facio, et usus etiam ad hoc institutum fore arbitror. Quanquam\n[[810.18]] longe aliis auxiliis opus esse agnoscam, quod in Wilkinsiano Opere Celeberrimus\n[[810.19]] Hookius praecipue mutandum senserit qua ratione contrahi posse putet libenter discam. Recte\n[[810.20]] notat Hookius eandem artem Ratiocinandi quae in Algebra arithmeticae et Geometriae servit\n[[810.21]] etiam aliis Scientiis valere debere. Ego plus etiam addo, ipsam algebram non esse veram\n[[810.22]] characteristicam Geometriae sed longe aliam invenire debere, quam certus sum ad usus Geometriae\n[[810.23]] in mechanicis disciplinis fore algebra ipsa utiliorem. Et hoc miror hactenus a nemine\n[[810.24]] animadversum. Plerique enim omnes algebram pro vera arte inveniendi mathematica habent, et\n[[810.25]] quam diu hoc praejudicio laborabunt, nunquam veros Scientiarum reliquarum characteres\n[[810.26]] invenient. Habeo ego hujus novae Analyseos mathematicae specimina quaedam eaque arbitror\n[[810.27]] plane diversa ab omni eo quod veteribus vel recentioribus in hoc genere in mentem venit. Atque\n[[810.28]] huic fundamento character meus saltem pro parte modificabitur. Nam illa pars quae de rebus\n[[810.29]] tractat, imaginationi per se non subjacentibus diverso nonnihil characterum genere adhibito\n[[810.30]] imaginationi subjicienda est. Haec si tam praestita essent quam ego fieri posse clarissime\n[[810.31]] intelligo, haberemus organon quod magis intellectum juvaret quam ullus tubus opticus visum\n[[810.32]] possit. Sed non is ego sum qui tale quid promittam, majoris ea res momenti est, quam ut ab uno\n[[810.33]] homine absolvi possit. Denique eam curam arbitror dignam integra societate neque uspiam\n[[810.34]] temere nunc tam profundissimorum Ingeniorum copiam alibi reperias, quam ego in Anglia\n[[811.1]] agnosco. Sed vereor ne praesens ejus Regni status virorum ingenio praestantium cogitationes\n[[811.2]] alio vertat. Itaque id tempus hujus modi meditationibus parum aptum arbitror. Eoque magis\n[[811.3]] Illustris Societatis vestrae heroica plane consilia aestimo, quo magis opportunitate praesentium\n[[811.4]] conjunctionum atque ut ita dicam aspectuum destituuntur. Vale </p>\n",
+  "number": "228a.",
+  "title": "LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE",
+  "date": "[Hannover, 6. Januar 1681.] [227b.231a.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:228a. LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE [Hannover, 6. Januar 1681.] [227b.231a.] Cl^#'m^#'o viro Theodoro Haakio Gothofredus Gulielmus Leibnitius. Schedam ab Ingeniosissimo ac merito suo celeberrimo Hookio vestro ad te scriptam accepi. Gaudeoque ei probari sententiam meam de usu maximo ac pen...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

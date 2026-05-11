@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_172",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 172,
+  "text": "<p> [[533.9]] <b>172. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[533.10]] Leipzig, 2. Februar 1707. [171.174.] </b></p>\n<p> [[533.15]] Vir Illustris atque Excellentissime! </p>\n<p> [[533.16]] Accepi TUAS humanitatis et benevolentiae erga me plenissimas, et lectis iis in id statim\n[[533.17]] enisus sum, ut desideriis Excellentiae Tuae, quae mandatorum instar veneror, quantum in me\n[[533.18]] esset, facerem satis. </p>\n<p> [[533.19]] Sed Reverendissimum Mayerum Excellentiae Tuae nomine convenire, et ut librum manuscriptum\n[[533.20]] R. P. Longi remitteret, rogare non potui, cum aliquot jam hebdomadae sint, cum ille\n[[533.21]] Lipsia discessit. Ne tamen aliquid in me desiderari paterer, Magnificos Viros Rechenbergium\n[[533.22]] atque Ittigium consului, qui valde dubitant, fore ut promissis stare possit Amplissimus Mayerus\n[[533.23]] aliis jam curis et cogitationibus distractus. Magnificus vero Ittigius suam operam lubens\n[[534.1]] conferet, si quidem R. P. Longi librum videre ipsi contigerit. Multa caeteroqui habet de\n[[534.2]] editionibus Scripturae sacrae Serrarius in <i>Prolegomenis</i> <i>Commentarii</i> sui in Johannem. ­Waltonus,\n[[534.3]] Calovius aliique satis noti sunt. </p>\n<p> [[534.4]] In reliquis quae desiderat R. P. Longus plene satisfacere non possum, cum Andream\n[[534.5]] Acoluthum A.C. 1704. d. 4. Nov. et Sebastianum Schmidium A.C. 1696. obiisse solum norim.\n[[534.6]] Matthias Frid. Beckius adhuc in Chronologicis quaedam edidit 1696, Frid. Albertus Judaeus\n[[534.7]] 1695 Lipsiae discessit. Elias Hutterus 1588 edidit <i>Biblia</i> Ebraea, Caspar Ulenbergius 1591.\n[[534.8]] adhuc Commentarium scripsit, et David Wolderus 1596 edidit <i>Biblia</i> Graeco-Latino-Germanica,\n[[534.9]] Marcus Meibomius forte adhuc vivit, sed ubi locorum nescio. </p>\n<p> [[534.10]] Memini etiam Excellentiam Tuam, cum nuper apud ipsam essem, definitionem Lineae\n[[534.11]] rectae vulgarem imperfectam judicasse, quod ex illa non facile possit demonstrari proprietas\n[[534.12]] illa: duas rectas non comprehendere spatium. Sed nuper haec meditatus quam optime id\n[[534.13]] sequentem in modum procedere cognovi: conferens scil. punctum cum via brevissima illico\n[[534.14]] claret: inter duo puncta non dari nisi unicam lineam rectam, consequenter duas lineas rectas duo\n[[534.15]] puncta communia habentes totas coincidere, adeoque cum duae rectae spatium determinaturae\n[[534.16]] in duobus punctis extremis concurrere debeant, atque hinc coincidant, eas non posse comprehendere\n[[534.17]] spatium. Sed haec aequi et bonique consulat Excellentia Tua, meque bonae mentis\n[[534.18]] cultorem et verae eruditionis studiosissimum admiratorem et amatorem porro foveat. </p>\n<p> [[534.19]] Status Academiae nostrae deplorandus est, multique Docentium necessariis vitae subsidiis\n[[534.20]] destituti Lipsiam relinquere coguntur. Caeterum non dubito, quin ad Excellentiam Tuam jam\n[[535.1]] perscriptum sit Celeberr. Menckenium ante aliquot dies fato functum esse. Exequiae cras\n[[535.2]] celebrabuntur. </p>\n<p> [[535.3]] Illustris atque Excellentissimi Nominis Tui Cultor observantissimus </p>\n<p> [[535.4]] M. G. Hansch A. M. </p>\n<p> [[535.5]] Lipsiae IV. Nonar. Febr. MDCCVII. </p>\n<p> [[535.6]] A Son Excellence Monseigneur de Leibnitz Conseiller privé de Son Altesse Electorale de\n[[535.7]] Brounsvic et Lunebourg etc. à Hannover </p>\n",
+  "number": "172.",
+  "title": "MICHAEL GOTTLIEB HANSCH AN LEIBNIZ",
+  "date": "Leipzig, 2. Februar 1707. [171.174.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:172. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ Leipzig, 2. Februar 1707. [171.174.] Vir Illustris atque Excellentissime! Accepi TUAS humanitatis et benevolentiae erga me plenissimas, et lectis iis in id statim enisus sum, ut desideriis Excellentiae Tuae, quae mandatorum instar veneror, quantum in me esset,...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

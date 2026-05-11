@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_132",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 132,
+  "text": "<p> [[478.5]] <b>133. LEIBNIZ AN ADAM ADAMANDUS KOCHAŃSKI</p>\n<p> [[478.6]] Hannover, Dezember 1691. [152.]</b></p>\n<p> [[478.21]] [ ... ] In Analytico Calculo ego Cartesii notis utor quibus addidi novas quasdam meas sed\n[[478.22]] pro rebus Cartesio non adhibitis. Per calculum Analyticum semper scire possumus utrum\n[[478.23]] Problema sit planum, an solidum an suprasolidum, et quoto gradu et possumus excogitare loca\n[[478.24]] seu lineas aptas ad ejus constructionem, et quia talia problemata semper reduci possunt ad\n[[478.25]] aequationes et Vieta generalem modum dedit pro Numerica aequationum solutione, hinc omnia\n[[478.26]] Geometriae ordinariae problemata vel in lineis vel in numeris solvere possumus. Sed dantur\n[[478.27]] praeterea innumera problemata Geometriae extraordinariae (praesertim in applicatione ad\n[[478.28]] Mechanicam et Physicam) quae Cartesius callide exclusit a sua <i>Geometria</i>: His igitur ego\n[[478.29]] subsidium aliquod paravi. Et talia problemata reduci possunt ad aequationes infinitas, ita ut\n[[478.30]] posthac etiam in illis saltem quoad praxin nihil amplius desiderem. Et ita quoad praxin dici\n[[479.1]] potest Geometriam esse hodie absolutam. Interim quia praxis una facilior est alia semper augeri\n[[479.2]] poterit scientiae perfectio, ut quantum licet perveniamus ad optimas constructiones, id enim\n[[479.3]] fateor nondum semper esse in potestate. </p>\n<p> [[479.4]] Absoluta igitur Geometria, quantum sufficit ad usum Generis humani, id jam agitur ut\n[[479.5]] eadem perfectio obtineatur in Mechanica. Quam in rem molior nova quaedam Elementa\n[[479.6]] Dynamica de quibus et specimina quaedam dedi. Distinguo vim mortuam et vivam, vim vivam\n[[479.7]] triplicem esse reperi, absolutam, directivam, et respectivam; Aggregatum directivae et respectivae.\n[[479.8]] Sed falsum est quod eandem servat quantitatem motus ut crediderant Cartesiani. In\n[[479.9]] Physicis quoque et caeteris Philosophiae partibus quasdam demonstrationes habeo quae alicujus\n[[479.10]] momenti videntur et in summa rerum valde a Cartesianis abeo. [ ... ] </p>\n",
+  "number": "133.",
+  "title": "LEIBNIZ AN ADAM ADAMANDUS KOCHAŃSKI",
+  "date": "Hannover, Dezember 1691. [152.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:133. LEIBNIZ AN ADAM ADAMANDUS KOCHAŃSKI Hannover, Dezember 1691. [152.] [ ... ] In Analytico Calculo ego Cartesii notis utor quibus addidi novas quasdam meas sed pro rebus Cartesio non adhibitis. Per calculum Analyticum semper scire possumus utrum Problema sit planum, an solidum an suprasolidum, et...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

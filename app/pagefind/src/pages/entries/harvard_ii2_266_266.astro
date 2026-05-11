@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_266",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 266,
+  "text": "<p> [[813.1]] <b>269. LEIBNIZ AN GIOVANNI BATTISTA TOLOMEI</p>\n<p> [[813.2]] [Hannover, 22. Juni 1694.] [250.283.]</b></p>\n<p> [[813.9]] R^#'m^#'o Patri Ptolemaeo S.J. Theologo insigni G.G. Leibnitius S.P.D. </p>\n<p> [[813.10]] Valere Te et meis non indelectatum nuntiavit mihi R.P. Isensehe, nec potuit scribere quod\n[[813.11]] esset gratius. Ei respondens, has ad Te lineas adjungo, etsi sciam quam sis occupatus. Sunt enim\n[[813.12]] de quibus non alius Te rectius me docuerit; nec satis scio an jam tum attigerim. Primo cum\n[[813.13]] insignibus in Gallia viris Ill^#'m^#'o Episcopo Meldensi, et qui nuper extinctus est Pelissonio aliquoties\n[[813.14]] literas commutavi, de vera constituenda corporis notione, quod illi meditationes meas\n[[813.15]] ad vindicandam corporis Christi realem praesentiam in Eucharistiae sacramento valde utiles\n[[813.16]] judicarant. Cum enim nunc magna philosophorum acutissimorum cohors in Cartesiana dogmata\n[[813.17]] unice inclinet, quibus corporis natura in extensione collocatur, quasi nihil aliud a nobis liquido\n[[813.18]] intelligatur in materia, quod avide arripiunt qui Reformati appellantur; mihi potius visum est\n[[813.19]] praeter Geometricas notiones (id est praeter extensionem cum suis variationibus) in natura esse\n[[813.20]] aliquid altius, quod imaginatio quidem non attingat, sed mens tamen clare intelligat, scilicet vis\n[[813.21]] actricis notionem ex metaphysicis petitam, qua substantiae omnis, et speciatim, ubi resistendi\n[[813.22]] vis accesserit, corporeae intima essentia continetur. Vim autem sive virtutem intelligo non\n[[813.23]] facultatem scholarum, quae nihil est quam quaedam propinqua possibilitas agendi, per se tamen\n[[814.1]] mortua ut sic dicam et effectu caritura nisi quid excitet, sed quae <greek>ĕnteléxeian</i> contineat, ita ut\n[[814.2]] conatum involvat, et per se prorumpat in actum, nisi quid obstet, ut grave suspensum aut arcus\n[[814.3]] tensus. Etsi enim gravitatem et vim Elasticam, et caetera omnia naturae phaenomena a motu\n[[814.4]] petam et mechanice explicem, tamen ultima causa motuum corporibus ad vim actricem inditam\n[[814.5]] reducitur et ipsae leges mechanicae ex alterioribus id est metaphysicis principiis pendent. Id\n[[814.6]] ipsum ergo est quod Aristoteles Animam definiens entelecheiam primam dixit, Scholastici\n[[814.7]] formam substantialem dixere, nobis non tollentibus sed illustrantibus majorum placita fortasse\n[[814.8]] intelligibilius audiet, vis primitiva. Quae prout limites exercitii sui ex variis corporum conflictibus\n[[814.9]] accepit secundariam parit accidentariam et in Mechanicis notam, cognatam illi qualitati\n[[814.10]] quam nonnulli impetum impressum vocant sed tamen diversam, cum vis in pari corporum\n[[814.11]] magnitudine non debeat velocitatis sed effectus possibilis proportione aestimari in quo plerosque\n[[814.12]] scriptores a veritate abscessisse demonstro, et Cartesianos imprimis, cum eandem quantitatem\n[[814.13]] motus in corporum conflictu conservari putant pro quo dicere debebant eandem quantitatem\n[[814.14]] virium seu effectus possibilis conservari, quae in libro de Dynamicis explicare constitui\n[[814.15]] hortantibus saepe summis viris. Sed ego sententiam Tuam discere pervelim, nam (si licet)\n[[814.16]] optem mea haec et vobis probari. </p>\n<p> [[814.17]] Sed et alterum est de quo consulere Te velim: rumor ad nos superiore anno dilatus est,\n[[814.18]] nescio quam verus, esse apud vos, qui Pontifici maximo suadeant emendationem quandam vel\n[[814.19]] interpretationem eorum quae Lilius et Clavius in Gregoriana temporum correctione praestiterunt.\n[[814.20]] Et memini olim cujusdam Francisci Leverae librum me videre in ipsa Roma editum, qui\n[[814.21]] Clavium negabat per omnia ex praescripto Pontificis, aut Lilii sententia egisse. Mihi videtur, si\n[[814.22]] Pontifici placeret titulo atque animo interpretandi pristina decreta hoc resumere negotium, forte\n[[815.1]] effici posse Caesaris interventu, et magnorum quorundam inter Protestantes principum Germaniae\n[[815.2]] laudatissima moderatione, ut hoc saltem calendarium Schisma tollatur, velut in praeludium\n[[815.3]] et omen majoris aliquando fructus ad reddendam Ecclesiae pacem. Itaque fac quaeso ut\n[[815.4]] discam quid Tibi videatur et praesertim si commodum putas Praeposito Generali vestro, summo\n[[815.5]] viro, cui etiam me commendari peto, nam illi innotuisse nomen meum, Te opinor interprete,\n[[815.6]] Fantonius vester olim significavit. Quod superest vale et fave. Dabam Hanoverae </p>\n",
+  "number": "269.",
+  "title": "LEIBNIZ AN GIOVANNI BATTISTA TOLOMEI",
+  "date": "[Hannover, 22. Juni 1694.] [250.283.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:269. LEIBNIZ AN GIOVANNI BATTISTA TOLOMEI [Hannover, 22. Juni 1694.] [250.283.] R^#'m^#'o Patri Ptolemaeo S.J. Theologo insigni G.G. Leibnitius S.P.D. Valere Te et meis non indelectatum nuntiavit mihi R.P. Isensehe, nec potuit scribere quod esset gratius. Ei respondens, has ad Te lineas adjungo, ets...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

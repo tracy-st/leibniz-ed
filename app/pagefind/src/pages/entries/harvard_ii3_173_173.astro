@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_173",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 173,
+  "text": "<p> [[444.7]] <b>173. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[444.8]] Venedig, 16. Mai [1698]. [171.176.]</b></p>\n\n<p> [[444.12]] Ill^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[444.13]] Mi figuro che V. S. Ill^#'m^#'a habbia già ricevuto una mia lettera con un fagottino di carte\n[[444.14]] stampate, ed un'altra che consegnai al Sig^#'r^#'e Mendelino. Attendo con impatienza le sue risposte\n[[444.15]] per consolarmi col felicesimo avviso della continuatione della sua prospera ed ottima salute,\n[[445.1]] come ancora con qualche nuova del buon esito dell'affare intrapreso con rara e generosa bontà\n[[445.2]] dal suo costantissimo amore a favore dell'Amico, che stabilisce nella sua efficace operatione le\n[[445.3]] speranze della sua quiete, molto necessaria per mettersi in stato di perfettionare e coltivare con\n[[445.4]] magiore frutto le sue meditationi, e letterarie fatiche. Vivo così occupato nella stampa e\n[[445.5]] correttione del mio libro, che appena hò tempo di scrivere a gl'Amici. Le mandarò ben presto\n[[445.6]] l'espositione del suo sentimento intorno di principii, dispositione, ed armonia dell'Universo,\n[[445.7]] che un tempo V. S. Ill^#'m^#'a con tanta cortesia qui mi comunicò, e spero che ella trovarà tutto senza\n[[445.8]] alteratione veruna, interamente conforme al suo pensiero. Sospiro il momento di rivederla ed\n[[445.9]] apprendere dalla sua dotta voce medesima l'Analitico metodo così differentiale, come integrale,\n[[445.10]] che ella con universale applauso ed ammiratione della Republica Letterata, hà con\n[[445.11]] somma felicità trovato. Il Sig^#'r^#'e Conte Bertolli divotamente la riverisce. Egli m' ha fatto leggere\n[[445.12]] alcuni versi latini del celebre ed eruditissimo Sig^#'r^#'e Abbate Mauro, ne' quali hò ammirato il\n[[445.13]] pellegrino talento d'un sì illustre letterato, la priego riverirlo in mio nome. Il Sig^#'r^#'e Guglielmini è\n[[445.14]] stato promosso da gli Ecc^#'m^#'i Signori Riformatori dello Studio di Padova alla catedra della\n[[445.15]] Matematica vacante per la morte dell'Angeli. La supplico dell'onore de' suoi stimatissimi\n[[445.16]] comandamenti. Quanto prima sperò mandarle una mia lettera stampata consecrata al suo nome\n[[445.17]] immortale, compatirà il mio ardire e divotamente riverendola mi resto </p>\n<p> [[445.18]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Obg^#'m^#'o, Cord^#'m^#'o S^#'r^#'e Michel Angelo Fardella </p>\n<p> [[445.19]] Venetia 16 Maggio </p>\n<p> [[445.20]] Indrizzarà la risposta a dirittura per Padova.\n[[445.21]] <yi>All'Ill^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di S.A.E. <b>Hannover</b> </p>\n",
+  "number": "173.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 16. Mai [1698]. [171.176.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:173. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 16. Mai [1698]. [171.176.] Ill^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o Mi figuro che V. S. Ill^#'m^#'a habbia già ricevuto una mia lettera con un fagottino di carte stampate, ed un'altra che consegnai al Sig^#'r^#'e Mendelino. Attendo ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

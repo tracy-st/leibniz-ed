@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_243",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 243,
+  "text": "<p> [[756.4]] <b>246. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[756.5]] Hannover, 1. (11.) Dezember 1693. [243.256.]</b></p>\n<p> [[756.22]] [ ... ] Gratum est quod meam sententiam non improbas de natura spirituum creatorum,\n[[756.23]] quos nunquam puto esse ab omni corpore separatos, veteris Ecclesiae exemplo. Tametsi enim\n[[756.24]] nostram pariter atque Angelicam mentem immaterialem esse arbitrer, utramque tamen semper\n[[756.25]] corpore indutam puto, et corpore suo in corpora agere, aut a corporibus pati. Ita omnes\n[[756.26]] Scholasticorum vitilitigationes momento dissipantur. Mirum enim est, quam multa et mira illi\n[[756.27]] comminiscuntur de operationibus Angelorum et loquela seu communicatione inter se invicem.\n[[756.28]] Honoratus Fabri vir doctus credidit Angelos pro arbitrio sese penetrabiles aut impenetrabiles\n[[756.29]] reddere aliaque id genus dictu quam intellectu faciliora. Johannes Duns Scotus etiam Mathematice\n[[756.30]] explicuit, quomodo Angelus momento quasi simul in coelo et in terra versatur,\n[[757.1]] ingrediturque solo et caput inter nubila condit. Fingit enim angelum summa facilitate sese in\n[[757.2]] omnes figuras mutare, nulla autem figura tam exigua est, quin in aliam aequalem prismaticam\n[[757.3]] mutari possit, cujus altitudo sit tanta, quantum coeli intervallum a terra, modo basis satis exigua\n[[757.4]] assumatur. Ita inviti etiam angelis attribuunt corporeas proprietates. Caeterum angelis bonis\n[[757.5]] solitum, malis permissum non puto, turbare frequenter ordinem rerum, praestat in his continere\n[[757.6]] se intra limites Scripturae Sacrae, quam imaginationibus propriis, aut fabulis alienis indulgere. </p>\n<p> [[757.7]] Christianus Thomasius valet ingenio, et utilis etiam esse potest, ad excitanda ingenia\n[[757.8]] aliorum. Itaque non displicet provocatio ejus. Et notio substantiae majoris momenti est, quam\n[[757.9]] prima specie videri queat. Itaque recte fecit, quod Philosophos et Theologos ad eam edendam\n[[757.10]] hortatus est. Sed certos temporis limites praescribere illis non potest. Mea sententia est omnem\n[[757.11]] substantiam habere vim agendi, imo semper agere, itaque Essentiam corporis non colloco in\n[[757.12]] extensione, sed in virtute motrice, quam Galli vocant <i>la Force</i>. Extensio non substantiae\n[[757.13]] corporeae, sed loci natura est. Et licet nullus sit vacuus locus, non tamen confundendae sunt\n[[757.14]] notiones, et manifestum est in ipsa per se extensione nec agendi nec patiendi vim inesse posse,\n[[757.15]] nisi intelligatur aliquid praeterea, quod extendi, id est diffundi repetitione dicatur, in quo inerit\n[[757.16]] substantiae character, nempe agere vel pati. [ ... ] </p>\n",
+  "number": "246.",
+  "title": "LEIBNIZ AN GERHARD MEIER (BREMEN)",
+  "date": "Hannover, 1. (11.) Dezember 1693. [243.256.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:246. LEIBNIZ AN GERHARD MEIER (BREMEN) Hannover, 1. (11.) Dezember 1693. [243.256.] [ ... ] Gratum est quod meam sententiam non improbas de natura spirituum creatorum, quos nunquam puto esse ab omni corpore separatos, veteris Ecclesiae exemplo. Tametsi enim nostram pariter atque Angelicam mentem imm...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

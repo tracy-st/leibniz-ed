@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_108",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 108,
+  "text": "<p> [[329.14]] <b>108. LEIBNIZ AN BURCHARD DE VOLDER</p>\n<p> [[329.15]] [Hannover,] 11. Oktober 1705. [98.114.] </b></p>\n<p> [[330.1]] Ex literis meis ad Dn. de Volder 11 octobr. 1705 </p>\n<p> [[330.2]] In nupero septembri diarii Eruditorum Amstelodamensis miratus sum Elementa Geometrica\n[[330.3]] ducis Burgundiae nomine edita[,] sed magis adhuc quae ibi de unitatibus habentur prorsus\n[[330.4]] ad mentem meam, etsi quisquis scripsit, insolutam reliquerit difficultatem[,] dum Geometrae\n[[330.5]] ostendunt extensionem non constare ex punctis, at Metaphysici contra Materiam ex unitatibus\n[[330.6]] seu simplicibus substantiis resultare debere. Revera materia non continuum sed discretum est\n[[330.7]] actu in infinitum divisum, etsi nulla pars spatii assignabilis materia vacet. At spatium ut tempus\n[[330.8]] non substantiale est quiddam, sed ideale, et in possibilitatibus seu ordine coexistentium utcunque\n[[330.9]] possibili consistit. Itaque nullae ibi divisiones nisi quas mens facit et pars toto posterior est.\n[[330.10]] Contra in realibus unitates multitudine sunt priores, nec existunt multitudines nisi per unitates.\n[[330.11]] <i>Unter dem Auszug und auf der Rückseite des Blattes hat Leibniz notiert</i>: </p>\n<p> [[330.12]] Extremitates lineae et unitates materiae non coincidunt. Tria puncta continua in eadem\n[[330.13]] recta concipi non possunt. At duo concipiuntur: extremitas unius rectae et extremitas alterius\n[[330.14]] rectae ex qua constat idem totum. Ut in tempore duo sunt instantia ultimum vitae, et primum\n[[330.15]] mortis. </p>\n<p> [[330.16]] Unitas ab unitate non tangitur, sed perpetua est trans-creatio in motu, ita scilicet cum res in\n[[330.17]] eo est ut per assignabile tempus continuando mutationes, penetratio esse deberet proximo post\n[[330.18]] tempore, unumquodque punctum alio loco esse, ut evitatio penetrationis, ordoque mutationum\n[[330.19]] jubet. Spatium infinitis modis a materia in partes actu divisa repletum\n[[330.20]] intelligi potest. Ex. si tribus circulis se tangentibus, tres alii se tangentes\n[[330.21]] interponantur, et his iterum tres alii, erit alius modus replendi in angulis\n[[330.22]] quam in medio. Alia ratio est replendi[,] si spatio semper maximus inscribatur\n[[330.23]] omnes circulos spatium includentes tangens. Per actuales mutationes\n[[330.24]] etiam tempus resolvitur in unitates durationis, seu in totidem creationes\n[[331.1]] numero infinitas. Nam de tempore non nisi instantia existunt. (: Idem <Fn>(: Idem ... sunt. :): <i>Diese Passage hat Leibniz in eckige Klammern gesetzt, wohl um sie von einer Weiterverarbeitung auszuschließen.</i></Fn> est de mutationibus quae\n[[331.2]] continuae revera non sunt. :) </p>\n",
+  "number": "108.",
+  "title": "LEIBNIZ AN BURCHARD DE VOLDER",
+  "date": "[Hannover,] 11. Oktober 1705. [98.114.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:108. LEIBNIZ AN BURCHARD DE VOLDER [Hannover,] 11. Oktober 1705. [98.114.] Ex literis meis ad Dn. de Volder 11 octobr. 1705 In nupero septembri diarii Eruditorum Amstelodamensis miratus sum Elementa Geometrica ducis Burgundiae nomine edita[,] sed magis adhuc quae ibi de unitatibus habentur prorsus a...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

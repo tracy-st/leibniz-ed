@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_140",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 140,
+  "text": "<p> [[459.8]] <b>140. BARTHÉLEMY DES BOSSES AN LEIBNIZ</p>\n<p> [[459.9]] Hildesheim, 20. August 1706. [135.141.] </b></p>\n<p> [[459.24]] Illustrissime Domine </p>\n<p> [[459.25]] Distuli responsum ad postremas I[llustrissimae] D[ominationis] T[uae] litteras, quod\n[[459.26]] Papebrochii responsorias expectarem una mittendas, quae necdum advenerunt: Significandum\n[[459.27]] interim duxi, esse hic adolescentem qui post octiduum Romam cogitet futurus ibidem Alumnus\n[[459.28]] Collegii Germanici, et Ptolomaeum magistrum auditurus. Qua occasione si quae forsan habes\n[[459.29]] quae Ptolomaeo communicata velis, poterunt commodissime transmitti. </p>\n<p> [[460.1]] Roma intelligimus proscriptas nuper e Scholis nostris esse triginta propositiones philosophicas,\n[[460.2]] e Cartesio Malebranchioque fere depromptas, quarum aliquas quia circa materiam a\n[[460.3]] te praeclare elucidatam versantur, et censura jam pridem tuo calculo comprobata est, hic a me\n[[460.4]] adduci non aegre feres. </p>\n<p> [[460.5]] 6^#'a <i>Modi vel Accidentia, in aliquo subjecto semel producta non amplius indigent actione\n[[460.6]] positiva cujusquam Causae ipsa conservantis, sed tamdiu durare debent donec positiva actione\n[[460.7]] Causae alicujus externae destruantur.</i> </p>\n<p> [[460.8]] 7^#'a <i>Ut aliquid de Quantitate Motus a Deo primum indita Materiae periisse crederetur,\n[[460.9]] Deum oporteret fingi mutabilem et inconstantem.</i> </p>\n<p> [[460.10]] 10^#'a <i>Essentia Materiae seu Corporis in Extensione consistit externa et actuali.</i> </p>\n<p> [[460.11]] 16^#'a <i>Est in Mundo certa ac definita Quantitas Motus, quae nec aucta unquam, nec\n[[460.12]] imminuta fuit. </i> </p>\n<p> [[460.13]] 19^#'a <i>Solus Deus est qui movere potest corpora; Angeli vero, Anima rationalis, ipsaque\n[[460.14]] corpora non sunt causae motus efficientes, sed occasionales tantum.</i> </p>\n<p> [[460.15]] 20^#'a <i>Creaturae non producunt Efficienter ullos Effectus, sed solus Deus illos ad praesentiam\n[[460.16]] illarum efficit: loca vero Scripturae, in quibus creaturis tribuitur actio, intelligenda sunt\n[[460.17]] sensu figurato.</i> </p>\n<p> [[460.18]] 21^#'a <i>Belluae sunt mera Automata, omni sensu et cognitione carentia.</i> </p>\n<p> [[460.19]] 22^#'a <i>Animae Rationalis unio cum corpore in eo solum consistit, quod Deus voluerit ad\n[[460.20]] certas mutationes corporis, certas in anima perceptiones aut motus excitari, et vice versa pro\n[[460.21]] certis animae cogitationibus seu voluntatibus, certos in corpore motus sequi.</i> </p>\n<p> [[460.22]] 23^#'a <i>Hanc motuum et affectionum communicationem non exigit ipsa corporis animaeque\n[[460.23]] natura sed solum decretum Dei liberum.</i> </p>\n<p> [[460.24]] 25^#'a <i>Corpora Mixta, etiam Brutorum non aliter differunt inter se, quam ex varia magnitudine,\n[[460.25]] situ, figura, textura, quiete vel motu atomorum sive particularum materiae insensibilium\n[[460.26]] quibus constant.</i> </p>\n<p> [[460.27]] 28^#'a <i>Nullae sunt formae substantiales corporeae a materia distinctae.</i> </p>\n<p> [[460.28]] Gratulor Censoribus nostris quod te conspirantem imo ducem nacti sint. Breve tuum, sed\n[[460.29]] succi plenum ad binas dubitationes meas postremas responsum, amplum meditandi campum\n[[461.1]] mihi suppeditavit. Qua de re scribam ad te prolixius ubi Papebrochii litteras accepero. Vale et\n[[461.2]] tuae mihi benevolentiae honorem conserva. Dabam Hildesii 20 Augusti 1706. </p>\n<p> [[461.3]] Illustrissimae Dominationis tuae Humillimus et obsequentissimus servus in Christo </p>\n<p> [[461.4]] Bartholomaeus Des Bosses S J </p>\n<p> [[461.5]] P. S. Inter relegendum video omissam esse a me propositionem 4^#'a^#'m quae sic habet: <i>Mens\n[[461.6]] nostra eo quod finita sit, nihil certi de infinito potest scire, proindeque a nobis disputari de illo\n[[461.7]] nunquam debet.</i> Cujus falsitatem utinam aliquando in promisso a te <b>de scientia infiniti</b> libro\n[[461.8]] demonstratam legamus. </p>\n",
+  "number": "140.",
+  "title": "BARTHÉLEMY DES BOSSES AN LEIBNIZ",
+  "date": "Hildesheim, 20. August 1706. [135.141.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:140. BARTHÉLEMY DES BOSSES AN LEIBNIZ Hildesheim, 20. August 1706. [135.141.] Illustrissime Domine Distuli responsum ad postremas I[llustrissimae] D[ominationis] T[uae] litteras, quod Papebrochii responsorias expectarem una mittendas, quae necdum advenerunt: Significandum interim duxi, esse hic adol...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

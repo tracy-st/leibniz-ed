@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi2_24",
+  "series": "Band VI 2 (1663-1672); durchgesehener Nachdruck 1990",
+  "seq": 24,
+  "text": "[[477.21]] <b>56. Totos libros explicare una figura </b> <span>477.21;0:62:056:7001-7112:L:l^</span>.\n[[477.22]] Totos libros explicare una figura, et ut omnes autores eadem utantur\n[[477.22]] Magno levamento res mathematicas discentium docentiumque figuris iisdem\n[[477.23]] uterentur omnes. Exempli causa tota doctrina optica posset explicari una figura grandi. Et ut\n[[478.1]] confusio vitaretur, quae eodem tempore consideranda sunt, possent notari colore eodem\n[[478.2]] et quia idem diverso tempore cum variis conferendum est, possent induci ei colores varii\n[[478.3]] se comitantes. Ita quicunque aliquid de re optica commentabitur, iisdem et figuris et\n[[478.4]] numeris utetur, quibus et alii omnes, et alias ipse. Compendio sumtuum incidendis figuris\n[[478.5]] novis, laboris in delineandis, universalitate intellectuum (uti apud Analyticos idem\n[[478.6]] omnibus z vel y ut quaesitum x) harmonia librorum, minore fatigatione imaginationis huc\n[[478.7]] illuc versandae, magna etiam commoditate ad detegenda nova et non considerata, tum\n[[478.8]] omnia simul sunt in conspectu, conferique inter se, et detegi hiatus possunt. His figuris\n[[478.9]] lineisque ut urbibus in chartis geographicis ascribi nomina debent, theoremata non pauca\n[[478.10]] possunt. Incredibile hoc levamentum est molestis illis versationibus foliorum et\n[[478.11]] inquisitionibus, et huc illuc respectationibus carere posse, Rationemque et sensum uno velut\n[[478.12]] momento quasi oculis in rem praesentem ductis expedire. Apparebit quid inventum\n[[478.13]] quousque sciendo profecti simus, patebit omnibus campus adjungendi. Abbreviaturae\n[[478.14]] quoque seu Brachigraphiae faciles possunt adhiberi. Lineae sint ductae iisdem\n[[478.15]] manentibus coloribus duplicitate aut triplicitate seu crassitie, ut fluvii in geographia, modo\n[[478.16]] flexus, punctis adjunctis, seratura, ita carere poterimus illuminatione molesta. Et\n[[478.17]] veteribus notis omnibus facile est adjungere novam, (suppetente quippe spatio, adjectum novi\n[[478.18]] generis priorem comitante serratura, aut variato tantum serraturae angulo, aut appositis\n[[478.19]] quibusdam hamis, punctis etc.) Tota Geometria potest contineri una grandi figura, una\n[[478.20]] cum demonstratione omnium theorematum brachygraphica in margine. Omnes\n[[478.21]] introspicient uno momento in fundum demonstrationum, et rationes rationum ad primas usque.\n[[478.22]] Stereometria potest exhiberi vel pluribus figuris, vel ea ratione, qua Rumelinus usus est\n[[478.23]] in corpore humano. Quanquam pro stereometricis moduli solidi sint vendendi cum libris,\n[[478.24]] similiter in mechanicis quoad eius fieri potest. Adde Speneri meditationes de emendandis\n[[478.25]] chartis geographicis adhibitis pluribus characteribus. Adde quae alibi commentatus sum\n[[478.26]] de tota quadam materia juridica una historia seu facto comprehendenda, ut Italus quidam\n[[478.27]] in Criminibus Judiciisque Ecclesiasticis fecit; Ayrerus quoque in processu Belialis contra\n[[478.28]] Jesum adumbravit.\n",
+  "number": "56.",
+  "title": "Totos libros explicare una figura",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:56. Totos libros explicare una figura 477.21;0:62:056:7001-7112:L:l^. Totos libros explicare una figura, et ut omnes autores eadem utantur Magno levamento res mathematicas discentium docentiumque figuris iisdem uterentur omnes. Exempli causa tota doctrina optica posset explicari una figura grandi. E...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

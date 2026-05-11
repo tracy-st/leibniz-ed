@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_58",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 58,
+  "text": "<p> [[267.10]] <b>59. LEIBNIZ AN ANTOINE ARNAULD</p>\n<p> [[267.11]] [Hannover, 9. Oktober 1687.] [58.60.]</b></p>\n<p> [[268.5]] Monsieur </p>\n<p> [[268.6]] Voicy <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: Lettre à part à Mons. Arnaud à la quelle le discours precedent a esté joint.</Fn> la reponse à vos dernieres objections qui est devenue un peu longue, parce que je\n[[268.7]] me voulois expliquer exactement, et ne laisser rien en arriere de vos doutes. J'ay inseré souvent\n[[268.8]] vos propres paroles, ce qui a encor contribué à la grossir. Comme j'avois établi toutes ces\n[[268.9]] choses il y a long temps, et prevenu si je l'ose dire la pluspart des objections, elle ne m'a couté\n[[268.10]] presque point de meditation, et il ne me falloit que de me decharger des pensées sur le papier, et\n[[268.11]] les relire par après. C'est ce que je dis, Monsieur, à fin que vous ne me croyiés pas fort enfoncé\n[[268.12]] dans ces choses au depens d'autres soins necessaires. Vous m'avés engagé vous même à aller si\n[[268.13]] loin, en me faisant des objections et des demandes, aux quelles j'ay voulu satisfaire tant à fin de\n[[268.14]] profiter de vos lumieres, qu'à fin de vous faire connoistre ma sincerité à ne rien deguiser. </p>\n<p> [[268.15]] Je suis apresent fort occupé à l'Histoire de [la] S^#'m^#'e Maison de Bronsvic, j'ay vû plusieurs\n[[268.16]] Archifs cet esté, et je vay faire un tour dans la haute Allemagne pour chercher quelques\n[[268.17]] monumens. </p>\n<p> [[268.18]] <petit><i>Der Absatz in Kleindruck wurde von Leibniz, ohne ihn gestrichen zu haben, durch das ihm Folgende\n[[268.19]] ersetzt.</i> </petit> </p>\n<p> [[268.20]] <petit>J'ay lû la <i>Remarque</i> de M. l'Abbé Catelan dans les <i>Nouvelles de la Republique des Lettres</i> du mois de juin,\n[[268.21]] et je trouve que vous avés deviné ce qui en est, en disant que peutestre il n'a pas pris mon sens. Il l'a si peu pris,\n[[268.22]] que c'est une pitié. Je vous communique icy ma reponse, qui sera peutestre inserée dans les <i>Nouvelles de la\n[[269.1]] Republique des Lettres</i>. Ainsi nous nous sommes encor à recommencer, et j'ay fait une faute en repliquant à sa\n[[269.2]] premiere reponse, je devois simplement dire, qu'elle ne touchoit point mon objection, et luy marquer les endroits\n[[269.3]] aux quels il faut repondre comme je fais maintenant. Voilà ce que c'est que d'avoir à faire à des gens, qui\n[[269.4]] n'approfondissent les choses. Dieu nous garde d'un tel Antagoniste en morale ou en Metaphysique pour ne rien\n[[269.5]] dire de la Theologie ou de la Jurisprudence. Il n'y auroit pas moyen de sortir d'affaire. J'ay adjouté dans ma\n[[269.6]] reponse un probleme mecanique qui se peut reduire à la Geometrie mais il faut user d'adresse, et je verray si\n[[269.7]] M. Catelan y osera mordre. ll me semble qu'il n'est pas des plus forts. Et je m'estonne de voir que parmy tant de\n[[269.8]] Cartesiens il y en a si peu qui imitent M. des Cartes en tachant d'aller plus avant. </petit>\n [[269.9]] Cela ne m'empeche pas que je ne souhaitte d'apprendre vostre sentiment sur mes eclaircissemens,\n[[269.10]] lorsque vostre commodité le permettra, aussi bien que sur ma reponse à M. l'Abbé\n[[269.11]] Catelan que je vous envoye icy, d'autant qu'elle est courte et à mon avis demonstrative,\n[[269.12]] pourveu qu'on se donne tant soit peu d'attention. </p>\n<p> [[269.13]] Car il est demonstratif, que les vistesses que les corps ont acquis en descendant sont\n[[269.14]] comme les racines quarrées des hauteurs dont il sont tombés. Or si on fait abstraction des\n[[269.15]] resistances exterieures, un corps peut precisement remonter à la hauteur dont il est descendu;\n[[269.16]] donc si ce M. l'Abbé Catelan ne s'y prend pas mieux que jusqu'icy, ce n'est pas de luy qu'il\n[[269.17]] faut attendre l'eclaircissement de cette matiere. Je souhaiterois que vous y puissiés donner un\n[[269.18]] moment d'attention serieuse, vous seriés peutestre surpris de voir, qu'on a supposé pour un\n[[269.19]] principe incontestable, ce qui est si aisé à renverser. </p>\n<p> [[271.2]] II. <tab/>SÜDDEUTSCHLAND, WIEN UND ITALIEN\n[[271.3]] <tab/>November 1687 ─ Juni 1690\n[[273.1]] </p>\n",
+  "number": "59.",
+  "title": "LEIBNIZ AN ANTOINE ARNAULD",
+  "date": "[Hannover, 9. Oktober 1687.] [58.60.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:59. LEIBNIZ AN ANTOINE ARNAULD [Hannover, 9. Oktober 1687.] [58.60.] Monsieur Voicy Am Kopf der Seite von Leibniz' Hand: Lettre à part à Mons. Arnaud à la quelle le discours precedent a esté joint. la reponse à vos dernieres objections qui est devenue un peu longue, parce que je me voulois expliquer...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

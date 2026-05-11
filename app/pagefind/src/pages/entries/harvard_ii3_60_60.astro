@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_60",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 60,
+  "text": "<p> [[167.1]] <b>60. FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ</p>\n<p> [[167.2]] Berlin, 28. Mai (7. Juni) 1696. [6.193.]</b></p>\n\n<p> [[167.13]] Extrait de la lettre de Mons. Dobrzenski Berlin 28^#'d^#'e May 1696 </p>\n<p> [[167.14]] Je vous ay Monsieur, une obligation particuliere de la bonté que vous avés eue de\n[[167.15]] m'envoyer le secret de mariner les truites. </p>\n<p> [[167.16]] Les truffles de Madame l'Electrice sont merveilleuses, et par bonheur on a trouvé icy de\n[[167.17]] parfaitement bonne huile, pour les accommoder et conserver de la maniere que vous me l'avés\n[[167.18]] ecrit. </p>\n<p> [[167.19]] On attend icy Mad. l'Electrice Douairiere de Saxe, on se flatte même qu'elle pourroit\n[[167.20]] rester icy une bonne partie de l'Esté. Mad. l'Electrice la voudroit regaler d'un opera Allemand.\n[[167.21]] Mons. Helmont vous rend bien des complimens, il est logé chez moy. Il m'endort tous les soirs\n[[167.22]] au coin du feu, par ses raisonnemens sur l'ame, et ne me fait rever la nuit qu'à des transmigrations\n[[167.23]] d'un corps dans l'autre; mais quand je considere que ces reveries de la transmigration\n[[167.24]] de l'ame ne sont pas à beaucoup prés si agreables que celles de la transmigration d'une partie\n[[167.25]] de nostre corps dans l'autre, que nous practiquons si souvent pendant que nous sommes en vie,\n[[167.26]] je deviens plus sensuel que philosophe et souhaiterois de mourir sans estre brulé comme Olindo\n[[167.27]] aupres de Sofronia dans le Tasse: <i>che l'anima mia nella tua bocca spiri</i> etc. </p>\n",
+  "number": "60.",
+  "title": "FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ",
+  "date": "Berlin, 28. Mai (7. Juni) 1696. [6.193.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:60. FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ Berlin, 28. Mai (7. Juni) 1696. [6.193.] Extrait de la lettre de Mons. Dobrzenski Berlin 28^#'d^#'e May 1696 Je vous ay Monsieur, une obligation particuliere de la bonté que vous avés eue de m'envoyer le secret de mariner les truites. Les truffles de Mada...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

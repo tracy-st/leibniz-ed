@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_223",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 223,
+  "text": "[[866.4]] <b>182₃.  De terminis vel singularibus vel universalibus </p>\n<p> [[866.7]] Ens omne singulare seu individuum est, sed Termini sunt vel singulares vel universales,\n[[866.8]] v.g. cum hominem intelligo in genere, quemlibet intelligo, sed Terminus singularis\n[[866.9]] est, qui involvit omnia praedicata sui subjecti; universalis terminus est terminus\n[[866.10]] exprimens praedicatum incompletum. Ita et terminus unus alio latior vel strictior est prout\n[[866.11]] plura vel pauciora praedicata involvit. Et Terminus qui omnia praedicata essentialia\n[[866.12]] involvit, est species infima. Similiter ergo Termini concreti alii sunt essentiales alii\n[[866.13]] accidentales. Etsi enim idem sit qui rationalis est, et docilis et qui doctus, tamen rationalis\n[[866.14]] est essentialis primitivus, docilis essentialis derivativus; doctus accidentalis. Nempe\n[[866.15]] abstracta sunt formae substantiales, quantitates seu abstractum materiae accidentia quae\n[[866.16]] sunt formae accidentales, vel variationes. <Fn><i>Am Rande</i>: formae</Fn> Quodammodo quantitas est abstractum\n[[866.17]] Materiae, est enim aliquid essentiale, neque enim manente re aggregata mutari potest.\n[[867.1]] Rectius tamen fortasse materia prima instar abstracti concepta est resistentia, cum alias\n[[867.2]] videatur ipsa semper esse subjectum seu principium concreti. </p>\n",
+  "number": "182₃.",
+  "title": "De terminis vel singularibus vel universalibus",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:182₃. De terminis vel singularibus vel universalibus Ens omne singulare seu individuum est, sed Termini sunt vel singulares vel universales, v.g. cum hominem intelligo in genere, quemlibet intelligo, sed Terminus singularis est, qui involvit omnia praedicata sui subjecti; universalis terminus est te...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

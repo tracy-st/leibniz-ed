@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_30",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 30,
+  "text": "<p> [[77.5]] <b>30. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[77.6]] Is sur Tille, 12. September 1695. [28.33.]</b></p>\n\n<p> [[77.19]] Is sur Tille le 12. 7^#'b^#'r^#'e <b>1695</b> </p>\n<p> [[77.20]] Voilà monsieur un Commencement de l'exactitude de m^#'r le president Boisot que je vous\n[[77.21]] envoye; il continuera comme il a bien commencé; et je l'y exhorte, non seullement pour vous\n[[77.22]] envoyer les 3 traictés que le cher deffunct son frere vous avoit promis mais aussi tous les autres\n[[77.23]] qu'il avoit voulu donner à Leonard pour mettre dans son <i>receüil des traictés de paix</i>, comme en\n[[78.1]] devant faire la meilleure partie et la plus Curieuse, qu'il negligea neanmoins d'y mettre; ce qui\n[[78.2]] l'obligea de m'écrire, qu'il seroit plus ayse que vous en profitassiés que ce libraire ignorant; et\n[[78.3]] qu'il en feroit un memoire pour vous l'envoyer et scavoir, si quelquesuns d'entr'eux ne se\n[[78.4]] trouveroient point dans vos receüils; affin de n'avoir pas la peine de les copier inutilement. J'ay\n[[78.5]] faict scavoir cela à mons^#'r le president pour inviter ce bon Religieux qui a copié celluy que je\n[[78.6]] vous envoye à continuer ses soings pour la recherche de tout ce qu'il pourra trouver de\n[[78.7]] convenable à vostre <i>Code Diplomatique</i>, et de repondre par là aux intentions de leur bienfaiteur,\n[[78.8]] et de tacher en mesme tems de copier le plus exactement qu'il pourra. J'ay envoyé à mons^#'r\n[[78.9]] Bourdelot medecin du Roy nostre bon amy ce que j'avois faict pour deffunct m^#'r Lantin. Il l'a\n[[78.10]] communiqué à mons^#'r Foucher nostre amy qui scait d'original l'histoire qui a donné lieu à la\n[[78.11]] fausse complaisance de m^#'r le president Cousin pour ne point parler de moy dans son Journal;\n[[78.12]] J'exhorte m^#'r Foucher à vous la dire; pour moy j'en ay honte[,] elle me faict pitié pour les uns et\n[[78.13]] pour les autres. Mad^#'e^#'l^#'l^#'e de Scudery eût peine de ne point voir son bon amy mons^#'r l'abbé Boisot\n[[78.14]] dans le <i>journal des Scavants</i>, et qu'on n'y eût point faict mention de l'eloge que mons^#'r Moreau\n[[78.15]] en avoit faict et que j'avois envoyé à ce president pour en parler; elle pria mons^#'r Bosquillon\n[[78.16]] d'en faire un sur des memoires qu'on luy donna et sur celluy de mons^#'r Moreau. Il y a esté mis,\n[[78.17]] où l'on voit que vous avés rempli vostre <i>Code Diplomatique</i> de quelques tiltres qui vous ont\n[[78.18]] esté fournis par le deffunct; ce qui n'est pas vray; j'ay mandé à mons^#'r le president son frere\n[[78.19]] qu'il falloit qu'il reparast cette faulte; pour ce qui regarde mons^#'r Lantin, Je croy que mess^#'r^#'s ses\n[[79.1]] amis de Hollande repareront dans leur Journal, ce qu'on n'a pas voulû [qu'il] parûst de moy\n[[79.2]] dans le nostre; m^#'r Bayle me mande deux nouvelles litteraires dont vous pouvés faire part à\n[[79.3]] mons^#'r de Spanheim et à mons^#'r Morel et surtout de la derniere. La 1^#'e^#'r^#'e regarde un livre latin que\n[[79.4]] mons^#'r Peydecker viênt de publier en latin et qu'on peut appeller <i>l'histoire du Jansenisme</i>; il y\n[[79.5]] donne la vie de Jansenius et l'histoire de son <i>Augustinus</i> à quoy il mesle beaucoup d'observations\n[[79.6]] de controverse; cela vaut, dit il, la peine d'estre lû. Le 2^#'d c'est le livre de mons^#'r Brenner\n[[79.7]] <i>Thesaurus nummorum Sueco Gothicorum vetustus, studio indefesso triginta annorum spatio\n[[79.8]] collectus secundum seriem temporum dispositus</i>, dont on n'avoit faict que tirer un petit nombre\n[[79.9]] d'exemplaires, et qu'on va publier plus ample, et avec un beau commentaire bien tost; Je vous\n[[79.10]] prie mons^#'r d'asseurer ces deux illustres amis de mes tres humbles Respects. Je suis du meilleur\n[[79.11]] de mon coeur </p>\n<p> [[79.12]] Tout à vous, Nicaise </p>\n",
+  "number": "30.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Is sur Tille, 12. September 1695. [28.33.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:30. CLAUDE NICAISE AN LEIBNIZ Is sur Tille, 12. September 1695. [28.33.] Is sur Tille le 12. 7^#'b^#'r^#'e 1695 Voilà monsieur un Commencement de l'exactitude de m^#'r le president Boisot que je vous envoye; il continuera comme il a bien commencé; et je l'y exhorte, non seullement pour vous envoyer ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

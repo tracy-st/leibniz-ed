@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_198",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 198,
+  "text": "<p> [[646.19]] <b>200. LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF</p>\n<p> [[646.20]] Hannover, 31. Dezember 1692 (10. Januar 1693). [163.]</b></p>\n<p> [[647.3]] [ ... ] Theologorum quorundam prudentiam saepe requiro, quibus id unum videtur propositum,\n[[647.4]] ut nova sectarum nomina excogitent, sibique adversarios fingant, quos scilicet novi\n[[647.5]] Alcidae gloriose debellent, contrario saepe eventu, ut ipsi potissimum errores noxios in vulgus\n[[647.6]] spargant refutandi colore, et haeresin antea imaginariam primi condant exagitando. Inane\n[[647.7]] Pietismi terriculamentum fuisse docuit eventus. De Quietismo adeo obscura res est, ut ego in\n[[647.8]] ipsa Roma cum primariis Viris, sed in diversa tendentibus locutus, nondum habeam, quod\n[[647.9]] liquido judicem. Nuper nescio quis (titulum credo novum libro suo gratulatus) <i>de Collegiatismo</i>\n[[647.10]] scripsit. Ut de Pajonismo nihil dicam, cujus <greek>kyríaw dójaw</greek> nondum satis perspectas habeo; nisi\n[[647.11]] quod audio immediatum gratiae influxum in animas negare Pajonii discipulos quosdam, cum\n[[647.12]] mihi tamen, quicquid est in rebus perfectionis continuo a Summo illo boni fonte immediate\n[[647.13]] manare videatur. Etsi enim Malebranchio non assentiar, qui creaturas vi agendi spoliat; sentio\n[[647.14]] tamen, nunquam creaturam in creatura perfectionem producere, sed tantum efficere aliquid\n[[647.15]] circa limites perfectioni a Deo datae in creatura positos, auctis vel minutis impedimentis. [ ... ] </p>\n<p> [[647.16]] Quoties tot florentes Germaniae Academias cogito abundare viris eruditis, qui facile\n[[647.17]] certent plerisque exterorum; toties doleo, non magis profici ad solida studiorum augmenta,\n[[647.18]] tantumque velut in orbem rediri, plerisque idem agentibus aut actum agentibus, quodsi essent\n[[647.19]] Agonothetae, qui labores partirentur, qui ad praeclara tentamina excitarent; si viri docti per\n[[647.20]] societates, aut certe per literarum commercia conferrent consilia, digno probis viris, ne dicam\n[[647.21]] sapientibus, candore; consulerent simul et famae et quieti, possemusque paulatim accedere ad\n[[647.22]] magnum illud desideratum rei literariae, repertorium scilicet omnis solidae eruditionis. Ego\n[[648.1]] sane doctrinam omnem humanam soleo comparare amplissimae Tabernae, in qua immensa\n[[648.2]] pulcherrimarum mercium vis, sed dispersa sine ordine, sine inventario jacet. Nam multae\n[[648.3]] praeclarae notitiae extant sparsae in libris, multae non inferiores redigendae, adhuc in [literis]\n[[648.4]] inter variarum artium homines latent: quae si collectae, digestae atque in indices relatae essent,\n[[648.5]] agnosceremus divina beneficia, opibusque nostris opinione majoribus tandem frueremur, quam\n[[648.6]] humani generis foelicitatem torpor noster in alia secula differt. Sed quamdiu non multi Tui\n[[648.7]] similes aut saltem imitatores exorientur, quorum simul et autoritas in Republica et Sapientia in\n[[648.8]] litteris emineat, semper intra pia desideria stabimus. [ ... ] </p>\n<p> [[648.9]] Dabam Hanoverae 31. Decembr. 1692. </p>\n<p> [[648.10]] Illustrissimi Nominis Tui Cultor obsequentissimus Godefridus Guilielmus Leibnitius. </p>\n",
+  "number": "200.",
+  "title": "LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF",
+  "date": "Hannover, 31. Dezember 1692 (10. Januar 1693). [163.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:200. LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF Hannover, 31. Dezember 1692 (10. Januar 1693). [163.] [ ... ] Theologorum quorundam prudentiam saepe requiro, quibus id unum videtur propositum, ut nova sectarum nomina excogitent, sibique adversarios fingant, quos scilicet novi Alcidae gloriose debellent,...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

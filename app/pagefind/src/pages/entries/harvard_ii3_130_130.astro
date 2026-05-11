@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_130",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 130,
+  "text": "<p> [[348.1]] <b>130. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[348.2]] [Venedig, 19. Juli 1697.] [129.131.]</b></p>\n\n<p> [[348.9]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[348.10]] Il nostro gentili^#'m^#'o Sig^#'r^#'e Zannovelli mi consegnò questa mattina una lettera di V. S. Ill^#'m^#'a col\n[[348.11]] suo dottissimo Opuscolo che leggerò questa sera con mia somma sodisfattione per i peregrini e\n[[348.12]] nobili pensieri, che contiene per l'accrescimento della Scienza naturale. Resto infinitamente\n[[348.13]] addolorato nel leggere che il diploma trovato con tanti sudori non sia quello che desidera V. S.\n[[348.14]] Ill^#'m^#'a. In ricevere la sua mi portai subito dal Sig^#'r^#'e Conte Bertolli, lo riverii in suo nome, e gli lessi\n[[348.15]] la lettera, egli m' hà risposto che dalle scritture publiche non hà trovato altro Enrico che quello\n[[348.16]] di Sassonia, non havendo havuta mai notitia alcuna di questo Enrico Duca di Baviera che regnò\n[[348.17]] l'anno 1100. Io viddi quanto si conteneva nel catastico del Monastero, e nell'indice di tutti\n[[348.18]] quelli che l' havevano infeudato, e non hò trovato che questo Enrico dell'anno 1036. Perciò il\n[[348.19]] Sig^#'r^#'e Conte Bertolli molto s'affligge di non poterla servire, non trovando maniera di potere\n[[348.20]] ottenere la notitia, che ella vorrebbe. Se vi fosse stato questo Enrico di Baviera certamente\n[[348.21]] nell'archivio ed indice delle Carceri si trovarebbe, essendo un diploma molto importante e\n[[348.22]] riguardevole e se la Donatione d'Enrico Duca di Sassonia fosse stata falsa, non sarebbe stata\n[[348.23]] legalmente conosciuta per vera e legitima dalla Corte di Padova nel Secolo passato, come si\n[[348.24]] vede nella copia che le mandai. Hò tanto zelo per cotesta Serenissima Casa, e talmente venero\n[[348.25]] la maestà di cotesto potentissimo e saviissimo Principe, che volintieri impiegarei tutto il mio\n[[349.1]] tempo, e la mia diligenza per trovare il diploma desiderato, ma hò perso la speranza, si come\n[[349.2]] non hebbi la fortuna di trovare il piccolo dittionario della lingua Cumana fra le reliquie del\n[[349.3]] Petrarca. Da canto mio hò fatto tutte le diligenze, né resta altro da fare al Sig^#'r^#'e Conte Bertolli\n[[349.4]] che divotamente la riverisce: l'istesso rincrescimento e dolore dimostra il Sig^#'r^#'e Zannovelli il\n[[349.5]] quale con sommo zelo e diligenza adopera tutte le sue forze per servire cotesto Sere^#'m^#'o Principe,\n[[349.6]] ma in questo Paese si vive in una tale ignoranza di quello che risguarda l'antichità, e l'eruditione,\n[[349.7]] che gli affari più difficili sono quelli che appartengono alla ricerca di simili cose. Se\n[[349.8]] V. S. Ill^#'m^#'a mi può dare qualche nuovo lume ed aprirmi la strada con qualche suo avvertimento\n[[349.9]] mi scriva pure, che farò tutto per mostrarle quanto mi premono i suoi stimatissimi comandi.\n[[349.10]] Circa il negotio del nostro comune Amico, attendo le sue risposte, acciò possa avvisarlo di quel\n[[349.11]] che si deve fare, e si può sperare affine di prendere a tempo le sue misure. Io le lo raccomando\n[[349.12]] con tutto il cuore, premendomi molto la sua quiete. M'ami, e si ricordi che inalterabilmente\n[[349.13]] sono </p>\n<p> [[349.14]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Ob^#'m^#'o, Cord^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[349.15]] Col seguente Ordinario le trasmetterò la mia seconda lettera sopra la corruttione ed abusi\n[[349.16]] dell'arte di parlare. In quella settimana si principiarà a stampare la mia Opera. </p></p>\n",
+  "number": "130.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "[Venedig, 19. Juli 1697.] [129.131.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:130. MICHEL ANGELO FARDELLA AN LEIBNIZ [Venedig, 19. Juli 1697.] [129.131.] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o Il nostro gentili^#'m^#'o Sig^#'r^#'e Zannovelli mi consegnò questa mattina una lettera di V. S. Ill^#'m^#'a col suo dottissimo Opuscolo che leggerò questa sera con mi...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

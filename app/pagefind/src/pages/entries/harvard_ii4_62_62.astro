@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_62",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 62,
+  "text": "<p> [[203.5]] <b>62. GEORGE CHEYNE AN LEIBNIZ</p>\n<p> [[203.6]] 20. (31.) März 1704</b></p>\n<p> [[204.3]] Sir </p>\n<p> [[204.4]] I did Receive a very large pacquett from M^#'r Bernoulli at Groninghen about 6 weeks ago,\n[[204.5]] but a long time after the date of his letters, for they came from thence by a privat hand, who was\n[[204.6]] hindred in his passage, If you have any correspondence with him (as I imagin you may have)\n[[204.7]] pray Give my most hearty service to him and acquaint him that the reason why I have delay'd\n[[204.8]] to answer his Last; was waiting till I shou'd have an opportunity of sending him M^#'r Newton and\n[[204.9]] [de] Moivre's books, Besides his letters require my time and Consideration, I have not had four\n[[204.10]] hours peacable leisure since I receiv'd 'em, the Necessities of Life and my Employment having\n[[204.11]] taken up all my hours. But I shall delay no longer writing to him. Pray you Sir be so kind as to\n[[204.12]] tell him this how soon you write to him I am </p>\n<p> [[204.13]] Sir Your most humble Servant Geo. Cheyne </p>\n<p> [[204.14]] March 20^#'t^#'h 1703/4 </p>\n",
+  "number": "62.",
+  "title": "GEORGE CHEYNE AN LEIBNIZ",
+  "date": "20. (31.) März 1704"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:62. GEORGE CHEYNE AN LEIBNIZ 20. (31.) März 1704 Sir I did Receive a very large pacquett from M^#'r Bernoulli at Groninghen about 6 weeks ago, but a long time after the date of his letters, for they came from thence by a privat hand, who was hindred in his passage, If you have any correspondence wit...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

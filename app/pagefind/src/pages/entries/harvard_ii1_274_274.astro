@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_274",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 274,
+  "text": "<p> [[838.1]] <b>239. LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS</p>\n<p> [[838.2]] [Hannover, 3. November 1682.] [228.241.]</b></p>\n<p> [[838.13]] [ ... ] A l'egard des dogmes la principale difficulté à mon avis, consiste dans la\n[[838.14]] Transsubstantiation. Et cette transsubstantiation implique contradiction, si la philosophie des\n[[838.15]] Modernes est veritable, qui soûtient que l'essence du corps est d'estre estendu et de remplir un\n[[838.16]] certain espace. Je voy que la philosophie des Gassendistes et Cartesiens prend le dessus même\n[[838.17]] en France, et je ne comprends pas comment ceux qui la croyent puissent estre catholiques de\n[[838.18]] bonne foy. </p>\n<p> [[838.19]] Comme cette même philosophie ne detruit pas moins la presence reelle, je m'y suis\n[[838.20]] appliqué quelques fois, et j'ay trouvé certaines demonstrations, dependantes des mathematiques\n[[838.21]] et de la nature du mouvement, qui me donnent une grande satisfaction sur ces matieres, et\n[[838.22]] même je croy qu'on pourroit en deduire la possibilité de la Transsubstantiation, ce qui est un\n[[838.23]] grand point, car comme elle semble d'ailleurs assez conforme aux sentimens de l'ancienne\n[[838.24]] Eglise, il n'y a que son impossibilité apparente, qui empeche les personnes meditatives, d'y\n[[838.25]] adjouter foy. Je voudrois pourtant sçavoir, si la maniere dont je l'explique, pourroit estre receue\n[[838.26]] dans l'Eglise romaine, quoyqu'il me semble qu'elle convient assez avec les principes de la\n[[838.27]] Theologie scholastique ce que l'explication des Cartesiens ne fait pas. Après le redressement et\n[[838.28]] desaveu des mauvaises practiques je ne voy rien qui soit si important pour la reunion que de\n[[838.29]] pouvoir satisfaire aux absurdités apparentes de la Transsubstantiation. Car tous les autres\n[[838.30]] dogmes sont bien plus conformes à la raison. Et de vouloir renoncer à la raison en matiere de\n[[838.31]] religion, est aupres de moy une marque presque certaine ou d'un entestement approchant de\n[[838.32]] l'enthousiasme, ou qui pis est d'une hypocrisie. On ne croit rien ny en religion ny ailleurs, que\n[[839.1]] par des raisons vrayes ou fausses qui nous y portent; <i>necessaria sunt motiva credibilitatis</i>; les\n[[839.2]] quels n'estant que probables, comme on peut juger par <i>l'analyse de la foy</i> de Greg. de\n[[839.3]] Valencia et autres, peuvent estre detruits ou contrepesés par des raisons d'impossibilité. (Car je\n[[839.4]] ne parle point de la foy divine, qui survient aux motifs humains.) [ ... ] </p>\n",
+  "number": "239.",
+  "title": "LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS",
+  "date": "[Hannover, 3. November 1682.] [228.241.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:239. LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS [Hannover, 3. November 1682.] [228.241.] [ ... ] A l'egard des dogmes la principale difficulté à mon avis, consiste dans la Transsubstantiation. Et cette transsubstantiation implique contradiction, si la philosophie des Modernes est veritable...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_404",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 404,
+  "text": "[[1696.1]] <b>335₁.  Principia philosophiae, pars secunda, Randbemerkungen PRINCIPIA PHILOSOPHIAE, PARS SECUNDA, RANDBEMERKUNGEN </p>\n<p> [[1696.2]] [XLVII / 8, 68] Secundo, si <i>B</i> esset tantillo major quam <i>C</i>, <Fn><i>Am Rande</i>: Miror <b>casum ommissum</b> cum corpora inaequalia inaequalibus celeritatibus in oppositas partes moventur.</Fn> caeteris positis ut prius,\n[[1696.3]] tunc solum <i>C</i> reflecteretur, et utrumque versus sinistram eadem celeritate moveretur. </p>\n<p> [[1696.4]] [XLVIII / 8, 68] Tertio, <Fn><i>Am Rande</i>: Malebranchius tres priores regulas approbat. </Fn> si mole essent aequalia, sed <i>B</i> tantillo celerius moveretur\n[[1696.5]] quam <i>C</i>, non tantum ambo pergerent moveri versus sinistram, sed etiam transferretur ex\n[[1696.6]] <i>B</i> in <i>C</i>, media pars celeritatis qua hoc ab illo excederetur: hoc est, si fuissent prius sex\n[[1696.7]] gradus celeritatis in <i>B</i>, et quatuor tantum in <i>C</i>, post mutuum occursum unumquodque\n[[1696.8]] tenderet versus sinistram, cum quinque gradibus celeritatis. </p>\n<p> [[1696.9]] [XLIX / 8, 68] Quarto, <Fn><i>Am Rande</i>: Malebranchius vult corpora simul ire post concursum, eadem qua ante, motus quantitate.</Fn> si corpus <i>C</i> plane quiesceret, essetque paulo majus quam <i>B</i>,\n[[1696.10]] quacunque cum celeritate <i>B</i> moveretur versus <i>C</i>, nunquam ipsum <i>C</i> moveret; sed ab eo\n[[1696.11]] repelleretur in contrariam partem: quia corpus quiescens magis resistit magnae celeritati\n[[1696.12]] quam parvae, idque pro ratione excessus unius supra alteram; et idcirco semper major\n[[1696.13]] esset vis in <i>C</i> ad resistendum, quam in <i>B</i> ad impellendum. </p>\n<p> [[1696.14]] [L / 8, 69] Quinto, <Fn><i>Am Rande</i>: Hanc approbat Malebranchius.</Fn> si corpus quiescens <i>C</i>, esset minus quam <i>B</i>, tunc quamtumvis\n[[1696.15]] tarde <i>B</i> versus <i>C</i> moveretur, illud secum moveret, partem scilicet sui motus ei talem\n[[1696.16]] transferendo, ut ambo postea aeque celeriter moverentur: nempe si <i>B</i> esset duplo majus\n[[1696.17]] quam <i>C</i>, transferret ipsi tertiam partem sui motus, quia una illa tertia pars tam celeriter\n[[1696.18]] moveret corpus <i>C</i>, quam duae aliae residuae, corpus <i>B</i> duplo majus. </p>\n<p> [[1696.19]] [LI / 8, 69] Sexto, <Fn><i>Am Rande</i>: Malebranchius vult ambo simul pergere dimidia celeritate.</Fn> si corpus <i>C</i> quiescens, esset accuratissime aequale corpori <i>B</i>\n[[1696.20]] versus illud moto, partim ab ipso inpelleretur, et partim ipsum in contrariam partem\n[[1696.21]] repelleret: nempe si <i>B</i> veniret versus <i>C</i>, cum quatuor gradibus celeritatis, communicaret\n[[1696.22]] ipsi <i>C</i> unum gradum, et cum tribus residuis reflecteretur versus partem adversam. </p>\n<p> [[1696.23]] [LII / 8, 69] Denique, <Fn><i>Am Rande</i>: Malebranchius vult generaliter quicunque celeritatum excessus sit ambo post concursum simul ire, eadem qua ante celeritate.</Fn> si <i>B</i> et <i>C</i> versus eandem partem moverentur, <i>C</i> quidem\n[[1697.1]] tardius, <i>B</i> autem illud insequens celerius, ita ut ipsum tandem attingeret, essetque <i>C</i>\n[[1697.2]] majus quam <i>B</i>; sed excessus celeritatis in <i>B</i> esset major, quam excessus magnitudinis in\n[[1697.3]] <i>C</i>, tunc <i>B</i> transferret tantum de suo motu in <i>C</i>, ut ambo postea aeque celeriter, et in\n[[1697.4]] easdem partes moverentur. Si autem e contra excessus celeritatis in <i>B</i>, minor esset quam\n[[1697.5]] excessus magnitudinis in <i>C</i>, <i>B</i> in contrariam partem reflecteretur, et motum omnem suum\n[[1697.6]] retineret. </p>\n",
+  "number": "335₁.",
+  "title": "Principia philosophiae, pars secunda, Randbemerkungen",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:335₁. Principia philosophiae, pars secunda, Randbemerkungen PRINCIPIA PHILOSOPHIAE, PARS SECUNDA, RANDBEMERKUNGEN [XLVII / 8, 68] Secundo, si B esset tantillo major quam C, Am Rande: Miror casum ommissum cum corpora inaequalia inaequalibus celeritatibus in oppositas partes moventur. caeteris positis...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

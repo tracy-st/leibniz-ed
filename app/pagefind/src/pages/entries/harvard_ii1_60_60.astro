@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_60",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 60,
+  "text": "<p> [[158.1]] <b>53. LEIBNIZ AN JOHANNES HEVELIUS</p>\n<p> [[158.2]] Frankfurt, 3. Mai 1671.</b></p>\n<p> [[158.16]] Vir Ampl^#'m^#'e et Celeberrime. </p>\n<p> [[158.17]] Si cultum quo Te prosequor apud Te exposuero, rem et parum Tibi gratam fecero, et cum\n[[158.18]] omnibus communem. Faciam ergo quod non omnes: sistam nimirum aliquid judicio Tuo, quod\n[[158.19]] ipsos Anglos, Gallos, Italos, tanti facere constat: audacter utique, sed humanitas Tua minuit\n[[158.20]] temeritatem meam. Videbis Hypothesin quandam paradoxam, brevem certe claramque omnium\n[[158.21]] phaenomenorum causam repetentem, ipsius etiam directionis Magneticae, a circulatione aetheris\n[[158.22]] cum luce, quam hactenus supposuit, quod sciam nemo. Magno me beneficio affeceris, si\n[[158.23]] Tuum, si Ampl^#'m^#'i Behmii, si aliorum amicorum judicia uberrima significaveris, si aliorum\n[[158.24]] egregiorum conatuum inventorumque participem feceris. Si quid vicissim in his locis curandum\n[[158.25]] mihi impones, summam promtitudinem senties. Vellem nosse, quid sentias de Vaticinatione\n[[158.26]] Philosophica quam dedit Henr. Bondius, si bene memini, Anglus eruditus qui declinationes\n[[158.27]] Magneticas futurorum annorum ex Hypothesi sua praedixit. Cum jam elapsi sint aliquot anni\n[[158.28]] nosse opto an cogitatis responderit eventus. P. Grandamicus S.J. (ut habet <i>in arte Magnetica</i>\n[[158.29]] editionis Romanae novissimae P. Kircher) observavit in magnete terrellae forma elaborato, ipso\n[[159.1]] polo suo suberi libratili imposito, <b>sine omni declinatione</b> meridianum quendam certum,\n[[159.2]] perpetuo obverti meridiano loci. De quo quid vos judicetis resciscere valde desidero. Vellem de\n[[159.3]] ejus successu edoceri, ad Hypotheses meas magneticas perficiendas. Quemadmodum et quid de\n[[159.4]] inclinatione acus magneticae, poli elevationem Gilberto et Kirchero referentibus monstrante,\n[[159.5]] sentiatis. Vale faveque </p>\n<p> [[159.6]] Vir Ampl^#'m^#'e et Celeberrime Cultori Tuo Gottfredo Guilielmo Leibnitio J.U.D. </p>\n<p> [[159.7]] Francofurti 3. Maji styl. novi 1671. et Consiliario Moguntino. </p>\n<p> [[159.8]] P. S. Si responso me dignaris, id Dn. Wachtler curabit et Dⁿ^#'o Zunnero Bibliopolae Francofurtensi\n[[159.9]] tradet, is mittet mihi. </p>\n<p> [[159.10]] Ampl^#'m^#'o Hevelio Reipublicae Dantiscanae Senatori. Danzig. </p>\n",
+  "number": "53.",
+  "title": "LEIBNIZ AN JOHANNES HEVELIUS",
+  "date": "Frankfurt, 3. Mai 1671."
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:53. LEIBNIZ AN JOHANNES HEVELIUS Frankfurt, 3. Mai 1671. Vir Ampl^#'m^#'e et Celeberrime. Si cultum quo Te prosequor apud Te exposuero, rem et parum Tibi gratam fecero, et cum omnibus communem. Faciam ergo quod non omnes: sistam nimirum aliquid judicio Tuo, quod ipsos Anglos, Gallos, Italos, tanti f...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

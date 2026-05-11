@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_7",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 7,
+  "text": "<p> [[15.1]] <b>7. LEIBNIZ AN CHRISTIAN DAUM</p>\n<p> [[15.2]] Leipzig, 17. (27.) Mai 1666. [6.]</b></p>\n<p> [[15.15]] Nobiliss^#'e et Cl^#'m^#'e Vir </p>\n<p> [[15.16]] Libenter fusius scriberem, nisi solennes nundinarum apud nos operae, id est amicis\n[[15.17]] peregre venientibus aut abeuntibus debita officia, perpetuo interturbarent. Quae tantum temporis\n[[15.18]] vix reliquerunt mihi, ut liceret satisfacere non dico debito meo, sed saltem juri Tuo. Nam,\n[[15.19]] ut a Grotio quoque disputatum est, alia debentur quidem, sed exigi ab invito non possunt, ut\n[[15.20]] gratitudo caeteraeque a justitia separatae virtutes; alia quae ex ipsa justitia speciali descendunt,\n[[15.21]] et necessario dantur, et valide petuntur, qualis est commodati restitutio. Quare hoc temperamentum\n[[15.22]] officii mei inveni, ut haec statim praestarem, illa paululum differrem, sed ea lege, ut\n[[15.23]] imposterum etiam exigendi Tibi jus sit, et hoc velut foenore mora compensaretur. Vides igitur\n[[15.24]] accipisque reduces, Nobiliss^#'e Vir, libros tuos tam privatim tuae diligentiae, quam promtitudinis\n[[15.25]] erga alios testes. Sed ne incomitati redirent, tria dissertationis meae exempla, aut, ut loquuntur,\n[[15.26]] exemplaria, adjeci. Superest, ut declarem gratitudinem meam paulo expressius; sed hoc alii\n[[15.27]] tempori et magis vacuo debetur. Interim Vale, Nobiliss^#'e Vir, faveque </p>\n<p> [[15.28]] Tibi obstrictissimo </p>\n<p> [[15.29]] Dabam Lipsiae 17 Maji A^#'o 1666. M. Gottfredo Guilielmo Leibnüzio. </p>\n<p> [[16.1]] P. S. Vellem discipulo Tuo plus, quam nunc licet, usui esse possem. Interim ei, quod\n[[16.2]] frequentissimum apud nos est, describenda quaedam locavi. </p>\n<p> [[16.3]] Viro Nobiliss^#'o atque Cl^#'m^#'o, Dⁿ^#'o Christiano Daumio, Gymnasiarchae Zwiccaviensi. Fautori\n[[16.4]] suo inprimis honorando. Zwickau. Franco. Nebenst zwey Paqueten. <Fn><i>Von Daums Hand, Empfangsdatum</i>: 20 Maii 1666.</Fn> </p>\n",
+  "number": "7.",
+  "title": "LEIBNIZ AN CHRISTIAN DAUM",
+  "date": "Leipzig, 17. (27.) Mai 1666. [6.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:7. LEIBNIZ AN CHRISTIAN DAUM Leipzig, 17. (27.) Mai 1666. [6.] Nobiliss^#'e et Cl^#'m^#'e Vir Libenter fusius scriberem, nisi solennes nundinarum apud nos operae, id est amicis peregre venientibus aut abeuntibus debita officia, perpetuo interturbarent. Quae tantum temporis vix reliquerunt mihi, ut l...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

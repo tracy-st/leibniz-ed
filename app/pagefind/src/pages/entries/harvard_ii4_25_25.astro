@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_25",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 25,
+  "text": "<p> [[73.22]] <b>25. LEIBNIZ AN PIERRE BAYLE</p>\n<p> [[73.23]] Berlin, 19. August 1702. [13.27.] </b></p>\n<p> [[74.17]] Monsieur </p>\n<p> [[74.18]] J'ay <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Mons Bayle Berlin 19 Aoust 1702 </Fn> appris de M. Toland que vous vous portés bien et que vous vous souvenes favorablement\n[[74.19]] de moy. Et j'en suis ravi. Il m'a meme salué de vostre part, et je vous en remercie non\n[[74.20]] seulement par cette lettre, mais encor par ce que j'y joins. J'ay vû la nouvelle edition de vostre\n[[74.21]] excellent <i>Dictionnaire</i>, où il y a tant d'erudition, d'esprit, et d'agrément, que j'ay eu besoin\n[[74.22]] d'un grand effort sur moy meme pour m'en arracher, quand il le falloit. Mon sejour à\n[[74.23]] Luzembourg, maison de plaisance de la Reine de prusse, où je me trouve maintenant avec Mad.\n[[74.24]] l'Electrice, me donne un loisir que je n'ay point ailleurs. J'ay lû d'abord l'article de <i>Rorarius</i>, et\n[[75.1]] me voyant invité si obligeamment, j'ay fait une replique que je vous envoye. Elle sera\n[[75.2]] maintenant pour vous Monsieur, et pour quelques amis choisis, plustost que pour le public.\n[[75.3]] Mais je souhaitte que vostre loisir vous puisse permettre de l'examiner, afin que je puisse avoir\n[[75.4]] l'honneur [d']apprendre vostre sentiment par la voye de M. de Volder, dont vous connoissés,\n[[75.5]] Monsieur, les grandes lumieres, et qui sera bien aise aussi de voir vos reflexions comme je\n[[75.6]] seray ravi d'apprendre encor les siennes. Si je ne savois que les plus profondes ne vous coustent\n[[75.7]] gueres je n'oserois point vous en demander, de peur de vous derober au temps qui vous doit\n[[75.8]] estre pretieux aussi bien qu'au public. </p>\n<p> [[75.9]] C'est encor pour cette raison que je finis maintenant, quoyque je pourrois encor dire bien\n[[75.10]] des choses à l'occasion de vostre ouvrage; et je suis avec zele </p>\n<p> [[75.11]] Monsieur etc. </p>\n",
+  "number": "25.",
+  "title": "LEIBNIZ AN PIERRE BAYLE",
+  "date": "Berlin, 19. August 1702. [13.27.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:25. LEIBNIZ AN PIERRE BAYLE Berlin, 19. August 1702. [13.27.] Monsieur J'ay Am Kopf der Seite von Leibniz' Hand: A Mons Bayle Berlin 19 Aoust 1702 appris de M. Toland que vous vous portés bien et que vous vous souvenes favorablement de moy. Et j'en suis ravi. Il m'a meme salué de vostre part, et je ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

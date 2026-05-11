@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_39",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 39,
+  "text": "<p> [[164.1]] <b>40. LEIBNIZ AN ANTOINE ARNAULD</p>\n<p> [[164.2]] [Göttingen, 30. April 1687.] [36.41.]</b></p>\n<p> [[164.26]] En <Fn><i>Am Kopf des Briefes</i>: ist nicht abgangen</Fn> matiere de religion (puisque vous touchés cette corde) il y a des gens de ma\n[[164.27]] connoissance (car je ne vous parle point de moy), qui ne sont pas eloignés des sentimens de\n[[164.28]] l'Eglise catholique Romaine, qui trouvent les definitions du Concile de Trente assez raisonnables\n[[164.29]] et conformes à la Sainte Ecriture et aux Saints Peres, qui jugent que le systeme de la\n[[164.30]] Theologie Romaine est mieux lié que celuy des Protestans, et qui avouent que les dogmes ne les\n[[164.31]] arresteroient pas. Mais ils sont arrestés premierement par quelques abus de practique tres\n[[165.1]] grands et trop communs, qu'ils voyent tolerés dans la Communion Catholique Romaine surtout\n[[165.2]] en matiere de culte; ils craignent d'estre engagés à les approuver ou au moins à ne pas oser les\n[[165.3]] blâmer, ils apprehendent de donner par là du scandale à ceux qui les prendroient pour des gens\n[[165.4]] sans conscience, et que leur exemple quoyque mal entendu porteroit à l'impieté; ils doutent\n[[165.5]] même, si on peut communier avec des gens qui pratiquent certaines choses peu tolerables; et ils\n[[165.6]] considerent qu'en ces rencontres il est plus excusable de ne pas quitter une Communion que d'y\n[[165.7]] entrer. </p>\n<p> [[165.8]] Secondement, quand cet obstacle ne seroit pas, ils se trouvent arrestés par les Anathematismes\n[[165.9]] du Concile de Trente, ils ont de la peine à souscrire à des condemnations qui leur\n[[165.10]] paroissent trop rigides, et peu necessaires, ils croyent que cela est contraire à la charité et que\n[[165.11]] c'est faire ou fomenter un schisme. </p>\n<p> [[165.12]] Cependant ces personnes se croyent veritablement Catholiques, comme le seroient ceux\n[[165.13]] qu'on a excommuniés injustement, <i>clave errante</i>, car ils tiennent les dogmes de l'Eglise\n[[165.14]] Catholique, ils souhaitent de plus la communion exterieure, à quoy d'autres mettent des\n[[165.15]] obstacles ou la leur refusent. </p>\n<p> [[165.16]] Un celebre Theologien Catholique Romain muni de l'approbation de plusieurs autres\n[[165.17]] avoit proposé un expedient; et avoit crû qu'un protestant, qui ne seroit arresté que par les\n[[165.18]] anathematismes et même par quelques definitions du Concile de Trente, et qui douteroit, si ce\n[[165.19]] Concile a esté veritablement Oecumenique, mais qui seroit prest à se sousmettre à un Concile\n[[165.20]] qui le seroit veritablement, et qui par consequent receuvroit les premiers principes de l'Eglise\n[[165.21]] Catholique, tellement que son erreur ne seroit pas de droit, mais de fait seulement; qu'un tel,\n[[165.22]] dis-je, pourroit estre receu à la communion sans faire aucune mention du Concile de Trente,\n[[165.23]] puisqu'aussi bien ce Concile n'a pas encor esté receu par tout, et que la profession du pape\n[[166.1]] Pie IV n'est faite que pour les Ecclesiastiques ou pour ceux qui enseignent, et que je ne crois\n[[166.2]] pas que le Concile de Trente soit entré dans la profession de tous ceux qu'on a receus à la\n[[166.3]] communion en France. Mais on doute que cet expedient soit approuvé. </p>\n",
+  "number": "40.",
+  "title": "LEIBNIZ AN ANTOINE ARNAULD",
+  "date": "[Göttingen, 30. April 1687.] [36.41.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:40. LEIBNIZ AN ANTOINE ARNAULD [Göttingen, 30. April 1687.] [36.41.] En Am Kopf des Briefes: ist nicht abgangen matiere de religion (puisque vous touchés cette corde) il y a des gens de ma connoissance (car je ne vous parle point de moy), qui ne sont pas eloignés des sentimens de l'Eglise catholique...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

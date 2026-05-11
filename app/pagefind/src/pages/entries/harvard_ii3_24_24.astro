@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_24",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 24,
+  "text": "<p> [[59.1]] <b>24. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[59.2]] [Hannover,] 16./26. Juli 1695. [20.29.]</b></p>\n\n<p> [[59.14]] Je <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Mons. Banage Bauval 16/26 Juillet 1695</Fn> viens d'apprendre, Monsieur, la mort de Monsieur Hugens, il m'est fatal d'ecrire des\n[[59.15]] lettres à des amis qui ne sçauroient repondre. Le Prince Erneste Landgrave de Hesse, et Mons.\n[[59.16]] de Seckendorf, ne purent lire les miennes; et M. Pelisson la lût en effet, mais la mort l'empecha\n[[59.17]] de faire la reponse qu'il avoit déja promise. </p>\n<p> [[59.18]] La perte de l'illustre M. Hugens est inestimable, peu de gens le sçavent autant que moy. Il\n[[59.19]] a égalé à mon avis la reputation de Galilei et de Descartes, et aidé par ce qu'ils avoient fait, il a\n[[59.20]] surpassé leur decouvertes. En un mot il faisoit un des premiers ornemens de ce temps. Je l'ay\n[[59.21]] souvent exhorté à nous donner ses pensées quand ce ne seroit que par lambeaux et d'une\n[[59.22]] maniere familiere. J'espere que son livre sur le systeme du monde et la constitution interieure\n[[60.1]] des planetes aura esté achevé. Mais comme il avoit coustume de mettre ses pensées par écrit, en\n[[60.2]] assez bonne forme, j'espere qu'on trouvera un grand Tresor parmy ses papiers. Je ne sçay s'il\n[[60.3]] n'aura donné quelques ordres pour cela; ce que je serois bien aise d'apprendre. Mais en cas que\n[[60.4]] non, nous y devons songer. Et moy sur tout qui ay eu l'honneur de le connoistre depuis tant\n[[60.5]] d'années, et de communiquer souvent avec luy, ce qui m'a donné le moyen de penetrer dans ses\n[[60.6]] pensées un peu mieux que beaucoup d'autres. Il connoissoit par des preuves publiques combien\n[[60.7]] j'estois sincere à reconnoistre en quoy je luy estois redevable. Et il me rendoit la pareille au\n[[60.8]] delà de ce que je meritois. Je n'ay pas l'honneur de connoistre Monsieur de Zulichem son frere,\n[[60.9]] Secretaire d'Estat du Roy. Sans cela je prendrois la liberté de l'exhorter à y mettre quelque\n[[60.10]] ordre convenable. Et si vous avés quelque liaison avec luy, ou avec ses amis; je vous supplie de\n[[60.11]] leur faire connoistre mes souhaits qui tendent egalement au bien public, et à la gloire de ce\n[[60.12]] grand homme, qu'on ne sçauroit assez honnorer. J'ay écrit pour faire marquer mes sentimens\n[[60.13]] dans les Actes de Leipzig sur ce sujet. Mais vous Monsieur, qui n'estes pas moins qu'eux en\n[[60.14]] droit d'avoir soin de la gloire des grands hommes ne manquerés pas de rendre justice à un tel\n[[60.15]] ami dans vostre <i>Histoire des ouvrages</i>. Au reste je me rapporte à ma precedente, et suis avec\n[[60.16]] bien du zele </p>\n<p> [[60.17]] Monsieur vostre tres humble et tres obeissant serviteur </p>\n",
+  "number": "24.",
+  "title": "LEIBNIZ AN HENRI BASNAGE DE BAUVAL",
+  "date": "[Hannover,] 16./26. Juli 1695. [20.29.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:24. LEIBNIZ AN HENRI BASNAGE DE BAUVAL [Hannover,] 16./26. Juli 1695. [20.29.] Je Am Kopf der Seite von Leibniz' Hand: A Mons. Banage Bauval 16/26 Juillet 1695 viens d'apprendre, Monsieur, la mort de Monsieur Hugens, il m'est fatal d'ecrire des lettres à des amis qui ne sçauroient repondre. Le Princ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

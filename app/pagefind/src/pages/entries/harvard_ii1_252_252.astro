@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_252",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 252,
+  "text": "<p> [[791.5]] <b>223a. LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE</p>\n<p> [[791.6]] [Hannover, Februar 1680.] [227b.]</b></p>\n<p> [[791.26]] [ ... ] Dn. Hook plurimum meo Nomine, quaeso salutes. Scriptis ejus multum defero et\n[[791.27]] delector, et ad investigationem Naturae (quo pollet Genio et Ingenio) magis ac magis promovendam\n[[791.28]] et illustrandam ipsi omnia prospera animitus exopto. Quae antehac circa Instrumentum\n[[792.1]] Arithmeticum in animo habui, ea spero tandem aliquando proditura in effectum;\n[[792.2]] Quamprimum id ad perfectionem deduxero, de omnibus ejus Circumstantiis Vos edocebo. </p>\n<p> [[792.3]] Video, eximium illum Virum magni facere Reverendiss^#'i quondam Episcopi Wilkinsii\n[[792.4]] Characterem Philosophicum, quem ego quoque ex merito aestimo: Illud tamen dissimulare non\n[[792.5]] possum fieri potuisse aliquid multo majus, et in tantum utilius, in quantum Characteres Algebraici\n[[792.6]] potiores sunt characteribus Chemicorum. Ego enim scripturam quandam universalem\n[[792.7]] excogitari posse arbitror, cujus ope calculare in omni genere rerum et Demonstrationes invenire\n[[792.8]] possimus, perinde ac in Algebra et Arithmetica. Atque utinam, quo tempore Willkinsius in\n[[792.9]] opere suo adhuc versabatur, innotuisset illud Consilium meum, fortasse eodem propemodum\n[[792.10]] labore haberemus nunc aliquid, quo nescio an utilius aliud generi humano, in rebus ad Scientias\n[[792.11]] pertinentibus, Munus dari possit. Locutus sum olim ea de re cum D^#'o Oldenburgio, qui mihi cum\n[[792.12]] egregiis vestrae Societatis Viris ea de re Consilia communicare promiserat, quod an fecerit\n[[792.13]] nescio. Nimirum saepe mecum cogitavi, tot praeclara Instrumenta, quae nunc in paratu habemus,\n[[792.14]] non satis in usum transferri, neque inde duci, quae ex ipsis tum ad rerum causas\n[[792.15]] indagandas tum ad vitae usus duci possent. Huic malo tandem aliquando ope hujus Calculi\n[[792.16]] unice succurri posse puto. Organumque nos habituros, quo non minus in Cogitando juvari\n[[792.17]] possimus, quam Tubis in Videndo. Sed hoc pro Dignitate exequi, certum est rem non Unius\n[[792.18]] Hominis esse, Volui tamen Cogitata haec mea sciret Hookius; nam pro excellenti Ingenio suo\n[[792.19]] judicare de illis potest, eo magis quo attentius ipse in Willkinsiano opere versatus videtur.\n[[792.20]] [ ... ] </p>\n",
+  "number": "223a.",
+  "title": "LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE",
+  "date": "[Hannover, Februar 1680.] [227b.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:223a. LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE [Hannover, Februar 1680.] [227b.] [ ... ] Dn. Hook plurimum meo Nomine, quaeso salutes. Scriptis ejus multum defero et delector, et ad investigationem Naturae (quo pollet Genio et Ingenio) magis ac magis promovendam et illustrandam ipsi omnia prospera a...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

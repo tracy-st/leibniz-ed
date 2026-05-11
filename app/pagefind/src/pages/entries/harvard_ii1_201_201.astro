@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_201",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 201,
+  "text": "<p> [[636.20]] <b>183. SIMON FOUCHER AN LEIBNIZ</p>\n<p> [[636.21]] Paris, 12. August 1678. [120.205.]</b></p>\n<p> [[637.7]] Monsieur A Paris du 12 Aoust 1678. </p>\n<p> [[637.8]] Il y a longtems que j'ay dessein de vous écrire pour vous prier de me conserver l'honneur\n[[637.9]] de vostre amitié et pour vous assurer que M^#'r le conseiller Lantin et moy nous avons redoublé\n[[637.10]] ensemble l'estime que nous avons pour vous. Il n'y a que quelques mois que je suis de retour de\n[[637.11]] province et l'une des premieres choses que j'ay faitte icy a esté de m'informer de vous aupres\n[[637.12]] de M^#'r l'Abbé Mariotte. Il m'a dit qu'il recevoit souvent de vos nouvelles en quoy je l'estime\n[[637.13]] heureux. Il m'a temoigné aussi que vous souhaitiez que je vous fisse faire un hygromettre à ma\n[[637.14]] façon. Plusieurs personnes que je considere fort entrautre M^#'r Lantin Messieurs Maltesté M^#'r\n[[637.15]] D'alancé M^#'r Justel etc. ont demandé la même chose, et je n'ay pas encor fait ce qu'ils\n[[637.16]] souhaitent. J'espere, Monsieur, que je satisferay tous ces messieurs et vous pour le premier.\n[[637.17]] Mais il ne me sera guere plus difficile de faire beaucoup de ces machines que d'en faire une\n[[637.18]] seule. Je vous ay dit Monsieur, ce qui m'a empesché d'en faire jusqu'à cet heure. Il faut les\n[[637.19]] experimanter et en faire en plusieurs manieres pour juger la meilleure. Je suis pourtant un peu\n[[637.20]] trop paresseux pour prendre cette pene, mais je ne laisseray pas de faire quelque jour ce que je\n[[637.21]] pourray pour perfectionner cette sorte de machine. Il faut que je sois un peu débarrassé\n[[637.22]] auparavant de quelque autre chose que j'ay dans l'esprit. On dit que M^#'r Hautefeuille veut faire\n[[637.23]] un mouvement perpetuel par le moyen des hygrometres, et d'un pendule. Il y a d'autres moyens\n[[637.24]] d'en venir à bout. Si celuy là peut estre exécuté, j'en ay sur d'autres principes. Mais le prejugé\n[[637.25]] que l'on a de l'impossibilité du mouvement perpetuel empesche qu'on ne se fie à ces sortes de\n[[637.26]] machines. On a cru autre fois des choses impossibles que l'on a executées en d'autres tems. Je\n[[637.27]] panse, Monsieur, que vous ne manquez pas non plus de conjectures pour ce mouvement. Il y a\n[[637.28]] un 3^#'m^#'e tome <i>de la Recherche de la verité</i> dans lequel le R. Pere Malbranche s'explique sur\n[[637.29]] plusieurs sujets. Il s'accorde en ce volume avec beaucoup de choses de <i>la critique</i>, 1^#'eⁿ^#'t en ce\n[[637.30]] qu'il veut que nous ne connoissions pas par les sens qu'il y a des corps hors de nous, 2. en ce\n[[637.31]] qu'il avouë dans un chapitre particulier que nous n'avons point d'idée claire de la nature de\n[[638.1]] nostre ame. Cela estant jugez Monsieur des consequences qu'on en peut tirer contre sa\n[[638.2]] philosophie. Je panse que vous vairrez ce 3^#'m^#'e volume. Je n'ay pas encor fait imprimer la\n[[638.3]] reponse à Dom Robert. Vous aves vu cette reponse en manuscrit il y a plus de 2 ans. Depuis\n[[638.4]] j'ay fait <i>l'apologie des Academiciens</i> et quelques autres petites remarques sur les prejugez des\n[[638.5]] sens. Tout cela n'est pas imprimé par ce que je ne suis guere propre à chercher des libraires. Si\n[[638.6]] vous me faite la faveur de me faire reponse je vous prie d'ecrire un mot à M^#'r le conseiller\n[[638.7]] Lantin afin que je le luy fasse tenir, il n'est jamais plus joyeux que quand il entend parler de\n[[638.8]] vous. Je vous assure, Monsieur, que je suis de son humeur en cela et si vous sçaviez ce que je\n[[638.9]] panse de vous, vous vairriez qu'on ne sçauroit avoir de meillieurs sentiments d'une personne\n[[638.10]] que ceux que j'ay de vous, Monsieur, à qui je suis entierement tres humble et </p>\n<p> [[638.11]] tres affectionné serviteur S. Foucher. </p>\n<p> [[638.12]] A Monsieur Monsieur de Libnyz Conseillier et Bibliothecaire du Duc d'Annovre. A\n[[638.13]] Annovre. </p>\n",
+  "number": "183.",
+  "title": "SIMON FOUCHER AN LEIBNIZ",
+  "date": "Paris, 12. August 1678. [120.205.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:183. SIMON FOUCHER AN LEIBNIZ Paris, 12. August 1678. [120.205.] Monsieur A Paris du 12 Aoust 1678. Il y a longtems que j'ay dessein de vous écrire pour vous prier de me conserver l'honneur de vostre amitié et pour vous assurer que M^#'r le conseiller Lantin et moy nous avons redoublé ensemble l'est...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

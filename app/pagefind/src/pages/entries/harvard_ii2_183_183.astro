@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_183",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 183,
+  "text": "<p> [[611.6]] <b>185. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[611.7]] [Wolfenbüttel,] 17./27. Oktober 1692. [166.212.]</b></p>\n<p> [[611.19]] Monsieur </p>\n<p> [[611.20]] Je remercie tres humblement M. l'Abbé Gallois des memoires de l'Academie royale, aussi\n[[611.21]] bien que de toutes ses autres bontés: qui passent mes merites. Je profiteray de vostre avis à son\n[[611.22]] egard. Il y a des meprises dans le recit de l'invention du phosphore, je sçay les choses\n[[611.23]] d'original. J'envoyeray un recit seur, si on le veut bien. Je ne dis pas cela pour choquer M.\n[[611.24]] Homberg, pour le quel j'ay bien de l'estime, mais je ne voudrois pourtant pas qu'on trouvât à\n[[612.1]] redire avec raison aux memoires d'une compagnie si illustre. Et si M. Homberg a esté abusé là\n[[612.2]] dedans par le rapport d'autruy, cela luy fera aussi peu de tort, qu'à Mons. l'Abbé Gallois luy\n[[612.3]] même. </p>\n<p> [[612.4]] Je n'avois garde de penser qu'on songeroit à m'accorder une place honnoraire dans\n[[612.5]] l'Academie, que je n'aurois osé prétendre. Et si j'avois dit en écrivant à M. Pelisson que j'estois\n[[612.6]] de l'Academie, on auroit eu sujet de se moquer de moy. Cependant je vous avoue Monsieur que\n[[612.7]] si j'avois sçu que M. Pelisson prevenu par la bonté qu'il a pour moy, trouveroit dans les lettres\n[[612.8]] que je luy écrivois quelque chose qu'il voudroit joindre à ses excellens ouvrages, <i>ut pannum\n[[612.9]] purpurae</i>, je me serois gardé d'entrer dans le detail des choses, qui me touchent; qui paroistra\n[[612.10]] affecté à ceux qui ne voyent pas les occasions que la suite des lettres avoit fournies. Ainsi je ne\n[[612.11]] songeois à rien moins qu'à voir ces choses publiées, jusqu'au moment que j'en ay receu\n[[612.12]] l'impression. </p>\n<p> [[612.13]] Je vous remercie aussi bien fort de vostre continuation de la philosophie des Academiciens\n[[612.14]] et je suis ravi de voir, que vous leur prestés des interpretations raisonnables. Le meilleur\n[[612.15]] seroit de reduire tout aux premieres verités, mais en attendant, il sera tousjours bon de prendre\n[[612.16]] les secondes qu'on [attrape] en chemin. </p>\n<p> [[612.17]] L'auteur qui repond à mon argument contre l'etendue prise pour l'essence de la matiere\n[[612.18]] m'accorde ce que je veux sans y penser. Il avoue que l'etendue est indifferent au mouvement et\n[[612.19]] au repos, et que pour expliquer l'inertie de la matiere il faut employer autre chose, sçavoir la\n[[612.20]] force. Je m'etonne souvent que des personnes d'esprit, et qui meprisent Aristote, s'eloignent\n[[612.21]] tellement de la logique en raisonnant. </p>\n<p> [[612.22]] A Mons. l'Abbé Foucher </p>\n<p> [[612.23]] 17/27 d'octobr. 1692.\n[[612.24]] Mes baisemains sur tout à M. Lantin. </p>\n",
+  "number": "185.",
+  "title": "LEIBNIZ AN SIMON FOUCHER",
+  "date": "[Wolfenbüttel,] 17./27. Oktober 1692. [166.212.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:185. LEIBNIZ AN SIMON FOUCHER [Wolfenbüttel,] 17./27. Oktober 1692. [166.212.] Monsieur Je remercie tres humblement M. l'Abbé Gallois des memoires de l'Academie royale, aussi bien que de toutes ses autres bontés: qui passent mes merites. Je profiteray de vostre avis à son egard. Il y a des meprises ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

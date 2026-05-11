@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_79",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 79,
+  "text": "<p> [[264.1]] <b>79. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[264.2]] Venedig, 2. August [1704]. [77.81.] </b></p>\n<p> [[264.9]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Venetia 2 Agosto. </p>\n<p> [[264.10]] Nella caduta settimana ritrovandomi in Padova ricevei il foglio di V. S. Ill^#'m^#'a in data 10 di\n[[264.11]] luglio, a cui rispondo ora, essendomi gia portato novamente in Venetia, ove mi fermarò fin alla\n[[264.12]] metà di settembre. Molto mi dispiace la morte del dottissimo Sig^#'r^#'e Marchese [de] l'Hospital che\n[[264.13]] avea con sì bell'ordine reso publico il veramente meraviglioso calcolo di V. S. Ill^#'m^#'a, che hà data\n[[264.14]] si può dire l'ultima mano ed il maggiore suo lustro all'Analise, che qui fra noi pochissimo\n[[264.15]] s'intende, e da pochi si professa con gravissimo detrimento delle buone scienze, che ricevono\n[[264.16]] da quella si può dire la maggiore loro forzà, ed un esquisita netezza e brevità nelle loro\n[[264.17]] dimostrationi. Piacesse percio a Dio che potessimo avere nel nostro Studio di Padova il Sig^#'r^#'e\n[[264.18]] Herman, che per io averne una grandissima opinione mi basta, che V. S. Ill^#'m^#'a lo lodi, e stimi\n[[264.19]] degno della nostra Accademia, ed essendo egli cosi ben informato del Metodo analitico di V. S.\n[[264.20]] Ill^#'m^#'a, come ben si conosce da suoi trattati sopra il calcolo differentiale, potrebbe molto contribuire\n[[264.21]] a promovere in questi paesi le discipline Matematiche, che si possono dire ormai\n[[264.22]] neglette ed abbandonate. Io lo farò presto proporre all'Ecc^#'m^#'i Riformatori dello Studio di Padova\n[[265.1]] che ora vanno in cerca d'un celebre e dotto Matematico, di cui anche se ne vorrebbono servire\n[[265.2]] per quel che riguarda l'uso per l'urgenze della Republica. Da canto mio tenterò tutto per farlo\n[[265.3]] chi[a]mare con utile e decoro. Vorrei sapere se presentemente insegni nell'Università di Basilea,\n[[265.4]] che stipendio ha, e che assegnamento se gli potrebbe fare, per dargli qui un onorato modo di\n[[265.5]] sossistere. Di che età è, e se nella pratica Matematica sia molto versato e principalmente per le\n[[265.6]] cose che appartengono all'acque. Sarebbe anche a proposito avere qualche opera sua stampata\n[[265.7]] per poterlo presentare all'Ecc^#'m^#'o Magistrato. Prego percio V. S. Ill^#'m^#'a degnarsi di darmi subito\n[[265.8]] queste notitie, per prendere bene le nostre misure, ed operare con frutto. In quanto al punto\n[[265.9]] della Religione m'ingegnarò di superarlo. La riverisco ed all'infretta mi resto </p>\n<p> [[265.10]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Obl^#'m^#'o S^#'r^#'e M. A. Fardella </p>\n<p> [[265.11]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. Hannover <Fn>Hannover <i>von fremder Hand gestrichen und ersetzt durch</i>: Berlin</Fn> </p>\n",
+  "number": "79.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 2. August [1704]. [77.81.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:79. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 2. August [1704]. [77.81.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Venetia 2 Agosto. Nella caduta settimana ritrovandomi in Padova ricevei il foglio di V. S. Ill^#'m^#'a in data 10 di luglio, a cui rispondo ora, essendomi gia portato nova...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

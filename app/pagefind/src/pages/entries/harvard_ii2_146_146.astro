@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_146",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 146,
+  "text": "<p> [[525.9]] <b>148. LEIBNIZ AN EDME PIROT</p>\n<p> [[525.10]] [Hannover, 6. Mai 1692.] [140.]</b></p>\n<p> [[526.1]] [ ... ] Je vous remercie treshumblement, Monsieur, de la bonté, que vous avés eu, de\n[[526.2]] communiquer à Mons. Mallement certaines pensées que j'avois à l'egard de la force. Mons.\n[[526.3]] Mallement m'estoit connu de reputation, et il me semble, qu'il a donné quelque chose sur le\n[[526.4]] systeme du monde. Mais je croy qu'il n'estoit pas assés entré dans mon sens, faute de loisir. Il\n[[526.5]] donne une instance, contre mon principe tirée des polygones du cercle. Mais je la trouve si peu\n[[526.6]] contraire à mon sentiment, et même je la croy si manifestement favorable, qu'il n'y a eu que\n[[526.7]] cette clarté même, qui m'ait empeché de l'alleguer pour moy; parce que je supposois que tout\n[[526.8]] Geometre l'allegueroit pour moy de soy même; estant constant que cette consideration qui\n[[526.9]] prend le cercle pour le dernier de tous les polygones reguliers, a esté le fondement de\n[[526.10]] l'invention d'Archimede à l'egard de la dimension du cercle. La reflexion de Mons. Mallement\n[[526.11]] ne me donne pas sujet d'en dire d'avantage. </p>\n<p> [[526.12]] On a raison de blamer l'entestement de quelques Cartesiens, et même feu M. des Cartes\n[[526.13]] tout grand homme qu'il estoit, avoit la vanité de s'en faire trop accroire; cependant je souhaiterois\n[[526.14]] qu'on luy rendit justice lors même, qu'on le refute. La <i>censure</i> de M. d'Avranche m'a\n[[526.15]] plû merveilleusement, quoyqu'il y ait quelques choses, qu'il reprend, que je crois qu'on\n[[526.16]] pourroit excuser. J'avois fait autres fois des notes sur la premiere et seconde partie des\n[[526.17]] <i>principes</i> de des Cartes, qui comprennent sa philosophie generale; où je crois d'avoir eclairci la\n[[526.18]] plus part des matieres. Je n'ay pas encor touché aux livres suivans qui traitent de la structure de\n[[526.19]] l'univers suivant son opinion, car il faudroit entrer dans un grand détail. [ ... ] </p>\n",
+  "number": "148.",
+  "title": "LEIBNIZ AN EDME PIROT",
+  "date": "[Hannover, 6. Mai 1692.] [140.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:148. LEIBNIZ AN EDME PIROT [Hannover, 6. Mai 1692.] [140.] [ ... ] Je vous remercie treshumblement, Monsieur, de la bonté, que vous avés eu, de communiquer à Mons. Mallement certaines pensées que j'avois à l'egard de la force. Mons. Mallement m'estoit connu de reputation, et il me semble, qu'il a do...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

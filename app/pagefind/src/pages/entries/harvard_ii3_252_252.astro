@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_252",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 252,
+  "text": "<p> [[728.10]] <b>252. LEIBNIZ FÜR GABRIEL WAGNER</p>\n<p> [[728.11]] [Ende März 1698.] [251.253.]</b></p>\n\n<p> [[729.1]] Vana disceptatio est, ubi vocabula diversimode accipiuntur. Si quis punctum intelligat\n[[729.2]] quod sit divisibile in infinitum, imo quod sit lineola, libens concedam ex talibus punctis lineam\n[[729.3]] componi. Sed punctum quod ego intelligo, partem habere non potest, et sic etiam ab Euclide et\n[[729.4]] aliis accipitur. </p>\n<p> [[729.5]] Hoc punctum ajo non nisi terminum esse seu rem privativam, nec (: ex linea :) <Fn>(: ex linea :): <i>Diese Passage hat Leibniz in l in eckige Klammern gesetzt, wohl um sie von der Abfertigung auszuschließen.</i></Fn> oriri nisi\n[[729.6]] per sectionem, demonstrare tamen ista in me nunc non susceperam, sed tantum objectionibus\n[[729.7]] contrariis respondere, idque sufficienter factum puto. Nam a me probationes exigere jam non\n[[729.8]] amplius opponere est. Exponere vero absurditates quae ex contrario consequuntur res est\n[[729.9]] majoris operae, studiumque postulat singulare non tantum in exponente, sed etiam in lecturo. </p>\n<p> [[729.10]] Quod elementa attinet, sciendum est non omnem magnitudinem, seu rem partibilem\n[[729.11]] componi ex elementis. Exemplo sit Unitas, cujus partes infinitis modis diversis assumi possunt,\n[[729.12]] veluti <zl>^#h(+5)^#h(+5)1<ne>2<be> et <zl>^#h(+5)^#h(+5)1<ne>2<be> , item <zl>^#h(+5)^#h(+5)1<ne>3<be> et <zl>^#h(+5)^#h(+5)2<ne>3<be> , item <zl>^#h(+5)^#h(+5)1<ne>4<be> et <zl>^#h(+5)^#h(+5)3<ne>4<be> , item <zl>^#h(+5)^#h(+5)1<ne>5<be> et <zl>^#h(+5)^#h(+5)4<ne>5<be> , item <zl>^#h(+5)^#h(+5)2<ne>5<be> et <zl>^#h(+5)^#h(+5)3<ne>5<be> etc. tot modis, quot numeri variari\n[[729.13]] possunt, imo etiam per incommensurabilia. Interim nullum vel fingi potest animo, elementum\n[[729.14]] unitatis, seu simplicissimum positivum cujus repetitione unitas constituatur, quodque adeo sit\n[[729.15]] minimum in Numeris. Eodem igitur modo se de continuo res habet, quod iisdem prorsus modis\n[[729.16]] quibus unitas secari potest; et, si daretur elementum continui, daretur et elementum unitatis seu\n[[729.17]] minimum numericum. </p>\n<p> [[729.18]] Haec ad rem illustrandam sufficere nunc arbitror, nam si omnia vellem discutere transverse\n[[729.19]] accepta in scheda transmissa, magnum laborem frustra sumerem. Si qua tamen superesse\n[[729.20]] videatur singularis difficultas, eoque proponatur animo, ut appareat subesse studium proficiendi\n[[729.21]] in cognitione veritatis, libenter et ut spero facile satisfaciam. </p>\n",
+  "number": "252.",
+  "title": "LEIBNIZ FÜR GABRIEL WAGNER",
+  "date": "[Ende März 1698.] [251.253.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:252. LEIBNIZ FÜR GABRIEL WAGNER [Ende März 1698.] [251.253.] Vana disceptatio est, ubi vocabula diversimode accipiuntur. Si quis punctum intelligat quod sit divisibile in infinitum, imo quod sit lineola, libens concedam ex talibus punctis lineam componi. Sed punctum quod ego intelligo, partem habere...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

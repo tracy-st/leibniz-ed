@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_39",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 39,
+  "text": "[[399.16]] <b>39. Aufzeichnungen zur Metaphysik. </b> <span>399.16;0:63:039:76!      :L:l^</span>.\n[[399.22]] Mirum non est numerum omnium numerorum, omnes possibilitates, omnes relationes\n[[399.23]] seu reflexiones non distincte intelligi, sunt enim imaginariae nec quicquam\n[[399.24]] respondens habent a parte rei. Ut si relatio sit inter a et b, eaque relatio vocetur c, et\n[[399.25]] consideretur relatio nova inter a et c, eaque vocetur d. Et ita porro in infinitum, non\n[[399.26]] videtur dicendum omnes istas relationes esse veras quasdam realesque ideas. Forte ea\n[[400.1]] tantum mera intelligibilia sunt, quae produci possunt, id est quae producta sunt aut\n[[400.2]] producentur.\n[[400.3]] Dubium nullum est quin Deus intelligat quomodo nos res percipiamus.\n[[400.4]] Quemadmodum si quis perfectam urbis notitiam dare velit is pluribus modis eam\n[[400.5]] repraesentabit. Et haec Dei intellectio quatenus nostrum intelligendi modum intelligit,\n[[400.6]] simillima est nostrae intellectioni, imo nostra ex ipsa resultat unde nos possumus\n[[400.7]] dicere Deum habere intellectum nostro quodammodo similem, prorsus enim\n[[400.8]] Deus res intelligit ut nos; sed eo discrimine quod simul etiam aliis modis infinitis eas\n[[400.9]] intelligat, nos uno tantum.\n[[400.10]] Si fingi posset mentem esse sine corpore, homo eodem modo omnia ageret, ac si\n[[400.11]] mentem non haberet; et homines et locuturi eadem essent, et scripturi, nescientes\n[[400.12]] quae facerent. Quemadmodum cum ludunt. Sed haec fictio ut corpus sit sine mente\n[[400.13]] est impossibilis.\n[[400.14]] Substantia seu Ens completum mihi est illud quod solum involvit omnia, seu ad\n[[400.15]] cuius perfectam intelligentiam nullius alterius opus est intellectione. Talis non est\n[[400.16]] figura, nam ut intelligamus unde orta sit eiusmodi figura recurrendum ad motus.\n[[400.17]] Unumquodque Ens completum non nisi uno modo produci potest: Figurae quod\n[[400.18]] diversis produci possunt modis, satis hoc indicio est non esse Entia completa.\n[[400.19]] Ex principio illo, quod effectus integer debet aequipollere causae plenae demonstratur\n[[400.20]] omnia esse plena. Hinc patet dari infinitum actu, quia conservatur impetus\n[[400.21]] ope materiae circumfusae quae continuat motum corpore cessante, atque ita\n[[400.22]] corpus secum aufert, hoc non fiet exacte, nisi materia secunda sine fine subdivisa fit.\n[[400.23]] Imo forte nec aliter fieri posset motus (posito omnia corpora se tangere).\n",
+  "number": "39.",
+  "title": "Aufzeichnungen zur Metaphysik.",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:39. Aufzeichnungen zur Metaphysik. 399.16;0:63:039:76! :L:l^. Mirum non est numerum omnium numerorum, omnes possibilitates, omnes relationes seu reflexiones non distincte intelligi, sunt enim imaginariae nec quicquam respondens habent a parte rei. Ut si relatio sit inter a et b, eaque relatio vocetu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

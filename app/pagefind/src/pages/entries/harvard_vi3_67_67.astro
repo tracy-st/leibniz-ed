@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_67",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 67,
+  "text": "[[490.3]] <b>67. Meditatio de principio individui </b> <span>490.3;0:63:067:76!      :L:l^</span>.\n[[490.14]] Meditatio de principio individui. Dicimus effectum involvere causam\n[[490.15]] suam; id est ita ut qui perfecte intelligat effectum aliquem, etiam ad causae eius\n[[490.16]] cognitionem perveniat. Utique enim necessaria quaedam inter causam integram et\n[[490.17]] effectum connexio est. Sed contra obstat, quod diversae causae producere possunt\n[[490.18]] eundem perfecte effectum, exempli causa, sive duo parallelogramma, sive duo (triangula),\n[[490.19]] uti oportet, et hic apparet, componantur, semper idem plane\n[[490.20]] quadratum prodibit; quorum alterum ab altero nullo poterit discerni\n[[490.21]] modo; ne a sapientissimo quidem; ita ut in nullius ne sapientissimi\n[[490.22]] quidem potestate futurum sit, ex dato quadrato ejusmodi invenire eius\n[[490.23]] causam, quoniam problema non est determinatum. Videtur ergo effectus non involvere\n[[490.24]] suam causam. Quare si aliunde nobis certum sit, effectum involvere suam causam,\n[[490.25]] necesse est in productis quadratis modum productionis semper discerni posse.\n[[490.26]] Adeoque impossibile esse, ut duo quadrata eiusmodi sint perfecte similia, quia ex\n[[491.1]] materia constabunt, ea autem mentem habebit, et mens retinebit effectum status\n[[491.2]] prioris. Et vero nisi fateamur, impossibile esse ut duo sint perfecte similia, sequetur,\n[[491.3]] principium individuationis, esse extra rem in eius causa. Et effectum non involvere\n[[491.4]] causam, secundum suam rationem specificam, sed secundum rationem individualem.\n[[491.5]] Adeoque unum ab alio non differre in se. Sin fatemur semper duas res differentes,\n[[491.6]] etiam in aliquo differre in se; sequitur materiae cuilibet adesse aliquid quod priorum\n[[491.7]] effectum retineat, nempe mentem. Et hinc etiam probatur, effectum involvere causam.\n[[491.8]] Verum enim de eo, eum productum a tali causa. Ergo adhuc impraesentiarum,\n[[491.9]] eiusmodi in eo est qualitas, quae id ferat, quae etsi relativa, habet tamen aliquid a\n[[491.10]] parte rei. Patet ex quantulis, quanta sequantur.\n[[491.11]] Pulcherrima ratiocinatio est, probatque, materiam non esse homogeneam, nec\n[[491.12]] vero cogitari a nobis potest, quo differat, nisi mente. Cum Mens nostra intima adsit,\n[[491.13]] sibi et materiae, sequitur nihil in iis introduci posse, quod non a nobis possit intelligi\n[[491.14]] quodammodo. Principium magni momenti.\n",
+  "number": "67.",
+  "title": "Meditatio de principio individui",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:67. Meditatio de principio individui 490.3;0:63:067:76! :L:l^. Meditatio de principio individui. Dicimus effectum involvere causam suam; id est ita ut qui perfecte intelligat effectum aliquem, etiam ad causae eius cognitionem perveniat. Utique enim necessaria quaedam inter causam integram et effectu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

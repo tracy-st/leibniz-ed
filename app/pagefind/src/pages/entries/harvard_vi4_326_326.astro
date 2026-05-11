@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_326",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 326,
+  "text": "[[1442.1]] <b>270.  De veritatibus primis [Mitte bis Ende 1680 (?)]</b>\n [[1442.2]] <tab/>[Mitte bis Ende 1680 (?)] </p>\n<p> [[1442.14]] <b>Veritates</b> <b>absolute primae</b>, <Fn><i>Am Rande</i>: Veritatis definitio realis est. <b>Verum</b> est quod ex identico demonstrabile est per definitiones. Quod demonstratur ex definitionibus nominalibus verum est hypothetice, quod ex realibus, absolute; definitiones non nisi reales earum notionum afferri possunt, quae a nobis immediate percipiuntur, ut cum dico <i>existere, verum esse, extensio, calor</i>; nam huic ipsi quod confuse percipimus, assignandum est ac aliquid distinctum. Definitiones reales a posteriori possunt probari, nempe ab experimentis.</Fn> sunt inter veritates rationis <b>identicae</b> et inter\n[[1442.15]] veritates facti haec ex qua a priori demonstrari possent omnia experimenta, nempe <i>Omne\n[[1442.16]] possibile exigit existere</i>, et proinde existeret nisi aliud impediret, quod etiam existere\n[[1442.17]] exigit, et priori incompatibile est, unde sequitur, semper eam existere rerum combinationem,\n[[1442.18]] qua existunt quam plurima, ut si ponamus <i>A B C D</i> esse aequalia quoad essentiam,\n[[1442.19]] seu aeque perfecta sive aeque existentiam exigentia, et ponamus <i>D</i> esse incompatibile\n[[1443.1]] cum <i>A</i> et cum <i>B, A</i> autem esse compatibile cum quovis praeter cum <i>D</i>, et similiter <i>B</i> et <i>C</i>,\n[[1443.2]] sequitur existere hanc combinationem <i>ABC</i>, excluso <i>D</i>, <Fn><i>Am Rande</i>: Quod omne existens est possibile, debet demonstrari ex definitione existentiae.</Fn> nam si <i>D</i> existere volumus, non\n[[1443.3]] nisi <i>C</i>, ipsi poterit coexistere, ergo existet combinatio <i>CD</i>, quae utique imperfectior est\n[[1443.4]] combinatione <i>ABC.</i> Itaque hinc patet res existere perfectissimo modo. Haec propositio:\n[[1443.5]] <i>omne possibile exigit existere</i>, <Fn><i>Am Rande</i>: Si Existentia esset aliud quiddam quam essentiae exigentia, sequeretur ipsam habere quandam essentiam seu aliquid novum superaddere rebus, de quo rursus quaeri posset an haec essentia existat, an non existat et cur ista potius quam alia. </Fn> probari potest a posteriori posito aliquid existere, nam vel\n[[1443.6]] omnia existunt, et tunc omne possibile adeo exiget existere, ut etiam existat; vel quaedam\n[[1443.7]] non existunt, tunc ratio reddi debet, cur quaedam prae aliis existant. Haec autem aliter\n[[1443.8]] reddi non potest quam ex generali essentiae seu possibilitatis ratione; posito possibile\n[[1443.9]] exigere sua natura existentiam, et quidem pro ratione possibilitatis seu pro essentiae\n[[1443.10]] gradu. Nisi in ipsa Essentiae natura esset quaedam ad existendum inclinatio, nihil existeret;\n[[1443.11]] nam dicere quasdam essentias hanc inclinationem habere, quasdam non habere, est\n[[1443.12]] dicere aliquid sine ratione, cum generaliter videatur existentia referri ad omnem essentiam\n[[1443.13]] eodem modo. <Fn><i>Am Rande</i>: Quoniam vera propositio est, quae vel identica est, vel ex identicis potest demonstrari adhibitis definitionibus; hinc sequitur Existentiae <b>definitionem realem</b> in eo consistere, ut existat quod est maxime perfectum ex iis quae alioqui existere possent, seu quod plus involvit essentiae. Adeo ut natura sit possibilitatis sive essentiae exigere existentiam. Nisi id esset, ratio existentiae rerum reddi non posset.</Fn> Illud tamen adhuc hominibus ignotum est, unde oriatur incompossibilitas\n[[1443.14]] diversarum, seu qui fieri possit ut diversae essentiae invicem pugnent, cum\n[[1443.15]] omnes termini pure positivi videantur esse compatibiles inter se. </p>\n<p> [[1443.16]] <b>Veritates secundum nos primae</b>, sunt experimenta. </p>\n<p> [[1443.17]] Omnis veritas quae non est absolute prima, demonstrari potest ex absolute prima. </p>\n<p> [[1443.18]] Omnis veritas aut demonstrari potest ex absolute primis (quas indemonstrabiles esse\n[[1443.19]] demonstrabile est), aut ipsa est absolute prima. Et hoc est quod dici solet, nihil debere\n[[1443.20]] asseri sine ratione, imo nihil fieri sine ratione. </p>\n",
+  "number": "270.",
+  "title": "De veritatibus primis",
+  "date": "[Mitte bis Ende 1680 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:270. De veritatibus primis [Mitte bis Ende 1680 (?)] [Mitte bis Ende 1680 (?)] Veritates absolute primae, Am Rande: Veritatis definitio realis est. Verum est quod ex identico demonstrabile est per definitiones. Quod demonstratur ex definitionibus nominalibus verum est hypothetice, quod ex realibus, ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

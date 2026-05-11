@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_367",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 367,
+  "text": "[[1613.1]] <b>310.  Dans les corps il n'y a point de figure parfaite [April bis Oktober 1686 (?)]</b>\n [[1613.2]] <tab/>[April bis Oktober 1686 (?)] </p>\n<p> [[1613.8]] Il n'y a point de figure precise et arrestée dans les corps à cause de la division\n[[1613.9]] actuelle des parties à l'infini. </p>\n<p> [[1613.10]] Soit par exemple une droite <i>ABC</i> je dis qu'elle n'est pas exacte. Car chaque partie de\n[[1613.11]] l'univers sympathisant avec toutes les autres il faut necessairement que si le point <i>A</i> tend\n[[1613.12]] dans la droite <i>AB</i>, le point <i>B</i> ait une autre direction. Car chaque partie <i>A</i> tachant\n[[1613.13]] d'entrainer avec elle toute autre, mais particulierement la plus\n[[1613.14]] voisine <i>B</i>, la direction de <i>B</i> sera composée de celle d'<i>A</i>, et de\n[[1613.15]] quelques autres; et il ne se peut point que <i>B</i> indefiniment\n[[1613.16]] voisine de <i>A</i> soit precisement exposée de la même façon à tout l'univers que <i>A</i>, en sorte\n[[1613.17]] que <i>AB</i> composent un tout, qui n'ait aucune sousdivision. </p>\n<p> [[1613.18]] Il est vray qu'on pourra tousjours mener une ligne imaginaire chaque instant, mais\n[[1613.19]] cette ligne dans les mêmes parties ne durera que cet instant, parce que chaque partie a un\n[[1613.20]] mouvement different de toute autre puisque elle exprime autrement tout l'univers. Ainsi\n[[1613.21]] il n'y a point de corps qui ait aucune figure durant un certain temps quelque petit qu'il\n[[1613.22]] puisse estre. Or je crois que ce qui n'est que dans un moment n'a aucune existence,\n[[1613.23]] puisqu'il commence et finit en meme temps. J'ay prouvé ailleurs qu'il n'y a point de\n[[1613.24]] moment moyen, ou moment du changement. Mais seulement le dernier moment de l'estat\n[[1613.25]] precedant et le premier moment de l'estat suivant. Mais cela suppose un estat durable. Or\n[[1613.26]] tous les estats durables, sont vagues; et il n'y [a] aucun de precis. Par exemple, on peut\n[[1614.1]] dire qu'un corps ne sortira pas d'une telle place plus grande que luy durant un certain\n[[1614.2]] temps, mais il n'y a aucune place precise ou egale au corps, où il dure. </p>\n<p> [[1614.3]] On peut donc conclure, qu'il n'y a aucun mobile d'une certaine figure, par exemple\n[[1614.4]] il n'est pas possible qu'il se trouve dans la nature une sphere parfaite qui fasse un corps\n[[1614.5]] mobile, en sorte que cette sphere puisse estre mue par le moindre espace. On pourra bien\n[[1614.6]] concevoir une sphere imaginaire qui dans un tas de pierres passe à travers de toutes ces\n[[1614.7]] pierres, mais on ne trouvera jamais aucun corps, dont la surface soit precisement spherique. </p>\n<p> [[1614.9]] <i>In instanti</i> le mouvement n'estant pas consideré, c'est comme si la masse estoit toute\n[[1614.10]] unie; et alors on peut luy donner telles figures qu'on veut. Mais aussi toute la varieté dans\n[[1614.11]] les corps cesse; et par consequent tous les corps sont detruits. Car le mouvement ou\n[[1614.12]] l'effort fait leur essence ou difference. Et dans ce moment tout revient en caos. L'effort\n[[1614.13]] ne sçauroit estre concû dans la masse seule. </p>\n",
+  "number": "310.",
+  "title": "Dans les corps il n'y a point de figure parfaite",
+  "date": "[April bis Oktober 1686 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:310. Dans les corps il n'y a point de figure parfaite [April bis Oktober 1686 (?)] [April bis Oktober 1686 (?)] Il n'y a point de figure precise et arrestée dans les corps à cause de la division actuelle des parties à l'infini. Soit par exemple une droite ABC je dis qu'elle n'est pas exacte. Car cha...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

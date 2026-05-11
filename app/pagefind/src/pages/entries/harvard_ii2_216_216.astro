@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_216",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 216,
+  "text": "<p> [[701.1]] <b>219. SIMON FOUCHER AN LEIBNIZ</p>\n<p> [[701.2]] Paris, 30. Mai 1693. [212.225.]</b></p>\n<p> [[701.12]] de Paris le 30 may 1693. </p>\n<p> [[701.13]] Une de vos lettres que vous m'aviez ecrite a esté perduë, et c'est celle que vous aviez\n[[701.14]] addressée à feu M^#'r Pelisson. J'ay pourtant vu un fragment entre les mains de M^#'r l'Abbé du\n[[701.15]] Hamel, où vous raportez un trait de Socrates tiré de Platon et où vous repondez au P. Malebranche\n[[701.16]] et à M^#'r l'Abbé Catelan. Vos deux petites pieces ont esté inserées dans le journal,\n[[701.17]] scavoir, celle que vous avez envoyée à M^#'r Pelisson pour repondre sur l'essence de la matiere et\n[[701.18]] celle que vous avez envoyée à M^#'r l'Abbé Nicaise le quel m'a ecrit de Dijon me priant d'en\n[[701.19]] parler à M^#'r le president Cousin, ce que j'ay fait et elle a esté inserée dans un journal après avoir\n[[701.20]] esté gardée six mois. Cette piece contient vostre jugement des ouvrages de M^#'r Descartes. Vous\n[[701.21]] m'en avez écrit un mot dans vostre derniere et je suis bien aise de ce qu'elle n'a point esté\n[[701.22]] perduë. Je vous ay repondu dans le journal du 17 mars de cette année sur vos axiomes de\n[[701.23]] Physique et sur le doute universel qu'on attribuë faussement aux Academiciens. Si vous\n[[701.24]] souhaitez me repondre là dessus et faire mettre vostre reponse dans le journal, je vous offre\n[[702.1]] pour cela mon service. Cela se fera fidelement. Je voudrois avancer ma Philosophie des\n[[702.2]] Academiciens mais le tems est peu favorable aux libraires à cause qu'ils ne scauroient avoir\n[[702.3]] commerce dans les pays etrangers, au reste la Philosophie, qui est assurement le genre d'estude\n[[702.4]] le plus important et le meilleur, n'a pas tant d'aprobateurs en cette ville que les belles lettres et\n[[702.5]] la polimatie. Les <i>Menagiana</i> viennent de paroistre et on en espere bientost un second volume.\n[[702.6]] Quand vous me faites l'honneur de m'ecrire, Monsieur, ecrivez je vous prie à vostre maniere\n[[702.7]] ordinaire, car je lis fort bien vostre ecriture laquelle renferme beaucoup en peu d'espace. Je\n[[702.8]] l'aime mieux que de gros caracteres en lettres d'or. Je n'ay point encor vu la critique de <i>la</i> <i>vie</i>\n[[702.9]] <i>de M^#'r Descartes</i> ecrite par M^#'r Baillet. Je crois que vous avez vu le livre de M^#'r d'Avranches\n[[702.10]] intitulé <i>Memoires pour servir à l'histoire du Cartesianisme</i>. C'est un dialogue addressé à M^#'r\n[[702.11]] Regis. Il ne contient que 5 fueilles au plus assurement. Il est ecrit d'une maniere adroite et\n[[702.12]] pleine d'esprit mais je ne voudrois pas qu'elle tournasse la Philosophie en ridicule et je ne\n[[702.13]] pense pas que l'Auteur regarde autrement ce livre que comme un roman ingenieux. On en\n[[702.14]] pourroit faire une infinité de cette maniere, et pour dire vray il n'y a rien que l'on ne puisse\n[[702.15]] tourner en ridicule parce que dans le monde il y a des esprits de toutes sortes de caracteres.\n[[702.16]] Vous vous accordez assez avec M^#'r d'Avranches au sujet des ouvrages de M^#'r Descartes et je\n[[702.17]] demeure d'accord avec vous que sa metaphysique est le moindre et neanmoins j'avouë avec\n[[702.18]] vous et avec plusieurs personnes d'esprit qu'on est obligé à ce grandhomme de ce qu'il a mis\n[[702.19]] les esprits en meilleur train qu'ils n'estoient pour philosopher. <Fn><i>Am Rande</i>: Je n'ay point vu vostre <i>Dynamique</i>. Il faut mieux envoyer des imprimez que des manuscrits, car les imprimez se peuvent communiquer à plusieurs personnes et sont deffendus par quelques uns.</Fn> </p>\n",
+  "number": "219.",
+  "title": "SIMON FOUCHER AN LEIBNIZ",
+  "date": "Paris, 30. Mai 1693. [212.225.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:219. SIMON FOUCHER AN LEIBNIZ Paris, 30. Mai 1693. [212.225.] de Paris le 30 may 1693. Une de vos lettres que vous m'aviez ecrite a esté perduë, et c'est celle que vous aviez addressée à feu M^#'r Pelisson. J'ay pourtant vu un fragment entre les mains de M^#'r l'Abbé du Hamel, où vous raportez un tr...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

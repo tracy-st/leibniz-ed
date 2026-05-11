@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_235",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 235,
+  "text": "<p> [[733.13]] <b>208. NICOLAS MALEBRANCHE AN LEIBNIZ</p>\n<p> [[733.14]] Paris, 31. Juli [1679]. [207.210.]</b></p>\n<p> [[734.2]] Monsieur </p>\n<p> [[734.3]] L'Auteur des <i>Meditations Metaphysiques</i> est Monsieur l'Abbé de Lanion. Quoiqu'il\n[[734.4]] n'ait point mis son nom il ne s'en cache point, je le sçai parce qu'il me l'a dit et à plusieurs\n[[734.5]] autres personnes que je connois. Ainsi Monsieur ne m'attribuez point s'il vous plaist cet\n[[734.6]] ouvrage. </p>\n<p> [[734.7]] Un gentilhomme Allemand est passé ici et qui je croi doit vous aller voir, lequel à ce que\n[[734.8]] l'on dit et que je ne croi pas possible, a trouvé le moyen de faire evanouir tous les termes d'une\n[[734.9]] Equation hormis le l^#'e^#'r et le dernier. Quoique je ne m'applique nullement depuis bien du tems à\n[[734.10]] ces sortes d'etudes je serois pourtant bien aise de sçavoir si cela est possible et je ne doute pas\n[[734.11]] que vous ne vous donniez la peine de l'examiner lorsque ce gentilhomme vous le communiquera. </p>\n<p> [[734.13]] L'Auteur des <i>Elemens</i> est persuadé qu'il y a bien des decouvertes à faire sur l'analyse\n[[734.14]] mais il a peine à s'appliquer à ces sortes d'etudes, je l'ai pourtant porté à revoir son ouvrage\n[[734.15]] pour le faire plus exact. Il y a long tems Monsieur que vous nous faites esperer quelque chose\n[[734.16]] sur cette matiere et sans doute vous pouvez tout. </p>\n<p> [[734.17]] Monsieur des Billetes a toujours la fievre quarte, il pensa mourir il y a environ deux mois.\n[[734.18]] Je pense que vous sçavez que M^#'r^#'s Arnaud et Nicole ne paroissent plus, ils se sont cachez, je\n[[734.19]] n'en sçai pas les raisons particulieres. Il y a des gens qui disent qu'ils sont allez à Rome mais je\n[[734.20]] ne croi pas que cela soit vrai. </p>\n<p> [[734.21]] Je ne sçai point d'ouvrage ni de nouvelle decouverte dont je puisse allonger ma lettre.\n[[734.22]] Ainsi permettez de me dire </p>\n<p> [[734.23]] Monsieur Votre tres humble et tres obeissant serviteur Malebranche P. D. L'O. </p>\n<p> [[734.24]] A Paris ce dernier Juillet. </p>\n<p> [[734.25]] A Monsieur Monsieur Leibniz Conseiller de Son Altesse Monseigneur le Duc de Hanovre\n[[734.26]] Prince de l'Empire. À Hanovre. </p>\n",
+  "number": "208.",
+  "title": "NICOLAS MALEBRANCHE AN LEIBNIZ",
+  "date": "Paris, 31. Juli [1679]. [207.210.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:208. NICOLAS MALEBRANCHE AN LEIBNIZ Paris, 31. Juli [1679]. [207.210.] Monsieur L'Auteur des Meditations Metaphysiques est Monsieur l'Abbé de Lanion. Quoiqu'il n'ait point mis son nom il ne s'en cache point, je le sçai parce qu'il me l'a dit et à plusieurs autres personnes que je connois. Ainsi Mons...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

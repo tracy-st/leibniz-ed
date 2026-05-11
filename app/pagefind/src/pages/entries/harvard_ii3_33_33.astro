@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_33",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 33,
+  "text": "<p> [[87.1]] <b>33. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[87.2]] Is sur Tille, 22. September 1695. [30.34.]</b></p>\n\n<p> [[87.10]] Is sur Tille le 22. 7^#'b^#'r^#'e 1695 </p>\n<p> [[87.11]] Vous reconnoistrés monsieur par la 3^#'e^#'m^#'e lettre que Je vous envoye de m^#'r le president Boisot\n[[87.12]] la passion qu'il a de vous rendre service, et d'executer les volontés de deffunct mons^#'r l'abbé\n[[87.13]] son frere à vostre égard. Je contribueray à l'entretenir de tout mon possible. J'ay recû depuis\n[[87.14]] peu une lettre de m^#'r Baillet qui me parle des deux livres dont vous m'ecriviés dans vostre\n[[87.15]] derniere; le 1^#'e^#'r qui est Latin <i>Systema mentis et rationis</i> luy est entierement inconnû aussi bien\n[[87.16]] qu'à sés amis à qui il en a parlé; l'autre qui a pour Tiltre <i>Conjuration contre m^#'r Descartes</i> n'est\n[[87.17]] à ce qu'il m'ecrit <i>qu'une plaisanterie, où l'on represente les qualités phisiques de la philosophie\n[[87.18]] d'Arist. et des peripateticiens, qui conspirent contre la vie de cet ennemy commun, et qui\n[[87.19]] se servent enfin de la chaleur pour l'assassiner. L'ecrit est petit, et n'a presque pas faict de\n[[87.20]] bruit, soit qu'il n'ayt pas assés de tour, ni de sel, soit qu'il soit trop serieux pour une piêce\n[[87.21]] badine, soit que le public se lasse ou se degouste effectivement de ces sortes d'imaginations en\n[[87.22]] un tems, où les esprits fins, enjoués et delicats deviennent plus rares que par le passé. Ce n'est\n[[87.23]] pas seulement en ce genre d'ecrire que la litterature semble se refroidir à Paris; <b>depuis que\n[[87.24]] vous n'i estes plus pour la soutenir et l'animer on n'y entend plus parler\n[[87.25]] d'aucun ouvrage important</i></b>. Voilà un peu d'encêns fin que m^#'r Baillet me donne pour me\n[[88.1]] recréer dans la campagne où Je suis presentement. <i>La <b>Bibliotheque orientale</b> de m^#'r\n[[88.2]] D'Herbelot a toutes les peines du monde à se tirer de la presse sous laquelle elle gemit depuis\n[[88.3]] tant d'années; le s^#'t Hierome n'en a pas moins à s'y remettre, aussi bien que le 4. tome de\n[[88.4]] l'<b>histoire ecclesiastique</b> de m^#'r Fleury qui va enfin paroistre, de meme que le 3. de celle\n[[88.5]] de m^#'r de Tillemont, qui faict le 6^#'e^#'m^#'e de ce qu'il a imprimé, et qui sera suivi ancore de plus de\n[[88.6]] douze. Le bombardement de Bruxelles a faict tort à quelques bons livres par la faute du s^#'r Fris\n[[88.7]] qui n'a pas voulû suyvre l'avis qu'on luy avoit donné d'ici de retirer son magazin, où il croyoit\n[[88.8]] que les bombes ne pourroient atteindre, on croit qu'il y a perdû à sa part pour prés de quatre\n[[88.9]] vingt mille francs de livres. M^#'r Bayle écrit qu'il commence l'impression du 2^#'d Tome de son\n[[88.10]] grand <b>Dictionnaire critique</b>, et que le 1^#'e^#'r qui finit à la lettre G comprend 338 feuilles; ce\n[[88.11]] qui doit faire un fort gros volume; il est du caractere et du papier du <b>Junius de pictura\n[[88.12]] veterum</b></i>. </p>\n<p> [[88.13]] Il me mande qu'on a imprimé à Leyde un receüil de lettres qui n'avoient point ancore parû\n[[88.14]] qui commence par une d'Alciat qui est à la liste, et qui est la plus considerable, et qui contient\n[[88.15]] plusieurs raisons par lesquelles ce fameux jurisc. pretend dissuader tout le monde de se faire\n[[88.16]] moine. La piêce est bonne et curieuse, m^#'r Matthaeus prof. de droict à Leyde y joinct quelques\n[[88.17]] notes; les autres lettres la pluspart sont de Boxhornius et de Pontanus: il y en a quelques unes de\n[[88.18]] Giphanius, de Tycho Brahe etc. On a faict à la Haye une nouvelle edition des lettres de Bongars\n[[89.1]] meilleure que celle de Paris; on y a joinct les lettres francoises de l'auteur, et remis les endroicts\n[[89.2]] que le traducteur en avoit retranché par principe de Bigoterie ou de politique. On y avoit\n[[89.3]] supprimé dans l'edition de Paris cent jolies choses, que l'auteur disoit librement contre la ligue\n[[89.4]] ou quelques Theologiens. On les restitüe dans cellecy. M^#'r Gronovius a r'imprimé <i>Monumentum\n[[89.5]] Ancyranum</i> avec des notes. Voilà m^#'r tout ce qui s'offre à vous dire presentement. Je suis du\n[[89.6]] meilleur de mon coeur Tout à vous </p>\n<p> [[89.7]] Nicaise\n[[89.8]] <yi>Pour Monsieur De Leibniz, con^#'e^#'r et Bibliothequair[e] de monseig^#'r le Duc D'Hanovre.\n[[89.9]] <b>Hanovre</b>. </p></p>\n",
+  "number": "33.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Is sur Tille, 22. September 1695. [30.34.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:33. CLAUDE NICAISE AN LEIBNIZ Is sur Tille, 22. September 1695. [30.34.] Is sur Tille le 22. 7^#'b^#'r^#'e 1695 Vous reconnoistrés monsieur par la 3^#'e^#'m^#'e lettre que Je vous envoye de m^#'r le president Boisot la passion qu'il a de vous rendre service, et d'executer les volontés de deffunct mo...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

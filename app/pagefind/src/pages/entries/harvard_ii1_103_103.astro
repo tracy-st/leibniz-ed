@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_103",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 103,
+  "text": "<p> [[291.1]] <b>89. BARUCH DE SPINOZA AN LEIBNIZ</p>\n<p> [[291.2]] Den Haag, 9. November 1671. [80.131.]</b></p>\n<p> [[292.16]] Eruditissime, Nobilissimeque D^#'e </p>\n<p> [[292.17]] Schedulam, <Fn><i>Am Kopf des Stückes von Leibniz Hand</i>: <me> <pl> abtreiben <ju></Fn> quam mihi dignatus es mittere, legi; magnasque pro ejusdem communicatione\n[[292.18]] ago gratias. Doleo, quod mentem tuam, quam tamen credo, te satis clare exposuisse non\n[[292.19]] satis assequi potuerim. Precor itaque ut ad haec pauca mihi respondere non graveris. Videlicet,\n[[292.20]] an aliam credis esse causam, cur in vitrorum apertura parci esse debemus, quam quia radii, qui\n[[292.21]] ex uno puncto veniunt, non in alio accurate puncto, sed in spatiolo (quod punctum mechanicum\n[[292.22]] appellare solemus), quod pro ratione aperturae majus, aut minus est, congregentur. Deinde\n[[292.23]] rogo, num lentes illae quas Pandochas vocas, hoc vitium corrigant. Hoc est, an punctum\n[[292.24]] mechanicum, sive spatiolum in quo radii, qui ex eodem puncto veniunt, post refractionem\n[[292.25]] congregantur, idem ratione magnitudinis maneat, sive apertura magna sit, sive parva. Nam si\n[[292.26]] hoc praestant, earum aperturam augere ad libitum licebit, et consequenter omnibus aliis figuris\n[[292.27]] mihi cognitis longe praestantiores erunt, alias non video, cur easdem supra communes lentes\n[[292.28]] tantopere commendes. Lentes enim circulares eundem ubique habent axem, adeoque quando\n[[292.29]] illas adhibemus, omnia objecti puncta, tanquam in axe optico posita, sunt consideranda. Et\n[[293.1]] quamvis omnia objecti puncta non in eadem sint distantia, differentia tamen, quae inde oritur,\n[[293.2]] sensibilis esse non potest, quando objecta admodum remota sunt, quia tum radii, qui ex eodem\n[[293.3]] puncto veniunt, considerantur tanquam paralleli ingrederentur vitrum. Hoc tamen credo, lentes\n[[293.4]] tuas juvare posse, quando plurima objecta uno obtutu comprehendere volumus (ut fit, quando\n[[293.5]] lentes oculares convexas admodum magnas adhibemus), ut omnia scilicet simul distinctius\n[[293.6]] repraesententur. Verum de his omnibus judicium suspendam, donec mentem tuam mihi clarius\n[[293.7]] explices, quod, ut facias, enixe rogo. </p>\n<p> [[293.8]] D^#'o Huddenio alterum, ut jussisti, exemplar misi. Respondit, sibi in praesentiarum tempus\n[[293.9]] non esse, idem examinandi[,] sperat tamen post unam aut alteram hebdomadam sui juris fore.\n[[293.10]] <i>Prodromus</i> Francisci Lanae nondum ad meas manus pervenit, ut nec etiam <i>cogitationes phisico-mechanicae</i>\n[[293.11]] Johanis Holtii, et quod magis doleo, quod nec etiam <i>hypotesin</i> tuam <i>phisicam</i>\n[[293.12]] videre potuerim. hic saltem Hagae com. venalis non extat. Si hanc ergo miseris rem mihi\n[[293.13]] gratissimam facies, et si qua alia in re tibi servire potero, non desinam ostendere, quod sim </p>\n<p> [[293.14]] Vir amplissime Ex asse tuus B. Despinoza. </p>\n<p> [[293.15]] Hagae comitis 9 Nov^#'r^#'i 1671. </p>\n<p> [[293.16]] D^#'u^#'s Dimerbruckius hic non habitat. cogor itaque hanc tabellioni ordinario tradere. Non\n[[293.17]] dubito quin hic Hagae Comitis aliquem, qui epistolas nostras curare velit, noveris. Quem ego\n[[293.18]] novisse velim ut epistolae commodius, et securius curari possent. Si <i>Tractatus theologicopoliticus</i>\n[[293.19]] ad tuas manus nondum pervenit, unum exemplar, nisi molestum erit, mittam. Vale. </p>\n<p> [[293.20]] Nobilissimo Amplissimoque D^#'o D^#'o Gotfredo Guilielmo Leibnitio Juris u. Doctori et\n[[293.21]] Consiliario Moguntino. Francfurt. <Fn><i>Von fremder Hand geändert in</i>: Maintz.</Fn> Port. <Fn><i>Zusätze von anderer Hand</i>: Franco bis Coln. Afgegaan den 9. Decemb. 1671.</Fn> </p>\n",
+  "number": "89.",
+  "title": "BARUCH DE SPINOZA AN LEIBNIZ",
+  "date": "Den Haag, 9. November 1671. [80.131.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:89. BARUCH DE SPINOZA AN LEIBNIZ Den Haag, 9. November 1671. [80.131.] Eruditissime, Nobilissimeque D^#'e Schedulam, Am Kopf des Stückes von Leibniz Hand: abtreiben quam mihi dignatus es mittere, legi; magnasque pro ejusdem communicatione ago gratias. Doleo, quod mentem tuam, quam tamen credo, te sa...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

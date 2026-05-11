@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_76",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 76,
+  "text": "<p> [[200.13]] <b>76. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[200.14]] Hamburg, 14. (24.) September 1696. [82.]</b></p>\n\n<p> [[201.4]] HochEdler, Vest und Hochgelehrter Herr, Hochgeneigter Herr </p>\n<p> [[201.5]] Daß Sie mich eines grußes gewürdigt, u. mir di freiheit gegönnt an Sie zu schreiben, hat\n[[201.6]] mich eüserst erfreüet: dis glük hab ich lange gewünscht, aber es selbst zuergreifen, mich nie\n[[201.7]] erkühnen mögen; nun, da es sich selbst anträgt, u. mir meine feigheit gleichsam aufrükt, wil ich\n[[201.8]] mich deßen desto kühner bedinen; denn ich fange schon an, mir mit doppelten Vorthel\n[[201.9]] zuschmeicheln: Vileicht findet sowol die begierde große dinge zulernen, als das verlangen\n[[201.10]] kleine dinge dem Pöbel der Gelehrten wieder zulehren, gelegenheit; wozu mir Mons. Uberhin\n[[201.11]] hofnung gemacht, theils durch vorstellung der leütseligk. Meines Hochgeneig. Patrons, theils\n[[201.12]] durch bericht von einer condition, deren ümstände er nicht recht erklärt, ich aber wol wißen\n[[201.13]] möchte. Die <i>Vernunft Ubungen</i>, die Sie verlangt, meine deütsche schreibart zu sehen, überschikke\n[[201.14]] gehorsamst, u. emfehle Ihrer Hochgeneigten gewogenheit damit </p>\n<p> [[201.15]] Hochedler Herr, Ihren gehorsamsten Diner Gabriel Wagner </p>\n<p> [[201.16]] Hamburg 14. Sept. 96 </p>\n",
+  "number": "76.",
+  "title": "GABRIEL WAGNER AN LEIBNIZ",
+  "date": "Hamburg, 14. (24.) September 1696. [82.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:76. GABRIEL WAGNER AN LEIBNIZ Hamburg, 14. (24.) September 1696. [82.] HochEdler, Vest und Hochgelehrter Herr, Hochgeneigter Herr Daß Sie mich eines grußes gewürdigt, u. mir di freiheit gegönnt an Sie zu schreiben, hat mich eüserst erfreüet: dis glük hab ich lange gewünscht, aber es selbst zuergreif...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

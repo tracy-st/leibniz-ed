@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_117",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 117,
+  "text": "<p> [[310.13]] <b>117. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[310.14]] Neustadt, 27. Mai (6. Juni) 1697. [113.121.]</b></p>\n\n<p> [[311.1]] I. N. J. C. </p>\n<p> [[311.2]] Excellentissimo dignitate officiorum, Virtutum et Eruditionis omnigenae meritis\n[[311.3]] G. G. Leibnitio Electorali Consiliario </p>\n<p> [[311.4]] S. P. D. V. Placcius. </p>\n<p> [[311.5]] Rusticationem in praediolo meo amoenissimo amoeniorem etiam fecere multo litterae\n[[311.6]] Tuae, cum adjecto dono. Cui nunc nisi disputatiunculam hanc, quod reponam non habeo.\n[[311.7]] Habiturus propediem, ni bibliopola fefellerit; qui recepit editionem Problematum IIX. <i>de\n[[311.8]] affectibus</i> et quidem Christiane movendis Primum C. D. B. V. e Theologicis meis opusculum.\n[[311.9]] Ad quod contra decretum animi mei publice professum, edendum me Conscientiae meae arbiter\n[[311.10]] M. Dornemannus impulit. Eis ut adaequent molem Tui libelli, addam alia aeque diu jam pressa.\n[[311.11]] Videlicet 1. <i>de Interitu mundi dissertationem contra annihilationi Luthero improbatae addictos</i>,\n[[311.12]] 2. <i>De hora crucifixionis Christi et antilogia Marci Evangelistae cum Johanne</i>, 3. <i>de\n[[311.13]] Soliloquiis Christianis</i>. Interim tua <i>Sinica</i>, meos etiam <i>Anonymos</i> auctura, perlegi. Sane quam\n[[311.14]] optarem voto tuo respondere successum! tam parum a mea incredulitate impetro spem tantam.\n[[311.15]] Et quaeso quis credat Jesuitas nos in suae felicitatis jam stabilitae partem ullam admissuros, aut\n[[311.16]] rem ita unquam agi permissuros, ut ne intelligant Sinenses quibus inter nos dissideamus. Cum\n[[311.17]] illi dudum impleverint sua superstitione, quam nos antichristianam dicimus omnia nec sine illa\n[[311.18]] unquam sint perrecturi docere? Mitto tot alia impedimenta, etiam a nostris partibus obstitura.\n[[311.19]] Interim exosculor tua pia desideria, sed (faxit ut errem Deus et falsus evadam Vates!) in\n[[311.20]] desideriis substitura. Ni fallor alias etiam Thomae Mori Utopienses narrantur ita sectis suis\n[[311.21]] innumeris addicti, ne quis publicos illorum cultus sacros frequentans id animadvertat. Ita si\n[[311.22]] fieret, revera evaderent id quod sunt, Luthero versae logomachiae 1. <i>Tim.</i> VI. 4. <i>Schuhlgezaenk</i>.\n[[311.23]] Id quod facile impetrari aliquatenus potuisset, si hoc solum egissent statim ab initio Magnates\n[[311.24]] adjuncta potentia; ne aliter quam Latine talia disceptarentur. Sed haec quidem extra oleas. Bina\n[[311.25]] Tua exemplaria Dn. Bussingio et Mejero destinata simulac in urbem rediero tradam. De\n[[311.26]] Weigelio et ipse miror, quod nec indicium sui reditus et transitus fecerit mihi. Quo magis\n[[311.27]] despero et nostros desperare conjecturo de Scholastica per ipsum emendatione hic locorum ulla.\n[[311.28]] Nempe Pietismi et Diotrephis calumnias timent, in hoc qui adjuvare nos debebant, sane hac in\n[[311.29]] parte me magis meticulosi, qui minus esse debebant. Vale, in Neostadorensi meo Tusculanulo,\n[[311.30]] d. 27. Maji 1697. </p>\n",
+  "number": "117.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "Neustadt, 27. Mai (6. Juni) 1697. [113.121.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:117. VINCENT PLACCIUS AN LEIBNIZ Neustadt, 27. Mai (6. Juni) 1697. [113.121.] I. N. J. C. Excellentissimo dignitate officiorum, Virtutum et Eruditionis omnigenae meritis G. G. Leibnitio Electorali Consiliario S. P. D. V. Placcius. Rusticationem in praediolo meo amoenissimo amoeniorem etiam fecere mu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

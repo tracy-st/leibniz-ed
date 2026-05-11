@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_272",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 272,
+  "text": "<p> [[831.6]] <b>237. EHRENFRIED WALTHER VON TSCHIRNHAUS AN LEIBNIZ</p>\n<p> [[831.7]] Paris, 27. Juli /6. August 1682. [236.247.]</b></p>\n<p> [[831.20]] Paris d. 27 Julii 1682. </p>\n<p> [[831.21]] [ ... ] Endlich so gebe nachricht, daß nach vieler Mühe endlich vor den H. procuriret, daß\n[[831.22]] was in den Manuscriptis des M^#'r des Cartes bey H. Clerselier enthalten, vor denselbigen wird\n[[831.23]] abgeschrieben werden; durch Einen der in der Algebra und Mathesi erfahren; M^#'r l'abbé\n[[831.24]] Mariotte hatt Mir versprochen, alles wohl in acht zu nehmen, es wehre nöthig daß Mein H. an\n[[831.25]] M^#'r Bruisseau deßentwegen schriebe, den Er machet immer unnöthige difficultaten, ob Ihm\n[[831.26]] gleich deßentwegen sehr gebetten, auch gedacht, daß es vielleicht 2 oder 3 pistolen auffs\n[[832.1]] höchste nur kosten dürffte, wie auch anwesend, Eines und das ander seinetwegen errinnern\n[[832.2]] werde, das Meinen H. zur nachricht dienen köndte; [ ... ] </p>\n<p> [[832.3]] Paris d. 6 Aoust Anno 1682. </p>\n<p> [[832.4]] <i>A Monsieur Monsieur Leubnitz Conseilleur de S.A.S. de Hannover.</i> <Fn><i>Von fremder Hand</i>: <i>à Clausthal. per adresse de M^#'r le Sec^#'r^#'e Leidenfrost à Osterode.</i></Fn> </p>\n",
+  "number": "237.",
+  "title": "EHRENFRIED WALTHER VON TSCHIRNHAUS AN LEIBNIZ",
+  "date": "Paris, 27. Juli /6. August 1682. [236.247.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:237. EHRENFRIED WALTHER VON TSCHIRNHAUS AN LEIBNIZ Paris, 27. Juli /6. August 1682. [236.247.] Paris d. 27 Julii 1682. [ ... ] Endlich so gebe nachricht, daß nach vieler Mühe endlich vor den H. procuriret, daß was in den Manuscriptis des M^#'r des Cartes bey H. Clerselier enthalten, vor denselbigen ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

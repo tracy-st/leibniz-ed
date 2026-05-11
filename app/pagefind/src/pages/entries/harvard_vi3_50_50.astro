@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_50",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 50,
+  "text": "[[432.4]] <b>50. Additio natura prior substractione </b> <span>432.4;0:63:050:75       :L:l^</span>.\n[[432.15]] Additio natura prior substractione. Natura priora.\n[[432.16]] Demonstratio axiomatum.\n[[432.17]] Additio est natura prior substractione, seu  a  b est natura prius quam\n[[432.18]]  a - b quia natura prius est ut duo a, b eodem modo tractentur quam ut tractentur\n[[432.19]] modo diverso, et cum modo diverso tractantur nondum ratio apparet, cur potius\n[[432.20]] dicamus  a - b, quam - a  b. Ea igitur causa forinsecus petenda est, quod non\n[[432.21]] est necesse cum dicimus  a  b; eodem modo ostenditur et ab seu multiplicationem\n[[432.22]] esse natura priorem ipso a / b seu divisione. Et haec quidem ita generalem hominum\n[[432.23]] assensum habent, ut pro monstro futurus sit arithmeticus, qui substractionem\n[[432.24]] tractet ante additionem. Itaque mea sententia Robervallius non inepte demonstravit\n[[432.25]] axioma: (si ab aequalibus auferas aequalia, residua sunt aequalia) ex axiomate natura\n[[433.1]] priore: (si aequalibus addas aequalia, summae sunt aequales) quamvis eum ideo reprehensum\n[[433.2]] sciam a collegis in Academia Regia Parisina, quia scilicet aeque illud ex hoc\n[[433.3]] demonstrare potuisset, quam hoc ex illo. Sed praeferenda sunt quae natura priora\n[[433.4]] sunt, et peccatum videri potest pro axiomate habere quod ex positis demonstrari\n[[433.5]] potest.\n",
+  "number": "50.",
+  "title": "Additio natura prior substractione",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:50. Additio natura prior substractione 432.4;0:63:050:75 :L:l^. Additio natura prior substractione. Natura priora. Demonstratio axiomatum. Additio est natura prior substractione, seu a b est natura prius quam a - b quia natura prius est ut duo a, b eodem modo tractentur quam ut tractentur modo diver...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

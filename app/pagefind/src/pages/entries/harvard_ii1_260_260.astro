@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_260",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 260,
+  "text": "<p> [[804.17]] <b>227d. LEIBNIZ AN DETLEV CLÜVER</p>\n<p> [[804.18]] Hannover, 31. August (10. September) 1680. [227c.]</b></p>\n<p> [[804.31]] [ ... ] Quod ad methodum attinet discernendi numerum primitivum a composito distinguendum\n[[804.32]] arbitror. Habetur aliqua utique sed non optima. Quemadmodum enim duplex methodus\n[[805.1]] est addendi (exempli gratia) summam numerorum progressionis Arithmeticae una vulgaris\n[[805.2]] secundum communem addendi rationem, altera per compendium. Ita quoque duae sunt methodi\n[[805.3]] examinandi numeros primitivos, una vulgaris, altera compendiosa. Itaque etsi nulla daretur\n[[805.4]] methodus compendiosa, non ideo problema hoc esset <greek>^%)/aporon</greek>. Dari tamen aliquam non dubito,\n[[805.5]] nec pauca habeo observata non contemnenda sed quae absolvere nondum vacavit. Sed rerum\n[[805.6]] ipsarum prima stamina, idque ut ego Interpretor notiones simplices investigare alterius plane\n[[805.7]] naturae ar<angle bracket>can</angle bracket>um est, et si quid judico cum divisionibus numerorum nihil commune habet,\n[[805.8]] numerorum enim, etiam primitivorum, notio simplex non est. </p>\n<p> [[805.9]] Si Algebra tibi idem est quod Ars inveniendi in mathematicis, fatebor tibi omne problema\n[[805.10]] mathematicum solvi posse per algebram, id est per aliquam Inveniendi artem sed Ego algebram\n[[805.11]] ita sumo, ut vulgo, pro arte extrahendi Radices ex aequationibus simplicibus, planis, solidis,\n[[805.12]] sursolidis, alteriusve gradus. Transcendentia autem voco problemata, quae neque plana sunt\n[[805.13]] neque solida neque sursolida, neque ullius omnino gradus. Exempli causa, Angulum secare in\n[[805.14]] data ratione rectae ad Rectam. Quae problemata etiam per geometriam Cartesii, sive per eas\n[[805.15]] Lineas quas Cartesius solas in Geometriam recipit solvi non possunt. Caeterum Transcendentia\n[[805.16]] commode tractantur per series infinitas, quibus tamen Ego alias adhuc methodos adjiciendas\n[[805.17]] censeo. Non intelligo quid tibi velis cum loqueris de methodo meristica sive distributiva, de\n[[805.18]] insufficientia datorum in incommensurabilibus, de methodo intellectuali, quo gradu suggerat\n[[805.19]] Scientiam, de scientia illa plastica quae omnium rerum varietatem denumerat, ac Leges compositionis\n[[805.20]] sive congressus cum terminis figurarum designat; multo minus quam tu Cabalam\n[[805.21]] figurativam tibi fingas; Pansophiam ab ulla characteristica expectare ridiculum est utique fuerit,\n[[805.22]] quemadmodum et ab analysi ulla, nam multa experimentis tantum cognoscuntur. Sed\n[[805.23]] qua[e]cunque sola ratione, etiam Angelica, investigari possunt, ea proprie per characteristicam\n[[805.24]] et investigata esse hactenus, et imposterum [investigatum] iri et eo longius nos prodituros quo\n[[805.25]] characteristicam magis perfecerimus, iterum tibi affirmo. [ ... ] </p>\n",
+  "number": "227d.",
+  "title": "LEIBNIZ AN DETLEV CLÜVER",
+  "date": "Hannover, 31. August (10. September) 1680. [227c.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:227d. LEIBNIZ AN DETLEV CLÜVER Hannover, 31. August (10. September) 1680. [227c.] [ ... ] Quod ad methodum attinet discernendi numerum primitivum a composito distinguendum arbitror. Habetur aliqua utique sed non optima. Quemadmodum enim duplex methodus est addendi (exempli gratia) summam numerorum p...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

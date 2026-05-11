@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_97",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 97,
+  "text": "<p> [[307.14]] <b>97. LEIBNIZ AN ─ (?)</p>\n<p> [[307.15]] [1704.] </b></p>\n\n </p>\n<p> [[308.1]] Voici, Monsieur, le livre de Mr. Locke. Lorsqu'en le parcourant Vous trouverés des\n[[308.2]] difficultés, que peutetre je n'ai point touchées, Vous me ferés un plaisir si Vous me les voudrés\n[[308.3]] marquer; et possedant ses sentimens Vous jugerés mieux de mes remarques et pourrés contribuer\n[[308.4]] à leur donner plus de poids, plus de clarté et plus de liaison. Car les ayant ecrites fort à la\n[[308.5]] hâte, <i>currente calamo</i> et le plus souvent en voyage ou quand j'étois l'année [passée] avec la\n[[308.6]] cour d'Hannovre à une maison de plaisance, où des occupations de plus de recherche m'étoient\n[[308.7]] defendues, y employant le tems, qui me restoit libre, cette maniere d'y travailler à reprises et à\n[[308.8]] baton rompû, a fait que j'ai eu et aurai besoin d'y retoucher en plusieurs endroits. Et un autre\n[[308.9]] sentira mieux que moi ce qui peut manquer. Je Vous envoye pour cet effêt la partie qui est deja\n[[308.10]] copiée, à fin que je la redresse entierement, pour en pouvoir faire faire une copie finale. </p>\n",
+  "number": "97.",
+  "title": "LEIBNIZ AN ─ (?)",
+  "date": "[1704.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:97. LEIBNIZ AN ─ (?) [1704.] Voici, Monsieur, le livre de Mr. Locke. Lorsqu'en le parcourant Vous trouverés des difficultés, que peutetre je n'ai point touchées, Vous me ferés un plaisir si Vous me les voudrés marquer; et possedant ses sentimens Vous jugerés mieux de mes remarques et pourrés contrib...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

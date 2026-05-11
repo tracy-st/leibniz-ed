@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_230",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 230,
+  "text": "<p> [[699.6]] <b>230. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[699.7]] 15. Dezember 1707. [224.] </b></p>\n<p> [[700.7]] [<i>L^#'1</i> ] </p>\n<p> [[700.8]] Vir Clarissime et Doctissime Amice Honoratissime </p>\n<p> [[700.9]] Scripseram <Fn><i>Am Kopf von L^#'1 von Leibniz' Hand</i>: Hanoverae 15 Decembr. 1707 A Monsieur Monsieur Hansch à Leipzic</Fn> Berolinum de Keplerianis M[anu]s[cript]is, sed nondum aliquid certi rescriptum\n[[700.10]] est. Plura Kepleri apud Hevelium ni fallor superfuere, atque inter alia ejus <i>Hipparchus</i>. </p>\n<p> [[700.11]] Gratulor Tibi quod Anatomico quoque studio aliquid temporis tribuis. Lacrymales glandulas\n[[700.12]] non ignoras ab Henr. Meibomio primum fuisse detectas. Totam Machinam Corporis\n[[700.13]] nostri ut pyrobolico-pneumatico-hydraulico-mechanicam considerare oportet, sunt in ea explosiones\n[[700.14]] dum humidum calore rarefactum abit in spiritus, qui cum alios musculos tum cor\n[[700.15]] movent, quod antliae est genus. </p>\n<p> [[700.16]] Vellem autem Corpus Humanum describi principio sumto a causa finali seu officio. Et\n[[700.17]] dicere soleo: esse Machinam conservandae Contemplationis gratia inventam. </p>\n<p> [[700.18]] Ex Coenobio Luccensi nihil nisi pro illis impenditur, qui sunt Conventuales et hi ipsi\n[[700.19]] absentes carent. </p>\n<p> [[701.1]] [<i>L^#'2</i> ] </p>\n<p> [[701.2]] Vir Clarissime et Doctissime Amice Honoratissime </p>\n<p> [[701.3]] A septimanis aliquot non optima valetudine sum usus: praeterea nondum Berolino responsum\n[[701.4]] certum de Keplerianis Manuscriptis accepi. Inde factum ut serius respondeam. </p>\n<p> [[701.5]] Intelligo ex Keplerianis superesse ejus <i>Hipparchum</i> insigne opus, quod in Tuo indice non\n[[701.6]] comparet. </p>\n<p> [[701.7]] Gratulor Tibi quod Anatomico etiam studio aliquid temporis tribuis. Lacrymales glandulas\n[[701.8]] non ignoras a Meibomio fuisse detectas. </p>\n<p> [[701.9]] Machinam corporis humani, esse ut ita dicam Pyrobolico-Hydraulico-mechanicam dici\n[[701.10]] potest. Spiritus enim impetum facientes explosione agere credibile est. Febrium causam immediatam\n[[701.11]] magis in spiritibus quam humoribus sitam esse puto. Vellem corpus humanum describi\n[[701.12]] principio sumto a causa finali seu officio, et dicere soleo: Esse machinam conservandae\n[[701.13]] contemplationis gratia inventam. </p>\n<p> [[701.14]] Ex coenobio Luccensi nihil impenditur nisi in Conventuales, et hi ipsi etiam absentes\n[[701.15]] carent. </p>\n<p> [[701.16]] De rebus literariis vix quicquam novi mihi compertum, nisi quod expectatur opus insigne\n[[701.17]] Monfalconii de Scriptura et literis Graecorum, in quo de veterum Manuscriptorum diplomatum\n[[701.18]] Critica agitur. </p>\n<p> [[701.19]] Quod superest vale et me ama. Dabam Hanoverae 15. Decembr. 1707 </p>\n<p> [[701.20]] deditissimus G. G. Leibnitius </p>\n<p> [[701.21]] A Monsieur Monsieur Hansch Maistre ès arts et Collegiat etc. Leipzig </p>\n",
+  "number": "230.",
+  "title": "LEIBNIZ AN MICHAEL GOTTLIEB HANSCH",
+  "date": "15. Dezember 1707. [224.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:230. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH 15. Dezember 1707. [224.] [L^#'1 ] Vir Clarissime et Doctissime Amice Honoratissime Scripseram Am Kopf von L^#'1 von Leibniz' Hand: Hanoverae 15 Decembr. 1707 A Monsieur Monsieur Hansch à Leipzic Berolinum de Keplerianis M[anu]s[cript]is, sed nondum aliquid ce...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

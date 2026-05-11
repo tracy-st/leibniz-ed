@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_1",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 1,
+  "text": "<p> [[3.1]] <b>1. LEIBNIZ AN JAKOB THOMASIUS </p>\n<p> [[3.2]] Jena, 2. (12.) September 1663. [3.]</b></p>\n<p> [[4.3]] Unica, quam tibi transmitto, disputatio sua novitate id meruisse visa est. <Fn><i>Anmerkung von Kortholt unter dem Text in E^#'2</i> nach <i>visa est</i>: Titulus ejus: Q. D. B. V. Dissertatio academica, cujus prima pars de ratione status: altera de nobilitate: tertia de ministrissimo: quam pro more consueto, praeside Dn. Severo Christophoro Olpio, Prof. publ. et h. t. academiae rectore magnifico, publicae eruditorum disquisitioni exponet auctor Wilhelm Schröter, illustriss. regiae societatis Britann. assessor. d. 25 Jul. Jenae, literis Sengenwaldianis, anno 1663, in fol.</Fn> Respondens\n[[4.4]] filius est D. Wilhelmi Schroeteri, Cancellarii Gothani, qui celeberrimo illi Franskio successit. Is\n[[4.5]] Jenae prius studiosus, mox peregrinandi amore in Bataviam, inde [in] Angliam delatus est,\n[[4.6]] inde, si ipsi credimus, in parlamentum irrepsit. Nuper, cum patriam suam reviseret, noluit\n[[4.7]] inglorius tacitusque abire, sed monimentum sui hanc disputationem relinquere constituit. Sed\n[[4.8]] eo eventu, ut multo fuerit consultius, siluisse. Nam et in conflictu vox, et in conversatione\n[[4.9]] morum elegantia defuit, sic, ut pro gloria, quam sibi promiserat, cumulatam ex hac urbe\n[[4.10]] infamiam asportaret. Quin et princeps Gothanus, re comperta, ac cognito, quam in hac disputatione\n[[4.11]] periculosa spargerentur, primus ursit, effecitque, ut publice confiscaretur. Ipsam sane\n[[4.12]] disputationem judicio peritiorum accepi ingeniosam esse: sed sic, ut tanto minus hic auctor\n[[4.13]] videatur. Immo non defuere, qui dudum cusam, et inde usque ab Anglia allatam suspicarentur,\n[[4.14]] quod disputatione [de] Ministrissimo, thesi una, Don Louis de Haro, tamquam adhuc florentis\n[[4.15]] viventisque mentio fieret, qui tamen et obiit dudum, et familia, postquam filii insidiae in Regem\n[[4.16]] detectae sunt, jacet proculcata. Sane corollaria novam quandam sapiunt philosophiam, qualibus\n[[4.17]] plena Anglia est, et ipse, ni fallor, Kenelmus Digbaeus, cui ille hanc disputationem dicavit, <Fn><i>Anmerkung von Kortholt unter dem Text in E^#'2</i> : Dedicavit 1) Friderico, Saxoniae Duci, 2) Digbaeo. Digbaeo hunc titulum tribuit: Illustrissimo heroi, Britanniae comiti ac domino, <k>Dn. Kenelmo Digby</k>, equiti Britanno exlegato, et summo rei navalis expraefecto, ac sacrae regiae majestatis reginae matris in Anglia cancellario magnifico, et illustrissimae regiae societatis ibidem assessori excellentissimo, domino, Maecenati atque amico meo sincero et pie colendo.</Fn>\n[[5.1]] ingenti opere <i>de immortalitate animae</i> simile quid delineavit. Reliqua disputatio Machiavellismum\n[[5.2]] spirat, et videbatur in hoc uno eam respondens intellexisse. Nam quoties jus naturae\n[[5.3]] divinaeque leges objiciebantur, eas ad privatorum pacta limitandas contendebat, totum jus\n[[5.4]] gentium, bellique ac pacis immani hac audacia subversurus. </p>\n<p> [[5.5]] Demum vivus undique aut Hobbes aut Hobbesianus elucet. Cum enim utilitatem aequi\n[[5.6]] matrem habeat, igitur prout illi velificabitur jus omne, stabit cadetque: cum cuilibet principum\n[[5.7]] absolutum det imperium, sola suspicio principi ad supplicia jus dabit: demum quia a civili lege\n[[5.8]] omnis justitia propullulat, necessario obligatio omnis ac foederum servandorum necessitas ruet\n[[5.9]] inter civitates. Haec in Hobbesio saepe reprehendentem V.E. audivi. Quare cepit me quaedam\n[[5.10]] de Hobbesio a V.E. quod ejus pace fiat, sciscitandi cupiditas, quis ille, an adhuc superstes, an\n[[5.11]] Antagonistam na[c]tus, an habuerit, qui in jure naturae illustrando paria fecerint, meliora aut\n[[5.12]] aequalia, si subtilitatem spectes. Unus mihi Dominus Pufendorfius notus est, qui tamen sua\n[[5.13]] <i>elementa jurisprudentia</i>[<i>e</i>] ex Weigelii nostri Ethica Euclidea manuscripta dicitur fere tota\n[[5.14]] efformasse. Jenae 2 Septemb. 1663. </p>\n",
+  "number": "1.",
+  "title": "LEIBNIZ AN JAKOB THOMASIUS",
+  "date": "Jena, 2. (12.) September 1663. [3.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:1. LEIBNIZ AN JAKOB THOMASIUS Jena, 2. (12.) September 1663. [3.] Unica, quam tibi transmitto, disputatio sua novitate id meruisse visa est. Anmerkung von Kortholt unter dem Text in E^#'2 nach visa est: Titulus ejus: Q. D. B. V. Dissertatio academica, cujus prima pars de ratione status: altera de no...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

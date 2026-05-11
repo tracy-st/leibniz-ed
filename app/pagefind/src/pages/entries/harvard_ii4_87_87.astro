@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_87",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 87,
+  "text": "<p> [[282.5]] <b>87. BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ</p>\n<p> [[282.6]] Paris, 9. September 1704. [51.94.] </b></p>\n<p> [[282.24]] Je n'ai point encore eu, Monsieur, l'honneur de vous répondre sur l'Arithmetique Dyadique,\n[[282.25]] et sur les caracteres de Fohi, par ce que je ne soupçonnois pas que nous en pussiés être en\n[[282.26]] peine. Dés que vous avés marqué que vous consentiés que cela fust imprimé dans nos <i>Memoires</i>,\n[[282.27]] l'Academie a reglé qu'on l'imprimeroit, et votre défense seule avoit empéché que l'on\n[[283.1]] n'imprimast plustost l'idée de l'Arithmetique Binaire. Mais il faut que tout cela soit dans son\n[[283.2]] temps. C'est à l'année 1703 que ces <i>Memoires</i> apartiennent, et nous achevons presentement\n[[283.3]] 1702, qui ne sera entierement fini que dans 15 jours. Si nos <i>Histoires</i> avoient pu penetrer\n[[283.4]] jusqu'à vous, vous verriés ou nous en sommes, et vous n'auriés pas eu d'inquietude sur ce que\n[[283.5]] vous nous avés envoyé. </p>\n<p> [[283.6]] Quant à votre Ecrit pour répondre au P. Lami, M. l'Abbé Bignon n'a pas jugé à propos de\n[[283.7]] le mettre dans son <i>Journal</i>, parce qu'on n'y met rien de polemique. Voilà, Monsieur, les deux\n[[283.8]] seuls articles dont j'avois à vous rendre conte. Quand vous voudrés nous envoyer quelque\n[[283.9]] morceau de vous, quelque échantillon de vos sublimes découvertes en Geometrie, l'Academie\n[[283.10]] en ornera ses <i>Memoires</i> avec un extréme plaisir, et fera sonner bien haut que vous étes de son\n[[283.11]] corps. Je suis avec beaucoup de respect, et une estime trés singuliere </p>\n<p> [[283.12]] Monsieur Votre trés humble et trés obeïssant serviteur Fontenelle </p>\n<p> [[283.13]] de Paris ce 9 Sept. 1704. </p>\n<p> [[283.14]] A Monsieur Monsieur Leibnits </p>\n",
+  "number": "87.",
+  "title": "BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ",
+  "date": "Paris, 9. September 1704. [51.94.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:87. BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ Paris, 9. September 1704. [51.94.] Je n'ai point encore eu, Monsieur, l'honneur de vous répondre sur l'Arithmetique Dyadique, et sur les caracteres de Fohi, par ce que je ne soupçonnois pas que nous en pussiés être en peine. Dés que vous avés marqué que...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

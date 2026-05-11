@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_110",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 110,
+  "text": "<p> [[411.8]] <b>111. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[411.9]] [Hannover, Ende April 1691.] [108.175.]</b></p>\n<p> [[411.17]] Ex responso: </p>\n<p> [[411.18]] Miror a quoquam posse quaeri utrum Cartesii philosophia a rei mathematicae imperito\n[[411.19]] intelligi possit, cum ipse Cartesius aliquoties sit professus suam physicam nihil aliud esse quam\n[[411.20]] ipsissimam Geometriam, id est scientiam de magnitudine, figura et motu rebus applicatam. Est\n[[411.21]] autem physica utique potissima et utilissima philosophiae Cartesianae pars, cum in Metaphysicis,\n[[411.22]] Ethicis et Logicis nihil magnopere novum mihi quidem praestitisse videatur. </p>\n<p> [[411.23]] Systemata in usum scholarum propterea comparata esse debent, ut juvenes ad rerum\n[[411.24]] pariter et bonorum autorum notitiam manu ducantur, et cum Theologi, IC^#'t^#'i et Medici receptam\n[[411.25]] philosophiam in usum suum transtulerint, eam velut basin esse debere censeo, nec veteris\n[[411.26]] doctrinae arcem demoliendam aut a fundamentis disjiciendam, sed potius ornandam novis\n[[411.27]] structuris, pavimentis, tabulatis, picturis, signis, hortis, fontibus. Qui secus faciet ille et veteribus\n[[411.28]] carebit, et nova non satis assequetur. Ipse certe Cartesius quantus quantus est ex veterum\n[[411.29]] lectione factus est, quamvis id callide dissimularit, sed prodit id ipse stylus, ut Huetius recte\n[[411.30]] animadvertit. Multis quoque annis Flexiae apud Jesuitas literis operam dedisse, et omnino\n[[412.1]] multae lectionis hominem fuisse scimus. Et vero ut quod res est dicam, mihi ridiculum videtur\n[[412.2]] novam quandam philosophiam aut sectam animo concipere quae Cartesiana appelletur. Praestat\n[[412.3]] potissimas quasque veritates ordine tradere undecunque excerptas laudatis tamen primis autoribus.\n[[412.4]] Cum Cartesius ipse sua pleraque ex veteribus sublegerit, utique juventus ad fontes\n[[412.5]] ducenda est. Recentiores quoque alii praeclara habent, quae a Cartesio frustra quaeras. Denique\n[[412.6]] duo sunt genera hominum qui discliplinis dant operam. Alii superficiariam quandam cognitionem\n[[412.7]] quaerunt, fere notitia vocabulorum technicorum sunt contenti et vetera ac recepta magis\n[[412.8]] quam nova et paucis cognita requirent, alii ad intima veritatis penetrare contendunt, hos uni\n[[412.9]] autori mancipari servile est, et profectibus inimicum. Unde etiam factum est, ut puri puti\n[[412.10]] Cartesiani nihil novi invenerint merosque egerint magistri paraphrastas exemplo Scholasticorum\n[[412.11]] etc. </p>\n<p> [[412.12]] P. S. Si quis pergeret philosophiam Cartesianam Methodo Mathematica tradere, quemadmodum\n[[412.13]] coepit Spinosa, is operae pretium faceret; eo scilicet modo quo peculiari libello coepit\n[[412.14]] Spinosa. Ita enim velut veste sermonis detracta apparet ubinam doctrina adhuc laboret, ac\n[[412.15]] stabilimento, atque etiam emendatione indigeat. </p>\n",
+  "number": "111.",
+  "title": "LEIBNIZ AN GERHARD MEIER (BREMEN)",
+  "date": "[Hannover, Ende April 1691.] [108.175.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:111. LEIBNIZ AN GERHARD MEIER (BREMEN) [Hannover, Ende April 1691.] [108.175.] Ex responso: Miror a quoquam posse quaeri utrum Cartesii philosophia a rei mathematicae imperito intelligi possit, cum ipse Cartesius aliquoties sit professus suam physicam nihil aliud esse quam ipsissimam Geometriam, id ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

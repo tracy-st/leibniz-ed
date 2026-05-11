@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_42",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 42,
+  "text": "<p> [[122.18]] <b>36. ERICH MAURITIUS AN LEIBNIZ</p>\n<p> [[122.19]] Speyer, 7. (17.) Januar 1671.</b></p>\n<p> [[123.1]] Amplissime, et consultissime, Vir, Fautor et Amice honoratissime, </p>\n<p> [[123.2]] Non committendum putavi, Doctissime Leibnitzi, quin circa novi hujus anni felicia\n[[123.3]] exordia, prospera omnia, et Tibi et studiis tuis apprecarer, simulque moram dilatae per menses\n[[123.4]] aliquot scriptionis purgarem, cujus ista unica causa est, quod, quae per me confecta voluisti\n[[123.5]] negotia, absque tamen culpa mea, non nisi sero expedita dare mihi licuerit. Duo erant, ni fallor,\n[[123.6]] quae fidei meae concredisti. Primum ut in Angliam Societati Regiae transmitterentur illa quae\n[[123.7]] de motu meditari voluisti: tum ut Catalogum Mss^#'t^#'o^#'r^#'u^#'m Gottorpiensium tibi procurarem. Atque\n[[123.8]] hunc quidem tandem (amissus enim per aliquot menses dicebatur) nactus sum, et descriptum\n[[123.9]] Tibi tradam, ubi Maguntiae vel Francofurti tecum sermones copulare licuerit; istas vero de\n[[123.10]] motu Meditationes Doctori Fogelio Hamburgensi misi, qui quod aliter de motu sentiat, quam\n[[123.11]] indoles illius a te explicatur, ceu sero demum intellexi, ambigere coepit, an transmittenda tua\n[[123.12]] essent in Angliam; admonitus tamen a me ne ultra cunctaretur, se certo transmissurum illa in se\n[[123.13]] recepit, nec ambigo jam ante septimanas aliquot reddita esse Societati. Legi interim praefationem\n[[123.14]] doctam quam praefigere voluisti Nizolii operi hactenus desiderato, factamque ibi honorificam\n[[123.15]] mei mentionem observavi, quo nomine gratias Tibi habeo maximas. Nova quaedam\n[[123.16]] mecum fero e Gallia et Anglia praecipue de quibus coram agendi, ubi Maguntiam vel Francofurtum\n[[123.17]] venero, occasionem exspecto. Vale et Fave </p>\n<p> [[123.18]] Tuo Erico Mauritio D. </p>\n<p> [[123.19]] Scrib. Spirae volante ut vides calamo VII Jan. MDCLXXI. </p>\n<p> [[123.20]] Viro Nobilissimo, Amplissimo et Consultissimo Dn. G. Leibnitzio J.U.D. celeberrimo et\n[[123.21]] Eminentissimi Electoris Maguntini Consiliario dexterrimo, Fautori et Amico honoratissimo.\n[[123.22]] <i>Mayntz.</i> Ericus Mauritius Spirae d. 9. Jan. 1671. </p>\n",
+  "number": "36.",
+  "title": "ERICH MAURITIUS AN LEIBNIZ",
+  "date": "Speyer, 7. (17.) Januar 1671."
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:36. ERICH MAURITIUS AN LEIBNIZ Speyer, 7. (17.) Januar 1671. Amplissime, et consultissime, Vir, Fautor et Amice honoratissime, Non committendum putavi, Doctissime Leibnitzi, quin circa novi hujus anni felicia exordia, prospera omnia, et Tibi et studiis tuis apprecarer, simulque moram dilatae per men...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

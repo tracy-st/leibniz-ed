@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi1_14",
+  "series": "Band VI 1 (1663-1672); unveränderter Nachdruck der Erstausgabe 1930",
+  "seq": 14,
+  "text": " [[535.32]] <b>19 De Possibilitate Gratiae Divinae 1669-1671 (?</b> <span>535.32;0:61:019:6901-7112:L:l^</span>.\n [[535.33]] Posset fortasse Definitio Gratiae Sufficientis et Efficacis dari, in qva conveniant omnes,\n [[535.34]] abstrahendo a singulorum sententiis, qvod omnino necesse est, alioqvi res abit in logomachian.\n [[536.1]] Ergo definio: Gratia in genere est concursus DEI extraordinarius ad bonum opus. Gratia\n [[536.2]] efficax qva absolute posita ponitur opus. Gratia sufficiens est qva posita non statim ponitur\n [[536.3]] opus nisi supposita hominis voluntate.\n [[536.4]] Sunto jam propositiones (1.) Datur gratia sufficiens. Scilicet ad agendum, supposita\n [[536.5]] voluntate. Hanc admittunt Thomistae et Molinistae, negant Ianseistae. (2.) Datur gratia\n [[536.6]] sufficiens-sola. Seu datur gratia sufficiens ad agendum, sine praesupposita gratia efficaci\n [[536.7]] ad volendum. Hanc admittunt Thomistae et Iansenistae, negant Molinistae. (3.) Si datur\n [[536.8]] gratia sufficiens, datur gratia sufficiens-sola. Hanc admittunt Molinistae et\n [[536.9]] Iansenistae, negant Thomistae. Hic ut verum fatear, mihi Thomistarum sententia et vera et utilis,\n [[536.10]] Iansenistarum falsa, Molinistarum videtur etiam periculosa.\n [[536.11]] Tabula opinionum\n [[536.12]] Non datur Liberum Arbitrium seu\n [[536.13]] omnis DEI concursus est determinativus, sive\n [[536.14]] ad bonum, sive ad malum concurrat.\n [[536.15]] Ita Stoici et Manichaei.\n [[536.16]] Non datur Gratia Sufficiens seu\n [[536.17]] omnis DEI concursus ad bonum est determinativus,\n [[536.18]] secus de concursu eius ad malum.\n [[536.19]] Ita Dordraceni et Iansenistae.\n [[536.20]] Dantur et debent dari omnia seu\n [[536.21]] quidam DEI concursus ad bonum, nullus ad malum est determinativus.\n [[536.22]] Ita Augustanenses et Thomistae.\n [[536.23]] Potest dari Gratia Efficax seu potest existere actus bonus sine concursu DEI determinativo.\n [[536.24]] Ita Molinistae soli nisi fortasse Semipelagianos velint adsciscere in Societatem.\n [[536.25]] Potest non dari Gratia seu potest existere actus bonus sine concursu DEI extraordinario sive determinativo  sive auxiliativo.\n [[536.26]] Ita Pelagiani.\n [[536.26]] Nota bene: potest statui triplex gratia: Efficax, sufficiens, necessaria. Efficax est qva posita ponitur actus. Necessaria\n [[536.27]] est qva non posita non ponitur actus. Sufficiens est qva posita accedente voluntate ponitur\n [[536.28]] actus. Dabitur igitur sententia anonymos, hactenus defensore carens, nisi aliqvem ei ex\n [[536.29]] veteribus adsciscas, qvae statuat, dari qvaedam auxilia gratiae, qvae tamen non sufficiant, etsi homo\n [[536.30]] vel maxime velit. Et ita putabunt aliqvem actum fieri concurrente gratia neqve efficace,\n [[536.31]] neqve sufficiente. Sed tamen haec in subtilitate consistet, nullo ad praxin usu. Uti et dissensus\n [[536.32]] Iansenisticus.\n",
+  "number": "19",
+  "title": "De Possibilitate Gratiae Divinae",
+  "date": "1669-1671 (?"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:19 De Possibilitate Gratiae Divinae 1669-1671 (? 535.32;0:61:019:6901-7112:L:l^. Posset fortasse Definitio Gratiae Sufficientis et Efficacis dari, in qva conveniant omnes, abstrahendo a singulorum sententiis, qvod omnino necesse est, alioqvi res abit in logomachian. Ergo definio: Gratia in genere es...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

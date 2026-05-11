@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_94",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 94,
+  "text": "<p> [[300.9]] <b>94. LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE</p>\n<p> [[300.10]] [Lietzenburg, Anfang November 1704]. [87.131.] </b></p>\n<p> [[300.23]] N'avois je pas raison, Monsieur, d'estre un peu en peine de la destinée de ce que j'avois\n[[300.24]] pris la liberté de vous envoyer il y a long temps, puisque vous me faites enfin l'honneur de\n[[300.25]] m'apprendre sur ma demande reiterée qu'on ne trouve pas à propos de mettre dans le <i>journal</i> la\n[[301.1]] reponse que j'ay faite au pere Lami, parcequ'elle est polemique à ce qu'on dit au lieu que\n[[301.2]] j'avois cru qu'elle estoit purement philosophique. Si cette resolution m'avoit esté connue plus\n[[301.3]] tost j'aurois trouvé peutestre déja un autre moyen de répondre à ce pere, pour me justifier\n[[301.4]] aupres du public. Et je vous supplie cependant Monsieur d'avoir la bonté de faire remettre ma\n[[301.5]] reponse entre les mains de M. Pinson. </p>\n<p> [[301.6]] Pour ce qui est des Dyadiques; la premiere piece que j'avois envoyée, estoit, et doit estre\n[[301.7]] encor pour l'Academie seule; et la seconde où les Dyadiques sont comparés avec les caracteres\n[[301.8]] de Fohy est destinée au public. Ainsi je vous supplie, Monsieur, de ne faire mettre dans vos\n[[301.9]] <i>memoires</i> que la seconde piece toute seule; et non pas la premiere, et de marquer cela au dessus\n[[301.10]] des papiers, a fin qu'apres quelque temps on ne l'oublie. </p>\n<p> [[301.11]] J'attends vos belles meditations sur l'infini ou infiniment petit. Il est vray que chez moy\n[[301.12]] les infinis ne sont pas des touts et les infiniment petits ne sont pas des grandeurs. Ma\n[[301.13]] metaphysique les bannit de ses terres, et je ne leur donne retraite, que dans les espaces\n[[301.14]] imaginaires du calcul geometrique, où ces notions ne sont de mise que comme les raçines qu'on\n[[301.15]] appelle imaginaires. La part que j'ay eue à faire valoir ce calcul des infinitesimales ne m'en\n[[301.16]] rend pas assez amoureux, pour les pousser au delà du bon sens. Et la vraye Metaphysique, ou\n[[301.17]] philosophie, si vous voulés, ne me paroist pas moins importante que la Geometrie, sur tout, s'il\n[[301.18]] y a moyen d'y introduire aussi les demonstrations qui n'en ont esté que trop bannies jusqu'icy,\n[[301.19]] avec le Calcul qui sera necessaire pour leur donner toute l'entrée dont elles ont besoin. </p>\n<p> [[301.20]] Cependant il y faut preparer les Lecteurs par des écrits exoteriques: les journaux m'y ont\n[[301.21]] servi jusqu'icy. Mais je voy bien que le vostre parvenu à un certain âge où l'on ne se soucie\n[[302.1]] plus des bagatelles, ne veut plus que des piéces de poids, et qui ayent corps. Je voudrois estre\n[[302.2]] tousjours en estat de vous en envoyer de cette force, mais mon esprit est devenu moins propre à\n[[302.3]] porter le travail des calculs et des figures, et il croit qu'il luy est permis maintenant de s'egayer\n[[302.4]] un peu, sauf aux autres de mepriser ses productions tardives. Je suis le premier a me rendre\n[[302.5]] justice la dessus, et je trouve tousjours des gens qui me font plus d'honneur que je ne merite.\n[[302.6]] Puisqu'il est vray que même <i>un</i> <i>sot trouve tousjours un plus sot qui l'admire</i>. </p>\n<p> [[302.7]] Ayés la bonté de marquer à M. l'Abbé Bignon que j'ay tousjours toute la deference qu'il\n[[302.8]] faut pour ses sentimens et je suis avec zele </p>\n<p> [[302.9]] Monsieur </p>\n",
+  "number": "94.",
+  "title": "LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE",
+  "date": "[Lietzenburg, Anfang November 1704]. [87.131.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:94. LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE [Lietzenburg, Anfang November 1704]. [87.131.] N'avois je pas raison, Monsieur, d'estre un peu en peine de la destinée de ce que j'avois pris la liberté de vous envoyer il y a long temps, puisque vous me faites enfin l'honneur de m'apprendre sur ma dema...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

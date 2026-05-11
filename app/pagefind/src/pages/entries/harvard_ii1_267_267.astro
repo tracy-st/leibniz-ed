@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_267",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 267,
+  "text": "<p> [[819.3]] <b>232. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[819.4]] Hannover, 26. Juli (5. August) 1681. [202.]</b></p>\n<p> [[819.11]] Hanoverae 26. Julii 1681. </p>\n<p> [[819.12]] Legi Nicetae Spilii libellum. Et Nicetam quidem Vincentium esse manifestum est. Spilium\n[[819.13]] autem non difficulter divinabit qui quod Germanis <i>Spiel</i>, Ludum, id Anglo-Saxonibus\n[[819.14]] <i>Play</i> esse noverit. Autor quisquis est, eleganter in classes dispescit jurisprudentiae reformatores\n[[819.15]] et de singulis non inique judicat. </p>\n<p> [[819.16]] Unum nollem Veridici a Justiniano libellum <i>de Corpore Juris Reconcinnando</i> mihi\n[[819.17]] fuisse imputatum. Quem ego quidem non contemno; meum tamen haberi, et mihi parum\n[[819.18]] convenire, et in autorem injurium esse judico. Et qui meam Jurisprudentiae methodum cum hoc\n[[819.19]] libello confert; et in dictione et in ratiocinandi modo magnum discrimen depraehendet. At\n[[819.20]] potius prioris illius libelli Anonymi <i>de Corpore Juris Reconcinnando</i>, autorem me dici patiar.\n[[819.21]] Etsi non essem ipse illa, quae in eo facta est, propositione contentus. Sed Elector Moguntinus,\n[[819.22]] in cujus aula tunc agebam, caetera velut altioris indaginis moliminisque, rectius differri judicabat.\n[[819.23]] Itaque et arctioribus me limitibus inclusi, et jejunius dixi, quam fecissem meo usus\n[[820.1]] arbitratu. Veridici autem autorem comperi eundem esse cum eo qui se vocat Relfendso, cujus <i>de\n[[820.2]] summa potestate principum Germaniae</i> scriptum habemus, quod conferenti utrumque libellum\n[[820.3]] satis apparebit. Relfendso autem est Rosenfeld. </p>\n",
+  "number": "232.",
+  "title": "LEIBNIZ AN VINCENT PLACCIUS",
+  "date": "Hannover, 26. Juli (5. August) 1681. [202.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:232. LEIBNIZ AN VINCENT PLACCIUS Hannover, 26. Juli (5. August) 1681. [202.] Hanoverae 26. Julii 1681. Legi Nicetae Spilii libellum. Et Nicetam quidem Vincentium esse manifestum est. Spilium autem non difficulter divinabit qui quod Germanis Spiel, Ludum, id Anglo-Saxonibus Play esse noverit. Autor q...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

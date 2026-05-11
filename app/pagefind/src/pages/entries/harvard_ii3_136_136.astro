@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_136",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 136,
+  "text": "<p> [[360.1]] <b>136. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[360.2]] [Hannover, 18. August 1697.] [124.142.]</b></p>\n\n<p> [[360.11]] Ex responsione </p>\n<p> [[360.12]] Nactus sum nuper denuo Epistolas ad Leusdenium de progressibus Evangelii Batavorum\n[[360.13]] opera procuratis. Habueram olim, sed amiseram, quod non nisi unam plagulam implerent. Si\n[[360.14]] habuissem <i>Sinicis novissimis</i> adjecissem. Expecto et praefationem Catechismi lingua Americana\n[[360.15]] Holmiae impressi, ex Suecico per amicum vertendam, unde apparet Suecos laudabili\n[[360.16]] opera id agere ut Christianam fidem barbaris instillent. Sed haec minuta sunt si compararentur\n[[360.17]] illis, quae fieri a nostris Reformatisque possent, si pontificiorum exemplum sequerentur. Doleo\n[[360.18]] optimum Weigelium majoribus omissis minuta consectari, et de calendario laborare, in quo non\n[[360.19]] multum est situm. </p>\n<p> [[361.1]] Nuper ad me venit quidam Dn. Neubauerus a Dn. Augusto Franco professore Halensi mihi\n[[361.2]] alias (nisi fama) non cognito commendatus. Is ostendit retulitque specimina novae puerorum\n[[361.3]] pauperculorum institutionis, quam Halae Saxonum inchoavit Dn. Francus, sane laudabiliter\n[[361.4]] quantum intellexi et ad sensum nostrum, ut sperem si sic pergat adjuveturque, posse ejus opera\n[[361.5]] in rem conferri quae Dn. Weigelius distractus et subinde <greek>ĕjvtikv́terow</greek> cogitavit, movit potius\n[[361.6]] quam promovit. Dixi illi in magna et populosa urbe qualis vestra est, tale quid fieri posse\n[[361.7]] insigni cum successu, eo modo quo in Gallia Academiae gymnasticae a privatis habentur;\n[[361.8]] suasique ut ubi Hamburgum venisset, Te adiret. Visus est delectari admodum Consiliis istis, et\n[[361.9]] credidit praeceptores idoneos non defuturos, jam tum enim tales Halae haberi. Pro cautione\n[[361.10]] tamen addidi, ut evitentur litigia apud vestros, non debere apparere commendationem exemplumque\n[[361.11]] Domini Franci, vitandaque initio omnia quae suspicionem pietismi illius imaginarii\n[[361.12]] facere possint. Interea cum Domino Franco amplius per literas de hoc instituto communicabo. </p>\n<p> [[361.13]] Audio Dn. Sam. Reiherum Kilonii aliam a Weigeliana moliri Calendarii restitutionem,\n[[361.14]] mihi de neutra satis constat, etsi aliquam videram schedam Domini Weigelii. </p>\n<p> [[361.15]] Duo sunt in Anglia viri egregii mihique faventes (etsi nullum nisi per amicum communem\n[[361.16]] nobis commercium intercedat) ambo ni fallor apti intelligendis philosophiae practicae dotibus.\n[[361.17]] Lockius scilicet, cujus prodiere cum talia, tum Tentamina de intellectu (<i>Essay of Understanding</i>)\n[[361.18]] et liber de Educatione, ambo ex Anglico in Gallicum versi et praeclara non pauca\n[[361.19]] monentes. </p>\n<p> [[361.20]] Alter est Bentlejus vir non tantum in literis elegantibus excellenter versatus, sed et\n[[361.21]] philosophiam et rem moralem non negligens, ut apparet ex ejus dissertationibus contra Christianae\n[[361.22]] fidei adversarios, Anglice editis, sed a viro docto Berolini latine versis non male. </p>\n<p> [[361.23]] Gaudeo Tibi oblatum qui rite adjuvet in digestione Pseudonymorum; ita ominor Te mox ea\n[[361.24]] molestia posse defungi, ut agites si non plausibiliora in vulgus, certe solidiora et magis expetita\n[[361.25]] apud Sapientes. </p>\n<p> [[362.1]] Petrus Rabus qui libros Belgice recensere instituit, quid hominis sit non satis exploratum\n[[362.2]] habeo. Videtur Belgica eloquentia potissimum valere, et vix in res ipsas ingredi altius et\n[[362.3]] subinde captare risum lectorum, ut solent superficiaria ingenia. Quae de Tuis habet non legi.\n[[362.4]] Negligi hominis censuram insubidam, consultissimum putem. Vale. </p>\n",
+  "number": "136.",
+  "title": "LEIBNIZ AN VINCENT PLACCIUS",
+  "date": "[Hannover, 18. August 1697.] [124.142.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:136. LEIBNIZ AN VINCENT PLACCIUS [Hannover, 18. August 1697.] [124.142.] Ex responsione Nactus sum nuper denuo Epistolas ad Leusdenium de progressibus Evangelii Batavorum opera procuratis. Habueram olim, sed amiseram, quod non nisi unam plagulam implerent. Si habuissem Sinicis novissimis adjecissem....">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

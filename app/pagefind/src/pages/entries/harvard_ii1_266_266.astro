@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_266",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 266,
+  "text": "<p> [[817.6]] <b>231a. ROBERT HOOKE AN THEODOR HAAK FÜR LEIBNIZ</p>\n<p> [[817.7]] [London, 13. April 1681.] [228a.]</b></p>\n<p> [[817.19]] S^#'r </p>\n<p> [[817.20]] I am extreamly pleasd to find soe excellent a Person as the Learned world must Acknowledg\n[[817.21]] M^#'r Leibnitz to concur in the same opinion w^#'t^#'h me that A language somew^#'t Like that of\n[[817.22]] y^#'e Bishop of Chester would be of use for the Promotion of Science. It has been Long my\n[[817.23]] Judgment, and that founded upon undenyable principles from w^#'c^#'h I cannot Recede that this\n[[817.24]] Language would be of much greater use then the world has conceived, though I have hitherto\n[[817.25]] had the Ill fortune scarcly to meet w^#'t^#'h one man (except himself) whom I can persuade to concurr\n[[817.26]] w^#'t^#'h me and that the Greatest number Look upon it only as a chymera and at best but a\n[[817.27]] Supplement for Latine in the inner parts of Europe or for the Lingua franca in the maritime, yet\n[[817.28]] my aymes have Always been much higher viz. to make it not only usefull for Expressing and\n[[817.29]] Remembring of things and notions but to Direct Regulate assist and even necessitate and\n[[818.1]] compell the mind to find out and comprehent whatsoever is knowable. And to make it an\n[[818.2]] Instrument which being actuated by the power of the mind shall most certainly produce the\n[[818.3]] Desired effect or plainly show the Impossibility thereof; especially in all those subjects where\n[[818.4]] y^#'e use of it may be free and where interest and Authority doe not Intercept the Regular Course\n[[818.5]] thereof, which I conceive to be the great antagonists which may impede its progress, preposession\n[[818.6]] may clogg it but it will get through safe and well: not withstanding. It may therefore not\n[[818.7]] unfitly be called the Algebra of Algebras or the Science of methods, which every one that now\n[[818.8]] Invents a particular method does somew^#'t participate but comes short of the full perfection and\n[[818.9]] best of that kind, at Least if he Light on it he knows not how he came by it nor can he prove that\n[[818.10]] tis soe and not otherwise. Any thing therefore that M^#'r Leibnitz knows that will promote this end\n[[818.11]] will be highly acceptable if he please to communicate it and shall be acknowledged as his. The\n[[818.12]] Great Difficulty lyes in the media but the Generall method will not only plainely show what\n[[818.13]] those are but the way of attaining them, but this is not to be done in many subjects but w^#'t^#'h much\n[[818.14]] exercise of the method and there is a subordination and positure in the subjects of Inquiry\n[[818.15]] themselves, and therefore the first Alphabet or those which may be called the Symbols are first\n[[818.16]] to be understood, then those which may be called the Syllables then the words then sentences or\n[[818.17]] propositions etc. nor is it to be imagined a Scollar in this art shall at first sight read perfectly\n[[818.18]] But must with Labour and Patience proceed methodically, and goe by steps from subject to\n[[818.19]] subject as Nature has placed them in order, and then tis not to be doubted but the Soule of man\n[[818.20]] may be carryed to the highest step of knowledge and comprehend scientifically whatever is\n[[818.21]] made capable of knowing. To compleat which the united Labours of many will be necessary\n[[818.22]] and of such as are fitly qualifyed and those often Meeting and Debating together, and exerting\n[[818.23]] their utmost abilitys in A right way. But where are these to be found. Either will or ability or\n[[818.24]] opportunity or some other necessary concomitant is found wanting. Soe that I fear this may be\n[[818.25]] seen in Speculation but twill be very difficult to bring it into act, and Every one must be content\n[[818.26]] to improve himself soe far as he can in the Disquisition on this or that subject he has most\n[[818.27]] present need of knowing. I question not but M^#'r Leibnitz may have many of these specimina by\n[[818.28]] him and therefore I doe heartily wish you could prevaile w^#'t^#'h him to Communicate some of these\n[[818.29]] which would be a means to persuade severall yet incredulous of the possibility of such a\n[[818.30]] Science: for my own part I Should very gladly contribute my Indeavours towards this end but\n[[818.31]] the Scarcity of Persons to converse w^#'t^#'h concerning it does almost Discourage me. But the\n[[819.1]] concurrence and confirmation of soe excellent a Person as Mon^#'r Leibnitz would be very\n[[819.2]] prevalent for making Proselyts. <Fn><i>Darunter von Hookes Hand</i>: concerning M^#'r Leibnitz his Dessigne for Universall Language or Characters sent by M^#'r Haak to M^#'r Leibnitz May 15, 1681.</Fn> </p>\n",
+  "number": "231a.",
+  "title": "ROBERT HOOKE AN THEODOR HAAK FÜR LEIBNIZ",
+  "date": "[London, 13. April 1681.] [228a.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:231a. ROBERT HOOKE AN THEODOR HAAK FÜR LEIBNIZ [London, 13. April 1681.] [228a.] S^#'r I am extreamly pleasd to find soe excellent a Person as the Learned world must Acknowledg M^#'r Leibnitz to concur in the same opinion w^#'t^#'h me that A language somew^#'t Like that of y^#'e Bishop of Chester wo...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

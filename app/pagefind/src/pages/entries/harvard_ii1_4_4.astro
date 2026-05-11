@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_4",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 4,
+  "text": "<p> [[8.4]] <b>4. LEIBNIZ AN CHRISTIAN DAUM</p>\n<p> [[8.5]] Leipzig, 26. März (5. April) 1666. [5.]</b></p>\n<p> [[8.28]] Nobiliss^#'e et Cl^#'m^#'e Vir. </p>\n<p> [[8.29]] Cum simulac in notitiam Tuam veni, statim beneficium senserim; nolui prius scribere,\n[[8.30]] quam grati animi signum qualecunque dare liceret. Igitur quod plurimum a Te adjutus, ne\n[[8.31]] verbulo quidem, nisi per Cl^#'u^#'m Fellerum, vel gratias egi, aegre minime [Te] laturum, maxime\n[[8.32]] spero. Quamprimum autem exiit e praelo nostra <i>de Arte Combinatoria</i> dissertatiuncula, nihil\n[[8.33]] antiquius habui, quam mittere; partim ne moram excusandi jus, aut gratias agendi occasionem\n[[9.1]] perderem; partim ut recognosceres artes Tuas, et quorum pars magna es, ea ipse haberes. <i>De\n[[9.2]] Arte Combinatoria</i>, inscripsimus, magis ut satisfieret vulgi auribus, in quibus et Lullii artificium,\n[[9.3]] et Ath. Kircheri promissum increbuit, quam quod ita sentiremus. Neque enim variationem\n[[9.4]] conjunctionum tantum, sed et retenta [earundem] rerum complexione artificium situs\n[[9.5]] commutandi sumus executi. Plus tamen in Complexionibus operae posuimus, quod utiliores\n[[9.6]] hae, etsi transpositiones jucundiores. Nam et professi sumus in opusculo, et experturus credet,\n[[9.7]] hanc scientiarum omnium clavem esse, denique hujus praeceptis Universam Logicam inventivam\n[[9.8]] contineri. Dolendum quippe est hodie partem Logicam de Judicio ita prope solam\n[[9.9]] urgeri, ut negligatur inventio, aut, quae traduntur, pontes sint asinorum, distinctionum cruces,\n[[9.10]] canonum pessime intellectorum praecipitia. Sed haec apud peritissimum Virum frustra. Transpositiones\n[[9.11]] addidi, ut superiora severiora, et in fundamenta scientiarum aditum molientia,\n[[9.12]] jucunditate temperarem: Earum spectaculum commodissimum versus sunt Protei: Proteorum\n[[9.13]] Tui: Tuorum vero utinam theatrum satis editum esset hic libellus! qui si artis tuae magnitudinem\n[[9.14]] modo assecutus sit, satis se praestitisse credet. Nam tua recte expressa etiam in humili loco per\n[[9.15]] se lucent. Caeterum in nonnullis aliis haesi. Nam de Goldsteinii Proteo nihil fere compertum\n[[9.16]] habebamus praeter verba. Et Publilius Porphyrius Optatianus, Poeta vetus, aevi Constantinianaei\n[[9.17]] in manus nostras non nisi citatus venit; de quo quantum noveramus, in ipso opusculo\n[[9.18]] disseruimus. Utriusque notitiam pleniorem, si daretur vel nunc demum ex Te discere, Cl^#'m^#'e Vir,\n[[9.19]] quanti aestimaturus sim principia haec favoris in me Tui, ipse facile vides. Denique promtitudini\n[[9.20]] tuae juvandi me ignotum, aut potius per me familiarissimam tibi amicam, Rem Literariam;\n[[9.21]] gratias et nunc ago, et cum occasio erit, habiturus sum majores. Vale. Id precatur </p>\n<p> [[9.22]] Tibi quondam publico nomine, nunc privatim obstrictus </p>\n<p> [[9.23]] Lipsiae, 26. Martii 1666. M. Gottfredus Guilielmus Leibnüzius. </p>\n<p> [[9.24]] Nobiliss^#'o et Cl^#'m^#'o Christiano Daumio, Gymnasiarchae Zviccaviensi, de re Literaria meritissimo\n[[9.25]] Viro, Fautori Suo Honoratissimo. <Fn><i>Unterhalb der Anschrift von Daums Hand das Empfangsdatum</i>: 30 Martii 1666</Fn> </p>\n",
+  "number": "4.",
+  "title": "LEIBNIZ AN CHRISTIAN DAUM",
+  "date": "Leipzig, 26. März (5. April) 1666. [5.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:4. LEIBNIZ AN CHRISTIAN DAUM Leipzig, 26. März (5. April) 1666. [5.] Nobiliss^#'e et Cl^#'m^#'e Vir. Cum simulac in notitiam Tuam veni, statim beneficium senserim; nolui prius scribere, quam grati animi signum qualecunque dare liceret. Igitur quod plurimum a Te adjutus, ne verbulo quidem, nisi per C...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_259",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 259,
+  "text": "[[1025.1]] <b>216.  Marginalien zum Promus condus von Joh. Balthasar Schupp [1677 bis 1679 (?)]</b>\n [[1025.2]] <tab/>[1677 bis 1679 (?)]\n [[1025.9]] <b>Schuppii Promus Condus</b>\n [[1025.10]] revisus, auctus et inscriptus Nobilissimo Adolescenti\n [[1025.11]] Johanni a Berenklo, Sueco, Matthiae Filio. Anno M. DC. L. <Fn><i>Am Kopf des Blattes</i>: Ex Lullianis. <tab/>Omne <b>Bonum</b> Magnum est duratque potentia mentis <tab/>Si vis virtutem stat tibi verus honor.</Fn>\n [[1025.12]] B <Fn><i>Am Rande</i>: Bonitas.</Fn> <i>N.</i> <i>alumna eloquentiae, amoenitas, anchorae, asylum innocentiae, ... </i>\n [[1025.13]] C <Fn><i>Am Rande</i>: Magnitudo.</Fn> <i>M.</i> Nom. <i>Abdomen, abyssus, ambages, acervus, aequor, aerarium, ... </i>\n [[1025.14]] D <Fn><i>Am Rande</i>: Duratio.</Fn> Durat Nom. <i>Aetas, aeternitas famae aevitas, aevum, ager novalis amicitiae</i>,\n [[1025.15]] E <Fn><i>Am Rande</i>: Potestas.</Fn> Potest. <i>Aculeus paenarum, adytum misericordiae, adminiculum, agilitas, ... </i>\n [[1025.16]] F <Fn><i>Am Rande</i>: Scientia.</Fn> Abyssus <i>sapientiae. acies. acrimonia. acumen. adytum sapientiae. ... </i>\n [[1025.17]] G <Fn><i>Am Rande</i>: Voluntas.</Fn> Vol. Nom. <i>Exactio. exactor aculeus. aemulatio pertinax virtutis. aemulus alienae\n[[1025.18]] gloriae. ... </i>\n [[1026.1]] H <Fn><i>Am Rande</i>: Virtus.</Fn> <i>Virtus</i> <i>Aemulator, aemulus, aequitas, animus, antistes, censor, praecordia, ... </i>\n [[1026.2]] I <Fn><i>Am Rande</i>: Veritas.</Fn> Verit. Nom. <i>Argumentum. arbiter secretorum. aura aulici rumoris. ... </i>\n [[1026.3]] K <Fn><i>Am Rande</i>: Gloria.</Fn> Gloria. Adorea. <i>aestimatio. aeternitas. altituto animi. amplitudo divitiarum. ... </i> </p>\n",
+  "number": "216.",
+  "title": "Marginalien zum Promus condus von Joh. Balthasar Schupp",
+  "date": "[1677 bis 1679 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:216. Marginalien zum Promus condus von Joh. Balthasar Schupp [1677 bis 1679 (?)] [1677 bis 1679 (?)] Schuppii Promus Condus revisus, auctus et inscriptus Nobilissimo Adolescenti Johanni a Berenklo, Sueco, Matthiae Filio. Anno M. DC. L. Am Kopf des Blattes: Ex Lullianis. Omne Bonum Magnum est duratqu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

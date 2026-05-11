@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_159",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 159,
+  "text": "<p> [[418.1]] <b>159. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[418.2]] Padua, 20. März [1698]. [149.163.]</b></p>\n\n<p> [[418.9]] Ill^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[418.10]] Oggi mi capita la benignissima di V. S. Ill^#'m^#'a che sommamente mi consola colle buone\n[[418.11]] nuove della sua salute, ed insieme m'erudisce, et illumina colle sue dotte ed acute riflessioni.\n[[418.12]] Saranno ben presto da mia parte consegnate due lettere mie stampate al Sig^#'r^#'e Mendelino, nella\n[[418.13]] prima delle quali combatto le principali ragioni con cui s'oppone alla dottrina cartesiana il\n[[418.14]] Medico Genovese; nell'altra rispondo alle sue repliche. Appresso le mandarò un'altra mia\n[[418.15]] lettera in continuatione dell'altre due che le trasmessi, che non è ancora publicata per le mie\n[[418.16]] gravissime occupationi per le publiche lettioni, e per la stampa della mia Opera grande che è già\n[[419.1]] sotto il torchio. Ella è divisa in quattro parti. Nella prima spiego largamente il Trattato di\n[[419.2]] Sant'Agostino della <i>Quantità dell'Anima</i>. La Seconda Parte contiene il commento del libro X\n[[419.3]] <i>della Trinità</i> d'Agostino ove con metodo analitica si investiga la natura dell'Anima. Nella terza\n[[419.4]] Parte che è la più faticosa e gagliarda prima premetto un mio Apparato con ordine Geometrico\n[[419.5]] affine di convincere di fallace qualsisia ragionamento d'Epicuro a prò della Mortalità\n[[419.6]] dell'Anima. Di poi viene questo Titolo. <i>Conflictus Carnis et Mentis, seu Augustinus et Epicurus\n[[419.7]] invicem pugnantes</i>. Ove s'espone tutto il libro terzo di Lucretio, e per mezzo dell'Apparato\n[[419.8]] si rigetta, doppo di che si spiega, e con nuove ragioni si stabilisce magiormente il piccolo\n[[419.9]] libro di Sant Agostino dell'<i>Immortalità dell'Anima</i>: Nell'ultima parte si racchiudono le mie\n[[419.10]] Investigationi <i>de Deo, Anima, et Universa Natura</i>. Per mezzo dell'Unità e del Numero filosofo\n[[419.11]] di tutta la Natura con metodo particolare e forte. In una di queste Investigationi ove raggiono\n[[419.12]] dell'Armonia dell'Universo mi prendo la libertà di proporre i dottissimi sentimenti che ella un\n[[419.13]] tempo mi comunicò in Venetia con formare il dovuto elogio al suo incomparabile sapere.\n[[419.14]] Stampoto che sarà il libro ne consegnarò uno al Sig^#'r^#'e Mendelino a conto di V. S. Ill^#'m^#'a. Coll'altro\n[[419.15]] Ordinario le domandarò la solutione d'alcuni dubbi non havendo ora tempo di farlo. L'Amico\n[[419.16]] la supplica con tutto il cuore non scordarsi del suo interesse, e tutto s'abbondona nella sua\n[[419.17]] cortesia che farà il possibile per consolarlo. E divotamente riverendola, mi resto </p>\n<p> [[419.18]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Oblg^#'m^#'o Dev^#'m^#'o S^#'r^#'e vero M. A. F. </p>\n<p> [[419.19]] Padova 20 Marzo </p>\n<p> [[419.20]] Terminato il mese d'Aprile incominciano le nostre vacanze fino a Novembre, e l'assicuro\n[[419.21]] che se haverò l'occasione mi metterò in viaggio per rivederla.\n[[419.22]] <yi>All'Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di S.A.E. <b>Hannover</b> </p>\n",
+  "number": "159.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 20. März [1698]. [149.163.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:159. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 20. März [1698]. [149.163.] Ill^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o Oggi mi capita la benignissima di V. S. Ill^#'m^#'a che sommamente mi consola colle buone nuove della sua salute, ed insieme m'erudisce, et illumina colle sue dotte ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

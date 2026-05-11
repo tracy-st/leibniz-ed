@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_159",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 159,
+  "text": "<p> [[510.1]] <b>159. LEIBNIZ AN ERNST SALOMON CYPRIAN</p>\n<p> [[510.2]] Hannover, 22. Oktober 1706. [156.] </b></p>\n<p> [[510.12]] Vir celeberrime, Fautor et Amice Honoratissime </p>\n<p> [[510.13]] Gratias <Fn><i>Am Kopf von L^#'2</i> : Ex responsione ad Dn. Cyprianum, directorem Gymnasii Coburgensis 22. Octobr. 1706</Fn> ago, quod literas remisisti, quae apud vos curari non poterant. </p>\n<p> [[510.14]] Praeclare etiam facis quod studia quibus Helmestadium ornabas prosequeris qua in re\n[[510.15]] etiam Franconicae nobilitatis commodo a Te consuli non dubito. </p>\n<p> [[510.16]] Vastissimus campus Historia est, sive Ecclesiastica sive civilis, multaque sunt loca adhuc\n[[510.17]] culturam expectantia ab eruditis viris: quo magis utile judico plurimos huic rei operam dare. </p>\n<p> [[510.18]] De jure naturae et gentium ita censeo pleraque scripta quae hodie teri in hoc genere solent,\n[[510.19]] parum satisfacere. Pufendorfiana certe et quae ex Pufendorfianis sunt procusa et in principiis\n[[510.20]] laborant, et in principiorum usu vacillant. Sed cum plerique superficiaria quadam cognitione\n[[510.21]] sint contenti quae attentionem meditationemque non postulat, curentque magis ut videantur\n[[510.22]] esse quam ut sint docti: Hinc tales libelli vulgo plausum invenere magno solidae doctrinae\n[[510.23]] detrimento. </p>\n<p> [[510.24]] Quod superest vale et me ama. Dabam Hanoverae 22 octobr. 1706 </p>\n<p> [[510.25]] Deditissimus Godofridus Guilielmus Leibnitius </p>\n<p> [[511.1]] P. S. Si qua se offerat inserviendi occasio, non sum neglecturus. </p>\n<p> [[511.2]] A Monsieur Monsieur Cyprianus directeur du Gymnase illustre à Coburg </p>\n",
+  "number": "159.",
+  "title": "LEIBNIZ AN ERNST SALOMON CYPRIAN",
+  "date": "Hannover, 22. Oktober 1706. [156.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:159. LEIBNIZ AN ERNST SALOMON CYPRIAN Hannover, 22. Oktober 1706. [156.] Vir celeberrime, Fautor et Amice Honoratissime Gratias Am Kopf von L^#'2 : Ex responsione ad Dn. Cyprianum, directorem Gymnasii Coburgensis 22. Octobr. 1706 ago, quod literas remisisti, quae apud vos curari non poterant. Praecl...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

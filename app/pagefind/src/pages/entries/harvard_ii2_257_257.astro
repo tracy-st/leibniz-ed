@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_257",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 257,
+  "text": "<p> [[797.10]] <b>260. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[797.11]] Dijon, 24. März 1694. [238.276.]</b></p>\n<p> [[797.19]] Dijon le 24. mars <b>1694</b> </p>\n<p> [[797.20]] Je vous prie monsieur que j'use du même compliment auprés de vous dont j'use auprés de\n[[797.21]] mons^#'r de Spanheim et de vouloir l'accepter, et de croire que vos lettres me sont egalement\n[[797.22]] agreables et d'un grand secours pour soulager les maux dont je me sents souvent attaqué; je\n[[797.23]] n'ay rien à adjouster à ce que je dis à mons^#'r de Spanheim si non l'histoire du livre de mons^#'r\n[[798.1]] Thiers touchant les guerres du monachisme sur les etudes; vous ne scaurés la mieux apprendre\n[[798.2]] que de mons^#'r l'abbé de la Trappe dont je vous envoye la copie de deux lettres qu'il m'a escript\n[[798.3]] depuis peu et dont je n'ay point parlé dans ma lettre à mons^#'r de Spanheim comme croyant qu'il\n[[798.4]] ne prend pas trop de part à cette guerre; cependant faictes luy en part si vous le jugés à propos.\n[[798.5]] L'aventure de M^#'r Thiers doit surprendre tous les gens de bien. On permet d'imprimer des\n[[798.6]] libelles sanglantes contre la reputation d'un prelat distingué par une vertu eclatante, et il n'est\n[[798.7]] pas permis de les refuter. Cela ne faict aucun tort à ce s^#'r Abbé; mais il est fascheux qu'un\n[[798.8]] homme de bien soit abandonné à la calomnie et qu'on l'outrage impunement. Il fault estre aussi\n[[798.9]] detaché du monde qu'il l'est pour n'estre pas sensiblement touché d'un procedé si extraordinaire.\n[[798.10]] On n'a pas de peine à deviner quels sont ces faulx amis dont il se plainct dans sa lettre; le\n[[798.11]] pauvre dom Michel Germain est mort qui a tant crié contre ce s^#'r abbé; dom Mabillon a esté\n[[798.12]] malade à mourir, et le petit dom Placide qui estoit un si bon homme Bibliothecaire de S^#'t\n[[798.13]] Germain des preys est mort pareillement. On a mis en sa place dom Denis de S^#'t^#'e Marthe. Le p.\n[[798.14]] Tarillon Jesuite a faict un petit poëme <i>de arte confabulandi</i> qui est fort agreable. On a\n[[798.15]] r'imprimé les <i>oeuvres</i> de m^#'r Despreaux avec une augmentation d'une satyre <i>contre les femmes</i>\n[[798.16]] et de notes sur Longin. Je croy que vous aurés vû le nouveau livre de m^#'r Abbadie de <i>l'art de se\n[[798.17]] connoistre</i> soy même qu'on a r'imprimé à Paris avec quelques petites retranchemens ou\n[[798.18]] adoucissemens. Mons^#'r Lantin et mons^#'r l'abbé Boisot vous saluent. Ce dernier me mande que le\n[[798.19]] <i>traité de l'eucharistie</i> de mons^#'r Pelisson est achevé d'imprimer, et que le Pape a trouvé bon\n[[798.20]] qu'on le luy dedie. Je suis mons^#'r avec toute l'estime, la consideration et la sincerité possible v^#'r^#'e\n[[798.21]] treshumble et tresobeis. serv. </p>\n<p> [[798.22]] Nicaise </p>\n<p> [[798.23]] Excusés la mauvaise ortografi de mon valet. </p>\n",
+  "number": "260.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Dijon, 24. März 1694. [238.276.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:260. CLAUDE NICAISE AN LEIBNIZ Dijon, 24. März 1694. [238.276.] Dijon le 24. mars 1694 Je vous prie monsieur que j'use du même compliment auprés de vous dont j'use auprés de mons^#'r de Spanheim et de vouloir l'accepter, et de croire que vos lettres me sont egalement agreables et d'un grand secours ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

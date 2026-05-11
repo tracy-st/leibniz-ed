@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_177",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 177,
+  "text": "<p> [[455.6]] <b>177. LEIBNIZ AN CLAUDE NICAISE</p>\n<p> [[455.7]] Hannover, 24. Juni (4. Juli) 1698. [172.180.]</b></p>\n\n<p> [[456.1]] Hanover ce 24 juin 1698 </p>\n<p> [[456.2]] Monsieur </p>\n<p> [[456.3]] Vous <Fn><i>Am Kopf der Seite</i>: Mons. l'Abbé Nicaise</Fn> aurés receu ma derniere à la quelle je me rapporte et vous diray cependant que j'ay\n[[456.4]] publié ce printemps la Chronique d'<i>Albericus Monachus Trium Fontium</i>, citée si souvent par\n[[456.5]] Messieurs Du Chêne, Le Mire, Blondel, Chiflet, et qui contient tant de belles notices Genealogiques.\n[[456.6]] Comme j'en ay eu un vieux exemplaire Manuscrit, en parchemin, assez bon, et un\n[[456.7]] autre moderne de la Bibliotheque de Wolfenbutel quoyque imparfait; j'en ay pû donner une\n[[456.8]] edition passable; et j'espere que les curieux m'en sçauront quelque gré, parce qu'autrement cet\n[[456.9]] ouvrage seroit peutestre encor demeuré enseveli assez long temps. Il y en avoit un exemplaire\n[[456.10]] dans la Bibliotheque des jesuites du College de Clermont; mais il estoit aussi imparfait que\n[[456.11]] celuy de Wolfenbutel, à ce que le R.P. Hardouin me fit dire. </p>\n<p> [[456.12]] Ce qui m'engage, Monsieur, à vous écrire presentement, est la lettre de Monsieur Ludolphi\n[[456.13]] par laquelle il repond à celle du R.P. Bonjour, que je vous envoye icy jointe vous suppliant\n[[456.14]] de [la luy] faire tenir. </p>\n<p> [[456.15]] On feroit fort bien de faire envoyer à Mons. Ludolphi l'exemplaire Aethiopique qu'il\n[[456.16]] demande, car il n'y a personne qui en puisse faire un meilleur usage que luy; et j'ose joindre\n[[456.17]] mes prieres aux siennes; ayant eu autrefois l'honneur de faire la reverence à l'Eminentissime\n[[456.18]] Cardinal Casanata; et l'ayant trouvé extremement porté à favoriser les connoissances utiles. </p>\n<p> [[456.19]] Nostre sçavant ami, Monsieur Morel a fait une cheute en revenant de la foire de Leipzig,\n[[456.20]] qui l'empeche de se servir de sa main, pour écrire. On espere pourtant à ce qu'il m'a fait écrire,\n[[456.21]] que ce sera sans suite. Je suis avec zele </p>\n<p> [[456.22]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n",
+  "number": "177.",
+  "title": "LEIBNIZ AN CLAUDE NICAISE",
+  "date": "Hannover, 24. Juni (4. Juli) 1698. [172.180.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:177. LEIBNIZ AN CLAUDE NICAISE Hannover, 24. Juni (4. Juli) 1698. [172.180.] Hanover ce 24 juin 1698 Monsieur Vous Am Kopf der Seite: Mons. l'Abbé Nicaise aurés receu ma derniere à la quelle je me rapporte et vous diray cependant que j'ay publié ce printemps la Chronique d'Albericus Monachus Trium F...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

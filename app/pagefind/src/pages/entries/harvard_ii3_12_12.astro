@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_12",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 12,
+  "text": "<p> [[30.1]] <b>12. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[30.2]] [Hannover,] 6./16. April 1695. [16.]</b></p>\n\n<p> [[30.16]] Monsieur </p>\n<p> [[30.17]] J'ay <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Monsieur l'Abbé Foucher 6/16 Avril 1695</Fn> dû juger par la derniere, que j'ay receue de vous il y a long temps, que vous vouliés\n[[30.18]] suspendre nostre commerce à cause de la guerre. Et c'est pour cela, que je n'ay point voulu\n[[30.19]] vous importuner. Cependant je ne crois pas que vous ayiés voulu le quitter entierement, car\n[[30.20]] plusieurs autres m'écrivent non obstant cette guerre, où la philosophie ne prend aucun interest.\n[[30.21]] Et c'est ce qui fait que je vous écris cellecy pour m'informer de vostre santé. Et pour vous dire,\n[[30.22]] que la mienne depuis quelque temps n'est pas des mieux affermies. C'est ce qui me fait penser\n[[30.23]] à publier quelques pensées et entre autres mon <i>Systeme sur la communication des substances et\n[[30.24]] l'union de l'</i>[<i>ame</i>] <i>avec le corps</i>, dont je vous ay mandé quelque chose autres fois. Je crois que\n[[30.25]] c'est le seul qui puisse fournir une explication intelligible, et sans recourir à la toute puissance\n[[31.1]] de Dieu. Je seray bien aise que des personnes judicieuses y fassent des reflexions, et j'en\n[[31.2]] attends sur tout de vous, qui pourront servir à donner des lumieres. On pourra adjouter\n[[31.3]] peutestre, ce que M. Arnaud m'avoit objecté, et ce que je luy ay repondu. Peutestre aussi que le\n[[31.4]] R.P. de Malebranche ne nous refusera pas aussi ses lumieres là dessus. </p>\n<p> [[31.5]] J'apprends la mort de M. Lantin. Cependant j'espere qu'il nous aura laissé des belles choses,\n[[31.6]] dont le public pourra encor jouir un jour. Et je vous supplie de m'en donner des nouvelles. </p>\n<p> [[31.7]] Un professeur celebre à Leide, nommé Mons. Volder ayant publié sur la fin de l'année\n[[31.8]] passée une réponse à la Critique de Mons. l'Evêque d'Avranches; un amy qui me la porta, me\n[[31.9]] pria de luy en dire mon sentiment; En la lisant je fis des remarques, car il me sembloit, qu'il ne\n[[31.10]] satisfaisoit pas assés. Un jour cela se pourra joindre à d'autres animadversions sur la philosophie\n[[31.11]] de M. des Cartes, que j'ay faites, sur tout si l'on songeoit encor à une nouvelle edition de\n[[31.12]] la <i>Censure</i> de M. d'Avranches. </p>\n<p> [[31.13]] Vous aurés la bonté, Monsieur, de m'honnorer bientost de vostre reponse, àfin que je sois\n[[31.14]] au moins asseuré de vostre bon estat, et du progrés de vos meditations. </p>\n<p> [[31.15]] La <Fn><i>Am Rande von Bl. 33 r^#'o gestrichen</i>: Monsieur l'Abbé Nicaise m'a écrit, et envoyé des Lettres pour M. de Spanhem et pour M. Morel, que j'ay fait tenir, et je luy écriray aussi tost, que j'auray au moins la reponse de M. Morel, car M. Spanheim n'écrit pas si promtement, ayant des occupations. <i>Leibniz verweist anschließend durch die Kustode</i> vertatur <i>auf Bl. 33 v^#'o und den dort ebenfalls gestrichenen Text</i>: Monsieur l'Abbé Nicaise me mande, que Mons. le president Boisot frere de feu M. l'Abbé va à Paris. Et comme M. l'Abbé m'avoit promis par M. Nicaise des pieces curieuses, tirées des <i>memoires</i> du feu Cardinal de Granvelle; j'espere que M. le president voudra me faire jouir de l'effect des bontés de son frere.</Fn> perte de M. Tevenot, de M. Pelisson, de M. Ménage, de M. l'Abbé Boisot, de\n[[32.1]] M. Lantin me paroist faire quelque tort, non seulement à la France, mais encor à nostre siecle,\n[[32.2]] car je ne voy pas qu'assez de jeunes gens se mettent sur les rangs, pour remplir le vuide; et je ne\n[[32.3]] sçay pas ce qu'on se deuvra figurer du siecle, dont nous ne sommes gueres plus éloignes. Si\n[[32.4]] vous me pouvés faire connoistre des personnes, dont on puisse esperer, qu'ils en seront\n[[32.5]] l'ornement, je vous en auray de l'obligation, et je suis avec zele </p>\n<p> [[32.6]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz. </p>\n",
+  "number": "12.",
+  "title": "LEIBNIZ AN SIMON FOUCHER",
+  "date": "[Hannover,] 6./16. April 1695. [16.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:12. LEIBNIZ AN SIMON FOUCHER [Hannover,] 6./16. April 1695. [16.] Monsieur J'ay Am Kopf der Seite von Leibniz' Hand: A Monsieur l'Abbé Foucher 6/16 Avril 1695 dû juger par la derniere, que j'ay receue de vous il y a long temps, que vous vouliés suspendre nostre commerce à cause de la guerre. Et c'es...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

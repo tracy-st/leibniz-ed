@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_67",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 67,
+  "text": "<p> [[294.9]] <b>68. LEIBNIZ AN ─ (?)</p>\n<p> [[294.10]] [Rom, Sommer 1689.] [69.]</b></p>\n<p> [[295.1]] Le R.P. Baldigiani a compris la force de ma demonstration, et ne voit pas ce qu'on y\n[[295.2]] pourroit repliquer. Si vous le pouvés desabuser, Monsieur, cela servira à me desabuser aussi. </p>\n<p> [[295.3]] J'admire que vous pouvés digerer cette consequence sçavoir qu'un corps se peut faire\n[[295.4]] elever à une plus grande hauteur que celle dont il descend; sans qu'il survienne une autre force\n[[295.5]] ou action exterieure, qu'il n'ait pas fait naistre luy même, et il n'est pas moins estonnant de\n[[295.6]] voir, Monsieur, que vous ne faites pas scrupule d'admettre, que le centre commun de gravité\n[[295.7]] des deux corps pesans peut monter plus haut qu'il n'estoit au commencement, sans aucune\n[[295.8]] action qui ne naisse de leur pesanteur et descente. Quand on est reduit là il semble que le\n[[295.9]] contraire est demonstré: et le subterfuge du temps ne sert point, car, quelque temps qu'on donne\n[[295.10]] à une machine elle ne se remontera jamais d'elle même. Et je defierois qui que ce soit de\n[[295.11]] trouver un exemple, où le temps serve à faire naistre enfin un effect plus grand que celuy qui\n[[295.12]] estoit au commencement sans qu'on employe une action survenue de dehors. </p>\n",
+  "number": "68.",
+  "title": "LEIBNIZ AN ─ (?)",
+  "date": "[Rom, Sommer 1689.] [69.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:68. LEIBNIZ AN ─ (?) [Rom, Sommer 1689.] [69.] Le R.P. Baldigiani a compris la force de ma demonstration, et ne voit pas ce qu'on y pourroit repliquer. Si vous le pouvés desabuser, Monsieur, cela servira à me desabuser aussi. J'admire que vous pouvés digerer cette consequence sçavoir qu'un corps se ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

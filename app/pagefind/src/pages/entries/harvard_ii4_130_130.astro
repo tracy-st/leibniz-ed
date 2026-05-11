@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_130",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 130,
+  "text": "<p> [[433.1]] <b>130. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[433.2]] Padua, 8. April 1706. [107.136.] </b></p>\n<p> [[433.15]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[433.16]] Credo che V. S. Ill^#'m^#'a averà già ricevuta una mia in risposta ad una sua in cui mi\n[[433.17]] comandava che facessi diligenza per raccorre almeno una libra di semi di Celso o sia moro\n[[433.18]] bianco e mandarlele a suo tempo, sopra di che gia hò fatte tutte le preventioni, e spero\n[[433.19]] pienamente servirla, subito che si sia maturato il frutto di questa Pianta, che bisognerà prima\n[[433.20]] siccarlo al Sole per poi raccorne il seme. Intorno a questo particolare V. S. Ill^#'m^#'a ne lasci tutta la\n[[433.21]] cura a me, che sarà obbedita e le trasmetterò tutto per mezzo del Sig^#'r^#'e Zanovelli. In quanto\n[[433.22]] all'interesse della Catedra per il nostro Sig^#'r^#'e Herman si persuada V. S. Ill^#'m^#'a che hò fatto\n[[433.23]] l'impossibile per colpire al segno e terminarlo. M'è convenuto operare fra molte difficoltà ed\n[[433.24]] acerbe oppositioni di Concorrenti alla Catedra che si valevano del pretesto della Religione per\n[[433.25]] rompere le mie misure, ma gratie a Dio colla patienza e destrezza hò superato ogn'impedimento\n[[433.26]] ed hò operato con tanto coraggio che hò finalmente indotto l'Ecc^#'m^#'o Magistrato de SS. Riformatori\n[[433.27]] a nominarlo ed elegerlo gia solennemente e con i voti segreti secondo il costume, hò\n[[434.1]] mandato l'invito decoroso colla lettera dell'Ill^#'m^#'o Segretario Gadaldini al Sig^#'r^#'e Herman, di cui\n[[434.2]] oggi mi capito il nuovo suo consenso con una lettera diretta all'Ecc^#'m^#'o Magistrato, che era\n[[434.3]] necessaria per potersi subito mettere la parte in Senato per la conferma, e per estrarne la Ducale\n[[434.4]] da trasmetterla poi subito al Sig^#'r^#'e Herman. Per l'annuo suo stipendio hò fatto quanto hò potuto,\n[[434.5]] e per facilitare le cose nelle funeste ed infelici circonstanze in cui per questi eserciti esteri si\n[[434.6]] trova questa Seren^#'m^#'a Republica, mi sono contentato coll'arbitrio ottenutone prima dal Sig^#'r^#'e\n[[434.7]] Herman di ducati annui 600 di prima condotta, colla promessa di vantaggiosi accrescimenti\n[[434.8]] nelle ricondotte a suoi tempi determinati. Oggi a Dio piacendo presenterò la lettera del Sig^#'r^#'e\n[[434.9]] Herman agli Eccellent^#'m^#'i Riformatori, e li sollecitarò affinché mettano il piu presto che si potrà\n[[434.10]] la loro nomina in Senato, di che non se ne dubita punto[,] qui l'ordine richiede così, e mai quasi\n[[434.11]] accade che l'Ecc^#'m^#'o Senato non approvi le deliberationi degli Ecc^#'m^#'i Riformatori, e massimamente\n[[434.12]] nel nostro caso, che si tratta di condurre un così dotto e celebre Matematico di cui qui\n[[434.13]] n'abbiamo sommo bisogno. Il Sig^#'r^#'e Herman informerà forse V. S. Ill^#'m^#'a di quanto io hò fatto per\n[[434.14]] ridurre alla sua perfettione questo affare difficile a maneggiarsi in questi tempi infelici. V. S.\n[[434.15]] Ill^#'m^#'a è supplicata conservarmi il suo amore, e stimati^#'m^#'o patrocinio, e divotamente riverendola mi\n[[434.16]] protesto </p>\n<p> [[434.17]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[434.18]] Padova 8 Aprile 1706. </p>\n",
+  "number": "130.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 8. April 1706. [107.136.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:130. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 8. April 1706. [107.136.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Credo che V. S. Ill^#'m^#'a averà già ricevuta una mia in risposta ad una sua in cui mi comandava che facessi diligenza per raccorre almeno una libra di semi di Celso o sia ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

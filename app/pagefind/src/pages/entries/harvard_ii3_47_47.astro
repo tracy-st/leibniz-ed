@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_47",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 47,
+  "text": "<p> [[135.6]] <b>47. GERHARD MEIER (HAMBURG) AN LEIBNIZ</p>\n<p> [[135.7]] Hamburg, 14. (24.) Februar 1696. [41.]</b></p>\n\n<p> [[135.12]] Illustris Excellentissimeque Vir, Patrone plurimum colende. </p>\n<p> [[135.13]] Qui <Fn><i>Am Rand oben links wohl von Leibniz' Hand</i>: Mejeri</Fn> proximas reddidit commendatitias, eum consilio juvi, quantum potui. Honesta saltim\n[[135.14]] ac liberali videbatur facie. <i>Specimen historiae</i> anecdotae desiderium apud me concitavit maximum,\n[[135.15]] quippe qui sic me totum dedi Theoreticis, ut historica tamen habere in deliciis non\n[[135.16]] desinam. Epistolam quoque Historicam, ceu indicium benevolentiae luculentissimum, fui exosculatus.\n[[135.17]] <i>Consequentiae</i> <i>a rectis ad obliqua</i> demonstrandi rationem abs Tua Excellentia excogitatam\n[[135.18]] memini me oculis quondam usurpasse, verum tunc temporis nescio quibus negotiis\n[[135.19]] districtus eam in meos referre codicillos neglexi, quae nunc una cum ceteris Vagetianis Vulcano\n[[135.20]] cesserit. Weigelius Mathematum Professor Jenensis haud adeo pridem nos invisit, atque suis de\n[[136.1]] Schola Virtutis consiliis Nob. Dn. Placcium in suam pertraxit sententiam, quippe qui perpetuum\n[[136.2]] inter Weigelii <i>tugendschul</i> suamque Semeioticam parallelismum, adeo ut singulae paragraphi\n[[136.3]] hujus ex illa possint illustrari, depraehendisse sibi videtur. Nunc Havniae degit brevi ad\n[[136.4]] nos reversurus Weigelius. Eodem Nob. Placcio auctore ac instigatore novum in me suscepi onus\n[[136.5]] conscribendae Hamburgensis Gymnasii Historiae. Obrutus collegiis ante Paschatos festum ne\n[[136.6]] minimam quidem huic instituto dicare possum cogitatiunculam, dein manum admoturus operi,\n[[136.7]] modo licuerit subsidia conquirere suffectura. Bibliotheca nostra nunc demum justis exornabitur\n[[136.8]] indicibus, quos iri impressum non doleo, quandoquidem thesaurus alioquin absconditus foret,\n[[136.9]] etiamsi selectioribus libris non esse instructam nobilissimi emporii Bibliothecam exteri sint\n[[136.10]] demiraturi. D. Mayerus bina luci exponet scripta. Alterum de Pietistis Veteris Ecclesiae:\n[[136.11]] Alterum de [Bellarmino] malae fidei postulato a fidei sociis. Deus Te servet, Vir illustris, in Rei\n[[136.12]] Literariae emolumentum. Quae votorum summa est </p>\n<p> [[136.13]] Tuae illustri Excellentiae deditissimi Gerh. Mejeri.\n [[136.14]] L. P.P. </p>\n<p> [[136.15]] Hamburgi A. XCVI. XIV. Febr. </p>\n<p> [[136.16]] Illustri Summoque Viro Dn. Godofrido Guilielmo Leibnitio Potentissimi Electoris Consiliario\n[[136.17]] etc. Patrono meo plurimum colendo. <b>Hanoveram</b>. Francò. </p>\n",
+  "number": "47.",
+  "title": "GERHARD MEIER (HAMBURG) AN LEIBNIZ",
+  "date": "Hamburg, 14. (24.) Februar 1696. [41.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:47. GERHARD MEIER (HAMBURG) AN LEIBNIZ Hamburg, 14. (24.) Februar 1696. [41.] Illustris Excellentissimeque Vir, Patrone plurimum colende. Qui Am Rand oben links wohl von Leibniz' Hand: Mejeri proximas reddidit commendatitias, eum consilio juvi, quantum potui. Honesta saltim ac liberali videbatur fac...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

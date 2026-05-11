@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_228",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 228,
+  "text": "<p> [[705.22]] <b>205a. LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER</p>\n<p> [[705.23]] [April 1679.] [204a.213.]</b></p>\n<p> [[706.9]] Monseigneur </p>\n<p> [[706.10]] Si V.A.S. a quelque moment de loisir je la supplie de souffrir que je luy monstre quelque\n[[706.11]] chose des essais, que je touchay hier. Il sera aisé de juger que, si la seule fiction ou supposition\n[[706.12]] de ces Nombres Characteristiques contient toutes les loix du raisonnement humain, et la forme\n[[706.13]] des consequences, il faudra que les nombres mêmes, quand ils seront prests, en contiendront la\n[[706.14]] matiere et nous donneront moyen et d'inventer aisement, et de juger seurement autant qu'il se\n[[706.15]] peut sur les faits donnés. Et c'est tout ce que l'homme peut faire par la force de l'esprit, car la\n[[706.16]] découverte des faits ou experiences par le hazard est une espece de fatalité qui ne depend pas de\n[[706.17]] nostre industrie. Cependant il y aura tousjours encor beaucoup de difference entre les esprits, et\n[[706.18]] ceux par exemple qui peuvent faire des grands calculs par la seule force de l'imagination sans\n[[706.19]] plume, auront des grands avantages sur les autres pour la promtitude. </p>\n<p> [[706.20]] La <i>polygraphie</i> du P. Kircher que V.A.S. a veu est si peu de chose, et si éloignée de mon\n[[706.21]] dessein, qu'il n'y a pas la moindre apparence que j'en puisse avoir profité. Aussi la pluspart des\n[[706.22]] inventions de ce pere ne sont que des petits jeux d'esprit plus tost jolis qu'utiles. </p>\n<p> [[706.23]] Si nous sçavions les caracteres des Chinois, je crois que nous trouverions un peu plus de\n[[706.24]] rapport, mais dans le fonds [ils] sont sans doute bien éloignés de cette analyse des pensées, qui\n[[707.1]] fait l'essence de mon dessein, et ils se contentent apparemment de quelques rapports qui sont\n[[707.2]] entre les choses, comme les hieroglyphes des Egyptiens. </p>\n<p> [[707.3]] <i>Ars magna</i> de Raymond Lulle a encor quelque relation à ce que je propose. Car il se sert\n[[707.4]] de quelques termes generaux, comme <i>Magnitudo</i>, <i>Potentia</i>, <i>Duratio</i>, <i>Virtus</i>, qui se peuvent\n[[707.5]] appliquer à toutes sortes des choses, et cela luy donne moyen par leur combinaison de discourir\n[[707.6]] amplement sur quelque chose que ce soit. Mais c'est l'ombre seulement de la veritable\n[[707.7]] Combinatoire, qui n'a pas laissé de trouver des admirateurs, quoyqu'elle ne fasse qu'effleurer\n[[707.8]] les choses, et est aussi éloignée de la veritable qu'un hableur est au dessous d'un homme en\n[[707.9]] même temps eloquent et solide. Cependant l'Art de Lulle subsiste et fait une espece de secte, et\n[[707.10]] s'enseigne mêmes encor publiquement dans l'isle de Majorque, patrie de cet auteur. [ ... ] </p>\n",
+  "number": "205a.",
+  "title": "LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER",
+  "date": "[April 1679.] [204a.213.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:205a. LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER [April 1679.] [204a.213.] Monseigneur Si V.A.S. a quelque moment de loisir je la supplie de souffrir que je luy monstre quelque chose des essais, que je touchay hier. Il sera aisé de juger que, si la seule fiction ou supposition de ces Nombres Ch...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

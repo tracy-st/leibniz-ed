@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_147",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 147,
+  "text": "<p> [[477.1]] <b>147. LEIBNIZ AN JACQUES BERNARD</p>\n<p> [[477.2]] [Hannover, Ende September bis Mitte Oktober 1706]. [133.] </b></p>\n<p> [[477.23]] Monsieur </p>\n<p> [[477.24]] Vos <i>nouvelles de la Republique des lettres</i> estant fort instructives, j'ay coustume de les lire\n[[477.25]] pour estre mieux informé de ce qui se passe dans le pays literaire. Et comme j'y ay remarqué un\n[[477.26]] endroit qui me touche, où vous donnés l'extrait d'un recit qui regarde l'Histoire de mon\n[[477.27]] invention de l'Analyse infinitesimale, mais qui n'est pas trop bien fondé; j'ay crû necessaire,\n[[478.1]] Monsieur, de vous envoyer le papier cyjoint qui en contient une narration exacte et circomstantiée,\n[[478.2]] approuvée même par Monsieur Bernoulli professeur maintenant à Bale et auparavant à\n[[478.3]] Groningue, qui avec feu Monsieur son frere y est le plus interessé à qui je l'avois communiqué,\n[[478.4]] et c'est la cause que vous le recevés un peu tard. Quoyque la narration que je refute, paroisse\n[[478.5]] fait pour favoriser ces Messieurs en apparence à mes depens; ils ont esté tousjours trop\n[[478.6]] raisonnables pour avoir des telles pretensions et leur avantages veritables et solides sont assez\n[[478.7]] grands sans qu'ils ayent besoin d'en chercher de faux. Aussi se seroient ils crû deshonnorés par\n[[478.8]] les procedés artificieux et injustes qu'on leur attribue. Ainsi je ne doute point que vous ne nous\n[[478.9]] fassiés la justice de publier nostre Apologie. Peutestre qu'un savant Medecin ecossois de mes\n[[478.10]] amis vous aura monstré en passant une longue lettre que je luy ay donnée pour Monsieur Coste\n[[478.11]] traducteur des <i>Essais</i> de M. Lock, et du livre de Mylady Masham contre M. Norris touchant\n[[478.12]] l'Amour divin. Ma Lettre regarde ce dernier livre que Mons. Coste m'avoit envoyé. Au reste je\n[[478.13]] suis </p>\n<p> [[478.14]] Monsieur vostre etc. </p>\n<p> [[478.15]] P. S. Si vous aviés quelque chose à m'ordonner Monsieur, vous pourriés l'envoyer à\n[[478.16]] Monsieur Mezquita Agent de Madame l'Electrice de Bronsvic à Amsterdam. </p>\n",
+  "number": "147.",
+  "title": "LEIBNIZ AN JACQUES BERNARD",
+  "date": "[Hannover, Ende September bis Mitte Oktober 1706]. [133.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:147. LEIBNIZ AN JACQUES BERNARD [Hannover, Ende September bis Mitte Oktober 1706]. [133.] Monsieur Vos nouvelles de la Republique des lettres estant fort instructives, j'ay coustume de les lire pour estre mieux informé de ce qui se passe dans le pays literaire. Et comme j'y ay remarqué un endroit qu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_261",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 261,
+  "text": "<p> [[802.12]] <b>264. CHRISTIAAN HUYGENS AN LEIBNIZ</p>\n<p> [[802.13]] Den Haag, 29. Mai 1694. [240.268.]</b></p>\n<p> [[803.16]] [ ... ] Je ne toucheray pas encore cette fois à nostre question du vuide et des\n[[803.17]] atomes n'aiant esté desia que trop long contre mon intention. Je vous diray seulement que dans\n[[803.18]] vos Notes sur Des Cartes, j'ay remarqué que vous croiez <i>absonum esse nullum dari motum\n[[803.19]] realem, sed tantum relativum</i>. Ce que pourtant je tiens pour tres constant, sans m'arrester aux\n[[803.20]] raisonnement et expériences de M. Newton dans ses <i>Principes de Philosophie</i>, que je scay estre\n[[803.21]] dans l'erreur, <Fn><i>Dazu in K^#'1 die Notiz</i>: mouvement tantum relativus; en quoy il s'abusoit.</Fn> et j'ay envie de voir s'il ne se retractera point dans la nouvelle Edition de ce livre\n[[803.22]] que doit procurer David Gregorius. Des Cartes n'a pas assez entendu cette matiere. [ ... ] </p>\n",
+  "number": "264.",
+  "title": "CHRISTIAAN HUYGENS AN LEIBNIZ",
+  "date": "Den Haag, 29. Mai 1694. [240.268.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:264. CHRISTIAAN HUYGENS AN LEIBNIZ Den Haag, 29. Mai 1694. [240.268.] [ ... ] Je ne toucheray pas encore cette fois à nostre question du vuide et des atomes n'aiant esté desia que trop long contre mon intention. Je vous diray seulement que dans vos Notes sur Des Cartes, j'ay remarqué que vous croiez...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

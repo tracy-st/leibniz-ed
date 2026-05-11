@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_235",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 235,
+  "text": "<p> [[636.7]] <b>235. LEIBNIZ AN ERNST SALOMON CYPRIAN</p>\n<p> [[636.8]] Wolfenbüttel, 4. Mai 1700. [234.]</b></p>\n\n<p> [[636.17]] Vir celeberrime, Fautor Honoratissime </p>\n<p> [[636.18]] Binis Tuis responsum debeo. Interea et adversae valetudinis Tuae nuntium accepi, hanc\n[[636.19]] jam superatam spero et voveo. Illis ut satisfaciam utcunque nunc quidem, credo jam non posse\n[[636.20]] nobis deesse magnetem quo Helmestadii retineare: et video in aulis omnibus Tibi faveri, neque\n[[636.21]] de eruditione Tua caeterisque ad docendum dotibus dubitari posse a quoquam. Nobilissimo\n[[636.22]] domino Struvio respondebo quam primum; et quaesitam per Te notitiam viri egregii mihi\n[[636.23]] conservabo. Interea cura quantum potes, ut valeas. Cui rei necessaria est in studiis moderatis.\n[[636.24]] Dabam Guelferbyti 4 Maji 1700. </p>\n<p> [[636.25]] Deditissimus G. G. Leibnitius\n[[636.26]] <yi><i>A Monsieur Monsieur Cyprianus professeur celebre Helmstadt franco</i> </p>\n",
+  "number": "235.",
+  "title": "LEIBNIZ AN ERNST SALOMON CYPRIAN",
+  "date": "Wolfenbüttel, 4. Mai 1700. [234.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:235. LEIBNIZ AN ERNST SALOMON CYPRIAN Wolfenbüttel, 4. Mai 1700. [234.] Vir celeberrime, Fautor Honoratissime Binis Tuis responsum debeo. Interea et adversae valetudinis Tuae nuntium accepi, hanc jam superatam spero et voveo. Illis ut satisfaciam utcunque nunc quidem, credo jam non posse nobis deess...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

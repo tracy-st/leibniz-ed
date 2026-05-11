@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_368",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 368,
+  "text": "[[1614.14]] <b>311.  Du rapport général de toutes choses [April bis Oktober 1686 (?)]</b>\n [[1614.15]] <tab/>[April bis Oktober 1686 (?)] </p>\n<p> [[1615.1]] Le rapport general et exact de toutes choses entre elles, prouve que toutes les parties\n[[1615.2]] de la matiere sont pleines d'organisme. Car chaque partie de la matiere devant exprimer\n[[1615.3]] les autres et parmy les autres y ayant beaucoup d'organiques, il est manifeste qu'il faut\n[[1615.4]] qu'il y ait de l'organique dans ce qui represente l'organique. </p>\n<p> [[1615.5]] J'adjoute même qu'il n'y a point de caos dans la nature, rien qui ne soit travaillé\n[[1615.6]] artistement jusqu'aux parties quelques petites qu'elles puissent estre. Il est vray que nous\n[[1615.7]] remarquons beaucoup de morceaux grossiers et sans art en apparence, mais ce qui est\n[[1615.8]] travaillé est trop petit pour paroistre, et cependant il est par tout. La sagesse de Dieu ne\n[[1615.9]] permet point qu'il y ait jamais un caos veritable, ce seroit un defaut de son art. </p>\n<p> [[1615.10]] Il s'en suit qu'on ne sauroit point assigner des parties qui n'ayent rien d'organiques,\n[[1615.11]] parce qu'une telle partie exprimant les autres, qui sont organiques, auroit de l'organique\n[[1615.12]] aussi <i>contra Hypothesin.</i> </p>\n",
+  "number": "311.",
+  "title": "Du rapport général de toutes choses",
+  "date": "[April bis Oktober 1686 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:311. Du rapport général de toutes choses [April bis Oktober 1686 (?)] [April bis Oktober 1686 (?)] Le rapport general et exact de toutes choses entre elles, prouve que toutes les parties de la matiere sont pleines d'organisme. Car chaque partie de la matiere devant exprimer les autres et parmy les a...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

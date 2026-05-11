@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_288",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 288,
+  "text": "[[1165.1]] <b>237₃.  Methodus discendi nov-antiqua METHODUS DISCENDI NOV-ANTIQUA </p>\n<p> [[1165.5]] <i>Methodum discendi Nov-antiquam qua more veterum ad minimum dimidio temporis,\n[[1165.6]] duplum ejus quod vulgo fit, adeoque quadruplum, non in theoria tantum sed et in ipsa\n[[1165.7]] praxi linguarum et scientiarum adeoque ipsarum virtutum jucundo naturae ductu, sine\n[[1165.8]] rigore scholastico praestari potest, collegii Sopho-Mathematici speciminibus reapse\n[[1165.9]] demonstrabit: Erhardus Weigelius.</i> Jenae Bauhofer 1673, est unius plagulae programma. </p>\n<p> [[1165.10]] Veteres plerique operas ad vitae sustentationem necessarias simul exercuere, et\n[[1165.11]] tamen longius provecti quam scholastici otio abundantes tot subsidiis artis inprimis\n[[1165.12]] Typographicae castrati. Scholae grammaticam, Rhetoricam, <Fn>Grotius putat Rhetoricam ultimam docendam. </Fn> Poeticam, oratoriam et logicam,\n[[1165.13]] ultima veterum inventa, quae subtili artificio verba de rebus aliunde praecognitis\n[[1165.14]] digerunt mentibus rudibus a rerum copia vacuis inculcant. A physicae primordiis, mineralium\n[[1165.15]] plantarum animalium observatione, quae se utiliter et jucunde mentibus insinuant\n[[1165.16]] vix suo rigore pueros retrahunt. Mechanicae specimina adolescentes exercitiis alias adeo\n[[1165.17]] gaudentes, vix tangere patiuntur. Geographiam et Historias, quas infantes sub praetextu\n[[1165.18]] fabularum utiliter auscultarent, sero nec nisi in latinitatis argumentum carptim proponunt.\n[[1165.19]] Arithmeticae et Geometriae rudimenta, veterum alas atque ansas tanquam molestas et\n[[1165.20]] indecoras aversantur. Linguarum singulas quas pueri sua sponte ad summum biennio cum\n[[1165.21]] rebus ipsis libere per conversationem haurirent, praesertim latinam et graecam vix per\n[[1165.22]] binas annorum decadas immensae syntaxeos infundibulo, sine rebus instillant. Interea\n[[1165.23]] spinosas conceptibilitates et verba sectantur. Sapientes hujus seculi contra consuetudinem\n[[1165.24]] et scholastica obstacula eluctati, duplo plus patientiae et ingenii habuisse quam veteres,\n[[1165.25]] censeri possunt. Moribus haec discendi ratio nocet. Praeceptorum animi perpetuo bilis\n[[1165.26]] aestu quotidie bis concitentur, ut hypochondria cum intestinis plerumque male se\n [[1165.27]] habeant. <Fn><i>Am Rande</i>: NB.</Fn> Discipulorum animi insensibili virulentia exemplorum iracundiae et morositatis\n[[1166.1]] in praeceptoribus observatorum partim naturali contra tot absurda reluctatione corrumpuntur;\n[[1166.2]] serviliter enim exigunt captum superantia, prohibent captu facilia. Ingenium\n[[1166.3]] farragine terminorum qui familiaribus in hac vita reddi non possunt, obstipando, vana\n[[1166.4]] pertinacia implent, ut ubi improbo labore isto quo praescriptum est modo contexere\n[[1166.5]] didicere ad superbiam et aliorum contemtum declinent. Unde tot ex scholis morosi potius\n[[1166.6]] et petulantes, quam morati et modesti. Ad certamina mutua propositis praemiis crebro\n[[1166.7]] provocantur pueri, terminorumque varie valentium certis acceptionibus [obstinate] defendendis\n[[1166.8]] astringuntur et sophisticis Elenchis quasi praecipuis excultae rationis speciminibus\n[[1166.9]] instruuntur. Unde non mirum tot ex scholis rixosa mundum confundentia prodire ingenia.\n[[1166.10]] Magistratus constitutis jam scholis per certos directores, Scholarchas id agit, ut a majoribus\n[[1166.11]] probatam Methodum docentes fideliter sequantur, rariusque nisi notabili abusu\n[[1166.12]] Scholas premente de mutatione consilium suscipit, multitudine negotiorum civilium alias\n[[1166.13]] nimium distractus. In scholis quae didicere vicissim suis propinant discipulis novitatem\n[[1166.14]] vel ex ratione status aversantes. </p>\n<p> [[1166.15]] Scio principes et Magnates minime praeoccupatos esse, et impense tales Methodos\n[[1166.16]] probare, quibus reipublicae magis quam otio Scholasticorum consulatur. Hortati me\n[[1166.17]] Wilhelmus et Ernestus fratres inclyti; Christianus Ernestus Marchio Brandeburgicus,\n[[1166.18]] cujus Antistitis Generalis a Lilien filius sexennis stupendum talis Methodi specimen\n[[1166.19]] edere potest, cui addi potest Ludolfi nostri filiolus ei coaetaneus. Nuper calcata addidit\n[[1166.20]] fortissimus Heros de Montecuccoli Marte simul et arte supra famam praepollens, ut et\n[[1166.21]] Eminentissimi Noribergae proceres. In hunc usum Collegium Numerorum et figurarum\n[[1166.22]] applicatorium instituimus. Jenae 4 Maji 1673. </p>\n",
+  "number": "237₃.",
+  "title": "Methodus discendi nov-antiqua",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:237₃. Methodus discendi nov-antiqua METHODUS DISCENDI NOV-ANTIQUA Methodum discendi Nov-antiquam qua more veterum ad minimum dimidio temporis, duplum ejus quod vulgo fit, adeoque quadruplum, non in theoria tantum sed et in ipsa praxi linguarum et scientiarum adeoque ipsarum virtutum jucundo naturae ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

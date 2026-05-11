@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_574",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 574,
+  "text": "[[2665.1]] <b>451.  Aus und zu Schriften von Valentin Weigel, Paracelsus, Sebastian Franck und Paul Lautensack [3.-5. November 1687]</b>\n [[2665.3]] <tab/>[3.-5. November 1687]\n [[2665.4]] <petit> </p>\n<p> [[2665.5]] Leibniz wartete in Frankenberg bei dem hessischen Bergwerksdirektor Johann Christian Orschall vier\n[[2665.6]] Tage vergeblich auf seinen alten Freund Johann Daniel Crafft. Diese Wartezeit vertrieb er sich u.a. mit der\n[[2665.7]] Lektüre von Valentin Weigels <i>Der goldene Griff</i>, wie er in einem Brief an Crafft am 6. November 1687\n[[2665.8]] berichtet (III, 4 N. 197, S. 359). Dabei dürften die vorliegenden Exzerpte angefertigt worden sein, die sich\n[[2665.9]] zudem durch gemeinsames Papier und Wasserzeichen als zusammengehörig erweisen. </petit> </p>\n",
+  "number": "451.",
+  "title": "Aus und zu Schriften von Valentin Weigel, Paracelsus, Sebastian Franck und Paul Lautensack",
+  "date": "[3.-5. November 1687]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:451. Aus und zu Schriften von Valentin Weigel, Paracelsus, Sebastian Franck und Paul Lautensack [3.-5. November 1687] [3.-5. November 1687] Leibniz wartete in Frankenberg bei dem hessischen Bergwerksdirektor Johann Christian Orschall vier Tage vergeblich auf seinen alten Freund Johann Daniel Crafft....">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

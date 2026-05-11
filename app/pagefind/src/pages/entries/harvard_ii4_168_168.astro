@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_168",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 168,
+  "text": "<p> [[525.1]] <b>168. JOHANN FRANZ BUDDEUS AN LEIBNIZ</p>\n<p> [[525.2]]  Jena, 23. Dezember 1706. [217.] </b></p>\n<p> [[525.17]] Illustri viro Gothofredo Guilielmo Leibnizio eruditorum principi\n [[525.18]] S. P. D. Joan. Franciscus Buddeus. </p>\n<p> [[525.19]] Tanta <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: Resp</Fn> jam pridem, Vir Illustris, Te prosecutus sum veneratione, ut occasione Tibi innotescendi,\n[[525.20]] nihil optatius mihi contingere posse, existimarem. Felicissimum itaque me mortalium\n[[525.21]] judicabam, cum ante aliquot annos Guelferbythi Te videndi, Tecumque colloquendi, mihi\n[[525.22]] daretur facultas. Mirifice tum confirmata et aucta fuit ea, quum animo de Tua et eruditione et\n[[525.23]] humanitate, conceperam, opinio, quae tamen jam tanta erat, ut eam augeri posse, non crederem. </p>\n<p> [[525.24]] Saepius inde in animum induxi, datis ad Te litteris meum testari in Te studium, declarare\n[[525.25]] affectum, significare voluntatem. Metus tamen is quidem forte intempestivus, abstitit, ne istam\n[[525.26]] hominis, ex unico congressu, ex beneficio a Te accepto Tibi nati, audaciam aegre ferres. Nunc\n[[525.27]] vero alterius inductus precibus, tanto hoc facio fidentius, quanto de summo Tuo studio juvandi\n[[525.28]] rem litterariam sum certior. Vivit in academia nostra et per multos jam annos vixit, ingenuus\n[[525.29]] juvenis <b>Johannes Georgius Liebknecht</b>, artium liberalium magister. Totum is se studio\n[[526.1]] mathematico tradidit, et naturae quodam instinctu impulsus, et ejus etiam captus utilitate ac\n[[526.2]] suavitate. </p>\n<p> [[526.3]] Cumque haud ita pridem intelligeret Wolffium Giessensi academiae destinatum, ad Hallensem\n[[526.4]] vocatum esse, munus docendi mathesin in Giessensi academia ambire, secum statuit.\n[[526.5]] Mox ab amicis certior redditur, Tui, Vir illustris, rem istam fore arbitrii, Tuum nutum, Tuamque\n[[526.6]] auctoritatem, maximum in constituendo Wolffii successore, allaturam momentum. Vota autem\n[[526.7]] sua cum ipse Tibi exponere non auderet, a me hoc fieri noluit, impetravitque tanto facilius, quo\n[[526.8]] mihi probitas ejus atque industria erat perspectior. De profectibus autem ejus in mathematicis,\n[[526.9]] et num possit rite tum gravi fungi munere, ipsemet Vir Summe ex speciminibus et ingenii\n[[526.10]] monumentis, quae ad Te misit, statues atque judicabis. Tuo judicio, exquisito et veri, omnes, qui\n[[526.11]] sapiunt, facile se submittunt. Adjeci his prolusionem quandam academicam indignam quidem\n[[526.12]] occulis Tuis, sed mei tamen itidem in Te animi meae observantiae testem. Vale Vir illustris, et\n[[526.13]] me inter eos, qui Te colunt et venerantur, haud ultimum esse crede. </p>\n<p> [[526.14]] Jenae die XXIII. Decembr. anno MDCCVI. </p>\n",
+  "number": "168.",
+  "title": "JOHANN FRANZ BUDDEUS AN LEIBNIZ",
+  "date": "Jena, 23. Dezember 1706. [217.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:168. JOHANN FRANZ BUDDEUS AN LEIBNIZ Jena, 23. Dezember 1706. [217.] Illustri viro Gothofredo Guilielmo Leibnizio eruditorum principi S. P. D. Joan. Franciscus Buddeus. Tanta Am Kopf der Seite von Leibniz' Hand: Resp jam pridem, Vir Illustris, Te prosecutus sum veneratione, ut occasione Tibi innotes...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

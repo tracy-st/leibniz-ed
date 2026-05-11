@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_123",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 123,
+  "text": "[[408.1]] <b>100.  Enumeratio particularum terminorumque primitivorum [Sommer 1680 bis Sommer 1684 (?)]</b>\n [[408.2]] <tab/>[Sommer 1680 bis Sommer 1684 (?)]\n [[408.19]] <tab/>Ab. <Fn><i>Oben rechts am Kopf der Seite</i>: dummodo: conjunctio an adverbium</Fn> Ad. Ante. Apud. Circa. <i>Causa. Gratia</i>. Citra. Contra. Coram. <i>Cum</i>. De. E. Erga.\n[[408.20]] <i>Ergo</i>. Extra. In. Inter. Intra. Juxta. Ob. Per. Post. Prae. Praeter. (Praeterea.) <i>Pridie</i>.\n[[408.21]] Pro. Prope. Propter. <i>Quoad</i>. Secundum. Sine. Sub. Super. Supra. Tenus. Trans. <i>Ubi\n[[408.22]] locorum. Ultra</i>. Versus.\n [[408.23]] <tab/><i>Abhinc. Adeo</i>. Adhuc. Aeque. <i>Alias.</i> Alibi. Alio. Alioqui. Aliquando. <i>Aliquanto.</i> Aliter.\n[[408.24]] Age. Ad summum. Ad unum. An. <i>Ante</i>. Circum. Cur <i>Certe. Circiter</i>. Commodum.\n[[408.25]] Deinde. (^&.!! <Leibniz special character: distilletur>) <i>Deinceps. Imposterum. Demum</i>. Denique. Deorsum. <i>Donec. Dudum.\n[[408.26]] Dummodo. Eatenus. Ex quo</i>. Fere. Forte. <i>Hac. Hactenus</i>. Hic. <i>Hinc</i>. Jam. (^&.!! <Leibniz special character: distilletur>)\n[[408.27]] <i>Identidem</i>. Illic. <i>Inde. Inde usque</i>. Interim. Interdum. <i>Imposterum. Impraesentiarum</i>.\n[[408.28]] Invicem. Ita. Iterum. <i>In summa</i>. Item. <i>Longe</i>. Magis. <i>Magis magisque. Maxime</i>.\n[[408.29]] <angle bracket><i>Modi istius</i></angle bracket>. <i>Modo. Mox. Mutuo</i>. Ne. (^&.!! <Leibniz special character: distilletur>) Nimis. Nimis-parum. Non. Nunc. <i>Olim</i>.\n[[409.1]] Praeterea. Quam. Quando. Quasi. <i>Quatenus. Saepe. Saltem</i>. Satis. <i>Sic</i>. Simul. <i>Sin.\n [[409.2]] Solum. Statim</i>. Sursum. Tam. Tandem. Tenus. <i>Velut</i>. Ultra. Vix.\n [[409.3]] <tab/>Ac. <i>Aut. At. Alioqui. Atqui. Attamen. Autem. Caeterum</i>. Cum. Denique. <i>De reliquo. Ecce</i>.\n[[409.4]] Ergo. Et. Etiam. Etsi. <i>Exempli gratia. Hinc</i>. Jam. Ideo. Ita. (^&.!! <Leibniz special character: distilletur>) Nam. Ne. (^&.!! <Leibniz special character: distilletur>) Nunc.\n[[409.5]] (^&.!! <Leibniz special character: distilletur>) Quam. (^&.!! <Leibniz special character: distilletur>) Sed. <i>Sin</i>. Tam. Tamen. Vel. <i>Veluti</i>. Ut.\n [[409.6]] <tab/><i>Aequalis</i>. Aliquis. <i>Antecedens</i>. Ego. Alius. Alter. Alternus. Alteruter. Certus quidam.\n[[409.7]] <i>Ecquis</i>. Hic. Idem. Idem ille. Ille. Illud. Ipse. Is. Id. Id quod. Iste. <i>Loco</i>. Majus.\n[[409.8]] Minus. Multa. Nemo. Nemo non. Neuter. Nullus. Omnis. Par. <i>Pauci</i>. Plerique.\n[[409.9]] Plures. Posterior. <i>Praesens</i>. Prior. Proximus. Qualis. Qualiscunque. Quantus.\n[[409.10]] Quantuscunque. Quidam. Quisquam. Quisque. Quisquis. Quivis. Quot. Quotquot.\n[[409.11]] Quotus. Quotusquisque. <i>Se. Sibi</i>. Secundus. Similis. Solus. Superior. Talis. Tantus.\n[[409.12]] Tanti est. Tempore brevi etc. Totus. Totum. Tu. Unus. Unusquisque. Uter. Uterlibet.\n[[409.13]] Uterque.\n [[409.14]] <tab/>Individuum. Universale. Proprium. Commune. Sunt non rerum sed Terminorum. Terminus\n[[409.15]] Essentialis, terminus accidentalis, qui mutabile aliquid dicit salva re de qua\n[[409.16]] dicitur.\n [[409.17]] <tab/>Ens, Non Ens. Reale, apparens. Positivum, privativum. Absolutum, Limitatum. Abstractum,\n[[409.18]] Concretum. Res, Modus. Substantia, accidens. </p>\n<p> [[409.19]] Possumus abstracta omittere. </p>\n",
+  "number": "100.",
+  "title": "Enumeratio particularum terminorumque primitivorum",
+  "date": "[Sommer 1680 bis Sommer 1684 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:100. Enumeratio particularum terminorumque primitivorum [Sommer 1680 bis Sommer 1684 (?)] [Sommer 1680 bis Sommer 1684 (?)] Ab. Oben rechts am Kopf der Seite: dummodo: conjunctio an adverbium Ad. Ante. Apud. Circa. Causa. Gratia. Citra. Contra. Coram. Cum. De. E. Erga. Ergo. Extra. In. Inter. Intra....">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

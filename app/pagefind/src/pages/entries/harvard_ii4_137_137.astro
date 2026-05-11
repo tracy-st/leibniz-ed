@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_137",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 137,
+  "text": "<p> [[455.1]] <b>137. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[455.2]] Venedig, 13. August 1706. [136.139.] </b></p>\n<p> [[455.12]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[455.13]] Mi <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: semiresp.</Fn> figuro che V. S. Ill^#'m^#'a averà già ricevuta la mia, che venerdi caduto consegnai al Sig^#'r^#'e\n[[455.14]] Zanovelli. Ora le replico che io sono stato attentissimo per mettere insieme qualche buona\n[[455.15]] quantità di semi di Mori bianchi che servono di cibo ai vermi di seta. Il mio Servitore me n'hà\n[[455.16]] già mandato un cartoccio pieno fatto dalle sue mani con molta diligenza, ed un altro il Dott^#'m^#'o\n[[455.17]] nostro Ramazzini che l'hà fatto fare in Modona, ove i Mori sono molto eccellenti e di diverse\n[[455.18]] sorti, e mi promette farmene avere ben tosto una maggiore quantità che sarebbe gia capitata,\n[[455.19]] come anche quei semi che da Reggio m'aveva promesso di mandarmi il nostro erudit^#'m^#'o\n[[455.20]] Professore Valsinieri, se ora tutto quel Paese non si trovasse infestato da gli eserciti stranieri,\n[[455.21]] gia attaccato dal Principe Eugenio che s'è impadronito di molti luoghi, spero però che calmate\n[[455.22]] le cose, mi sarà subito trasmesso subito. Essi non possono capire come V. S. Ill^#'m^#'a ne voglia di\n[[455.23]] questi semi almeno una libra, che come essi dicono sarebbe quasi bastante a seminarne una\n[[455.24]] gran parte della Terra. Quel che io ora n'hò appresso di me mi pare gia bastante per il fine che\n[[455.25]] s'è proposto V. S. Ill^#'m^#'a, mentre che ogn'uno di questi piccolissimi semi cresce poi in grand^#'m^#'a\n[[455.26]] Pianta che bisogna collocarla in qualche mediocre distanza dall'altra. Se poi non mi capitassero\n[[455.27]] i semi che aspetto da Modona e Reggio, ora che hò la cognitione di questa cosa, le prometto per\n[[455.28]] l'anno venturo a Dio piacendo farnele avere anche due libre, gia ora nota al mio ingegnoso e\n[[456.1]] diligente Servitore la maniera di raccogliere e preparare questa sorte di semi che nasce nel\n[[456.2]] frutto. Prego percio V. S. Ill^#'m^#'a prescrivermi subito la maniera, come devo trasmetterle questi\n[[456.3]] semi, e sarebbe il piu sbrigato fare ordinare al Sig^#'r^#'e Zanovelli che li riceva e trasmetta costa a\n[[456.4]] V. S. Ill^#'m^#'a, mentre che io mi fermero ancora qui due mesi coll'oggetto principale di terminare\n[[456.5]] l'affare del Dott^#'m^#'o nostro Sig^#'r^#'e Herman con fare decretare la sua elettione in Senato, il che credo\n[[456.6]] accaderà subito che entrati i Todeschi nel Milanese, c'assicuraremo d'essere liberi da quartieri\n[[456.7]] d'inverno, il che sollevarebbe molto il Paese oppresso, ed il denaro dello Studio non sarebbe\n[[456.8]] piu adoperato ad uso publico, ora la cagione che resti tutto sospeso. Il frate che pretendeva la\n[[456.9]] catedra di Matematica non è il P. Grandi, ma un Monaco Olivetano. Qui tutti sospirano il Sig^#'r^#'e\n[[456.10]] Herman per imparare il calcolo differentiale, e sperano anche apprendere l'integrale, che gli\n[[456.11]] sara gia stato comunicato da V. S. Ill^#'m^#'a che divotamente riverisco e mi resto </p>\n<p> [[456.12]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[456.13]] Venetia 13 Agosto 1706. </p>\n<p> [[456.14]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. <b>Hannover</b> </p>\n<p> [[456.15]] [<i>Nachschrift zum Brief auf Bl. 248</i>] </p>\n<p> [[456.16]] Dopo d'avere serrata la lettera mi sono abboccato con Il Sig^#'r^#'e Zanovelli, il quale hà\n[[456.17]] stimato bene che io gli consegnassi i semi che qui aveva appresso di me, per trasmetterle subito\n[[456.18]] a V. S. Ill^#'m^#'a che si potrebbono seminare per l'autunno venturo. Io gia l'hò obbedito con\n[[456.19]] consegnarli tutto. Se mi capiteranno i semi che aspetto da Modona et Reggio, li saranno subito\n[[456.20]] trasmessi. e per l'anno venturo ora che intendo meglio quest'affare la servirò secondo quella\n[[456.21]] quantità che desidera. </p>\n",
+  "number": "137.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 13. August 1706. [136.139.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:137. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 13. August 1706. [136.139.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Mi Am Kopf der Seite von Leibniz' Hand: semiresp. figuro che V. S. Ill^#'m^#'a averà già ricevuta la mia, che venerdi caduto consegnai al Sig^#'r^#'e Zanovelli. Ora le r...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

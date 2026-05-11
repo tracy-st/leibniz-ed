@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_96",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 96,
+  "text": "<p> [[263.1]] <b>96. LEIBNIZ AN GABRIEL WAGNER</p>\n<p> [[263.2]] [nach dem 1. Februar 1697.] [95.99.]</b></p>\n\n<p> [[263.10]] Von Pechlin, Marco Meibom, Aizema und Kuflern kan nichts weiters mit gewisheit\n[[263.11]] schreiben. <i>Pegelii</i> gedancken sind alzu unreif umb mit des <i>Rogerii Baconi</i> seinen verglichen zu\n[[263.12]] werden. Kepler war excellent in der Geometri, aber die ist anders abstract als die Metaphysic,\n[[263.13]] welche von der imagination nicht geleitet wird. </p>\n<p> [[263.14]] Die begebenheiten der Natur sind gewiß aber nicht nothig sondern zufallig. Wie die\n[[263.15]] bewegungsgesez so sind auch die arten der materi, als welche allein durch die bewegung\n[[263.16]] unterschieden. Der Seelen unsterbligkeit und Gottes willkührliche regirung halte nicht fur\n[[263.17]] glaubensartikel sondern fur gewiße lehren, nur daß man Gott keine solche willkührigkeit\n[[263.18]] zulege, die unsern unvollkomenheiten unterworffen. Die Dynamic handelt nicht von diesen\n[[263.19]] dingen, sondern die Metaphysic, von welcher jene ihre principia entlehnet. </p>\n<p> [[263.20]] Mich düncket in der antwort sey zuviel galle, solte nicht beßer seyn die gegner außlachen\n[[263.21]] als außschelten. Zweifle noch immer ob Hr. Professor Meyer autor der wiedrigen schrifft sey.\n[[263.22]] Ich finde daß die Menschen offt ein ander entgegen seyn, weil sie ein ander nicht kennen. Es\n[[263.23]] gehet ihnen wie den Americanern, da die so nicht einerley sprache reden ein ander freßen. Hrn.\n[[263.24]] Placcium und Hrn. Meyern habe ich für feine leute gehalten und kan ihnen nicht wohl eine\n[[263.25]] boßheit zutrauen. </p>\n",
+  "number": "96.",
+  "title": "LEIBNIZ AN GABRIEL WAGNER",
+  "date": "[nach dem 1. Februar 1697.] [95.99.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:96. LEIBNIZ AN GABRIEL WAGNER [nach dem 1. Februar 1697.] [95.99.] Von Pechlin, Marco Meibom, Aizema und Kuflern kan nichts weiters mit gewisheit schreiben. Pegelii gedancken sind alzu unreif umb mit des Rogerii Baconi seinen verglichen zu werden. Kepler war excellent in der Geometri, aber die ist a...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

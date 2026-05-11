@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_314",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 314,
+  "text": "[[1368.1]] <b>258.  Distinctio mentis et corporis [Anfang 1677 bis Anfang 1678 (?)]</b>\n [[1368.2]] <tab/>[Anfang 1677 bis Anfang 1678 (?)]\n[[1368.10]] <tit2><b>Distinctio mentis et corporis</b></tit2> </p>\n<p> [[1368.11]] Scio me esse, et nihilominus dubito an ullum sit corpus in rerum natura. Ergo non\n[[1368.12]] sum corpus. Hoc argumentum infirmum est, nisi ostendatur extensionem per se constituere\n[[1368.13]] substantiam completam, hoc enim posito, utique manifestum est ex illa substantia\n[[1368.14]] nunquam posse nasci cogitationem. Sed hoc nondum ostensum est. Itaque hoc quidem\n[[1368.15]] scimus cogitationem non esse modum extensionis, sed nescimus an non sit modus\n[[1368.16]] substantiae, cujus modus alius est ipsa extensio. Sunt enim diversa in corpore, scilicet\n[[1368.17]] extensio et ipsa materia extensa. </p>\n<p> [[1368.18]] Vera igitur methodus distinctionem inter mentem et corpus probandi haec est, quod\n[[1368.19]] impossibile est unquam nobis certo innotescere an detur corpus. Corpus autem voco id\n[[1368.20]] omne quod eis quae sentimus simile est. Impossibile autem hoc esse, ex eo patet, quia\n[[1368.21]] impossibile est ullo modo nos certos reddi posse, de existentia corporum, seu impossibile\n[[1368.22]] esse rationibus philosophicis probari unquam corpora ne sint apparentiae an substantiae. </p>\n<p> [[1369.1]] Non magis certum mihi est alios homines cogitare, quam bruta sentire. </p>\n<p> [[1369.2]] Ex eo quod ego sum, satis intelligi potest, me non esse solum; nam facile intelligo\n[[1369.3]] alios esse posse similes mihi, me multo perfectiores, et me non posse esse causam\n[[1369.4]] quominus et ipsi existant. </p>\n<p> [[1369.5]] Certum est apparentias esse in me, sed non ideo sequitur totidem esse substantias\n[[1369.6]] extra me, quot videntur causae apparentiarum; id est totidem esse corpora. </p>\n<p> [[1369.7]] Nullo modo probari potest ratione naturali, quod dentur substantiae divisibiles seu\n[[1369.8]] corporeae. </p>\n",
+  "number": "258.",
+  "title": "Distinctio mentis et corporis",
+  "date": "[Anfang 1677 bis Anfang 1678 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:258. Distinctio mentis et corporis [Anfang 1677 bis Anfang 1678 (?)] [Anfang 1677 bis Anfang 1678 (?)] Distinctio mentis et corporis Scio me esse, et nihilominus dubito an ullum sit corpus in rerum natura. Ergo non sum corpus. Hoc argumentum infirmum est, nisi ostendatur extensionem per se constitue...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

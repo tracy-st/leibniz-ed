@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_219",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 219,
+  "text": "[[860.12]] <b>181.  Qui sunt milites et subditi simul [März bis April 1687 (?)]</b>\n [[860.13]] <tab/>[März bis April 1687 (?)] </p>\n<p> [[860.20]] Princeps habet 1000 subditos, et 200 milites, quorum aliqui sunt simul subditi, alii\n[[860.21]] vero extranei: quaeruntur illi qui sunt milites et subditi simul. Colligantur in unum et\n[[860.22]] milites [et subditi]. </p>\n<p> [[861.1]] Collectis in unum militibus dicatur <i>exite subditi</i>, vel collectis in unum subditis\n[[861.2]] dicatur <i>exite milites</i>. </p>\n<p> [[861.3]] Sed si hoc solo postulato uti permissum sit ex <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> detrahere <i>A</i>, sic erit procedendum.\n[[861.4]] Colligantur in unum milites <i>A</i> et subditi <i>L</i>, et a toto detrahantur <i>A</i> milites <i>per</i>\n[[861.5]] <i>postulatum</i>, restabunt meri subditi, qui cum insint omnibus subditis et sint dati, dabuntur\n[[861.6]] et reliqui <i>per</i> <i>idem postulatum</i>. Seu datur quaesitum. Scilicet postulatum tale est, a dato\n[[861.7]] detrahere datum quod ei inest. </p>\n<p> [[861.8]] Vel aliter, ut utrumque <i>A</i> et <i>L</i> eodem modo tractetur. Ab <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> detrahatur <i>A</i> restet <i>B</i>,\n[[861.9]] ab eodem detrahatur <i>L</i> restat <i>M</i>. Jam datum <i>B</i> ^&.Sg <Leibniz special character> <i>M</i> detrahatur ab <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> restat commune\n[[861.10]] <i>H</i>. </p>\n<p> [[861.11]] Via electitia videtur brevior, sed revera non est, nempe <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> ^&.sv <Leibniz special character> <i>A</i> ^&.SE <Leibniz special character> <i>B</i>, <i>L</i> ^&.sv <Leibniz special character> <i>B</i> ^&.SE <Leibniz special character> <i>H</i>\n[[861.12]] seu <i>L</i> ^&.sv <Leibniz special character> <i>A</i> ^&.sv <Leibniz special character> <i>L</i> ^&.Sg <Leibniz special character> <i>A</i> ^&.SE <Leibniz special character> <i>H</i>, quae via est brevissima, seu <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> ^&.sv <Leibniz special character> <i>A</i> ^&.sv <Leibniz special character> <i>L</i> ^&.SE <Leibniz special character> ─ <i>H</i>, nam hic non\n[[861.13]] licet compensare. </p>\n<p> [[861.14]] Aliud est hic summam duorum, aliud singula seorsim detrahere. </p>\n",
+  "number": "181.",
+  "title": "Qui sunt milites et subditi simul",
+  "date": "[März bis April 1687 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:181. Qui sunt milites et subditi simul [März bis April 1687 (?)] [März bis April 1687 (?)] Princeps habet 1000 subditos, et 200 milites, quorum aliqui sunt simul subditi, alii vero extranei: quaeruntur illi qui sunt milites et subditi simul. Colligantur in unum et milites [et subditi]. Collectis in ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

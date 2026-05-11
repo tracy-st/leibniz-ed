@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_32",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 32,
+  "text": "<p> [[144.12]] <b>33. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[144.13]] [Hannover, 20. Januar 1687.] [29.39.]</b></p>\n<p> [[145.1]] Ex mea responsione. </p>\n<p> [[145.2]] Perplacent quae Logicam et Analyticam artem non tantum in se reductam sed et usibus\n[[145.3]] publicis adhibitam tractant, quod revera faciunt JC^#'t^#'i cum de probationibus praesumtionibus\n[[145.4]] interpretationibus, indiciis, Medicique cum de signis [indicantibus] et contra indicantibus\n[[145.5]] agunt. Habebam olim in animo componere aliquid de gradibus probabilitatis aestimandis quam\n[[145.6]] logicae partem maxime practicam et in usu versantem mirabar negligi. Omnes in ore habent,\n[[145.7]] argumenta non numero sed pondere esse aestimanda. Sed quis stateram dedit qua argumenta\n[[145.8]] atque indicia inter se mutuo pugnantia, ponderentur, ut eligamus quod ex datis maxime\n[[145.9]] probabile est[?] Considero autem (Mathematicorum imitatione) certitudinem seu veritatem ut\n[[145.10]] totum, et probabilitates ut partes, ita ut sese habeant probabilitates ad veritatem, quemadmodum\n[[145.11]] anguli acuti ad rectum. Sint duo <i>A</i> et <i>B</i> sitque <i>B</i> duplo probabilius quam <i>A</i> ponamus jam\n[[145.12]] alterutrum eorum esse verum. Hoc posito dico probabilitatem ipsius <i>A</i> esse considerandam, ut\n[[145.13]] tertiam partem veritatis, probabilitatem vero ipsius <i>B</i>, ut veritatis duas tertias. Ambae autem\n[[145.14]] simul alternative componunt totam veritatem. Hoc autem intelligendum est quoad effectum,\n[[145.15]] non quasi veritas ipsa in se partes habeat [falsitatis]. Exempli causa si homines <i>L</i> et <i>M</i> ad\n[[145.16]] summam 30 ex eodem capite jus sibi tribuant, neuterque prae altero sit in possessione, aut ex\n[[145.17]] alio capite praeferendus, et duplo probabilius sit ipsum [<i>M</i> quam <i>L</i>] revera hoc jure frui;\n[[145.18]] aequitatis naturalis foret divisionem in ea quam dixi proportione fieri. Ubi tamen praesumtiones\n[[145.19]] a probabilitatibus caute sunt distinguendae. Sed licet judicibus talis divisio rerum incertarum\n[[145.20]] non sit in usu, idque merito, attamen haec consideratio saltem prodesse potest ad aestimanda\n[[145.21]] indicia et probabilitatum gradus, ut sciamus quorsum potius sit inclinandum. </p>\n<p> [[145.22]] Marq. Gud. saluto missurum me illi quasdam inscriptiones ab Abbate quodam Italo. </p>\n<p> [[145.23]] P. S. Hamburgi urbe [populosissima] (quam Ser^#'m^#'u^#'s Rudolphus Augustus Lutetiam nostram\n[[145.24]] appellat) multi haud dubie agunt omnis generis eruditi, curiosi, artifices in variis excellentes.\n[[145.25]] Horum quasi Catalogum aliquem per otium fieri perutile, nec opinor, injucundum foret. </p>\n<p> [[145.26]] Indicem fasciculorum Jungianorum a Vagetio desideravi. </p>\n",
+  "number": "33.",
+  "title": "LEIBNIZ AN VINCENT PLACCIUS",
+  "date": "[Hannover, 20. Januar 1687.] [29.39.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:33. LEIBNIZ AN VINCENT PLACCIUS [Hannover, 20. Januar 1687.] [29.39.] Ex mea responsione. Perplacent quae Logicam et Analyticam artem non tantum in se reductam sed et usibus publicis adhibitam tractant, quod revera faciunt JC^#'t^#'i cum de probationibus praesumtionibus interpretationibus, indiciis,...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

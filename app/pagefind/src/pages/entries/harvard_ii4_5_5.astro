@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_5",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 5,
+  "text": "<p> [[21.5]] <b>5. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[21.6]] Dijon, 30. Mai 1701. [7.] </b></p>\n<p> [[21.16]] Dijon le 30 may <b>1701</b> </p>\n<p> [[21.17]] Il <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: resp.</Fn> y a long tems monsieur que je n'ay eû l'honneur de vous écrire, et que je n'ay recû de\n[[21.18]] vos cheres nouvelles; j'ay esté prés d'une année entiere à la campagne persecuté de toutes\n[[21.19]] sortes de maux, qui m'ont derangé, et qui m'ont empeché de satisfaire à mon devoir à l'egard\n[[21.20]] de mes amis, et surtout envers vous monsieur que je regarde comme le meilleur et le plus\n[[21.21]] important de Tous; Je n'ay écrit uniquement cette année qu'à nostre S^#'t pere Clement XI, à qui\n[[21.22]] j'estois obligé de le faire dans son exaltation, ayant recû auparavant de luy une excellente lettre\n[[21.23]] qui m'engageoit à le feliciter. On nous prosne ce pape comme un grand protecteur des Muses et\n[[21.24]] des scavants; tous les grands sont assés portés à souhaitter cette qualité dont ils tirent avantage;\n[[21.25]] mais il fault outre cela aymer les lettres, et il ne suffit pas ancor de les aymer il fault les\n[[22.1]] connoistre, c'est ce que mons^#'r d'Avranches trouve tres difficile surtout à un Italien qui n'a\n[[22.2]] travaillé toute sa vie qu'à se rendre capable d'arriver aux dignités et aux grands emploicts par la\n[[22.3]] politique; Il fault neanmoins se contenter des bons desirs et de la bonne volonté. Je laisse à\n[[22.4]] mons^#'r Pinsson à vous dire toutes les nouvelles litteraires dont je suis fort ignorant. J'ay veû\n[[22.5]] seullement ces jours passés le nouvau Journal qui s'imprime à Trevoux, dont je croy que mons^#'r\n[[22.6]] Pinsson vous aura faict part. Voicy ce que m'en ecrit un de mes amis qui est à Paris et qui a faict\n[[22.7]] une fort bonne critique du <i>Telemaque</i>. </p>\n<p> [[22.8]] <i>Puisque vous voyés le nouveau Journal de Trevoux Je n'ay plus de nouvelles à vous dire.\n[[22.9]] Je prevoys qu'ils nous vont divertir. Les Jesuites qui en sont les auteurs y attaquent les\n[[22.10]] Journalistes hollandois qui ne manqueront pas de chamailler avec leurs feû ordinaire. Il y dans\n[[22.11]] le second <b>Journal de Trevoux</b> une seconde Touche au <b>dictionnaire</b> de Furetiere r'imprimé\n[[22.12]] par Basnage: Les journalistes de Trevoux ont bien senti, que cela leur alloit faire des\n[[22.13]] affaires avec ce calviniste qui n'est pas endurant, et ont voulu adoucir la chose en chargeant\n[[22.14]] une preface d'un mensonge officieux, qui ne sert de rien, et qui pourra leur estre reproché:\n[[22.15]] quelle apparence que l'imprimeur se soit ingeré de fourrer dans le Journal la lettre pour\n[[22.16]] laquelle ils demandent excuse, et ne voit on pas qu'elle est de la composition de quelqu'un\n[[22.17]] d'entr'eux.</i> </p>\n<p> [[22.18]] Je me rejouis mons^#'r de voir le Suidas qu'on dit qui s'imprime à Paris avec beaucoup\n[[22.19]] d'augmentation et de correction; nous aurons bientost le Pollux de Hollande avec plusieurs\n[[22.20]] commentaires de scavants et surtout de mons^#'r Saumaise à ce que mons^#'r Graevius m'a ecript,\n[[22.21]] dites nous mons^#'r ce que vous faictes qui vaudra mieux que tout ce que nous attendons des\n[[23.1]] autres; nous aurons bientost les poesies de mons. d'Avranches avec son nouveau <i>paradis\n[[23.2]] terreste</i> r'imprimé en Hollande et augmenté. Mons^#'r Graevius me mande que quoyque le\n[[23.3]] Hesychius de Foppaeus paroisse desesperé qu'il y a neanmoins un Hollandois qui pretend nous\n[[23.4]] le donner; ce dictionnaire avec celluy de Pollux et de Suidas seront d'un grand secours aux\n[[23.5]] scavants et rendent bien le Furetiere[,] le Richelet et celluy de m^#'r Bayle; ne soyiés pas mons^#'r si\n[[23.6]] long à m'ecrire que je l'ay esté à vostre egard; soulagés mes maux par vos excellentes et\n[[23.7]] agreables lettres et croyés moy toujours Tout à vous </p>\n<p> [[23.8]] Nicaise </p>\n<p> [[23.9]] A Monsieur Monsieur de Leibniz prés de Son Altesse Electorale monseig^#'r le Duc\n[[23.10]] d'Hanovre. <b>Hanovre</b>. </p>\n",
+  "number": "5.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Dijon, 30. Mai 1701. [7.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:5. CLAUDE NICAISE AN LEIBNIZ Dijon, 30. Mai 1701. [7.] Dijon le 30 may 1701 Il Am Kopf des Briefes von Leibniz' Hand: resp. y a long tems monsieur que je n'ay eû l'honneur de vous écrire, et que je n'ay recû de vos cheres nouvelles; j'ay esté prés d'une année entiere à la campagne persecuté de toute...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

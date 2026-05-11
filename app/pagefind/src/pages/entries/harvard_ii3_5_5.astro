@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_5",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 5,
+  "text": "<p> [[19.1]] <b>5. ANTONIO ALBERTI AN RUDOLF CHRISTIAN VON BODENHAUSEN</p>\n<p> [[19.2]] 5. Februar 1695. [18.]</b></p>\n\n<p> [[19.13]] Je suis persuadé Mon tres honoré Monsieur qu'il na pas tenu à vous que je n'aye receu\n[[19.14]] exactement la reponse aux lettres que je me suis donné l'honneur de vous ecrire pour vous\n[[19.15]] informer de ce que j'avois fait en execution de ce que vous m'aviez ordonné. Je vous prie\n[[19.16]] Monsieur de vouloir bien excuser l'Abbé della Stuffa. Je vous asseure qu'il n'a point de tort, et\n[[19.17]] qu'il m'avoit écrit diverses fois de Florence pour me demander ce que j'avois imploré pour vos\n[[19.18]] copies. Mais je ne scais comme quoy j'oubliai de luy repondre sur cet article. Au reste je suis\n[[19.19]] sensiblement affligé de l'Indisposition de notre Illustre et incomparable M. Libnits. En verité je\n[[19.20]] ne puis penser à la perte d'un si grand homme sans ressentir une tres vive douleur. Ce qui\n[[19.21]] m'afflige d'avantage c'est qu'il mourroit hors du sein de l'eglise catholique. À propos de quoy\n[[19.22]] je vous veux dire ce que dit l'autre jour un grand Cardinal à qui on informait du grand merite de\n[[19.23]] notre ami. Il asseura que s'il étoit dans la disposition de se reunir à l'eglise on pouvoit comter\n[[19.24]] que non seulement on lui donneroit le poste de <i>primus Custos</i> de la Vaticane mais encore\n[[19.25]] beaucoup d'autres avantages, en sorte qu'il pourroit employer tout ce qui lui reste de vie à\n[[19.26]] servir utilement et glorieusement le public. Je vous ecris ceci non que je voie grande apparance\n[[20.1]] à le faire reussir; mais pour communiquer à une personne que j'estime et que j'honore\n[[20.2]] infiniment une des choses que je desire le plus au monde. </p>\n<p> [[20.3]] J'ay dit à M^#'r Landini qui me paroit un parfait honnete homme, ce que j'ay depensé pour\n[[20.4]] faire les copies dont est question. J'ay emprunté à Msgr Champini le tome de 1693 et l'ai donné\n[[20.5]] au dit sieur Landini pour en faire copier ce qu'il trouvera à propos et de la manière et par qui il\n[[20.6]] voudra. Je voudrais Mon tres honoré Monsieur trouver quelque occasion plus importante pour\n[[20.7]] vous temoigner à quel point je suis avec tout le respect et l'attachement possible </p>\n<p> [[20.8]] Monsieur votre tres humble et tres obeissant serviteur </p>\n<p> [[20.9]] ce 5 febrier 1695 Ant. Alberti </p>\n",
+  "number": "5.",
+  "title": "ANTONIO ALBERTI AN RUDOLF CHRISTIAN VON BODENHAUSEN",
+  "date": "5. Februar 1695. [18.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:5. ANTONIO ALBERTI AN RUDOLF CHRISTIAN VON BODENHAUSEN 5. Februar 1695. [18.] Je suis persuadé Mon tres honoré Monsieur qu'il na pas tenu à vous que je n'aye receu exactement la reponse aux lettres que je me suis donné l'honneur de vous ecrire pour vous informer de ce que j'avois fait en execution d...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_191",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 191,
+  "text": "<p> [[614.9]] <b>173. ARNOLD ECKHARD AN LEIBNIZ</p>\n<p> [[614.10]] Rinteln, 5. (15.) April 1678. [149.]</b></p>\n[[614.21]] Vir Nobilissime et Amplissime, Domine et Fautor multis nominibus colende. </p>\n<p> [[614.22]] Renunciatum mihi est a Rev^#'m^#'o Dⁿ^#'o Abbate Loccensi, quam gravissimum istum casum, qui\n[[614.23]] me per aliquot menses afflixit, tandemque de omni pristino statu dejecit, familiariter tuleris:\n[[614.24]] quantaque fide, cura et diligentia Ser^#'m^#'o Brunsvicensium ac Luneburgensium Duci, Hero Tuo et\n[[614.25]] item meo clementissimo me studiaque mea commendaveris. Quo nomine equidem gratias Tibi\n[[614.26]] ago maximas: majores etiam habeo: memor futurus summorum Tuorum in me meritorum, dum\n[[614.27]] spiritus hos reget artus. O miram divini Numinis in me benignitatem, quam in mediis meis\n[[614.28]] angustiis sensisse me, impius sim, si negem! Dum enim fortunae fluctibus agitatus nil nisi\n[[615.1]] praesentissimum omnium fortunarum naufragium ante oculos video, adestis illico Vos, summi\n[[615.2]] Viri, tantoque Principe digni Ministri, rebusque meis fessis opem tempestivi acceleratis. Vos e\n[[615.3]] saevissima hyeme turbulentissimaque tempestate in exoptatum tranquillitatis portum me reduxistis.\n[[615.4]] Vestra egomet opera terram illam teneo, ubi et ego, et studia mea (nec vanum spero\n[[615.5]] augurium) spiritum, vitam, vigorem recipiemus. Faxit ille, a cujus nutu cuncta humana pendent,\n[[615.6]] ut omnia cedant feliciter: egoque Ser^#'m^#'o Hero devotissimum animi affectum, fidelissimaque\n[[615.7]] obsequia; Tibi autem, Amplissime Vir, et reliquis novi fati mei conciliatoribus studia, cultum et\n[[615.8]] observantiam meam ita probem, ut nec Vos dati beneficii poenitere, nec me accepti pudere\n[[615.9]] unquam possit. Vale, Vir Nobilissime, faveque </p>\n<p> [[615.10]] Nobiliss. Amplitud. T. Observantissimo A. Eckhardo. </p>\n<p> [[615.11]] Scribebam Rintel. ad d. V. April. 1678. </p>\n",
+  "number": "173.",
+  "title": "ARNOLD ECKHARD AN LEIBNIZ",
+  "date": "Rinteln, 5. (15.) April 1678. [149.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:173. ARNOLD ECKHARD AN LEIBNIZ Rinteln, 5. (15.) April 1678. [149.] Vir Nobilissime et Amplissime, Domine et Fautor multis nominibus colende. Renunciatum mihi est a Rev^#'m^#'o Dⁿ^#'o Abbate Loccensi, quam gravissimum istum casum, qui me per aliquot menses afflixit, tandemque de omni pristino statu ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

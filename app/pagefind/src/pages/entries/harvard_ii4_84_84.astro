@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_84",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 84,
+  "text": "<p> [[274.18]] <b>84. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[274.19]] Venedig, 6. September [1704]. [82.92.] </b></p>\n<p> [[275.4]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Venetia 6. Settembre </p>\n<p> [[275.5]] Nella <Fn><i>Am Kopf der Seite von Leibniz' Hand, mit Verweis auf N. 81</i>: prior 22 Aug.</Fn> settimana passata l'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Marcello, come capo de gli Ecc^#'m^#'i Riformatori\n[[275.6]] dello Studio di Padova, parlò lungamente in Magistrato del Sig^#'r^#'e Herman, in virtù di quel\n[[275.7]] che mi scrisse V. S. Ill^#'m^#'a, e si risolse di doverne subito scrivere in Hannover, ed in Basilea per\n[[275.8]] mezo del loro Residente in Milano, e fù ordinato a me che con l'istesso Ordinario passato ne\n[[275.9]] dovessi scrivere a V. S. Ill^#'m^#'a per sentire lo stipendio che pretende il Sig^#'r^#'e Herman, ogni\n[[275.10]] qualvolta si risolvesse stabilirsi in Padova, il che fù da me subito eseguito; ma per mia disgratia\n[[275.11]] chi avea la cura di consegnare il mio foglio al Sig^#'r^#'e Gianovelli per Sabato caduto, non sò per\n[[275.12]] quale negligenza [lo] consegnò solamente domenica quando era gia partito il Corriere. Il che\n[[275.13]] m'è molto dispiaciuto per non arrivare costì la mia lettera, insieme con quella de Riformatori.\n[[275.14]] Replico per ciò quest'altra che V. S. Ill^#'m^#'a riceverà con il mio foglio della settimana caduta,\n[[275.15]] acciò le sia nota la cagione di questo sconcerto, e si degni solecitare la risposta per non perdere\n[[275.16]] l'occasione, ora che l'Ecc^#'m^#'o Magistrato mostra tanto genio per il soggetto proposto da lei e\n[[275.17]] divotamente riverendola mi resto </p>\n<p> [[275.18]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n",
+  "number": "84.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 6. September [1704]. [82.92.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:84. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 6. September [1704]. [82.92.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Venetia 6. Settembre Nella Am Kopf der Seite von Leibniz' Hand, mit Verweis auf N. 81: prior 22 Aug. settimana passata l'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Marcello,...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

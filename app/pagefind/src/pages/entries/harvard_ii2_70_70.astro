@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_70",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 70,
+  "text": "<p> [[297.5]] <b>71. LEIBNIZ AN VITALE GIORDANI</p>\n<p> [[297.6]] [Rom, Ende Oktober bis Anfang November 1689.] [72.]</b></p>\n<p> [[297.18]] [ ... ] Sed in universum in horum axiomatum de recta demonstrationibus illam difficultatem\n[[297.19]] reperio, quod in eas nullo modo ingreditur definitio rectae nec ulla rectae proprietas\n[[297.20]] axiomate aliquo praemittendo contenta. Definitio enim rectae a te assumta est quod sit brevissima\n[[297.21]] inter duo puncta, quae pulchre uteris pro parallelarum proprietate, sed hic eam non\n[[297.22]] adhibes nec aliud de recta axioma praemittis. Itaque in omnibus istis demonstrationibus posset\n[[297.23]] alia quaecunque linea pro recta assumi quod tamen male fieret. Itaque videtur aliquid his\n[[297.24]] demonstrationibus deesse. Et difficulter absolvi poterit demonstratio nisi quis assumat\n[[298.1]] notione[m] rectae, qualis est qua ego uti soleo, quod corpore aliquo duobus punctis immotis\n[[298.2]] revoluto locus omnium punctorum quiescentium sit recta vel saltem quod recta sit linea secans\n[[298.3]] planum interminatum in duas partes congruas; et planum sit superficies secans solidum interminatum\n[[298.4]] in duas partes congruas. </p>\n",
+  "number": "71.",
+  "title": "LEIBNIZ AN VITALE GIORDANI",
+  "date": "[Rom, Ende Oktober bis Anfang November 1689.] [72.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:71. LEIBNIZ AN VITALE GIORDANI [Rom, Ende Oktober bis Anfang November 1689.] [72.] [ ... ] Sed in universum in horum axiomatum de recta demonstrationibus illam difficultatem reperio, quod in eas nullo modo ingreditur definitio rectae nec ulla rectae proprietas axiomate aliquo praemittendo contenta. ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

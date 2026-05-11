@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_53",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 53,
+  "text": "[[435.3]] <b>53. Sur les premières propositions et les premiers termes </b> <span>435.3;0:63:053:76       :L:f^</span>.\n[[435.15]] Il est très important de conceuvoir, que le nombre des premieres propositions est\n[[435.16]] infini, car elles sont ou definitions, ou Axiomes. Le Nombre des definitions aussi bien\n[[435.17]] que des termes est infini. Le nombre des Axiomes l'est aussi. J'appelle Axiome\n[[435.18]] proposition necessaire, indemonstrable. Necessaire c'est à dire dont le contraire\n[[435.19]] implique contradiction. Or la seule proposition dont le contraire implique contradiction,\n[[435.20]] sans qu'on le puisse demonstrer, est l'identique formelle. Cela se dit expressement\n[[435.21]] là dedans, donc cela ne s'y peut pas demonstrer; demonstrer: c'est à dire faire\n[[435.22]] voir par la raison et par consequences. Cela s'y peut montrer, à l'oeil, donc cela ne s'y\n[[435.23]] peut pas demonstrer. Les sens font voir que A est A est une proposition dont l'opposée,\n[[435.24]] A n'est pas A, implique contradiction formellement. Or ce que les sens font\n[[435.25]] voir est indemonstrable. Donc les Axiomes veritables, et indemonstrables sont les\n[[435.26]] propositions identiques. Or leur nombre est infini. Car le nombre des termes estant\n[[436.1]] infini, le nombre de telles propositions est aussi, car il en peut avoir autant que des\n[[436.2]] termes. Cependant cela est merveilleux, et il paroistroit étrange à un homme, à qui on\n[[436.3]] ne l'expliqueroit pas; de dire que le nombre des propositions premieres incontestables,\n[[436.4]] est infini. Si les principes sont infinis; les conclusions le seront encor bien\n[[436.5]] d'avantage. Telles propositions identiques sont: unumquodque tantum est quantum\n[[436.6]] est, sive quodlibet sibi ipsi aequale est. Item unumquodque tale est quale est, sive\n[[436.7]] quodlibet sibi ipsi simile est.\n[[436.8]] Les premiers Termes indefinibles ne se peuvent, aisement reconnoistre de nous,\n[[436.9]] que comme les nombres premiers: qu'on ne sçauroit discerner jusqu'icy, qu'en essayant\n[[436.10]] la division. De méme les Termes irresolubles ne se sçauroient bien reconnoistre\n[[436.11]] que negativement et comme par provision. Car j'ay une marque par la quelle on\n[[436.12]] peut reconnoistre la resolubilité. La voicy: Lors que nous rencontrons une proposition\n[[436.13]] qui nous paroist necessaire, et qui n'est pas demonstrée; il s'en suit infalliblement\n[[436.14]] qu'il se trouve dans cette proposition un terme definible, pourveu qu'elle soit necessaire.\n[[436.15]] Ainsi il faut tacher de donner cette demonstration; et nous ne la sçaurions\n[[436.16]] donner, sans trouver cette resolution. Par cette methode, en ne laissant passer aucun\n[[436.17]] axiome sans preuve, excepté les definitions, et les identiques, nous viendrons à la\n[[436.18]] resolution des Termes, et aux plus simples idees. Vous direz que cela pourroit aller à\n[[436.19]] l'infini, et qu'il se pourroit tousjours prouver de nouvelles propositions, qui nous\n[[436.20]] obligeroient à chercher des nouvelles resolutions. Je ne le croy pas. Mais si cela estoit\n[[436.21]] cela ne nous nuiroit, car par ce moyen nous ne laisserions pas d'avoir demonstré\n[[436.22]] parfaitement tous nos theoremes; et les resolutions que nous aurions faites, nous\n[[436.23]] suffiroient à une infinité de belles consequences et practiques; de méme que dans la\n[[436.24]] nature, il ne faut pas abandonner la recherche des experiences à cause de leur infinité:\n[[436.25]] puisque nous pouvons déja parfaitement bien employer celles qui nous sont\n[[436.26]] données.\n",
+  "number": "53.",
+  "title": "Sur les premières propositions et les premiers termes",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:53. Sur les premières propositions et les premiers termes 435.3;0:63:053:76 :L:f^. Il est très important de conceuvoir, que le nombre des premieres propositions est infini, car elles sont ou definitions, ou Axiomes. Le Nombre des definitions aussi bien que des termes est infini. Le nombre des Axiome...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

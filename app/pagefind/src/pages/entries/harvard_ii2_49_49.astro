@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_49",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 49,
+  "text": "<p> [[217.1]] <b>50. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[217.2]] [Juli 1687.] [45.63.]</b></p>\n<p> [[217.13]] Monsieur </p>\n<p> [[217.14]] J'ay <Fn><i>Am Kopf des Konzepts</i>: À Mons. Foucher</Fn> receu la vostre avec celle de M. Thevenot. Je vous suis bien obligé de ce soin. J'ay\n[[217.15]] repondu à M. Catelan dans les <i>Nouvelles de la rep. des lettres</i> au commencement de cette\n[[217.16]] année, et comme j'y avois touché en passant les corrections que le R. P. Malebranche a voulu\n[[217.17]] apporter aux regles du mouvement de M. des Cartes, ce Pere a repliqué et il est demeuré\n[[217.18]] d'accord, qu'en partie j'ay eu raison, mais comme il adjoute des choses, qui ne s'accordent pas\n[[217.19]] avec mes principes, j'ay envoyé une duplique en Hollande, qui sera peutestre imprimée dans les\n[[217.20]] dites <i>Nouvelles</i>. J'espere d'avoir la satisfaction de vous faire entendre mes pensées sur ces\n[[217.21]] matieres et d'autres, et d'entendre vos sentimens là dessus. </p>\n<p> [[218.1]] J'ay vû Augustinus Steuchus Eugubinus <i>de perenni philosophia</i>, mais son dessein est\n[[218.2]] principalement d'accommoder les anciens au christianisme (: ce qui est en effect tres beau :),\n[[218.3]] plustost que de mettre les pensées de philosophie dans leur jour. </p>\n<p> [[218.4]] Je croy d'avoir remarqué que Leucippe a conçu quelque chose de semblable aux tourbillons\n[[218.5]] de M. des Cartes, il l'appelle <greek><i>dínhn</i></greek>, <i>vorticem</i>. J'ay trouvé aussi chez les anciens la\n[[218.6]] comparaison du baston dont M. des Cartes se sert pour expliquer la vision. Je vous diray encor\n[[218.7]] que les anciens avoient une certaine Analyse Geometrique toute differente de l'Algebre, et que\n[[218.8]] ny M. des Cartes ny les autres que je sçache ne connoissent point du tout, mais il faudroit bien\n[[218.9]] des meditations pour la redresser. J'en pourray un jour informer le public. Elle a de tout autres\n[[218.10]] usages que l'Algebre et comme elle luy cede en certaines choses, elle la surpasse en d'autres. </p>\n",
+  "number": "50.",
+  "title": "LEIBNIZ AN SIMON FOUCHER",
+  "date": "[Juli 1687.] [45.63.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:50. LEIBNIZ AN SIMON FOUCHER [Juli 1687.] [45.63.] Monsieur J'ay Am Kopf des Konzepts: À Mons. Foucher receu la vostre avec celle de M. Thevenot. Je vous suis bien obligé de ce soin. J'ay repondu à M. Catelan dans les Nouvelles de la rep. des lettres au commencement de cette année, et comme j'y avoi...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

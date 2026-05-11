@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_165",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 165,
+  "text": "<p> [[517.14]] <b>165. NICOLAS HARTSOEKER AN LEIBNIZ</p>\n<p> [[517.15]] Düsseldorf, 25. November 1706. [152.167.] </b></p>\n<p> [[517.19]] Monsieur </p>\n<p> [[517.20]] Je vous remercie tres humblement de la bonté que vous avez euë de me faire tenir par\n[[517.21]] Monsieur le Baron de Krosik quelques reflexions sur mes <i>conjectures physiques</i>; et comme rien\n[[517.22]] ne contribuë plus à decouvrir les secrets de la nature, ce qui doit être l'unique but d'un\n[[518.1]] physicien, je vous prie inflamment de vouloir y continuer. Il m'est deja arrivé Monsieur qu'en\n[[518.2]] meditant sur les difficultez que vous m'avez faites, j'ai trouvé à ce faire à moi même, du sorte\n[[518.3]] que s'il fit falloit venir à une seconde impression de mon ouvrage, je serois obligé d'y faire\n[[518.4]] assez de changements. Je vous prie Monsieur d'examiner principalement les discours de\n[[518.5]] l'aiman[t], des principes du corps naturel, du mouvement, du feu, et de l'arc en Ciel, et de me\n[[518.6]] faire sçavoir quel est vôtre sentiment là dessus, après quoi je me donnerai l'honneur de vous\n[[518.7]] envoyer mes réponses et reflexions sur vos objections. Je ne doute pas que vous ne trouviez de\n[[518.8]] tres grandes difficultez à me faire sur ces matieres qui sont d'une difficulté infinie, sur tout à\n[[518.9]] cause que je me suis le plus souvent écarté du grand chemin pour en frayer un autre tout\n[[518.10]] nouveau, et aller par des routes inconnuës. Vôtre profond sçavoir est si connu de tous les\n[[518.11]] sçavans de l'Europe que je dois toujours tenir à grand honneur d'être attaqué par un ennemi tel\n[[518.12]] que vous; et j'aurai moins de honte d'un être terrassé que par un ennemi moins redoutable que\n[[518.13]] vous. </p>\n<p> [[518.14]] Je ne sçai si vous avez quelque relation à la cour de Berlin, mais si cela étoit j'aurois bien\n[[518.15]] une priere à vous faire Monsieur touchant le pretendu Comte Rogieri que j'ai appris avec la\n[[518.16]] plus grande joye du monde avoir été arreté par les ordres de la Majesté le Roy de Prusse. Je ne\n[[518.17]] demande pas qu'on lui fasse aucun bien ou mal, mais puisque la Majesté temoigne tant de zele\n[[518.18]] pour l'avancement des arts et des sciences, par l'avancement de plusieurs Academies, et par sa\n[[518.19]] liberalité envers les sçavans; je souhaiterois pour l'amour de la verité, qu'on obligeast ce\n[[518.20]] pretendu Comte d'avoir que tout son sçavoir faire n'a consisté qu'en quelques tours de passe\n[[518.21]] passe, et qu'on rendit cela public, afin de detromper par là une infinité de gens qui se laissent\n[[518.22]] duper encore tous les jours par des fripons comme lui. Vous avez pû voir ce que j'en ai écrit\n[[518.23]] dans mes <i>Conjectures Physiques.</i> Je suis avec tout le zele et toute la veneration imaginable pour\n[[518.24]] vôtre merite extraordinaire et distingué plus que personne du monde </p>\n<p> [[518.25]] Monsieur Vôtre tres humble et tres obeïssant serviteur Nicolas Hartsoeker </p>\n<p> [[518.26]] Dusseldorp ce 25 de Nov: 1706 </p>\n",
+  "number": "165.",
+  "title": "NICOLAS HARTSOEKER AN LEIBNIZ",
+  "date": "Düsseldorf, 25. November 1706. [152.167.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:165. NICOLAS HARTSOEKER AN LEIBNIZ Düsseldorf, 25. November 1706. [152.167.] Monsieur Je vous remercie tres humblement de la bonté que vous avez euë de me faire tenir par Monsieur le Baron de Krosik quelques reflexions sur mes conjectures physiques; et comme rien ne contribuë plus à decouvrir les se...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

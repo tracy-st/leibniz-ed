@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_45",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 45,
+  "text": "<p> [[208.1]] <b>46. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[208.2]] Hamburg, 14. (24.) Mai 1687. [44.49.]</b></p>\n<p> [[208.13]] I. N. J. C. </p>\n<p> [[208.14]] S. P. Vir Nobilissime Excellentissime. Domine et Amice honoratissime. </p>\n<p> [[208.15]] Nae Tu et morulam et opellam a me praestitam egregie pensas, tuis et eruditionis et\n[[208.16]] humanitatis adeo plenissimis litteris! In quibus tamen hoc prae aliis omnibus oblectat, quod\n[[208.17]] brevi Te coram videndi spem facis. Quaeso ne illa me fallat. Vix enim habeo quenquam, cum\n[[208.18]] quo aliquot horas aeque desiderem de rebus litterariis agere paulo confidentius. Interim mitto\n[[208.19]] Epistolam Vagetianam, cui juncta erat D^#'i Capelli discussio <i>rariorum Beccelerianorum</i>, in\n[[208.20]] monetis aliquot et aliis artificiosis partim et naturalibus consistentium. Libros memoratos\n[[208.21]] partim tantum vidi, sed nullum eorum legi, nisi Pufendorffiana carptim in paucis foliolis\n[[208.22]] necdum ligatis. Vel unius ejus adeo mordax et omni juri naturae contraria, de jure naturae\n[[208.23]] controvertendi ratio, me absterret, ne quid in eo argumenti meorum publici faciam juris, de\n[[208.24]] quibus Deo Volente coram. <i>Den Schaden Josephs</i> necdum vidi. De Analyticis accessionibus\n[[209.1]] idem tecum sentio, et opto. Ut nempe alii a Viotto et Conringio (quorum neuter iis par erat)\n[[209.2]] huic operi aliquando admoveant mentes. Sed illa quidem spes, nisi a Te impleatur, apud me\n[[209.3]] desperata est. Sed et de his coram, si Deus volet atque vivemus. Interim felix festum hoc et\n[[209.4]] omnia felicia alia Tibi precor ex animo. Vale. </p>\n<p> [[209.5]] Excellentissimi Tui Nominis observantissimus V. Placcius </p>\n<p> [[209.6]] Hamb. 1687 d. 14 Maij </p>\n<p> [[209.7]] <i>A Monsieur Monsieur Leibnütz. Conseiller de son Altesse à Hanover.</i> </p>\n",
+  "number": "46.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "Hamburg, 14. (24.) Mai 1687. [44.49.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:46. VINCENT PLACCIUS AN LEIBNIZ Hamburg, 14. (24.) Mai 1687. [44.49.] I. N. J. C. S. P. Vir Nobilissime Excellentissime. Domine et Amice honoratissime. Nae Tu et morulam et opellam a me praestitam egregie pensas, tuis et eruditionis et humanitatis adeo plenissimis litteris! In quibus tamen hoc prae ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_207",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 207,
+  "text": "<p> [[651.1]] <b>207. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[651.2]] Hannover, 4. August 1707. [205.210.] </b></p>\n<p> [[651.9]] Vir Clarissime </p>\n<p> [[651.10]] Ecce literas, quas occasione dissertationis Tuae elegantis et eruditae scripsi, quas spero\n[[651.11]] fore ad mentem Tuam. Gratias etiam ago pro libris redemtis. Si forte occasione Nundinarum\n[[651.12]] Brunsvicensium mitti in eam urbem fasciculus librorum, et Forstero Bibliopolae Hanoverano\n[[651.13]] commendari posset, possent hac ratione mature ad me deferri. Sin minus, expectabo nundinas\n[[651.14]] Lipsienses, unde per onerarium quendam vectorem vel Brunsvigam, vel huc usque libri mitti\n[[651.15]] poterunt. Si Brunsvigam destinantur commendari poterit fasciculus vel arcula Dno Polich,\n[[651.16]] Magistro illic postae S^#'m^#'a^#'e domus Brunsvicensis. </p>\n<p> [[651.17]] Cui pecuniam dari velis quam pro me expendisti, indicabis[.] Si nemo occurrat, saltem in\n[[651.18]] nundinis Lipsiensibus per Forsterum accip[i]es. </p>\n<p> [[651.19]] Gratias etiam ago, quod cum Dno Fritschio in mei gratiam locutus es. </p>\n<p> [[651.20]] Quod superest vale et me ama. Dabam Hanoverae 4. Aug. 1707 </p>\n<p> [[651.21]] deditissimus G. G. Leibnitius\n[[651.22]] P. S. Si pretium pro Alcmanis monumento, et Marsiglii Danubio non usque adeo nimium\n[[651.23]] est, mallem eos libros accipere etsi imperfectos, quam plane iis carere. Idque inprimis de\n[[651.24]] Marsigliano opere dictum velim, quod fortasse longius promotum non fuit. </p>\n",
+  "number": "207.",
+  "title": "LEIBNIZ AN MICHAEL GOTTLIEB HANSCH",
+  "date": "Hannover, 4. August 1707. [205.210.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:207. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH Hannover, 4. August 1707. [205.210.] Vir Clarissime Ecce literas, quas occasione dissertationis Tuae elegantis et eruditae scripsi, quas spero fore ad mentem Tuam. Gratias etiam ago pro libris redemtis. Si forte occasione Nundinarum Brunsvicensium mitti in eam...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

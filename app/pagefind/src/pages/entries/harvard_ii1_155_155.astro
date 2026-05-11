@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_155",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 155,
+  "text": "<p> [[484.7]] <b>139. ARNOLD ECKHARD AN GERHARD WOLTER MOLANUS FÜR LEIBNIZ</p>\n<p> [[484.8]] Rinteln, 29. März (8. April) 1677. [138.140.]</b></p>\n<p> [[484.22]] Reverendissime et Magnifice Dⁿ^#'e Abbas et Director, </p>\n<p> [[484.23]] Domine et Patrone aeternum venerande. </p>\n<p> [[484.24]] Quod tam doctum tamque amicum (ita enim scribis) mihi adversarium excitare voluisti,\n[[484.25]] gratias eo nomine et ago et habeo Tibi ingentes. Ego non putaveram esse in vicinia Virum\n[[484.26]] Mathematum tam peritum, atque hunc esse video. Ideoque in magna felicitatis meae parte\n[[484.27]] putabo, si Viri tam Eruditi amicitiam mihi conciliaveris. Inter alia, quae de rebus Mathematicis\n[[484.28]] praeclare disserit, illud egregium est, quod methodum invenisse se scribit, cujus ope valor\n[[484.29]] radicis incognitae cujusque aequationis in quocunque gradu analytice exprimi possit. Quod\n[[484.30]] inventum vel solum Auctoris memoriam aeternitati consecrabit. Ceterum de rebus Mathematicis\n[[484.31]] facile inter nos conventurum esse video. Neque enim Cartesius omnia, quae potuit, tradere\n[[485.1]] voluit, neque si voluisset, ita tamen tradidisset, ut nihil amplius inveniendum restaret. Illud\n[[485.2]] tamen assentiri Viro Clarissimo nondum possum, quod aut methodum, qua usus fuit Cartesius,\n[[485.3]] imperfectam, aut Archimedem Cartesio praeponendum existimat. Voluit enim Cartesius\n[[485.4]] methodi suae praestantiam unico tantum exemplo declarare, ideoque famosum illud problema,\n[[485.5]] quod <i>Geometriae</i> suae lib. 1. Pappi verbis proponit, cujusque solutionem magno studio Veteres\n[[485.6]] frustra quaesiverant, expediendum sibi sumit. Quod quidem admirabili prorsus via modoque\n[[485.7]] perfecit. Quod si ille in alia quadam Matheseos parte, et ea quidem, quam Archimedes excoluit,\n[[485.8]] ingenii sui specimen aliquod edere voluisset, non dubito quin id aeque egregie fecisset in\n[[485.9]] Archimedea, atque in Apolloniana Mathesi. Ad ea, quae de reliqu<angle bracket>is Philo</angle bracket>sophiae partibus\n[[485.10]] disserit Vir Clarissimus, m<angle bracket>ulta mo</angle bracket>nenda essent. Sed de his propediem, spero, col<angle bracket>loquemur.\n[[485.11]] Et</angle bracket>enim, si Deus volet, futuro die lunae ad vos exc<angle bracket>urrere</angle bracket> constitui. Interim vale, Reverendissime\n[[485.12]] Dⁿ^#'e A<angle bracket>bbas,</angle bracket> et si grave non est, Virum Amplissimum qua<angle bracket>m -</angle bracket>issime meo nomine\n[[485.13]] saluta, faveque </p>\n<p> [[485.14]] Reverendissimae Magnific^#'a^#'e T. Obsequentissimo </p>\n<p> [[485.15]] Rintel. d. 29. Mart. 1677. A. Eckhardo. </p>\n",
+  "number": "139.",
+  "title": "ARNOLD ECKHARD AN GERHARD WOLTER MOLANUS FÜR LEIBNIZ",
+  "date": "Rinteln, 29. März (8. April) 1677. [138.140.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:139. ARNOLD ECKHARD AN GERHARD WOLTER MOLANUS FÜR LEIBNIZ Rinteln, 29. März (8. April) 1677. [138.140.] Reverendissime et Magnifice Dⁿ^#'e Abbas et Director, Domine et Patrone aeternum venerande. Quod tam doctum tamque amicum (ita enim scribis) mihi adversarium excitare voluisti, gratias eo nomine e...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

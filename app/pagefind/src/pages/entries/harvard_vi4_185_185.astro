@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_185",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 185,
+  "text": "[[642.19]] <b>153.  De lingua rationali [Herbst 1685 (?)]</b>\n [[642.20]] <tab/>[Herbst 1685 (?)] </p>\n<p> [[643.1]] Lingua rationalis ita utiliter constituetur, ut cuilibet vocabulo aliarum linguarum\n[[643.2]] respondens possit, si velimus constitui, v.g. <i>Titius est magis doctus Cajo.</i> Sensus est:\n[[643.3]] quatenus Titius est doctus, et Cajus est doctus, eatenus Titius est superior et Cajus est\n[[643.4]] inferior. Haec analysis optima quidem est, sed non exprimitur vis singulorum verborum.\n[[643.5]] Quod ut assequamur, dicendum erit: Titius est doctus et qua talis superior, quatenus\n[[643.6]] inferior qua doctus est Cajus. Cumque si <i>doctior</i> sit idem quod <i>magis doctus</i> patet in\n[[643.7]] explicationem hujus: <i>doctior Cajo</i>, id est <i>doctior aliquo qui est Cajus</i>, ingredi hoc ipsum.\n[[643.8]] Et quidem <i>doctus</i> est quasi radicale, <i>magis aliquo qui est</i> <i>hic</i>, scil. <i>Cajus</i> esse servilia. Et\n[[643.9]] haec servilia debent posse ita esse constituta, ut apparet regula commutandi seu ex hoc\n[[643.10]] <i>Titius est doctus magis aliquo qui est Cajus</i> debet etiam fieri posse <i>Cajus est doctus\n[[643.11]] minus aliquo qui est Titius</i> item <i>doctrina Caji minor est quam Titii</i>, etc. </p>\n<p> [[643.12]] Notandum et non videri possibile esse ut abstrahendo aliquod commune semper\n[[643.13]] inveniamus jam commune illud in notione seu charactere, alioqui innumeris opus esset\n[[643.14]] literis ingredientibus, sed abstractio illa plerumque pendet ab aliquo respectu, itaque\n[[643.15]] videtur potius additione quorundam servilium interdum fieri abstractio, quam minuendo\n[[643.16]] seu excerpendo partem notionis. </p>\n<p> [[643.17]] Si velimus multiplicatione numerorum in se invicem exhibere compositas notiones\n[[643.18]] nonnihil haerebimus in iis inter se jungendis quae idem bis involvunt, ut si dicas <i>triangulum\n[[643.19]] aequilaterum</i>, manifestum est anguli notionem jam inferre notionem laterum et\n[[643.20]] contra. </p>\n<p> [[643.21]] Si duo inter se disputantes consentiant in quaestione hujus linguae verbis vel characteribus\n[[643.22]] exprimenda, postea ex ipsis characteribus dirimi poterit controversia. </p>\n<p> [[643.23]] Videndum an sic institui possint characteres, ut pro arbitrio transponi possint; salva\n[[643.24]] praesenti significatione, sed re melius considerata aliter faciendum arbitror, nam praeterquam\n[[643.25]] quod ita nimis multa forent synonyma, quae memoriam turbarent (tot scilicet\n[[643.26]] quot transpositiones), putem ne fieri quidem hoc posse quia non potest quaevis litera\n[[643.27]] absolute per se stare. </p>\n<p> [[644.1]] Reperio plurimas notiones incomplexas quae relationes involvunt, supponere quasdam\n[[644.2]] propositiones, sed generales seu indefinitas, verbi gratia <i>A est B.</i> Quid ergo si tot\n[[644.3]] faciamus syllabas vocabuli quot sunt praepositiones ingredientes notionem, ita ut syllaba\n[[644.4]] sit trium literarum, ex quibus una sit subjectum altera praedicatum [propositionis]\n[[644.5]] indefinitae, tertia modum connexionis cum reliquis praepositionibus exprimat. Videndum\n[[644.6]] quid hic possint diphthongi, item literae aspiratae, quae quodammodo duplices sunt. </p>\n<p> [[644.7]] <i>Aethiops est albus</i> <i>quoad dentes</i> sic explicari potest: Aethiops est albus quatenus\n[[644.8]] dentes (qui sunt partes quatenus Aethiops est totum) sunt albi. Ita videmus prius: <i>quatenus</i>\n[[644.9]] respicere ad omne quod sequitur, in quibus involvitur postea novum <i>quatenus</i>\n[[644.10]] strictius. Videmus et relativum <i>qui</i> adhiberi respectu unius termini, at <i>quatenus</i> respectu\n[[644.11]] integrae propositionis. Si quis vellet evitare repetitionem Aethiopis, sic rem instituere\n[[644.12]] posset: Aethiops seu <i>A</i> est albus quatenus dentes (qui sunt partes quatenus <i>A</i> est totum)\n[[644.13]] sunt albi. </p>\n<p> [[644.14]] <i>Dentes Aethiopis</i> hoc loco sic explicui: dentes qui sunt partes quatenus Aethiops est\n[[644.15]] totum. </p>\n",
+  "number": "153.",
+  "title": "De lingua rationali",
+  "date": "[Herbst 1685 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:153. De lingua rationali [Herbst 1685 (?)] [Herbst 1685 (?)] Lingua rationalis ita utiliter constituetur, ut cuilibet vocabulo aliarum linguarum respondens possit, si velimus constitui, v.g. Titius est magis doctus Cajo. Sensus est: quatenus Titius est doctus, et Cajus est doctus, eatenus Titius est...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_385",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 385,
+  "text": "[[1659.12]] <b>327₁.  Radix contingentiae est infinitum in rationibus\n[[1659.16]] <tab/><k>Veritas</k> <tab/><k>Proportio</k>\n [[1659.17]] 1) <tab/>est praedicatum inesse subjecto <tab/> 1) <tab/>est quantitatem minorem\n [[1659.18]] <tab/>certo modo inesse majori\n [[1659.19]] 2) <tab/>ostenditur reddendo rationem <tab/> 2)<tab/>ostenditur explicando habitudinem\n [[1659.20]] 3) <tab/>quod fit per quandam analysin <tab/> 3)<tab/>quod fit per quandam analysin\n [[1659.21]] <tab/>terminorum <tab/>terminorum\n [[1659.22]] 4) <tab/>in notiones communes utrique. <tab/> 4)<tab/>in quantitates communes utrique.\n [[1660.1]] 5) <tab/>Haec Analysis vel finita est, <tab/> 5) <tab/>Haec Analysis vel finita est\n [[1660.2]] <tab/>vel infinita. <tab/>vel infinita.\n [[1660.3]] 6) <tab/>Si finita sit dicitur <tab/> 6) <tab/>Si finita sit, dicitur\n [[1660.4]] <tab/>Demonstratio <tab/>Inventio maximae communis\n [[1660.5]] <tab/>mensurae,\n [[1660.6]] 7) <tab/>et veritas dicitur <tab/> 7) <tab/>et proportio dicitur\n [[1660.7]] <tab/>necessaria, <tab/>commensurabilium\n [[1660.8]] 8) <tab/>reducitur enim ad veritates <tab/> 8)<tab/>reducitur enim ad congruentiam\n [[1660.9]] <tab/>identicas, <tab/>cum mensura eadem repetita\n [[1660.10]] 9) <tab/>seu principium contradictionis. <tab/> 9) <tab/>seu principium aequalitatis\n [[1660.11]] <tab/>eorum quae sibi congruunt.\n [[1660.12]] 10) <tab/>Sin nunquam perveniatur <tab/>0) <tab/>Sin nunquam perveniatur\n [[1660.13]] <tab/>ad exhaustionem <tab/>ad exhaustionem\n [[1660.14]] 11) <tab/>et analysis procedat in infinitum <tab/>1) <tab/>et analysis procedat in infinitum\n [[1660.15]] 12) <tab/>veritas dicitur contingens <tab/>2) <tab/>proportio est incommensurabilita-\n [[1660.16]] <tab/>tis\n [[1660.17]] 13) <tab/>quae infinitas involvit rationes <tab/>3) <tab/>quae infinitos habet quotientes\n [[1660.18]] 14) <tab/>ita tamen ut semper aliquod <tab/>4)<tab/>ita tamen ut semper aliquod\n [[1660.19]] <tab/>sit residuum <tab/>sit residuum\n [[1660.20]] 15) <tab/>cujus iterum quaerenda est ratio <tab/>5) <tab/>novum praebens quotientem\n [[1660.21]] 16) <tab/>continuata autem analysi <tab/>6)<tab/>continuata autem analysi\n [[1660.22]] <tab/>prodit series infinita <tab/>prodit series infinita\n [[1660.23]] 17) <tab/>quae tamen a Deo <tab/>7)<tab/>circa quam Geometra\n [[1660.24]] <tab/>perfecte cognoscitur. <tab/>utique multa cognoscit.\n [[1660.25]] 18) <tab/>Et haec est scientia visionis <tab/>8)<tab/>Et haec est doctrina de numeris\n [[1660.26]] <tab/><tab/>surdis, decimo <i>Elementorum</i>\n[[1660.27]] contenta\n [[1660.28]] 19) <tab/>distincta a scientia simplicis <tab/>9)<tab/>distincta ab Arithmetica communi\n [[1660.29]] <tab/>intelligentiae\n [[1660.30]] 20) <tab/>utraque tamen non experimentalis <tab/>0)<tab/>utraque non experimentis sensuum,\n [[1661.1]] <tab/>sed a priori habens infallibilitatem <tab/>sed demonstrationibus innixa\n [[1661.2]] 21) <tab/>neque inter has media datur. <tab/>1)<tab/>neque inter has media datur.\n [[1661.3]] <tab/>Quam vero vocant Scientiam Mediam\n [[1661.4]] <tab/>est scientia visionis\n [[1661.5]] <tab/>contingentium possibilium.\n [[1661.6]] 22) <tab/>Ex his apparet radicem <tab/>2)<tab/>Ex his apparet radicem\n [[1661.7]] <tab/>contingentiae esse <tab/>incommensurabilitatis esse\n [[1661.8]] <tab/>infinitum in rationibus. <tab/>infinitum in materiae partibus. </p>\n",
+  "number": "327₁.",
+  "title": "Radix contingentiae est infinitum in rationibus",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:327₁. Radix contingentiae est infinitum in rationibus Veritas Proportio 1) est praedicatum inesse subjecto 1) est quantitatem minorem certo modo inesse majori 2) ostenditur reddendo rationem 2)ostenditur explicando habitudinem 3) quod fit per quandam analysin 3)quod fit per quandam analysin terminor...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_425",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 425,
+  "text": "[[1801.10]] <b>347.  De Pallavicini axiomatibus [1686 bis 1689 (?)]</b>\n [[1801.11]] <tab/>[1686 bis 1689 (?)] </p>\n<p> [[1801.17]] Nec sufficiunt nec vero conducunt ad ratiocinandum, quasi conclusionum praemissa\n[[1801.18]] capita, initia illa: <i>quodlibet vel est vel non est</i>, item <i>Non potest idem simul esse et non\n[[1801.19]] esse</i>. </p>\n<p> [[1801.20]] Sex omnino axiomata sunt, quae nec probari per aliquid se perspectius possunt, et\n[[1801.21]] unicuique hominum, ac ferme etiam belluarum suopte ingenio constant; Eademque\n[[1801.22]] necessaria sunt atque idonea, quibuscunque argumentationibus qua physicis, qua moralibus: </p>\n<p> [[1802.1]] Primum: <i>nil novum oritur ex se ipso, sed ab alia quadam causa producitur.</i> </p>\n<p> [[1802.2]] 2. <i>Ab eadem plane causa</i> (volendi facultatem excipio) <i>produci nequeunt nova\n[[1802.3]] effectorum genera.</i> </p>\n<p> [[1802.4]] 3. <i>Si postquam extitit certa quaepiam res certam aliam rem oriri semper videmus,\n[[1802.5]] illa hujus fuit causa.</i> </p>\n<p> [[1802.6]] 4. <i>Proximae causae</i> (praeter volendi facultatem) <i>ex quibus diuturno et semper simili\n[[1802.7]] experimento manare vidimus certum effectorum genus, ejusdem generis effecta dabunt\n[[1802.8]] etiam in posterum, modo nil novum ponatur nisi alius locus et aliud tempus.</i> </p>\n<p> [[1802.9]] 5. <i>Illud effectorum agmen quod antehac semper a certa quadam specie propinquarum\n[[1802.10]] causarum duntaxat prodire vidimus, imposterum quoque ab ejusdem modi causis\n[[1802.11]] duntaxat prodibit.</i> Hoc intra moralis, quod ajunt, evidentiae fines concluditur. </p>\n<p> [[1802.12]] 6. <i>Plerumque id ipsum causae imposterum efficient, atque in praesentia efficiunt,\n[[1802.13]] quod plerumque ab iisdem vel a maxime similibus causis antea effectum novimus.</i> Hoc\n[[1802.14]] sola pariter evidentia morali contentum est, et ei omnis practica ratiocinatio innititur. </p>\n<p> [[1802.15]] 7. Huic sexto generali praejudicio communiter adjiciunt homines natura suadente in\n[[1802.16]] singulis eventibus peculiarem quandam anticipationem ac persuasionem, ex qua tota\n[[1802.17]] <i>probabilitas</i> emergit, quae fallax utique, sed plerumque vera est, nimirum: <i>in hoc ancipiti\n[[1802.18]] eventu id contingit, quod in similibus circumstantiis plerumque contingere consuevit.</i> </p>\n<p> [[1802.19]] Haec P. Sforza Pallavicinus (postea Cardinalis) lib. 2. <i>de Bono</i> quemadmodum ipse\n[[1802.20]] in libri Epitoma exhibet. </p>\n<p> [[1802.21]] Sunt quaedam in his Pallavicini quae non satisfaciunt. </p>\n<p> [[1802.22]] 1) Verum est generaliter prolatum contradictionis principium nihil novi dare, sed si\n[[1802.23]] per ecthesin quandam applicetur rebus, ut <i>Omne A est A</i>; <i>unumquodque sibi ipsi aequale\n[[1802.24]] vel simile est</i>, et his similia efficit aliquid, quemadmodum exemplis comperi. Ignorant\n[[1802.25]] hos usus non philosophi, quia multa de demonstrationibus disserentes, raro ad ipsasmet\n[[1802.26]] conficiendas perveniunt. </p>\n<p> [[1802.27]] 2) Principia quae hic affert Pallavicinus non sunt indemonstrabilia ut statuit, sed\n[[1802.28]] fluunt ex definitione veritatis, <b>vera</b> enim propositio est ad identicas resolubilis, seu\n[[1802.29]] cujus ratio reddi potest, hinc vulgo ajunt nihil sine causa vel ratione fieri posse vel asseri\n[[1802.30]] debere. </p>\n<p> [[1802.31]] 3) Etiam axioma tertium non minus quam quintum ad moralem certitudinem pertinet.\n[[1802.32]] Imo tertium paulo est incertius et vix excedit praesumtionem. Sextum quoque ad\n[[1802.33]] moralem certitudinem non assurgit. </p>\n<p> [[1803.1]] 4) Non est cur volendi facultatem excipiat in axiomatibus secundo et quarto, nam et\n[[1803.2]] in voluntate nunquam eveniet ut omnibus tam intra quam extra volentem positis iisdem,\n[[1803.3]] diversum; aut diversis, idem, prodeat. Semper erit aliqua ratio inclinans voluntatem, etsi\n[[1803.4]] necessitatem non afferat. </p>\n",
+  "number": "347.",
+  "title": "De Pallavicini axiomatibus",
+  "date": "[1686 bis 1689 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:347. De Pallavicini axiomatibus [1686 bis 1689 (?)] [1686 bis 1689 (?)] Nec sufficiunt nec vero conducunt ad ratiocinandum, quasi conclusionum praemissa capita, initia illa: quodlibet vel est vel non est, item Non potest idem simul esse et non esse. Sex omnino axiomata sunt, quae nec probari per ali...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_356",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 356,
+  "text": "[[1498.11]] <b>299₁.  Gestrichener Ansatz GESTRICHENER ANSATZ </p>\n<p> [[1498.14]] <p>Si <Fn><i>Am Kopf der Seite</i>: Literae, ut <i>A, B, C</i> mihi significant hoc loco Terminum concretum aliquid positivi involventem, propositio ut <i>A est B</i> semper a me hoc loco intelligitur universalis, nisi aliter admoneatur.</Fn> <i>A</i> sit vel <i>B</i> vel <i>C</i> vel <i>D</i>, et ita porro, tunc <i>A</i> dicetur <b>Aliquid</b>, et specialiter\n[[1498.15]] <b>Aliquis</b> homo idem erit quod <i>B</i> homo vel <i>C</i> homo vel <i>D</i> homo, et ita porro; verbi gratia\n[[1498.16]] Europaeus homo vel Asiaticus homo, etc. </p>\n<p> [[1498.17]] Si <i>N</i> sit neque <i>B</i> neque <i>C</i> neque <i>D</i>, et ita porro tunc <i>N</i> dicetur esse <b>Nihil</b>, atque hoc\n[[1498.18]] est quod vulgo dicunt Nihili nulla esse attributa. Specialiter <b>Nullus</b> homo idem erit\n[[1498.19]] quod neque Europaeus homo, neque Asiaticus homo, et ita porro. </p>\n<p> [[1499.1]] Quid sit <b>Ens</b> vel Res non melius nunc quidem declarare possum quam dicendo <i>A</i>\n[[1499.2]] esse Ens, et <i>B</i> esse Ens, et <i>C</i> esse Ens, et <i>D</i> esse Ens, et ita porro tanquam si dicerem Ens\n[[1499.3]] esse commune omnium genus. Aliquid autem et Ens revera quidem idem sunt, sed\n[[1499.4]] differunt in modo concipiendi. Possum etiam dicere Ens esse cujus conceptus aliquid\n[[1499.5]] positivi involvit, seu aliquid ponit quod a nobis concipi potest. </p>\n<p> [[1499.6]] <b>Existit</b> Ens quod immediate percipi potest, aut ex eo quod immediate percipi\n[[1499.7]] potest sequitur. Immediate percipi illa dico, quorum nobis conscii sumus seu quae sunt\n[[1499.8]] intra intellectum nostrum, tunc enim medium nullum est inter id quod percipit et quod\n[[1499.9]] percipitur neque a Deo ratio erroris intelligi potest. Porro ut Ens definio per conceptum,\n[[1499.10]] ita Existens definio per sensum sive perceptionem; concipimus Entia etiam possibilia,\n[[1499.11]] percipimus existentia, aut quae apparent existentia. </p>\n<p> [[1499.12]] Perceptio est cogitatio ex qua sequitur conatus agendi. Sed ut distinctius intelligamus\n[[1499.13]] quid sit existere, videamus quibus modis rem aliquam existere probetur. Et quidem\n[[1499.14]] me varia cogitantem deinde existere quoque phaenomena varia menti meae adversantia\n[[1499.15]] sive apparitiones plurimas. </p>\n",
+  "number": "299₁.",
+  "title": "Gestrichener Ansatz",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:299₁. Gestrichener Ansatz GESTRICHENER ANSATZ Si Am Kopf der Seite: Literae, ut A, B, C mihi significant hoc loco Terminum concretum aliquid positivi involventem, propositio ut A est B semper a me hoc loco intelligitur universalis, nisi aliter admoneatur. A sit vel B vel C vel D, et ita porro, tunc ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

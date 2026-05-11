@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_271",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 271,
+  "text": "<p> [[830.9]] <b>236. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[830.10]] [Hannover, Ende Juni 1682.] [235.237.]</b></p>\n<p> [[830.23]] [ ... ] Unter denen Academicis wird M. h. H. den H. Abbé Mariotte den ehrlichsten und\n[[830.24]] aufrichtigsten zu seyn finden. So hat er auch ein sonderlich talent die natur zu untersuchen,\n[[830.25]] artliche experimenta auszufinden und deren ursachen zu errathen. Aber mit Metaphysicis und\n[[830.26]] Analyticis bemühet er sich nicht. </p>\n<p> [[830.27]] M. h. H. tractat werde zweifelsohne mit sonderbarer lust und Nuzen lesen, und ersehe gern\n[[830.28]] bereits aus dem so M. h. H. davon gedencket, daß er numehr von einigen aus Cartesio und\n[[831.1]] Spinosa gezogenen praejudiciis befreyet, dagegen ich unterschiedtlich mahl geprediget, immaßen\n[[831.2]] ich allezeit davor gehalten, neque cogitationem neque extensionem esse notiones primitivas\n[[831.3]] aut perfecte intellectas. Was sonst M. h. H. in seinem tractat, de educatione, de inquisitione\n[[831.4]] veritatis, und de Medicina ut ita dicam provisionali hat, solches wird zweifelsohne treflich und\n[[831.5]] nüzlich seyn. [ ... ] </p>\n",
+  "number": "236.",
+  "title": "LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS",
+  "date": "[Hannover, Ende Juni 1682.] [235.237.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:236. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS [Hannover, Ende Juni 1682.] [235.237.] [ ... ] Unter denen Academicis wird M. h. H. den H. Abbé Mariotte den ehrlichsten und aufrichtigsten zu seyn finden. So hat er auch ein sonderlich talent die natur zu untersuchen, artliche experimenta auszufind...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

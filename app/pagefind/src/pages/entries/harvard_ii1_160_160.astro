@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_160",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 160,
+  "text": "<p> [[501.23]] <b>144. LEIBNIZ AN HERMANN CONRING</p>\n<p> [[501.24]] [April 1677.] [49.145.]</b></p>\n<p> [[502.6]] Ampl^#'m^#'e et Cl^#'m^#'e Dⁿ^#'e </p>\n<p> [[502.7]] Aliquot anni sunt, quod mihi non innotescere Tibi tantum, sed et tecum per literas\n[[502.8]] commercium colere datum est, quod postea itinera mea abrupere. Nunc Germaniae redditus,\n[[502.9]] tibique vicinior, indignus profecto essem fortuna qua uti nescirem. Itaque ubi primum Hanoveram\n[[502.10]] appuli, et delatum a Serenissimo Principe Consiliarii munus accepi, in primis illud mihi\n[[502.11]] faciendum putavi, ut neque absentia neque silentio imminutum intelligeres cultum illum, quem\n[[502.12]] nomini tuo ab omnibus verae eruditionis aestimatoribus deberi sentio. Quam animi mei sententiam\n[[502.13]] hae literae tibi non facunde quidem, attamen ex vero, interpretabuntur. Et cum Princeps\n[[502.14]] etiam Bibliothecae suae curam a me geri velit, certe non negligendi mihi viri sunt, qui\n[[502.15]] praeclaris monumentis rem literariam auxere, praesertim in vicino positi, et in humanitatem\n[[502.16]] effusi, qualem in te sum expertus. Gratulor autem inprimis aetati tuae, quae de vigore animi\n[[502.17]] nihil detraxit. Video enim novissima monumenta tua nihil illis cedere quae triginta ab hinc et\n[[502.18]] amplius annis adornasti. Quare avide expecto quae circa religionem te moliri ab egregio Viro,\n[[502.19]] Molano nostro intellexi. Nam post tot annorum lectionem atque meditationem exquisitum\n[[502.20]] aliquid a te sibi pollicentur etiam qui ab adversa stant parte. Neque illi audiendi sunt qui\n[[502.21]] alienam hanc putant a Medico vel Jurisconsulto curam. Quasi vero cuiquam interdictum sit ex\n[[502.22]] ipsis fontibus sapere, et ubi sibi satisfacere visus est, publico prodesse velle. Quin imo hanc\n[[502.23]] esse debere arbitror piis omnibus, quibus vitae genus inquisitionem permittit, maximam et\n[[502.24]] novissimam solicitudinem, ut rationem spei suae reddere possint. Qua quidem occasione unum\n[[502.25]] a te desiderare audeo, fretus illa benignitate quam sum olim expertus, nimirum quae sit\n[[502.26]] sententia tua, de illis demonstrationibus quae de vertice rerum, mente, et immortalitate nostrae\n[[502.27]] animae feruntur. Velim enim argumentum illud coli diligentius, et exquisitis demonstrationibus\n[[502.28]] si fieri potest adornari. Nam quae vir ingeniosissimus Renatus Cartesius, cui in Gallia et\n[[502.29]] Batavis passim fasces submiserunt eruditi, publicavit, rem si quid judico non absolvunt. Ut cum\n[[503.1]] probare contendit Ens perfectissimum necessario existere, quia ipsa existentia in perfectionum\n[[503.2]] numero est, adeoque enti perfectissimo deesse non potest. Quae quidem ratiocinatio pro certo\n[[503.3]] sumit, quandam essentiam perfectissimam intelligi posse, hoc enim posito, reliqua manifesta\n[[503.4]] sunt. At qui subtiliores sunt adversarii ajunt Ens perfectissimum tam implicare contradictionem\n[[503.5]] quam numerum maximum. Quod si ergo hanc notionem Entis perfectissimi vel Entis necessario\n[[503.6]] existentis intelligibilem esse non evicerit, nec existere Ens illud effecerit. </p>\n<p> [[503.7]] De caetero magno me beneficio affeceris, si quae alia publico bono moliris, mihi indicaveris:\n[[503.8]] neque enim dubito quin multae praeclarae tibi in variis studiis restent meditationes,\n[[503.9]] quas equidem nollem perire. Inprimis optem cogitata tua circa rem medicam non intercipi,\n[[503.10]] qualia multa esse non ambigo. Nam plurima haud dubie a tot annis in te aliisque observasti, et\n[[503.11]] qua polles judicii acrimonia ex observatis conclusisti. Qualia vel ideo magis expetenda censeo,\n[[503.12]] quod jactura in hoc studiorum genere non facile reparatur; mihi enim semper facilius visum est\n[[503.13]] et JC^#'t^#'o^#'s et Theologos egregios, quam Medicos excellentes habere. Si secus feceris plurimum\n[[503.14]] ipsis Medicis nocebis: multi enim putabunt te eo ingenio virum vix quicquam certi quod de re\n[[503.15]] medica scriberes habuisse, non tua haud dubie sed artis culpa. Sed ne modum Epistolae\n[[503.16]] excedam finiam ubi hoc unum adjecero intellexisse me ex Gallia duo praeclara scripta mox\n[[503.17]] proditura, unum Cl^#'m^#'i Cangii <i>Glossarium</i>, alterum doctissimi viri Petri Danielis Huetii librum <i>de\n[[503.18]] religionis christianae veritate</i> opus amplum et exquisitum. </p>\n",
+  "number": "144.",
+  "title": "LEIBNIZ AN HERMANN CONRING",
+  "date": "[April 1677.] [49.145.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:144. LEIBNIZ AN HERMANN CONRING [April 1677.] [49.145.] Ampl^#'m^#'e et Cl^#'m^#'e Dⁿ^#'e Aliquot anni sunt, quod mihi non innotescere Tibi tantum, sed et tecum per literas commercium colere datum est, quod postea itinera mea abrupere. Nunc Germaniae redditus, tibique vicinior, indignus profecto ess...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

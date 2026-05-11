@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_106",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 106,
+  "text": "<p> [[283.1]] <b>106. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[283.2]] 31. März (10. April) 1697. [104.111.]</b></p>\n\n<p> [[283.9]] I. N. J. C. </p>\n<p> [[283.10]] Excellentissimo et Amplissimo Dn. G. G. Leibnitio </p>\n<p> [[283.11]] V. Placcius S. P. D. </p>\n<p> [[283.12]] Quod cum eruditis aliis omnibus abruptum mihi litterarium commercium manet, tecum\n[[283.13]] uno conservare dum vivam volupe cum sit; exacte ad omnia ultimarum tuarum respondeo. Et\n[[283.14]] primo quidem de Weigeliana morte per Dei gratiam falsus est rumor excitatus litteris Helmestadianis\n[[283.15]] Dn. Schmidii. Ipse Weigelius superiori hebdomade hic transiit commoratus solo\n[[283.16]] biduo, nec mihi, sed Dn. Bussingio visus, et Viennam a nobis pergens. Jungianae Geometriae\n[[283.17]] spem superesse gaudeo, eamque in <i>Anonymis</i> meis publicabo. De <i>Menagianis</i> necdum mihi\n[[283.18]] satis fit, nescio an et quae nova illa editio. Tomum II. Parisiis 1695 equidem vidi, sed in ea nihil\n[[283.19]] de Jolante, Eleonora vel Alienora regina. Quaeso itaque, paulo explicatius me informes.\n[[283.20]] <i>Cautionis criminalis processus circa sagas</i> auctor te indice certus omnino mihi ut fiat opto.\n[[283.21]] Manet enim dubia illius mihi et ambigua valde hactenus notitia. Quidam amicorum in symbola\n[[283.22]] sua manuscripta N. Speeium, Jesuitam[;] Simon Pauli in <i>Catalogo</i> suo Herm. Sibram von\n[[284.1]] Singen nescio quem inscribit. Editio 1695. Solisbaci. Joannem Gronaeum C. Austriacum ut\n[[284.2]] puto fictitium nomen praefationi ad lectorem non operi facit. Librum lectu dignum legi. Quo\n[[284.3]] magis auctorem scire aveo. Denique an innotuerit tibi aut describi mihi quoque possit argumentum\n[[284.4]] et moles libri Cornelii Duplicii <i>Apologiae pro Christierno II. Daniae rege</i> in Belgium\n[[284.5]] profugo, circiter A. 1524 excusi, scire aveo. Vale. 1697. prid. Cal. April. </p></p>\n",
+  "number": "106.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "31. März (10. April) 1697. [104.111.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:106. VINCENT PLACCIUS AN LEIBNIZ 31. März (10. April) 1697. [104.111.] I. N. J. C. Excellentissimo et Amplissimo Dn. G. G. Leibnitio V. Placcius S. P. D. Quod cum eruditis aliis omnibus abruptum mihi litterarium commercium manet, tecum uno conservare dum vivam volupe cum sit; exacte ad omnia ultimar...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

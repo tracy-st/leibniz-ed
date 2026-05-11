@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_156",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 156,
+  "text": "<p> [[502.1]] <b>156. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[502.2]] [Coburg,] 11. Oktober 1706. [155.159.] </b></p>\n<p> [[502.9]] Perillustris atque Excellentissime Domine </p>\n<p> [[502.10]] Quod <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> Tibi mei oblivionem nondum passus es obrepere, in praecipua felicitatis parte pono,\n[[502.11]] ac memorem hujus aliorumque beneficiorum animum semper praestabo. </p>\n<p> [[502.12]] Schulenburgii impedimenta vidimus cum milite, cui illorum custodia credita fuerat. Dux\n[[502.13]] ipse dicitur copias prope Francofurthum collegisse, irruptionem in Bipontinos facturus. Igitur\n[[502.14]] literas Tibi reddo bona fide, curaturus omni studio, si certa mihi perferendarum ratio non\n[[502.15]] deesset. </p>\n<p> [[502.16]] Dignatus es ex me quaerere, Vir Perillustris, cui rei nunc studeam? Respondebo Tibi\n[[502.17]] duobus verbis, Here optime. Ex quo me Helmstadio ejecit invidia, quicquid temporis subducere\n[[502.18]] laboribus publicis et Franconicae nobilitatis juventuti licet, historiae ac juri naturae gentiumque\n[[502.19]] impendo, incertus, an me his rebus docendis velint aliquando fata adhibere. Te precor, Vir\n[[503.1]] Summe, ut me olim in lucem academicam denuo protrahas, daturum operam, ut commendationis\n[[503.2]] Te nunquam poeniteat. Vale, Vir maxime, et, si id adjici pateris; Here omni obsequii\n[[503.3]] genere devenerande, et me ornare ne desine. Scrib. d. XI. Octobr. 1706. </p>\n<p> [[503.4]] T. aeterno obsequio ac fide Ernestus Salomo Cyprianus. </p>\n",
+  "number": "156.",
+  "title": "ERNST SALOMON CYPRIAN AN LEIBNIZ",
+  "date": "[Coburg,] 11. Oktober 1706. [155.159.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:156. ERNST SALOMON CYPRIAN AN LEIBNIZ [Coburg,] 11. Oktober 1706. [155.159.] Perillustris atque Excellentissime Domine Quod Am Kopf der Seite von Leibniz' Hand: resp. Tibi mei oblivionem nondum passus es obrepere, in praecipua felicitatis parte pono, ac memorem hujus aliorumque beneficiorum animum s...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

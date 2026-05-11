@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_202",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 202,
+  "text": "<p> [[627.6]] <b>202. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[627.7]] Leipzig, 9. Juli 1707. [199.205.] </b></p>\n<p> [[627.12]] Illustris atque Excellentissime VIR, Patrone observanter colende! </p>\n<p> [[627.13]] Executus <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: Semiresp</Fn> sum mandata Tua, et Fritschio nostro rem totam sub fide silentii exposui. Sed\n[[627.14]] responsum tuli se nullam apud Batavos officinam habere, at fratrem suum Amstelodami vivere,\n[[627.15]] et hoc ipso tempore Lipsiae agere. Quare confestim occasionem cum ipso colloquendi quaesivi,\n[[627.16]] quam nuper etiam consecutus sum. Postquam vero consilium perceperat, promtitudinem mihi\n[[627.17]] suam Excellentiae Tuae voluntatibus inserviendi multis indiciis luculentissimis comprobavit.\n[[627.18]] Verum id dolebat unice, quid licet Amstelodami sedes suas fixerit, nullos tamen unquam in\n[[627.19]] Batavis Libros imprimendos curaverit, paratum tamen esse reliquorum Cl. Baylii scriptorum\n[[628.1]] editori, ut primum de voluntate Excellentiae Tuae factus esset certior (rogabat autem ut id fieret\n[[628.2]] quam citissime), illud per literas significandi, non dubitans fore hunc virum ad Operis editionem\n[[628.3]] quam promtissimum. Quare non potui quin officio meo satisfacturus Excellentiae Tuae\n[[628.4]] tribus verbis id indicarem; Scriptum meum quod attinet, nisi grave est, vellem Excellentiam\n[[628.5]] Tuam per Postam mittere sub operculo: </p>\n<p> [[628.6]] <i>A Monsieur Mons. Clausnitzer</i> </p>\n<p> [[628.7]] <i>Secretaire de la Poste</i>,\n [[628.8]] tum quod tutius est, tum quod id fieri sine sumtibus Excellentiae T. et meis potest; amicus enim\n[[628.9]] iste lubentissime mihi in hisce gratificabitur. Vehementer autem desidero monita Excellentiae T.,\n[[628.10]] quibus me vel in sententia confirmatum vel meliora edoctum iri spero, et longe\n[[628.11]] amplissimam certa Philosophiae Platonicae, cujus indagini alias deditissimus sum[,] fundamenta\n[[628.12]] eruendi occasionem adepturum esse certo confido. </p>\n<p> [[628.13]] Scribebam de subito MDCCVII. d. 9. Julii Lipsiae. </p>\n<p> [[628.14]] Excellentiae Tuae Submississimus Mich. Gottl. Hanschius </p>\n<p> [[628.15]] A Son Excellence Monseigneur de Leibnitz Conseiller privé de Son Altesse Electorale de\n[[628.16]] Brounsvic et Lunebourg à Hannover </p>\n",
+  "number": "202.",
+  "title": "MICHAEL GOTTLIEB HANSCH AN LEIBNIZ",
+  "date": "Leipzig, 9. Juli 1707. [199.205.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:202. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ Leipzig, 9. Juli 1707. [199.205.] Illustris atque Excellentissime VIR, Patrone observanter colende! Executus Am Kopf des Briefes von Leibniz' Hand: Semiresp sum mandata Tua, et Fritschio nostro rem totam sub fide silentii exposui. Sed responsum tuli se nullam ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

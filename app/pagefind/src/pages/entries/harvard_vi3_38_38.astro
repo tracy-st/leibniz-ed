@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_38",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 38,
+  "text": "[[398.6]] <b>38. Geplante fingierte Dialoge </b> <span>398.6;0:63:038:76!      :L:f^</span>.\n[[398.7]] :l^</span>.\n[[398.14]] Dialogus inter Reginam Mariam Medicaeam et P. Berullum, postea Cardinalem.\n[[398.15]] La Reine luy conte qu'elle n'a pas dormi cette nuit à cause d'un mal de dent, et qu'elle\n[[398.16]] a esté travaillée d'étranges pensées, qu'il luy est venu dans l'esprit ce qu'elle avoit veu\n[[398.17]] quelques jours auparavent en passant de son appartement par un escalier derobé,\n[[398.18]] qu'une grosse vilaine araignee attrapoit une mouche, la tiroit dans son trou, et l'achevoit\n[[398.19]] miserablement que là dessus il luy est venu la pensée, que le Diable traitoit de\n[[398.20]] méme les ames de ceux qui meurent dans le peché, et que Dieu a voulu representer\n[[398.21]] cela par la. Elle fait une preface que cette idee est triste; le pere Berulle apres luy avoit\n[[398.22]] donné à connoistre, que le Diable est plus mechant et plus terrible infiniment, vient\n[[398.23]] peu à peu à ce point important, qu'il ne faut pas que la crainte des enfans soit le motif\n[[398.24]] principal de nostre pieté.\n[[399.1]] Dialogue entre le Pape Alex. VII. et le Card. Pallavicini de la reforme de l'Eglise.\n[[399.2]] Le Cardinal tache de faire comprendre au pape par certains points de la Scholastique,\n[[399.3]] que Dieu méme ne fait pas les choses optimo modo. Le pape est d'un sentiment\n[[399.4]] contraire. Le Cardinal se rend. Mais il tache de faire comprendre au pape qu'il se faut\n[[399.5]] garder des réformes ideelles, et que la vertu et la volupté ne sont pas incompatibles.\n[[399.6]] Autre dialogue entre le Pape Innocent XI et le Cardinal Cibo son premier ministre.\n[[399.7]] Dialogue entre le Cardinal de Richelieu et Mons. de Groot touchant la reconciliation\n[[399.8]] des religions.\n[[399.9]] Dialogue entre Mons. le Prince de Conti, et Mons. l'Evesque d'Alet de la Restitution.\n[[399.11]] Dialogue entre la Reine Christine et Mons. des Cartes de l'ame du monde.\n[[399.12]] Dialogue entre le Roy Jacques et le Chancelier Bacon de l'importance de la\n[[399.13]] Philosophie naturelle.\n[[399.14]] Dialogue entre le Roy Jacques et Mons. Casaubon de l'importance de l'étude des\n[[399.15]] belles lettres.\n",
+  "number": "38.",
+  "title": "Geplante fingierte Dialoge",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:38. Geplante fingierte Dialoge 398.6;0:63:038:76! :L:f^. :l^. Dialogus inter Reginam Mariam Medicaeam et P. Berullum, postea Cardinalem. La Reine luy conte qu'elle n'a pas dormi cette nuit à cause d'un mal de dent, et qu'elle a esté travaillée d'étranges pensées, qu'il luy est venu dans l'esprit ce ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

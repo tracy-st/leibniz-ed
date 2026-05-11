@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_225",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 225,
+  "text": "<p> [[717.1]] <b>228. JACQUES-BENIGNE BOSSUET FÜR LEIBNIZ</p>\n<p> [[717.2]] [Meaux, Ende Juni bis Mitte August 1693.] [222.242.]</b></p>\n[[717.24]] <b>Sur l'essence des Corps</b> <Fn><i>In A von Ledieus Hand am Ende des Textes</i>: Copie tirée de l'original même écrit de la main de M. l'Ev. de Meaux <i>und am Rand</i>: 1693.</Fn> </p>\n<p> [[717.25]] Toutes les fois que M. Leibniz entreprendra de prouver que l'essence du Corps n'est pas\n[[717.26]] dans l'etendüe actuelle non plus que celle de l'ame dans la pensée actuelle, je me declare\n[[717.27]] hautement pour luy. J'ay mesme travaillé sur cela et je pretends pouvoir demonstrer par\n[[717.28]] M. Descartes qu'il n'a point un autre sentiment que celuy de l'ecole. En cela donc comme en\n[[717.29]] beaucoup d'autres choses ses Disciples ont fort embroüillé les idées de leur maistre. Les\n[[717.30]] siennes mesme n'ont pas esté fort nettes lors qu'il a conclu l'infinité de l'etendüe par l'infinité\n[[718.1]] de ce vuide qu'on imagine hors du monde. En quoy il s'est fort trompé et je croy que de son\n[[718.2]] erreur on pour[r]oit induire par consequences legitimes l'impossibilité de la creation et de la\n[[718.3]] destruction des substances quoi que rien au monde ne soit plus contraire à l'idée de l'estre\n[[718.4]] parfait que ce Philosophe prend pour principal moyen de l'existence de Dieu. </p>\n<p> [[718.5]] Quant au surplus de la Dynamique je m'en instruirai avec plaisir. Car autant que je suis\n[[718.6]] ennemi des nouveautez qui ont rapport avec la foy autant suis-je favorable s'il est permis de\n[[718.7]] l'avouer à celles qui sont de pure Philosophie par ce qu'en cela on doit et on peut profiter tous\n[[718.8]] les jours tant par le raisonnement que par l'experience. </p>\n",
+  "number": "228.",
+  "title": "JACQUES-BENIGNE BOSSUET FÜR LEIBNIZ",
+  "date": "[Meaux, Ende Juni bis Mitte August 1693.] [222.242.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:228. JACQUES-BENIGNE BOSSUET FÜR LEIBNIZ [Meaux, Ende Juni bis Mitte August 1693.] [222.242.] Sur l'essence des Corps In A von Ledieus Hand am Ende des Textes: Copie tirée de l'original même écrit de la main de M. l'Ev. de Meaux und am Rand: 1693. Toutes les fois que M. Leibniz entreprendra de prouv...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

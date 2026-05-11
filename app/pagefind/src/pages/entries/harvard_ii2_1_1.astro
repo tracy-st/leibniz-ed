@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_1",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 1,
+  "text": "<p> [[3.2]] <b>1. LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS</p>\n<p> [[3.3]] 1./11. Februar 1686. [2.]</b></p>\n<p> [[3.28]] Extrait de ma lettre à Mg^#'r le Landgrave Ernest 1/11 Febr. 1686 </p>\n<p> [[3.29]] J'ay fait dernierement (estant à un endroit où quelques jours durant je n'avois rien à faire)\n[[3.30]] un petit discours de Metaphysique, dont je serois bien aise d'avoir le sentiment de Mons.\n[[3.31]] Arnaud. Car les questions de la grace, du concours de Dieu avec les creatures, de la nature des\n[[4.1]] miracles, de la cause du peché et de l'origine du mal, de l'immortalité de l'âme, des idées, etc. y\n[[4.2]] sont touchées d'une maniere qui semble donner de nouvelles ouvertures propres à eclaircir des\n[[4.3]] difficultés tres grandes. J'ay joint icy le sommaire des articles qu'il contient, car je ne l'ay pas\n[[4.4]] encor pû faire mettre au net. </p>\n<p> [[4.5]] Je supplie donc V.A.S. de luy faire envoyer ce sommaire et de le faire prier de le\n[[4.6]] considerer un peu et de dire son sentiment. Car comme il excelle egalement dans la Theologie\n[[4.7]] et dans la philosophie, dans la lecture et dans la meditation, je ne trouve personne qui soit plus\n[[4.8]] propre que luy d'en juger. Et je souhaiterois fort d'avoir un censeur aussi exact, aussi éclairé et\n[[4.9]] aussi raisonnable que l'est Monsieur Arnaud, estant moy même l'homme du monde le plus\n[[4.10]] disposé de ceder à la raison. Peut estre que M. Arnaud trouvera ce peu de choses pas tout à fait\n[[4.11]] indignes de sa consideration, sur tout puisqu'il a esté assez occupé à examiner ces matieres. S'il\n[[4.12]] trouve quelque obscurité, je m'expliqueray sincerement et ouvertement, et enfin s'il me trouve\n[[4.13]] digne de son instruction, je feray en sorte, qu'il aye sujet de n'en estre point mal satisfait. </p>\n<p> [[4.14]] Je supplie V. A. S. de joindre cecy au sommaire que je luy envoye, et d'envoyer l'un et\n[[4.15]] l'autre à M. Arnaud. </p>\n",
+  "number": "1.",
+  "title": "LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS",
+  "date": "1./11. Februar 1686. [2.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:1. LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS 1./11. Februar 1686. [2.] Extrait de ma lettre à Mg^#'r le Landgrave Ernest 1/11 Febr. 1686 J'ay fait dernierement (estant à un endroit où quelques jours durant je n'avois rien à faire) un petit discours de Metaphysique, dont je serois bien aise d'av...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

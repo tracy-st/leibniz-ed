@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_63",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 63,
+  "text": "<p> [[204.15]] <b>63. DAMARIS LADY MASHAM AN LEIBNIZ</p>\n<p> [[204.16]] Oates, 29. März (9. April) 1704. [56.67.] </b></p>\n<p> [[205.9]] S^#'r Oates 29 March 1704 </p>\n<p> [[205.10]] Thō I am not in the Number of those who can confirm the advantageous Idea you have of\n[[205.11]] English Ladys yet I have been too much conversant amongst Learned Men not to have\n[[205.12]] contracted (so far as I am capable of it) a Just Value for them or to have been ignorant of the\n[[205.13]] rank you hold in the Commonwealth of Letters. This has dispos'd me long since to entertain\n[[205.14]] with Pleasure any Occasion of testifying a great Respect for you; and has lately suggested to me\n[[205.15]] that my Fathers <k>Intellectual System</k> might, possibly, not be unacceptable to you. The\n[[205.16]] esteem you express for that Work pleases me very much both on this account, and also as it is a\n[[205.17]] new Confirmation to me of the Worth of that Performance. </p>\n<p> [[205.18]] I should be glad to have a farther view into the Intellectual World; and would therefore\n[[205.19]] willingly have right Conceptions of the System you propose. To this Purpose upon the receit of\n[[205.20]] your obliging Letter, I look'd into the Article of <k>Rorarius</k> in the first Edition of M^#'r Bayls\n[[205.21]] Dictionarie (not haveing the 2^#'d by me) and being by his quotation of you there, directed to the\n[[205.22]] <i>Journal des Savans</i> 1695 I read what is there publish'd of it. </p>\n<p> [[205.23]] Perhaps my not being accustom'd to such abstract Speculations made me not well\n[[205.24]] comprehend what you say there of <b><i>Formes</i></b>, upon which I think you build your Hypothesis: for\n[[205.25]] (as it seemes to me) you sometimes call them <b><i>Forces Primitives</b></i>, sometimes <b><i>des Ames</b></i>\n[[205.26]] sometimes <b><i>Formes constitutives des substances</b></i>, and sometimes <b><i>Substances</i></b> themselves;\n[[205.27]] but such yet as are neither Spirit, nor matter whence I confess I have no cleare Idea of what\n[[205.28]] you call <b><i>Formes</i></b>. </p>\n<p> [[205.29]] That a man whose Correspondence is so highly esteem'd as yours by all the Learned men\n[[205.30]] of Europe should employ any of his valuable Moments in the instruction of an Ignorant Woman\n[[205.31]] is what I should not perhaps presume to importune you for, if your character was known to me\n[[206.1]] onely as a Learned Man; for those who are far advanced in Learned Studies, and high\n[[206.2]] Speculations may think themselves excus'd from such a Condescention; but you I am confident\n[[206.3]] would not contemne the most Ignorant Lover of Truth; were I not secur'd by my sex of a\n[[206.4]] favorable distinction from the obligeing Civilitie of a Man Conversant in Courts. </p>\n<p> [[206.5]] I take the libertie therefore to request the favour of you that you will by some explication\n[[206.6]] or definition of them help me to Conceive what your <b><i>Formes</b></i> are; for I cannot but desire to\n[[206.7]] understand a Systeme recommended to me not onely by the eminence of its Author, but\n[[206.8]] particularly also as tending to inlarge our Idea of the Divine Perfections, and the Beautie of his\n[[206.9]] Works. If you please to add in short the Sum of your Answers to M^#'r Bayles objections in his\n[[206.10]] second edition of his Dictionarie it will be an Additional Obligation in giveing me still further\n[[206.11]] Light into this matter. </p>\n<p> [[206.12]] I have order'd my Fathers <i>Discourse concerning the Lords Supper</i> to be sent you together\n[[206.13]] with his <i>Intellectual System</i> in the same vol: the Value you express for the Author makes me\n[[206.14]] think you will not dislike to look into anything of his and thō this Treatise was writ when he\n[[206.15]] was a Young Man, yet it was Highly commended by our Famous Selden. </p>\n<p> [[206.16]] You will much oblige me in accepting of this Book as from one who is with great Esteem\n[[206.17]] and Respect </p>\n<p> [[206.18]] S^#'r Your very Humble Servant Da Masham. </p>\n<p> [[206.19]] M^#'r Locke (whose company I am so Happy as to injoy in my Familie) desires me to present\n[[206.20]] you his Humble Service. </p>\n",
+  "number": "63.",
+  "title": "DAMARIS LADY MASHAM AN LEIBNIZ",
+  "date": "Oates, 29. März (9. April) 1704. [56.67.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:63. DAMARIS LADY MASHAM AN LEIBNIZ Oates, 29. März (9. April) 1704. [56.67.] S^#'r Oates 29 March 1704 Thō I am not in the Number of those who can confirm the advantageous Idea you have of English Ladys yet I have been too much conversant amongst Learned Men not to have contracted (so far as I am ca...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

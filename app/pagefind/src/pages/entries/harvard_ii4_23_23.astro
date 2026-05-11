@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_23",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 23,
+  "text": "<p> [[69.1]] <b>23. LEIBNIZ AN ERNST SALOMON CYPRIAN</p>\n<p> [[69.2]] Lietzenburg, 25. Juli 1702. [12.155.] </b></p>\n<p> [[69.18]] [<i>L^#'1</i> ] </p>\n<p> [[69.19]] Vir Celeberrime Fautor Honoratissime </p>\n<p> [[69.20]] Ex literis Tuis aliorumque relatione laetus intellexi, res tuas fluere ex sententia, Teque eo\n[[69.21]] magis mereri videri ampliora etiam, quo magis modestia tua, ut subinnuis, fortunae velut\n[[69.22]] refragatur. </p>\n<p> [[69.23]] Campanella non indignus est cura Tua. Ajunt complura adhuc extare ipsius inedita. Ex his\n[[69.24]] unum videre me memini libellum de <i>Monarchia Messiae</i>, quo Papae Monarchiam Universalem\n[[69.25]] suadet, ac tuetur, et multa habet non abhorrentia ab iis quae pro <i>Monarchia Hispanica</i> edidit. </p>\n<p> [[70.1]] [<i>L^#'2</i> ] </p>\n<p> [[70.2]] Vir celeberrime Fautor Honoratissime </p>\n<p> [[70.3]] Gratissimum mihi dudum fuit intelligere inventos Tibi aestimatores candidos et autoritate\n[[70.4]] praeditos doctrinae Tuae ingeniique singularis; eaque ratione effectum esse, ut res Tuae ex\n[[70.5]] sententia fluant. </p>\n<p> [[70.6]] Eoque magis ut spero poteris egregias cogitationes conferre in publicos usus. </p>\n<p> [[70.7]] Campanellae librum <i>de libris propriis</i> puto Tibi visum. Is enim pernecessarius est de viri\n[[70.8]] vita et scriptis commentanti. </p>\n<p> [[70.9]] Multa conscripsit in carcere, in quem conjectus fuerat ab Hispanis, quod suspectum sese\n[[70.10]] rerum novarum reddidisset. Ea credidit edenda Tobiae Adamidae Consiliario postea Saxonico,\n[[70.11]] qui promisso stetit. </p>\n<p> [[70.12]] Cum tormenta sustinuisset, servatus est in vinculis per multos annos, et tandem Urbani\n[[70.13]] VIII. papae intercessione liberatus. Itaque Romam primum deinde in Gallias venit, ubi novissima\n[[70.14]] sua opera edidit. Peireskii liberalitatem sensit, ut in vita hujus invenies. Puto in Gallia\n[[70.15]] obiisse. </p>\n<p> [[70.16]] Philosophatus est Bernardi Telesii exemplo, cujus lectione se inflammatum scribit. Multum\n[[70.17]] habet acuminis et ingenii, sed soliditate et rerum usu videtur subinde destitutus fuisse;\n[[70.18]] prodesse potest ad ornandum et ditandum, non ad constituendum et solidandum verae philosophiae\n[[70.19]] systema; Cartesius de eo satis contemtim sensit, in Epistola aliqua credo ad Mersennum.\n[[70.20]] Quod superest, semper grata mihi erunt quae a Te veniunt, sed maxime quae indicabunt\n[[70.21]] magis magisque florentem rerum Tuarum statum. Vale et fave. Dabam Berolini 6 januar 1702 </p>\n<p> [[70.22]] Deditissimus Godefridus Guilielmus Leibnitius. </p>\n<p> [[71.1]] P. S. Campanellae scriptum <i>de</i> <i>Monarchia Messiae</i> nondum prodiit, in quo papae afferebat\n[[71.2]] imperium orbis, quod antea Hispanis destinaverat, sed ingratis pro tanto beneficio. </p>\n<p> [[71.3]] Has literas credebam transmissas [,] nunc casu inter schedas meas reperi, et veniam peto. </p>\n<p> [[71.4]] Luzenburgi in palatino Reginae prope Berolinum 25 julii 1702 </p>\n",
+  "number": "23.",
+  "title": "LEIBNIZ AN ERNST SALOMON CYPRIAN",
+  "date": "Lietzenburg, 25. Juli 1702. [12.155.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:23. LEIBNIZ AN ERNST SALOMON CYPRIAN Lietzenburg, 25. Juli 1702. [12.155.] [L^#'1 ] Vir Celeberrime Fautor Honoratissime Ex literis Tuis aliorumque relatione laetus intellexi, res tuas fluere ex sententia, Teque eo magis mereri videri ampliora etiam, quo magis modestia tua, ut subinnuis, fortunae ve...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

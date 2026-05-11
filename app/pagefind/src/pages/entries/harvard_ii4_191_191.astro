@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_191",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 191,
+  "text": "<p> [[604.15]] <b>191. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[604.16]] Padua, 7. Mai 1707. [188.192.] </b></p>\n<p> [[605.1]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[605.2]] Questa <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> mia lettera sara ricapitata a V. S. Ill^#'m^#'a per mezo del nostro Dottissimo Sig^#'r^#'e\n[[605.3]] Herman da Basilea, a cui oggi trasmetto la copia della parte o sia Ducale, in cui con grandissima\n[[605.4]] lode dell'istesso s'espone il decreto dell'Ecc^#'m^#'o Senato, che conferma ed approva l'elettione\n[[605.5]] fatta dall'Ecc^#'m^#'o Magistrato de S. S. Riformatori coll'assignamento di prima condotta di\n[[605.6]] fiorini 600 a lire sei di valuta corrente. Questa copia me l'han trasmessa gli Eccell^#'m^#'i Padroni\n[[605.7]] medesimi per mezo dell'Ill^#'m^#'o Segretario Gadaldini che mi comanda da parte dell'Ecc^#'m^#'o Magistrato,\n[[605.8]] che la mandi subito al Sig^#'r^#'e Herman sollecitandolo alla partenza. Questa è stata dopo due\n[[605.9]] anni la prima promotione di lettore fatta in Senato, cotanto differita dall'infelicità de' tempi, e\n[[605.10]] da me promossa con tutta l'attentione possibile, senza perdonare a fatiga niuna, sommamente\n[[605.11]] premendomi in quest'occasione servire ed obbedire a V. S. Ill^#'m^#'a[,] a cui vivo cotanto obligato,\n[[605.12]] ed a cui vorrei potere in tutte le congiunture almeno dare qualche saggio dell'inalterabile, ed\n[[605.13]] obligata mia gratitudine. Qui tutti questi Professori, e quanti amano le buone lettere grandemente\n[[605.14]] applaudono a questa promotione che molto contribuisce allo splendore e riputatione di\n[[605.15]] questo Studio, atte[s]e le rare virtù del Sig^#'r^#'e Herman così dotto ed acuto nelle Discipline\n[[605.16]] matematiche, e massimamente nella nova analisi[,] nobilissimo parto della gran Mente di V. S.\n[[605.17]] Ill^#'m^#'a che con i suoi molti ritrovati ha cotanto illustrate e promosse le buone lettere. </p>\n<p> [[605.18]] Credo che per via del Sig^#'r^#'e Zanovelli V. S. Ill^#'m^#'a averà già ricevuta a quest'ora un'altra mia\n[[605.19]] lettera, in cui umilmente l'esponeva il bisogno che averei dell'alta e potente protettione della\n[[605.20]] Principessa di Bransvich, nova Regina delle Spagne, che V. S. Ill^#'m^#'a mi potrebbe ben guadagnare\n[[605.21]] quando volesse, il che molto mi potrebbe giovare per potere avere a suo tempo qualche\n[[605.22]] avantaggio così io come la mia casa in Sicilia, che come qui si dice presto insieme con il Regno\n[[605.23]] di Napoli caderà sotto il dominio del mio Augustissimo Carlo Terzo, del di cui partito io sempre\n[[605.24]] sono costantemente stato. Desiderarei dunque sopra ciò sentire la dispositione che averebbe\n[[605.25]] V. S. Ill^#'m^#'a a favorirmi, acciò poi con tutta libertà le potessi comunicare il mio sentimento. V. S.\n[[605.26]] Ill^#'m^#'a che m'è stato fin ora un gran Benefattore non m'abbandoni in gratia in questa occasione,\n[[605.27]] mentre che se vorrà, potrebbe essere cagione d'un gran mio bene come le significarò. Scrivo\n[[606.1]] oggi all'infretta, avendo dovuto replicare le lettere che scrivo al Sig^#'r^#'e Herman, acciò smarren-\n[[606.2]] dosi l'una, le possa capitare l'altra. Mi ricordo de' semi de' Celsi mori bianchi, che le saranno a\n[[606.3]] suo tempo trasmessi nella copia che brama, e divotamente rivenderola mi resto </p>\n<p> [[606.4]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[606.5]] Padova, 7 Maggio 1707. </p>\n<p> [[606.6]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. <b>Hannover</b> </p>\n",
+  "number": "191.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 7. Mai 1707. [188.192.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:191. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 7. Mai 1707. [188.192.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Questa Am Kopf der Seite von Leibniz' Hand: resp mia lettera sara ricapitata a V. S. Ill^#'m^#'a per mezo del nostro Dottissimo Sig^#'r^#'e Herman da Basilea, a cui oggi trasm...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

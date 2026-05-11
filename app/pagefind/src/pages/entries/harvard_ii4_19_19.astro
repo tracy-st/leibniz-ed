@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_19",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 19,
+  "text": "<p> [[59.1]] <b>19. LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE</p>\n<p> [[59.2]] Hannover, 8. Mai 1702. [18.21.] </b></p>\n<p> [[59.20]] Monsieur Hanover 8 May 1702. </p>\n<p> [[59.21]] Vous <Fn><i>In L^#'1 am Kopf der Seite von Leibniz' Hand</i>: A Monsieur de Fontenelle</Fn> aurés receu ma derniere que j'ay adressée à M. l'Abbé Bignon, en luy envoyant les\n[[59.22]] observations de Berlin sur une nouvelle Comete. Maintenant je luy en communique la continuation,\n[[59.23]] et y joins encor ce mot pour Vous, Monsieur; avec une remarque sur l'Algèbre de\n[[60.1]] M. Ozanam qui vient de paroistre. Je m'imagine que cette Remarque seroit propre à estre\n[[60.2]] inserée dans le <i>journal des savans</i>, si on le trouve à propos, parcequ'on y donne le moyen\n[[60.3]] d'aller plus loin sur un certain sujet, que M. Ozanam n'a crû qu'on pouvoit aller. Lors qu'un\n[[60.4]] habile homme, tel que M. Ozanam, donne des bornes à la science, cela decourage et fait du tort\n[[60.5]] à ceux qui s'y arrestent; c'est pourquoy il est utile de les franchir. Je me contente de le faire\n[[60.6]] dans un exemple qui monstre le chemin à ceux qui ont plus le loisir, et plus de vigueur que moy\n[[60.7]] pour le poursuivre. </p>\n<p> [[60.8]] J'ay oublié dans la ma derniere de vous demander des nouvelles de ce que M. Tschirnhaus\n[[60.9]] a communiqué à l'Academie, autant qu'il est permis de le savoir. Je me contenteray en matiere\n[[60.10]] de Geometrie ou de ce qui en depend d'apprendre les propositions ou theoremes sans en\n[[60.11]] demander les demonstrations. Mais en ce qui est physique on a sujet de souhaiter plus\n[[60.12]] d'éclaircissement. En voicy un exemple. On parle fort des coussins ou sacs faits de cuir,\n[[60.13]] preparé en sorte qu'il puisse tenir l'air enfermé, et soutenir le poids d'un homme, au moins\n[[60.14]] 24 heures durant; car on dit que des peuples du levant en font des lits, et qu'il y a eu des gens en\n[[60.15]] Europe, qui l'ont imité. Cela estant, je souhaiterois d'apprendre s'il y a des gens connus en\n[[60.16]] France qui en font ou qui savent le moyen d'en faire. S'il y en a, on le saura dans l'Academie,\n[[60.17]] autrement il y a de l'apparence que c'est une chose qu'il faudra encor chercher. </p>\n<p> [[60.18]] Je vous demande pardon, Monsieur, de la liberté que je prends de faire de telles demandes.\n[[60.19]] Si je croyois qu'elle vous pouvoient causer de la peine je ne les hazarderois pas. Au reste je suis\n[[60.20]] avec zele </p>\n<p> [[60.21]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[60.22]] P. S. Je demande pardon de n'avoir pas fait copier la remarque cyjointe, faute de temps. Je\n[[60.23]] crois pourtant qu'elle sera assez lisible. </p>\n",
+  "number": "19.",
+  "title": "LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE",
+  "date": "Hannover, 8. Mai 1702. [18.21.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:19. LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE Hannover, 8. Mai 1702. [18.21.] Monsieur Hanover 8 May 1702. Vous In L^#'1 am Kopf der Seite von Leibniz' Hand: A Monsieur de Fontenelle aurés receu ma derniere que j'ay adressée à M. l'Abbé Bignon, en luy envoyant les observations de Berlin sur une nou...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

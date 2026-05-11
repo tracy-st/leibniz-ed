@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi2_23",
+  "series": "Band VI 2 (1663-1672); durchgesehener Nachdruck 1990",
+  "seq": 23,
+  "text": "[[476.0]] <b>55. De reductione hypothesium ad demonstrationes ac phaenomenorum ad\ntheoremata </b> <span>476.0;0:62:055:6909-7012:L:l^</span>.\n[[476.1]] Petrus Ramus in Mathematicis omnia problemata reduxit ad theoremata. Et merito.\n[[476.2]] Quia modo tantum applicandi differunt. Solutio enim problematis est theorema, verbis\n[[476.3]] tantum operativis mutatis. V.g. problema: datum Circulum mutare. Solutio seu\n[[476.4]] Canon: multiplicetur quadratum diametri, seu circumscriptum, producto\n[[476.5]] circumscribatur Circulus, is erit multiplex dati. Theorema: Circuli sunt ut quadrata diametrorum\n[[476.6]] seu circumscripta. Similiter mihi venit in mentem omnes Hypotheses ad demonstrationes,\n[[476.7]] omniave phaenomena ad theoremata reduci posse. V. g. Phaenomenon est: Lumen\n[[476.8]] quoad sensum instanti movetur, seu minore celeritate, quam est quaelibet sensibilis.\n[[476.9]] Hypothesis: Supponatur nullam esse sensibilem in pleno lineam, quae non contineat\n[[476.10]] lineam aliquam insensibilem contigui sibi corporis subtilissimi, quod aetherium vocant.\n[[476.11]] Solutio: Luce igitur orta, seu corpore lucido emissis ex se radiis impellere lineas luminis\n[[476.12]] incipiente, quo primum momento initium lineae impellit, eo et impellet finem eius ad\n[[477.1]] quantamcunque distantiam. Uti qui baculum impellit totum simul impellit, etsi\n[[477.2]] protendantur in infinitum. Ergo quo primum momento lux orietur lumen sentietur. Theorema\n[[477.3]] fieri potest: Si ad certam distantiam a lucido nulla sit linea recta sensibilis quae non\n[[477.4]] contineat luminosam; orta lux ad distantiam eandem momento videbitur.  Quod\n[[477.5]] theorema est prorsus necessarium, et reddit causam possibilem Luminis instantanei. Si esset\n[[477.6]] convertibile seu si hypothesis demonstrabilis esset vel sensu certa, redderet causam\n[[477.7]] prorsus necessariam, seu ostenderet nullam aliam esse posse, quod fit in hoc exemplo:\n[[477.8]] Phaenomenon: Grave projectum aliquamdiu impetum retinet. Hypothesis: 1.) Gravi\n[[477.9]] projecto nihil statim occurit aeque validum. 2.) Cui nihil occurit aeque validum, id\n[[477.10]] impetum semel acquisitum retinet. Solutio: Igitur grave projectum impetum retinet.\n[[477.11]] (Theorema: Quicquid semel movetur, id eadem via et celeritate semper movebitur nisi\n[[477.12]] sit quod impediat; et, si quid sit quod impediat, sed non aeque validum, minuetur\n[[477.13]] impetus; si id continue obstet, minuetur continue impetus, donec desinat.) Theorema: Si\n[[477.14]] gravi projecto nihil statim occurrit aeque validum, et motus omnis durat nisi impediatur;\n[[477.15]] impetus gravis projecti aliquamdiu durabit. Ita causa reddita est possibilis. Sed cum\n[[477.16]] Hypothesis non solum sit possibilis, sed et certa, altera sensu, altera demonstratione;\n[[477.17]] et converti possit Theorema hoc modo, atque et sic demonstrari: Si gravis projecti\n[[477.18]] impetus durat; nisi impediatur, sequitur nihil statim occurrere aeque validum, et omnem\n[[477.19]] motum durare nisi impediatur. Cum ergo et hoc conversum verum sit, erit causa reddita\n[[477.20]] non solum possibilis, sed et necessaria.\n",
+  "number": "55.",
+  "title": null,
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:55. De reductione hypothesium ad demonstrationes ac phaenomenorum ad theoremata 476.0;0:62:055:6909-7012:L:l^. Petrus Ramus in Mathematicis omnia problemata reduxit ad theoremata. Et merito. Quia modo tantum applicandi differunt. Solutio enim problematis est theorema, verbis tantum operativis mutati...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

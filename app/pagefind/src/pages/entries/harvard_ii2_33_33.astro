@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_33",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 33,
+  "text": "<p> [[146.1]] <b>34. LEIBNIZ AN JOHANN VAGETIUS</p>\n<p> [[146.2]] [Hannover, 20. Januar 1687.] [30.35.]</b></p>\n<p> [[146.14]] Vir Clarissime et Excellentissime </p>\n<p> [[146.15]] De Jungianis Capellianisque missis multas ago gratias, ac tuam in extinctos pietatem\n[[146.16]] laudo. </p>\n<p> [[146.17]] Du Cangius autor Magni <i>Glossarii</i> de rebus Byzantinis volumen spissum maxima eruditione\n[[146.18]] refertum, ut ejus viri omnia, aut mox edet Parisiis, aut jam edidit. Multae in eo\n[[146.19]] delineationes aeri incisae, quae nondum prostabant. </p>\n<p> [[146.20]] In Jungianis omnibus, maximis minimis, inveniuntur aliqua exquisita et utilia, ut recte\n[[146.21]] scribis; itaque optandum erat in urbe vestra subsidia editionibus superiori autoritate parari, quod\n[[146.22]] etiam ad laudem vestram pertineret. Nobilissimum Westermannum a me salutari rogo. </p>\n<p> [[146.23]] Reductionem consequentiae a rectis ad obliqua factam ad hoc quod vos apte vocatis\n[[146.24]] <i>Relationis inversionem</i>, probo, ut Jungiana pleraque. Semper enim danda opera est ut\n[[146.25]] composita reducamus ad simpliciora, quamdiu autem rem nondum reduximus ad omnium\n[[146.26]] simplicissima, fit (saltem in certo genere) ut variae ejusdem rei fieri possint Analyses, itaque\n[[147.1]] ego aliam resolutionem institui, nimirum obliquum specialem reduco ad obliquum generalem\n[[147.2]] cum recto speciali, quod etiam ad demonstrandum sufficit. Possumus etiam omnes praedicationes\n[[147.3]] reducere ad aequipollentias supplendo aliquid ad complendam reciprocationem, unde\n[[147.4]] rursus apparet propositum. </p>\n<p> [[147.5]] Si forte proxima aestate Hamburgum Deo volente excurrere vacabit, potero vestra venia,\n[[147.6]] (ut fieri posse innuis) Apographa quaedam Jungiana inspicere. </p>\n<p> [[147.7]] Cl. Siverus quem etiam a me salutari peto ni fallor aliquando et <i>Textoriam</i> Jungianam\n[[147.8]] pertexendi spem fecerat, quod perutile foret, praesertim si vacaret illi theoriam cum praxi\n[[147.9]] conferre, cujus rei multiplex Hamburgi materia est. Ea occasione possit adjici accurata descriptio\n[[147.10]] instrumenti aliquot abhinc annis in Scotia inventi, quo Tibialia fiunt. Interea <greek>F</i>oranomiam\n[[147.11]] Jungianam tandem edi, e publica re erit; sed addi desiderarem non tantum figuras, ut Siverum\n[[147.12]] facturum scribis, sed et demonstrationes, quae magis adhuc placent intelligentibus. </p>\n<p> [[147.13]] Fateor me nondum capere potuisse cur Jungius Heureticam excluserit a Logica, nisi forte\n[[147.14]] maluit eam considerare ut partem logicae secretiorem promiscue non vulgandam. </p>\n<p> [[147.15]] Nondum etiam satis intelligo quo sensu Metaphysicam non admiserit inter scientias. </p>\n<p> [[147.16]] Utrum in Heureticis et Zetesi praecepta aliqua conscripserit, beneficio tuo discere desiderarem.\n[[147.17]] Sed et utrum inter tot praeclara cogitata, non etiam in rebus Medicis aliquid tentaverit,\n[[147.18]] ipsemet doctor Medicinae et aliquando practicus; saltem in rite constituendis definitionibus\n[[147.19]] morborum nominalibus per symptomata seu signa in sensus incurrentia potuisset operae\n[[147.20]] pretium facere; tales enim certe haberi possunt debentque licet causae ignorentur, et hae ipsae\n[[147.21]] tamen utiles sunt causis aliquando investigandis.\n [[147.22]] Denique indicem Fasciculorum Jungianorum [<i>bricht ab</i>] </p>\n",
+  "number": "34.",
+  "title": "LEIBNIZ AN JOHANN VAGETIUS",
+  "date": "[Hannover, 20. Januar 1687.] [30.35.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:34. LEIBNIZ AN JOHANN VAGETIUS [Hannover, 20. Januar 1687.] [30.35.] Vir Clarissime et Excellentissime De Jungianis Capellianisque missis multas ago gratias, ac tuam in extinctos pietatem laudo. Du Cangius autor Magni Glossarii de rebus Byzantinis volumen spissum maxima eruditione refertum, ut ejus ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

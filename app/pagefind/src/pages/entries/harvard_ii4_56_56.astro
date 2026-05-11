@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_56",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 56,
+  "text": "<p> [[186.1]] <b>56. LEIBNIZ AN DAMARIS LADY MASHAM</p>\n<p> [[186.2]] [Hannover, 14. Januar 1704]. [63.] </b></p>\n<p> [[186.38]] Milady </p>\n<p> [[186.39]] J'ay appris que Vous me destinés un Exemplaire du <i>Systeme Intellectuel</i> de feu M. Cudworth:\n[[186.40]] il n'y a gueres d'honneur, où je pourrois estre plus sensible, par rapport à la personne qui\n[[187.1]] me le fait, et au present même. Je vis ce livre la premiere fois à Rome, où M. Auzout,\n[[187.2]] Mathematicien François de grande reputation[,] l'avoit apporté, et je fus charmé de voir les plus\n[[187.3]] belles pensées des sages de l'antiquité mises dans leur jour, et accompagnées de solides\n[[187.4]] reflexions: en un mot beaucoup d'erudition, et autant de lumiere, jointes ensemble. La matiere\n[[187.5]] aussi m'interesse beaucoup, car j'ay fort pensé sur ce sujet, et je pretends même d'avoir\n[[187.6]] découvert un nouveau pays dans ce monde intelligible, et d'avoir ainsi augmenté un peu ce\n[[187.7]] grand systeme que Monsieur vostre Pere nous a laissé, Madame, après l'avoir fait passer par les\n[[187.8]] meilleures mains des anciens et des modernes, et enrichi du sien. Mon addition consiste entre\n[[187.9]] autres dans un petit systeme de l'Harmonie préetablie entre les substances, dont M. Bayle parle\n[[187.10]] amplement dans les deux Editions de son beau <i>Dictionnaire</i>, article de Rorarius, mais plus\n[[187.11]] amplement dans la seconde Edition[,] où il adjoute pourtant des nouvelles objections dignes\n[[187.12]] d'estre resolües. Et je luy ay envoyé ma reponse qui n'est pas encor publiée, qui luy a donné\n[[187.13]] plus d'entrée dans le fonds de mon sentiment, comme il reconnoist dans la lettre qu'il m'en a\n[[187.14]] écrite. Il paroist au moins à ce celebre auteur dans l'endroit que je viens de dire, qu'on n'a\n[[187.15]] jamais encor poussé si loin l'idée qu'on peut avoir de la grandeur des perfections divines et de\n[[187.16]] la beauté de son ouvrage. Je n'oserois point entrer si avant dans ces matieres, lorsque j'ay\n[[187.17]] l'honneur d'écrire à une Dame, si je ne savois où va la penetration des Dames Angloises, dont\n[[187.18]] j'ay vû un échantillon dans l'ouvrage de feue Mad. la Comtesse de Connaway sans parler\n[[187.19]] d'autres. Mais je ne dois point abuser de vos graces, et il est temps de marquer que je suis avec\n[[187.20]] respect et reconnoissance </p>\n<p> [[187.21]] Milady vostre tres humble et tres obeissant serviteur L. </p>\n",
+  "number": "56.",
+  "title": "LEIBNIZ AN DAMARIS LADY MASHAM",
+  "date": "[Hannover, 14. Januar 1704]. [63.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:56. LEIBNIZ AN DAMARIS LADY MASHAM [Hannover, 14. Januar 1704]. [63.] Milady J'ay appris que Vous me destinés un Exemplaire du Systeme Intellectuel de feu M. Cudworth: il n'y a gueres d'honneur, où je pourrois estre plus sensible, par rapport à la personne qui me le fait, et au present même. Je vis ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

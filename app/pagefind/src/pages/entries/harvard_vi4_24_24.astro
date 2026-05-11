@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_24",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 24,
+  "text": "[[62.8]] <b>18.  De propositionibus probabilibus in physicis adhibendis [1678 bis 1680 (?)]</b>\n [[62.9]] <tab/>[1678 bis 1680 (?)] </p>\n<p> [[62.18]] <p>In physicis (perinde ac in re Ethica affectuum et morum) adhibendae sunt praesertim\n[[62.19]] in praxi specialiori quaedam propositiones rationibus probabilibus nixae et quasi praesumtivae,\n[[62.20]] ut mulum participaturum esse de equi et asini qualitatibus, majoris animalis\n[[62.21]] majorem fore foetum, quod tamen saepe falsum, corpora volatilia reddi, si volatilia saepe\n[[62.22]] ab ipsis sublimentur: si ea quae per vim a se invicem separata sunt reconjungantur ipsa\n[[62.23]] sese rursus attractura cum aliquo nisu; quae pugnent cum uno tertio, non esse pugnatura\n[[62.24]] inter se. Ipsae propositiones probabiles serviunt saltem ad inveniendum et occasionem\n[[62.25]] dant tentandis experimentis secundum has propositiones conjecturales, ut appareat qua-\n[[63.1]] ­tenus succedant. Cavendae tamen ineptae quaedam et divinatoriae, quae in astrologicis\n[[63.2]] aut similibus analogiis longe remotis sunt fundatae, quibus homines chimaericoteri utuntur.\n[[63.3]] Simili fere arte etiam in Arithmeticis utimur ad theoremata observatione sive inductione\n[[63.4]] invenienda, quae postea comprobantur inquaerendo in rationes solidas et necessarias. </p>\n",
+  "number": "18.",
+  "title": "De propositionibus probabilibus in physicis adhibendis",
+  "date": "[1678 bis 1680 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:18. De propositionibus probabilibus in physicis adhibendis [1678 bis 1680 (?)] [1678 bis 1680 (?)] In physicis (perinde ac in re Ethica affectuum et morum) adhibendae sunt praesertim in praxi specialiori quaedam propositiones rationibus probabilibus nixae et quasi praesumtivae, ut mulum participatur...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi2_5",
+  "series": "Band VI 2 (1663-1672); durchgesehener Nachdruck 1990",
+  "seq": 5,
+  "text": "[[146.6]] <b>35. Miracula Sacrae Coenae </b> <span>146.6;0:62:035:7001-7204:L:l^</span>.\n[[146.7]] Miracula Sacrae Coenae quae cum Axiomatibus Naturae pugnant.\n[[146.8]] I. Nihil potest simul duo disparata esse. Sed contra quod in Coena nobis proponitur\n[[146.9]] DEUS est et Homo.\n[[146.10]] II. Nihil est extra seipsum. Sed contra in coena,\n[[146.11]] non amans tam se penes\n[[146.12]] Quam penes amatum est.  H. Grot. Carm. de Euchar.\n[[146.13]] III. Nihil agit in seipsum. Sed contra in Coena Salvator se proponit suis edendum, se\n[[146.14]] propinat bibendum. Idem est Conviva, convivium; Comedens et qui comeditur.\n[[146.15]] Hieron. ad Hebr. q. 2.\n[[146.16]] IV. Nihil simul integrum et divisum est. Sed contra in Coena Christus totus in calice et\n[[146.17]] pane simul indivisim datur. Christus enim est in hoc sacramento non per modum\n[[146.18]] quantitatis, sed substantiae quae uti tota in minima parte continetur. Ita Christus\n[[146.19]] in singulis portionibus est totus. Augustin. tr. 26 in Joh.\n[[147.1]] V. Totum est majus parte. Sed contra in coena pars est aequalis toti. Nam\n[[147.2]] Sumit unus sumunt mille\n[[147.3]] Tantum iste quantum ille\n[[147.4]] Nec sumtus consumitur.\n[[147.5]] VI. Alimentum in nutritione assimilatur ei quod nutritur. Sed contra in coena caro et\n[[147.6]] sanguis Salvatoris tanquam alimentum spirituale non assimilatur corpori nostro,\n[[147.7]] sed nos assimilat sibi id est Spirituales facit. Thom. P. III. q. 73. art. 3.\n",
+  "number": "35.",
+  "title": "Miracula Sacrae Coenae",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:35. Miracula Sacrae Coenae 146.6;0:62:035:7001-7204:L:l^. Miracula Sacrae Coenae quae cum Axiomatibus Naturae pugnant. I. Nihil potest simul duo disparata esse. Sed contra quod in Coena nobis proponitur DEUS est et Homo. II. Nihil est extra seipsum. Sed contra in coena, non amans tam se penes Quam p...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

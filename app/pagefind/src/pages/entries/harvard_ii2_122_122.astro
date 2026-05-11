@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_122",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 122,
+  "text": "<p> [[445.24]] <b>123. LEIBNIZ AN MELCHISÉDECH THÉVENOT</p>\n<p> [[445.25]] Braunschweig, 24. August (3. September) 1691.</b></p>\n[[446.6]] [ ... ] J'ay aussi quelques demonstrations sur les veritables loix du mouvement, et la juste\n[[446.7]] estime de la force, on a esté prevenu jusqu'icy que la quantité du mouvement (<i>factum ex ductu\n[[446.8]] corporis in celeritatem</i>) est la quantité de la force. Et les Cartesiens se laisseroient tuer pour le\n[[446.9]] soutenir. Quelques sçavans hommes comme Messieurs Wallis, Hugens, Wren, Borelli, Mariotte,\n[[446.10]] et autres ont bien vû, que la meme quantité de mouvement, ne se conserve pas tousjours.\n[[446.11]] Mais il semble aussi, qu'ils ont crû, que la meme quantité de la force ne subsistoit pas. Ce qui a\n[[446.12]] paru pourtant estrange. Et moy meme j'y estois embarassé autres fois, mais enfin je decouvris il\n[[446.13]] y a deja plusieurs années, ce que c'est que la force, et qu'elle se conserve tousjours, et comment\n[[446.14]] par là on peut reduire cette matiere à des loix Geometriques; par une espece d'Equation entre la\n[[446.15]] cause et l'effect, et concilier les phenomenes avec la raison. Depuis donc que je croy que la\n[[446.16]] Geometrie et la Mecanique se sont rendus entierement analytiques, j'ay pensé d'etendre le\n[[446.17]] calcul à des matieres, qu'on en a jugé jusqu'icy tout à fait incapables. J'appelle icy calcul, toute\n[[446.18]] notation qui represente le raisonnement, quand elle n'auroit point de rapport aux nombres.\n[[446.19]] [ ... ] </p>\n",
+  "number": "123.",
+  "title": "LEIBNIZ AN MELCHISÉDECH THÉVENOT",
+  "date": "Braunschweig, 24. August (3. September) 1691."
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:123. LEIBNIZ AN MELCHISÉDECH THÉVENOT Braunschweig, 24. August (3. September) 1691. [ ... ] J'ay aussi quelques demonstrations sur les veritables loix du mouvement, et la juste estime de la force, on a esté prevenu jusqu'icy que la quantité du mouvement (factum ex ductu corporis in celeritatem) est ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

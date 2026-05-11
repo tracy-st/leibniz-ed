@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_51",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 51,
+  "text": "<p> [[142.6]] <b>44a. LEIBNIZ AN JOHANN GEORG GRAEVIUS</p>\n<p> [[142.7]] Mainz, 18./28. Februar 1671. [18.61a.]</b></p>\n<p> [[142.16]] [ ... ] Occasionem ad Te scribendi ex Cl^#'m^#'i Horbii literis sumseram, quibus significavit\n[[142.17]] benevolentiam illam, qua superiores Germanos, cives tuos, omnes, tum eos ex iis potissimum\n[[142.18]] prosequaris, quos verus meliorum literarum amor captos tenet, effecisse, ut nec cogitata mea\n[[142.19]] qualiacunque, quae ille quidem tunc comperta habebat, de emendanda quousque privato fas est,\n[[142.20]] Jurisprudentia, de reducenda ad positiones non multas, quodam velut Edicti perpetui novi\n[[142.21]] specimine, Jurisprudentiae Romanae vastitate, de caeteris omnibus, quae quidem non omnino\n[[142.22]] cum materia subjecta ex rerum natura abiisse constat, ex paucis quibusdam fundamentis\n[[142.23]] ratiocinatione derivandis; de condendis vocabulorum JC^#'t^#'i^#'s peculiarium definitionibus, quales\n[[142.24]] fieri posse illustri specimine docuit Cujacius; de annotandis denique iis quae scientiae civilis\n[[142.25]] ratio Legibus Romanis aut addi, aut adimi postulat, Tibi omnino displicerent. Nam quae\n[[142.26]] alioquin <i>de Arte Combinatoria</i>, seu parte Logicae inventoria, de constituenda <i>Hypothesi Physica\n[[142.27]] nova</i>, singulari quadam simplicitate claritateque phaenomenis satisfactura (quae nunc\n[[143.1]] tribus plagulis comprehensa atque Illustri Societati Regiae Britannicae, cujus Secretarii hortatu\n[[143.2]] et prodiit, inscripta, sub praelo calet), de machinamentis quibusdam fortasse publice profuturis\n[[143.3]] parata sunt, apud Te memorasse, aut nunc etiam memorare prolixius, jactantiae poterat imputari.\n[[143.4]] Nunc quando de redditione priorum literarum dubito, breviter haec repetenda duxi. [ ... ] </p>\n",
+  "number": "44a.",
+  "title": "LEIBNIZ AN JOHANN GEORG GRAEVIUS",
+  "date": "Mainz, 18./28. Februar 1671. [18.61a.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:44a. LEIBNIZ AN JOHANN GEORG GRAEVIUS Mainz, 18./28. Februar 1671. [18.61a.] [ ... ] Occasionem ad Te scribendi ex Cl^#'m^#'i Horbii literis sumseram, quibus significavit benevolentiam illam, qua superiores Germanos, cives tuos, omnes, tum eos ex iis potissimum prosequaris, quos verus meliorum liter...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

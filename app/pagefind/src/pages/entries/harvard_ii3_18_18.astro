@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_18",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 18,
+  "text": "<p> [[42.1]] <b>18. LEIBNIZ AN RUDOLF CHRISTIAN VON BODENHAUSEN</p>\n<p> [[42.2]] <tab/>FÜR ANTONIO ALBERTI\n<p> [[42.3]] [Hannover, 24. Juni 1695.] [5.]</b></p>\n\n<p> [[42.14]] Reponse à celuy qui me communique la lettre de Monsieur ... donnée a Rome </p>\n<p> [[42.15]] 5 Fevrier 1695 </p>\n<p> [[42.16]] Je vous supplie, Monsieur de temoigner à Mons. Alberti combien je luy suis obligé pour\n[[42.17]] les bons offices qu'il me rend d'une maniere si forte et si obligeante, quoyque je ne sois pas en\n[[42.18]] estat d'en profiter. Ce personnage eminent, à qui il a parlé de moy si favorablement doit avoir\n[[42.19]] des sentimens pleins de generosité, puisqu'il pense à un etranger, par la seule raison de quelque\n[[42.20]] merite, qu'on luy attribüe. </p>\n<p> [[42.21]] La mort de M. Pelisson a interrompu un commerce dont cet excellent homme estoit\n[[42.22]] charmé à cause d'une ouverture que je luy avois donnée en passant des sentimens de quelques\n[[42.23]] principaux Theologiens de la Confession d'Augsbourg, qui sont mes amis particuliers. Comme\n[[42.24]] il croyoit avec raison; que cela pourroit servir d'acheminement à la paix de l'Eglise il le jugea si\n[[43.1]] important, qu'il en parla au Roy son maistre d'une maniere efficace. Et sans sa mort je croy que\n[[43.2]] la negotiation auroit eu quelque suite. Mons. Pelisson jugea qu'on y applaudiroit à Rome\n[[43.3]] même, et en effect je crois que c'est tousjours beaucoup, quand on fait un pas, et quand on\n[[43.4]] gagne sans qu'il en couste. C'est à peu prés comme dans le Concile de Florence les Grecs se\n[[43.5]] reunirent avec Rome, non obstant qu'ils demeurerent en different sur quelques points, comme\n[[43.6]] par exemple sur le divorce. Ainsi il y a eu des Theologiens qui ont monstré qu'en la pluspart\n[[43.7]] des matieres les sentimens sont plus approchans qu'on ne pense, et que pour quelques peu de\n[[43.8]] points, qui ne paroissent point conciliables encor, il y auroit cet expedient, qu'on se soumettroit\n[[43.9]] à ce que l'Eglise en pourroit juger dans un Concile General. Car ceux qui sont sincerement dans\n[[43.10]] cette disposition, d'écouter l'Eglise, ne sçauroient estre censés heretiques et ceux qui seroient\n[[43.11]] prests à l'union hierarchique, ne seroient pas Schismatiques non plus. Ainsi l'union se pourroit\n[[43.12]] faire même avant ce concile et la soumission au chef de l'Eglise precederoit l'accord entier des\n[[43.13]] sentimens, ce qui doit paroistre d'autant moins estrange, qu'on sçait combien les Theologiens\n[[43.14]] de France sont eloignés de plusieurs sentimens des Italiens et Espagnols en des matieres\n[[43.15]] peutestre encor plus importantes, sans que cela empeche l'union; quoyque les uns ne reconnoissent\n[[43.16]] point l'autorité entiere de quelques conciles, que les autres tiennent pour Oecumeniques;\n[[43.17]] puisqu'ils gardent tous le centre de l'union Hierarchique, et qu'ils sont tous prests à se\n[[43.18]] soumettre à ce que l'Eglise pourroit declarer un jour. J'avoue que les conjonctures ne paroissent\n[[43.19]] gueres propres à telles negotiations. Cependant je crois qu'on ne doit rien negliger qui pourroit\n[[43.20]] servir d'acheminement à un si grand bien et qu'on ne trouvera pas tousjours de ce costé cy des\n[[43.21]] personnes d'autorité et de merite, disposés comme ceux que je connois. Ainsi je tiens qu'il\n[[43.22]] seroit bon de profiter de leur bonne volonté autant qu'il seroit possible; et je ne desespererois\n[[43.23]] pas d'obtenir des declarations en forme, qui seroient de consequence, si on y repondit de vostre\n[[43.24]] costé, d'une maniere que leur bonne volonté semble meriter. Mais la chose est d'une nature à\n[[43.25]] estre extremement menagée pour en tirer du fruit. </p>\n",
+  "number": "18.",
+  "title": "LEIBNIZ AN RUDOLF CHRISTIAN VON BODENHAUSEN",
+  "date": "[Hannover, 24. Juni 1695.] [5.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:18. LEIBNIZ AN RUDOLF CHRISTIAN VON BODENHAUSEN FÜR ANTONIO ALBERTI [Hannover, 24. Juni 1695.] [5.] Reponse à celuy qui me communique la lettre de Monsieur ... donnée a Rome 5 Fevrier 1695 Je vous supplie, Monsieur de temoigner à Mons. Alberti combien je luy suis obligé pour les bons offices qu'il m...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

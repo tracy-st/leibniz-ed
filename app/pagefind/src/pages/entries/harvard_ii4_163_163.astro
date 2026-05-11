@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_163",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 163,
+  "text": "<p> [[515.11]] <b>163. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[515.12]] Helmstedt, 13. November 1706. [160.166.] </b></p>\n<p> [[515.24]] Admodum Reverende Pater Fautor Honoratissime </p>\n<p> [[515.25]] Aliquot diebus Guelfebyti et Brunsvigae haesi, inde ad vicinum Helmestadium excurri,\n[[515.26]] nunc iter Berolinum prosequor; atque inde ante anni exitum redire spero. </p>\n<p> [[515.27]] Si qua tamen ad me destinentur per Hanoveram recipiam, gaudeboque subinde a Te\n[[515.28]] discere, quae res literaria fert novi praesertim in Theologia et Philosophia. </p>\n<p> [[516.1]] Vidi non ita pridem scripta quaedam R. P. Temmen Soc. Vestrae. Videtur a Malebranchianis\n[[516.2]] sententiis non abhorrere, et alioqui ultra vulgus niti. </p>\n<p> [[516.3]] Quod superest vale et fave. Dabam Helmaestadii 13 Novembr. 1706 </p>\n<p> [[516.4]] deditissimus G. G. Leibnitius </p>\n<p> [[516.5]] Au Reverend Pere le R. P. des Bosses, Theologien de la Compagnie de Jesu. Hildesheim\n[[516.6]] im Jesuiter Collegio </p>\n",
+  "number": "163.",
+  "title": "LEIBNIZ AN BARTHÉLEMY DES BOSSES",
+  "date": "Helmstedt, 13. November 1706. [160.166.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:163. LEIBNIZ AN BARTHÉLEMY DES BOSSES Helmstedt, 13. November 1706. [160.166.] Admodum Reverende Pater Fautor Honoratissime Aliquot diebus Guelfebyti et Brunsvigae haesi, inde ad vicinum Helmestadium excurri, nunc iter Berolinum prosequor; atque inde ante anni exitum redire spero. Si qua tamen ad me...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_97",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 97,
+  "text": "<p> [[372.9]] <b>98. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[372.10]] Hamburg, 3. (13.) Januar 1691. [85.115.]</b></p>\n<p> [[372.17]] I. N. J. C. </p>\n<p> [[372.18]] Nobilissimo et Amplissimo Dⁿ^#'o G. G. Leibnutzio </p>\n<p> [[372.19]] S. P. D. V. Placcius. </p>\n<p> [[372.20]] Dum <Fn><i>Am Fuß der Seite von Leibniz' Hand</i>: <i>Le Sieur des Essars auteur de l'Amadis françois. Memoire</i> <i>des dames de Brantome.</i> <angle bracket><i>Ch.</i></angle bracket> <i>de la reine Marguerite.</i></Fn> sub anni hujus ineuntis auspicium, quod auspicatissimum plane tibi ex animo precor\n[[372.21]] augurorque, rationes meas, qua domesticas, qua litterarias subduco, video me in aere tuo inde a\n[[372.22]] Septembri mense adhuc esse. Ne malum plane nomen sim itaque, tandem reddo quod debeo\n[[373.1]] responsum, veniam morae a sola tua benevolentia petens. Neque tamen interim in mandatis tuis\n[[373.2]] exequendis aeque ac in rescribendi officio segnis fui. Quamvis enim Meisneri compellandi\n[[373.3]] occasionem hucusque frustra quaesitam necdum invenerim: cum Dⁿ^#'o Zimmermanno tamen\n[[373.4]] illius Collegii membro facile praecipuo et de pertinentibus ad ipsum aliis, et de iis quae super\n[[373.5]] Collegio Arithmetico scribis, ita communicavi, ut non frustra id factum putem. Siquidem laetari\n[[373.6]] mihi visus est, occasione commercium litterarium, et hisce et aliis de rebus Tecum ineundi.\n[[373.7]] Quod an coeptum sit, scire aveam. Ni factum etiam, promoturus, ut quamprimum ineatur. Id\n[[373.8]] quod sine reipublicae litterariae insigni emolumento non fore spero augurorque. Tschirnhausiana\n[[373.9]] legi, et haberem circa illa quae percontarer, siquidem otii hoc tui esse intelligam, ut\n[[373.10]] cognoscas, et sententiam aperias tuam de quaesitis, Logicis quidem potissimum. Nam Physica\n[[373.11]] et Mathematica superant meas vires. Ad Philosophiam practicam vero facientia ex meis facile\n[[373.12]] principiis expedio. Quae uti experior indies magis sufficere magisque resolvendis omnibus in\n[[373.13]] hoc argumento difficultatibus, ita ut perpoliantur, et ad specialissima quaeque, descensu facto,\n[[373.14]] magis porrigantur, assidue laboro. Nec aliud est impedimentum aeque obstans <i>Anonymorum et\n[[373.15]] Pseudonymorum</i> editioni. De quibus apud Bailletum quid fiat, an scias, vel scire possis, oppido\n[[373.16]] percupiam resciscere. Nam anno jam et quod excurrit ab eo litterarum nihil habui, neque novi\n[[373.17]] per internuntios. Et bellorum hae necdum finem ostendentes turbae, parum in propinquo\n[[373.18]] repositum spei sinunt. Nisi tuo itaque auxilio quid comperiam, desperatum hoc est desiderium.\n[[373.19]] Quod tamen antequam expleatur, ad publicandos meos auctores non accedam. Enimvero\n[[373.20]] praeire ipsum mallem me, quam sequi. Caussae multae sunt: quarum praecipuam facile divinas.\n[[373.21]] Vale, et an hac de re certiorem me facere queas, quaeso vide. </p>\n<p> [[373.22]] Hamb 1691. d. 3 Januarii. </p>\n<p> [[373.23]] <i>A Monsieur Monsieur Leibnutz. Conseiller de Son Altesse à Hannover.</i> </p>\n",
+  "number": "98.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "Hamburg, 3. (13.) Januar 1691. [85.115.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:98. VINCENT PLACCIUS AN LEIBNIZ Hamburg, 3. (13.) Januar 1691. [85.115.] I. N. J. C. Nobilissimo et Amplissimo Dⁿ^#'o G. G. Leibnutzio S. P. D. V. Placcius. Dum Am Fuß der Seite von Leibniz' Hand: Le Sieur des Essars auteur de l'Amadis françois. Memoire des dames de Brantome. Ch. de la reine Marguer...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

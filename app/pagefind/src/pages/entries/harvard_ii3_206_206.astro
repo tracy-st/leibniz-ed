@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_206",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 206,
+  "text": "<p> [[543.1]] <b>206. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[543.2]] [Helmstedt, Anfang April 1699.] [205.210.]</b></p>\n\n<p> [[543.9]] Illustris Domine, </p>\n<p> [[543.10]] Jubent me et Indulgentia Tua, quam plenissimam experior, et mea pietas, omnem studiorum\n[[543.11]] meorum rationem ad Te referre. Itaque binos hosce quaterniones mittendos reputavi, ut\n[[543.12]] intelligere digneris, ea me modestia cum Liberio conversari, qua id fieri aetatem meam decet.\n[[543.13]] Si Tuo judicio exornabor, praeclare mecum actum fuerit. Neque enim doctis displicere potest,\n[[543.14]] quicquid Tuo calculo probas. </p>\n<p> [[543.15]] Vitam Lutheri, a Christiano Junckero descriptam, ac plusculis nummis illustratam, puto\n[[543.16]] Tibi a Venerando D. Schmidio missum iri: alioqui pietatis meae fuisset, librum exhibuisse, ab\n[[543.17]] autore mecum communicatum. Nescio an ejusmodi operae multum autoritatis deferri queat,\n[[543.18]] quandoquidem nummi plerique privata autoritate, nec eo tempore cusi sunt, quo contigere facta,\n[[543.19]] quae illustrant. Vale, Illustris ac Gratiose Patrone, Deus Te servet. </p>\n<p> [[543.20]] Illustr. Nomin. T. subjectissimus cliens M. Ernestus Salomo Cyprianus.\n[[543.21]] <yi>Illustri ac Excellentissimo Domino, Domino Gothofredo Guilielmo Leibnitzio, Consiliario\n[[543.22]] Intimo Hannoverano Eminentissimo, Patrono suo Gratioso. Hannoveram. <i>par couvert</i>. </p>\n",
+  "number": "206.",
+  "title": "ERNST SALOMON CYPRIAN AN LEIBNIZ",
+  "date": "[Helmstedt, Anfang April 1699.] [205.210.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:206. ERNST SALOMON CYPRIAN AN LEIBNIZ [Helmstedt, Anfang April 1699.] [205.210.] Illustris Domine, Jubent me et Indulgentia Tua, quam plenissimam experior, et mea pietas, omnem studiorum meorum rationem ad Te referre. Itaque binos hosce quaterniones mittendos reputavi, ut intelligere digneris, ea me...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

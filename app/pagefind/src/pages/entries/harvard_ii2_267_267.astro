@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_267",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 267,
+  "text": "<p> [[815.7]] <b>270. LEIBNIZ AN JUSTUS CHRISTOPH BÖHMER</p>\n<p> [[815.8]] [Hannover, Ende Juni 1694.] [267.293.]</b></p>\n<p> [[815.15]] Quilibet numerus habet quadratum respondentem. </p>\n<p> [[815.16]] Ergo quot sunt numeri tot sunt quadrati. </p>\n<p> [[815.17]] Ergo multitudo omnium numerorum aequatur multitudini omnium ab iis quadratorum. </p>\n<p> [[815.18]] Sed multitudo omnium numerorum est totum, et multitudo omnium quadratorum est\n[[815.19]] [pars]. Quia multitudo omnium numerorum est multitudo tam quadratorum quam non quadratorum. </p>\n<p> [[815.21]] Ergo si datur multitudo omnium numerorum, totum aequatur parti. Q. E. A.\n [[816.1]] <k><b>in forma</b></k> </p>\n<p> [[816.2]] Si quilibet <i>A</b> habet sibi respondentem <i>B</i>, et quilibet <i>B</i> habet sibi respondentem <i>A</i>; sequitur\n[[816.3]] tot esse <i>A</i> quot sunt <i>B</i> et contra. </p>\n<p> [[816.4]] Atqui quilibet Numerus habet sibi respondentem Quadratum, et quilibet Quadratus habet\n[[816.5]] sibi respondentem Numerum. </p>\n<p> [[816.6]] Ergo tot sunt numeri quot sunt quadrati, et contra. </p>\n<p> [[816.7]] Ergo multitudo omnium numerorum (si qua est), aequalis est multitudini omnium quadratorum. </p>\n<p> [[816.9]] Sed multitudo omnium numerorum est totum, et multitudo omnium quadratorum est pars\n[[816.10]] quia multitudo omnium numerorum continet etiam numeros non quadratos. </p>\n<p> [[816.11]] Ergo Totum aequatur Parti. Quod est absurdum. </p>\n<p> [[816.12]] Ergo Nulla est multitudo seu Numerus omnium numerorum vel omnium quadratorum, sed\n[[816.13]] talis res est chimaerica. </p>\n",
+  "number": "270.",
+  "title": "LEIBNIZ AN JUSTUS CHRISTOPH BÖHMER",
+  "date": "[Hannover, Ende Juni 1694.] [267.293.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:270. LEIBNIZ AN JUSTUS CHRISTOPH BÖHMER [Hannover, Ende Juni 1694.] [267.293.] Quilibet numerus habet quadratum respondentem. Ergo quot sunt numeri tot sunt quadrati. Ergo multitudo omnium numerorum aequatur multitudini omnium ab iis quadratorum. Sed multitudo omnium numerorum est totum, et multitud...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_154",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 154,
+  "text": "<p> [[409.3]] <b>154. LEIBNIZ AN GABRIEL WAGNER</p>\n<p> [[409.4]] [Hannover, Januar bis Mitte Februar 1698.] [150.157.]</b></p>\n\n<p> [[409.10]] Mein Hochg. Herr </p>\n<p> [[409.11]] Nachdem Ihrer durchlt. Durchlt. seine Person ich zu einer anständigen Arbeit bey dero\n[[409.12]] Bibliothec vorgeschlagen, und Sie nicht zwar ein übriges, doch ein zulängliches vors erste in\n[[409.13]] gnaden verwilliget; so wird keine ungedult, sondern eine danckbarkeit und zufriedenheit\n[[409.14]] erfordert. Hätte man beym ersten antritt ein mehrers haben wollen, so wäre gewiß gar nichts\n[[409.15]] daraus worden. Es sind Professores auff Universitaten, die so viel nicht haben. Man ist dadurch\n[[409.16]] furs erste aus der gegenwärtigen noth gekommen, und hat dabey eine gelegenheit gefunden es\n[[409.17]] weiter zu bringen, wenn man sich deren recht bedienen kan und will. Überall in der welt wird\n[[409.18]] man zu tadeln und zu clagen finden; man muß aber die sachen nehmen wie sie seyn, und sich\n[[409.19]] des guthen so dabey ist, suchen zu seinem besten zu bedienen. Die jenigen Personen so die\n[[409.20]] oberaufsicht bey der Fürstl. Academi haben, die werden keine ursach haben ihm zu wieder zu\n[[409.21]] seyn, wenn er sich nicht selbsten bey ihnen unangenehm machet, und einen eigensinn zeiget.\n[[409.22]] Durch gefälligkeit und guthe bezeigung gewinnet man die Leüte. Was hindert oder schadet dem\n[[409.23]] Herrn der Gallicismus bey den jungen Edelleüten? Sie können deßen ungeacht viel guthes von\n[[409.24]] ihm lernen. Und wenn er ihren Hofemeistern solches zeiget, so werden sie selbst dazu helffen,\n[[410.1]] und auch ihren nuzen und erbauung dabey finden. Man befleiße sich aber solche dinge zu\n[[410.2]] sagen, die die Leüte nicht vor die Köpfe stoßen sondern einen eingang in die gemüther finden,\n[[410.3]] und keinem streit oder tadel unterworffen seyn. Die Gnädigste Herrschafft wird ein sonderbares\n[[410.4]] gefallen daran haben, und das wird eine staffel seyn zu einem mehreren. Wenn man aber vor\n[[410.5]] der Zeit abbricht und nichts ausmacht, wie kan man dann bey ihr eine ergözlichkeit oder gnade\n[[410.6]] hoffen. Habe dieses auff sein fast ungewöhnlich abgefastes schreiben wohlmeinend erinnern\n[[410.7]] müßen. </p>\n<p> [[410.8]] Bey dem Herrn Grafen wird durch schreiben nichts auszurichten seyn, hätte ich aber sein\n[[410.9]] leztes ehe gehabt, hätte ich mich deßen mündtlich bedienen wollen. Ich getraue mir nicht etwas\n[[410.10]] bey ihm zu erhalten. Kan mein Herr auff andere weise etwas von ihm bekommen, so unterlaße\n[[410.11]] er es nur meinet wegen nicht, denn auff die mir des wegen gegebene Vollmacht nicht die\n[[410.12]] geringste Rechnung zu machen, sondern sie nur zu nehmen als ein Versuch, gleich wie man\n[[410.13]] auff vielen Hehrden stellet. </p>\n<p> [[410.14]] Den Catalogum philosophorum will gegen die meße mitbringen. </p>\n<p> [[410.15]] Ich weis wohl wie es mit eintheilung der Zeddel bewand, und habe dergleichen selbst\n[[410.16]] wohl ehe versucht. Bey der ersten eintheilung ist zu viele genauigkeit vergebens; im fortgang\n[[410.17]] weisen sich die sachen hernach selbst. Ich verbleibe </p>\n<p> [[410.18]] Meines insonders Hochg. Hn. Dienstwilliger Gottfried Wilhelm Leibniz </p>\n<p> [[410.19]] P.S. Die Herren Medici zu Wolfenbutel werden eben so wohl an Hand gehen können, als\n[[410.20]] Herr Linek zu Leipzig. </p>\n<p> [[410.21]] Ich habe noch dieß erinnern wollen, daß seine Briefe nicht wohl zu gemacht gewesen\n[[410.22]] ohngeacht das Siegel unverlezt. Auß dem lezt uberschickten <i>de continuo</i> habe ohne das\n[[410.23]] vorhergehende nicht wohl kommen können, doch köndte dieses wenige beykommende allen\n[[410.24]] Zweifel benehmen. </p>\n",
+  "number": "154.",
+  "title": "LEIBNIZ AN GABRIEL WAGNER",
+  "date": "[Hannover, Januar bis Mitte Februar 1698.] [150.157.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:154. LEIBNIZ AN GABRIEL WAGNER [Hannover, Januar bis Mitte Februar 1698.] [150.157.] Mein Hochg. Herr Nachdem Ihrer durchlt. Durchlt. seine Person ich zu einer anständigen Arbeit bey dero Bibliothec vorgeschlagen, und Sie nicht zwar ein übriges, doch ein zulängliches vors erste in gnaden verwilliget...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

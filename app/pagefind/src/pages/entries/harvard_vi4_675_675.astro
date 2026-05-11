@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_675",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 675,
+  "text": "[[2913.1]] <b>514.  Indices librorum in jure tam pontificio quam civili [1677 bis 1682 (?)]</b>\n [[2913.2]] <tab/>[1677 bis 1682 (?)] </p>\n<p> [[2913.5]] Joh. Fichardus edidit librum de veteribus Jurisconsultis, secundum diversas materias,\n[[2913.6]] quem <i>Partitionum universalium</i> libro 19 recenset Gesnerus. </p>\n<p> [[2913.7]] Habet autem tantum priscos. Longe diffusior est <i>Index omnium librorum</i> <i>in jure tam\n[[2913.8]] pontificio quam civili passim editorum et primum compositus a Johanne Nevisano,\n[[2913.9]] deinde auctus per Ludovicum Gomesium, et rursus per Joh. Fichardum ingenti accessione\n[[2913.10]] locupletatus</i> quem eodem loco <i>pandectarum</i> inseruit secundo loco relatum adjectis\n[[2913.11]] corollariis idem Gesnerus. Eundem postea Joh. Bapt. Ziletus et demum Joh. Wolfg.\n[[2913.12]] Freymonius multo auctiorem in lucem dedit. Hac inscriptione <i>Elenchus</i> <i>omnium autorum\n[[2913.13]] qui in jure tam civili quam canonico vel committendo vel quibuscunque modis explicando\n[[2913.14]] ad nostram usque aetatem claruerunt</i> nomina et monumenta complectens. Est et index\n[[2913.15]] nostro operi <i>tractatuum universi juris autoritate pontificis in unum congestorum</i> praemissus,\n[[2913.16]] sed ultra scriptores inclusos se non extendens. Demum Felicis Contelorii <i>Index\n[[2913.17]] legalis autorum materias juris ex professo tractantium</i> ex Bibl. Joh. Bapt. Coccini\n[[2913.18]] collectus subjunctusque tomo 5^#'t^#'o collectaneorum in <i>Jus pontificium</i> Augustini Barbosae. </p>\n",
+  "number": "514.",
+  "title": "Indices librorum in jure tam pontificio quam civili",
+  "date": "[1677 bis 1682 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:514. Indices librorum in jure tam pontificio quam civili [1677 bis 1682 (?)] [1677 bis 1682 (?)] Joh. Fichardus edidit librum de veteribus Jurisconsultis, secundum diversas materias, quem Partitionum universalium libro 19 recenset Gesnerus. Habet autem tantum priscos. Longe diffusior est Index omniu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

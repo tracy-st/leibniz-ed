@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_191",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 191,
+  "text": "<p> [[633.20]] <b>193. LEIBNIZ AN PAUL PELLISSON-FONTANIER</p>\n<p> [[633.21]] Hannover, 28. November (8. Dezember) 1692. [191.]</b></p>\n<p> [[634.7]] [ ... ] Pour moy je ne souhaitte rien de plus que ce qui pourroit servir au bien general\n[[634.8]] particulierement en tout ce qui augmente nos lumieres, et le tresor des connoissances humaines.\n[[634.9]] Et ce que je regrette le plus, c'est, que par les negligences, et par les caprices des hommes\n[[634.10]] d'aujourd'huy nous manquons nous même à profiter de nos peines. Et il semble que nous ne\n[[634.11]] travaillons que pour la posterité. Ce qui est bon mais il seroit encor mieux, si nous en pouvions\n[[634.12]] prendre les primices pour nous. Je compare les connoissances des hommes d'apresent, à un\n[[634.13]] grand magazin de toute sorte d'excellens materiaux mais mal arrangés qu'on ne met point en\n[[634.14]] oeuvre, et dont on n'a pas même d'inventaire. </p>\n<p> [[634.15]] La France est gouvernée par un Monarque dont les lumieres et les soins s'etendent sur\n[[634.16]] toutes choses, qui a choisi d'excellens hommes pour executer ses grands desseins et qui\n[[634.17]] pourroit encor contribuer à l'accroissement des sciences, plus que tout le reste du genre humain.\n[[634.18]] Mais le malheur du temps semble s'y opposer afin que nous n'en profitions point. Et c'est\n[[634.19]] comme une espece de fatalité, qui nous veut tenir bas et qui empoisonne la felicité de nostre\n[[634.20]] siecle. Les payens disoient qu'il y avoit la deesse Nemesis ou Rhamnousia, qui estoit jalouse du\n[[634.21]] bonheur des hommes, mais pour parler chrestiennement, nos maux viennent de nostre aveuglement,\n[[634.22]] et nous meritons cet aveuglement et ces maux par nos pechés. Nous tournons mêmes\n[[634.23]] nostre esprit à inventer des nouveaux maux; et là dessus je me souviens d'une Epigramme que\n[[634.24]] je fis autres fois sur les bombes; et que j'adjoute icy, quoyque je sçache qu'elle n'est pas assez\n[[634.25]] delicate pour paroistre devant vous. Il est temps de finir.\n[[635.1]] <b>In Bombos</b> <+4>\n [[635.2]] Quis furor humanum stimulat genus? aemula coeli\n [[635.3]] Fulgura Tartareis ignibus aucta micant.\n [[635.4]] Nec satis est simplex tonitru, praegnantia mitti\n [[635.5]] Cernimus, et fulmen fulmina ferre novum.\n [[635.6]] Tormentumque aliud tormenti prodit ab ore,\n [[635.7]] Inque cavo latitans stat catapulta globo.\n [[635.8]] Inclususque simul volat ecce cuniculus ingens\n [[635.9]] Et terrae motum machina dira vehit\n [[635.10]] Disjectaeque domus et late sparsa per auras\n [[635.11]] Moenia cum fundo subsiliente cadunt.\n [[635.12]] Seclorumque labor paucis evertitur horis.\n [[635.13]] In mala turba homines ingeniosa sumus.\n [[635.14]] Nil potuit majus Phlegethon immittere terris\n [[635.15]] Nec fuit ars Stygio dignior ulla deo. </p>\n",
+  "number": "193.",
+  "title": "LEIBNIZ AN PAUL PELLISSON-FONTANIER",
+  "date": "Hannover, 28. November (8. Dezember) 1692. [191.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:193. LEIBNIZ AN PAUL PELLISSON-FONTANIER Hannover, 28. November (8. Dezember) 1692. [191.] [ ... ] Pour moy je ne souhaitte rien de plus que ce qui pourroit servir au bien general particulierement en tout ce qui augmente nos lumieres, et le tresor des connoissances humaines. Et ce que je regrette le...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

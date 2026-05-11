@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_51",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 51,
+  "text": "<p> [[146.17]] <b>51. LEIBNIZ AN MENTET KETTWIG</p>\n<p> [[146.18]] [Hannover, 5. April] 1696. [44.62.]</b></p>\n\n<p> [[147.1]] Vir Nobilissime et Consultissime, Fautor Honoratissime </p>\n<p> [[147.2]] Gratissimae <Fn><i>Am Kopf der Seite</i>: Martino Kettwigio IC^#'t^#'o Cl^#'m^#'o Embdam</Fn> semper erunt Tuae, praesertim, si quid meditando addas ad scientiae profectum:\n[[147.3]] Diu enim est quod quaero qui aliquid conferre possint, quando mihi multis modis\n[[147.4]] distracto non omnia destinata exequi licet. Quod morem laudandi vituperandique inter eruditos\n[[147.5]] attinet, si in alterutram partem excedendum sit, malim elogiis peccari; quibus nemo facile\n[[147.6]] decipitur, quam vituperiis, quibus plerumque inest aliquid noxii et iniqui. Huberi fateor scripta,\n[[147.7]] excepta <i>Historia</i>, mihi parum lecta et vix vacat. Si Grotium passim secutus est non reprehenderim,\n[[147.8]] in id enim scribunt insignes viri, ut alii utantur, et jactis fundamentis aliquid superstruant,\n[[147.9]] si non laudavit, eo facilius condonaverim, quod per se patere videtur quid a scriptore\n[[147.10]] notissimo sit sumtum. </p>\n<p> [[147.11]] Non dubito quin Grotius quaedam contra Hobbii sententias fuerit dicturus si in tempore\n[[147.12]] vidisset, sed nec dubito tamen quin aliqua inde in usus suos fuerit versurus. Grotiana et\n[[147.13]] Hobbiana conciliari posse facile assentior. Quin video plerorumque dogmata rectam interpretationem\n[[147.14]] capere, ut adeo eruditos magis in struendo quam destruendo occupatos esse debere\n[[147.15]] arbitrer. Vellem scilicet non iri in circulum et velut dolium volvi, sed prioribus demonstratione\n[[147.16]] constitutis longius procedi. Quae in libro <i>de jure suprematus</i> et praefatione <i>Codicis diplomatici</i>\n[[147.17]] de Hobbianis et juris naturalis principiis dicta sunt, an Tibi expensa, nosse velim. </p>\n<p> [[147.18]] Vincentius Placcius vir doctrina et meditatione, et zelo praestans <i>Accessionibus</i> nuper\n[[147.19]] editis Moralem Scientiam, et jus naturae delineavit. Haec a Te legi attente, et adnotari optem\n[[147.20]] quae in rem videantur. Nam illis lineis ductis occasio aliis datur sua conferendi. Itaque\n[[147.21]] gratum sibi fore vir doctissimus mihi significavit. Jura summae potestatis non ultra locum\n[[147.22]] habere censeo, quam patitur Reipublicae salus, et veram juris philosophiam constat huc\n[[148.1]] referri. Itaque non video quomodo haec separes nisi forte eo modo, quomodo agnoscunt IC^#'t^#'i\n[[148.2]] quae ipso jure valent aliquando exceptione infirmari. Nec Galliae Regi jus mutandae successionis\n[[148.3]] conceditur. Scis Carolum VI. exhaeredato velut ob crimen filio, regnum in filiam\n[[148.4]] contulisse, quae Anglorum Regi nupserat, et magna pars procerum assensit. Ipse ego in <i>Codice\n[[148.5]] diplomatico</i> formulam edidi, sed quae non tenuit, et contrarium receptum habetur. Rex Galliae\n[[148.6]] domi suae multis juris vinculis ligatus est, praesertim in iis provinciis ubi antiquis ducibus\n[[148.7]] comitibusve successit. Hispanica quoque Regna suas succedendi Leges habent, a Carolo V. et\n[[148.8]] Philippo II. agnitas. Legi Commissoriae nec passim locus est, nec nunquam. Limites vel\n[[148.9]] recepto jure gentis vel necessitate definiuntur. Itaque temperare stylum tutius veriusque est et\n[[148.10]] quae a foederatis provinciis olim acta sunt ego nec damnare ausim, nec absolvere: Longa est\n[[148.11]] historia longae ambages factorum, quae oporteat examinari majore difficultate quam fructu. Et\n[[148.12]] plerumque utrinque injusta sunt bella. Praesens tamen nostrum et quae similia sunt, excipere\n[[148.13]] oportet. Quod superest, si qua speciatim occasione Placciani operis notare placeat, curabo\n[[148.14]] perferri, ne inutile hoc commercium sit. Censeo enim nos omnia ad fructum dirigere debere, qui\n[[148.15]] maximus est, si nos primum, deinde et alii meliores reddantur. Vale etc. <Fn><i>Am Rande von Bl. 7 v^#'o quer eine nicht zum Brief gehörende Notiz von Leibniz</i>: Es ist nur der Tomus I. und scheinet also daß der Tom. II. fehle, es wäre dann daß er nie herauskommen.</Fn> </p>\n",
+  "number": "51.",
+  "title": "LEIBNIZ AN MENTET KETTWIG",
+  "date": "[Hannover, 5. April] 1696. [44.62.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:51. LEIBNIZ AN MENTET KETTWIG [Hannover, 5. April] 1696. [44.62.] Vir Nobilissime et Consultissime, Fautor Honoratissime Gratissimae Am Kopf der Seite: Martino Kettwigio IC^#'t^#'o Cl^#'m^#'o Embdam semper erunt Tuae, praesertim, si quid meditando addas ad scientiae profectum: Diu enim est quod quae...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

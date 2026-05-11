@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_139",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 139,
+  "text": "<p> [[401.13]] <b>124. NICOLAS MALEBRANCHE AN LEIBNIZ</p>\n<p> [[401.14]] [Paris, 1. Hälfte 1676.] [123.125.]</b></p>\n<p> [[402.1]] Monsieur </p>\n<p> [[402.2]] Je croy qu'il y a encore bien plus de tems à perdre et de difficultez à vaincre dans les\n[[402.3]] disputes par écrit, que dans celles qui se terminent dans la conversation. Vous en voyez bien les\n[[402.4]] raisons. Cependant puisque vous m'avez fait l'honneur de m'écrire vous soufrirez bien que je\n[[402.5]] vous reponde. </p>\n<p> [[402.6]] Vous niez deux propositions dont voicy la 1^#'e^#'r^#'e. <i>Deux choses reellement distinctes sont\n[[402.7]] separables.</i> et vous dites sur la preuve de cette proposition, que quoyque 2 choses soient\n[[402.8]] reel[l]ement distinctes, tous les requisits de l'une ne peuvent pas toujours estre entendus sans\n[[402.9]] les <b>requisits</b> de l'autre. À quoy je vous repons que cela n'est point vray dans les estres\n[[402.10]] absolus mais seulement dans les manieres des estres et dans toutes les choses qui consistent\n[[402.11]] dans des rapports: car les estres absolus n'ont point de <b>requisits</b>, leur idée est simple. Vous\n[[402.12]] pouvez penser à une partie d'étendue sans panser à une autre. Mais si deux parties d'etendue se\n[[402.13]] joignent et que vous les vouliez separer, alors il faut penser à une autre etendue qui les separe.\n[[402.14]] Ce <b>requisit</b> est concû necessairement; mais on voit clairement qu'il est aussi possible que les\n[[402.15]] autres parties d'etenduë qu'on conçevoit jointes [soient separées.] On n'y conçoit point de\n[[402.16]] contradiction si ce n'est que l'on suppose ce qui est en question que l'estendue est immobile. </p>\n<p> [[402.17]] La 2^#'e proposition que vous niez est celle cy. <i>Deux choses etenduës separables sont\n[[402.18]] mobiles.</i> Cela me paroist evident. Car si l'on conçoit que l'etenduë qui separe deux parties\n[[402.19]] d'etendue croisse ou augmente incessamment, les deux parties d'etendue s'eloigneront sans\n[[402.20]] cesse et par consequent [elles] seront en mouvement. Et je ne voi pas que si l'on peut metre\n[[402.21]] l'etenduë d'un pouce entre 2 parties d'etendue on ne puisse mettre un pied une toise etc. Au\n[[402.22]] reste je tombe d'accord que les parties de l'etendue sont separables en ce que l'une peut estre\n[[402.23]] detruite sans l'autre, mais cela n'empeche pas que l'une ne puisse s'eloigner de l'autre si ce\n[[402.24]] n'est que l'on veuille toujours se representer l'etendue comme immobile c'est à dire supposer\n[[402.25]] ce qui est en question. </p>\n<p> [[402.26]] Voilà Monsieur ce qu'il est necessaire que je reponde pour satisfaire à vostre lettre. je ne\n[[402.27]] vous en dis pas davantage parceque j'espere, en vous rendant la civilité que je vous dois depuis\n[[402.28]] si long temps, vous repondre plus clairement et plus agreablement sur les difficultez que vous\n[[402.29]] me ferez l'honneur de me proposer. Je suis </p>\n<p> [[402.30]] Monsieur Vostre tres humble et tres obeissant serviteur Malebranche. </p>\n<p> [[402.31]] A Monsieur Monsieur De Leibniz à l'hotel de St. Quentin. </p>\n",
+  "number": "124.",
+  "title": "NICOLAS MALEBRANCHE AN LEIBNIZ",
+  "date": "[Paris, 1. Hälfte 1676.] [123.125.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:124. NICOLAS MALEBRANCHE AN LEIBNIZ [Paris, 1. Hälfte 1676.] [123.125.] Monsieur Je croy qu'il y a encore bien plus de tems à perdre et de difficultez à vaincre dans les disputes par écrit, que dans celles qui se terminent dans la conversation. Vous en voyez bien les raisons. Cependant puisque vous ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

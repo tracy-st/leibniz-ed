@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_193",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 193,
+  "text": "<p> [[491.9]] <b>193. LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY</p>\n<p> [[491.10]] [Hannover, 25. Dezember 1698.] [60.]</b></p>\n\n<p> [[492.1]] Monsieur </p>\n<p> [[492.2]] Je <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Monsieur Monsieur de Dobrzenski grandMaistre de la maison etc.</Fn> suis faché, qu'il faut que je vous dise que Vous ne serés plus ennuyé par nostre bon\n[[492.3]] homme Monsieur d'Helmont. Malgré toute la consideration que j'ay, Monsieur, pour vos\n[[492.4]] interests, j'eusse souhaitté, qu'il vous eût endormé encor bien des fois. Vous auriés fait\n[[492.5]] volontiers ce petit sacrifice à Mesdames les Electrices, qui avoient de l'amitié et de l'estime\n[[492.6]] pour luy et qui se plaisoient à l'entendre quelques fois. Et en effect Elles avoient raison en cela,\n[[492.7]] comme en toute autre chose c'estoit un homme rare en bien des façon. Il avoit une afinité de\n[[492.8]] bonnes connoissances; et non obstant sa religion fort eloignee de celle qui est receue, il estoit\n[[492.9]] des plus honnestes hommes, et des meilleurs amis que j'aye connu. Et si l'age luy avoit osté\n[[492.10]] l'agrement, le merite y suppleoit abondamment. En fin Mad. de Mozfeld sa parente, m'a notifié\n[[492.11]] sa mort; dont je suis bien faché, et Mad. nostre Electrice aussi, qui en a receu une lettre de la\n[[492.12]] même Dame. Une colique le surprit la nuit, on luy donna un verre de vin sec qu'il demanda, et\n[[492.13]] on se retira en luy laissant de la lumiere parcequ'il le voulut. Mais en revenant on le trouva sans\n[[492.14]] sentiment; il demeura pourtant plusieurs heures en cet estat, et enfin il expira le lendemain.\n[[492.15]] Mad. de Mozfeld me demande une Epitaphe. Voicy ce que j'ay fait.\n [[492.16]] <i>Nil patre inferior jacet hic Helmontius alter</i>\n [[492.17]] <i>Qui junxit varias mentis et artis opes</i>\n [[493.1]] <i>Per quem Pythagoras et Cabbala sacra revixit</i>\n [[493.2]] <angle bracket><i>Quisque</i></angle bracket> <i>Leontinus</i> <i>cuncta sibi ipse dabat</i>\n [[493.3]] <i>Quodsi Graja virum tellus et prisca tulissent</i>\n [[493.4]] <i>secula, nunc inter lumina prima foret.</i> </p>\n<p> [[493.5]] J'apprends que leur Serenités Electorales vont en Prusse, et y pourront rester un temps\n[[493.6]] considerable. Cela m'a donné la pensee de faire auparavant un petit tour à Berlin, pour icy faire\n[[493.7]] ma Cour. Je m'imagine que ce sera la semaine qui vient. Mais comme ce n'est pas encor une\n[[493.8]] chose seure, je n'en ay presque parlé encor icy, qu'à de <angle bracket>Serenité</angle bracket> Monsign l'Electeur et à Mad.\n[[493.9]] l'Electrice. Et je vous supplie Monsieur de temoigner par avance ma devotion à la Serenité\n[[493.10]] Electorale de Madame vostre ou plustost encor nostre incomparable Electrice. Et de me faire la\n[[493.11]] grace de me compter tousjours absolument pour </p>\n<p> [[493.12]] Vostre etc. </p>\n",
+  "number": "193.",
+  "title": "LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY",
+  "date": "[Hannover, 25. Dezember 1698.] [60.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:193. LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY [Hannover, 25. Dezember 1698.] [60.] Monsieur Je Am Kopf der Seite von Leibniz' Hand: A Monsieur Monsieur de Dobrzenski grandMaistre de la maison etc. suis faché, qu'il faut que je vous dise que Vous ne serés plus ennuyé par nostre bon homme Monsieur d'H...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

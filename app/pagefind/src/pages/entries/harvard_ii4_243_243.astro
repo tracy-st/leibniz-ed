@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_243",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 243,
+  "text": "<p> [[738.6]] <b>243. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[738.7]] [Hannover, 23. Juni 1707 (?)]. [242.244.] </b></p>\n<p> [[738.19]] <petit> <k>Theorema VII.</k>\n [[738.20]] <i>Atomi molis non sunt Elementa rerum.</i>\n [[738.21]] Demonstratio.\n[[738.22]] Cum Atomi molis supponantur esse partes materiae, determinatam agnoscentes magnitudinem atque figuram, et\n[[738.23]] esse tamen simul indivisibiles, [ ... ] patet, de Atomo molis partes diversas, quarum pars A non est pars B, simul\n[[738.24]] affirmari; dum eadem ponitur agnoscere determinatam suam magnitudinem et figuram, [ ... ]; et simul negari;\n[[738.25]] dum eadem assumitur esse indivisibilis, [ ... ] sive (quod eodem recidit) dum affirmatur, partes ejusdem\n[[738.26]] constituere unicam simplicem entitatem, vel continuum unicum absolute, vel solidum unicum impenetrabile;\n[[738.27]] adeoque Atomum molis involvere contradictionem [ ... ]. Sed quicquid involvit contradictionem, illud absolute\n[[738.28]] est impossibile, [ ... ] et proinde Non-Ens [ ... ]. Quamobrem Atomus molis est Non-Ens. Sed Non-Ens non\n[[739.1]] potest ingredi in partes compositorum, consequenter nec ex illo intelligi potest, cur partes ita potius, quam aliter\n[[739.2]] existant [ ... ]. Ergo Atomi molis non sunt Elementa monadatorum, [ ... ].\n[[739.3]] Scholion I. LEIBNITIUS in Epistola, Hanovera XXIII. Junii MDCCVII. ad me data: </petit>\n [[739.4]] \"Etsi existentia Atomi molis non foret contra divinam potentiam, foret tamen contra divinam\n[[739.5]] sapientiam. Non enim datur ratio sufficiens, <k>Deum</k> determinans ad subdividendum e. gr. globum\n[[739.6]] terrae, et non subdividendi Acarum. Ultimum in natura rerum non datur, quia nulla datur\n[[739.7]] ratio terminandi. Ut acarus ad globum terrae, ita hic ad alium majorem.\" </p>\n",
+  "number": "243.",
+  "title": "LEIBNIZ AN MICHAEL GOTTLIEB HANSCH",
+  "date": "[Hannover, 23. Juni 1707 (?)]. [242.244.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:243. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH [Hannover, 23. Juni 1707 (?)]. [242.244.] Theorema VII. Atomi molis non sunt Elementa rerum. Demonstratio. Cum Atomi molis supponantur esse partes materiae, determinatam agnoscentes magnitudinem atque figuram, et esse tamen simul indivisibiles, [ ... ] patet, ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

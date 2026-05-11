@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_69",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 69,
+  "text": "<p> [[296.6]] <b>70. LEIBNIZ AN ─ (?)</p>\n<p> [[296.7]] [Rom, Sommer 1689.] [69.]</b></p>\n<p> [[296.12]] <i>Non intelligo</i>, inquis, <i>cur connectantur duo corpora, quae ut effectum suum faciant\n[[296.13]] sejuncta esse debent, et moveri in temporibus diversis</i>. </p>\n<p> [[296.14]] Respondeo: atqui ego ea non connecto cum de centri gravitatis calculo ago. </p>\n<p> [[296.15]] Saltem ibi ergo cessat haec exceptio. </p>\n<p> [[296.16]] Deinde quando semel <i>B</i> perfecit suum ascensum, quid ni connectere <i>A</i> et <i>B</i> liceat per\n[[296.17]] stateram durante descensu ipsius <i>B</i> <angle bracket>ex</angle bracket> 16 pedibus ad probandam inde secuturam levationem\n[[296.18]] ipsius <i>A</i> altius quam ante seu motum perpetuum id est absurdum. Et in universum connexio aut\n[[296.19]] sejunctio augere vel minuere vires et centrum gravitatis plus minusve attollere non debet. </p>\n<p> [[296.20]] <i>Negas a te admitti elevationem centri gravitatis</i>. Protestatio facto contraria est. An enim\n[[296.21]] negas in primo statu esse elevatum ad <zl>4<ne>5<be> pedis (cum <i>A4</i> est elevatum ad pedem 1 et <i>B1.</i> in\n[[297.1]] horizonte) in sequente vero esse elevatum ad <zl>16<ne>5<be>  (cum <i>A4</i> est in horizonte, et <i>B.1.</i> elevatum ad\n[[297.2]] 16 pedes).\n [[297.3]] Tempus non video quid ad rem faciat, quia quantocunque tempore concesso effici non\n[[297.4]] potest motus perpetuus, seu elevatio centri gravitatis sine extrinseco auxilio. </p>\n",
+  "number": "70.",
+  "title": "LEIBNIZ AN ─ (?)",
+  "date": "[Rom, Sommer 1689.] [69.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:70. LEIBNIZ AN ─ (?) [Rom, Sommer 1689.] [69.] Non intelligo, inquis, cur connectantur duo corpora, quae ut effectum suum faciant sejuncta esse debent, et moveri in temporibus diversis. Respondeo: atqui ego ea non connecto cum de centri gravitatis calculo ago. Saltem ibi ergo cessat haec exceptio. D...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

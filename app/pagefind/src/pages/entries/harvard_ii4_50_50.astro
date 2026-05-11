@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_50",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 50,
+  "text": "<p> [[169.20]] <b>50. LEIBNIZ AN ISAAC JAQUELOT (?)</p>\n<p> [[169.21]] [Berlin, 18. April 1703]. [48.58.] </b></p>\n<p> [[170.1]] Lettre a M. ... </p>\n<p> [[170.2]] Je vous communique Monsieur une lettre de Monsieur de Fontenelle Secretaire de l'Academie\n[[170.3]] Royale des Sciences de Paris avec ma reponse; parceque j'y monstre que Dieu n'agit pas\n[[170.4]] par necessité dans la nature comme Spinosa et ce semble des Cartes l'ont crû, mais suivant le\n[[170.5]] choix de sa sagesse. Et je m'imagine que vous serés bien aise de le voir. Monsieur des Cartes\n[[170.6]] pour rendre raison des loix du mouvement n'a recours qu'à la constance de Dieu; mais cela ne\n[[170.7]] s'eloigne pas du principe de la necessité. Spinosa conviendra du principe de la constance, mais\n[[170.8]] non pas de celuy de la sagesse que je crois qu'il faut encor employer. </p>\n",
+  "number": "50.",
+  "title": "LEIBNIZ AN ISAAC JAQUELOT (?)",
+  "date": "[Berlin, 18. April 1703]. [48.58.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:50. LEIBNIZ AN ISAAC JAQUELOT (?) [Berlin, 18. April 1703]. [48.58.] Lettre a M. ... Je vous communique Monsieur une lettre de Monsieur de Fontenelle Secretaire de l'Academie Royale des Sciences de Paris avec ma reponse; parceque j'y monstre que Dieu n'agit pas par necessité dans la nature comme Spi...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

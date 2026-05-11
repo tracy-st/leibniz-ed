@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_264",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 264,
+  "text": "<p> [[814.3]] <b>230. LEIBNIZ AN CHRISTIAN PHILIPP</p>\n<p> [[814.4]] Hannover, 11. (21.) März 1681. [226.]</b></p>\n<p> [[814.17]] à Hanover ce 11 de Mars 1681. </p>\n<p> [[814.18]] [ ... ] Je n'ay pas vû la traduction de la <i>Pseudodoxia Epidemica</i> de Brown, faite par\n[[814.19]] Rautner; et je vous suis obligé de l'indice que vous me faites de l'insertion de mon écrit. Il s'en\n[[814.20]] faut peu que je ne desavoüe cet écrit que j'avois intitulé <i>Hypothese physique</i>, et qui je ne sçay\n[[814.21]] comment, a esté fort bien receu par tout; quoyque je m'imagine que je dirois apresent bien\n[[814.22]] d'autres choses, si j'estois en humeur d'écrire. </p>\n<p> [[814.23]] Pour ce qui est de mon sentiment touchant les ouvrages de Monsieur Stenon, et de Mons.\n[[814.24]] Weigelius; il faut avouer que tout ce que Mons. Stenon a donné en physique est excellent; mais\n[[814.25]] ce qui merite le plus d'estre estimé, c'est le traité qu'il a fait <i>De solido intra solidum</i>: je l'ay\n[[814.26]] souvent exhorté à le pousser plus loin, et à en tirer des consequences pour trouver le commencement\n[[814.27]] du genre humain, l'inondation generale, et quelques autres belles verités, qui\n[[814.28]] confirment ce qui nous en est dit par l'écriture sainte. </p>\n<p> [[815.1]] Mons. Weigelius a beaucoup d'esprit sans doute; mais souvent il est peu intelligible, et il\n[[815.2]] semble qu'il n'a pas tousjours des pensées bien nettes. Je voudrois qu'il s'appliquât plus tost à\n[[815.3]] nous donner quantité de belles observations, qu'il a pû faire en practiquant les mecaniques, que\n[[815.4]] de s'amuser à des raisonnemens generaux, où il me semble qu'il se perd quelques fois. Non\n[[815.5]] obstant tout cela je ne laisse pas de l'estimer beaucoup; et de reconnoistre qu'il se trouve\n[[815.6]] beaucoup de bonnes pensées dans tous ses écrits. [ ... ] </p>\n",
+  "number": "230.",
+  "title": "LEIBNIZ AN CHRISTIAN PHILIPP",
+  "date": "Hannover, 11. (21.) März 1681. [226.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:230. LEIBNIZ AN CHRISTIAN PHILIPP Hannover, 11. (21.) März 1681. [226.] à Hanover ce 11 de Mars 1681. [ ... ] Je n'ay pas vû la traduction de la Pseudodoxia Epidemica de Brown, faite par Rautner; et je vous suis obligé de l'indice que vous me faites de l'insertion de mon écrit. Il s'en faut peu que ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_230",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 230,
+  "text": "<p> [[727.5]] <b>233. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[727.6]] Venedig, 12. August [1693]. [208.237.]</b></p>\n<p> [[727.15]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[727.16]] Il Reggimento dell'Eccell^#'m^#'o Delfino in Padova terminò il mese di maggio passato, ed io\n[[727.17]] sono tre mesi, che mi trovo in Venetia, ove quando stimavo di mettermi in viaggio per\n[[727.18]] Germania, disposte già tutte le mie cose a questo oggetto, mi fù da gl'Eccell^#'m^#'i Sig^#'r^#'i Riformatori\n[[727.19]] dello Studio, e principalmente dall'Eccell^#'m^#'o Sig^#'r^#'e Procuratore Sebastiano Foscarini, mio benefico\n[[727.20]] Mecenate, proibito di partirmi, ed havendomi ottenuto un breve da Roma per uscire dalla\n[[727.21]] Religione francescana, m'ordinarono che mi vestissi da Prete, proveduto di beneficio dalla\n[[728.1]] Casa Delfina, e nell'ultima riduttione di luglio mi promossero alla catedra dell'Astronomia, e\n[[728.2]] Meteore occupata alcuni anni sono dal celebre Montanari, e di prima condotta, m' hanno\n[[728.3]] assegnato un stipendio di ducati, 500, nell'istessa maniera, che fù condotto il Montanari colla\n[[728.4]] speranza dell'accrescimento nella ricondotta doppo anni cinque. Onde nell'istesso giorno,\n[[728.5]] deposte le spoglie monastiche, mi sono trovato Prete secolare, e lettore di Padova, con sodisfattione\n[[728.6]] universale di questa Dominante, e di Padova. Con queste dolci, e generose violenze\n[[728.7]] m' hanno necessitato a fermarmi in Italia, ed io non hò saputo resistere al comando di questi\n[[728.8]] Senatori, che non han voluto in conto alcuno permettere, che abbandoni lo Studio di Padova per\n[[728.9]] qualsivoglia altra Università, e per restituirmi affatto la quiete, e la libertà, mi han procurato la\n[[728.10]] licenza di pretarmi, potendo adesso vivere a mio modo secondo la mia coscienza in Padova ove\n[[728.11]] a Dio piacendo mi portarò verso ottobre per stabilirmi casa, ed apparecchiarmi per l'ingresso,\n[[728.12]] che sarà verso gl'ultimi di Novembre. Mi creda V. S. Illu^#'m^#'a, che se non fosse stato il comando\n[[728.13]] supremo di questi Senatori, che m' han beneficato con tanta generosità, mi sarei subito partito,\n[[728.14]] come havevo risoluto, però le circonstanze presenti non mi l' han permesso. Sia come si voglia\n[[728.15]] io mi confessarò sempre infinitamente obligato all'incomparabile bontà di V. S. Illu^#'m^#'a, e ne\n[[728.16]] conservarò eterna la memoria, e l'assicuro, che ella haverà qui un Amico affettuosissimo, che\n[[728.17]] sarà sempre grato al suo amore. Coll'Ordinario vegnente darò parte de miei studii, e non mi\n[[728.18]] scordarò dell'Ongarello. La sua lettera mi è stata puntualmente consegnata. E mi resto </p>\n<p> [[728.19]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o Ob<angle bracket>lig</angle bracket>^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[728.20]] Venetia 12 Agosto </p>\n<p> [[728.21]] A Monsieur Monsieur Leibniz Conseiller de la Cour Serenissime a Volfembutel </p>\n",
+  "number": "233.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 12. August [1693]. [208.237.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:233. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 12. August [1693]. [208.237.] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o Il Reggimento dell'Eccell^#'m^#'o Delfino in Padova terminò il mese di maggio passato, ed io sono tre mesi, che mi trovo in Venetia, ove quando stimavo di me...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

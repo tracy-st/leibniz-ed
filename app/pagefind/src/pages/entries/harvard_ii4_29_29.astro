@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_29",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 29,
+  "text": "<p> [[82.11]] <b>29. LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY</p>\n<p> [[82.12]] Berlin, 4. November 1702. [30.] </b></p>\n<p> [[83.1]] Monsieur </p>\n<p> [[83.2]] Je ne say s'il m'est permis de vous supplier de la faveur suivante. J'en fais cependant\n[[83.3]] l'essay parce que c'est quelque chose de fort raisonnable et charitable même à mon avis. Il y a\n[[83.4]] un soldat de la garnison de Spandau, qui a quelque talent naturel comme il a monstré par la\n[[83.5]] petite fortification qu'il a faite tout proche de Luzenbourg avec des petites sentinelles et canons\n[[83.6]] qu'il a fondus d'estain. Comme ce garçon pourroit aller plus loin et cultiver son talent pour le\n[[83.7]] service du public, et comme j'ay coustume de faire apprendre quelque chose à mes valets, j'ay\n[[83.8]] quelque envie de le prendre, si on le pouvoit tirer delà sans beaucoup de difficulté; et alors je\n[[83.9]] luy ferois apprendre à compter, desseigner, tourner, etc. </p>\n<p> [[83.10]] Mais il faudroit luy faire parler auparavant et apprendre de luy s'il en estoit bien aise, et\n[[83.11]] comment s'y prendre. Peutestre seroit il bon qu'il essayât cela comme de luy même. Souvent on\n[[83.12]] laisse aller les soldats s'ils peuvent trouver dix ecus qu'il faut pour lever un autre; et je ne\n[[83.13]] regretterois pas une petite somme comme cela. Il est dans la compagnie du commendant qui est\n[[83.14]] Mons. Bulow ce me semble. Peutestre que celuy cy ne feroit point le difficile, et au besoin on\n[[83.15]] pourroit employer nostre M. de Bulo pour favoriser la chose. Ainsi je vous supplie, Monsieur, de\n[[83.16]] faire parler premierement à ce soldat en secret, luy recommendant le silence jusqu'à ce qu'on\n[[83.17]] sache comment s'y prendre. Mais il n'y a point de temps à perdre, parce qu'il faut que je m'en\n[[83.18]] aille bien tost. Ainsi je vous supplie, Monsieur, de m'en faire savoir bien tost ce qui en est, en cas\n[[83.19]] que vous trouvés à propos de vous en mêler. Je demande mille pardon de cette liberté, souhaitant\n[[83.20]] de meriter vos bontés, et vous remerciant de celles que j'ay deja eprouvées, et je suis avec zele </p>\n<p> [[83.21]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[83.22]] Berlin 4 Novembr 1702 </p>\n<p> [[83.23]] A Monsieur Monsieur le Baron de Dobrzenski Grand maistre de la Maison de la Reine et\n[[83.24]] Conseiller intime de guerre du Roy </p>\n",
+  "number": "29.",
+  "title": "LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY",
+  "date": "Berlin, 4. November 1702. [30.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:29. LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY Berlin, 4. November 1702. [30.] Monsieur Je ne say s'il m'est permis de vous supplier de la faveur suivante. J'en fais cependant l'essay parce que c'est quelque chose de fort raisonnable et charitable même à mon avis. Il y a un soldat de la garnison de Sp...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

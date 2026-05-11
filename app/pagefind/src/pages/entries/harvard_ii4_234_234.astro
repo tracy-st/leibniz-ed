@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_234",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 234,
+  "text": "<p> [[709.6]] <b>234. DEMOISELLE LETI AN LEIBNIZ</p>\n<p> [[709.7]] Hannover, 20. Dezember 1707. [233.] </b></p>\n<p> [[709.15]] J'aurois répondu sur le champ, Monsieur, au billet que Vous m'avez fait l'honeur de\n[[709.16]] m'écrire, si je n'avois pas été sur le point de sortir quand je le reçus. Je savois M^#'r que vous êtes\n[[709.17]] un des plus savans hommes de l'Europe, vôtre maniere d'agir envers moi me fait voir que vous\n[[709.18]] êtes en même tems un des plus polis et des plus obligeans. La bonté que vous avez euë,\n[[709.19]] Monsieur, de me communiquer la Lettre de M^#'r Coste et vôtre réponse, me flatte agréablement:\n[[709.20]] j'ai lû l'une et l'autre avec plaisir, et j'ai été fort aise de voir ce que vous pensés, sur une\n[[709.21]] matiere aussi délicate, et qui a été un grand sujet de dispute depuis long-tems. Si mon\n[[709.22]] aprobation étoit de quelque prix, je vous dirois, Monsieur, tout ce que je pense de vôtre Lettre,\n[[709.23]] mais il faut un Appelles pour louër un Alexandre. </p>\n<p> [[710.1]] Je conois fort particulierement M^#'r Coste, et j'ai été surprise de voir, qu'un homme qui a\n[[710.2]] autant d'esprit et de savoir, qu'il en a, ait presque ajoûté foi à ce qu'on a publié des Miracles\n[[710.3]] prétendus des prophetes du Dauphiné. Il semble qu'il arrive de tems en tems certaines choses,\n[[710.4]] qui en imposent si fort, qu'on n'ose presque se déclarer contre: nous en avons presentement un\n[[710.5]] exemple ici, puisqu'il n'est presque pas permis de nier les merveilleux effets de la poudre de\n[[710.6]] simpathie, ou au moins de les attribuer en partie à l'Imagination de celui sur qui elle agit.\n[[710.7]] Cependant c'est une chose aussi incomprehensible pour moi que d'entendre dire qu'un homme\n[[710.8]] parle Grec et Latin, sans avoir apris ces Langues. </p>\n<p> [[710.9]] J'ai écrit à mon Beau-frere, Monsieur, ce que vous m'ordonnez de lui dire de vôtre part et\n[[710.10]] je lui ai envoié vôtre Lettre pour M^#'r Coste. Je souhaite que vous soïez bientôt en état de sortir,\n[[710.11]] et que vous vous souveniez de la promesse que vous me faites de m'honorer d'une de vos\n[[710.12]] visites. Je vous aurois prévenue, si c'étoit la coûtume que les Dames rendissent des visites aux\n[[710.13]] Messieurs. Je suis </p>\n<p> [[710.14]] Monsieur Votre très-humble et très obeïssante Servante M. Leti </p>\n<p> [[710.15]] Hanover ce 20 Xbre 1707. </p>\n",
+  "number": "234.",
+  "title": "DEMOISELLE LETI AN LEIBNIZ",
+  "date": "Hannover, 20. Dezember 1707. [233.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:234. DEMOISELLE LETI AN LEIBNIZ Hannover, 20. Dezember 1707. [233.] J'aurois répondu sur le champ, Monsieur, au billet que Vous m'avez fait l'honeur de m'écrire, si je n'avois pas été sur le point de sortir quand je le reçus. Je savois M^#'r que vous êtes un des plus savans hommes de l'Europe, vôtre...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

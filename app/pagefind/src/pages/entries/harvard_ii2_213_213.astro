@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_213",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 213,
+  "text": "<p> [[691.1]] <b>215. LEIBNIZ AN JOHANN CHRISTOPH HARTUNG</p>\n<p> [[691.2]] [Ende] März 1693. [210.]</b></p>\n<p> [[691.10]] WohlEdler <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: An H. D. Hartung nach Jena. Martii 1693</Fn> vest und Hochgelahrter insonders Hochg. H. Doctor. </p>\n<p> [[691.11]] Deßelben angenehmes habe zurecht erhalten, und möchte wündschen mit dem verlangten\n[[691.12]] an hand gehen zu können. Alleine waß ich von der gleichen vor vielen jahren aufgezeichnet\n[[691.13]] haben mag, ist theils nicht beyhanden theils in einem chaos von papiren verstecket, daß dazu so\n[[691.14]] leicht nicht zu gelangen, in dem mir ganz andere verrichtungen von langer zeit her obgelegen. </p>\n<p> [[691.15]] Des Herrn Doctoris <i>Metaphysica juris</i> ist mir zu handen kommen und finde löblich daß er\n[[691.16]] meines wißens der erste so ein eignes werck davon heraus geben. Sonsten ist nicht ohne, daß\n[[691.17]] die applicatio terminorum metaphysicorum ad alias scientias et facultates offt mehr die sachen\n[[691.18]] verdunckelt als ercläret, in dem solche termini gemeiniglich keine richtige bedeutungen haben,\n[[691.19]] daher dann auch die gemeinen Regulae philosophicae, so darauff gebauet, sehr ungewiß fallen,\n[[691.20]] und mehr zweifel erregen, als heben, deswegen auch mein <i>methodus</i> einige erinnerungen\n[[691.21]] gethan; in zwischen bleibt es doch dabey daß die rechte metaphysica als welche die allgemeinen\n[[691.22]] beschaffenheiten der dinge und die haupt regeln in sich begreiffen soll, in allen andern\n[[691.23]] wißenschafften großen Nuzen habe; Meines Herrn Doctoris nüzliche arbeit auch zu fernern\n[[691.24]] nachdencken den weg bahnen helffe. Und gleich wie sonst von ihm noch mehr gemeinnüziges\n[[691.25]] der studirenden jugend zum besten versprochen wird, also wündsche dazu gluck und heil, der\n[[691.26]] ich verbleibe </p>\n<p> [[691.27]] Meines Hochg. H. Doctoris etc. </p>\n",
+  "number": "215.",
+  "title": "LEIBNIZ AN JOHANN CHRISTOPH HARTUNG",
+  "date": "[Ende] März 1693. [210.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:215. LEIBNIZ AN JOHANN CHRISTOPH HARTUNG [Ende] März 1693. [210.] WohlEdler Am Kopf des Briefes von Leibniz' Hand: An H. D. Hartung nach Jena. Martii 1693 vest und Hochgelahrter insonders Hochg. H. Doctor. Deßelben angenehmes habe zurecht erhalten, und möchte wündschen mit dem verlangten an hand geh...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

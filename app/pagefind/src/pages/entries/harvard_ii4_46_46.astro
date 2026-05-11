@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_46",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 46,
+  "text": "<p> [[151.8]] <b>46. BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ</p>\n<p> [[151.9]] Paris, 24. März 1703. [41.49.] </b></p>\n<p> [[151.18]] Monsieur </p>\n<p> [[151.19]] Dès que j'eus reçû votre lettre du 6 Jan. je chargeai le Libraire de l'Academie de ramasser\n[[151.20]] tous les Livres ou Ecrits que vous demandiés, et de les porter chés M. Brosseau. Il y a si long\n[[151.21]] temps que cela est fait, qu'apparemment vous en étes instruit à l'heure qu'il est. Je ne croi pas\n[[151.22]] qu'on ait rien oublié de ce que vous souhaitiés qu'on vous envoyast. Mille graces trés humbles,\n[[151.23]] Monsieur, de l'honneur que vous m'avés fait de me prendre pour votre Commissionnaire. Je me\n[[151.24]] croi maintenant en possession d'une fonction si glorieuse, et si vous me la faisiés partager avec\n[[151.25]] quelque autre, je vous avertis que je le trouverois fort mauvais. </p>\n<p> [[152.1]] Il vous est échapé dans votre lettre des traits, ou plustost des rayons de Metaphisique qui\n[[152.2]] m'ont charmé, et qui m'ont porté de grandes lumieres dans l'esprit. Tout ce que vous me dites\n[[152.3]] sur les premieres Loix des mouvemens qui renferment quelque cause immaterielle, est d'une\n[[152.4]] beauté sublime. Je voudrois seulement savoir, si ces Loix sont indifferentes à la nature des\n[[152.5]] Corps, c'est à dire telles que la Cause immaterielle ou Dieu en eust pu prescrire d'autres. En ce\n[[152.6]] cas là, je vous avoüe qu'il y a là quelque chose d'arbitraire qui me fait de la peine, et qui\n[[152.7]] peutêtre par des consequences pourroit faire tort aux Verités geometriques. Si ces Loix sont\n[[152.8]] déterminées par la nature des Corps à être telles, il y a donc entre elles et la nature des Corps\n[[152.9]] quelque rapport qui nous échape, et si nous le connoissions les Loix du mouvement ne nous\n[[152.10]] conduiroient necessairement à rien d'immateriel. Il me semble que selon votre idée c'est\n[[152.11]] absolument la premiere partie du Dilemme qu'il faut soutenir, mais elle a bien ses difficultés. Si\n[[152.12]] les Loix du mouvement sont arbitraires, qui m'assure qu'elles soient générales? Il y en aura ici\n[[152.13]] d'une façon, ailleurs d'une autre. Ainsi parceque la construction d'un Animal est arbitraire, il y\n[[152.14]] a differentes constructions d'Animaux. Ce qui est necessaire est général, cela est incontestable,\n[[152.15]] mais la proposition negative me paroist vraye aussi, que ce qui n'est point necessaire n'est point\n[[152.16]] général. Pourquoi l'Etre infiniment sage aura t'il, entre deux especes de Loix égales par elles\n[[152.17]] mêmes, préferé absolument les unes aux autres? Pourquoi ne les pas employer toutes, ou\n[[152.18]] ensemble, ou separément s'il le faloit? J'ai bien de la peine à croire qu'en ce genre là tout ce qui\n[[152.19]] est possible n'existe. L'Ouvrage du souverain Ouvrier en sera plus noble et plus magnifique.\n[[152.20]] Enfin l'Essence de Dieu qui renferme toutes les autres essences étant necessaire, je croirois\n[[152.21]] qu'elle les détermine necessairement aussi a être telles. Delà les Verités éternelles. Or je voi\n[[152.22]] bien que le mouvement ne s'ensuit pas et ne peut s'ensuivre de l'essence de la matiere quelle\n[[152.23]] qu'elle soit, mais pour les loix du mouvement il me paroist qu'elles doivent s'en ensuivre, quoi\n[[152.24]] que je ne voye pas cette liaison, peutêtre parceque l'essence de la matiere ne m'est pas assés\n[[152.25]] connüe. </p>\n<p> [[152.26]] Je ne sai pas trop s'il y a le sens commun à tout cela. Vous m'avoüerés du moins que ce\n[[152.27]] n'est pas vouloir vous imposer, que de se hasader à de pareils raisonnemens avec un homme tel\n[[152.28]] que vous, je serois plus reservé et plus Laconique si j'avois dessein de me faire passer auprés de\n[[152.29]] vous pour un habile homme. Mais je ne veux pas vous tromper, peutêtre aussi <angle bracket>est-ce</angle bracket> parceque\n[[152.30]] je n'espererois pas d'y reüssir. </p>\n<p> [[152.31]] L'<i>Histoire</i> de l'Academie de 1700 est entierement imprimée, et va paroistre ces iours ci.\n[[152.32]] J'aurai soin d'en faire envoyer un Exemplaire pour vous à M. Brosseau. J'ai bien enuie de\n[[153.1]] savoir votre sentiment sur 1699, et non seulement sur ce qui me regarde, mais sur le total. Je\n[[153.2]] suis </p>\n<p> [[153.3]] Monsieur Votre trés humble et trés obeïssant serviteur Fontenelle </p>\n<p> [[153.4]] de Paris ce 24 Mars. 1703. </p>\n<p> [[153.5]] A Monsieur Monsieur Leibnits </p>\n",
+  "number": "46.",
+  "title": "BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ",
+  "date": "Paris, 24. März 1703. [41.49.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:46. BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ Paris, 24. März 1703. [41.49.] Monsieur Dès que j'eus reçû votre lettre du 6 Jan. je chargeai le Libraire de l'Academie de ramasser tous les Livres ou Ecrits que vous demandiés, et de les porter chés M. Brosseau. Il y a si long temps que cela est fait, ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

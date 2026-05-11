@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_9",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 9,
+  "text": "<p> [[25.1]] <b>9. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[25.2]] Dijon, 8. März 1695. [23.]</b></p>\n\n<p> [[25.8]] Dijon le 8 mars <b>1695</b> </p>\n<p> [[25.9]] Il y a longtems monsieur que je n'ay recû de vos cheres nouvelles, ni que je n'ay eu le bien\n[[25.10]] de vous ecrire à cause de mes indispositions continuelles. J'avois chargé mons^#'r Toinard de le faire\n[[25.11]] et de vous faire scavoir ce qui avoit esté dict dans une assemblée de Paris de vostre Conjecture sur\n[[25.12]] l'origine du mot de Germains; Je croy aussi que nostre amy monsieur de Larroque dont vous\n[[25.13]] scavés la disgrace, et qui doibt bientost estre purgé de ce dont on l'a accusé injustement, Je croy\n[[25.14]] dis je qu'il vous aura faict part d'une lettre de deffunct nostre cher amy l'abbé Boisot, qui à la\n[[25.15]] veille de vous envoyer ce qu'il vous promettoit par la voye de Basle que vous nous indiquiés\n[[25.16]] tomba malade de la maladie dont il est mort. Peutestre n'aurés vous pas recû ce que j'avois\n[[25.17]] mandé sur ce chapitre à m^#'r de Larroque; il fault vous en faire mention en cette lettre. </p>\n<p> [[25.18]] <i>Le <b>codex Gentium Diplomaticus</b> devra estre le plus recherché de tout. Mons^#'r de\n[[25.19]] Leibniz qui a tant d'esprit n'i mettoit rien que d'excellent. Outre ce que Je vous ay dit Je puis\n[[26.1]] luy fournir plusieurs traictés de paix qu'on ne trouve point; mais il fault scavoir auparavant\n[[26.2]] s'il ne les a pas desia. Je pourray quelque jour vous en envoyer un petit memoire; Lorsque\n[[26.3]] Leonard imprima les derniers traictés de paix Je luy fis offrir ceux que J'ay dans la simple veüe\n[[26.4]] de luy faire plaisir; mais son impression estoit trop avancée, ou il ne comprit pas que ce que Je\n[[26.5]] luy offrois estoit ce qu'il y auroit de plus curieux dans son receüil, et il se contenta de me\n[[26.6]] remercier; je seray ravi que mons^#'r de Leibniz profite de ce refûs et qu'il soit le 1^#'e^#'r à faire\n[[26.7]] imprimer ces anciens traictés</i> etc. </p>\n<p> [[26.8]] On a faict en cette ville un petit eloge de ce cher deffunct et qui y a esté imprimé. Il y est\n[[26.9]] parlé de vous mons^#'r[;] j'en ay envoyé deux exemplaires à mons^#'r de Brosseau l'un pour vous et\n[[26.10]] l'autre pour mons^#'r Morel qui estoit son bon amy; et auquel je vous prie de faire tenir l'incluse,\n[[26.11]] aussi bien que celle de mons^#'r de Spanheim; qui sera bien affligé de la mort de mons^#'r Lantin que\n[[26.12]] je luy mande; il a suyvi de prés son bon amy et le nostre mons^#'r de Court; voilà l'histoire des\n[[26.13]] plaisirs perdûe; Je souhaitte que celle de la musique n'aye pas le mesme sort, quoy[que] nostre\n[[26.14]] bon amy mons^#'r Ouvrard qui y avoit travaillé pendant plus de trante années ayt subi celluy de la\n[[26.15]] mort aussi bien que mons^#'r Lantin; on m'a dict qu'il avoit laissé au chapitre de Tours dont il\n[[26.16]] estoit chanoine tous ses ecripts; ils ne sont pas en trop bonnes mains; on croit que les cent\n[[26.17]] volumes de receüils mss. tant du Cardinal de Granvelle que d'autres qui estoient dans la\n[[26.18]] Bibliotheque de mons^#'r l'abbé Boisot et qu'il avoit donné aux moines de son abbaye tomberont\n[[26.19]] dans la Bibliotheque du Roy. Mons^#'r le president Boisot son frere qui me vint voir Il y a cinq ou\n[[26.20]] six jours allant à Paris, me dict qu'il en parleroit à mons^#'r de Pontchartrin pour cela, et me\n[[26.21]] promit qu'il feroit en sorte de me donner les 3 premieres pièces qu'il vous avoit promis; Je\n[[27.1]] voudrois mons^#'r pouvoir contribuer en cela et en toutes autres choses à vostre satisfaction et à\n[[27.2]] celle du public, pour lequel vous travaillés si utilement. Aymés moy toujours mons^#'r et croyés\n[[27.3]] moy tout à vous </p>\n<p> [[27.4]] Nicaise </p>\n",
+  "number": "9.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Dijon, 8. März 1695. [23.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:9. CLAUDE NICAISE AN LEIBNIZ Dijon, 8. März 1695. [23.] Dijon le 8 mars 1695 Il y a longtems monsieur que je n'ay recû de vos cheres nouvelles, ni que je n'ay eu le bien de vous ecrire à cause de mes indispositions continuelles. J'avois chargé mons^#'r Toinard de le faire et de vous faire scavoir ce...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

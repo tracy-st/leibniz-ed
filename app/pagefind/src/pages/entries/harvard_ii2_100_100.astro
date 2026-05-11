@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_100",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 100,
+  "text": "<p> [[384.1]] <b>101. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[384.2]] [Hannover, 5. Februar] 1691. [95.103.]</b></p>\n<p> [[384.13]] Extrait <Fn><i>Auf Bl. 10 v^#'o zunächst zwei Notizen ohne Bezug zu unserem Brief</i>: A Dno. Bernoullio viro Cl^#'m^#'o peto quaeri u <i>und</i> reddere aliquem inter philosophos id est referre. sic et referre pro ferre ut acceptum referre</Fn> de ma reponse au R.P. Michel Angelo Fardella Janvier 1691 </p>\n<p> [[384.14]] Je ne crois pas que nous soyons privés de la liberté, ny que cela s'ensuive de mes pensées,\n[[384.15]] comme vous objectés; au contraire je tiens qu'il n'y a point d'hypothese, qui establisse mieux la\n[[384.16]] spontaneité des actions des substances que la mienne. Et je crois aussi quoyque tout soit certain\n[[384.17]] dans l'univers, que cette certitude n'importe aucune necessité dans nos actions, et laisse la\n[[384.18]] contingence dans son entier. Il n'y a rien qui n'ait sa raison, mais cette raison n'est pas\n[[384.19]] tousjours necessitante. Quant à l'image de Dieu, je crois que nostre liberté la represente, non\n[[384.20]] pas entant que nous sommes indifferens (car cette indifference est une imperfection)[,] mais\n[[384.21]] entant que nous agissons suivant la raison. Dieu n'est jamais indifferent, et lorsque nous [le]\n[[384.22]] sommes, c'est nostre ignorance qui en est la cause, puisque alors la raison du choix nous\n[[384.23]] manque. Mais j'attends vos pensées et objections. </p>\n<p> [[385.1]] J'ay mis dans cette lettre ces mots: <i>Vous aurés la bonté de me marquer plus distinctement\n[[385.2]] vos intentions, et peutestre trouverat-on quelque chose qui y soit conforme.</i> </p>\n<p> [[385.3]] Je luy ay marqué que suivant <i>l'Histoire de Camaldoli</i>, Henri Duc de Baviere l'an 1101.\n[[385.4]] avoit donné des bienfaits au monastere de Carceri et je desire qu'il s'informe, comment il\n[[385.5]] faudroit faire pour obtenir la copie du diplome. </p>\n",
+  "number": "101.",
+  "title": "LEIBNIZ AN MICHEL ANGELO FARDELLA",
+  "date": "[Hannover, 5. Februar] 1691. [95.103.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:101. LEIBNIZ AN MICHEL ANGELO FARDELLA [Hannover, 5. Februar] 1691. [95.103.] Extrait Auf Bl. 10 v^#'o zunächst zwei Notizen ohne Bezug zu unserem Brief: A Dno. Bernoullio viro Cl^#'m^#'o peto quaeri u und reddere aliquem inter philosophos id est referre. sic et referre pro ferre ut acceptum referre...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

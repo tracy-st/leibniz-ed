@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_10",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 10,
+  "text": "<p> [[35.18]] <b>10. PIERRE BAYLE AN LEIBNIZ</p>\n<p> [[35.19]] Rotterdam, 5. Oktober 1701. [13.] </b></p>\n<p> [[36.24]] Monsieur </p>\n<p> [[36.25]] Il m'est absolument impossible de vous envoier la copie de mes observations sur le\n[[36.26]] memoire que vous envoiates à M^#'r de Bauval, et que je souhaitai qu'il inserat dans son <i>journal</i>,\n[[36.27]] car comme je n'ai point de copiste, je donne aux imprimeurs ce que je compose et sans l'avoir\n[[36.28]] même mis au net: ils impriment sur l'original quelque raturé qu'il soit et puis quand la\n[[36.29]] correction des epreuves est faite ils dechirent ou jettent au feu cet original. Il y auroit un remede\n[[36.30]] à cela Monsieur, qui seroit de vous envoier imprimées les pages où sont contenues mes\n[[36.31]] observations, mais cela ne serviroit de rien pour le principal usage que j'en pourrois tirer et le\n[[36.32]] public aussi par mon <i>dictionaire</i>, car avant que ces pages fussent entre vos mains les imprimeurs\n[[36.33]] auront achevé, et pour le plutard ils acheveront avant que j'eusse pu recevoir votre\n[[36.34]] reponse. Ils travaillent deja à la table des matieres, et le libraire les presse d'achever afin\n[[36.35]] d'eviter la dificulté qu'il y a de faire secher les feuilles pendant l'hiver qui commence ici des le\n[[36.36]] mois de novembre. </p>\n<p> [[36.37]] Je suis tres faché Monsieur, de n'avoir pas scu plutot ce que votre derniere lettre m'a\n[[36.38]] apris; j'aurois eu par ce moien l'avantage d'enrichir mes additions de vos savantes et incomparables\n[[36.39]] reflexions. Le public n'y perdra rien, car vous aurez bien tot l'occasion de les envoier\n[[36.40]] à M^#'r de Bauval pour etre inserées dans son <i>histoire des ouvrages des savans</i>. </p>\n<p> [[37.1]] Je vous suis infiniment obligé Monsieur, de vos bons souhaits, c'est pour les grans\n[[37.2]] hommes comme vous qu'il les faut faire, et personne ne les fait avec plus d'ardeur que moi qui\n[[37.3]] suis avec la plus grande admiration du monde </p>\n<p> [[37.4]] Monsieur Votre tres humble et tres obeissant serviteur Bayle </p>\n<p> [[37.5]] A Rotterdam le 5. d'Oct. 1701 </p>\n",
+  "number": "10.",
+  "title": "PIERRE BAYLE AN LEIBNIZ",
+  "date": "Rotterdam, 5. Oktober 1701. [13.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:10. PIERRE BAYLE AN LEIBNIZ Rotterdam, 5. Oktober 1701. [13.] Monsieur Il m'est absolument impossible de vous envoier la copie de mes observations sur le memoire que vous envoiates à M^#'r de Bauval, et que je souhaitai qu'il inserat dans son journal, car comme je n'ai point de copiste, je donne aux...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

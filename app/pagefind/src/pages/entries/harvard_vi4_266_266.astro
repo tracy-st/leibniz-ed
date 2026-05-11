@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_266",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 266,
+  "text": "[[1037.26]] <b>222₁.  Auszug AUSZUG </p>\n<p> [[1038.1]] [ad p. 11] Possible intellectuel, polygone de 100 000 costés. </p>\n<p> [[1038.2]] [ad p. 11 sq.] Possible naturel dont les causes sont dans la nature. </p>\n<p> [[1038.3]] [ad p. 13 sq.] Possible selon l'ordre de la nature, ce qui arrive effectivement dans la\n[[1038.4]] suite des causes. </p>\n<p> [[1038.5]] [ad p. 12] Possible naturel est celuy dont un semblable a esté fait. <Fn><i>Daneben</i>: Mariotte.</Fn> </p>\n<p> [[1038.6]] [ad p. 59 sq.] Le Houx est un arbrisseau qui a les feuilles larges piquantes et vertes\n[[1038.7]] en tout temps et le fruit petit et rouge; si une autre plante se trouvoit un jour avec les\n[[1038.8]] memes proprietés, il faudroit adjouter encor quelque autre difference. </p>\n<p> [[1038.9]] [ad p. 65] Definition obscure est un Enigme comme celle de l'ame d'Aristote. </p>\n<p> [[1038.10]] [ad p. 77] Euclide ne devoit pas dire que les cercles ne se coupent en deux points,\n[[1038.11]] mais leur [circonferences]. </p>\n<p> [[1038.12]] [ad p. 155] Un homme qui a 20 000 ecus de bien, ne doit pas le hazarder en un seul\n[[1038.13]] coup contre 100 000 écus, car ces 100 000 gagnés n'augmenteront pas beaucoup son\n[[1038.14]] bonheur, et les 20 000 perdus le rendront miserable. </p>\n<p> [[1038.15]] [ad p. 240] <i>Le sucre est blanc, ce que je vois est blanc, donc c'est du sucre.</i> Ce\n[[1038.16]] sophisme (+ qui trompe les enfans <i>in rebus talibus</i> +) nous fait souvent tomber dans\n[[1038.17]] l'erreur lorsqu'on voit plusieurs signes semblables (+ <i>argumentum in secunda figura\n[[1038.18]] affirmativum</i>. On peche plus souvent contre les regles de la logique qu'on ne croit +). </p>\n",
+  "number": "222₁.",
+  "title": "Auszug",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:222₁. Auszug AUSZUG [ad p. 11] Possible intellectuel, polygone de 100 000 costés. [ad p. 11 sq.] Possible naturel dont les causes sont dans la nature. [ad p. 13 sq.] Possible selon l'ordre de la nature, ce qui arrive effectivement dans la suite des causes. [ad p. 12] Possible naturel est celuy dont ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_233",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 233,
+  "text": "<p> [[731.1]] <b>207b. JOHANN SIGISMUND ELSHOLZ AN LEIBNIZ</p>\n<p> [[731.2]] Berlin, 9. (19.) Juli 1679. [207a.210a.]</b></p>\n<p> [[731.11]] Hochedler, Vester, Insonders Hochgeehrter Herr. </p>\n<p> [[731.12]] Aus dessen vom 24. Junii an mich abermahl abgelassenen Schreiben habe ich ersehen, daß\n[[731.13]] M. h. Herr sinnes ist, zweene Claves, scilicet mathematicam et physicam selbst auß zu fertigen:\n[[731.14]] und daß er nur verlange eine beyhülffe einiger andern, welche über die bißher verhandene\n[[731.15]] Experimenta Register, Tabellen oder Inventaria außarbeiteten, damit sotane Inventaria nachmals\n[[731.16]] mit denen Clavibus conferiret werden könten. Hiebey sind mihr eingefallen die vielfältige\n[[731.17]] Klagen, daß man in rebus Physicis et Mathematicis fast keine oder doch gar wenige Demonstrationes\n[[731.18]] habe, sondern sich mit der probabilitet und mit conjecturis behelffen müsse. Aber\n[[731.19]] auff diesen nunmehr fürhabenden weg, würden Demonstrationes gnug an den tag kommen.\n[[731.20]] Wan also M. h. Herrn beliebet, mihr ferner zu communiciren den modum, wie man die Experimenta\n[[731.21]] necessaria zusammen ordnen und eintäffeln solle, damit sie einander illustriren, und ad\n[[731.22]] calculum mathematicum dienen können: so wil ich nicht allein nach möglichkeit daran arbeiten,\n[[731.23]] sondern auch andere die Naturkündigung liebende dazu disponiren, damit wir communi\n[[731.24]] studio unsern Zweck erreichen. </p>\n<p> [[731.25]] Hiebey sende ich des H. Probst Müllers andwort, und hette ich gern gesehen, daß sie mehr\n[[731.26]] satisfaction in sich hielte: allein es ist andem, daß dergleichen Ihm schon von vielen geschehen,\n[[731.27]] insonderheit von Athanasio Kirchero, mit welchem er unterschiedene Schreiben geweckselt,\n[[731.28]] wie auch von einem Jesuiten in Mähren Adamantio genandt, wie auch von H. Ludolpho Fürstl.\n[[731.29]] Raht zu Gotha: also daß es scheinet, man habe ihn tot repetitionibus etwas verdrießlich\n[[731.30]] gemachet. Jedoch wan I. Hochf. Durchl. zu Hannover eine inclination hiezu spüren liessen,\n[[731.31]] würde er facilior seyn, auch interpretationes librorum Sinensium gern verrichten. Schliesse\n[[731.32]] hiemit, und in erwartung ferner nachricht bleibe ich </p>\n<p> [[732.1]] Meines hochge. Herrn Raths stets willigster diener J. S. Elsholz. </p>\n<p> [[732.2]] Berlin den 9. Julii 1679. </p>\n<p> [[732.3]] <i>A Monsieur Monsieur le Conseiller de Leibniz treshumblⁿ^#'t. à Hannover.</i> </p>\n",
+  "number": "207b.",
+  "title": "JOHANN SIGISMUND ELSHOLZ AN LEIBNIZ",
+  "date": "Berlin, 9. (19.) Juli 1679. [207a.210a.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:207b. JOHANN SIGISMUND ELSHOLZ AN LEIBNIZ Berlin, 9. (19.) Juli 1679. [207a.210a.] Hochedler, Vester, Insonders Hochgeehrter Herr. Aus dessen vom 24. Junii an mich abermahl abgelassenen Schreiben habe ich ersehen, daß M. h. Herr sinnes ist, zweene Claves, scilicet mathematicam et physicam selbst auß...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

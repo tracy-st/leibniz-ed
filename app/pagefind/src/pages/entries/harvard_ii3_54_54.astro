@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_54",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 54,
+  "text": "<p> [[154.16]] <b>54. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[154.17]] [Hannover, 13. April 1696.] [53.65.]</b></p>\n\n<p> [[155.7]] Monsieur </p>\n<p> [[155.8]] Je vous suis obligé de la bonté que vous avés de penser encor à mes interests. Je ne me\n[[155.9]] suis jamais promis grand chose des defenses qu'on pourroit obtenir par l'autorité superieure;\n[[155.10]] cependant je n'ay point voulu refuser le secours que des princes m'ont offert et qu'on ne\n[[155.11]] méprise pas tousjours impunement. Mais comme le dommage d'autruy n'est pas mon avantage,\n[[155.12]] j'aimerois tousjours mieux que tout se puisse faire de bonne grace. Or sans entrer dans la\n[[155.13]] discussion de droit, ny dans les maximes d'honneur, qui ne sont pas tousjours considerées, j'ay\n[[155.14]] crû qu'en ne demandant rien à Messieurs vos libraires, qui fut contraire, ou plustost qui ne fut\n[[155.15]] conforme à leur interests, je pourrois obtenir une chose qui leur fut indifferente. Vous m'attaqués,\n[[155.16]] Monsieur, par mon foible, en me proposant de faire ce qui seroit le plus conforme à\n[[155.17]] l'utilité publique, car j'y suis le plus porté du monde. Je vous avoue aussi, qu'il seroit peutestre\n[[155.18]] un peu mieux pour le public que leur collection et la mienne composassent un seul ouvrage.\n[[155.19]] Mais je ne crois pas qu'il importe beaucoup pour ces sortes de collections, que le tout soit rangé\n[[155.20]] parfaitement selon l'ordre chronologique, au quel un index general supplée; ainsi on auroit pû\n[[155.21]] conserver mon dessein; dont il y a deux raisons: l'une que sans cela je ne voy pas comment on\n[[155.22]] puisse debiter mon premier Tome; l'autre que je passeray pour un homme qui aura abandonné\n[[155.23]] son projet après avoir employé le secours de tant de Ministres qui m'ont communiqué un si\n[[156.1]] grand nombre de pieces pour mon <i>Codex Diplomaticus</i>. Et comme j'ay plus d'egard à l'honneur\n[[156.2]] qu'à l'interest, je ne dois point mepriser cette raison. J'adjoute encor une troisiême, c'est\n[[156.3]] que M. Moetjens me mande, qu'ils veulent seulement employer les traités, et non pas les autres\n[[156.4]] pieces, ce qui fait que leur ouvrage ne satisfera pas à tout ce que j'ay promis. En tout cas si ces\n[[156.5]] Messieurs m'avoient offert quelque temperament honnorable, j'aurois pû penser à ce qu'il y\n[[156.6]] auroit à faire, mais comme ils n'ont pas voulu faire la moindre demarche, et sont demeurés dans\n[[156.7]] un refus entier, ils m'ont osté tout moyen de faire quelque chose avec eux. Ainsi il depend de\n[[156.8]] leur resolution de donner quelque éclaircissement, qui puisse servir à renouer le traité. Car j'ay\n[[156.9]] déja dit, que l'interest est ce qui m'adresse le moins, et vous aurés la bonté de m'apprendre si je\n[[156.10]] dois encor attendre quelque chose. Il seroit peutestre bon aussi que je fusse un peu mieux\n[[156.11]] informé du titre et de l'oeconomie de l'ouvrage, pour mieux prendre mes mesures. </p>\n",
+  "number": "54.",
+  "title": "LEIBNIZ AN HENRI BASNAGE DE BAUVAL",
+  "date": "[Hannover, 13. April 1696.] [53.65.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:54. LEIBNIZ AN HENRI BASNAGE DE BAUVAL [Hannover, 13. April 1696.] [53.65.] Monsieur Je vous suis obligé de la bonté que vous avés de penser encor à mes interests. Je ne me suis jamais promis grand chose des defenses qu'on pourroit obtenir par l'autorité superieure; cependant je n'ay point voulu ref...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

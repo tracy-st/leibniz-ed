@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_112",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 112,
+  "text": "<p> [[294.1]] <b>112. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[294.2]] [Hannover,] 26. April (6. Mai) 1697. [111.113.]</b></p>\n\n<p> [[294.10]] Quis autor fuerit libri, suo merito celebris, qui inscribitur <i>Cautio Criminalis in processu\n[[294.11]] contra Sagas</i>, didici ex ore Eminentissimi Electoris Moguntini <b>Johannis Philippi.</b> Nempe\n[[294.12]] is fuit Fridericus <b>Spee,</b> Societatis Jesu Presbyter, ex nobili Westphaliae familia editus, pietate\n[[294.13]] et doctrina praestans: cujus extant libri <greek>ăskhtikoì</greek> plane in genere suo excellentes, et mihi ex\n[[294.14]] commendatione tanti Principis primum noti deinde semper familiares, et per me multis amicis\n[[294.15]] et ipsius et nostrae religionis commendati. Usque adeo, ut me etiam suggerente a nonnullis in\n[[294.16]] praxin traductum fuerit elegans, quod proponit, et Mathematica ratione demonstrat, <b>artificium\n[[294.17]] indesinenter laudandi Deum.</b> Hic tantus vir in Franconia Confessoris munere\n[[294.18]] fungebatur tunc, cum multi in <b>Herbipolitano et Bambergensi</b> tractu sceleratae magiae\n[[294.19]] infamia oppressi comburerentur. <b>Johannes Philippus Schoenbornius,</b> postea Episcopus\n[[294.20]] Herbipolitanus, et postremo Moguntinus Elector Herbipolitanae Ecclesiae Canonicus, in\n[[294.21]] juventute agens cum eo familiaritatem forte contraxit, et cum quaereret juvenis; <b>unde optimo\n[[294.22]] patri plus canitiei, quam pro aetate;</b> ille hoc sibi a sagis venisse, quas ad ignem\n[[294.23]] duxisset. Mirante Schoenbornio, aenigma explicuit <b>Spejus.</b> Nempe se multo studio inquirentem,\n[[294.24]] et jure etiam atque auctoritate confessionis usum, in nemine eorum quos ad ignem\n[[294.25]] comitatus sit, deprehendisse aliquid unde persuasus sit, vere illis magiae crimen improperatum.\n[[294.26]] Simpliciores ubi in confusione quaesisset, ne in nova tormenta proderentur veritos primum se\n[[294.27]] magos dixisse; post hausta fiducia, ubi intellexissent, nil tale a Confessario metuendum, in alia\n[[294.28]] omnia ivisse. Omnes ejulatibus miris, vel inscitiam, vel malitiam judicum, suamque miseriam\n[[294.29]] deplorasse; et ad Deum innocentiae testem in extremis provocasse. Tam miserabili totiesque\n[[294.30]] repetito spectaculo, ita se commotum, ut senuerit ante annos. Cumque processu temporis\n[[294.31]] <b>Schoenbornio</b> factus est familiarior, <b>libri illius auctorem se esse non dissimulavit.</b>\n[[294.32]] <b>Schoenbornius</b> postea ad Episcopatus Principatusque gradum evectus, memorque\n[[295.1]] eorum, quae vir tam gravis narraverat; quoties aliquis, aliquave, hujus sceleris insimulabatur,\n[[295.2]] rem omnem ad suam cognitionem evocavit, et quod ille monuerat, nimis verum deprehendit. Ita\n[[295.3]] hominum combustiones in illo tractu cessavere. </p></p>\n",
+  "number": "112.",
+  "title": "LEIBNIZ AN VINCENT PLACCIUS",
+  "date": "[Hannover,] 26. April (6. Mai) 1697. [111.113.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:112. LEIBNIZ AN VINCENT PLACCIUS [Hannover,] 26. April (6. Mai) 1697. [111.113.] Quis autor fuerit libri, suo merito celebris, qui inscribitur Cautio Criminalis in processu contra Sagas, didici ex ore Eminentissimi Electoris Moguntini Johannis Philippi. Nempe is fuit Fridericus Spee, Societatis Jesu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_579",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 579,
+  "text": "[[2690.1]] <b>452.  Controversia de peccato philosophico [Herbst 1689 (?)]</b>\n [[2690.2]] <tab/>[Herbst 1689 (?)]\n [[2690.3]] <petit> </p>\n<p> [[2690.4]] Die im Juni 1686 in Dijon unter dem Vorsitz von François Musnier durch Stephan Bougot vertretenen\n[[2690.5]] Thesen zum <i>Peccatum philosophicum</i> lösten besonders seit der zweiten Jahreshälfte 1689 heftige Diskussionen\n[[2690.6]] aus, die auch Leibniz mit großem Interesse verfolgte, wie etwa im Briefwechsel mit Antonio Magliabechi (13.\n[[2690.7]] Januar 1690, I, 5 N. 282, S. 510; 20. Februar 1690, I, 5, N. 297, S. 528 f.; 26. Oktober 1690, I, 6 N. 133,\n[[2690.8]] S. 280), und Landgraf Ernst (14. Juli 1690, I, 5, N. 360, S. 616 f.; 14. September 1690, I, 6 N. 62, S. 107; 26.\n[[2690.9]] November 1690, I, 6 N. 72, S. 132 f. u. ö.) deutlich wird. Neben zwei sorgfältig exzerpierten Thesen von\n[[2690.10]] Bougot und Ignatius de Jonghe jeweils mit französischer Übersetzung (N. 452₁) liegen mehrere Auszüge vor, so\n[[2690.11]] aus der in den ersten Septembertagen 1689 anonym erschienenen Schrift Antoin Arnaulds <i>Nouvelle hérésie de\n[[2690.12]] la morale</i> (N. 452₂), der ersten seiner fünf Abhandlungen zum <i>peccatum philosophicum</i>. Leibniz hat diese\n[[2690.13]] Schrift wohl unmittelbar nach ihrem Erscheinen, sicher aber noch während seines Aufenthaltes in Rom bis\n[[2690.14]] Mitte November 1689 einsehen können (I, 7 N. 145, S. 290). Ebenso exzerpierte er die Antwort des Jesuiten\n[[2690.15]] Joseph de Reux auf Arnaulds Ausführungen (N. 452₃), die seit Anfang Oktober bekannt war, sowie die\n[[2690.16]] Debatten zwischen de Reux und Martin Steyaert vornehmlich vom 18. August 1689 (N. 452₄). Leibniz dürfte\n[[2690.17]] die vorliegenden Auszüge kurze Zeit nach Bekanntwerden der Schriften und somit im Herbst 1689 angefertigt\n[[2690.18]] haben. Dafür spricht ebenfalls der Gebrauch italienischen Papiers mit einem gemeinsamen, für die Zeit ab\n[[2690.19]] Juli/August 1689 erschlossenen Wasserzeichen in den Unterstücken N. 452₂₋₄. </petit> </p>\n",
+  "number": "452.",
+  "title": "Controversia de peccato philosophico",
+  "date": "[Herbst 1689 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:452. Controversia de peccato philosophico [Herbst 1689 (?)] [Herbst 1689 (?)] Die im Juni 1686 in Dijon unter dem Vorsitz von François Musnier durch Stephan Bougot vertretenen Thesen zum Peccatum philosophicum lösten besonders seit der zweiten Jahreshälfte 1689 heftige Diskussionen aus, die auch Lei...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

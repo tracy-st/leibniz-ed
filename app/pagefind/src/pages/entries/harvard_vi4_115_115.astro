@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_115",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 115,
+  "text": "[[384.8]] <b>95.  Linguae philosophicae Specimen in Geometria edendum Januar 1680</b>\n [[384.9]] <tab/> Januar 1680\n[[385.1]] <tit2><b>Linguae philosophicae Specimen in Geometria edendum</b> </tit2>\n [[385.2]] Januar. 1680. </p>\n<p> [[385.3]] Ut aliquod linguae philosophicae specimen edam, ac ne videar incredibilia promittere,\n[[385.4]] incipiam ab illis in quibus id et facilius et securius, et mirabili magis effectu\n[[385.5]] praestatur; nimirum in Geometria. Revocabo omnia ad rectarum ductus, et facilitatis nunc\n[[385.6]] quidem causa, non omnia resolvam; sed conabor caetera resolvere in triangula similia. Ut\n[[385.7]] autem omnia procedant facilius, et quia nondum metaphysicam ipsam resolvere satis\n[[385.8]] licuit, utar flexionibus, particulis ac constructionibus linguae latinae. Sed vocabula nova\n[[385.9]] effingam, sumta ex natura ejus, quod fit cum lineae ducuntur. </p>\n<p> [[385.10]] Hac ratione ubi primum Elementa explicuero, gradus ad caetera omnia non difficilis\n[[385.11]] erit. Nihil autem calculi hic miscebo, imo nec de magnitudinibus, summis, differentiis,\n[[385.12]] rationibus rationumque compositionibus, aut potentiis aut summis, caeterisque quae\n[[385.13]] communia sunt Arithmeticae et Geometriae, sed solis punctis, rectis, angulis, intersectionibus,\n[[385.14]] contactibus, motibus sum locuturus, ostendamque quomodo expressiones calculares\n[[385.15]] vel mixtae ad lineares revocentur. Fructus autem erit maximus, quoniam hac\n[[385.16]] ratione licebit Geometricas ratiocinationes maxime subtiles sine charta, sine pulvere, sine\n[[385.17]] calculo, sola imaginationis et memoriae vi peragere. </p>\n<p> [[385.18]] Aequalitatem ad congruentiam revocabimus, rationem ad similitudinem. Aequalia\n[[385.19]] quorum unum in alterum transformari potest. </p>\n",
+  "number": "95.",
+  "title": "Linguae philosophicae Specimen in Geometria edendum",
+  "date": "Januar 1680"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:95. Linguae philosophicae Specimen in Geometria edendum Januar 1680 Januar 1680 Linguae philosophicae Specimen in Geometria edendum Januar. 1680. Ut aliquod linguae philosophicae specimen edam, ac ne videar incredibilia promittere, incipiam ab illis in quibus id et facilius et securius, et mirabili ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

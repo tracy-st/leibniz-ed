@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_29",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 29,
+  "text": "<p> [[136.16]] <b>30. JOHANN VAGETIUS FÜR LEIBNIZ</p>\n<p> [[136.17]] Hamburg, 4. (14.) Januar 1687. [28.34.]</b></p>\n<p> [[137.1]] <i>Log. Hamb.</i> III. XXXIII. <i>Leibniz exemplifiziert am Rand</i>:\n [[137.2]] ^&!(^#g511)<i>O. A est B</i>. <i>Gra</i><greek><i>f</i></greek><i>ice est ars</i>,\n [[137.3]] <i>E. O. C ad aliquod A,</i> <i>Ergo omne Discens aliquam</i>\n [[137.4]] <i>est C ad aliquod B.</i> <i>Graphicen est discens aliquam artem</i>\n [[137.5]] Si non, utique Si non, utique\n [[137.6]] § 2. 3. 4 <i>Q. C ad aliquod A,</i> <i>Qu. Discens aliquam Gra</i><greek><i>f</i></greek><i>icen</i>\n [[137.7]] <i>non erit C ad aliquod B.</i> <i>non erit discens aliquam artem</i>\n [[137.8]] Esto, si potest, Esto si potest\n [[137.9]] <i>D</i>, illud <i>C ad aliquod A</i>, <i>Titius discens aliquam gra</i><greek><i>f</i></greek><i>icen</i>\n [[137.10]] <i>quod non sit, C ad aliquod B.</i> <i>qui non sit discens aliquam artem</i>\n [[137.11]] Jam, quia Jam quia\n [[137.12]] ^&!(^#g523) <i>D est C ad aliquod A</i>, <i>Titius est discens aliquam gra</i><greek><i>f</i></greek><i>icen</i>\n [[137.13]] utique, per Inversionem utique per ...\n [[137.14]] relationis, (rejectu impossibilem\n [[137.15]] omni illi, qui novit et fatetur,\n [[137.16]] correlata se mutuo ponere,\n [[137.17]] quod faciunt, qui ratione utuntur,\n [[137.18]] omnes)\n [[137.19]] <i>Q. A, erit, ad quod C,</i> <i>quaedam graphice erit id quod</i>\n [[137.20]] <i>est D</i>. <i>discens est Titius</i>\n [[137.21]] § 5. 6 Sed <i>O. A est B</i>, Sed <i>omnis Gra</i><greek><i>f</i></greek><i>ice est Ars</i>\n [[137.22]] Ergo per Disamis aut Darapti Ergo\n [[137.23]] <i>Q. B, est ad quod C,</i> <i>quaedam ars est id quod discens</i>\n [[137.24]] <i>est, D.</i> <i>est Titius</i>\n [[137.25]] Ergo per inversionem iterum, Ergo\n [[137.26]] <i>D, est, C ad aliquod B,</i> <i>Titius est discens quandam artem</i>\n [[137.27]] nec potest fieri, ut,\n [[137.28]] Si <i>A est B</i>, tamen detur <i>D</i>,\n [[137.29]] i.e. <i>aliquod C ad A, quod</i>\n [[137.30]] <i>non sit C ad aliquod B</i> </p>\n<p> [[137.31]] q. e. d.\n [[138.1]] Brevius. </p>\n<p> [[138.2]] Infert consequentia a rectis universalem, Sub ea comprehensam in 1^#'m^#'a figura semper\n[[138.3]] inferre licet sec. §. 2-4. In ista dianoea composita primae sumtiones erunt, 1) quae casus rectos\n[[138.4]] habet et 2) propositio minor. Ex his iisdem per concessas omnibus dianoeas, syllogismum\n[[138.5]] nimirum 3^#'t^#'i^#'a^#'e figurae et duas inversiones relationis. Semper poterit sec. § 5. 6 eadem conclusio\n[[138.6]] inferri. Si a[utem]: fallere posset consequentia a rectis, fieri non posset quin ex consequente\n[[138.7]] ejus universali, deduci posset comprehensa aliqua falsa. Neque enim falsa esse potest universalis,\n[[138.8]] sub qua comprehensa nulla falsa est. </p>\n<p> [[138.9]] Ita haec videram hactenus in quibus demonstratam h. e. ad concessas dianoeas mihi\n[[138.10]] quando vellem revocabilem, certus eram contineri consequentiam a rectis. </p>\n<p> [[138.11]] <greek>Metabásevw</i> vitia averruncant cautelae inductionis IV, IX perlustravi de ea Jungiana\n[[138.12]] omnia et satis intelligo. </p>\n<p> [[138.13]] Haec clariss. Leibnizio cum officiorum pollicitatione et voto omnigenae prosperitatis per\n[[138.14]] annum hunc et sequentes omnes quos Deus jubeat esse quamplurimos. </p>\n<p> [[138.15]] Hamb. 1687. 4 Jan. Joh. Vagetius manu propria </p>\n",
+  "number": "30.",
+  "title": "JOHANN VAGETIUS FÜR LEIBNIZ",
+  "date": "Hamburg, 4. (14.) Januar 1687. [28.34.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:30. JOHANN VAGETIUS FÜR LEIBNIZ Hamburg, 4. (14.) Januar 1687. [28.34.] Log. Hamb. III. XXXIII. Leibniz exemplifiziert am Rand: ^&!(^#g511)O. A est B. Grafice est ars, E. O. C ad aliquod A, Ergo omne Discens aliquam est C ad aliquod B. Graphicen est discens aliquam artem Si non, utique Si non, utiqu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

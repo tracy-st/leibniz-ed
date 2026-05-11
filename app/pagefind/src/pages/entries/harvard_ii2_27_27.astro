@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_27",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 27,
+  "text": "<p> [[134.1]] <b>28. LEIBNIZ AN JOHANN VAGETIUS</p>\n<p> [[134.2]] Anfang [Januar] 1687. [23.30.]</b></p>\n<p> [[134.13]] Ex meis ad Vagetium 1687. initio </p>\n<p> [[134.14]] Consilium edendi Jungiana omnia uti jacent, non improbandum censeo. Nec hoc sine\n[[134.15]] exemplo est. Ita memini ex Blasii Pascalii schedis posthumis concinnatum fuisse a defuncti\n[[134.16]] amicis libellum, qui licet nexu systematico careret, mire tamen placuit titulo: <i>Pensées de\n[[134.17]] M. Pascal</i>. Utinam hoc fieret saepius, non ita frequenter perirent egregiorum virorum labores,\n[[134.18]] eo praetextu quod imperfecti sint. Cum Parisiis essem vidi integra volumina scripta manu\n[[134.19]] Renati Cartesii, hortatusque sum possessorem, ut omnia sine discrimine curaret edi. Cui rei\n[[134.20]] nescio quid hactenus obstiterit. Haeredes quoque Blasii Pascalii olim schedas quasdam Geometricas\n[[134.21]] ad Conicorum doctrinam illustrandam spectantes fidei meae crediderant, rogantes, ut\n[[134.22]] ordinarem, quemadmodum e re videretur, quod etiam praestiti probavique etsi integrum aliquid\n[[134.23]] quale a superstite potuisset dari, inde exculpi non posset, multas tamen praeclaras propositiones\n[[135.1]] interspergi additis demonstrationibus, quae sane merebantur non perire. Reddens ergo schedas\n[[135.2]] sententiam meam de editione et connexione scripto reliqui, sed ab eo tempore nihil de editione\n[[135.3]] intellexi, vereorque ne culpa tot jacturarum in Bibliopolas et Typogra<greek>f</i>os sit conferenda qui\n[[135.4]] saepe vel non intelligunt quid publicari mereatur, vel non curant, dum lucrosas nugas orbi\n[[135.5]] obtrudere ipsis liceat. </p>\n",
+  "number": "28.",
+  "title": "LEIBNIZ AN JOHANN VAGETIUS",
+  "date": "Anfang [Januar] 1687. [23.30.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:28. LEIBNIZ AN JOHANN VAGETIUS Anfang [Januar] 1687. [23.30.] Ex meis ad Vagetium 1687. initio Consilium edendi Jungiana omnia uti jacent, non improbandum censeo. Nec hoc sine exemplo est. Ita memini ex Blasii Pascalii schedis posthumis concinnatum fuisse a defuncti amicis libellum, qui licet nexu s...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_445",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 445,
+  "text": "[[1992.7]] <b>366₁.  Verworfener Ansatz VERWORFENER ANSATZ </p>\n<p> [[1992.9]] Cum felicitas in Mentis perfectione consistat, mens autem nostra a corpore suo\n[[1992.10]] varie afficiatur, et corpus humanum a circumstantibus corporibus juvari ac laedi possit,\n[[1992.11]] ideo corporum naturam nosse magna sapientiae pars haberi debet, ut vim eorum noxiam\n[[1992.12]] declinemus, amicam experiamur. Bona enim censenda sunt tum quae voluptate nos\n[[1992.13]] afficiunt, modo non majus malum post se trahant, tum quae dolorem impediunt; tum vero\n[[1992.14]] quae nos reddunt potentiores ad grata comparanda, ingrata amolienda. Quae his contraria\n[[1992.15]] sunt, mala habentur. Bona autem tum produci, tum si jam producta sint nobis admoveri\n[[1992.16]] possunt, contra mala vel destrui sive immutari, vel depelli. Itaque cognoscendae sunt\n[[1992.17]] corporum proprietates; item quomodo corpora produci, immutari, atque etiam loco\n[[1992.18]] moveri possint. Antequam enim corporum natura ad usus nostros satis referri possit, prius\n[[1992.19]] ipsa per se intelligenda est. Omnis autem scientia actionis cujusdam causa expetenda est,\n[[1992.20]] quare Physicam non vanae cujusdam curiositatis aut ostentationis gratia, sed ideo tractabimus,\n[[1992.21]] ut majus in naturam imperium exerceamus, minusque ipsi a corporibus dependeamus,\n[[1992.22]] denique ut intellectum perficiamus et tantarum rerum autorem amando voluntatem\n[[1992.23]] nostram melioris vitae gustu imbuamus. </p>\n",
+  "number": "366₁.",
+  "title": "Verworfener Ansatz",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:366₁. Verworfener Ansatz VERWORFENER ANSATZ Cum felicitas in Mentis perfectione consistat, mens autem nostra a corpore suo varie afficiatur, et corpus humanum a circumstantibus corporibus juvari ac laedi possit, ideo corporum naturam nosse magna sapientiae pars haberi debet, ut vim eorum noxiam decl...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

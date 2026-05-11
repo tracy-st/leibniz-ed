@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_160",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 160,
+  "text": "<p> [[511.3]] <b>160. BARTHÉLEMY DES BOSSES AN LEIBNIZ</p>\n<p> [[511.4]] Hildesheim, 22. Oktober 1706. [158.163.] </b></p>\n<p> [[511.13]] Illustrissime Domine </p>\n<p> [[511.14]] Litteras <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> tuas 16 mensis labentis datas, distributorum nostratium, uti plerumque fit, culpa,\n[[511.15]] primum die Martis, post meridiem, hoc est aliquanto serius accepi, quam ut respondere quamprimum\n[[511.16]] possem, uti optaveras. </p>\n<p> [[511.17]] Non possum non maximas tibi gratias agere de amantissima tua Guelfebytum invitatione,\n[[511.18]] nec enim jucundius quidquam accidere mihi possit occasione ista quam suggeris videndi tui, et\n[[511.19]] quod caput, innotescendi Serenissimo duci: sed, Illustrissime Domine, ut, quod res est, candide\n[[511.20]] dicam, Ego cum libris fere solis commercium habere solitus, et consuetudinis aulicae non\n[[511.21]] admodum gnarus tanto Principi me sistere vereor. Accedit quod Provinciae nostrae Praesidem\n[[511.22]] Collegium hoc de more visitaturum, propediem praestolemur, quo tempore abesse me domo\n[[511.23]] non expedit. Utut haec se habeant, si nihilominus e re fore judicas excursionem istam; id cum\n[[511.24]] Guelfebytum veneris, verbo mihi significa: Promptissime advolabo. Malim enim minus urbanus\n[[511.25]] inveniri quam parum obsequens, et Superior noster, qui nihil potius ambit quam tuis ac\n[[512.1]] serenissimi maxime ducis nutibus, quos pro imperio habet, obedire, facultatem hanc mihi\n[[512.2]] concedet perquam lubenter. Caetera ad commercium Philosophicum nostrum pertinentia, in\n[[512.3]] reditum tuum reservo. Accludo litteras P. Janningi. </p>\n<p> [[512.4]] Quod superest vale, Illustrissime Domine, et solita me benevolentia prosequere. Dabam\n[[512.5]] Hildesii 22 Octobris 1706 </p>\n<p> [[512.6]] Illustrissimae Dominationis tuae Humillimus et obedientissimus servus </p>\n<p> [[512.7]] Bartholomaeus Des Bosses S J </p>\n<p> [[512.8]] Monsieur Monsieur De Leibnitz Conseiller d'Etat de S. A. E. de Brunswick-Lunebourg\n[[512.9]] etc. etc. à Hannover </p>\n",
+  "number": "160.",
+  "title": "BARTHÉLEMY DES BOSSES AN LEIBNIZ",
+  "date": "Hildesheim, 22. Oktober 1706. [158.163.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:160. BARTHÉLEMY DES BOSSES AN LEIBNIZ Hildesheim, 22. Oktober 1706. [158.163.] Illustrissime Domine Litteras Am Kopf der Seite von Leibniz' Hand: resp. tuas 16 mensis labentis datas, distributorum nostratium, uti plerumque fit, culpa, primum die Martis, post meridiem, hoc est aliquanto serius accepi...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

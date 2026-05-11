@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_291",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 291,
+  "text": "<p> [[878.6]] <b>255. SIMON FOUCHER AN LEIBNIZ</p>\n<p> [[878.7]] [Ende 1685.] [248.]</b></p>\n<p> [[878.20]] Je n'ay encor pu voir les journaux de Lypsic du mois de novembre dernier. On a de la\n[[878.21]] pene de les voir à Paris à cause de nos journaux de France dont le privilege ne souffre pas que\n[[878.22]] l'on jouisse des autres. Vous trouverez dans ce pacquet ce qui a esté imprimé de ma façon\n[[878.23]] depuis que je n'ay eu l'honneur de vous voir: sçavoir la reponse à don Robert, 2. le commentaire\n[[878.24]] de la moitié de mes vers de la <i>Sagesse des Anciens</i> c'est à dire des 52 premiers. Quelque\n[[878.25]] difficulté de libraires m'a fait differer d'achever le reste de ce livre. Il n'est point encor exposé\n[[879.1]] en vente. Je vous envairroys ma <i>logique des Academiciens</i> volontiers, si je pouvois, mais je\n[[879.2]] n'en ay plus qu'un exemplaire. J'espere qu'elle sera bientost réimprimée. Je dois ajouter à la\n[[879.3]] reponse à don Robert <i>l'Apologie des Academiciens</i>. J'ay reservé à luy repondre sur ce sujet afin\n[[879.4]] de faire pour cela un livre à part. La matiere le merite bien, ce me semble. </p>\n<p> [[879.5]] Monsieur Huet que vous connoissez m'a prié de vous faire ses baises mains. M^#'r Lantin\n[[879.6]] nostre amy a mis en musique une ode faite par M^#'r Huët. Si j'avois pu l'avoir je vous l'aurois\n[[879.7]] envoyée. Les disputes de M^#'r Arnaud et du Pere Malbranche continuent tousjours. Je voudrois\n[[879.8]] que vous eussiez esté present à quelques conferences que nous avons euës ensemble le Pere\n[[879.9]] Malbranche et moy sur la Philosophie. Il me semble tousjours que son opinion des idées qui ne\n[[879.10]] sont point façons d'estre de l'ame, est insoustenable. Pour ce qui est de ses sentimens sur la\n[[879.11]] grace, je n'en dis pas la mesme chose et je ne prononce point sur cette matiere qui [est] au\n[[879.12]] dessus de mon esprit. On voit icy depuis peu un livre nouveau de <i>l'élevation des eaux</i> par un\n[[879.13]] Anglois. je ne l'ay point encor assez examiné pour vous en parler. On fait une place royale\n[[879.14]] nouvelle à Paris où l'on placera la statuë du roy faite par l'ordre de M^#'r le marechal de la\n[[879.15]] Feuilliade. </p>\n<p> [[879.16]] M^#'r Osanna a donné depuis peu un livre nouveau de l'Aritmetique et progression des\n[[879.17]] nombres. Pour la Philosophie morale je n'en trouve point de plus incontestable ni de plus utile\n[[879.18]] que celle d'Epictete. Pour ce qui est des commentaires de l'empereur Marc Aurelle Antonin, je\n[[879.19]] les trouve remplis d'un si grand sens et de tant de suc que je ne me sçaurois laisser de les lire. Je\n[[879.20]] sçais que la morale de Platon est la source de celle des Stoïciens et surtout des plus Modernes.\n[[879.21]] Mais il me semble que ces Modernes ont encheri sur les anciennes idées. Avec tout cela\n[[879.22]] Monsieur nous aurions bien besoing d'une Philosophie toute particuliere, car nous n'en avons\n[[879.23]] point encore qui ne soit defectueuse, je voudrois bien en avoir une de vostre main aussi bien\n[[879.24]] que de celle de M^#'r Lantin nostre amy. Il m'avoit fait esperer une <i>histoire du plaisir et de la\n[[879.25]] douleur</i>, je n'en vois encor rien, j'ai peur que tous ses ouvrages ne se perdent quand il viendra à\n[[879.26]] mourir. Je vous souhaite à tous deux une vie eternelle. </p>\n<p> [[879.27]] Je suis Monsieur votre tres humble serviteur Foucher\n",
+  "number": "255.",
+  "title": "SIMON FOUCHER AN LEIBNIZ",
+  "date": "[Ende 1685.] [248.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:255. SIMON FOUCHER AN LEIBNIZ [Ende 1685.] [248.] Je n'ay encor pu voir les journaux de Lypsic du mois de novembre dernier. On a de la pene de les voir à Paris à cause de nos journaux de France dont le privilege ne souffre pas que l'on jouisse des autres. Vous trouverez dans ce pacquet ce qui a esté...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

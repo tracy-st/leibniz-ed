@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_105",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 105,
+  "text": "<p> [[281.14]] <b>105. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[281.15]] Hamburg, 6. (16.) März 1697. [103.107.]</b></p>\n\n<p> [[282.1]] HochEdler, Vest= und Hochgelehrter Herr, Hochgeneigter Hr. HofRaht </p>\n<p> [[282.2]] Das glük hindert mich ziemlich, di bedienung bei dem Hrn. Grafen anzutreten, u. welches\n[[282.3]] das meiste, dem Hrn. HofRaht aufzuwarten: di flüße haben mich von neüen so hart überfallen,\n[[282.4]] daß si nicht nur durch zähe schmerzen, von denen ich doch <angle bracket>(die</angle bracket> erste jugend ausgenommen)\n[[282.5]] jeder Zeit frei gewesen, den bakken sondern auch das eine auge so stark aufgetriben, daß ich\n[[282.6]] einer misgeburt ähnlicher als einem menschen gesehen, nun 5 tage: alle andere Zufälle zuerzehlen,\n[[282.7]] ist unnöthig. Hibei befürchte nun, dass der Hr. Graf ungedultig worden, u. eine ungnade auf\n[[282.8]] mich werfen möchte ehe ich einmal zu ihm komme: bitte derowegen gehorsamst, bei gelegenh.\n[[282.9]] alles gut zumachen, u. unbeschwert zuberichten, wi er gesinnet sei. Indem ich aber zum\n[[282.10]] schreiben wenig ruhe habe, schließe ich, u. befehle mich Ihrer hohen gewogenheit, </p>\n<p> [[282.11]] als M. Hochgeneigten Hn. HofRahts unterdienstl. G. Wagner </p>\n<p> [[282.12]] Hamb. 6. Merz 97. </p>\n<p> [[282.13]] P.S. Solte ich wieder gesund werden, ehe ich von Ihnen antw. bekähme, wil ich mich doch\n[[282.14]] auf di reise machen, in hofnung, der Hr. Graf werde noch vorigen sinnes sein u. di Verzögerung,\n[[282.15]] di von mir nicht herrührt, mir nicht zurechnen. Dise ungelegenheit ist mir auch verdrieslich,\n[[282.16]] daß bei disem Zustande, di reisegelder ziemlich drauf gehen u. di itzigen Zuhörer, nach\n[[282.17]] ankündigung des abzuges mich nicht bezahlen wollen, mich dadurch zwingen bei ihnen\n[[282.18]] zubleiben; weswegen si mir auch noch 100 Thl. jährl. zulegen wollen, u. auf allerlei art\n[[282.19]] Bükenburg zu verleiden suchen; doch hab ich mich bei ihnen auf keine Zeit verbunden, bleib\n[[282.20]] also frei, u. des sinnes, zureisen, so schier ich gesundh. wegen geschikt bin. </p>\n<p> [[282.21]] Mein Brief ist abzugeben, auf dem H. Geist Kirchhofe, bei Hrn. Putensen.\n[[282.22]] <yi>Dem HochEdlen, Vest= und Hochgelehrten Herrn, Hrn. Gotfried Wilhelm Leibniz, Ihr.\n[[282.23]] Churf. Durchl. zu Braunschw. HochVerordneten HofRaht, u.a. m. etc. Hannover. Franco. </p>\n",
+  "number": "105.",
+  "title": "GABRIEL WAGNER AN LEIBNIZ",
+  "date": "Hamburg, 6. (16.) März 1697. [103.107.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:105. GABRIEL WAGNER AN LEIBNIZ Hamburg, 6. (16.) März 1697. [103.107.] HochEdler, Vest= und Hochgelehrter Herr, Hochgeneigter Hr. HofRaht Das glük hindert mich ziemlich, di bedienung bei dem Hrn. Grafen anzutreten, u. welches das meiste, dem Hrn. HofRaht aufzuwarten: di flüße haben mich von neüen so...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_36",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 36,
+  "text": "<p> [[106.1]] <b>36. FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ</p>\n<p> [[106.2]] Ruhleben, 22. [November 1702]. [30.43.] </b></p>\n<p> [[106.8]] Monsieur à Ruleben ce 22 au matin. </p>\n<p> [[106.9]] La lettre que vous m'avez fait l'honneur de m'escrire du 15^#'m^#'e de ce mois ne m'a esté\n[[106.10]] rendue que samedi passé au soir fort tard. Le lendemain M^#'r le Brigadier de Finck vinst chez moi\n[[106.11]] et y passast la nuit. Lundi je fus un peu incommodé. Voila Monsieur les raisons pourquoi je n'ai\n[[106.12]] pu m'acquiter plustost qu'hier de vostre commission touchant le Soldat de Spandau. Mr le\n[[106.13]] Commendant me fist l'honneur de venir diner ici sur la priere que je lui en avois faite. Je lui\n[[106.14]] proposai la chose le mieux qu'il me fust possible et ne manquai pas de faire valoir l'obligation\n[[106.15]] que la Reine en auroit, mais je m'apperçeus bien d'abord que c'estoit lui toucher le coeur que\n[[106.16]] de lui faire cette demande. Il me dit que ce Soldat estoit son eleve, qu'il l'avoit pris à l'age de\n[[106.17]] 16 ans, que c'estoit le meilleur de toute la compagnie, qu'il aimeroit mieux pendre quatre autres\n[[106.18]] que celui là, que c'estoit un homme sur et que je n'ignorois pas qu'un Officier doit avoir une\n[[106.19]] extreme peine de se defaire de telles gens. Il y adjoutast sur les expedients que je lui proposai\n[[106.20]] qu'il n'y alloit pas moins contre son devoir et contre les ordres du Roy de vendre un Soldat\n[[106.21]] qu'il agiroit contre le service de S. M. s'il le laissoit aller ou [s'il] le troquoit contre un autre\n[[106.22]] parceque M^#'r de Montarque Lieut. Col. et Ingenieur de S. M. qui a depuis peu une compagnie\n[[106.23]] franche dans la Citadelle de Spandau s'est offert de faire apprendre à cet homme les fortifications\n[[106.24]] sans qu'il sortist de la compagnie. Il adjoutast encore que vers le Printemps il seroit\n[[106.25]] obligé de lever 40 ou 50 hommes qu'il auroit toutes les peines du monde pour les avoir et que\n[[106.26]] ce Soldat lui estoit fort utile à cela. Enfin le resultat de tout cela fust qu'il esperoit que la Reine\n[[106.27]] ne lui voudroit pas du mal s'il tachoit d'eviter une chose qui estoit contre son devoir et le\n[[106.28]] service du Roy mais que pour marquer son desir de faire ce que la Reine pourroit desirer dans\n[[107.1]] cette rencontre il veut bien laisser cet homme pourvu qu'on lui en rende un autre qui soit ausi\n[[107.2]] bon et de qui il pust estre ausi asuré que de celuici ce que seroit une chose fort difficile. Vous\n[[107.3]] jugez bien Monsieur qu'à tout cela je n'ai rien eu à repliquer et qu'il m'a fallu finir mes\n[[107.4]] persuasions avec la douleur de voir qu'il avoit de fortes raisons pour les combattre. </p>\n<p> [[107.5]] J'espere Monsieur que je serai plus heureux dans d'autres rencontres pour vostre service.\n[[107.6]] Si vous avez de l'amitié pour moi comme je n'en doute pas vous m'en ferez naitre les occasions\n[[107.7]] afin de pouvoir verifier par des effects le Zele et la pasion avec la quelle je suis </p>\n<p> [[107.8]] Monsieur Vostre treshumble tresobeissant serviteur F. B. Dobrzensky </p>\n<p> [[107.9]] J'espere qu'à la premiere fois que j'irai à Berlin j'aurai l'honneur de vous y voir. </p>\n",
+  "number": "36.",
+  "title": "FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ",
+  "date": "Ruhleben, 22. [November 1702]. [30.43.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:36. FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ Ruhleben, 22. [November 1702]. [30.43.] Monsieur à Ruleben ce 22 au matin. La lettre que vous m'avez fait l'honneur de m'escrire du 15^#'m^#'e de ce mois ne m'a esté rendue que samedi passé au soir fort tard. Le lendemain M^#'r le Brigadier de Finck vinst...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

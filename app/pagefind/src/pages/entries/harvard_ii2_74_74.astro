@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_74",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 74,
+  "text": "<p> [[305.10]] <b>75. LEIBNIZ AN ANTONIO ALBERTI</p>\n<p> [[305.11]] Florenz, 18. Dezember 1689. [74.76.]</b></p>\n<p> [[306.1]] à Florence 18 X^#'b^#'r^#'e 1689.\n [[306.2]] Monsieur </p>\n<p> [[306.3]] Ce <Fn><i>Am Kopf der Seite in L^#'1</i> : A M. Antonio Alberti</Fn> Gentilhomme Écossois qui voyage avec M. le comte Duglas sera bien aise d'avoir\n[[306.4]] l'honneur de vous connoistre. Vous le trouverés versé en toute sorte de belles recherches, et sa\n[[306.5]] curiosité s'étend jusqu'à la theologie, et jusqu'aux plus profondes considerations de la liberté\n[[306.6]] humaine dont il m'a entretenu quelquesfois. C'est pourquoy je crois l'obliger en luy donnant\n[[306.7]] l'occasion de vous voir. Je satisfais en même temps au desir que j'ay de vous faire connoistre la\n[[306.8]] fidelité de ma mémoire en tout ce qui concerne une personne de vostre merite, et de vous\n[[306.9]] témoigner avec combien de passion je suis </p>\n<p> [[306.10]] Monsieur Vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[306.11]] Je vous supplie de faire mes complimens à M. le Chanoine Palagi dont j'honoreray\n[[306.12]] tousjours le merite. Et de saluer aussi M. l'Abbé de S. Siste et autres amis. J'espere que Mg^#'r le\n[[306.13]] Prince Erneste se portera bien, je souhaitteray bien tost à S.A.S. l'<i>ad multos annos</i>. J'espere\n[[306.14]] aussi que M. Arnaud sera en parfaite santé, et je souhaitte que ce soit encor pour long temps. </p>\n<p> [[306.15]] P. S. Si vous me voulés donner quelques ordres vous les pourrés adresser à M. Melani\n[[306.16]] demeurant al Corso vis à vis de Monsignor Imperiale. Car il est agent de S.A.S. de Bronsvic-Lunebourg-Hanover. </p>\n<p> [[306.18]] A Monsieur Monsieur Antonio Alberti. Rome. </p>\n",
+  "number": "75.",
+  "title": "LEIBNIZ AN ANTONIO ALBERTI",
+  "date": "Florenz, 18. Dezember 1689. [74.76.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:75. LEIBNIZ AN ANTONIO ALBERTI Florenz, 18. Dezember 1689. [74.76.] à Florence 18 X^#'b^#'r^#'e 1689. Monsieur Ce Am Kopf der Seite in L^#'1 : A M. Antonio Alberti Gentilhomme Écossois qui voyage avec M. le comte Duglas sera bien aise d'avoir l'honneur de vous connoistre. Vous le trouverés versé en ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

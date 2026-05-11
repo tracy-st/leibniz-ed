@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_81",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 81,
+  "text": "<p> [[269.1]] <b>81. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[269.2]] Venedig, 22. August [1704]. [79.82.] </b></p>\n<p> [[269.9]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[269.10]] Attendo con impatienza da V. S. Ill^#'m^#'a l'informationi, che le domandai nella mia del Sig^#'r^#'e\n[[269.11]] Herman, accio sapessi come lo dovrò proporre all'Ecc^#'m^#'o nostro Magistrato per [la ca]tedra della\n[[269.12]] Matematica, vorrei di vantaggio sape[re se] esso è attualmente Professore di Matematica\n[[269.13]] nell'Università di Basilea, e parimente la maniera d'avere i suoi libri per presentarli agli Ecc^#'m^#'i\n[[269.14]] Riformatori dello Studio. Io hò grandissima passione per questo affare, e da canto mio tenterò\n[[269.15]] tutto, ed impiegherò tutta la mia diligenza per colpire al segno, ed averei un sensibilissimo\n[[269.16]] contento d'avere per mio Collega nello Studio un Sogetto così celebre e dotto come il Sig^#'r^#'e\n[[269.17]] Herman, e molto piu per essere di natione Todesco, e strettissimo amico di V. S. Ill^#'m^#'a, che non\n[[269.18]] dubito gli abbia comunicati i piu rari e nobili lumi della sua ora tanto profittevole e rin[oma]ta\n[[269.19]] Analise. Quando da Modena ritornerà <angle bracket>qui il</angle bracket> Sig^#'r^#'e Ramazzini gli comunicarò quanto con\n[[269.20]] sommo ingegno m'hà scritto V. S. Ill^#'m^#'a intorno al Problema dell'argento vivo, dalla sua felice\n[[269.21]] penna sciolto senza tanti prolissi e sofistici ragionamenti con una grandissima semplicità e\n[[269.22]] brevità, e pregandola dell'onore de' suoi stimatissimi comandamenti, con tutto rispetto mi\n[[269.23]] rassegno </p>\n<p> [[269.24]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Obl^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[269.25]] Venetia, 22 Agosto. </p>\n<p> [[269.26]] Un Gentiluomo Todesco mio Amico m'hà pregato che supplicassi V. S. Ill^#'m^#'a di farle\n[[269.27]] ricapitare subito l'inclusa al luogo in essa designato. </p>\n",
+  "number": "81.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 22. August [1704]. [79.82.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:81. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 22. August [1704]. [79.82.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Attendo con impatienza da V. S. Ill^#'m^#'a l'informationi, che le domandai nella mia del Sig^#'r^#'e Herman, accio sapessi come lo dovrò proporre all'Ecc^#'m^#'o nostro ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

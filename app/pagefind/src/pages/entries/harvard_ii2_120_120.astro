@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_120",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 120,
+  "text": "<p> [[438.1]] <b>121. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[438.2]] [Venedig,] 3. August [1691]. [119.122.]</b></p>\n<p> [[438.7]] Illu^#'m^#'o Sig^#'r^#'e, mio sig^#'r^#'e, sig^#'r^#'e colend^#'m^#'o </p>\n<p> [[438.8]] Due cose mi sembrano affatto irreconciliabili coll'umana libertà, il Decreto predeterminativo\n[[438.9]] di Dio, e la Prescienza. La libertà porta seco necessariamente il carattere della independenza\n[[438.10]] e sovranità, non si concepisce libero un Agente che subito non si intenda in qualche\n[[438.11]] maniera independente sovrano e padrone almeno in riguardo alla condotta ed economia delle\n[[438.12]] sue Facoltà ed attioni in maniera che tutto intieramente dipenda dal suo arbitrio e delettione,\n[[438.13]] che se è un altro che lo conduce, regola e determina prima a far più tosto una cosa che un'altra,\n[[438.14]] allora affatto cancellato il carattere dell'independenza e sovranità si distrugge affatto il concetto\n[[438.15]] di Libero; per il che per me ogni priorità ed antecedente determinatione offende l'attione libera\n[[438.16]] rendendola inevitabile e necessaria, e benché ancora ammesse la Predeterminatione e Prescienza\n[[438.17]] di Dio si intendano l' humane attioni contingenti, in quanto che il loro opposto <i>non\n[[438.18]] implicat contradictionem</i>, nondimeno da ciò solamente se n'inferisce che procedano liberamente\n[[438.19]] in riguardo al Decreto di Dio che poteva determinare le cose altrimente, sì come\n[[438.20]] liberamente e con tutta la piena indifferenza tali quali presentemente sono [le] dispose, ma non\n[[438.21]] se ne deduce che siano libere in riguardo all' huomo che le produce condotto, guidato e\n[[438.22]] predeterminato da un Agente più forte a cui l' huomo non può punto resistere. Non pregiudica\n[[438.23]] meno la nostra libertà la Prescienza, di quel che fà la Predeterminatione. Che Dio habbia\n[[438.24]] previsto tutta la serie infinita delli nostri pensieri rende talmente inevitabili e necessarie le\n[[438.25]] nostre operationi, che non sì possono dalla nostra libertà in conto veruno impedire; così tutto\n[[438.26]] sarebbe Fatale, nulla libero, e ciò pienamente e diffusamente mi sforzo dimostrarlo nella\n[[438.27]] seconda parte della mia <i>filosofia</i> ove con molte ragioni provo non essere necessario che Dio\n[[438.28]] prevegga l'attioni libere future dell' huomo, bastando a Dio l'idea di se stesso all'esclusione\n[[438.29]] d'ogni altra idea che rapresenta cosa diversa dalla divina essenza. Intendo chiaramente che per\n[[439.1]] lasciare l' huomo nella sua piena libertà secondo i disegni della sua inefabile Providenza nella\n[[439.2]] prima costitutione delle cose, possa dispensarsi dalla cognitione, e prescienza di tutto quello,\n[[439.3]] che noi liberamente per l'avvenire faremo senza punto pregiudicare la sua Sapienza, che\n[[439.4]] solamente da se stessa non già da alcuno oggetto straniero mendica la sua pienezza e perfettione.\n[[439.5]] All'Essere infinito perfettissimo basta conoscere se stesso talmente che possa se vuole\n[[439.6]] sospendere la cognitione, che tende alle cose finite e da esso diverse, sicché io intendo, che la\n[[439.7]] Scienza di tutto il creato esistente, futuro, e possibile, sia puramente arbitraria, e contingente,\n[[439.8]] non già naturale, e necessaria nel divino intendimento. La priego condonarmi se con tanta\n[[439.9]] libertà, e confidenza le propongo i miei sentimenti, che riusciranno sempre bassi, e deboli al di\n[[439.10]] lei ingegno robusto e luminoso, ne dia la colpa alla sua eccessiva bontà, che mi rende tanto\n[[439.11]] audace. </p>\n<p> [[439.12]] Nella sua passata V. S. Illu^#'m^#'a mi accennò che haveva trovato un nuovo stromento per\n[[439.13]] risolvere con ogni facilità l'equationi composte, <Fn><i>Leibniz hat dazu bemerkt</i>: Ma Machine des Equations est bonne si elle estoit executée avec la perfection requise, mais c'est ce qui est extremement difficile, et c'est comme si on vouloit trouver les moyennes proportionnelles par la machine de M. des Cartes. J'ay pensé à une voye moins geometrique à la verité mais bien plus practicable que je n'ay pas encor assez digerée.</Fn> se mi volesse favorire di mandarmene un\n[[439.14]] piccolo disegno, le ne restarei molto obligato, e se vi fosse il suo consenso, ne farei qui\n[[439.15]] Fabricare l'ordegno e ne farei mentione come opera sua nella mia <i>Dialectica Geometrica</i> che è\n[[439.16]] già pronta per la stampa. Non le raccordo il mio interesse conoscendo quanto V. S. Illu^#'m^#'a sia\n[[439.17]] inclinata a favorirmi e proteggermi e vivamente spero che Dio l' haverà scielta per stromento\n[[439.18]] della mia salute e quiete, le mie speranze sono tutte fondate nel suo amore sincero ed operativo.\n[[439.19]] Mentre dichiarandomi con passione tutto suo mi resto </p>\n<p> [[439.20]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o Affett^#'m^#'o Dev^#'m^#'o S^#'r^#'e </p>\n<p> [[439.21]] 3 Agosto </p>\n",
+  "number": "121.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "[Venedig,] 3. August [1691]. [119.122.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:121. MICHEL ANGELO FARDELLA AN LEIBNIZ [Venedig,] 3. August [1691]. [119.122.] Illu^#'m^#'o Sig^#'r^#'e, mio sig^#'r^#'e, sig^#'r^#'e colend^#'m^#'o Due cose mi sembrano affatto irreconciliabili coll'umana libertà, il Decreto predeterminativo di Dio, e la Prescienza. La libertà porta seco necessaria...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

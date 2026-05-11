@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_258",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 258,
+  "text": "<p> [[801.1]] <b>227b. ROBERT HOOKE AN THEODOR HAAK FÜR LEIBNIZ</p>\n<p> [[801.2]] [London, 22. Juli 1680.] [223a.228a.]</b></p>\n<p> [[801.17]] S^#'r </p>\n<p> [[801.18]] I am extreamly pleasd to finde by yo^#'r letter that D^#'r Leibniz (the acutnesse of whose\n[[801.19]] invention and solidity of Judgment I very much admire and hono^#'r) has the same apprehensions\n[[801.20]] w^#'t^#'h me concerning the usefullnesse of A philosophicall language and character. An attempt at\n[[801.21]] w^#'c^#'h the late learned Bishop D^#'r Wilkins published in his book called the <i>Reall Character</i> etc. For\n[[801.22]] though that excellent person has not carryed it soe farr and to the height it is possible to be\n[[801.23]] improved for that end, yet what he did was not w^#'t^#'hout a prospect that way, and whilst he was\n[[801.24]] composing of it we had many discourses to that purpose (for I had the happynesse to be w^#'t^#'h him\n[[801.25]] a great part of the time that he was compiling it and have had many debates w^#'t^#'h him of that\n[[801.26]] particular) though I never before I saw your letter heard in the least that it was the opinion of D^#'r\n[[801.27]] Leibnitz. And though I could not Prevaile w^#'t^#'h that Person to modell it according to some Ideas\n[[801.28]] of it which I then conceived yet since his Death I have spent some thoughts upon it and have\n[[801.29]] formed an Idea of it which will shorten it at least half in half, and make it applicable and usefull\n[[801.30]] not only for common Discourse and keeping Correspondence but for the strict and philosophicall\n[[801.31]] way of Reasoning and Inquiry. Nor am I ignorant that the same method of Ratiocination\n[[802.1]] and Demonstration which is made use of in Geometry and for finding out the affections and\n[[802.2]] proprietys of quantity may also be applyed to the search after the proprietys affections and\n[[802.3]] causes of any other subject where we can arrive to a certain knowledge of the principles of it,\n[[802.4]] And even in the inquisition and manifestation of those principles the same method and art will\n[[802.5]] assist us noe lesse then Algebra does Geometry or Arithmetick nor doe I doubt but that in\n[[802.6]] naturall philosophy (for instance) the true proprietys of bodys the power of causes or motions,\n[[802.7]] the effects resulting from conjunctions and the conjunctions and causes from the results may as\n[[802.8]] certainly and demonstrably be evidenced from either of them Given as if both were seen\n[[802.9]] together, and all the Intermediate time of operating. For the art of Reasoning both according to\n[[802.10]] the Analytick and Synthetick method is not to be confined to the speculation of quantity,\n[[802.11]] though that indeed be very extensive and comprise a very great part of man's Speculation, but\n[[802.12]] is as boundlesse as the mind and Soule of man. Nor has this been unseen by severall Authours\n[[802.13]] some whereof have made some essays towards it though very short of what may yet be done, by\n[[802.14]] some that shall more thoroughly consider and examine it. Our learned Lord Bacon may be\n[[802.15]] reconned among one of the best of that kind, And though he had the Infelicity to have some\n[[802.16]] prejudice for mathematicall learning, yet the Extraordinary strength of his naturall and acquired\n[[802.17]] parts carried him on Almost to a miracle in all the efforts of his undertakings. Severall excellent\n[[802.18]] hints to this purpose may be found scatterd here and there in his <i>Novum Organum</i> and some\n[[802.19]] other peices of his writings, But they are but Hints and doe yet need very much of thought and\n[[802.20]] Invention to Produce them into a compleat Art and method. I question not but D^#'r Leibnitz has\n[[802.21]] had very excellent thoughts to this Purpose. And I should be very glad to understand how farr\n[[802.22]] he hath carryed it toward perfection. [ ... ] </p>\n",
+  "number": "227b.",
+  "title": "ROBERT HOOKE AN THEODOR HAAK FÜR LEIBNIZ",
+  "date": "[London, 22. Juli 1680.] [223a.228a.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:227b. ROBERT HOOKE AN THEODOR HAAK FÜR LEIBNIZ [London, 22. Juli 1680.] [223a.228a.] S^#'r I am extreamly pleasd to finde by yo^#'r letter that D^#'r Leibniz (the acutnesse of whose invention and solidity of Judgment I very much admire and hono^#'r) has the same apprehensions w^#'t^#'h me concerning...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

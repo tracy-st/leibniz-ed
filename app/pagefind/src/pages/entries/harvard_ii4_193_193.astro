@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_193",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 193,
+  "text": "<p> [[608.1]] <b>193. NICOLAS HARTSOEKER AN LEIBNIZ</p>\n<p> [[608.2]] Düsseldorf, 29. Mai 1707. [189.] </b></p>\n<p> [[608.8]] Monsieur </p>\n<p> [[608.9]] Je ne receus qu'avant hier la lettre que vous me fites l'honneur de m'écrire le 9 du mois\n[[608.10]] passé. </p>\n<p> [[608.11]] Vous dites Monsieur <i>que les miroirs spheriques fort grands ramasseront moins les rayons\n[[608.12]] à proportion que les petits, parceque les foyers qui, au lieu d'être des points, sont des surfaces\n[[608.13]] notables, croissent comme les quarrez des diametres de la sphere.</i> Cela ne me paroit pas tout à\n[[608.14]] fait vrai, Monsieur, car les miroirs spheriques, de quelque grandeur qu'ils puissent être,\n[[608.15]] ramassent les rayons dans la même proportion que les petits; et c'est pour cette raison que les\n[[608.16]] foyers des miroirs spheriques qui sont des surfaces, croissent comme les quarrez des diametres\n[[608.17]] de la sphere. Ainsi quand un miroir d'un certain diametre ramasse par ex[emple]: cent rayons\n[[608.18]] dans un certain espace, qu'on appelle foyer, un miroir dont le diametre sera deux fois plus\n[[608.19]] grand, supposé que les portion[s] de leurs spheres soient semblables, amassera quatre cent\n[[608.20]] rayons dans un espace quatre fois plus grand. Mais les miroirs paraboliques font la même chose,\n[[608.21]] car si l'on en prend des portions semblables, les surfaces de leurs foyers croissent comme les\n[[608.22]] quarrez des diametres de ces portions: et ces foyers aussi bien que ceux des miroirs spheriques\n[[608.23]] doivent être des surfaces, et non pas des points, parce que le Soleil n'occupe pas un point dans\n[[608.24]] le Ciel mais un espace dont le diametre a environ 32 min: Au reste si les miroirs paraboliques\n[[608.25]] reunissent parfaitement bien dans un seul point les rayons qui y tombent paralleles à son axe; ils\n[[608.26]] reunissent moins bien que la sphere ceux, qui coupent cet axe avec une certaine obliquité.\n[[608.27]] D'ailleurs les miroirs paraboliques sont presque aussi difficiles à faire que les verres hyperboliques\n[[608.28]] où l'on ne reussira jamais. </p>\n<p> [[608.29]] J'ai trouvé une maniere tres facile d'étamer les miroirs de verre d'une figure differente du\n[[608.30]] plan, et cela me reussit presque aussi bien qu'a un autre d'étamer un plan. </p>\n<p> [[609.1]] Dès que j'aurai achevé le second volume de mes <i>Conjectures</i>, où je travaille à present, je\n[[609.2]] veux me donner entierement à examiner de nouveau la nature et la proprieté des couleurs, et\n[[609.3]] tout ce qui en depend, et avec un peu plus d'attention et d'exactitude que je ne l'ai fait encore\n[[609.4]] jusqu'à present; car la digneté du sujet le merite bien. </p>\n<p> [[609.5]] S: A: S: a receu les lettres en question, et vous remercie aussi bien que Monsieur le Comte\n[[609.6]] de Wartenberg des soins que vous avez pris tous deux dans cette affaire. S: A: S: apprehende,\n[[609.7]] que, si l'on ne prend pas garde à ce pretendu Comte Rugeri, il trompera S: M: le Roy de Prusse,\n[[609.8]] comme il a trompé l'Empereur et plusieurs autres princes, et qu'il échappera ensuite. </p>\n<p> [[609.9]] Je suis avec tout le zele et toute la passion imaginable plus que personne du monde </p>\n<p> [[609.10]] Monsieur Vôtre tres humble et tres obeïssant serviteur Nicolas Hartsoeker </p>\n<p> [[609.11]] Dusseldorp ce 29 mai 1707 </p>\n",
+  "number": "193.",
+  "title": "NICOLAS HARTSOEKER AN LEIBNIZ",
+  "date": "Düsseldorf, 29. Mai 1707. [189.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:193. NICOLAS HARTSOEKER AN LEIBNIZ Düsseldorf, 29. Mai 1707. [189.] Monsieur Je ne receus qu'avant hier la lettre que vous me fites l'honneur de m'écrire le 9 du mois passé. Vous dites Monsieur que les miroirs spheriques fort grands ramasseront moins les rayons à proportion que les petits, parceque ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

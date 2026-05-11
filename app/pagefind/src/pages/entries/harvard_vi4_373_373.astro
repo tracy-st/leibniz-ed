@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_373",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 373,
+  "text": "[[1636.14]] <b>316.  Corpus non est Substantia sed modus tantum Entis sive apparentia cohaerens [März 1689 bis März 1690 (?)]</b>\n [[1636.15]] <tab/>[März 1689 bis März 1690 (?)]\n[[1636.19]] </petit>\n[[1637.1]] <b>Corpus non est Substantia</b>\n [[1637.2]] <b>sed modus tantum Entis sive apparentia cohaerens</b> </p>\n<p> [[1637.3]] Intelligo autem per corpus non id quod Scholastici ex materia et forma quadam\n[[1637.4]] intelligibili componunt sed quod molem alias Democritici vocant. Hoc ajo non esse\n[[1637.5]] substantiam. Demonstrabo enim si molem consideramus ut substantiam incidere nos in\n[[1637.6]] implicantia contradictionem, ex ipso continui labyrintho: ubi illud inprimis considerandum\n[[1637.7]] est, primum Atomos esse non posse, nam cum divina sapientia pugnant. Deinde\n[[1637.8]] corpora reipsa divisa esse in partes infinitas, nec tamen in puncta, ideoque non posse ullo\n[[1637.9]] modo assignari corpus unum sed materiae portionem quamlibet esse ens per accidens,\n[[1637.10]] imo et in perpetuo fluxu: Si vero hoc tantum dicamus: corpora esse apparentias cohaerentes,\n[[1637.11]] cessat omnis inquisitio de infinite parvis, quae percipi non possunt. Sed et hic locum\n[[1637.12]] habet, Herculeum illud argumentum, meum, quod ea omnia quae sintne an non sint a\n[[1637.13]] nemine percipi potest, nihil sunt. Jam ea est corporum natura, nam si Deus ipse vellet\n[[1637.14]] creare substantias corporeas quales fingunt homines, nihil ageret, neque ipse percipere\n[[1637.15]] posset, se aliquid egisse, quoniam nihil denique quam apparentiae percipiuntur. Signum\n[[1637.16]] veritatis itaque cohaerentia est, causa autem est voluntas Dei, formalis ratio est quod\n[[1637.17]] Deus percipit aliquid optimum esse seu harmonic<greek>v</greek>taton, sive quod aliquid Deo placet.\n[[1637.18]] Itaque ipsa ut ita dicam voluptas divina est rerum existentia. </p>\n",
+  "number": "316.",
+  "title": "Corpus non est Substantia sed modus tantum Entis sive apparentia cohaerens",
+  "date": "[März 1689 bis März 1690 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:316. Corpus non est Substantia sed modus tantum Entis sive apparentia cohaerens [März 1689 bis März 1690 (?)] [März 1689 bis März 1690 (?)] Corpus non est Substantia sed modus tantum Entis sive apparentia cohaerens Intelligo autem per corpus non id quod Scholastici ex materia et forma quadam intelli...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

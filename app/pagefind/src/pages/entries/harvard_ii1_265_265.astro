@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_265",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 265,
+  "text": "<p> [[815.7]] <b>231. LEIBNIZ AN FRIEDRICH SCHRADER</p>\n<p> [[815.8]] [Hannover, März ─ April 1681.]</b></p>\n<p> [[815.35]] [ ... ] Tam multa nunc habemus egregia naturae phaenomena ut mihi jam tandem\n[[815.36]] tempus esse videatur accingendi sese ad ordinandam earum congeriem, constituendasque conclusiones.\n[[816.1]] Nam ut olim inopia, ita nunc confusione laboramus. Idque saepe monui doctissimos\n[[816.2]] quosdam amicos ex Societate Regia Anglicana, qui et assensi sunt. Nam si sic pergimus,\n[[816.3]] posteritati quidem ingentis aedificii materiam relinquemus, sed ipsi agemus sub dio, nec\n[[816.4]] laboribus nostris fruemur. Unde fieri etiam video, ut homines practici nova ista experimenta\n[[816.5]] contemnere soleant, quasi nihil inde duci possit ad usum vitae. In quo falluntur sane, sed\n[[816.6]] ipsorum philosophorum experimentalium plerumque culpa, qui saepe conclusiones quas possent\n[[816.7]] non eliciunt. Cur autem id non fiat duo in causa esse arbitror, <b>primo</b> quod experimenta\n[[816.8]] atque observata dispersa sunt, neque in quoddam inventarium relata; pleraeque enim conclusiones\n[[816.9]] exurgunt ex multis experimentis inter se certa quadam ratione combinatis; <b>secundo</b>\n[[816.10]] quod hi qui experimenta colunt fere ratiocinandi artem ipsam, nempe mathesin (quae logica\n[[816.11]] quaedam physica est) negligunt. Quanquam logica quoque ipsa generalis, seu ars demonstrandi\n[[816.12]] impune a physico contemni non possit; imo compererim ego, sine quibusdam demonstrationibus\n[[816.13]] metaphysicis non posse demonstrari veras motuum leges; unde hactenus nondum quod\n[[816.14]] sciam ita extant, quemadmodum oportet. Etsi enim omnia fiant in natura secundum leges\n[[816.15]] mathematicas et mechanicas, comperi tamen ipsas leges mechanicas ex altioribus principiis\n[[816.16]] oriri quia, etsi materia per se sit mobilis, motum tamen actu ipso a se habere non potest, sed a\n[[816.17]] causa quadam incorporea excitari debet. Constitutis autem legibus motuum tam in solidis,\n[[816.18]] quam in liquidis, tum demum et mechanica reduci poterunt ad terminos purae Geometriae, et\n[[816.19]] physica ad terminos purae mechanices; et poterimus elicere ex datis experimentis, quicquid\n[[816.20]] inde elici debet: nec dubito quin hac methodo ab aliquot viris industriis inter se conspirantibus\n[[816.21]] plura intra decennium agi possint ad usum vitae, quam alias intra seculum et ultra. Sed ut dixi\n[[816.22]] methodo opus esset duplici, tum experimenta ordinandi atque in inventarium redigendi, tum ex\n[[816.23]] illis ratiocinandi, seu mathesin physicae applicandi. Quod postremum nemo novorum autorum\n[[816.24]] hactenus praestitit, si Galilaeum et Cartesium aliosque paucissimos excipias. </p>\n<p> [[816.25]] Boylii et judicium et industriam experimentalem magni sane facio, saepe tamen miror, ex\n[[816.26]] multis egregiis observationibus nullas eum elicere conclusiones alicujus momenti; plerumque\n[[816.27]] enim illud tantum protritum concludit, quod scilicet omnia debeant explicari per magnitudinem\n[[816.28]] figuram et motum. Mihi vero tempus tandem esse videtur, ut tentemus, qua magnitudine,\n[[817.1]] quibus figuris motibusque phaenomena sint explicanda. Alioqui philosophia nostra non multo\n[[817.2]] ad praxin utilior erit, quam vulgata. Quodsi itaque multos in observando quidem Verulamio et\n[[817.3]] Boylio, in ratiocinando autem Galilaeo et Cartesio similes haberemus; si experimenta ordine\n[[817.4]] institueremus et disponeremus; si ratiocinationes experimentis inaedificando mathesin physicam\n[[817.5]] magis excoleremus [<i>bricht ab</i>] </p>\n",
+  "number": "231.",
+  "title": "LEIBNIZ AN FRIEDRICH SCHRADER",
+  "date": "[Hannover, März ─ April 1681.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:231. LEIBNIZ AN FRIEDRICH SCHRADER [Hannover, März ─ April 1681.] [ ... ] Tam multa nunc habemus egregia naturae phaenomena ut mihi jam tandem tempus esse videatur accingendi sese ad ordinandam earum congeriem, constituendasque conclusiones. Nam ut olim inopia, ita nunc confusione laboramus. Idque s...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

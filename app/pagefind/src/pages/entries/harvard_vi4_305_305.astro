@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_305",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 305,
+  "text": "[[1352.5]] <b>251.  Quod non omnia possibilia ad existentiam perveniant, seu quaedam esse possibilia, quae nec sunt, nec fuere, nec erunt [1677 (?)]</b>\n [[1352.6]] <tab/>[1677 (?)]\n [[1352.11]] <b>Quod non omnia possibilia ad existentiam perveniant</b>,\n [[1352.12]] <b>seu quaedam esse possibilia, quae nec sunt, nec fuere, nec erunt</b> </p>\n<p> [[1352.13]] Possibile voco quod supponi sive intelligi potest sine contradictione, verbi gratia in\n[[1352.14]] toto mundo non esse nisi globulos seu corpora rotunda, nihil in se continet quod contradictionem\n[[1352.15]] includat. Hinc jam probo quaedam hujusmodi possibilium nunquam\n[[1352.16]] ex[t]itisse, vel extitura esse. Nam si ponamus omnia esse globulos, impossibile est\n[[1352.17]] naturae viribus eos unquam esse cessare, omnes ergo aliae Atomorum figurae nec\n[[1352.18]] extiterunt naturaliter (alioqui nunquam inde facti fuissent globuli) nec existent. Contra si\n[[1352.19]] alia quaevis figura assumatur impossibile est globulorum figuram aliquando extitisse aut\n[[1352.20]] fore. Utroque ergo modo aliquid ex possibilibus in se impossibile erit existere ob alia\n[[1352.21]] posita, seu ob statum universi. Quo semel admisso habemus Deum non qualem Cartesius\n[[1352.22]] et Spinosa, sed qualem docent Christiani. </p>\n<p> [[1353.1]] Si demonstrari potest, non posse quamlibet materiae partem a quavis alia separatam\n[[1353.2]] intelligi, sed dari quasdam Atomos, idem manifeste demonstratum habetur. Sed etsi\n[[1353.3]] omnia rursus subdividi ponamus, quia tamen variis modis institui potest subdivisio: non\n[[1353.4]] utique omnia possibilia contingunt. </p>\n",
+  "number": "251.",
+  "title": "Quod non omnia possibilia ad existentiam perveniant, seu quaedam esse possibilia, quae nec sunt, nec fuere, nec erunt",
+  "date": "[1677 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:251. Quod non omnia possibilia ad existentiam perveniant, seu quaedam esse possibilia, quae nec sunt, nec fuere, nec erunt [1677 (?)] [1677 (?)] Quod non omnia possibilia ad existentiam perveniant, seu quaedam esse possibilia, quae nec sunt, nec fuere, nec erunt Possibile voco quod supponi sive inte...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

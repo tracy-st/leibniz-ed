@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_181",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 181,
+  "text": "<p> [[565.10]] <b>181. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[565.11]] Leipzig, 19. Februar 1707. [180.184.] </b></p>\n<p> [[565.17]] Vir Illustris et Excellentissime, Patrone gratiosissime! </p>\n<p> [[565.18]] Locutus sum nuperrime cum Consultissimo Carpzovio nostro de scripto Bernardi <greek> ănekdót^v</greek>\n[[565.19]] atque ex eo intellexi, inter Beati Fratris scrinia nihil tale fuisse inventum. Fritschium\n[[565.20]] itaque ipsum adivi, qui Librum se adhuc possedere mihi fassus est, et Dn. Smitho subirascens,\n[[565.21]] se praestitutum esse suo tempore quod Bernardo olim promisisset, regessit. Vidit enim apud\n[[565.22]] ipsum scriptum hoc Dn. L. Olearius Fautor et Amicus meus honorandus, sed indigestum adhuc\n[[565.23]] esse, et ulteriori lima indigere priusquam edatur, mihi retulit. Feci igitur, Vir Excellentissime,\n[[565.24]] quantum in viribus meis fuit positum, neque video, qua ratione ex viri hujus manibus\n[[566.1]] concreditum scriptum recuperari possit. Si aliquid amplius hac in re a me expectare poteris,\n[[566.2]] Excellentiae Tuae gratia laetus agam lubensque. </p>\n<p> [[566.3]] Ipse jam <i>Diatribam</i> Historico-philosophicam <i>de Enthusiasmo Platonico</i> luci publicae\n[[566.4]] proxima quaque occasione exponere constitui, in qua ex primis Platonicae philosophiae principiis\n[[566.5]] demonstrabo, finem ejus ultimum esse <b>animae humanae in Essentiam DEI reditum</b>,\n[[566.6]] in originem simul atque progressum hujus doctrinae inquirendo, eandemque secundum\n[[566.7]] rectae rationis principia examinando. Sed desunt adhuc quaedam adminicula ad uberiorem\n[[566.8]] hujus argumenti deductionem atque illustrationem oppido necessaria. Nim[irum] scriptis ex\n[[566.9]] Anglis praeter Henricum Morum quem possideo, etiam Mericus Casaubonus de Enthusiasmo\n[[566.10]] Naturali anglico idiomate Londini 1656. Hunc tractatum diu in Bibliothecis quaesivi, sed\n[[566.11]] frustra in ipsa etiam Guelpherbytana. Quare rem mihi gratissimam, omnibusque obsequiis\n[[566.12]] iterum demerendam faciet Excellentia Tua, si copiam hujus libri mihi facere possit, vel alia\n[[566.13]] etiam ad hoc argumentum facientia suppeditare. Quod superest sum maneoque </p>\n<p> [[566.14]] Illustris atque Excellentissimi Nominis Tui Cultor observantissimus </p>\n<p> [[566.15]] M. G. Hanschius </p>\n<p> [[566.16]] Lipsiae d. 19. Febr. 1707. </p>\n<p> [[566.17]] A Son Excellence Monseigneur de Leibnitz Conseiler de Sa Majesté le Roy de Prusse à\n[[566.18]] Berlin </p>\n",
+  "number": "181.",
+  "title": "MICHAEL GOTTLIEB HANSCH AN LEIBNIZ",
+  "date": "Leipzig, 19. Februar 1707. [180.184.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:181. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ Leipzig, 19. Februar 1707. [180.184.] Vir Illustris et Excellentissime, Patrone gratiosissime! Locutus sum nuperrime cum Consultissimo Carpzovio nostro de scripto Bernardi ănekdót^v atque ex eo intellexi, inter Beati Fratris scrinia nihil tale fuisse inventum....">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

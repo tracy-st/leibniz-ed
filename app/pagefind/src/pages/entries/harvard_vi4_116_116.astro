@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_116",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 116,
+  "text": "[[386.1]] <b>96.  De methodo synthetica aut anagogica applicanda in algebra [Frühjahr 1680 (?)]</b>\n [[386.3]] <tab/>[Frühjahr 1680 (?)] </p>\n<p> [[386.10]] Methodus synthetica est, cum problema difficile soluturi incipimus a facilioribus. In\n[[386.11]] synthesi per se facili observandum, ut tentemus obtinere elegantes progressiones, quibus\n[[386.12]] Tabularum calculandarum compendia contineantur. Algebra, qua scilicet incognitum pro\n[[386.13]] cognito sumimus, est synthesis quaedam peculiaris problematis propositi, fictitia. Synthesis\n[[386.14]] fictitia generalis, cum generalis expressio habetur rei quae quaeritur, ut in curvis\n[[386.15]] communibus. </p>\n<p> [[386.16]] Analysis pura quae nihil syntheseos habet, est Anagogica, in qua semper procedimus\n[[386.17]] per incognita retro, nempe reducendo problema propositum ad aliud facilius, et hoc\n[[386.18]] iterum ad aliud. Talis est Methodus mea qua utor cum alias aequationes reduco ad\n[[386.19]] aequicompositas, item cum formulas in quibus potentiae, reduco ad illas in quibus sola\n[[386.20]] rectangula. Item cum curvarum ordinatas resolvo in partes seu in duas pluresve ordinatas\n[[386.21]] aliarum curvarum simpliciorum; vel terminos seriei, in plurium serierum terminos, quo\n[[386.22]] facto summam vel dimensionem illarum reduco ad has simpliciores. Eademque methodo\n[[386.23]] pervenio ad seriem summatricem quando aliqua per formulam communem exprimibilis\n[[386.24]] datur, quando scilicet formula resolvitur in differentiam duorum terminorum vicinorum\n[[386.25]] ejusdem seriei. </p>\n<p> [[386.26]] Methodus procedendi per meras cognitas est pure synthetica. Mixtas mixta. <i>Zetetica</i>\n[[386.27]] Vietae pertinent ad Synthesin, est enim percurrere pulchriora problemata. Huc pertinent\n[[387.1]] et factiones Canonicae, seu constructiones quaedam crebro utiles, nam quando forte\n[[387.2]] incidimus in elegantem constructionem, hanc notamus, ut postea jam ad alia applicemus.\n[[387.3]] Est tamen his mixta quaedam Anagogica, dum alia problemata ad ista solennia reducuntur. </p>\n<p> [[387.5]] Data veterum pertinent ad Anagogicam, ut appareat ex problematis recessibus, ex\n[[387.6]] datis quaenam sequantur; et ita problema reducemus ad aliud. Exemplum elegans praebet\n[[387.7]] solutio problematum quorundam quae Batavus proposuit, Monfortius Neapolitanus solvit\n[[387.8]] numerice, ego reduxi ad problemata alia jam constructa. Eadem Methodo tractabitur\n[[387.9]] utiliter problema quod mihi proposuit Fergusonius. Ex duobus punctis <i>A, B</i> datis duas\n[[387.10]] [rectas] ad idem punctum circuli <i>C</i> ita\n[[387.11]] ducere ut comprehensae intra circulum\n[[387.12]] sint aequales. Nam si <i>CD</i>, et <i>CE</i> aequales\n[[387.13]] erit triangulum <i>CDE</i> isosceles. Per\n[[387.14]] punctum <i>C</i> ducatur parallela ipsi <i>DE</i>,\n[[387.15]] nempe <i>FCG</i>, ea circulum tanget, ergo\n[[387.16]] problema habemus simplicius, nam\n[[387.17]] omissa ipsarum <i>CD, CE</i> mentione, tantum\n[[387.18]] quaeritur punctum circuli <i>C</i> tale, ut\n[[387.19]] ex datis punctis <i>A, B</i> ad ipsum ductae\n[[387.20]] rectae faciant angulos ad tangentem aequales, nam ut angulus <i>D</i> aequ. angulo <i>E</i>, ita et\n[[387.21]] angulus <i>ACF</i> aequ. angulo <i>BCG</i>. Itaque res reducta ad hoc problema Catoptricum jam ab\n[[387.22]] aliis solutum. Invenire punctum circuli <i>C</i> quod radium a dato puncto <i>C</i> venientem, ad\n[[387.23]] aliud datum <i>B</i> reflectat. Vel quod eodem redit datis duobus focis <i>A, B</i> describere Ellipsin\n[[387.24]] quae datum circulum <i>CDE</i> tangat et invenire punctum contactus. </p>\n<p> [[387.25]] Notandum quod problemata ideo fiunt difficilia, quod non satis determinata, haec\n[[387.26]] etiam causa irrationalitatis, nam semper in irrationali plures radices. </p>\n",
+  "number": "96.",
+  "title": "De methodo synthetica aut anagogica applicanda in algebra",
+  "date": "[Frühjahr 1680 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:96. De methodo synthetica aut anagogica applicanda in algebra [Frühjahr 1680 (?)] [Frühjahr 1680 (?)] Methodus synthetica est, cum problema difficile soluturi incipimus a facilioribus. In synthesi per se facili observandum, ut tentemus obtinere elegantes progressiones, quibus Tabularum calculandarum...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

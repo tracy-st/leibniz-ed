@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_2",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 2,
+  "text": "<p> [[5.15]] <b>2. JOHANN STRAUCH AN LEIBNIZ</p>\n<p> [[5.16]] Braunschweig, 6. (16.) Juli 1665.</b></p>\n<p> [[6.1]] Joh. Strauchius D. Gottfredo Guilielmo Leibnuzio suo Affini Carissimo. </p>\n<p> [[6.2]] Binas a Te accepi literas, et alteras priores una cum dissertatione tua elegantissima.\n[[6.3]] Equidem fere pudet ad illam tam diu tacuisse. Sane possum quam plurimas intermissi officii\n[[6.4]] allegare causas, quas etiam probare Tibi non dubitem: sed malo hanc deprecari quam purgare\n[[6.5]] culpam. Nunc hoc ex animi mei sententia habe, in tua dissertatione nupera, an ingenii felicitatem\n[[6.6]] magis, an scientiam et industriam laudarem, hactenus me ambegisse. Certe videris viam,\n[[6.7]] quam vulgo (praefiscini dicam) monstrare non solent, tute tibi reperisse, ad prudentiae nostrae\n[[6.8]] adyta, expeditam, praeclaram, rectam; adeoque ire non qua itur, sed qua eundum. Quare\n[[6.9]] conatus tuos valde laudo, atque vellem [adesse] propius, quo provehere etiam si possem liceret.\n[[6.10]] Caeterum <i>de Conditionibus</i> Galganettum in bibliotheca publica Academiae Salanae vidi. Est et\n[[6.11]] alius de hoc argumento in libris meis, Philibertus Brusselius, Consiliarius olim Karoli V. et\n[[6.12]] Philippi Hisp. R. Lovanii editus, qui si non plenius certe elegantius scripsisse videtur. De\n[[6.13]] methodo tua sane non negem vel difficultate sua esse spetiosam, sed vereor ut in omni\n[[6.14]] argumento tenere eam possis. Quod eo dictum velim, non ut [Te] deterream sed ut excitem.\n[[6.15]] Quod super est, vale, et in affectu erga me persevera. Brunsvigae 6. Julii 1665. </p>\n",
+  "number": "2.",
+  "title": "JOHANN STRAUCH AN LEIBNIZ",
+  "date": "Braunschweig, 6. (16.) Juli 1665."
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:2. JOHANN STRAUCH AN LEIBNIZ Braunschweig, 6. (16.) Juli 1665. Joh. Strauchius D. Gottfredo Guilielmo Leibnuzio suo Affini Carissimo. Binas a Te accepi literas, et alteras priores una cum dissertatione tua elegantissima. Equidem fere pudet ad illam tam diu tacuisse. Sane possum quam plurimas intermi...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

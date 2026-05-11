@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_36",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 36,
+  "text": "<p> [[109.1]] <b>32. FRIEDRICH NITZSCH AN LEIBNIZ</p>\n<p> [[109.2]] Gießen, 5. (15.) November 1670. [34.]</b></p>\n<p> [[109.16]] Vir Nobilissime atque Clarissime, Dⁿ^#'e Fautor atque Amice Honoratissime. </p>\n<p> [[109.17]] Jam redux ab itinere literas Tuas accepi demum, ita ut prius, quam nunc fit, respondere\n[[109.18]] non potuerim; quod quidem uti nullus dubito aequi bonique consules. Multam vero Tibi\n[[109.19]] salutem defero a Geislero, Pfauzio, Diecelio, Weigelio item et Thomasio, quorum ille occupatus\n[[109.20]] fuit in erigenda sua sphaera, qua noctu atque interdiu stellarum motum, ipsarumque scintillationem,\n[[109.21]] repraesentare potest, quod inventum mire me delectavit, utut occasione hypotheseos\n[[109.22]] Caramuelis id ipsi obtigisse suspicer. Cum Geislero quoddam mihi intercessit de Te litigium,\n[[109.23]] dum Veridicum de Justiniano seu <i>Rationem Corporis Juris reconcinnandi</i> Tuum opusculum\n[[109.24]] judicavit, id quod et antea in <i>Larva detracta</i> (quam ut forsan nosti ipse edidit) fecerat, me\n[[109.25]] contra nitente persuaso ex styli partim differentia, partim etiam ex aliis, quae vix Ingenium\n[[109.26]] Tuum demonstrant. Uter melius judicaverit ipse quaeso judex esto. De Dⁿ^#'o Barnero ejusdem\n[[109.27]] Tecum semper fui sententiae, ipsum esse Virum doctum et in Chymicis inprimis peritum,\n[[110.1]] nescio vero an Neotericorum Physico-Mathematicorum hypothesin et philosophandi rationem\n[[110.2]] amplectatur. Helmontianus enim est et per Archeum omnia cum Marco Marci aliisque explicat.\n[[110.3]] <i>Collegium Naturae Curiosorum</i> in Germania aliam induit faciem, cumque antea apud Ipsum\n[[110.4]] lege quasi cautum esset, ut quilibet Collega Tractatus quosdam ederet, jam communicatione\n[[110.5]] invicem facta acquiescunt, ita ut si quae curiosa habent, simul edantur a Collegii Directore Dn.\n[[110.6]] D. Sachs a Lewenheimb; Prodiit et his nundinis pars prima figuris illustrata quam sine dubio\n[[110.7]] vidisti; Ubi multae quidem observationes egregiae; Hoc tamen defectu opus laborare putatur,\n[[110.8]] quod multa etiam ex veteribus habet, illisque Autoribus, qui jamdiu sunt impressi, id quod certo\n[[110.9]] meo quidem judicio superfluum erat. De <i>Diario Romano</i> Tinassi nulla mihi a Te relata, igitur si\n[[110.10]] quid ibi singulare occurrit, communica quaeso. De Correspondente tam Celebri, Kircherum\n[[110.11]] intelligo Tibi gratulor, cujus aveo videre <i>Arcam Noae</i>, quia simile quiddam tentare mihi animus\n[[110.12]] jam diu fuit, totumque negotium inscribere volui Theologum Mathematicum; Sed gaudeo\n[[110.13]] praeventum me esse a Viro adeo celebri. Praeterea et ex animo de splendida oblata Sparta Tibi\n[[110.14]] gratulor. Vergat illa in Dei honorem, Principis et Patriae incrementum, Tuam vero famam magis\n[[110.15]] magisque celebrem. Et mihi gratulari poteris, Amice, partim de Mutatione facta, ad quam non\n[[110.16]] levem olim in Conferentium Societate dedisti stimulum, partim de impetrata jamjam Licentia;\n[[110.17]] qua [re] transmitto Disputationem Inauguralem Censurae Tuae subactoque judicio committendam.\n[[110.18]] Addidi et Literas Bertrandi, nec non Dn. Titelii, quas vero utrasque mihi bona fide\n[[110.19]] remittes. Uti enim magnifacio Virum illum, ejusque favorem nunquam non imo et nuperrime\n[[110.20]] sum expertus; ita nollem Ejus literis praesertim his ipsis carere. Praeterea vero Vale et ut facis\n[[110.21]] ama </p>\n<p> [[111.1]] Qui se profitetur Cultorem Tuum Indefessum </p>\n<p> [[111.2]] Giessae rapt. d. 5. Nov. 1670. L. Fridericum Nitzschium. </p>\n<p> [[111.3]] <i>A Monsieur Monsieur Godefroy Guillaume Leibnüz, Docteur es Droits et Conseillier de\n[[111.4]] son Altesse Electorale de Mayence. A Mayence.</i> </p>\n",
+  "number": "32.",
+  "title": "FRIEDRICH NITZSCH AN LEIBNIZ",
+  "date": "Gießen, 5. (15.) November 1670. [34.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:32. FRIEDRICH NITZSCH AN LEIBNIZ Gießen, 5. (15.) November 1670. [34.] Vir Nobilissime atque Clarissime, Dⁿ^#'e Fautor atque Amice Honoratissime. Jam redux ab itinere literas Tuas accepi demum, ita ut prius, quam nunc fit, respondere non potuerim; quod quidem uti nullus dubito aequi bonique consules...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_81",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 81,
+  "text": "<p> [[207.1]] <b>81. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT</p>\n<p> [[207.2]] Hannover, 18. (28.) Oktober 1696. [80.87.]</b></p>\n\n<p> [[207.14]] Extrait de ma reponse Hanover 18 Octobr. 1696 </p>\n<p> [[207.15]] Je vous remercie, Monsieur des <i>Aphorismes</i> <i>chymiques</i>[,] du titre Anglois du livre de\n[[207.16]] l'enfer, et des deux cens problemes faits en faveur de la revolution. J'auray soin d'envoyer à\n[[207.17]] Mons. le professeur Hart pour M. le duc Rudolfe Auguste, les supplemens de l'Harmonie des\n[[207.18]] Evangelistes de Monsieur de Rosenroth et je feray savoir à M. le duc Antoine Ulric ce que vous\n[[207.19]] voulés faire de l'autre ouvrage dont le titre est <i>Messias puer</i>. </p>\n<p> [[207.20]] Je voy que les Aphorismes qui demandent que <Leibniz special character: ms = Mars> et<Leibniz special character: vn = Venus> soyent joints avec <<Leibniz special character: an = Antimon> sont marqués\n[[207.21]] par une ligne qui semble les effacer. Je crois que ce n'est pas sans dessein. </p>\n<p> [[207.22]] Je souhaitte que quantité de belles pensées, que vous avés encore dans la metaphysique,\n[[207.23]] physique, mecanique, morale, se publient de vostre vivant. Car quoyque rien ne se perde dans le\n[[207.24]] monde. Neanmoins si elles se publient plus tost, elles pourront encore fructifier. </p>\n<p> [[207.25]] Comme presque tous vos 200 problemes sont fondés sur la Sainte Ecriture, Mad. l'Electrice,\n[[207.26]] qui aimeroit mieux de voir comment on pourroit encor confirmer d'avantage vos sentimens\n[[207.27]] par la raison, souhaitteroit une centaine ou deux de preuves fondées sur la raison, sur\n[[208.1]] l'ordre et sur l'experience. Et comme les problemes n'ont point de liaison entre eux, et sont\n[[208.2]] autant de pieces detachées, Elle seroit bien aise de voir quelque chose de semblable à l'égard\n[[208.3]] des raisons. Et je me souviens, Monsieur, de vous en avoir deja parlé. Il suffiroit, que vous\n[[208.4]] prissiés un papier, et sans vous attacher à le remplir tout d'un coup par une Meditation suivie,\n[[208.5]] qui vous fatigueroit aussi bien que les lecteurs peu stylés aux meditations, vous pourriés\n[[208.6]] marquer sur ce papier de temps en temps des preuves detachées, ou indices, à mesure qu'elles\n[[208.7]] vous tomberoient dans l'esprit, sans vous mettre en peine de l'ordre, ny de la liaison qu'il vous\n[[208.8]] seroit aisé de leur donner par après, s'il en estoit besoin, après avoir amassé la matiere, d'autant\n[[208.9]] plus, qu'il n'y a rien qui presse etc. </p>\n<p> [[208.10]] Mad. la duchesse d'Orleans allegue contre vostre exemple des lievres, l'experience contraire\n[[208.11]] des lieux de sa connoissance, où on les a detruits à force de chasser. Mais tout doit estre\n[[208.12]] entendu avec moderation. Les Espagnols ont bien detruit les hommes de quelques Isles de\n[[208.13]] l'Amerique. La question est seulement, s'il est vray selon vostre sentiment, que lors qu'on\n[[208.14]] laisse assez de quelque espece, pour propager la race, les naissances sont plus frequentes après\n[[208.15]] une grande mortalité. C'est un fait, qui meriteroit une verification plus exacte. </p>\n<p> [[208.16]] Les recits de Madame vostre parente, et de la fille de Mons. de Rosenroth sont curieux et\n[[208.17]] extraordinaires et Mad. l'Electrice en fera part à Madame d'Orleans. <Fn><i>Am Fuß der Seite von Leibniz' Hand</i>: <i>ich habe Hr</i> <i>Kraften</i> <i>adresse abgeschrieben, und vor deßen</i> <i>beßerung des Kornbrandes gedacht</i></Fn> </p>\n",
+  "number": "81.",
+  "title": "LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT",
+  "date": "Hannover, 18. (28.) Oktober 1696. [80.87.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:81. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT Hannover, 18. (28.) Oktober 1696. [80.87.] Extrait de ma reponse Hanover 18 Octobr. 1696 Je vous remercie, Monsieur des Aphorismes chymiques[,] du titre Anglois du livre de l'enfer, et des deux cens problemes faits en faveur de la revolution. J'auray s...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

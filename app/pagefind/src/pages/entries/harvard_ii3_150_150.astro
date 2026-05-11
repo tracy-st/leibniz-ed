@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_150",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 150,
+  "text": "<p> [[401.1]] <b>150. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[401.2]] Wolfenbüttel, 20. (30.) Dezember 1697. [120.154.]</b></p>\n\n<p> [[401.12]] Wolgebohrener Herr Hochgeneigter Herr </p>\n<p> [[401.13]] Ich habe solang mit schreiben verzogen, bis ich was zu schreiben hätte. Der HofM.\n[[401.14]] eifersucht, der Edelleüte gallicismus u. liderligk. schneiden alle hofnung zu Collegiis ab, wozu\n[[401.15]] auch zweier Inspectorum falschheit kömt. Weil nun auf dise laquayen besoldung nicht zuleben,\n[[401.16]] wird hochnöthig sein, beim Grafen alles mögliche zu versuchen, weil ich sonst mit der\n[[401.17]] vertröstung hiher kommen, daß ich nicht nur was in Hannover aufgangen, sondern auch was auf\n[[401.18]] den Merz zur reise nöthig, fix bekommen möchte. Der catalogus erfodert zwar mehr kopfbrechens\n[[401.19]] als ich gemeint, doch würde di gewonheit leicht aufmuntern, wenn küpfern geld nicht\n[[401.20]] küpferne affecten machte u. die erwegung der unbilligk., daß di Verrichtung des geringern mit\n[[401.21]] 2-300, di Verrichtung des schwerern mit 100 bezahlt wird, unlust erwekte, sonderlich wenn\n[[401.22]] man über dieses schon 3 mal soviel gehabt: ich dächte, eine Verehrung von <angle bracket>50</angle bracket> Thl. nebst der\n[[401.23]] Tafel, wäre vor <zl>^#h(+5)1<ne>2<be> jahr, ohne erwehnung einer besoldung nicht zu viel; holz, stube u. das N. jahr\n[[401.24]] am tisch, werden gerade die 25 wegnehmen, wo bleibt das übrige? </p>\n<p> [[401.25]] Wenn mir aus Leipzig von Apoteker Linken 3, 4 brechpulver könten verschaft werden,\n[[401.26]] weil ich keinen bekanten da habe, wäre mirs ein überaus großer dienst. </p>\n<p> [[401.27]] Di untersuchung vom punct hätte wol mitgeschikt, aber beim catalogo viel u. adcurat thun\n[[401.28]] wollen, erfodert mehr Zeit, als man meint, ehe mans versucht: ich nehme wol 6, 7 Zettel in di\n[[402.1]] hand, di grillen erfodern, ehe einer kömt, der sein kästchen selbst gleich meldet, weil der\n[[402.2]] klaren, historis., physicalis. u.s.f. wenig, der metaphysisch theologis. so viel sind; und wenn ja\n[[402.3]] entweder an Vielheit oder adcuration mangeln sol, wil ichs liber laßen am ersten mangeln: doch\n[[402.4]] sol di Unterred. vom punct bald folgen. Der Vice HofM. ist zieml. falsch, der StalM. aber sehr\n[[402.5]] störrisch gegen mich, weil ich aus unwißenh., daß er vor jenem di <angle bracket>Stele</angle bracket> hat, ihm nicht eher\n[[402.6]] zugesprochen, als bis er mirs selbst an di <angle bracket> - - -</angle bracket>ßen: der OberMarschal ist freündl; hat doch\n[[402.7]] zum Herzog mich zuführen, weit hinaus gestelt. Das register meiner philosophorum möchte\n[[402.8]] wol wieder haben, weils sonst könnte in Vergeßenh., auch bei mir selbst, gerathen. Womit mich\n[[402.9]] befehle u. verbl. </p>\n<p> [[402.10]] Wohlgebohrner Hr., dero Gehors. G. Wagner </p>\n<p> [[402.11]] Wolfenb. 20. Dec. 97. </p>\n",
+  "number": "150.",
+  "title": "GABRIEL WAGNER AN LEIBNIZ",
+  "date": "Wolfenbüttel, 20. (30.) Dezember 1697. [120.154.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:150. GABRIEL WAGNER AN LEIBNIZ Wolfenbüttel, 20. (30.) Dezember 1697. [120.154.] Wolgebohrener Herr Hochgeneigter Herr Ich habe solang mit schreiben verzogen, bis ich was zu schreiben hätte. Der HofM. eifersucht, der Edelleüte gallicismus u. liderligk. schneiden alle hofnung zu Collegiis ab, wozu au...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

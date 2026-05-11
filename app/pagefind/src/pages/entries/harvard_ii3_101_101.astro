@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_101",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 101,
+  "text": "<p> [[276.20]] <b>101. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT</p>\n<p> [[276.21]] [Hannover], 26. Februar (8. März) 1697. [87.102.]</b></p>\n\n<p> [[277.3]] Extrait de ma lettre à Mons. Helmont en luy envoyant celle de Mad. l'Electrice\n [[277.4]] 26 fevrier 1697. </p>\n<p> [[277.5]] Je suis bien aise, que vous avés donné ordre pour contenter Madame la princesse de\n[[277.6]] Chimay, qui le merite, quand il n'y en auroit point d'autre raison que celle de l'estime qu'elle a\n[[277.7]] pour vous. L'hyver commence à prendre congé, j'espere que le printemps nous amenera\n[[277.8]] quantité de bonnes choses comme sont l'amendement de la santé de l'Electeur, Madame\n[[277.9]] l'Electrice de Brandebourg, les apparences de la paix, l'heureuse continuation de la grossesse\n[[277.10]] de Madame la duchesse de Modene et par consequent la transmigration de quelque ame dans le\n[[277.11]] corps du nouveau prince, qu'elle nous doit donner. Nous ferons son horoscope quand nous\n[[277.12]] aurons l'honneur de vous voir etc. </p>\n",
+  "number": "101.",
+  "title": "LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT",
+  "date": "[Hannover], 26. Februar (8. März) 1697. [87.102.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:101. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT [Hannover], 26. Februar (8. März) 1697. [87.102.] Extrait de ma lettre à Mons. Helmont en luy envoyant celle de Mad. l'Electrice 26 fevrier 1697. Je suis bien aise, que vous avés donné ordre pour contenter Madame la princesse de Chimay, qui le merite,...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

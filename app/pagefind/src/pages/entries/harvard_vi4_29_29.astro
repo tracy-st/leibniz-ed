@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_29",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 29,
+  "text": "[[69.1]] <b>23.  Acervus Chrysippi März 1678</b>\n [[69.2]] <tab/> März 1678\n[[69.11]] <tit2><b>Acervus Chrysippi</b></tit2> </p>\n<p> [[69.12]] Martii 1678 </p>\n<p> [[69.13]] Tandem aliquando: </p>\n<p> [[69.14]] <i>Inventus Chrysippe</i> <i>tui finitor acervi.</i> <Fn><i>Von fremder Hand</i>: Persius, <i>Sat.</i> 6. extr.</Fn> Nimirum omnes illae notiones, in quibus\n[[69.15]] locum habet acervus sive sorites Stoicorum, ut <i>divitiae</i>, <i>paupertas</i>, <i>calvities</i>, <i>calor</i>, <i>frigus</i>;\n[[69.16]] <i>tepor</i>, <i>album nigrum</i>, <i>magnum parvum</i>, absolute sumtae sunt notiones vagae imaginariae,\n[[69.17]] imo falsae, seu nullam ideam habentes. Eae demum notiones, quibus objectio ista fieri\n[[69.18]] non potest, a nobis pure ac liquide intelliguntur. Scilicet priores respectum dicunt ad\n[[69.19]] nostram opinionem, quae variat, ex. g. quod uni frigidum id alteri calidum videtur,\n[[69.20]] utrumque vere, imo et eidem diverso tempore. Idem est de paupertate. Nam quem certo\n[[69.21]] respectu pauperem dicemus, alio respectu esse negabimus. Si <i>pauperies</i> absolute sumta\n[[69.22]] esset vera notio, deberet certo obolorum numero definiri, quia necesse est aliquem uno\n[[69.23]] obolo [abjecto] fieri ex non paupere pauperem; aut nunquam. Hinc defectui isti succurrunt\n[[69.24]] leges, et pauperem definiunt qui certum solidorum numerum non habet. Et aetate\n[[70.1]] majorem, qui 25 annos egressus est. De notionibus imaginariis verae saltem manent\n[[70.2]] propositiones comparativae, neque illis potest objici Sorites. </p>\n<p> [[70.3]] Notiones imaginarias voco, quae non sunt in rebus extra nos, sed quarum essentia\n[[70.4]] est nobis apparere. Hinc ubi dubitare incipimus, ut uno obolo detracto, cessat quaestio, et\n[[70.5]] is de quo agitur, mihi nec pauper est nec dives. Si definiamus rem effectu quodam certo\n[[70.6]] aliud est, ut pauper est, qui certum aliquid emere non potest. Calida res est, quae\n[[70.7]] thermometrum ascendere facit, tunc enim res reducitur ad sensum aliquem certum. Cum\n[[70.8]] dubitamus res sit calida an frigida, tepidam dicimus, tepor ergo non certa idea extra nos,\n[[70.9]] sed nostra dubitatione constat. </p>\n",
+  "number": "23.",
+  "title": "Acervus Chrysippi",
+  "date": "März 1678"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:23. Acervus Chrysippi März 1678 März 1678 Acervus Chrysippi Martii 1678 Tandem aliquando: Inventus Chrysippe tui finitor acervi. Von fremder Hand: Persius, Sat. 6. extr. Nimirum omnes illae notiones, in quibus locum habet acervus sive sorites Stoicorum, ut divitiae, paupertas, calvities, calor, frig...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

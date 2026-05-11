@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_234",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 234,
+  "text": "<p> [[732.16]] <b>237. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[732.17]] [September bis Oktober 1693.] [233.]</b></p>\n<p> [[733.8]] Vir Cl^#'m^#'e fautor honoratissime </p>\n<p> [[733.9]] Gratissimum mihi fuit intelligere optimo loco esse et valetudinem et caeteras res tuas, de\n[[733.10]] quo pene dubitare me coegerat silentium. Nolim putes mutati consilii tui rationes aliquid\n[[733.11]] detrahere de affectu meo posse, tametsi enim spe suavissima exciderimus, nostra tamen jactura\n[[733.12]] libenter redimimus successus tuos. Et si tu pro judicio exquisito tuo tibi ipse intus satisfacis,\n[[733.13]] atque illis obligationibus, quas rebus mature excussis Tibi imponendas judicas, de caetero non\n[[733.14]] alia magis re mihi satisfacere potes, quam prospere agendo. Gaudeo Te Montanario successorem\n[[733.15]] datum insigni certe viro, et tui olim amicissimo, qui profecto si habuisset optionem, non\n[[733.16]] alium quam Te sibi delegisset. Nescio an vivat adhuc Stephanus de Angelis vir clarissimus, cui\n[[733.17]] locutus sum Patavii, et magnam viri humanitatem sum expertus. Donavit mihi complura\n[[733.18]] opuscula sua, quae pleraque nondum antea videram. Cumque inspexissem attentius facile\n[[733.19]] deprehendi plena esse acuminis et doctrinae. Fuit ipsi cum Joh. Alph. Borello viro certe\n[[733.20]] doctissimo liticula, sed causae statum nondum satis examinandi otium fuit, quam multis enim\n[[733.21]] distrahar facile judicas. Si ut spero vivit tibique cum eo consuetudo est, rogo ut per occasionem\n[[733.22]] egregio viro significes gratam mihi ejus memoriam aestimatissimamque doctrinam haberi.\n[[733.23]] Quid moliaris discere semper volupe erit, neque enim a te nisi egregia expecto, et procedere\n[[733.24]] puto philosophiam tuam, ac subinde Mathesin quoque, in quibus tu prae multis aliis quo es\n[[733.25]] ingenio praestare aliquid praeclarum potes in Italiae tuae decus. </p>\n",
+  "number": "237.",
+  "title": "LEIBNIZ AN MICHEL ANGELO FARDELLA",
+  "date": "[September bis Oktober 1693.] [233.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:237. LEIBNIZ AN MICHEL ANGELO FARDELLA [September bis Oktober 1693.] [233.] Vir Cl^#'m^#'e fautor honoratissime Gratissimum mihi fuit intelligere optimo loco esse et valetudinem et caeteras res tuas, de quo pene dubitare me coegerat silentium. Nolim putes mutati consilii tui rationes aliquid detrahe...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

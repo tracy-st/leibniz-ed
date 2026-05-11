@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_8",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 8,
+  "text": "<p> [[23.6]] <b>8. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[23.7]] Padua, 3. März 1695. [10.]</b></p>\n\n<p> [[23.20]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[23.21]] Il Tempo, e la lontananza non saranno mai capaci di rendermi ingrato con scordarmi di\n[[23.22]] quanto devo all'incomparabile bontà di V. S. Illu^#'m^#'a, le di cui pretiose gratie viveranno sempre\n[[23.23]] nel mio cuore. Il Signore Magliabechi m' hà consolato coll'avviso felice della sua ottima\n[[23.24]] salute, e dell'eruditissime opere, che ella mette alle stampe, e mi scrive d' haverle mandata una\n[[23.25]] mia Pagina, in cui si contiene l'ordine delle mie lettioni di questo anno, che devono essere da\n[[24.1]] me dette in questa Università, ove hò insegnato la materia delle Comete, e per ordine de\n[[24.2]] gl'Eccell^#'m^#'i nostri Riformatori presentemente raggiono in catedra del Terremoto con gran concorso\n[[24.3]] d'Uditori, e ciò per sodisfare alla comune curiosità circa le particolarità osservate in\n[[24.4]] questa orribile scossa, che fù qui intesa nel mese caduto. Sarei molto contento se tanto circa la\n[[24.5]] natura delle Comete, quanto del Terremoto potessi sapere il suo dotto, e purgato sentimento, e\n[[24.6]] principalmente vorrei sapere <i>An Cometae sint potius Corpora sempiterna, quam temporanea, et\n[[24.7]] posito quod non sint Planetae ut arridet Domenico Cassini, sed potius corpora quaedam de\n[[24.8]] novo procreata, an Sint Corpora semidiaphana ex Stellarum effluviis efformata, ut potius\n[[24.9]] appellanda sint Spectra, et ludibria sensuum ex lumine reflexo atque refracto potissimum\n[[24.10]] profluentia, quam substantiae verae, et reales. Quemadmodum etiam vellem a te scire, an in\n[[24.11]] Centro Telluris vere ignis ardeat, qui centralis, ac perpetuus dici valeat</i>. Con altra occasione la\n[[24.12]] supplicarò d'illuminarmi circa quello che concerne la natura del Corpo, e sua divisibilità, se si\n[[24.13]] distingue dallo Spatio, se riceve il movimento da un altro, come anche intorno alla natura\n[[24.14]] dell'Etere, e cimento che unisce insieme le parti nel Solido, ed in che principalmente consiste\n[[24.15]] l'energia, e forza architettonica, che si racchiude nel Seme delle cose. Se mai potrò, ed haverò\n[[24.16]] soldo che basta nelle vacanze dello Studio penso di mettermi in viaggio a cotesta volta per\n[[24.17]] rivederla, e di presenza ringratiarla dei rilevanti beneficii, che ella m' hà fatto, come anche\n[[24.18]] renderla capace delli forti motivi che m'indussero a fermarmi qui, e non portarmi costì secondo\n[[24.19]] il concertato; l' hò comunicato con tutta secretezza a Monsieur Bouchet, il quale non sa\n[[24.20]] disapprovare la mia condotta. Del resto mi creda che con il cuore sono sempre costì, ed il\n[[24.21]] commodo onorevole che qui godo non hà già estinto i lumi che per tanto tempo mercé la Divina\n[[24.22]] Misericordia vivono nella mia Mente, essendo costantemente l'istesso che prima. La priego\n[[24.23]] perciò con tutto il cuore a continuarmi la sua protettione, e perdonarmi se le circostanze del\n[[24.24]] tempo m'obligarono a rifiutare le sue gratie, come anche persuadersi che mai mi scordarò di\n[[24.25]] quanto le sono obligato, inalterabilmente protestandomi </p>\n<p> [[24.26]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o, Oblig^#'m^#'o, Affett^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[24.27]] Padova 3 Marzo 1695 </p>\n",
+  "number": "8.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 3. März 1695. [10.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:8. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 3. März 1695. [10.] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o Il Tempo, e la lontananza non saranno mai capaci di rendermi ingrato con scordarmi di quanto devo all'incomparabile bontà di V. S. Illu^#'m^#'a, le di cui pretiose gratie ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

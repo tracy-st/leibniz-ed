@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_73",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 73,
+  "text": "<p> [[195.1]] <b>73. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[195.2]] [Hannover,] 8./18. September 1696. [67.91.]</b></p>\n\n<p> [[195.10]] Monsieur </p>\n<p> [[195.11]] Vous <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: à M. Bauval à la Haye 8/18 Sept. 1696.</Fn> aurés receu ma derniere où j'avois joint des vers sur feu Monsieur Hugens, que je\n[[195.12]] vous envoye de nouveau parce que j'ay changé quelques mots, par exemple au lieu de <i><b>Tutus</i></b> <i>et\n[[195.13]] in mediis navita fertur aquis</i> j'ay mis <i><b>certus</b> et in</b> etc. Car les longitudes qu'on peut connoître\n[[195.14]] en quelque façon par les pendules ne garantissent point le vaisseau des dangers de toute sorte,\n[[195.15]] mais le rendent au moins plus certain de sa route. </p>\n<p> [[195.16]] Mons. Dartis depuis quelque temps ne continue point son <i>Journal</i>, mais en echange\n[[195.17]] M. Chauvin pousse le sien à Berlin. On imprime quelque chose en Italie sous le titre de\n[[195.18]] <i>Galleria di Minerva</i>, qui a l'air d'un Journal. Mons. l'Abbé Fardella professeur à Padoue m'en\n[[195.19]] a envoyé un échantillon, où l'on fait rapport d'un livre qu'il prepare pour nous expliquer <b>la</b>\n[[196.1]] <b>Philosophie de S. Augustin</b> dans son livre <i>de quantitate animae</i> et autres ouvrages. Il\n[[196.2]] pretend que ce pere a mieux rencontré que la plupart des philosophes. Et en effect il a puisé du\n[[196.3]] Platonisme le meilleur et de plus convenable à nôtre religion. Cet habile Abbé qui est Professeur\n[[196.4]] de Mathematiques y mettra beaucoup du sien, et comme en passant autresfois à Venise je\n[[196.5]] luy avois fait connoître quelque chose de mes nouvelles hypotheses de philosophie, autant que\n[[196.6]] l'occasion le pouvoit permettre, il l'entendit avec beaucoup d'applaudissemens, et a marqué\n[[196.7]] depuis d'en avoir fait grand usage, et de vouloir pousser plus avant ces meditations. Je suis avec\n[[196.8]] zele. </p>\n",
+  "number": "73.",
+  "title": "LEIBNIZ AN HENRI BASNAGE DE BAUVAL",
+  "date": "[Hannover,] 8./18. September 1696. [67.91.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:73. LEIBNIZ AN HENRI BASNAGE DE BAUVAL [Hannover,] 8./18. September 1696. [67.91.] Monsieur Vous Am Kopf der Seite von Leibniz' Hand: à M. Bauval à la Haye 8/18 Sept. 1696. aurés receu ma derniere où j'avois joint des vers sur feu Monsieur Hugens, que je vous envoye de nouveau parce que j'ay changé ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

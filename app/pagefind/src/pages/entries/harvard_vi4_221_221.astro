@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_221",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 221,
+  "text": "[[862.1]] <b>182₁.  Erster Entwurf ERSTER ENTWURF </p>\n<p> [[862.6]] <i>A</i> <b>infert</b> <i>B</i>, vel <i>B</i> <b>sequitur</b> ex <i>A</i>; si ponendo <i>A</i>, et substituendo coincidentia oritur\n[[862.7]] <i>B</i>. Non tamen requiritur ut nihil aliud oriatur quam <i>B</i>. </p>\n<p> [[862.8]] <b>Eadem</b> vel <b>Coincidentia</b> sibi mutuo substitui possunt ita ut non oriatur contradictio. </p>\n<p> [[862.10]] <b>Contradictio</b> est <i>A non-A.</i> </p>\n<p> [[862.11]] Illatio est duplex, explicabilis cum substitutionis series est finita, et inferens dicetur\n[[862.12]] <b>implicare</b>, vel illatio est inexplicabilis cum series substitutionis est infinita et inferens\n[[862.13]] dicetur <b>involvere</b>. Cum plicae sunt flexiones finitae sunt, cum volutio est sunt infinitae,\n[[862.14]] itaque apta sunt nomina. </p>\n<p> [[862.15]] <b>Impossibile</b> est quod implicat contradictionem. </p>\n<p> [[862.16]] <b>Possibile</b> est quod non implicat contradictionem. </p>\n<p> [[862.17]] <b>Vera propositio</b> est <i>A continet B</i>, si <i>A non-B</i> infert contradictionem. Comprehenduntur\n[[862.18]] et categoricae et Hypotheticae propositiones, v.g. <i>si A continet B, C continet D</i>,\n[[862.19]] potest sic formari <i>A continere B continet C continere D.</i> Itaque <i>A continere B</i>, et simul <i>C\n[[862.20]] non continere D</i> infert contradictionem. Uti status quo idem est <i>A</i> et <i>non B</i> (seu quo simul\n[[862.21]] <i>L</i> continet <i>A</i>, et <i>L</i> continet <i>non B</i>) implicat contradictionem; ita status quo simul <i>A</i>\n[[862.22]] continet [<i>B</i>] et non simul <i>C</i> continet <i>D</i>, implicat contradictionem. </p>\n<p> [[863.1]] <b>Vera propositio categorica affirmativa universalis</b> est; <i>A est B</i>, si <i>A</i> et\n[[863.2]] <i>AB</i> coincidat et <i>A</i> sit possibile, et <i>B</i> sit possibile. Hinc sequitur si <i>A est B</i>, vera propositio\n[[863.3]] est, <i>A non-B</i> implicare contradictionem, nam pro <i>A</i> substituendo aequivalens <i>AB</i> fit\n[[863.4]] <i>AB non-B</i> quod manifeste est contradictorium. <Fn><i>Am Rande</i>: Verum est vel necessarium vel contingens, Verum necessarium sciri potest per finitam seriem substitutionum seu per coincidentia commensurabilia, Verum contingens per infinitam seu per coincidentia incommensurabilia. Explicabile conferemus commensurabili, inexplicabile incommensurabili. Verum necessarium est cujus veritas est explicabilis, contingens cujus veritas est [in]explicabilis. Probatio a priori seu <b>Apodixis</b> est explicatio veritatis.</Fn> </p>\n<p> [[863.5]] <b>Vera propositio Hypothetica</b> primi gradus est si <i>A est B</i>, et inde sequitur <i>C\n[[863.6]] est D</i>, nempe substitutione coincidentium. Status quo <i>A</i> est <i>B</i> vocetur <i>L</i> et status quo <i>C</i> est\n[[863.7]] <i>D</i> vocetur <i>M</i>, erit <i>L</i> ^&.SE <Leibniz special character> <i>LM.</i> Ita reducitur hypothetica ad categoricam v.g. status quo aër est\n[[863.8]] clarus dicatur <i>serenum</i>, et status quo aër est sine nubibus dicatur <i>sudum</i>; dici potest,\n[[863.9]] <i>serenum est sudum</i>, seu <i>serenum et serenum sudum coincidunt.</i> <Fn><i>Am Rande</i>: NB.</Fn> Et similia vocabula fieri\n[[863.10]] possunt pro aliis propositionibus, significantia statum vel tempus. <i>Serenat</i> idem quod <i>est\n[[863.11]] serenum</i>, hoc modo similia impersonalia, <i>tonat, pluit, piget, agitur, ridetur</i>, id est vera est\n[[863.12]] propositio <i>pluvia cadit</i> (<i>aliquando pluit</i>) <i>et sudum est, aliquod serenum est pluvium</i> seu\n[[863.13]] <i>serenum pluvium</i> non implicat contradictionem. Ex Hypotheticis primi gradus eodem\n[[863.14]] modo transiri poterit ad hypotheticas secundi. </p>\n<p> [[863.15]] Veritas adeoque et illatio seu veritas hypothetica duplex est, contingens, si in\n[[863.16]] probando seu in substitutione aequipollentium opus est progressu in infinitum, necessaria,\n[[863.17]] si absolvi potest probatio. Ergo diversa invenienda essent vocabula, quo distinguantur\n[[863.18]] inferens contingenter et inferens necessario. <Fn><i>Am Rande</i>: NB.</Fn> Habent haec duo sese invicem, ut\n[[863.19]] commensurabile et incommensurabile, necessaria consequentia est ut resolutio in communem\n[[863.20]] mensuram, contingens nunquam absolvit resolutionem. </p>\n",
+  "number": "182₁.",
+  "title": "Erster Entwurf",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:182₁. Erster Entwurf ERSTER ENTWURF A infert B, vel B sequitur ex A; si ponendo A, et substituendo coincidentia oritur B. Non tamen requiritur ut nihil aliud oriatur quam B. Eadem vel Coincidentia sibi mutuo substitui possunt ita ut non oriatur contradictio. Contradictio est A non-A. Illatio est dup...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

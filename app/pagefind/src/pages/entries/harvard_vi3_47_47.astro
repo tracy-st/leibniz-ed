@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_47",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 47,
+  "text": "[[426.15]] <b>47. Theoremata sunt cogitandi compendia </b> <span>426.15;0:63:047:74       :L:l^</span>.\n[[426.23]] Omnia Theoremata non nisi Tachygraphias seu cogitandi compendia esse, ut\n[[426.24]] animus a rebus ipsis distincte cogitandis dispensetur, nec ideo minus omnia recte\n[[426.25]] proveniant, in hoc consistit omnis utilitas verborum, et characterum, ut in Arithmetica\n[[426.26]] sunt decimales, ut sunt Notae Analyseos, ut innumeros et saepe impossibiles\n[[426.27]] expressu, aut mire implicatos linearum motuumque ductus persequi necesse non sit.\n[[427.1]] Hoc etsi non verbis, aut reflexione animi, reapse tamen autores Algebrae expressere,\n[[427.2]] sed et inventores Algorithmi, et verborum in scientiis, et proinde omnis scientiarum\n[[427.3]] abstractarum laus consistit in compendiosis loquendi scribendique notis, et his notis\n[[427.4]] fit ut possimus computare progressionis alicujus terminum summamque, tout d'un\n[[427.5]] coup, etsi per singula non eamus, ut possimus ipsi infinito exhibere finitum aequale,\n[[427.6]] quaeque alia sunt huius generis non intelligentibus rationes rerum admiranda.\n",
+  "number": "47.",
+  "title": "Theoremata sunt cogitandi compendia",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:47. Theoremata sunt cogitandi compendia 426.15;0:63:047:74 :L:l^. Omnia Theoremata non nisi Tachygraphias seu cogitandi compendia esse, ut animus a rebus ipsis distincte cogitandis dispensetur, nec ideo minus omnia recte proveniant, in hoc consistit omnis utilitas verborum, et characterum, ut in Ari...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

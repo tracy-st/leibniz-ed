@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_228",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 228,
+  "text": "<p> [[690.6]] <b>228. SAMUEL CRELLIUS AN LEIBNIZ</p>\n<p> [[690.7]]  Berlin, 1. Dezember 1707</b></p>\n<p> [[690.14]] Vir Illustrissime </p>\n<p> [[690.15]] Metaphysicam Stegmanni tandem descriptam tradidi Domino Kirchio, Amico meo, ad Te\n[[690.16]] dirigendam. Doleo, quod non citius id factum sit. Sed partim expectatio alterius exemplaris,\n[[690.17]] partim alia impedimenta opus hucusque protraxerunt. Cum vero aliud nancisci non potuerim,\n[[690.18]] ex meo vitiosissime descripto exemplari, hocce describendum fuit. Operam istam libenter\n[[690.19]] quidem in se suscepit Adolescens ille nobilis, qui commendatione Tua in Gymnasium Joachimicum\n[[690.20]] mensamque ibi communem receptus est, et hac occasione gratissimum suum animum\n[[691.1]] exiguo hocce labore testari voluit. Sed cum viderem Tractatibus quibusdam Dni Kirchii describendis\n[[691.2]] fuisse distentum, ego ipse coetera absolvi, quia Codicem meum, in quo alii quidam\n[[691.3]] Tractatus cum ista Metaphysica sunt compacti, ignoto homini concredere nolebam. Mercedem\n[[691.4]] pro descriptione hujus Tractatus nullam admittemus, Illustrissimo Tuo Nomini addictissimi et\n[[691.5]] devinctissimi, quin potius Christophori Ostorodi similem Tractatus philosophicum Msctum, si\n[[691.6]] volueris, addam. Coeterum non per omnia mihi placet ista Metaphysica. De corporeo Deo\n[[691.7]] crasse satis philosophatur. Sed et Socini placita jamdudum deserui non pauca. Correcto Systemate\n[[691.8]] Theologiae Socini, et rejectis Terminis Scholasticis in Theologia vulgo receptis, bene se\n[[691.9]] haberent res Christianae, et facilius Judaeos Gentilesque converteremus. Sed de his nunc non\n[[691.10]] est agendi locus nec tempus. Vale, Vir Illustrissime, et fave </p>\n<p> [[691.11]] Tui studiosissimo et Tibi ad officia quaevis paratissimo </p>\n<p> [[691.12]] Samueli Crellio </p>\n<p> [[691.13]] Die 1 Decembris A^#'o 1707 dabam Berolini, discedens ideoque festinante calamo. </p>\n<p> [[691.14]] D. Kirch forsan expectabit donec responsum Tuum advenerit, quo eum certiorem facies,\n[[691.15]] qua ratione Tractatus iste sit transmittendus. </p>\n<p> [[691.16]] Illustrissimo atque Excellentissimo Viro Domino de Leibnitz Serenissimi Prussiae Regis,\n[[691.17]] Electorisque Brunsuigensis Consiliario Status Intimo. </p>\n",
+  "number": "228.",
+  "title": "SAMUEL CRELLIUS AN LEIBNIZ",
+  "date": "Berlin, 1. Dezember 1707"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:228. SAMUEL CRELLIUS AN LEIBNIZ Berlin, 1. Dezember 1707 Vir Illustrissime Metaphysicam Stegmanni tandem descriptam tradidi Domino Kirchio, Amico meo, ad Te dirigendam. Doleo, quod non citius id factum sit. Sed partim expectatio alterius exemplaris, partim alia impedimenta opus hucusque protraxerunt...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

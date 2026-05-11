@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_334",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 334,
+  "text": "[[1464.1]] <b>278.  An corpora sint mera phaenomena [Winter 1682/83 (?)]</b>\n [[1464.2]] <tab/>[Winter 1682/83 (?)] </p>\n<p> [[1464.5]] 1) Pono id quod non majorem habet Unionem, quam ligna in fasce seu strue\n[[1464.6]] lignorum, vel lateres sibi impositi, non esse proprie unum Ens sed potius Entia, licet\n[[1464.7]] unum pro omnibus nomen ponatur. </p>\n<p> [[1464.8]] Idque verum esse sive parva sive magna sit eorum distantia item sive lateres illi aut\n[[1464.9]] ligna in strue sint bene coordinata, sive non, id enim Unionem eorum non facit majorem;\n[[1464.10]] item licet singulae partes quendam motum communem habeant, vel aliud quiddam quod\n[[1464.11]] de omnibus praedicari possit. </p>\n<p> [[1464.12]] 2) Pono item in corpore nihil aliud quam extensionem intelligi seu quod habeat\n[[1464.13]] partes extra partes. </p>\n<p> [[1464.14]] 3) Pono denique omne corpus esse actu divisum in plures partes, quae sint etiam\n[[1464.15]] corpora.\n [[1464.16]] Hinc sequitur </p>\n<p> [[1464.17]] <b>Primo</b> nullum dari unum corpus. </p>\n<p> [[1464.18]] <b>Secundo</b> imo nec ulla dari corpora, quae nihil aliud sunt quam corpus et corpus. </p>\n<p> [[1464.19]] Hinc sequitur aut corpora esse mera phaenomena, non vero Entia realia, aut in\n[[1464.20]] corporibus aliud esse quam extensionem. </p>\n<p> [[1464.21]] Argumentum hoc procedit, etiamsi positio tertia non concedatur. Modo concedatur,\n[[1464.22]] solum contactum non facere unum Ens, et proinde si duo fingantur corpora triangularia\n[[1464.23]] aequalia (non amplius subdivisa) quae componunt cubum, non magis ex iis fieri unum\n[[1464.24]] novum Ens, quam si ita se tangant tantum per apices seu in punctis. Item non magis fieri\n[[1464.25]] ex iis unum Ens, si alterum apud alterum in illa compositione cubi quiescat, quam si\n[[1465.1]] moveantur aut si momento aliquo tantum sint illa situatione cubi, unde sequeretur cubum\n[[1465.2]] simul nasci et interire. </p>\n<p> [[1465.3]] Item non magis fieri inde unum novum Ens, sive moveantur ita ut se tangant, sed\n[[1465.4]] motu in aequali, aut in diversa; sive moveantur ut comites cubum componentes. </p>\n",
+  "number": "278.",
+  "title": "An corpora sint mera phaenomena",
+  "date": "[Winter 1682/83 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:278. An corpora sint mera phaenomena [Winter 1682/83 (?)] [Winter 1682/83 (?)] 1) Pono id quod non majorem habet Unionem, quam ligna in fasce seu strue lignorum, vel lateres sibi impositi, non esse proprie unum Ens sed potius Entia, licet unum pro omnibus nomen ponatur. Idque verum esse sive parva s...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

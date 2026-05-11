@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_116",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 116,
+  "text": "<p> [[321.1]] <b>101. LEIBNIZ AN OTTO VON GUERICKE</p>\n<p> [[321.2]] [31. Januar 1672.] [83.103.]</b></p>\n<p> [[321.12]] An Herrn Gericken. </p>\n<p> [[321.13]] Ich bin neülich ohngefähr im Römischen <i>Journal</i> über eine Epistel eines <i>mathematici</i>\n[[321.14]] nahmens Eschinardi kommen, welcher vorgiebt, daß die Thermometra nicht in gleiche, sondern\n[[321.15]] einander ungleiche theile müsten abgetheilt werden, weil sie nicht <i>motu uniformi</i> sondern\n[[321.16]] <i>accelerato</i> stiegen und wüchsen. Es ist bekand daß ohne das die thermometra sehr ungewiß,\n[[321.17]] indem <i>gradus raritatis in aëre</i> nicht allein von Wärme und Kälte, sondern auch Trockne und\n[[321.18]] Feüchte variirt werden. So glaub ich auch gar gern, daß das Baroscopium von allen mit\n[[321.19]] einander einige impression empfange, denn die Lufft durch veränderung der Wärme und Kälte,\n[[321.20]] Trockne und Feüchte, und denn bewegung oder ruhe ihre Leichte oder schwere verändert. Einig\n[[321.21]] und allein deücht mich, sey das Hygroscopium oder mas der trockne und feüchtigkeit invariabel\n[[321.22]] und an eine einfache Ursache gebunden. Und derowegen mit deßen hülffe, auch wenn es\n[[321.23]] gleich ebenmäßig von zusammengesezten Ursachen hehrkommen solte, dennoch durch Combination\n[[321.24]] solcher Instrumenten zu einiger richtigkeit zu kommen. Denn wenn man solche\n[[321.25]] <i>instrumenta</i> zusammen hielte, würde vielleicht sich auß der differenz die Ursach finden. Als\n[[321.26]] zum exempel wenn sich das <i>Baroscopium</i> veränderte, das <i>Hygroscopium</i> aber nicht, oder nicht\n[[321.27]] mit gleicher proportion, köndte man daraus schließen, daß die verenderung der Schwehre nicht\n[[322.1]] von feüchtigkeit oder trockne sey sondern entweder von rarefaction und condensation, oder\n[[322.2]] Bewegung hehr rührte, solches nun wieder zu entscheiden, müste man das <i>Thermometrum</i>\n[[322.3]] dagegen halten, were, wenn darinn keine solche veränderung, zu schließen daß die veränderung\n[[322.4]] der Schwehre der Lufft von einer Bewegung hehrrühre, so die Lufft träget, und\n[[322.5]] dergestalt köndte man vielleicht etwas gründtliches von künfftigen wetter schließen, auch wohl\n[[322.6]] vielleicht gar zu <i>periodis tempestatum</i> kommen, wie dann an manchen orthen die winde\n[[322.7]] periodisch seyn. Damit aber die Mühe zu observiren gemindert werde, köndte es also angestellet\n[[322.8]] werden, daß die veränderungen von Zeiten zu zeiten sich selbst zeichneten wie Hookius\n[[322.9]] und andere am <i>Barometro</i> gethan zu haben vorgeben, mit hülffe einer gewißen machine. </p>\n<p> [[322.10]] Ob der Mond eine veränderung in Schwehre der Lufft causire, und dadurch zu einer\n[[322.11]] Mechanischen demonstration der Ursach der Meerfluten zu gelangen. </p>\n<p> [[322.12]] Ein zweifel fält mir hier noch bey. Ob die schwehre der Lufft durch tragung des windes\n[[322.13]] vermindert werden könne. Denn wenn man ein geschirr voll waßer nimt, so zum exempel mit\n[[322.14]] dem waßer 20 Pfund wieget, und ein stück holzes von 5 Pfund hinein leget, so vom waßer\n[[322.15]] getragen wird, so wird doch das ganze geschirr mit holz und wasser 25 Pfund wiegen. So sagt\n[[322.16]] man auch daß wenn ein Mensch in einer wage stehe, und etwas trage, werde solches mit ihm\n[[322.17]] wiegen und wenn eine Kugel vom winde über einen glatten boden getrieben würde, würde sie\n[[322.18]] nichts desto minder mit voriger gewalt den boden drücken. </p>\n",
+  "number": "101.",
+  "title": "LEIBNIZ AN OTTO VON GUERICKE",
+  "date": "[31. Januar 1672.] [83.103.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:101. LEIBNIZ AN OTTO VON GUERICKE [31. Januar 1672.] [83.103.] An Herrn Gericken. Ich bin neülich ohngefähr im Römischen Journal über eine Epistel eines mathematici nahmens Eschinardi kommen, welcher vorgiebt, daß die Thermometra nicht in gleiche, sondern einander ungleiche theile müsten abgetheilt ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

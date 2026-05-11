@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_13",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 13,
+  "text": "<p> [[32.7]] <b>13. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[32.8]] [Hannover,] 9. (19.) April 1695. [11.15.]</b></p>\n\n<p> [[32.17]] Vir celeberrime </p>\n<p> [[32.18]] Literas <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: 9 April. 1695 <i>A Mons. Placcius</i> </Fn> Tuas gratissimas accepi, et pro munere quod mihi destinas gratias praevias ago,\n[[32.19]] neque enim dubito, quin egregium sit futurum. Suffecerit fasciculum Brunsvigo-Luneburgico\n[[32.20]] veredario ordinario more solito committi; ita enim recte ad me deferetur. </p>\n<p> [[33.1]] Interea gaudeo a Te ipso nuntium de rebus Tuis accepisse, speroque Te optima valetudine\n[[33.2]] frui, cum antea diu nihil de Te accepissem, nisi occasione controversiae quam Tibi cum Dn.\n[[33.3]] Thomasio esse intellexi. </p>\n<p> [[33.4]] Aliquoties a Te volui quaerere qualisnam sit Jungianarum schedarum jactura ex incendio\n[[33.5]] aedium Vagetianarum. Spero tamen potissima quaeque fuisse servata, et tantum fortasse Apographa\n[[33.6]] fasciculorum plerorumque periisse. Fac igitur quaeso, ut sciam, quid supersit, aut quid\n[[33.7]] nobis inde promittere possimus. </p>\n<p> [[33.8]] Spero quod ad me mittere polliceris, <i>Ethicam</i> fore Tuam, a qua multum nobis bonae frugis\n[[33.9]] promitto; quemadmodum et ab iis quae edis omnibus, atque adeo et ab iis quae nuper de <i>IC^#'t^#'o\n[[33.10]] perfecto</i> iterato dedisti. </p>\n<p> [[33.11]] Ingenium Dn. Thomasii nostri utique magni facio, plerumque tamen facilius ipsi assentior,\n[[33.12]] cum profert propria, quam cum rejicit aliena. Ego diuturno usu didici nihil facile spernere.\n[[33.13]] Profundae illae Meditationes in omni doctrinarum genere habent et ipsae usus suos, etsi non\n[[33.14]] tam obvios. Itaque quod de variis interpretationum generibus meditatus es, majore solito\n[[33.15]] <greek>ăkribeía̧</greek> mihi applausum potius, quam contemtum mereri videtur; excitandosque potius doctos\n[[33.16]] ad notiones illas enucleationes prosequendas, quam deterrendos. </p>\n<p> [[33.17]] Quin sim lecturus avide et quantum licebit studiose, quicquid a Te proficiscitur, dubitare\n[[33.18]] non debes. Sed censuram exercere majoris operae est, nec a me expectandae, qui natura atque\n[[33.19]] instituto ita comparatus sum, ut in aliorum scriptis potius quaeram profectus meos, quam\n[[33.20]] defectus alienos. Si quid tamen monere necessarium videatur, pro meo candore non dissimulabo.\n[[33.21]] Vale etc. etc. </p>\n",
+  "number": "13.",
+  "title": "LEIBNIZ AN VINCENT PLACCIUS",
+  "date": "[Hannover,] 9. (19.) April 1695. [11.15.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:13. LEIBNIZ AN VINCENT PLACCIUS [Hannover,] 9. (19.) April 1695. [11.15.] Vir celeberrime Literas Am Kopf der Seite von Leibniz' Hand: 9 April. 1695 A Mons. Placcius Tuas gratissimas accepi, et pro munere quod mihi destinas gratias praevias ago, neque enim dubito, quin egregium sit futurum. Suffecer...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

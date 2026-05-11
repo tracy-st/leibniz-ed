@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_93",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 93,
+  "text": "<p> [[251.15]] <b>79. LEIBNIZ AN MARTIN FOGEL</p>\n<p> [[251.16]] Frankfurt, 5. Oktober 1671. [52.]</b></p>\n<p> [[251.25]] Quum salutem a Te humanissimam mihi nunciaret Dn. Schultzius vester, officii mei esse\n[[251.26]] putavi literas reponere. Hypothesin meam Tibi visam credo, qua nonnullis viris doctis compendiose\n[[252.1]] satis intimas phaenomenorum naturae causas complexus videor. Certe Clariss. Wallisius\n[[252.2]] transmisso mihi judicio suo de ea liberaliter admodum judicavit, et quidam vir egregie in\n[[252.3]] his quoque studiis doctus scripsit, nullam se legisse, quae satisfaceret magis. </p>\n<p> [[252.4]] Legi Physicam Gallicam de Monsieur de Rohaut, elegantiam in ea agnosco, in summa\n[[252.5]] tamen a Cartesio vix abit. Praga mihi nuper scriptum est, editas illic esse observationes\n[[252.6]] novissimorum Cometarum, a Patribus Societatis in Indiis factas. In Gallia Doctor quidam\n[[252.7]] Sorbonicus Philosophiam Cartesii impugnaverat, aut potius recentiorum in universum, et in ea\n[[252.8]] Arnaldum: sed suppressa sunt exempla ab auctore ipso, nunc praesertim cum Arnaldi plurimum\n[[252.9]] aucta sit Auctoritas, ex quo nepos ex fratre Mr. de Pomponne in Lyonnaei locum a Rege electus\n[[252.10]] est. Audio Te, vir Clariss. Academicorum Lynceorum, sive Historiam, sive Observationes ex\n[[252.11]] Italico vertere. Clariss. Screta Schafhusanus, Juvenis inprimis doctus, ut nuper ad me scribebatur,\n[[252.12]] statuerat vertere Experimenta Florentina. Mitto ecce schedulam, quam vides, quam ideo\n[[252.13]] inprimi curavi, ut de ea re cum amicis et curiosis communicare possem liberius. Quare Judicio\n[[252.14]] Tuo nihil mihi accidet gratius. Illud etiam vehementer rogo, ut, si rescribere dignabere, nova\n[[252.15]] nonnulla literaria, quae Tibi numquam desunt, addas. Quod restat, vale faveque. </p>\n<p> [[252.16]] Francofurti 5 Oct. styl. n. 1671. </p>\n<p> [[252.17]] P. S. Expone aliquando, si placet, quo sint loco posthuma Jungiana, quae prodire omnia\n[[252.18]] publice interest. </p>\n",
+  "number": "79.",
+  "title": "LEIBNIZ AN MARTIN FOGEL",
+  "date": "Frankfurt, 5. Oktober 1671. [52.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:79. LEIBNIZ AN MARTIN FOGEL Frankfurt, 5. Oktober 1671. [52.] Quum salutem a Te humanissimam mihi nunciaret Dn. Schultzius vester, officii mei esse putavi literas reponere. Hypothesin meam Tibi visam credo, qua nonnullis viris doctis compendiose satis intimas phaenomenorum naturae causas complexus v...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

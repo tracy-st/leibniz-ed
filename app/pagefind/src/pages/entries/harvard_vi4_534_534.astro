@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_534",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 534,
+  "text": "[[2471.1]] <b>422.  Excerpta ex Walenburgiorum libris [1. Hälfte 1677 (?)]</b>\n [[2471.2]] <tab/>[1. Hälfte 1677 (?)]\n[[2471.10]] <tit2><b>Excerpta ex Walenburgiorum libris</b></tit2> </p>\n<p> [[2471.11]] <i>Tract. 1. Examen principiorum fidei</i>. </p>\n<p> [[2471.12]] <i>Tenent Protestantes per modum principii solam scripturam sufficere ad probandos\n[[2471.13]] articulos fidei.</i> (+ Quaeritur an si nullus alius extaret liber de religione Christiana, quam\n[[2471.14]] scriptura sacra, nec aliunde quicquam de ea sciri posset. Fingamus in aliquam Maris\n[[2471.15]] Africani insulam in qua homines Arabicam linguam intelligant ejici naufragio codicem\n[[2471.16]] scripturae sacrae arabica lingua scriptum. Tollunt librum incolae et cum caeteris spoliis in\n[[2471.17]] unum acervum conjiciunt. Noctu igne concepto omnia comburuntur, solo Codice salvo,\n[[2471.18]] attoniti ea re incolae librum avide legunt, et doctrinam ejus praeparatu mirati sequendam\n[[2471.19]] sibi constituunt, quaeritur an ex eo solo mediocri judicio ac diligentia sibi veram religionem\n[[2471.20]] quantum ad salutem satis est concinnare possent, mihi id verisimile admodum\n[[2471.21]] videtur. +) </p>\n<p> [[2471.22]] Walenburch d. l. <i>Commune</i> Romanorum et Protestantium <i>principium est</i>, <i>doctrinam\n[[2471.23]] Christianorum primorum seculorum quae in libris sanctorum patrum et antiquorum\n[[2471.24]] Conciliorum reperitur esse incorruptam; saltem quoad articulos necessarios.</i> (+ Patres\n[[2471.25]] quasdam possunt habere opiniones cum Romana Ecclesia communes sed non ideo illa\n[[2472.1]] quae in Romana Ecclesia habes, quod scilicet Anathematismis Romana Ecclesia difficilem\n[[2472.2]] reddit unionem. +) </p>\n<p> [[2472.3]] An articuli fidei debeant ex sententia Protestantium esse in scriptura ita ut non sit\n[[2472.4]] opus consequentiis. Affirmant Walenburgii. </p>\n<p> [[2472.5]] Nisi Protestantes ex scriptura sacra probare possunt quis sit numerus articulorum\n[[2472.6]] fidei, non est eorum principium sufficiens. Non vero possunt, nam ea in re ipsi dissident\n[[2472.7]] inter se. Hoc argumentum ego non admitto. Sufficit aliquem credere articulum aliquem\n[[2472.8]] tametsi nesciat an sit necessarius. </p>\n<p> [[2472.9]] <i>Quomodo ullam controversiam catholicis movebunt legitime, nescientes an ob\n[[2472.10]] errorem</i> necessarium ab iis <i>recesserint.</i> </p>\n<p> [[2472.11]] Calviniani non possunt ostendere cur consensus inter ipsos et pontificios fundamentalior\n[[2472.12]] quam inter ipsos et Lutheranos. </p>\n<p> [[2472.13]] Decretum synodi Nationalis Carentoniensis anno 1631. (Walenb. pag. 3.) </p>\n<p> [[2472.14]] p. 4. Quaestio inter Protestantes et Pontificios <i>an Ecclesia sit infallibilis</i> [<i>judex</i>]\n[[2472.15]] <i>controversiarum</i> non tantum <i>quoad articulos necessarios</i>, id enim concedunt, inquit,\n[[2472.16]] <i>Protestantes, et eo ipso totam causam nobis tradunt</i>, sed <i>an sit infallibilis judex ex dono\n[[2472.17]] Spiritus Sancti, et promissione Christi sine ulla restrictione ad articulos sive omnibus\n[[2472.18]] necessarios sive non necessarios.</i> </p>\n<p> [[2472.19]] <i>De interpretatione scripturae per scripturam.</i> </p>\n<p> [[2472.20]] <i>Confessio Helvetica posterior artic. 2. illam duntaxat scripturae interpretationem\n[[2472.21]] agnoscimus, quae cum regula fidei et charitatis congruit</i> (+ regula fidei et charitatis, seu\n[[2472.22]] analogia fidei, quid? +). </p>\n<p> [[2472.23]] An si in syllogismo una propositio sit fidei, altera rationis, conclusio sit theologica.\n[[2472.24]] Concedit Musaeus si propositio illa rationis sit absolute necessaria, seu metaphysice cert\n[[2472.25]] [<i>bricht ab</i>] </p>\n",
+  "number": "422.",
+  "title": "Excerpta ex Walenburgiorum libris",
+  "date": "[1. Hälfte 1677 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:422. Excerpta ex Walenburgiorum libris [1. Hälfte 1677 (?)] [1. Hälfte 1677 (?)] Excerpta ex Walenburgiorum libris Tract. 1. Examen principiorum fidei. Tenent Protestantes per modum principii solam scripturam sufficere ad probandos articulos fidei. (+ Quaeritur an si nullus alius extaret liber de re...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

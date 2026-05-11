@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_83",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 83,
+  "text": "<p> [[229.7]] <b>70. PIERRE DE CARCAVY AN LEIBNIZ</p>\n<p> [[229.8]] Paris, 10. Juli 1671. [67.74.]</b></p>\n<p> [[229.17]] Monsieur de Paris le 10^#'e Juillet 1671. </p>\n<p> [[229.18]] ne pouvant me donner l'honneur de vous escrire que peu de chose à cause des affaires\n[[229.19]] dont je suis accablé, je le faiss en nostre langue vous suppliant d'agreer que j'en use de la sorte,\n[[229.20]] et que je vous dise en ce qui regarde M^#'r Kraf, et le secret dont il a parlé à M^#'r Colbert qu'il n'a\n[[229.21]] qu'à executer ce dont il est demeuré d'accord avec M^#'r du Fresne, et qu'on luy tiendra\n[[229.22]] absolument tout ce qu'on luy a promis. </p>\n<p> [[229.23]] Pour ce qui est de vos petits livres j'ay donné à quelques uns de nos M^#'r^#'s ce qu'il vous a plu\n[[229.24]] en envoyer, Eux et moy vous en rendons tres humbles graces, ils m'ont prié de vous dire qu'ils\n[[229.25]] eussent souheté que vous vous fussiez davantage estendu en certains endroits, où ils ont trouvé\n[[229.26]] quelque difficulté et obscurité, ce qui est arrivé sans doute par le desir que vous avez eu de\n[[229.27]] comprendre beaucoup en peu de mots, la plus part des hommes sont ennemys de la peyne, et\n[[229.28]] comme chacun a ses occupations et mesmes ses preventions il faut pour entrer en commerce\n[[229.29]] s'accommoder les uns avec les autres. Si vous me jugez capable de vous servir en quelque\n[[229.30]] chose je le feray tres volontiers estant avec verité </p>\n<p> [[230.1]] Monsieur vostre tres humble et obeissant serviteur de Carcavy. </p>\n<p> [[230.2]] A Monsieur Monsieur Libniktz Docteur ez droits et con^#'e^#'r de Son Altesse Electoralle de\n[[230.3]] Mayence. </p>\n",
+  "number": "70.",
+  "title": "PIERRE DE CARCAVY AN LEIBNIZ",
+  "date": "Paris, 10. Juli 1671. [67.74.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:70. PIERRE DE CARCAVY AN LEIBNIZ Paris, 10. Juli 1671. [67.74.] Monsieur de Paris le 10^#'e Juillet 1671. ne pouvant me donner l'honneur de vous escrire que peu de chose à cause des affaires dont je suis accablé, je le faiss en nostre langue vous suppliant d'agreer que j'en use de la sorte, et que j...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi2_4",
+  "series": "Band VI 2 (1663-1672); durchgesehener Nachdruck 1990",
+  "seq": 4,
+  "text": "[[145.34]] <b>34. De baptismo liberorum invitis parentibus </b> <span>145.0;0:62:034:7001-7112:L:l^</span>.\n[[145.1]] Incidit nuper ex tali casu meditatio. Chirurgus nescio quis ad Judaei cujusdam\n[[145.2]] Moguntini infantem periculose decumbentem vocatus, aquam poscit, cum nemo adesset,\n[[145.3]] baptizat puerum in nomine Patris, Filii et Spiritus S. Infans moritur. Judaei re comperta\n[[145.4]] mire indignantur, Chirurgus a se animam Deo assertam gloriatur. Mihi hoc incidit, Canones\n[[145.5]] legesque vetare invitis Judaeis parentibus liberos baptizari. Hoc non facerent, si tam facile\n[[145.6]] iis salutem asseri posse crederent. Ergo hoc ad salutem sufficere non putant. Quid ergo\n[[145.7]] requiritur? an fides parentis? Quid igitur, si ille mortuus, cujus ergo, an tum nullius, ergo\n[[145.8]] deterioris conditionis qui habet, quam non habet. Cujus ergo tum? an omnino eius qui\n[[145.9]] jus regendi habet? Quid si igitur nemo eum habeat, qui jure habeat, sed qui detinet, de\n[[145.10]] facto detineat, an iste infans deterioris conditionis erit. An ille qui detinet? ergo qui Judaeis\n[[145.11]] abripit, puerum baptizat, recte facit, Deo enim vindicat animam thesauris mundi\n[[145.12]] pretiosiorem. Cur ergo leges Canonesque rem tam utilem vetuerunt. Si illae recte vetuerunt,\n[[145.13]] necesse est aliud quiddam requiri, quam baptismum et alterius fidem. Requiritur ergo\n[[145.14]] Baptismus et fides praevisa per scientiam vel absolutam vel mediam, neque aliud quiddam\n[[145.15]] mihi apparet. Nam ubi videt Deus infantem, si superstes esset, crediturum, proficit ei\n[[145.16]] baptismus ad salutem, sin non crediturum, et felicitatis et damnationis expers est, quasi\n[[145.17]] non baptizatus. Et haec ratio est, cur Leges Canonesque Christianorum liberos baptizari\n[[145.18]] tam severe jubeant, Judaeorum vetent, quia credibile est Judaeorum liberos, si praeter\n[[145.19]] baptismum eis tribuatur nihil, in Judaismo educatum iri, et baptismum irritum fore;\n[[145.20]] contra liberos Christianorum Christianos fore praesumitur, neque nisi rarissime aliter\n[[145.21]] contingit. Caeterum eodem haec res fundamento nititur quo praedestinatio. DEus iis\n[[145.22]] salutem dabit, quorum fidem praevidet, quod si igitur intercipiantur mature antequam se\n[[145.23]] fides exerat, nihilominus dabit, ne sine culpa sua tanto bono spolientur. Duo requiruntur:\n[[145.24]] Baptismus et fides B aptizati. Dico: baptizati. Nam ita verba sonant: qui crediderit\n[[145.25]] et baptizatus fuerit, salvus erit. Ejusdem igitur est credere et baptizari. Fides baptizati\n[[145.26]] vel praesens, vel futura, nam praeterita nulla cogitari potest. Praesens in adulto: Futura\n[[145.27]] in infante. Infans aut adolescet, aut immaturus decedet. Si adolescet fides requiritur\n[[145.28]] absolute futura. Si decedet immaturus, fides requiritur sub conditione futura, si nempe\n[[145.29]] viveret. Unde non dicitur: qui credet et baptizabitur salvus erit, sed qui crediderit. Non\n[[145.30]] dicitur ho pisteusyn qui credet, crediturus; sed ho pisteusas, Aoriston seu indefinitum tempus,\n[[146.1]] quod in se haec omnia complectitur: qui credit, credebat, credidit, credet, crederet,\n[[146.2]] crediderit, credidisset, crediturus esset. Breviter: Infanti baptizato morienti eadem felicitas\n[[146.3]] evenit, quae superstiti evenisset. Ita moritur, quasi nondum moreretur. Aut quod fidem\n[[146.4]] infantis morientis post baptismum et salutem attinet, idem evenit quod eveniret, si primo\n[[146.5]] adolescentiae momento moreretur.\n",
+  "number": "34.",
+  "title": "De baptismo liberorum invitis parentibus",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:34. De baptismo liberorum invitis parentibus 145.0;0:62:034:7001-7112:L:l^. Incidit nuper ex tali casu meditatio. Chirurgus nescio quis ad Judaei cujusdam Moguntini infantem periculose decumbentem vocatus, aquam poscit, cum nemo adesset, baptizat puerum in nomine Patris, Filii et Spiritus S. Infans ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

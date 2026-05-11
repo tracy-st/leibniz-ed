@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_20",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 20,
+  "text": "<p> [[45.1]] <b>20. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[45.2]] Hannover, 20./30. Juni 1695. [14.24.]</b></p>\n\n<p> [[45.8]] Hanover ce 20/30 Juin 1695 </p>\n<p> [[45.9]] Je <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A M. H. Bauval Banage</Fn> ne doute point que M. Leers ne m'ait écrit, et que sa lettre n'ait esté perdue;\n[[45.10]] parcequ'effectivement un paquet de lettres qui me devoit estre envoyé lors que je faisois un\n[[45.11]] voyage sur la fin de l'année passée s'est perdu, sans qu'on ait jamais pû sçavoir où il est\n[[45.12]] devenu. Je le tiens trop honneste homme pour manquer à certains devoirs que la raison nous\n[[45.13]] ordonne. Il m'obligeroit cependant, s'il me vouloit encor écrire un mot, pour m'informer un\n[[45.14]] peu du succés de mes livres, et mettre fin à l'affaire; d'autant que je serois disposé de prendre\n[[45.15]] des livres pour en sortir plus aisement. </p>\n<p> [[45.16]] Pour ce qui est de M. Moetjens et de ses associés, je vous diray, qu'effectivement j'ay eu\n[[45.17]] de quoy rendre mon premier Tome cinq ou six fois plus grand qu'il n'est, et que j'ay de même\n[[45.18]] de quoy donner quelques Tomes sur le siecle passé et sur le nostre. Mais j'ay voulu choisir. Ce\n[[46.1]] qui est encor le dessein de mon second Tome. Mais puisque ces Messieurs veuillent quelque\n[[46.2]] chose de bien complet, je croy que j'ay leur fait, et qu'ils auront bien de la peine à en trouver\n[[46.3]] autant chez quelque particulier que ce soit. Mais comme la plus part de ces pieces sont non\n[[46.4]] imprimées ou rares, au lieu que je croy que la plus grande partie de leur recueil, ne sera tiré que\n[[46.5]] des livres imprimés assez communs; il me semble, que j'aurois droit en cas que nous puissions\n[[46.6]] tomber d'accord, de prendre quelque part à la direction de tout l'ouvrage, et au titre même; ou\n[[46.7]] bien qu'on mît au moins à part mes Tomes, à fin que mon choix paroisse, qui n'a pas esté\n[[46.8]] desapprouvé des plus habiles. Il faudroit encor conserver ma preface. Je ne doute point qu'on\n[[46.9]] ne trouve moyen de s'accorder pour le reste. Et qu'ils ne fassent des offres raisonnables. Je\n[[46.10]] vous supplie donc Monsieur de faire connoistre mon intention à ces Messieurs. S'ils ont dessein\n[[46.11]] de s'accommoder de mes materiaux, il sera bon qu'ils entrent dans le detail de leur dessein, tant\n[[46.12]] à l'egard de ce qui est deja imprimé, que de ce qui doit encor estre fait. Estant necessaire que je\n[[46.13]] sois informé, d'autant plus que je pourray peutestre dire sans vanité, que ce que je donnerois, ne\n[[46.14]] seroit pas la moindre, ny la moins considerable partie de tout leur grand ouvrage. </p>\n<p> [[46.15]] On m'a mandé, que Mons. le Clerc publiera bien tost le reste de son pentateuche. J'attends\n[[46.16]] de jour en jour <i>la science des Medailles</i> du P. Joubert en latin avec les additions de M. Morel, et\n[[46.17]] son <i>Specimen</i>, où il y aura quelques belles choses de Mons. de Spanhem. </p>\n<p> [[47.1]] Mons. Nieuwentiit Mathematicien Hollandois m'a envoyé deux livres qui sont faits en\n[[47.2]] partie contre le nouveau calcul que j'ay introduit, et que M. Hugens luy meme a trouvé utile.\n[[47.3]] Mais il propose ses difficultés d'une maniere fort honneste, et je repondray de même; il m'est\n[[47.4]] aisé de luy satisfaire, parceque les difficulté[s] viennent, de ce qu'il n'avoit pas assez compris\n[[47.5]] ma Methode, qui en effect n'a pas encor esté assez clairement expliquée. On me mande de\n[[47.6]] Rome que le pere de Reux flamand travaille à la continuation de la Bibliotheque Jesuitique des\n[[47.7]] peres Alegambe et Southwel. Je suis etc. </p>\n",
+  "number": "20.",
+  "title": "LEIBNIZ AN HENRI BASNAGE DE BAUVAL",
+  "date": "Hannover, 20./30. Juni 1695. [14.24.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:20. LEIBNIZ AN HENRI BASNAGE DE BAUVAL Hannover, 20./30. Juni 1695. [14.24.] Hanover ce 20/30 Juin 1695 Je Am Kopf der Seite von Leibniz' Hand: A M. H. Bauval Banage ne doute point que M. Leers ne m'ait écrit, et que sa lettre n'ait esté perdue; parcequ'effectivement un paquet de lettres qui me devo...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_170",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 170,
+  "text": "<p> [[580.1]] <b>172. LEIBNIZ AN MARIE DE BRINON</p>\n<p> [[580.2]] Hannover, 12./22. September 1692. [113.265.]</b></p>\n<p> [[580.9]] Hanover 12/22 Septemb. 1692. </p>\n<p> [[580.10]] La <Fn><i>Am Kopf der Seite</i> : A Madame de Brinon.</Fn> sagesse même ne pouvoit rien dire de plus vray que ce que Vous dites, Madame, à\n[[580.11]] l'occasion des Recherches Genealogiques, qu'il vaut beaucoup mieux que le nom d'un Prince\n[[580.12]] soit écrit au livre de vie, que dans quelque vieille pancartes. Le moyen d'y estre enregistré,\n[[580.13]] n'est pas tant de fonder quelque chapelle, que de faire du bien. Et le plus grand bien qu'on peut\n[[580.14]] faire c'est de rendre les hommes meilleurs tant par son exemple, que par les ordres qu'on y met.\n[[580.15]] Aimer la justice, soulager les maux, favoriser la vertu, glorifier Dieu par la connoissance de ses\n[[580.16]] merveilles, à l'egard de la nature et de la grace, ce sont les veritables titres de la Genealogie des\n[[580.17]] enfans de Dieu. Les preuves de la vraye noblesse sont dans nostre conscience. Tout prince\n[[580.18]] qu'on est, on est degradé par la mechanceté, par l'injustice, par la dureté de coeur, qui fait\n[[580.19]] mépriser les cris des miserables, par cette mollesse, qui fait qu'on ne pense qu'à ses plaisirs,\n[[580.20]] plût à Dieu que vos belles leçons fussent entendues de tout le monde, et qu'on en profitât par un\n[[580.21]] veritable soin du salut. </p>\n<p> [[580.22]] Je suis Madame etc. </p>\n",
+  "number": "172.",
+  "title": "LEIBNIZ AN MARIE DE BRINON",
+  "date": "Hannover, 12./22. September 1692. [113.265.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:172. LEIBNIZ AN MARIE DE BRINON Hannover, 12./22. September 1692. [113.265.] Hanover 12/22 Septemb. 1692. La Am Kopf der Seite : A Madame de Brinon. sagesse même ne pouvoit rien dire de plus vray que ce que Vous dites, Madame, à l'occasion des Recherches Genealogiques, qu'il vaut beaucoup mieux que ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

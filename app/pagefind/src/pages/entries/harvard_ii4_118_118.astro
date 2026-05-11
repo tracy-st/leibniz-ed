@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_118",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 118,
+  "text": "<p> [[381.1]] <b>118. LEIBNIZ AN JACQUES BERNARD</p>\n<p> [[381.2]] [Hannover, 19.] Januar 1706. [133.] </b></p>\n<p> [[382.13]] Monsieur </p>\n<p> [[382.14]] J'ay <Fn><i>Am Kopf von L^#'1 von Leibniz' Hand</i>: janvier 1706 A Mons. Bernard à Leide nicht abgangen</Fn> receu une lettre de M. Burnet, gentilhomme Ecossois, qui me dit de vous avoir\n[[382.15]] monstré un papier que je luy avois donné sur les natures plastiques, que vous avés paru disposé\n[[382.16]] à le publier, Monsieur, et que vous avés bien voulu aussi donner conseil sur quelques bagatelles\n[[382.17]] que j'avois projettées pour les faire imprimer en Hollande. </p>\n<p> [[382.18]] Je vous suis obligé, Monsieur, de ces manieres officieuses; et je profiteray un de ces jours\n[[382.19]] de vostre bonne volonté en vous envoyant quelque reponse que j'ay faite au Pere <b>Lami</b> qui\n[[383.1]] avoit attaqué mon systeme de l'Harmonie preétablie dans son livre de la <i>Connoissance de soy\n[[383.2]] même</i>. Mais ce que j'avois fait sur les natures plastiques, a déja esté envoyé à Mons. Beauval-Banage. </p>\n<p> [[383.4]] Feu M. Lock m'avoit encouragé à faire des remarques sur son Ouvrage: mais sa mort\n[[383.5]] m'en a découragé. J'avois eu en veue principalement de donner quelque occasion au public de\n[[383.6]] profiter de nostre conference. </p>\n<p> [[383.7]] J'ay echangé plusieurs lettres sur la philosophie et sur d'autres matieres, avec des personnes\n[[383.8]] distinguées; dont il ne seroit peutestre pas mal de donner un recueil au public, commençant par\n[[383.9]] les Françoises. J'ay joint quelques fois des Memoires aux Lettres, quand les lettres auroient esté\n[[383.10]] trop prolixes en y mettant le tout. Si quelque libraire s'en charge un jour, je ne luy demanderay\n[[383.11]] qu'un bon nombre d'exemplaires, car il m'en faudra beaucoup pour quantité d'amis. </p>\n<p> [[383.12]] J'ay remarqué dernierement dans un de vos journaux des reflexions curieuses sur les\n[[383.13]] couleurs. Il seroit bon de les comparer avec les profondes recherches de M. Newton sur ce sujet. </p>\n<p> [[383.14]] Au reste je suis </p>\n<p> [[383.15]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[383.16]] En me voulant adresser quelque chose, il suffira de l'envoyer à M. de Bothmar Ministre\n[[383.17]] d'Estat et Envoyé extraordinaire de cette Cour qui est à la Haye. </p>\n",
+  "number": "118.",
+  "title": "LEIBNIZ AN JACQUES BERNARD",
+  "date": "[Hannover, 19.] Januar 1706. [133.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:118. LEIBNIZ AN JACQUES BERNARD [Hannover, 19.] Januar 1706. [133.] Monsieur J'ay Am Kopf von L^#'1 von Leibniz' Hand: janvier 1706 A Mons. Bernard à Leide nicht abgangen receu une lettre de M. Burnet, gentilhomme Ecossois, qui me dit de vous avoir monstré un papier que je luy avois donné sur les na...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

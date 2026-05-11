@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_14",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 14,
+  "text": "<p> [[34.1]] <b>14. HENRI BASNAGE DE BAUVAL AN LEIBNIZ</p>\n<p> [[34.2]] Amsterdam, 19. April [1695]. [7.20.]</b></p>\n\n<p> [[34.11]] d'Amsterdam ce 19 d'Avril </p>\n<p> [[34.12]] J'ai eté surpris Monsieur de la negligence de M. Leers à vous rendre compte de l'usage\n[[34.13]] qu'il a fait des exemplaires de vôtre <i>Codex Juris etc</i>. Je ne doutois nullement qu'il ne l'eust fait,\n[[34.14]] et qu'il ne se fûst acquitté de ce qu'il vous devoit à cet egard. Je lui en ai fait des reproches plus\n[[34.15]] d'une fois, et s'il ne vous a pas satisfait là dessus, il n'a pas tenu à moi. Quoi qu'il en soit je\n[[34.16]] vous rends mille graces du present que vous m'avez fait: Je l'estime infiniment, et par sa propre\n[[34.17]] valeur, et par l'estime que j'ai pour vous Monsieur qui avez eu cette honnêteté lâ pour moi.\n[[34.18]] M. Huguens m'a dit qu'il vous en remercieroit lui mesme. Il etoit attaqué d'une fievre assez\n[[34.19]] fâcheuse quand je suis parti de la Haye il y a 8 jours. Il est vray que Moetjens libraire de la\n[[34.20]] Haye avec quelques autres a dressé un plan d'imprimer en plusieurs <i>in folio</i> tous les traittez de\n[[34.21]] paix, d'alliance etc. Ils y enfermeront les 6 in 4^#'o de Leonard: vôtre receuil y entrera aussi dans\n[[34.22]] son ordre, et selon la suitte des temps. En un mot ils y mettront par ordre chronologique tout ce\n[[35.1]] qu'ils pouront rassembler, qui aura quelque rapport à leur dessein. Ainsi vous jugez bien que\n[[35.2]] vous leur feriez grand plaisir de leur fournir de la matiere pour grossir et enrichir leur\n[[35.3]] compilation. Je leur ai parlé des intentions que vous m'aviez marquées; et ils m'ont temoigné\n[[35.4]] qu'ils auroient toute la reconnoissance imaginable des peines que vous voudriez bien prendre à\n[[35.5]] cet egard. Ayez donc s'il vous plaist la bonté <angle bracket>de</angle bracket> vous expliquer plus precisément de ce que\n[[35.6]] vous pourie<angle bracket>z</angle bracket> contribuer à l'execution de leur plan. </p>\n<p> [[35.7]] Je n'ai trouvé per<angle bracket>sonne</angle bracket> ni assez intelligent ni assez exact pour entreprendre de v<angle bracket>ous</angle bracket>\n[[35.8]] envoyer des remarques sur vos <i>Animadversiones</i>: Et je vous les envoyerai si vous le trouvez à\n[[35.9]] propos, et par la voye que vous m'indiquerez. M. Huygens a en effet composé un ouvrage\n[[35.10]] Philosophique, c'est un traitté Latin de la possibilité de la Pluralité des mondes. C'est en Latin\n[[35.11]] plus amplement et plus solidement raisonné [que] ce que vous avez vû en François par M. de\n[[35.12]] Fontenelles. La Copie est chez l'Imprimeur. Nous ne voyons depuis 3 mois que panegyriques\n[[35.13]] pour la Reine. Je n'ai rien vû en François de meilleur que celui de M^#'r Abadie: Et je croi que\n[[35.14]] celui de M. Graevius disputera la preference à M^#'r^#'s Spanheim, Perizonius, et Francius dont les\n[[35.15]] harangues sont aussi imprimées. Vous aurez vû sans doute <i>la vie du Card. de Richelieu</i>. On\n[[35.16]] l'attribüe à M. Le Clerc. Du moins elle n'est pas indigne de lui. On a traduit en François le\n[[35.17]] traitté de <i>L'Education des Enfants</i> de M. Looke. Les 4 derniers livres du Pentateuque traduits et\n[[35.18]] commentez par M. Le Clerc paroistront dans un mois. Du reste il n'y a rien de fort considerable.\n[[35.19]] On m'a mandé que l'affaire de M. Larroque prend un assez bon train, et qu'il a obtenu la\n[[35.20]] liberté de voir ses Amis. On reimprime ici les <i>Numismata</i> de Patin et de Vaillant. </p>\n<p> [[36.1]] Soyez persuadé que je suis Monsieur avec beaucoup de respect vôtre tres humble <angle bracket>et tr</angle bracket>es\n[[36.2]] obeyssant serviteur Basnage de Bauval\n[[36.3]] <yi>A Monsieur Monsieur de Leibnits Conseiller de Son Altesse Electorale. A Hanover. </p>\n",
+  "number": "14.",
+  "title": "HENRI BASNAGE DE BAUVAL AN LEIBNIZ",
+  "date": "Amsterdam, 19. April [1695]. [7.20.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:14. HENRI BASNAGE DE BAUVAL AN LEIBNIZ Amsterdam, 19. April [1695]. [7.20.] d'Amsterdam ce 19 d'Avril J'ai eté surpris Monsieur de la negligence de M. Leers à vous rendre compte de l'usage qu'il a fait des exemplaires de vôtre Codex Juris etc. Je ne doutois nullement qu'il ne l'eust fait, et qu'il n...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

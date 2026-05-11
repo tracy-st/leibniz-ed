@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_221",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 221,
+  "text": "<p> [[688.12]] <b>200. JOHANN VAGETIUS AN LEIBNIZ</p>\n<p> [[688.13]] Hamburg, 21. Februar (3. März) 1679. [180.211.]</b></p>\n<p> [[688.20]] Hamb. 21. Febr. 1679. </p>\n<p> [[688.21]] Jungiana quod attinet, ut postulatis tuis satisfaciam, <i>Vermium</i> <i>historia</i> paratur editioni, hac\n[[688.22]] aestate, ut spero, lucem visura. Fogelii <i>Lexicon Philosophicum</i> jam in eo est, ut praelum subeat.\n[[688.23]] Concinnatum et ipsum maximam partem ex Jungianis hypomnematibus. </p>\n<p> [[688.24]] De caeteris quoque, nil dissimulans, ut respondeam, Demonstrationi resolvendae et dijudicandae\n[[688.25]] Librum IV^#'t^#'u^#'m <i>Log. Hamb.</i> cum Generali Formae resolvendae doctrina conjunctum\n[[689.1]] scio ego sufficere. Heureticam autem Logicae inserendam esse affirmare non ausim. In Axiomatum\n[[689.2]] definitione subintelligendum est genus. Propositio Principalis per se i.e. ex terminis\n[[689.3]] vera i.e. una voce Principium. Ita quod de ideis mones jam in ea deprehenditur inclusum. </p>\n<p> [[689.4]] Inductio vero primus est sciendi gradus, quod vel <i>Geometria</i> Jungii <i>Empirica</i> et Demonstrationum\n[[689.5]] Ecthesis [ostendunt], ubi ad singulas voces inductio ex individuo universalitatem\n[[689.6]] concludit, et indubitato animadvertit, se non falli. Hac certitudine majorem qui quaerit, fixos\n[[689.7]] homini limites quod transit, mihi videtur quaerere. In Cautionibus tamen (quod <i>Log. Hamb.</i>\n[[689.8]] monet) Argus oportet ut sit Inductor. Ita demum deprehensus isto pacto assensus est is ipse\n[[689.9]] certitudinis gradus qui jure scientia audit. </p>\n<p> [[689.10]] Ex definitionibus vero tantum abest, ut solis statim demonstrentur axiomata, ut definitiones\n[[689.11]] ne propositiones quidem sint in demonstratione mentali, cum definitum et definitio eadem\n[[689.12]] apprehendantur notione. </p>\n<p> [[689.13]] Demonstratio autem (more auctoribus recepto) Jungio describitur, qualis in Euclide occurrit,\n[[689.14]] ubi cum axiomatum demonstrationes nullae legantur, nec Jungius eas demonstrari (sc.\n[[689.15]] Mathematicis) docet. Argumentationes vero illas, quibus ex definitionibus illae deducuntur, si\n[[689.16]] non sint identicae, i.e. nugatoriae, apodicticas quidem, non tamen apodixes appellat, partem\n[[689.17]] demonstrationis in oratione externa eas agnoscens, non integram demonstrationem. </p>\n<p> [[689.18]] Protonoëmata secundum quid sunt quaecunque coram sensibus aut intellectui sunt exhibita.\n[[689.19]] Absolute talia inventa nondum sunt. Cogitatio haudquaquam est prima notio. Involvit\n[[689.20]] enim cogitantem et respectum inhaerentis ad subjectum, imo effecti ad causam. Ex horum enim\n[[689.21]] locorum Maximis concludit, qui concludit: Cogito Ergo sum. </p>\n<p> [[689.22]] Haec de rudimento literarum illarum qualia inveni volui transscribere, multis quidem\n[[689.23]] modis tunc mutata, sed quos revocare in memoriam occupatior nunc non possum, nec actum\n[[689.24]] agere. </p>\n",
+  "number": "200.",
+  "title": "JOHANN VAGETIUS AN LEIBNIZ",
+  "date": "Hamburg, 21. Februar (3. März) 1679. [180.211.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:200. JOHANN VAGETIUS AN LEIBNIZ Hamburg, 21. Februar (3. März) 1679. [180.211.] Hamb. 21. Febr. 1679. Jungiana quod attinet, ut postulatis tuis satisfaciam, Vermium historia paratur editioni, hac aestate, ut spero, lucem visura. Fogelii Lexicon Philosophicum jam in eo est, ut praelum subeat. Concinn...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

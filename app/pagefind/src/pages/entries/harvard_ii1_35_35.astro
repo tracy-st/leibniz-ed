@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_35",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 35,
+  "text": "<p> [[108.1]] <b>31. SIR WILLIAM CURTIUS AN LEIBNIZ</p>\n<p> [[108.2]] Frankfurt, 13. (23.) Oktober 1670.</b></p>\n<p> [[108.9]] Amplissime Consultissime Domine Francofurti. 13. Octob. 70. </p>\n<p> [[108.10]] Zunnero vestro Wilkinsii nostri <i>characterem universalem</i>, te ita jubente, tradendum\n[[108.11]] curavi; eo ipso paene momento quo ad me e bibliopegi manibus pervenit. Id causae est, quod in\n[[108.12]] illo novo Schemate Philosophiae adhuc hospes sum, tuo deinceps judicio civitate donandus.\n[[108.13]] Olim cum studio mnemonico insudarem, id genus studiorum me forsan mirifice cepisset. Nunc\n[[108.14]] <greek>tò pãn</greek> meum Praxin spirat, obvia sua facilitate lassatum Genium demulcentem. </p>\n<p> [[108.15]] Litteras tuas Dⁿ^#'o Oldenburgio inscriptas e manibus optimi adfinis Dⁿ^#'i Fayi recte accepi et\n[[108.16]] paucis post diebus per Cursorem Antverpiensem curavi, fasciculo Dⁿ^#'i Comitis <b>Arlingtonii</b>\n[[108.17]] Secretarii status inclusas et ejus amanuensi Dn. <b>Williamsonio</b> peculiariter commendatas.\n[[108.18]] Est enim et hic Societatis nostrae membrum. </p>\n<p> [[108.19]] Dominum Legatum <b>Falcobrigium</b> Oppenhemio ad vos secundo Rheno defluxisse,\n[[108.20]] nunciavit mihi heri incoram Dn. Rokowodius. Male mihi est, quod Illustritati Suae cura vel\n[[108.21]] curiositas antiquum hospitium Regis nostri (tunc exulis) videndi defuit. Potuissem enim, ut est\n[[108.22]] politiori litteratura non obiter tinctus, Illustrissimi Dⁿ^#'i Boineburgii (cui me Te parario quam\n[[108.23]] officiosissime commendatum velim) et Tui notitiam et usum ei conciliare. Sed hanc jacturam\n[[108.24]] Fama forte adventus ejus et vestra humanitas suppleverit. Vale et Salve cum cumulatiss^#'o Dⁿ^#'o\n[[108.25]] Lassero a </p>\n<p> [[108.26]] Vestri studiosiss^#'o et ad omnia paranda paratissimo W. Curtio. Eq. Bar. </p>\n",
+  "number": "31.",
+  "title": "SIR WILLIAM CURTIUS AN LEIBNIZ",
+  "date": "Frankfurt, 13. (23.) Oktober 1670."
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:31. SIR WILLIAM CURTIUS AN LEIBNIZ Frankfurt, 13. (23.) Oktober 1670. Amplissime Consultissime Domine Francofurti. 13. Octob. 70. Zunnero vestro Wilkinsii nostri characterem universalem, te ita jubente, tradendum curavi; eo ipso paene momento quo ad me e bibliopegi manibus pervenit. Id causae est, q...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_115",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 115,
+  "text": "<p> [[428.1]] <b>116. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[428.2]] [Hannover, 22. Juni 1691.] [110.118.]</b></p>\n<p> [[428.9]] Extrait de ma reponse </p>\n<p> [[428.10]] Quant à la construction des Equations, j'ay inventé un instrument quel estant fait une fois\n[[428.11]] serviroit à toutes les Equations qui ne passent pas un degré limité par la grandeur de l'instrument,\n[[428.12]] au lieu que l'instrument de des Cartes ne sert qu'à trouver les moyennes proportionelles\n[[428.13]] c'est à dire à resoudre les Equations, qui n'ont que deux termes. J'ay aussi inventé un\n[[428.14]] moyen de me servir dans le Calcul d'Algebre ou de la specieuse de tous les avantages de la\n[[428.15]] preuve de l'Abjection Novenaire. </p>\n<p> [[428.16]] L'Espace selon moy n'est pas une substance, non plus que le temps. Et je crois qu'effectivement\n[[428.17]] il ne se trouve point de vuide; quoyque l'essence de la matiere ne consiste pas dans\n[[428.18]] l'étendue. </p>\n<p> [[428.19]] Nos idées viennent sans doute de Dieu, parceque nous l'exprimons en quelque façon, et\n[[428.20]] même nous exprimons l'infinité de Dieu quoyque d'une maniere confuse. Les idées de toutes\n[[428.21]] choses sont en nous, quoyqu'elles ne soyent developpées que dans les sciences demonstratives. </p>\n",
+  "number": "116.",
+  "title": "LEIBNIZ AN MICHEL ANGELO FARDELLA",
+  "date": "[Hannover, 22. Juni 1691.] [110.118.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:116. LEIBNIZ AN MICHEL ANGELO FARDELLA [Hannover, 22. Juni 1691.] [110.118.] Extrait de ma reponse Quant à la construction des Equations, j'ay inventé un instrument quel estant fait une fois serviroit à toutes les Equations qui ne passent pas un degré limité par la grandeur de l'instrument, au lieu ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

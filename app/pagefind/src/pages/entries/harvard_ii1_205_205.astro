@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_205",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 205,
+  "text": "<p> [[643.1]] <b>186. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[643.2]] Hamburg, 26. Oktober (5. November) 1678. [185.187.]</b></p>\n[[644.5]] Annotationes ad Placcium <i>de Actionibus</i> </p>\n<p> [[644.6]] ex Epistola mea ad ipsum 12 Novemb. 1678. </p>\n<p> [[644.7]] <b>Primum</b> quod ubique laesiones dividis in non injustas, et injustas, valde quidem laudo,\n[[644.8]] opus tamen arbitror esse subdistinctione. Possunt enim laesiones fieri casu aut culpa, aut dolo:\n[[644.9]] quae casu fiunt tantum, obligant solummodo ad restituendum id quo laedens factus est locupletior.\n[[644.10]] Quod si ergo sub nomine injustarum comprehendis ut suspicor tam eas quae fiunt culpa,\n[[644.11]] quam quae dolo, distinguendum erat circa id quod petitur: magis enim obligari videtur, qui in\n[[644.12]] dolo est. Nec abhorrere a ratione naturali arbitror sententiam JC^#'t^#'o^#'r^#'u^#'m Romanorum, qui eum qui\n[[644.13]] in culpa est, fere tantum ad restituendam rei aestimationem condemnant, quanti scilicet vendi\n[[644.14]] potest. At contra eum qui in dolo est rationem habent ejus omnis quod actoris interest; etiamsi\n[[644.15]] res tanti vendi non possit. Nam saepe et pretium affectionis, et privatae quaedam commoditates\n[[644.16]] nostrae faciunt, ut res nobis pluris sit quam cuivis e populo futura esset. </p>\n<p> [[644.17]] <b>Alterum</b> quod annoto est, non me intelligere liquido quid sibi velit apud Te facultas\n[[644.18]] generalis et specialis. <b>Generalis</b> apud Te exempla sunt: dominium, possessio, actio; specialis[:]\n[[644.19]] haereditas, servitus, dos, pignus. Nisi hoc fortasse tibi vis: Generales applicari posse ad\n[[644.20]] quasvis speciales, et dominium verbi gratia aut possessionem, aut actionem dari haereditatis,\n[[644.21]] servitutis, dotis, pignoris, aut alterius juris nomine. </p>\n<p> [[644.22]] <b>Tertio</b> tuam ipse divisionem alicubi evertere videris, cum laesionem ais esse vel <b>facultatis</b>,\n[[644.23]] seu agendi potestatis vel libertatis, seu potestatis omittendi. Laesionem autem libertatis\n[[644.24]] seu potestatis omittendi mox ita subdividis, ut eam laedat, qui dandi, faciendi, omittendi\n[[644.25]] necessitatem imponit. Cum tamen qui omittendi necessitatem imponit, non impediat potestatem\n[[644.26]] omittendi, sed potestatem faciendi. </p>\n<p> [[644.27]] <b>Quarto</b> divisiones nonnullae videntur superfluae, verbi gratia qui obligationem alienam\n[[644.28]] erga me, vel meam erga alios impedit is etiam impedit suam erga me obligationem nempe\n[[644.29]] meam aut facultatem aut libertatem non laedendi. Poterant ergo duae illae novissimae in Tabula\n[[644.30]] juris naturalis species <b>verb. alienam erga me</b>, et <b>verb. meam erga alios</b>, omitti,\n[[644.31]] praesertim cum nihil in illis annotandum occurrat quod non ex prioribus pateat. Dices superflua\n[[644.32]] non nocere, et minutias esse, quae hic animadverto. Idem tecum sentio, et haec annoto, magis\n[[644.33]] obsequendi causa et ut intelligeres me tua diligenter legere, quam ut magni haec momenti\n[[644.34]] putarem. Primae tamen animadversionis aliquam rationem habendam puto. </p>\n<p> [[645.1]] Vellem Exceptiones simili a te studio digeri, et mox ordinem judiciorum subjici secundum\n[[645.2]] jus naturae civili collatum. Denique quia magni ad rempublicam momenti sunt Ordinationes\n[[645.3]] Politicae quas vocant, has quoque ex regulis juris naturalis legibusque optimae reipublicae et\n[[645.4]] recta ratione constitui optarem. Quae omnia a te cum publico fructu praestari posse certus sum. </p>\n",
+  "number": "186.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "Hamburg, 26. Oktober (5. November) 1678. [185.187.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:186. VINCENT PLACCIUS AN LEIBNIZ Hamburg, 26. Oktober (5. November) 1678. [185.187.] Annotationes ad Placcium de Actionibus ex Epistola mea ad ipsum 12 Novemb. 1678. Primum quod ubique laesiones dividis in non injustas, et injustas, valde quidem laudo, opus tamen arbitror esse subdistinctione. Possu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

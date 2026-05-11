@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_28",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 28,
+  "text": "<p> [[72.1]] <b>28. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[72.2]] Dijon, 29. August 1695. [23.30.]</b></p>\n\n<p> [[72.18]] Dijon le 29. aoust <b>1695</b> </p>\n<p> [[72.19]] Je croyois monsieur n'avoir plus de part dans vostre souvenir aprés le long silence que\n[[72.20]] vous aviés gardé en mon endroict; vous reconnoistrés par celle de mons^#'r le president Boisot que\n[[72.21]] je vous envoye que je pense en vous et que je prends part à ce qui vous regarde; J'ay oublié l'un\n[[72.22]] des trois Tiltres que nostre cher deffunct m'avoit promis de vous envoyer. Le 1^#'e^#'r estoit les\n[[72.23]] promesses de mariage de Marie de Bourg[og]ne avec Nicolas dûc de Calabre. Le 2. le traicté de\n[[72.24]] paix entre Charles V. et Muley Assen pour la rep. de Tunis; prenés la peine de me mander le\n[[73.1]] 3^#'e^#'m^#'e que j'ay oublié ayant égaré la lettre où il en estoit faict mention; mons^#'r le president Boisot\n[[73.2]] ne s'en tiendra pas lâ; Comme il est fort obligeant il fera son possible pour enrichir vostre <i>code\n[[73.3]] diplomatique</i> et contribuera tout ce que vous desirerez de luy. L'on n'a point mis dans nostre\n[[73.4]] <i>journal des scavants</i>, l'eloge que je vous ay envoyé quoy que j'en eusse faict donner un\n[[73.5]] exemplaire à mons^#'r le president Cousin pour cela; Il y en a mis un autre qui est venû bien long\n[[73.6]] tems après où l'auteur avance un mensonge, que vous avés recû beaucoup de piêces de m^#'r\n[[73.7]] l'abbé Boisot pour enrichir vostre ouvrage; on n'y a pas mis non plus ce que j'avois faict pour\n[[73.8]] mons^#'r Lantin comme je le mande à mons^#'r de Spanheim, tant je suis descrié dans l'esprit de ce\n[[73.9]] journaliste ou pour mieux dire tant il a de complaisance aveugle pour d'autres gens qui ne\n[[73.10]] connoissent pas mons^#'r Lantin et qui luy ont inspiré des choses qui ne sont point à sa louange; je\n[[73.11]] parlois fort de vous mons^#'r dans cet eloge de m^#'r Lantin et de l'histoire des plaisirs dont vous\n[[73.12]] m'aviés parlé; j'avois mesme pris occasion de là de faire une epigramme de dix vers à sa\n[[73.13]] loüange; nous pourrons retablir tout cela; Je vous remercie de vos belles et agreables nouvelles;\n[[73.14]] vostre reflexion sur le livre qui a pour Tiltre <i>Conjuration contre Descartes</i> m'a faict rire; je ne\n[[73.15]] scay ce que c'est ni qui en est l'auteur; j'ay mandé à mons^#'r Baillet de me le faire scavoir. </p>\n<p> [[73.16]] J'ay bien de la joye d'apprendre tout ce que vous, et mons^#'r de Spanheim me dites de\n[[73.17]] nostre amy mons^#'r Morel, je ne sçaurois m'empescher de la luy temoigner à luy meme par un\n[[74.1]] petit mot que je vous adresse; dites nous des nouvelles du <i>dictionnaire historique</i> de m^#'r Teissier\n[[74.2]] s'il avance fort; je parts dans deux jours pour nostre Campagne d'Is sur Tille où vous\n[[74.3]] pourrés m'adresser vos commandemens. Je suis du meilleur de mon Coeur tout à vous </p>\n<p> [[74.4]] Nicaise </p>\n",
+  "number": "28.",
+  "title": "CLAUDE NICAISE AN LEIBNIZ",
+  "date": "Dijon, 29. August 1695. [23.30.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:28. CLAUDE NICAISE AN LEIBNIZ Dijon, 29. August 1695. [23.30.] Dijon le 29. aoust 1695 Je croyois monsieur n'avoir plus de part dans vostre souvenir aprés le long silence que vous aviés gardé en mon endroict; vous reconnoistrés par celle de mons^#'r le president Boisot que je vous envoye que je pens...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

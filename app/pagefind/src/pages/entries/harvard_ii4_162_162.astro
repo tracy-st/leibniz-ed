@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_162",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 162,
+  "text": "<p> [[513.11]] <b>162. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[513.12]] Leipzig, 31. Oktober 1706. [171] </b></p>\n<p> [[514.21]] Vir Illustris atque Excellentissime, Domine ac Patrone gratiosissime! </p>\n<p> [[514.22]] Beneficia olim in se collata oblivioni devovere ingrati animi crimen est. Quod ne incurram\n[[514.23]] ego, literis hisce observantissimis recentem adhuc benefactorum memoriam Tibi, Illustris\n[[514.24]] Domine, approbare volui. Diu jam est, quod TE inter praecipua Saeculi ornamenta numerari,\n[[514.25]] studia colere, studiosos amare, fovere, provehere, multorumque qui aliqua componunt, portum\n[[514.26]] sinum praemium, omnium exemplum, ipsarum denique literarum praesidium esse optime novi,\n[[514.27]] Tuasque coram admirari virtutes vehementer optavi; sed defuit occasio hactenus, quam nuperrimo\n[[514.28]] hostium in Saxoniam adventu me Lipsiae aliquantisper arcente, divino quodam fato non\n[[514.29]] sine ingenti animi mei laetitia consecutus sum. Quantum vero Tibi, Patrone gratiosissime,\n[[514.30]] debeam, mente quidem teneo, et quoad vita suppetet, tenebo, at nullis verbis exprimere valeo.\n[[514.31]] Neque enim tantum ignotum me hominem serena fronte excepisti, verum et necessario orbatum\n[[514.32]] subsidio (o magnum beneficium!) num erata sublevare pecunia haud dedignatus es. Fateor\n[[514.33]] quam lubentissime me nullam unquam rationem inventurum esse, qua ulla ex parte obsequiis\n[[514.34]] ex servitiis meis tantam gratiam assequi, nedum superare possim. Quare devotis aeternum\n[[514.35]] Numen suspiris veneror, ut longum TE servet sospitem atque incolumem, salutaria consilia\n[[514.36]] regat et fortunet ad salutem et utilitatem communis Patriae, ejusque civium commoda et\n[[515.1]] emolumenta, ut hoc modo gloriam, bonis omnibus adplaudentibus, Tua Virtute Tuaque integritate\n[[515.2]] partam ad posteros sartam tectam transmittas, mihi vero illam concedat felicitatem, ut Tua,\n[[515.3]] Patrone Maxime fretus providentia apud exteras rationes studia mea perficiendi occasionem\n[[515.4]] nanciscar exoptatissimam. Vale, Vir Illustris, meque inter Clientes Tuos infimo loco saltem\n[[515.5]] numerari patiaris, qui permaneo </p>\n<p> [[515.6]] Illustris atque Excellentissimi Nominis Tui Cultor devotissimus </p>\n<p> [[515.7]] M. Michael Gottlieb Hansch </p>\n<p> [[515.8]] Lipsiae A. O. R. MDCCVI. Prid. Calend. Novembr. </p>\n<p> [[515.9]] Monsieur Monsieur de Leibnitz Conseiller de S. A. E. de Brounsvic et Lunebourg etc. à\n[[515.10]] Hannover </p>\n",
+  "number": "162.",
+  "title": "MICHAEL GOTTLIEB HANSCH AN LEIBNIZ",
+  "date": "Leipzig, 31. Oktober 1706. [171]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:162. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ Leipzig, 31. Oktober 1706. [171] Vir Illustris atque Excellentissime, Domine ac Patrone gratiosissime! Beneficia olim in se collata oblivioni devovere ingrati animi crimen est. Quod ne incurram ego, literis hisce observantissimis recentem adhuc benefactorum me...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

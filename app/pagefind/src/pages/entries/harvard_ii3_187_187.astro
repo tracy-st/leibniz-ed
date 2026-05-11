@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_187",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 187,
+  "text": "<p> [[472.1]] <b>187. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[472.2]] Venedig, 24. Oktober [1698]. [186.191.]</b></p>\n\n<p> [[472.12]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[472.13]] Questa mattina portandomi alla libreria del Sig^#'r^#'e Albritio trovai un'obligatissima lettera\n[[472.14]] dell'Ill^#'m^#'o ed Eruditissimo Sig^#'r^#'e Abbate Mauro, e nell'istesso tempo m'imbattei con un Tedesco\n[[472.15]] in punto di partirsi per Germania, ed havendolo pregato di consegnare la mia Opera a V. S.\n[[472.16]] Ill^#'m^#'a nel suo passaggio per costà egli con somma generosità subito s'esibì di favorirmi, e si tolse\n[[472.17]] la copia in foglio con una mia lettera da presentarla a V. S. Ill^#'m^#'a. Il nome e qualità del Tedesco\n[[472.18]] che porta il libro V. S. Ill^#'m^#'a lo trovarà nel qui accluso polisino. Non ricevendo sue lettere e quasi\n[[472.19]] havendo perso la speranza dell'impiego che ella motivava, mi sono aiutato per mezzo di gran\n[[472.20]] personaggi di guadagnarmi il patrocinio del Seren^#'m^#'o Elettore Palatino Duca di Neoburgo il\n[[472.21]] quale hà già ricevuto il mio libro, e si mostra molto disposto di chiamarmi per darmi qualche\n[[472.22]] posto litterario. Io ne do parte a V. S. Ill^#'m^#'a acciò possa proteggermi ed assistermi appresso la\n[[472.23]] Corte Palatina. Il mio desiderio è di vivere in Germania vicino a V. S. Ill^#'m^#'a. Il mio libro s'è\n[[472.24]] stampato all'infretta e senza assistenza di Correttori alla maniera d'Italia, perciò la priego di\n[[472.25]] compatimento se [lo troverà pieno] d'errori. Qui trovarà inclusa la mia lettera indirizzata al\n[[472.26]] Sig^#'r^#'e Magliabechi, ove si contiene l'idea ed argomento dell'Opera. Priego V. S. Ill^#'m^#'a riverire e\n[[473.1]] ringratiare in mio nome l'Ill^#'m^#'o Sig^#'r^#'e Abbate Mauro con fargli vedere queste mie fatiche. Imploro\n[[473.2]] il di lei alto patrocinio, la priego consolarmi con suoi caratteri, ed assicurarsi che sono </p>\n<p> [[473.3]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Obg^#'m^#'o, Cord^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[473.4]] Venetia 24. Ottobre </p>\n<p> [[473.5]] Mi favorirà indrizzare le risposte per Padova. </p>\n<p> [[473.6]] Compatirà alcuni errori che sono corsi nella lettera stampata. </p>\n",
+  "number": "187.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 24. Oktober [1698]. [186.191.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:187. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 24. Oktober [1698]. [186.191.] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o Questa mattina portandomi alla libreria del Sig^#'r^#'e Albritio trovai un'obligatissima lettera dell'Ill^#'m^#'o ed Eruditissimo Sig^#'r^#'e Abbate Mauro, e nell'i...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

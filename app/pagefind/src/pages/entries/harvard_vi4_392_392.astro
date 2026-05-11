@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_392",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 392,
+  "text": "[[1674.9]] <b>329₄.  Pars toto minor PARS TOTO MINOR\n [[1674.14]] <b>Definitio</b> </p>\n<p> [[1674.15]] Minus est, quod parti alterius (nempe Majoris) aequale est.\n [[1674.16]] <b>Axioma</b> </p>\n<p> [[1674.17]] Quodlibet sibi ipsi aequale est.\n [[1674.18]] <b>Demonstratio</b> </p>\n<p> [[1674.19]] Quidquid parti Totius aequale est, id Toto minus est, <i>per def. Minoris.</i> </p>\n<p> [[1674.20]] Jam pars est aequalis Parti Totius, nempe sibi ipsi, <i>per Axioma.</i> </p>\n<p> [[1674.21]] Ergo pars Toto minor est. Q. E. D.\n[[1675.1]] B 2. METAPHYSICA </p>\n<p> [[1675.2]] EXCERPTA ET NOTAE MARGINALES </p>\n",
+  "number": "329₄.",
+  "title": "Pars toto minor",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:329₄. Pars toto minor PARS TOTO MINOR Definitio Minus est, quod parti alterius (nempe Majoris) aequale est. Axioma Quodlibet sibi ipsi aequale est. Demonstratio Quidquid parti Totius aequale est, id Toto minus est, per def. Minoris. Jam pars est aequalis Parti Totius, nempe sibi ipsi, per Axioma. Er...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

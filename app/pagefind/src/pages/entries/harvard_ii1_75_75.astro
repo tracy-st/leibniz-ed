@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_75",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 75,
+  "text": "<p> [[203.7]] <b>63. HERZOG JOHANN FRIEDRICH VON HANNOVER AN LEIBNIZ</p>\n<p> [[203.8]] Riddagshausen, 6. (16.) Juni 1671. [59.84.]</b></p>\n[[203.17]] Von Gottes gnaden Johann Friedrich Hertzog zue Braunschweig und Lüneburg etc. </p>\n<p> [[203.18]] Unsern gunst und geneigten Willen zuvor, Vester, Hochgelahrter, Lieber Besonder. </p>\n<p> [[203.19]] Es ist Unß deßelben beliebtes Schreiben von 21 Maij nebenst dem Beyschluß zu recht\n[[203.20]] geliefert und deßen allerseits zum öfftern wiederholende verlesung über alle maaße angenehm.\n[[203.21]] Gleich Wir nun darab seinen Unß zuetragenden Wolwillen sattsamlich zu verspüren, Also\n[[203.22]] sagen Wir ihme desfalls geziemenden dank, verlangen sothaner beliebegen correspondence\n[[203.23]] fernerweite continuation und werden nicht ermangelen, bey fürkommender Gelegenheit, solches\n[[203.24]] allemahl dankbahrlich zu erkennen, gestallt Wir demselben mit gunst und geneigtem\n[[203.25]] willen sonders wol beygethan. Gegeben zu Riddagshausen, am 6^#'t^#'eⁿ Junii 1671. </p>\n<p> [[203.26]] Johann Friedrich. </p>\n<p> [[203.27]] Dem Vesten Hochgelahrten, Unserm Lieben Besondern, Gottfried Wilhelm Leibnitzen,\n[[203.28]] der Rechte Doctoren. </p>\n",
+  "number": "63.",
+  "title": "HERZOG JOHANN FRIEDRICH VON HANNOVER AN LEIBNIZ",
+  "date": "Riddagshausen, 6. (16.) Juni 1671. [59.84.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:63. HERZOG JOHANN FRIEDRICH VON HANNOVER AN LEIBNIZ Riddagshausen, 6. (16.) Juni 1671. [59.84.] Von Gottes gnaden Johann Friedrich Hertzog zue Braunschweig und Lüneburg etc. Unsern gunst und geneigten Willen zuvor, Vester, Hochgelahrter, Lieber Besonder. Es ist Unß deßelben beliebtes Schreiben von 2...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

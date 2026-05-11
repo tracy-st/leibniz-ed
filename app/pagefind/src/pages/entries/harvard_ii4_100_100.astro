@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_100",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 100,
+  "text": "<p> [[314.4]] <b>100. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[314.5]] Padua, 7. April 1705. [99.102.] </b></p>\n<p> [[315.33]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[315.34]] Domenica caduta mi capitò l'umani^#'m^#'o foglio di V. S. Ill^#'m^#'a colla data 12 marzo. Non sò in\n[[315.35]] primo luogo capire come si sia smarrita una mia che l'aveva trasmessa per mezo del Sig^#'r^#'e\n[[315.36]] Zanovelli di cui V. S. Ill^#'m^#'a non mi fà mentione veruna. In ricevere la lettera del Dotti^#'m^#'o Sig^#'r^#'e\n[[315.37]] Herman, la mandai subito all'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Marcello Capo del Magistrato de gli Ecc^#'m^#'i\n[[315.38]] Sig^#'r^#'i Riformatori, accio potessi ricevere i suoi ordini intorno a ciò che doveva rispondere al\n[[316.1]] Sig^#'r^#'e Herman. Per la difficolta incontrata in Venetia di radunare il Magistrato non ebbi la\n[[316.2]] fortuna di potere rispondere subito, il che poi eseguii con ogni diligenza, quando ricevei i\n[[316.3]] comandi dell'Ecc^#'m^#'o Magistrato, avendo scritto per tre diverse parti al Sig^#'r^#'e Herman, da cui poi\n[[316.4]] ricevei la risposta che nuovamente trasmessi al Magistrato, e mi fù ordinato che scrivessi subito\n[[316.5]] al Sig^#'r^#'e Herman, ricercandolo della sua intentione circa lo stipendio, gia risoluti gli Ecc^#'m^#'i\n[[316.6]] Riformatori di promoverlo alla catedra matematica di questo Studio[,] in virtù di che scrissi nel\n[[316.7]] mese caduto una lunghissima lettera al Sig^#'r^#'e Herman per via di Zurigo informandolo di tutto, e\n[[316.8]] pregandolo di rispondermi con ogni celerita accio il Magistrato potesse venire alla deliberatione.\n[[316.9]] Ed ora attendo la risposta con impatienza, ed oggi mi capita una lettera dell' Ecc^#'m^#'o\n[[316.10]] Procu^#'r^#'e Marcello, che molto si duole di non vedere comparire lettere del Sig^#'r^#'e Herman, non\n[[316.11]] dovendo dimorare nel Magistrato che fin alli 20 del corrente. Spero però ricevere lettere del\n[[316.12]] Sig^#'r^#'e Herman in questa settimana per il calcolo che hò fatto, e mi creda che sto per quest'affare\n[[316.13]] coll'animo molto agitato e sospeso e non vorrei che uscisse di Magistrato l'Ecc^#'m^#'o Marcello,\n[[316.14]] senza avere ricevute le risposte del Sig^#'r^#'e Herman, per cui fin ora in riguardo principalmente di\n[[316.15]] V. S. Ill^#'m^#'a hò operato con tutto il calore, e vigore possibile, e se mi capita a tempo la risposta del\n[[316.16]] Sig^#'r^#'e Herman, il negotio gia è conchiuso in questo mese, tanto le cose sono ben disposte. Di\n[[316.17]] quel che accaderà V. S. Ill^#'m^#'a ne sarà subito pienamente informato, e divotamente riverendola,\n[[316.18]] mi resto </p>\n<p> [[316.19]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e M. A. Fardella </p>\n<p> [[316.20]] Padova 7 Aprile 1705 </p>\n",
+  "number": "100.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 7. April 1705. [99.102.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:100. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 7. April 1705. [99.102.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Domenica caduta mi capitò l'umani^#'m^#'o foglio di V. S. Ill^#'m^#'a colla data 12 marzo. Non sò in primo luogo capire come si sia smarrita una mia che l'aveva trasmessa per...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

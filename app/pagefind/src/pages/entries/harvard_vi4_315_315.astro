@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_315",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 315,
+  "text": "[[1369.9]] <b>259.  Quid sit Idea [Herbst 1677 (?)]</b>\n [[1369.10]] <tab/>[Herbst 1677 (?)]\n[[1370.1]] <tit2><b>Quid sit Idea </b></tit2> </p>\n<p> [[1370.2]] Ante omnia <k>Ideae</k> nomine intelligimus <b>aliquid</b>, <b>quod in mente nostra est</b>,\n[[1370.3]] vestigia ergo impressa cerebro non sunt ideae, pro certo enim sumo Mentem aliud esse\n[[1370.4]] quam cerebrum aut subtiliorem substantiae cerebri partem. </p>\n<p> [[1370.5]] Multa autem sunt in mente nostra, exempli causa, cogitationes, perceptiones, affectus,\n[[1370.6]] quae agnoscimus non esse ideas, etsi sine ideis non fiant. Idea enim nobis <b>non in\n[[1370.7]] quodam cogitandi actu, sed facultate consistit</i>, et ideam rei habere dicimur,\n[[1370.8]] etsi de ea non cogitemus, modo data occasione de ea cogitare possimus. </p>\n<p> [[1370.9]] Est tamen et in hoc difficultas quaedam, habemus enim facultatem remotam cogitandi\n[[1370.10]] de omnibus, etiam quorum ideas forte non habemus, quia facultatem habemus eas\n[[1370.11]] recipiendi. Idea ergo postulat <b>propinquam quandam cogitandi de re facultatem,\n[[1370.12]] sive facilitatem.</i> </p>\n<p> [[1370.13]] Sed ne hoc quidem sufficit, nam qui methodum habet quam si sequatur ad rem\n[[1370.14]] pervenire possit, non ideo habet ejus ideam. Ut si ordine enumerem Coni sectiones,\n[[1370.15]] certum est me venturum in cognitionem Hyperbolarum oppositarum, quamvis nondum\n[[1370.16]] earum ideam habeam. Necesse est ergo esse aliquid in me, <b>quod non tantum ad rem\n[[1370.17]] ducat, sed etiam eam exprimat.</i> </p>\n<p> [[1370.18]] <b>Exprimere</b> aliquam rem dicitur illud in quo habentur habitudines, quae habitudinibus\n[[1370.19]] rei exprimendae respondent. Sed eae expressiones variae sunt; exempli causa\n[[1370.20]] modulus Machinae exprimit machinam ipsam, scenographica rei in plano delineatio\n[[1370.21]] exprimit solidum, oratio exprimit cogitationes et veritates; characteres exprimunt numeros,\n[[1370.22]] aequatio Algebraica exprimit circulum aliamve figuram: et, quod expressionibus istis\n[[1370.23]] commune est, ex sola contemplatione habitudinum exprimentis, possumus venire in\n[[1370.24]] cognitionem proprietatum respondentium rei exprimendae. Unde patet non esse necessarium\n[[1370.25]] ut id quod exprimit simile sit rei expressae, modo habitudinum quaedam analogia\n[[1370.26]] servetur. </p>\n<p> [[1371.1]] Patet etiam expressiones alias fundamentum habere in natura, alias vero saltem ex\n[[1371.2]] parte fundari in arbitrio ut sunt expressiones quae fiunt per voces aut characteres. Quae in\n[[1371.3]] natura fundantur, eae vel similitudinem aliquam postulant, qualis est inter circulum\n[[1371.4]] magnum et parvum, vel inter regionem et regionis tabulam geographicam; vel certe\n[[1371.5]] connexionem qualis est inter circulum et ellipsin quae eum optice repraesentat, quodlibet\n[[1371.6]] enim punctum ellipseos secundum certam quandam legem alicui puncto circuli respondet.\n[[1371.7]] Imo circulus per aliam figuram similiorem in tali casu male repraesentaretur. Similiter\n[[1371.8]] omnis effectus integer, repraesentat causam plenam, possum enim semper ex cognitione\n[[1371.9]] talis effectus devenire in cognitionem suae causae. Ita facta cujusque repraesentant\n[[1371.10]] ejus animum, et Mundus ipse quodammodo repraesentat Deum; fieri etiam potest ut ea\n[[1371.11]] sese mutuo exprimant quae oriuntur ab eadem causa, exempli causa gestus et sermo. Ita\n[[1371.12]] surdi quidam loquentes non ex sono, sed ex motu oris intelligunt. </p>\n<p> [[1371.13]] Ideam itaque rerum in nobis esse, nihil aliud est, quam Deum autorem pariter et\n[[1371.14]] rerum et mentis eam menti facultatem cogitandi impressisse, ut ex suis operationibus ea\n[[1371.15]] ducere possit quae perfecte respondeant his quae sequuntur ex rebus. Etsi itaque idea\n[[1371.16]] circuli non sit circulo similis, tamen ex ea veritates duci possunt, quas in vero circulo\n[[1371.17]] experientia haud dubie esset confirmatura. </p>\n",
+  "number": "259.",
+  "title": "Quid sit Idea",
+  "date": "[Herbst 1677 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:259. Quid sit Idea [Herbst 1677 (?)] [Herbst 1677 (?)] Quid sit Idea Ante omnia Ideae nomine intelligimus aliquid, quod in mente nostra est, vestigia ergo impressa cerebro non sunt ideae, pro certo enim sumo Mentem aliud esse quam cerebrum aut subtiliorem substantiae cerebri partem. Multa autem sunt...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

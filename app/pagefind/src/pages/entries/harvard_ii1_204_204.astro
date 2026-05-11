@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_204",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 204,
+  "text": "<p> [[640.9]] <b>185a. LEIBNIZ AN PIERRE DANIEL HUET</p>\n<p> [[640.10]] Hannover, 18./28. Oktober 1678. [116.203.]</b></p>\n<p> [[641.6]] Illustri Viro Petro Danieli Huetio </p>\n<p> [[641.7]] Gottfredus Guilielmus Leibnitius. </p>\n<p> [[641.8]] Intellexi magno gaudio meo insigne opus et victurum, <i>de veritate Religionis</i> nostrae\n[[641.9]] tandem prodiisse in lucem. Neque vero dignius argumentum reperire poteras, cui destinaretur\n[[641.10]] maximus ille eruditionis apparatus, quem tantis vigiliis collegisti. Quid enim denique Religione\n[[641.11]] praestantius est, et quid mortales animos afficit magis? Dulcissimum profecto est, et mirifice\n[[641.12]] solatur incommoda vitae, immortalitatem asseri nobis, non quamlibet, sed qualem optare\n[[641.13]] possimus; id est qualem docuit Christus. Quem ostendere promissum tot oraculis fuisse Messiam\n[[641.14]] generis humani restauratorem, maxima conclusionum est post duas illas capitales de Deo\n[[641.15]] et Mente. Certe non video quam possimus utilitatem expectare majorem ab historia et eruditione.\n[[641.16]] Amplius dico, mihi studium antiquitatis omne hunc propemodum unicum habere videtur\n[[641.17]] usum, ut vetera felicitatis atque ut ita dicam nobilitatis nostrae, quam ad Christum regenerati\n[[641.18]] referre debemus, documenta a dubitationibus et corruptelis vindicemus. Ostendendum enim est\n[[641.19]] primum libros sacros quos habemus genuinos esse, et ad nos pervenisse incorruptos quoad\n[[641.20]] summam rerum. Quod nemo satis potest nisi Criticae artis mysteria intellexerit, et manuscriptorum\n[[641.21]] fidem explorare possit, et linguarum proprietates, et genium illorum seculorum, et\n[[641.22]] seriem temporum norit. Deinde ostendendum est autorem tantarum rerum ad quem libri sacri\n[[641.23]] referuntur, coelo missum fuisse, id vero oracula testantur quae multis post seculis nasciturum\n[[641.24]] cecinere, et mira facta eorum quos sua Christus autoritate armavit, et sanctitas doctrinae\n[[641.25]] incomparabilis, et martyrum constantia, et denique triumphus crucis. Haec vero omnia ita ut\n[[641.26]] narrantur gesta fuisse, demonstrari non potest nisi tota historia universali sacra et profana\n[[641.27]] accuratissime constituta, collectisque et manuscriptis et numismatis et inscriptionibus, aliisque\n[[641.28]] cimeliis eruditorum. His enim fit Historiae fides. Itaque saepe mecum cogitans optavi esse qui\n[[642.1]] nobis <b>inventarium</b> ut ita dicam exhibeat pretiosi hujus thesauri omnium quae hodieque\n[[642.2]] supersunt reliquiarum antiquitatis; quoad ejus fieri potest. Tale quiddam circa inscriptiones\n[[642.3]] expectamus a summo in his studiis Viro Marquardo Gudio, nec numismatis deerunt Ezechiel\n[[642.4]] Spanhemius aliique excellentes Viri, maxime autem Carcavius vester tantarum in hoc genere\n[[642.5]] opum custos meritissimus. Sed Historiam Manuscriptorum hactenus desidero, qua enumerentur\n[[642.6]] meliores qui nunc quoque extant in Europa Codices, illi inprimis ex quibus autores expressi\n[[642.7]] sunt, et qui sunt unici. </p>\n<p> [[642.8]] Sed haec obiter: interea suffecerit omnem eruditionis apparatum ad Historiam sacram\n[[642.9]] comprobandam, velut scopum potissimum, dirigi debere. Quod cum a Te felicissime factum\n[[642.10]] esse non dubitem, quanquam non nisi partem operis inediti Te olim monstrante viderim;\n[[642.11]] gratulandum meliori eruditioni arbitror, quae verum usum suum te duce invenit; gratulandum\n[[642.12]] Tibi qui famam et utilitatem conjunxisti. Ipsum opus non ego tantum avide desidero (quanquam\n[[642.13]] jam in itinere ad nos esse arbitrer), sed et expectat Serenissimus <k>Johannes Fridericus</k>\n[[642.14]] Brunsvicensium et Luneburgensium Dux, Princeps supra quam credi possit et intelligens, et\n[[642.15]] rerum omnium maximeque eruditionis sacrae curiosus, cui non ignotum est nomen Tuum, et qui\n[[642.16]] me institutum tuum enarrantem summa cum voluptate audivit. </p>\n<p> [[642.17]] Vale illustris Vir, et cultori nominis tui ac Virtutum tuarum fave. </p>\n<p> [[642.18]] Dabam Hanoverae 18 Octobr. 1678. </p>\n<p> [[642.19]] P. S. Has literas accipies ab ornatissimo ac plane doctissimo Hansio Holsato amico meo\n[[642.20]] qui famam tuam et virtutes juxta mecum colit. </p>\n",
+  "number": "185a.",
+  "title": "LEIBNIZ AN PIERRE DANIEL HUET",
+  "date": "Hannover, 18./28. Oktober 1678. [116.203.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:185a. LEIBNIZ AN PIERRE DANIEL HUET Hannover, 18./28. Oktober 1678. [116.203.] Illustri Viro Petro Danieli Huetio Gottfredus Guilielmus Leibnitius. Intellexi magno gaudio meo insigne opus et victurum, de veritate Religionis nostrae tandem prodiisse in lucem. Neque vero dignius argumentum reperire po...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

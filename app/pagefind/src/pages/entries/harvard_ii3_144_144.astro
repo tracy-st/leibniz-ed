@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_144",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 144,
+  "text": "<p> [[382.6]] <b>144. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[382.7]] [Hannover,] 29. September (9. Oktober) 1697. [142.148.]</b></p>\n\n<p> [[382.15]] Ex Epistola mea ad V. Cl. Vincentium Placcium. 29. Septembr. 1697 </p>\n<p> [[382.16]] De Theologia naturali, quae rectae rationi consentiat, nihilque detrahat Revelatae honorique\n[[382.17]] divino, quam optas diu multumque jam a multis annis cogitavi, mecumque ita inivi\n[[382.18]] rationes, ut res satis in potestate videatur. Deum duplici modo considerare oportet, physice et\n[[382.19]] moraliter. Physice scilicet ut ultimam rationem rerum, nempe quoad omnem perfectionem,\n[[382.20]] quae illis inest; moraliter vero ut Monarcham perfectissimae Reipublicae, qualis est ipsa ut sic\n[[382.21]] dicam Civitas Mentium totius universi. Hoc posito Theologia practica nihil aliud est quam\n[[382.22]] jurisprudentia pro republica universali, cujus rector est Deus, quatenus nostra in ea officia\n[[382.23]] comprehendit. Hinc autem porro solvitur difficilis ille praedestinationis Nodus, qui varie\n[[383.1]] homines torsit. Nempe Deus non permitteret peccatum, aut malum, nisi majus bonum obtineret\n[[383.2]] ex malo. Pro certo etiam habendum, neminem damnari nisi a se ipso, imo ne perseverare\n[[383.3]] quidem in statu miseriae nisi voluntate sua. Multa etiam alia praeclara meo judicio dici possunt,\n[[383.4]] non quidem satis vulgo animadversa explicatave Theologis; neque tamen contraria sanae\n[[383.5]] Theologiae inter nos receptae. Socinianis certe non assentior, qui putant satisfactione aut\n[[383.6]] vindicta opus non esse; sed contra potius judico ultra emendationem peccantis et exemplum\n[[383.7]] alios praeservans, spectari posse et debere in poena harmoniam ipsam, quae vindicta demum\n[[383.8]] justa impletur. Itaque puto in republica universi nullum bonum factum esse sine praemio,\n[[383.9]] nullum peccatum sine poena. Quod si igitur irae detrahatur imperfectio, quae in rationis\n[[383.10]] obnubilatione dolorisque sensu consistit, tantumque vindicandi voluntas relinquatur, Deo tribui\n[[383.11]] potest, scripturae sacrae exemplo. Nempe peccatum non Deo malum est neque universo\n[[383.12]] (correctione scilicet accedente, quae majus inde bonum procurat) sed peccanti. Omnis scilicet\n[[383.13]] affectus (: exceptis illis qui per se mali aliquid involvunt, qualis est invidia, quam veteres inepte\n[[383.14]] diis suis tribuebant :) si pro appetitu rationali habeatur, seposito nempe sensitivo tumultu, Deo\n[[383.15]] ascribi potest. Fortasse tamen vocabula subinde adhibere licebit purgatiora, de quibus ipse\n[[383.16]] optime dispicies. </p>\n<p> [[383.17]] Nuper ex Gallia mihi missa est Epistola quam Archiepiscopi et Episcopi aliquot ad\n[[383.18]] pontificem Romanum scripsere contra <i>Nodum praedestinationis solutum</i> Cardinalis Sfondrati,\n[[383.19]] cujus censuram expetere videntur, improbant inprimis quod dixit infantes sine baptismo\n[[383.20]] defunctos etsi ad coelestia gaudia non perveniant, tamen meliore et perfectiore in statu esse ob\n[[383.21]] summam innocentiam, quam qui adulti per poenitentiam salutem aeternam sunt consecuti. Mihi\n[[383.22]] ut verum fatear errasse videtur Sfondratus, sed bono animo, et horrore peccati, quo judicavit\n[[383.23]] praestare non peccare et coelo carere, quam peccare et regnum coeleste obtinere. Qualia cum\n[[383.24]] sint dudum agitata inter scholasticos, censuram mereri non videntur, etc. </p>\n",
+  "number": "144.",
+  "title": "LEIBNIZ AN VINCENT PLACCIUS",
+  "date": "[Hannover,] 29. September (9. Oktober) 1697. [142.148.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:144. LEIBNIZ AN VINCENT PLACCIUS [Hannover,] 29. September (9. Oktober) 1697. [142.148.] Ex Epistola mea ad V. Cl. Vincentium Placcium. 29. Septembr. 1697 De Theologia naturali, quae rectae rationi consentiat, nihilque detrahat Revelatae honorique divino, quam optas diu multumque jam a multis annis ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

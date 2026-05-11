@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_118",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 118,
+  "text": "<p> [[312.1]] <b>118. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[312.2]] Venedig, 7. Juni 1697. [115.122.]</b></p>\n\n<p> [[312.7]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o </p>\n<p> [[312.8]] Arrivato in Venetia m'imbattei con il Sig^#'r^#'e Zanovelli, il quale mi pregò da parte del Sig^#'r^#'e\n[[312.9]] Mocenigo, che adoperassi tutta la mia diligenza per trovare un manuscritto del Petrarca, ove si\n[[312.10]] contiene un piccolo dittionario della lingua cumana, e per istruttione mi diede una lettera di\n[[312.11]] V. S. Ill^#'m^#'a, che è stata il potente motivo di mettermi subito in attione; a tal oggetto mi portai\n[[312.12]] subito dal dottissimo e mio confidentissimo Sig^#'r^#'e Conte Bertolli Consultore di Stato di questa\n[[312.13]] Serenissima Republica; il quale m' hà detto che <i>in Sacrae</i> <i>Aedis fastigio</i> non si trova luogo\n[[312.14]] alcuno, ove si possano conservare manuscritti, come ne anche la Cella dell'Abbate Gioachino,\n[[312.15]] ma che ciò più tosto sarà nel Tesoro, o vero nella Secreta m' hà promesso parlarne oggi\n[[312.16]] coll'Ecc^#'m^#'o Sig^#'r^#'e Procuratore Giulio Giustiniani, eruditissimo Senatore, e molto versato nelle\n[[312.17]] cose dell'Antichità, il quale tiene la cura de' manuscritti più rari, e di quanto dimora negli\n[[312.18]] archivii publici, assicurandomi che se il sovradetto manuscritto si trovarà, me ne darà subito\n[[312.19]] una copia. Di quanto si farà, V. S. Ill^#'m^#'a ne sarà avvisata col seguente ordinario. Nella settimana\n[[312.20]] passata consegnai al Sig^#'r^#'e Mendelino una mia, in cui la pregava si degnasse parteciparmi, se le\n[[312.21]] sia capitato un mio fagottino, che nel passato settembre fù consegnato ad uno della fameglia\n[[312.22]] della Sig^#'r^#'a Principessa che da Modena si portava ad Hannover. In questo fagottino v'era un\n[[313.1]] manuscritto in foglio dell'Ongarelli, e l'opera del Sig^#'r^#'e Domenico la Scala, perciò torno a\n[[313.2]] supplicarla di porgermene l'avviso, e consolarmi con suoi pretiosissimi caratteri. In un altissimo\n[[313.3]] Monte di Vicenza s'è scoperta una grotta, ove si trova una grandissima moltitudine di\n[[313.4]] conchiglie di diverse sorti, che noi chiamiamo pesci armati, che dimorano nel fondo dell'antro,\n[[313.5]] se V. S. Ill^#'m^#'a comanda le ne mandarò molti in un scatolino col racconto di tutte le circostanze,\n[[313.6]] che meritano qualche riflessione, trovando si tutte queste conchiglie intiere ed insassite, conforme\n[[313.7]] molto strane, e bizarre. La priego della continuatione del suo amore, e mi resto </p>\n<p> [[313.8]] Di V. S. Ill^#'m^#'a Um<angle bracket>il</angle bracket>^#'m^#'o Ob^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[313.9]] La risposta me l'indrizzarà per Padova </p>\n<p> [[313.10]] Venetia 7 Giugno 1697\n[[313.11]] <yi>All'Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di S.A.E. <b>Hannover</b> </p>\n",
+  "number": "118.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 7. Juni 1697. [115.122.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:118. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 7. Juni 1697. [115.122.] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o Arrivato in Venetia m'imbattei con il Sig^#'r^#'e Zanovelli, il quale mi pregò da parte del Sig^#'r^#'e Mocenigo, che adoperassi tutta la mia diligenza per trovare un...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

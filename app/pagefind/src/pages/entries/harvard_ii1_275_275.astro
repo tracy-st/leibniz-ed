@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_275",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 275,
+  "text": "<p> [[839.5]] <b>240. LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF</p>\n<p> [[839.6]] Zellerfeld, [11. Juni] 1683. [242.]</b></p>\n<p> [[839.25]] [ ... ] Quoniam Blasii Pascalii et Petri Danielis Huetii mentionem facis, qui pro Religione\n[[839.26]] cum laude scripserunt, dicam aliqua de illis mihi comperta. Nam Huetio quidem saepe\n[[840.1]] locutus sum, vidique opus ejus cum adhuc non nisi Manuscriptum haberetur, et postea in\n[[840.2]] Germania ab eo literas accepi. Pascalius vero obierat dudum, cum ego apud Parisios versarer,\n[[840.3]] sed aderat ejus soror, foemina erudita et ingeniosa, et ex sorore nepotes, cum quibus multa mihi\n[[840.4]] notitia intercessit, quemadmodum et cum Ill^#'m^#'o Duce Rohanesio, qui Pascalio usus erat familiarissime,\n[[840.5]] et his studiis valde afficiebatur. Ab his nonnulla inedita Pascalii legenda accepi, sed\n[[840.6]] pleraque Mathematica; intellexi et nonnulla ad vitam ejus pertinentia, et consilia praeclara,\n[[840.7]] quae pietatis propagandae causa agitabat: quae alias potero narrare prolixius. Unum dicam,\n[[840.8]] Pascalium moralibus solum argumentis (qualia sane egregia extant in libello <i>cogitationum</i>\n[[840.9]] posthumo) studuisse, Metaphysicis vero, quibus Plato et D. Thomas, aliique Philosophi et\n[[840.10]] Theologi ad divinam existentiam, animarumque immortalitatem comprobandam usi sunt, non\n[[840.11]] multum tribuisse: in quo ipsi non assentior. Puto enim, Deum non tantum in historia sacra et\n[[840.12]] civili aut etiam naturali nobis loqui, sed et intus in Mente nostra, per abstractas illas a materia\n[[840.13]] aeternasque Veritates. Et licet fatear, argumenta illa nondum ad plenae demonstrationis vim\n[[840.14]] perducta esse, tantam tamen jam tum mihi habere videntur, quantam ipsa moralia, et credo\n[[840.15]] paulatim ab hominibus perfici, ac forte aliquando rigorosa demonstratione absolvi posse. Itaque\n[[840.16]] nihil puto contemnendum, quod nobis usui esse possit, licet non omnes omnibus, sed quisque\n[[840.17]] illis merito utatur, quae suo magis instituto consentanea sunt. Huetium non puto secutum esse\n[[840.18]] Pascalianas Cogitationes, sed publicationem earum molitione operis sui longe praevertisse; nec\n[[840.19]] aliud, ni fallor, praefatio ejus innuit; et cum tota ratio operis in eo consistat, ut ostendat,\n[[840.20]] Prophetias in Jesu Christo fuisse adimpletas, quo argumento jam ipsi Apostoli usi sunt, et quod\n[[840.21]] ipse magna utique eruditione, multisque praeclaris suis observationibus locupletavit, non video\n[[841.1]] quomodo Pascalium secutus commode dici possit. Quod admoneri a me, justitiae suum cuique\n[[841.2]] tribuentis ratio exigit. Illud tamen fateor passim ab eo intermisceri quaedam minus firma,\n[[841.3]] quibus summam quidem eruditionem suam ostendit, sed adversariis cavillandi occasionem\n[[841.4]] reliquit, quae vellem in aliud opus rejecisset, ut cum probare conatur omnem philosophiam et\n[[841.5]] Theologiam gentilium a Judaica depravata fluxisse, ac Bacchum, Adonidem et nescio quos\n[[841.6]] alios ex Mose efformatos: cui opinioni assentiri ego non possum. Quasi diabolus ad fingendum\n[[841.7]] auxilio opus habeat, aut sua cuique genti fabularum materia defuerit. Circa nonnullorum\n[[841.8]] quoque librorum sacrorum autores, dubitationes aliquae superesse videntur. Sed haec\n[[841.9]] tamen, quae in egregio opere minus probo, summae rei non officiunt. [ ... ] </p>\n<p> [[841.10]] Dabam Zellerfeldae ad Hercyniae fodinas 1683. </p>\n",
+  "number": "240.",
+  "title": "LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF",
+  "date": "Zellerfeld, [11. Juni] 1683. [242.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:240. LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF Zellerfeld, [11. Juni] 1683. [242.] [ ... ] Quoniam Blasii Pascalii et Petri Danielis Huetii mentionem facis, qui pro Religione cum laude scripserunt, dicam aliqua de illis mihi comperta. Nam Huetio quidem saepe locutus sum, vidique opus ejus cum adhuc non...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_194",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 194,
+  "text": "<p> [[609.12]] <b>194. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[609.13]] Halle, 7. Juni 1707. [164.] </b></p>\n<p> [[610.1]] Hochwolgebohrner Herr, Hoher Gönner. </p>\n<p> [[610.2]] Eürer Excell. habe im neüligsten WinterM. durch zwei briefchen berichtet, daß ich mit\n[[610.3]] meiner <i>Geschicht der neüen Weltweisheit</i> weiter nicht fort könte, wegen mangel der Leipzig.\n[[610.4]] Monate, <i>Ephemer. nat Cur.</i>, etc. daher nun wider herumschweifen müste, solche bücher, u.\n[[610.5]] einen verleger zusuchen: dabei entdeckte ich meine izt größere lust zum weltweisen wörterbuche,\n[[610.6]] u. daß ich bereit stünde, auf Eür. Excell. befehl nach Hannover zu kommen, üm Dero\n[[610.7]] vorschub zugeniessen. Nach 4. wöchentliger vergebliger hofnung auf antw., reiste ich mit\n[[610.8]] großem leidwesen den 1. KristM. nach Jena, u. vergangenen 20. Merz nach Halle: hir erfuhr\n[[610.9]] ich, daß im kristM. ein brief an mich nach Jena wäre gangen; ich habe mich auf vilerlei art\n[[610.10]] bemühet, den brief von Jena zuerlangen, aber ümsonst. Weil man nun in Aschersleben gemuhtmast,\n[[610.11]] der brief sei von Eür. Excell. gewesen, so habe himit deßen mich gehorsamst erkundigen\n[[610.12]] wollen. Ersuche demnach Eür. Excell., mir ie ehe ie liber zu berichten, ob diselbe noch mir\n[[610.13]] gelegenheit an hand geben wolle zum <i>weltweisen wörterbuch</i>, oder auch di <i>weltw. Geschicht</i>,\n[[610.14]] <i>VernunftsKunst</i>, u. d. g. endlich zu verfertigen. Ich erwarte geneigte antw., in Verbleibung </p>\n<p> [[610.15]] Hochwolgebohr. Hr., Eür. Excell. gehorsamster </p>\n<p> [[610.16]] Gabriel Wagner. vormal. Prof. in Erlangen </p>\n<p> [[610.17]] Halle 7. Jun. [1]707. </p>\n<p> [[610.18]] Di antw. an mich ist abzugeben in der Märckerstraße bei Hn. Doct. Golen. </p>\n",
+  "number": "194.",
+  "title": "GABRIEL WAGNER AN LEIBNIZ",
+  "date": "Halle, 7. Juni 1707. [164.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:194. GABRIEL WAGNER AN LEIBNIZ Halle, 7. Juni 1707. [164.] Hochwolgebohrner Herr, Hoher Gönner. Eürer Excell. habe im neüligsten WinterM. durch zwei briefchen berichtet, daß ich mit meiner Geschicht der neüen Weltweisheit weiter nicht fort könte, wegen mangel der Leipzig. Monate, Ephemer. nat Cur., ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

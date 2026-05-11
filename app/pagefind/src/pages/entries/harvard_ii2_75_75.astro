@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_75",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 75,
+  "text": "<p> [[307.1]] <b>76. LEIBNIZ AN ANTONIO ALBERTI</p>\n<p> [[307.2]] [Modena, 20. Januar 1690.] [75.77.]</b></p>\n<p> [[307.12]] J'ay prouvé dans mes Dynamiques que les forces absolues d'un corps sont comme les\n[[307.13]] quarrés de ses vitesses, qu'il y a un centre de gravité dans toute sorte de corps ce que les\n[[307.14]] Mathematiciens ont supposé jusqu'icy sans le prouver, quoyque la chose ne soit point manifeste\n[[307.15]] assez. Que la force respective avec laquelle des corps agissent l'un sur l'autre; et leur\n[[307.16]] force commune directive prises ensemble font la force totale absolue, et que ces trois forces\n[[307.17]] conservent tousjours la même quantité. Mais que la même quantité de mouvement ne se\n[[307.18]] conserve point. Je demonstre aussi que plusieurs directions composées ensemble tendent au\n[[307.19]] centre commun de gravité de tous les points extremes de chaque tendence. Item que la force\n[[307.20]] vive est à la force que j'appelle morte, comme l'infini au fini. Et j'y joins enfin un essai pour\n[[307.21]] rendre des raisons physiques des mouvemens celestes. </p>\n<p> [[307.22]] Je me suis assés arresté à Florence où j'ay trouvé les deux princes extremement curieux et\n[[307.23]] amateurs des belles Connoissances. Outre quantité de personnes doctes, et des belles bibliotheques\n[[307.24]] où il y a des Ms. de consequence, j'y ay vû la lettre de S. Chrysostome <i>ad Caesarium</i>\n[[308.1]] qui a fait tant de bruit, mais il me semble qu'elle n'est pas irreconciliable avec la presence\n[[308.2]] reelle. J'y ay vû aussi un livre imprimé vers la fin du 15[.] siecle que j'avois desiré de voir il y a\n[[308.3]] long temps, sçavoir Johannis Suisset <i>Calculationes de Motu, et intensionibus ac remissionibus\n[[308.4]] formarum seu qualitatum</i>. Il estoit fameux sous le nom de <i>Calculator</i>. Et Scaliger <i>adversus\n[[308.5]] Cardanum</i> en fait mention avec Eloge. C'estoit quelque chose de singulier, qu'un scholastique\n[[308.6]] raisonnât Mathematiquement. </p>\n<p> [[308.7]] Il y a deja 3 semaines que je me trouve à Modene où S.A.S. m'a fait fournir des ecritures\n[[308.8]] de son Archif et autres Ms. par lesquels je suis eclairci sur les doutes que j'avois aussi bien que\n[[308.9]] feu Mons. du Cange et Mons. Justel (qui en ont conferé avec moy) sur la verité de l'origine\n[[308.10]] commune des deux S^#'m^#'e^#'s maisons de Bronsvic et d'Este. Car Faleti, Pigna, et autres Historiens\n[[308.11]] de la maison d'Este ont tellement brouillé les choses et melé tant de faussetés dans leur histoire\n[[308.12]] qu'il n'y a point d'apparence de les croire sur leur parole. J'ay appris à Boulogne qu'il y a le\n[[308.13]] Pere Bassano Dominiquain qui a eu la curiosité d'amasser quantité de livres Antijesuitiques. </p>\n<p> [[308.14]] J'espere que M. Arnaud se portera encor bien. Quand j'estois encor en Allemagne j'avois\n[[308.15]] echangé avec luy quelques lettres sur mes pensées Metaphysiques. Ma derniere est demeurée\n[[308.16]] sans replique parce que M. Arnaud estant alors fort occupé et la matiere demandant une grande\n[[308.17]] attention, il répondit, qu'il l'examineroit à son premier loisir. Mais il est trop distrait et son\n[[308.18]] temps est si pretieux, que je n'ose pas luy demander la continuation de ses reflexions, que\n[[308.19]] j'estime extremement, parce qu'il approfondit les choses, et a même un don rare aux grands\n[[308.20]] hommes, qui est de se rendre quelques fois après une meure discussion. </p>\n<p> [[308.21]] A Mons. Antonio Alberti à Rome. </p>\n",
+  "number": "76.",
+  "title": "LEIBNIZ AN ANTONIO ALBERTI",
+  "date": "[Modena, 20. Januar 1690.] [75.77.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:76. LEIBNIZ AN ANTONIO ALBERTI [Modena, 20. Januar 1690.] [75.77.] J'ay prouvé dans mes Dynamiques que les forces absolues d'un corps sont comme les quarrés de ses vitesses, qu'il y a un centre de gravité dans toute sorte de corps ce que les Mathematiciens ont supposé jusqu'icy sans le prouver, quoy...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

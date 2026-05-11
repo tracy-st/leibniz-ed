@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_220",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 220,
+  "text": "<p> [[707.1]] <b>223. LEIBNIZ AN WILHELM ERNST TENTZEL</p>\n<p> [[707.2]] [Wolfenbüttel,] 19. (29.) Juni 1693.</b></p>\n<p> [[707.15]] [ ... ] Nuper Dn. Hartungus juris apud Jenenses doctor, <i>Metaphysicae juridicae</i> autor ad\n[[707.16]] me scripserat, petieratque ut nescio quae vetera meditata mea ad jurisprudentiam pertinentia ex\n[[707.17]] schedis eruta cum ipso communicarem. Quorum scilicet mentionem ipse feceram in libello ante\n[[707.18]] 25 et amplius annos edito sub titulo <i>Methodi juris.</i> Sed mihi tot aliis distracto post tantum\n[[707.19]] intervallum haec refingere velle difficilius fuerit, quam denuo cudere. Itaque necessaria excusatione\n[[707.20]] usus sum. Caeterum non putaveram lectam ei fuisse <i>Methodum</i> meam, quoniam in ipso\n[[707.21]] opere <i>Metaphysicae</i> suae, nullam mentionem fecerat etiam cum res ita ferre videretur. Et\n[[707.22]] quoniam in Epistola <i>Metaphysicae</i> quoque suae meminerat, non dissimulavi, vocabulorum\n[[707.23]] metaphysicorum usum crebriorem in superioribus disciplinis adeo mihi non probari, ut nec in\n[[707.24]] ipsa philosophia valde probetur. De iis loquor vocabulis, quorum nulla certa constansque\n[[707.25]] habetur definitio, aut quorum vis omnis familiariori sermone commode satis exprimi potest. Et\n[[707.26]] inprimis a distinctionibus scholae abhorreo, ad turbandam rerum intelligentiam natis; cum una\n[[707.27]] bona definitio omnium distinctionum inanem subtilitatem, velut lux illata tenebras tollat. Ego\n[[708.1]] tamen Hartungi et operam et doctrinam probo, nec dubito aliquid recti et praeclari ab eo\n[[708.2]] praestari posse. </p>\n<p> [[708.3]] V. Cl. Erhardi Weigelii ingenium et de studiorum emendatione judicium maximi facio, et\n[[708.4]] vellem plus ei tribui, quam vulgo fieri video. Utinam sua exponeret dilucidius. Nuper certe\n[[708.5]] <i>philosophia Mathematica</i>, quae tandem ad manus meas pervenit, obscuriuscula plerisque videbitur.\n[[708.6]] Vellem descenderet ad specialiora artium Mathematicarum, multaque non vulgaria a se\n[[708.7]] excogitata nobiscum communicaret potius, quam nimis diu haereret in compertis alio verborum\n[[708.8]] rerumque schemate dicendis. Nam quod ipsam inveniendi artem attinet videtur aliquid amplius\n[[708.9]] dici posse, ejusque intima multo adhuc profundius abdita latere et tamen ubi eruta erunt, (quam\n[[708.10]] in rem otio tantum opus puto) multo plus habitura claritatis. Vale. Dabam Guelfebyti 19 Jun.\n[[708.11]] 1693. </p>\n<p> [[708.12]] Cultor studiosissimus Godefr. Guil. Leibnitius. </p>\n<p> [[708.13]] P. S. Illustri Bachovio, et Ampl^#'m^#'o Pfannero, me pariter atque institutum meum ut porro\n[[708.14]] commendes rogo. </p>\n",
+  "number": "223.",
+  "title": "LEIBNIZ AN WILHELM ERNST TENTZEL",
+  "date": "[Wolfenbüttel,] 19. (29.) Juni 1693."
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:223. LEIBNIZ AN WILHELM ERNST TENTZEL [Wolfenbüttel,] 19. (29.) Juni 1693. [ ... ] Nuper Dn. Hartungus juris apud Jenenses doctor, Metaphysicae juridicae autor ad me scripserat, petieratque ut nescio quae vetera meditata mea ad jurisprudentiam pertinentia ex schedis eruta cum ipso communicarem. Quor...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

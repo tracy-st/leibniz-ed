@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_209",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 209,
+  "text": "<p> [[669.1]] <b>189. LEIBNIZ AN JEAN GALLOIS</p>\n<p> [[669.2]] [Hannover, 19.] Dezember 1678. [158.207c.]</b></p>\n<p> [[669.14]] Lettre à M. l'Abbe Galloys Decembr. 1678. </p>\n<p> [[669.15]] [ ... ] J'adjouteray quelque chose des Combinaisons, et de l'Art d'inventer en general.\n[[669.16]] Car je sçay que vous aimés ces considerations universelles, et que vous aves vous même là\n[[669.17]] dessus des observations importantes. Je suis confirmé de plus en plus de l'utilité et de la realité\n[[669.18]] de cette science generale, et je voy que peu de gens en ont compris l'étendue. Mais pour la\n[[669.19]] rendre plus facile et pour ainsi dire sensible; je pretends de me servir de la Characteristique,\n[[669.20]] dont je vous ay parlé quelques fois, et dont l'Algebre et l'Arithmetique ne sont que des\n[[669.21]] échantillons. Cette Characteristique consiste dans une certaine ecriture ou langue (car qui a\n[[669.22]] l'une peut avoir l'autre) qui rapporte parfaitement les relations des nos pensées. Ce charactere\n[[669.23]] seroit tout autre que tout ce qu'on a projetté jusqu'icy. Car on a oublié le principal qui est que\n[[669.24]] les caracteres de cette écriture doivent servir à l'invention et au jugement, comme dans\n[[669.25]] l'algebre et dans l'arithmetique. Cette écriture aura de grands avantages, entre autre un qui me\n[[669.26]] paroist important. C'est que les chimeres, que celuy même qui les avance n'entend pas ne\n[[669.27]] pourront pas estre écrites en ces caracteres. Un ignorant ne s'en pourra pas servir ou s'efforçant\n[[669.28]] de le faire il deviendra sçavant par là même. Car cette écriture est instructive bien plus que celle\n[[670.1]] des Chinois où il faut estre sçavant pour sçavoir écrire. La connoissance de la langue s'avancera\n[[670.2]] avec celle des choses et y servira beaucoup, et une chose pourra avoir autant de noms que de\n[[670.3]] proprietés; mais il n'y en a qu'un qui sera la clef de tous les autres, quoyqu'on n'y puisse pas\n[[670.4]] tousjours parvenir dans les matieres qui dependent des experiences. Cependant on approchera\n[[670.5]] au moins par cette voye, autant qu'il est possible <i>ex datis experimentis aut in potestate\n[[670.6]] existentibus.</i> On jugera même souvent quelles experiences sont encor necessaires pour remplir\n[[670.7]] le vuide. Mais à fin d'arriver à ce grand dessein il ne faut que les definitions des termes de\n[[670.8]] quelque langue receue, ce qui n'est pas infini. Et cela me fait souvenir des definitions des mots\n[[670.9]] qui ont esté faits dans l'Academie Françoise, dont vous m'aves parlé un jour, et que je\n[[670.10]] souhaiterois bien de voir. Il y aura bien d'abregés dans l'execution: mais je ne me sçaurois\n[[670.11]] expliquer là dessus en peu de mots. [ ... ] </p>\n",
+  "number": "189.",
+  "title": "LEIBNIZ AN JEAN GALLOIS",
+  "date": "[Hannover, 19.] Dezember 1678. [158.207c.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:189. LEIBNIZ AN JEAN GALLOIS [Hannover, 19.] Dezember 1678. [158.207c.] Lettre à M. l'Abbe Galloys Decembr. 1678. [ ... ] J'adjouteray quelque chose des Combinaisons, et de l'Art d'inventer en general. Car je sçay que vous aimés ces considerations universelles, et que vous aves vous même là dessus d...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

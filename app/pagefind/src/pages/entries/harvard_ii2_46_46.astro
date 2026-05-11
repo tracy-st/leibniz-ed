@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_46",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 46,
+  "text": "<p> [[209.8]] <b>47. LEIBNIZ AN JOHANN VAGETIUS</p>\n<p> [[209.9]] Hannover, [Ende Mai 1687.] [37.]</b></p>\n<p> [[209.21]] Clarissime et Excellentissime Vir, Amice honoratissime </p>\n<p> [[209.22]] Per complures septimanas reipublicae causa absens fui, partimque ad Hercynios montes\n[[209.23]] partim per nonnullas nostras praefecturas habui quod agerem; nunc paulo ante ferias pentecostales\n[[209.24]] reversus, nihil antiquius habui, quam ut pro munere Indicis <i>rariorum Becclerianorum</i>\n[[209.25]] agerem gratias. </p>\n<p> [[210.1]] Habebat eum et Gerardus Molanus Abbas Luccensis et Ecclesiasticarum rerum in his\n[[210.2]] regionibus director, in re nummaria versatissimus. Sed cum ipse bonam partem nummorum\n[[210.3]] Beccelerianorum possideat, emendae integrae collectioni animum adjecturum non puto. </p>\n<p> [[210.4]] Est nunc in Gallia quidam Nobilis de Alvensleben, qui hoc eruditionis genere delectatur,\n[[210.5]] ei indicium aliquando faciam. </p>\n<p> [[210.6]] Honorarium si quod unquam dabitur proxenetae nulli alii quam Tibi potius deberi arbitror. </p>\n<p> [[210.7]] Consequentiam a rectis ad obliqua utroque modo, ex positis suppositionibus demonstratam\n[[210.8]] arbitror, quae differunt utique a conclusione. Si quis autem suppositiones neget, huic fateor\n[[210.9]] nihil esse demonstratum, donec illae quoque demonstrentur. Posteriorem quam probas, profundiorem\n[[210.10]] esse, notavi ipsemet, utorque simili Methodo ad ratiocinationes quibusdam aequationum\n[[210.11]] Algebraicarum imitationibus exprimendas. Caeterum ego illas etiam demonstrationes\n[[210.12]] non contemno, quae ex quibusdam suppositionibus legitime procedunt, quas pertinacior aliquis\n[[210.13]] in dubium vocare potest, saltem enim demonstrant connexionem veritatum, ut sciamus hoc\n[[210.14]] unum demonstrandum restare, quod in suppositione assumtum est, eaque Methodo utitur etiam\n[[210.15]] Archimedes. </p>\n<p> [[210.16]] De Jungianis in re Medica tentamentis siles, quemadmodum etiam cur ille Meta<greek>f</i>ysicam\n[[210.17]] excludere visus sit numero scientiarum. Neque etiam attingis, utrum Cl. Siverus Jungianis\n[[210.18]] <i>Phoronomicis</i> addiderit demonstrationes, sine quibus manca est omnis scientia. Video tum in\n[[210.19]] <i>Geometria Empirica</i>, tum etiam in <i>Harmonico</i> libello esse omissas. Sed in <i>Harmonicis</i> non\n[[210.20]] difficulter supplentur. <i>Empiricus</i> libellus tironibus scriptus erat, ut experientia oculari Geometriam\n[[210.21]] sibi redderent familiarem. At in <greek><i>F</i></greek><i>oranomicis</i> neque tam facile, opinor, suppleri\n[[210.22]] possunt, et scribuntur eruditioribus. </p>\n<p> [[210.23]] Nosse velim aliquando, an tales quaestiones attigerit Jungius? Si mobile <i>A</i> duos simul\n[[210.24]] conatus aequales habeat, unum ex <i>A</i> pergendi in linea <i>AB</i>, alterum ex <i>A</i> pergendi in linea <i>AC</i>,\n[[210.25]] quaeritur, cum simul ambabus lineis <i>AB</i>, et <i>AC</i> ire non possit, in quanam ire debeat linea\n[[210.26]] intermedia? Hoc posito statuunt omnes et recte mobile iturum in linea <i>AD</i>\n[[210.27]] quae angulum <i>BAC</i> in duas aequales partes secat. </p>\n<p> [[210.28]] Sed jam quaero porro, si mobile tres habeat aequales conatus, unum\n[[210.29]] eundi in recta <i>AB</i>, alterum in recta <i>AC</i>, tertium in recta <i>AE</i>, quanam\n[[210.30]] intermedia linea moveri debeat, cui dubio explicando praecedens modus\n[[210.31]] non sufficit. </p>\n",
+  "number": "47.",
+  "title": "LEIBNIZ AN JOHANN VAGETIUS",
+  "date": "Hannover, [Ende Mai 1687.] [37.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:47. LEIBNIZ AN JOHANN VAGETIUS Hannover, [Ende Mai 1687.] [37.] Clarissime et Excellentissime Vir, Amice honoratissime Per complures septimanas reipublicae causa absens fui, partimque ad Hercynios montes partim per nonnullas nostras praefecturas habui quod agerem; nunc paulo ante ferias pentecostale...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

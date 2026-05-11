@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_274",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 274,
+  "text": "[[1064.19]] <b>226.  Annotationes ad Logicam Hamburgensem [Herbst 1678 bis Winter 1679/80 (?)]</b>\n [[1064.20]] <tab/>[Herbst 1678 bis Winter 1679/80 (?)]\n[[1065.1]] <tit2><b>Annotationes ad Logicam Hamburgensem </b> </tit2> </p>\n<p> [[1065.2]] <b>Prolegom. n. 1.</b> <i>Logica est ars mentis operationes dirigens ad verum a falso\n[[1065.3]] discernendum</i>. Annot. Videtur logicae officium esse non tantum judicium adjuvare sed et\n[[1065.4]] inventionem. Inventionem inquam non tantum argumentorum (quibus aliqua propositio\n[[1065.5]] probetur aut refellatur), sed et propositionum; imo ipsa ars quaerendi seu quaestiones\n[[1065.6]] inveniendi Logica est. Pertinet etiam ad Logicam invenire omnes species dati generis;\n[[1065.7]] duarum specierum infimum genus commune. Datis duabus rebus valde discrepantibus\n[[1065.8]] invenire similitudinem (quod magni usus est in arte Mnemonica), datis duabus rebus\n[[1065.9]] valde similibus invenire discrimen, quod maximi usus est in omni examine. </p>\n<p> [[1065.10]] Lib. IV. cap. X. <i>de demonstratione</i> num. 6. <i>Propositio per se vera dicitur quae\n[[1065.11]] absque demonstratione partim inductione, partim naturali mentis lumine innotescit.\n[[1065.12]] Ideoque etiam indemonstrabilis, itemque immediata propositio</i>. Annot. Non video quomodo\n[[1065.13]] certae veritatis sit, quod sola inductione innotescit, cum impossibile sit omnia\n[[1065.14]] exempla explorare. Quid autem sit naturali mentis lumine innotescere non intelligo. Unde\n[[1065.15]] enim scimus, lumen esse non tenebras? nisi ad communem opinionem recurrimus et\n[[1065.16]] successum quae probabilitatem parit non scientiam. Fateor ut infra <b>n. 11.</b> dicitur axiomata\n[[1065.17]] auditori proposita statim fidem reperire: sed hic non quid homines credant aut non\n[[1065.18]] credant, sed qua ratione certi simus, quaeritur. Ipse autor ait sequenti <b>n. 12.</b> principiis\n[[1065.19]] contradictionis aliorum axiomatum veritatem inniti, probari possunt ergo. Eandem difficultatem\n[[1065.20]] reperio circa <b>n. 42.</b> capitis ejusdem. Ita enim scientiarum fundamenta ­deni-\n [[1065.21]] ­que in opinionem communem, seu id quod admitteret quivis auditor resolverentur. </p>\n<p> [[1065.22]] <b>N. [43.]</b> dicitur hypothesin quae omnibus phaenomenis satisfaciat necessario veram\n[[1065.23]] credi: sed quoniam ejusdem rei multae possunt esse causae non video quomodo hinc\n[[1065.24]] necessario constet hujus effectus hanc quae assignata est, esse causam. </p>\n<p> [[1065.25]] Lib. IV. cap. 17. esse ait generalia quaedam de quibus nihil demonstrari possit ut <i>de\n[[1065.26]] triangulo prout a rectilineo, sphaerico, cylindrico, conico, etc. abstrahitur.</i> Mihi contra\n[[1065.27]] videtur quamvis notionem generalem et proprietates quasdam generales habere. </p>\n<p> [[1065.28]] Miror autorem paucis de demonstratione ac ordine didascalico propositis statim\n[[1065.29]] transire ad dialecticam seu loca probabilium argumentorum, nec vero topicam apodic-\n[[1066.1]] ticam saltem attigisse. Et cum de integrae cujusdam scientiae systemate ac dispositione,\n[[1066.2]] sub ordinis didascalici appellatione tractasset, hoc ipsum eum admonere debebat, ut de\n[[1066.3]] methodo etiam illa ageret, qua scientia aliqua aut de novo inveniri, aut perdita restitui, aut\n[[1066.4]] arcta nimis extendi et locupletari possit. Item de methodo quae cuidam quaestioni peculiaris\n[[1066.5]] est, seu de arte resolvendi problemata, et demonstrandi theoremata proposita. Scio\n[[1066.6]] autorem de his omnibus potuisse praeclara dicere, eoque magis miror, hic ne digito\n[[1066.7]] quidem indicasse, aut per summa capita digessisse, quae in hanc rem meditata habebat.\n[[1066.8]] Nisi forte in arcano habere ea maluit, meditans adhuc societatem quandam <angle bracket>heu</angle bracket>reticam,\n[[1066.9]] cui servari praecepta inveniendi <angle bracket>con</angle bracket>sultius judicavit. </p>\n",
+  "number": "226.",
+  "title": "Annotationes ad Logicam Hamburgensem",
+  "date": "[Herbst 1678 bis Winter 1679/80 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:226. Annotationes ad Logicam Hamburgensem [Herbst 1678 bis Winter 1679/80 (?)] [Herbst 1678 bis Winter 1679/80 (?)] Annotationes ad Logicam Hamburgensem Prolegom. n. 1. Logica est ars mentis operationes dirigens ad verum a falso discernendum. Annot. Videtur logicae officium esse non tantum judicium ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

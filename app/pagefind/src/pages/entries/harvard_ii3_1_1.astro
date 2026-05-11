@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_1",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 1,
+  "text": "<p> [[3.1]] <b>1. LEIBNIZ AN NICOLAS MALEBRANCHE</p>\n<p> [[3.2]] Hannover, 27. Dezember 1694 (6. Januar 1695). [183.]</b></p>\n\n<p> [[3.20]] Mon Reverend Pere Hannover ce 27 Decembr. 1694. </p>\n<p> [[3.21]] Je ne vous importunerois pas sans un sujet que M. le Marquis de l'Hospital m'a fourni. Il\n[[3.22]] me mande de vous avoir laissé un ecrit que vous aviés tiré de luy pour le faire publier mais\n[[3.23]] qu'ayant appris que j'avois dessein d'écrire sur les memes matieres en partie, il me prioit de luy\n[[3.24]] faire sçavoir au plus tost, si je suis content que son ecrit paroisse: j'ay repondu comme il faut à\n[[3.25]] cette honesteté et je luy ay dit, que s'il ne vous avoit pas encor accordé cette permission, je me\n[[3.26]] joindrois à vous, mon Reverend Pere, pour l'obtenir, faisant estat d'y apprendre bien des belles\n[[3.27]] choses moy meme. </p>\n<p> [[4.1]] Mais comme Mons. le Marquis est loin de Paris, et que ma lettre ne luy sera rendue qu'un\n[[4.2]] peu tard, je vous ay voulu écrire en meme temps à fin de vous faire connoistre au plus tost, que\n[[4.3]] l'egard qu'on peut avoir pour moy ne doit nullement empecher ny differer vostre dessein. </p>\n<p> [[4.4]] Je vous adresse en meme temps la lettre pour Mons. le Marquis, dans la croyance, que ce\n[[4.5]] sera le moyen de la faire rendre plus promtement et plus seurement. </p>\n<p> [[4.6]] Mons. Arnaud estant mort enfin, on peut dire avec raison ce qu'un de mes amis m'ecrivoit\n[[4.7]] agreablement que les RR. PP. Jesuites y ont plus perdu, qu'ils ne croyent peutestre d'avoir\n[[4.8]] gagné. Un tel surveillant estoit utile, <greek>ăgauh̀</greek> <greek>d'^%)/eriw ^%(/hde brotoĩsi</greek>. Je crois que le pere general,\n[[4.9]] ayant les sentiments qu'on connoist, n'estoit pas faché des soins que M. Arnaud prenoit pour le\n[[4.10]] soulager. Pour vous, mon R. P., je croy que vous n'y avois ny gagné ny perdu. J'avoue que\n[[4.11]] j'estois faché de voir la querelle renouvellée dernierement, sur un sujet de peu d'importance,\n[[4.12]] puisqu'il ne s'agissoit que du sentiment de S. Augustin sur une matiere de philosophie. Je ne\n[[4.13]] sçay si la Bibliotheque de la grace paroistra encor, nonobstant la mort de ce grand homme et\n[[4.14]] nonobstant la bulle et le bref du pape qui ont defendu depuis peu, de renouveller les contestations\n[[4.15]] sur les cinq propositions. Pour moy je ne serois point faché de voir quantité de petits\n[[4.16]] livres faits par d'habiles gens sur des matieres considerables, ramassés ensemble. Car j'ay fort\n[[4.17]] medité sur cette meme matiere de la liberté, depuis bien d'années jusqu'à avoir composé là\n[[4.18]] dessus un dialogue latin à Paris, que je fis voir à Mons. Arnaud qui ne le meprisa point. Et\n[[4.19]] depuis j'ay bien plus approfondi les choses. </p>\n<p> [[5.1]] Mais je ne sçay à quoy je songe d'enfiler des discours dans une lettre, qui ne devoit estre\n[[5.2]] que pour le sujet que j'ay marqué au commencement. Finissant l'année, je prie Dieu de vous en\n[[5.3]] donner encor beaucoup d'heureuses, et je suis avec zele </p>\n<p> [[5.4]] de vostre Reverence le tres humble et tres obeis[s]ant serviteur Leibniz <Fn><i>Am Rand von Leibniz' Hand</i>: Au R.P. Malebranche. </Fn> </p>\n",
+  "number": "1.",
+  "title": "LEIBNIZ AN NICOLAS MALEBRANCHE",
+  "date": "Hannover, 27. Dezember 1694 (6. Januar 1695). [183.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:1. LEIBNIZ AN NICOLAS MALEBRANCHE Hannover, 27. Dezember 1694 (6. Januar 1695). [183.] Mon Reverend Pere Hannover ce 27 Decembr. 1694. Je ne vous importunerois pas sans un sujet que M. le Marquis de l'Hospital m'a fourni. Il me mande de vous avoir laissé un ecrit que vous aviés tiré de luy pour le f...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

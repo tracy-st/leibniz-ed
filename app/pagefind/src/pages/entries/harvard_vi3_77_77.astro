@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_77",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 77,
+  "text": "[[526.11]] <b>77. Guilielmi Pacidii de rerum arcanis </b> <span>526.11;0:63:077:76       :L:l^</span>.\n[[526.21]] Guilielmi Pacidii de Rerum Arcanis.\n[[526.22]] 1) De Arte Rationis et Methodo inveniendae veritatis.\n[[526.23]] 2) De Lingua Rationali, et de Artibus characteristica et combinatoria.\n[[526.24]] 3) De Algebrae imperfectione et novo quodam Analyseos genere et de abdita\n[[526.25]] Geometria.\n[[526.26]] 4) De vera Metaphysica, deque idea et existentia Dei.\n[[527.1]] 5) De animabus, quod omnia sint animata, sola autem immortalis reminiscatur\n[[527.2]] sui.\n[[527.3]] 6) Labyrinthus prior, seu de Fato, Fortuna, Libertate.\n[[527.4]] 7) Labyrinthus posterior, seu de Compositione continui, tempore, loco, motu\n[[527.5]] atomis, indivisibili et infinito.\n[[527.6]] 8) Geometria motus seu linearum determinationes, centrobaryca, revocatio motus\n[[527.7]] ad calculum.\n[[527.8]] 9) Physica motus seu de potentia et concursu ac reactionibus.\n[[527.9]] 10) De artibus Mechanicis, seu de motuum coordinationibus, pro corporum figura\n[[527.10]] et consistentia et potentia.\n[[527.11]] 11) Hypothesis Physica demonstrativa deque artibus physicis.\n[[527.12]] 12) De abditis rerum causis et Medicina dogmatica constituenda.\n[[527.13]] 13) De Naturae arcanis et corporum exaltatione et Tinctura.\n[[527.14]] 14) De Luce Mentium et Amore Dei super omnia.\n[[527.15]] 15) Demonstrationes Catholicae, seu de vera Ecclesia et Caritate.\n[[527.16]] 16) De Iustitia et novo Codice.\n[[527.17]] 17) De Majestate et Republica.\n[[528.1]] 19) De Prudentia pragmatica, et historia nostri temporis.\n[[528.2]] 20) De rebus Oeconomicis, deque incrementis civitatum, opificiisque et re mercatoria.\n[[528.4]] 21) De arte ac disciplina militari ac bello sacro.\n[[528.5]] 22) De educatione, literis et linguis.\n[[528.6]] 23) De censura morum et casibus conscientiae.\n[[528.7]] 24) De societate Theophilorum et perfectione Christiana.\n[[528.8]] 25) Votum: sive fabula de emendatione rerum generali, et Historia seculi sequentis,\n[[528.9]] incipit anno 1730.\n[[528.10]] 26) Spes sive carmen de futura vita.\n",
+  "number": "77.",
+  "title": "Guilielmi Pacidii de rerum arcanis",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:77. Guilielmi Pacidii de rerum arcanis 526.11;0:63:077:76 :L:l^. Guilielmi Pacidii de Rerum Arcanis. 1) De Arte Rationis et Methodo inveniendae veritatis. 2) De Lingua Rationali, et de Artibus characteristica et combinatoria. 3) De Algebrae imperfectione et novo quodam Analyseos genere et de abdita ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

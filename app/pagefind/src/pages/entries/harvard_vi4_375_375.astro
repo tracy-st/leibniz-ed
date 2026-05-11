@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_375",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 375,
+  "text": "[[1639.1]] <b>318.  Mentes ipsae per se dissimiles sunt inter se [März 1689 bis März 1690 (?)]</b>\n [[1639.2]] <tab/>[März 1689 bis März 1690 (?)] </p>\n<p> [[1639.8]] Contra Libertatem nostram objicitur rationem volendi esse ab externis, nempe a\n[[1639.9]] corporis temperamento, et objecti impressione. </p>\n<p> [[1639.10]] Respondeo: concurrere et dispositiones internas ipsius mentis. </p>\n<p> [[1639.11]] Instabis: dispositiones mentis praesentis, esse ab impressionibus praeteritis corporis\n[[1639.12]] et externorum praeteritis. </p>\n<p> [[1639.13]] Respondeo, concedendo de quibusdam, negando de omnibus, sunt enim quaedam in\n[[1639.14]] mente dispositiones primitivae quae non sunt ab externo. Itaque dicendum est Mentes\n[[1639.15]] ipsas per se, ex natura sua primitiva dissimiles esse inter se, contra quam vulgo putatur.\n[[1639.16]] Cujus rei etiam aliunde certa argumenta habeo in promtu. Ut una mens alia perfectior sit\n[[1639.17]] fortiorque ad resistendum externis. Radix libertatis est in dispositionibus primitivis. </p>\n<p> [[1639.18]] Instabis: queri te posse, cur Deus tibi non plus virium dederit. </p>\n<p> [[1639.19]] Respondeo: si hoc fecisset, tu non esses, nam non te, sed aliam creaturam produxisset. </p>\n",
+  "number": "318.",
+  "title": "Mentes ipsae per se dissimiles sunt inter se",
+  "date": "[März 1689 bis März 1690 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:318. Mentes ipsae per se dissimiles sunt inter se [März 1689 bis März 1690 (?)] [März 1689 bis März 1690 (?)] Contra Libertatem nostram objicitur rationem volendi esse ab externis, nempe a corporis temperamento, et objecti impressione. Respondeo: concurrere et dispositiones internas ipsius mentis. I...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_22",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 22,
+  "text": "<p> [[65.1]] <b>19a. LEIBNIZ AN GOTTLIEB SPITZEL</p>\n<p> [[65.2]] 7./17. April 1670. [16a.]</b></p>\n<p> [[65.16]] [ ... ] Esset igitur optandum magnopere, ut extaret aliquis qui meritissimos de re literaria\n[[65.17]] viros inde usque ab inventa Typographia recenseret ordine temporum; annotaretque illud\n[[65.18]] maxime: quid quisque potissimum in Rempublicam contulerit. Ita fiet ut multi licet doctissimi\n[[65.19]] sint fortasse initio praetereundi (neque enim simul omnes dari possunt), qui tamen nominare\n[[65.20]] non possunt, quid potissimum iis eruditio debeat. Nominandi igitur illi, quibus primae autorum\n[[65.21]] veterum eruderationes debentur, qui difficiles in antiquitate, in Chronologia Geographiaque\n[[65.22]] nodos primi solverunt, quicunque proprias nobis meditationes suas, easque si non veras, saltem\n[[65.23]] ingeniosas reliquere; qui novum aliquod dicendi genus, novam sectam orsi sunt, quibus in\n[[65.24]] medicina ac mathesi, sed et artibus mechanicis utilia reperta debentur, qui historias non aliunde\n[[65.25]] descriptas, sed earum rerum quibus interfuere ipsi, earumque memorabilium scripsere: breviter,\n[[65.26]] illi, qui si non vixissent, caeteris rebus in eo qui secutus est statu manentibus, aliquid Res\n[[65.27]] literaria detrimenti passa esset. Hos annotari, non est res adeo vasta, utilis tamen, sed et non\n[[65.28]] nego, recondita, et profunda. Neque enim tanti esset de patria eorum, de varia fortuna, de exitu\n[[65.29]] inquiri quam de iis meritis, quibus aeternum memorandi sunt. </p>\n<p> [[65.30]] Ac vereor ne plerique illi qui vitas nobis dedere hoc non satis attenderint. Quotusquisque\n[[65.31]] enim est qui in vitis Erasmi, Rhenani, Melanchthonis, Camerarii meminerit, quos illi autores e\n[[65.32]] tenebris primi eruerint. Quis est qui eum IC^#'t^#'u^#'m nominet, qui primus Jurisprudentiam in artem\n[[66.1]] redigere aggressus est, qui fere dixerim Apelles fuit. Ubi nominatur qui primus in re nautica\n[[66.2]] accurate philosophatus sit, ostenderitque cursum navis, si magnetem sequatur, necessario esse\n[[66.3]] rhomboeid<greek>h̃</greek> non <greek>kykloeidh̃</greek>. Ubi est catalogus compositionum apud Medicos celebriorum\n[[66.4]] atque usitatiorum, suis autoribus, a quibus saepe denominantur, vindicatarum. Quis refert\n[[66.5]] primum prope eorum qui Mathesin ad Physicam applicarunt, fuisse Joh. Suisset Calculatorem\n[[66.6]] ideo Scholasticis appellatum, primos Circuli pseudo-quadratores fuisse Bovillum et Orontium;\n[[66.7]] et ut ad Theologica transeam, primum omnipraesentiam carnis Christi docuisse Fabrum Stapulensem;\n[[66.8]] M. Ant. de Dominis et Arminianis primum praelusisse Acontium, quaeque sunt alia\n[[66.9]] id genus, oppido multa, quae etsi sparsim nonnulla habeantur, nullibi tamen collecta sunt. Ex\n[[66.10]] hoc demum opere, quod talia complecteretur, vera ac solida historia literaria esset expectanda,\n[[66.11]] qua omnis verae eruditionis origines et progressus ostenderentur. Quemadmodum audi Josephum\n[[66.12]] Glanvillum Anglum nuperrime de incrementis scientiarum inde usque ab Aristotele\n[[66.13]] auctarum scripsisse. Sed sufficeret nunc quidem, qui recentes, id est inde usque ab inventa\n[[66.14]] Typographia editos percurreret eosque demum qui aliquid de suo ad augendam supellectilem\n[[66.15]] publicam contulere, instar Monasteriorum benefactoribus suis, quantum in se est non ingratorum,\n[[66.16]] in Necrologia, ut sic loquar referret, suaque cuique merita ascriberet. Huic instituto\n[[66.17]] arbitror conferre aliquid posse <i>Pinacothecas</i> Nicii, vitas Germanorum Adami, Gallorum per\n[[66.18]] Sammarthanos, Orientalizantium per Colomesium, Mathematicorum per Blancanum, Medicorum\n[[66.19]] per Lindium, et Meybomium (quanquam Meybomius hactenus tantum expectetur),\n[[66.20]] Theologorum per Bismarcum. Huc pertinent singulares vitae, ut Tychonis per Gassendum,\n[[67.1]] Peireskii per Gassendum, F. Pauli per Fulgentium, Cartesii per Borellum, Gassendi per Sorberium;\n[[67.2]] Cardani, Campanellae, Thuani, per se ipsum. Utinam Tibi vacet, Vir Ampliss^#'e, tanti\n[[67.3]] momenti instituto Te accingere, aut saltem initio scripta extantiora dare! Fracta enim semel\n[[67.4]] glacie, non deerunt, sive Tu sive alii qui et veteres addant, et suppleant recentiores. [ ... ] </p>\n",
+  "number": "19a.",
+  "title": "LEIBNIZ AN GOTTLIEB SPITZEL",
+  "date": "7./17. April 1670. [16a.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:19a. LEIBNIZ AN GOTTLIEB SPITZEL 7./17. April 1670. [16a.] [ ... ] Esset igitur optandum magnopere, ut extaret aliquis qui meritissimos de re literaria viros inde usque ab inventa Typographia recenseret ordine temporum; annotaretque illud maxime: quid quisque potissimum in Rempublicam contulerit. It...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

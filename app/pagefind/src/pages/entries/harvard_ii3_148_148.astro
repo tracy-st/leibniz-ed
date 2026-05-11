@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_148",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 148,
+  "text": "<p> [[397.17]] <b>148. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[397.18]] Hamburg, 27. November (7. Dezember) [1697.] [144.198.]</b></p>\n\n<p> [[398.11]] I. N. J. C. </p>\n<p> [[398.12]] S. P. Vir Nobilissime, Amplissime Dne. Fautor honoratissime. </p>\n<p> [[398.13]] Putavi nuperas meas intercidisse. Nam Hanoveram eas direxeram, cum postremae Tuae\n[[398.14]] Guelpherbyti essent datae. Certe responsi nil accepi nisi quod nunc de remissa tibi scheda\n[[398.15]] nescio qua significas. Itaque illas adhuc expecto, expetoque. De Carniolana antiqua lingua juxta\n[[398.16]] cum ignarissimis hic quisquam novit eorum quos ego novi. Quod ad Bentlejum et Lockium\n[[398.17]] mittere mea non detrectas, oppido gratissimus accepto. Sed cum suspicer omnino Hamburgo\n[[398.18]] Londinum te tua mittere, cui tradenda sint tuo nomine, et commendanda scire pervelim, ac ante\n[[398.19]] scire an uterque Londini vel alio in loco agat, an se invicem norint, aut de me meisque\n[[398.20]] <i>Accessionibus</i> quidquam. Nuper accepi Helmstadio litteras nunciantes Medicum inde reducem\n[[398.21]] meas <i>accessiones</i> aliquo in pretio haberi [divulgasse.] Nec tamen ullum eo hactenus exemplar\n[[398.22]] misi. Nam Caveo destinatum per hic viventem Affinem Pullein non puto redditum esse. Ipso\n[[398.23]] enim paullo post defuncto quidni perierit aut male curatum sit cujus antecedens proxime nec\n[[398.24]] mihi redditum est exemplar Caveanum, neque aliud Menckenio quod debebatur. Id sane huic\n[[398.25]] duplici exemplari, quorum utrumque nitide Tomis tribus ligatum asservo fieri nolim. Quaeso\n[[398.26]] itaque diserte, quid fieri velis expedi, et an spes ulla sit impetrandi eorum virorum monita de\n[[398.27]] addendis, ordinandis, emendandis aliquibus. Aliter ac a Te, a quo maxime mihi pollicebar, et\n[[398.28]] sperare aliqua debueram, sed nil accepi. Nam in universa Germania quem habemus, a quo in eo\n[[399.1]] genere studiorum ad meum genium quid liceat praestolari? Batavis vero etiam haec sunt\n[[399.2]] ridicula adeo ut in Rabo vidisti. Oportet illis meas nugas congestas de <i>Anonymis et Pseudonymis</i>\n[[399.3]] propinare. In illas involabunt. Sane per Dei gratiam pertinaci assiduitate adjutoris mei\n[[399.4]] illis incumbentis per horas 8. quotidie mecum et cum tribus amanuensibus, in mundum sunt\n[[399.5]] redacti, et evasere ultra 7000 veteres et novi omnium aetatum artium et linguarum libri duos in\n[[399.6]] folio Tomos daturi. Modo liceat editorem nancisci obstetricantem correctione exacta plus quam\n[[399.7]] XX manuum characteribus nitide aliis, aliis etiam aliquibus satis negligenter et liris pene deliris\n[[399.8]] interdum et aegre assequendis exaratis. Si quid ad hoc opis aut consilii suppeditare nosti facies\n[[399.9]] mihi rem gratissimam, in officio tibi futuro quando jusseris vicissim. Vale. Hamb. [1697.]\n[[399.10]] d. 27. Novembr. </p>\n<p> [[399.11]] Excell^#'i Tui Nominis cultor sincerus V. Placcius\n[[399.12]] <yi><i>A Monsieur Monsieur Leibnitius Conseiller de son Altesse Electorale à Hannover.</i> </p>\n",
+  "number": "148.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "Hamburg, 27. November (7. Dezember) [1697.] [144.198.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:148. VINCENT PLACCIUS AN LEIBNIZ Hamburg, 27. November (7. Dezember) [1697.] [144.198.] I. N. J. C. S. P. Vir Nobilissime, Amplissime Dne. Fautor honoratissime. Putavi nuperas meas intercidisse. Nam Hanoveram eas direxeram, cum postremae Tuae Guelpherbyti essent datae. Certe responsi nil accepi nisi...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

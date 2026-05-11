@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_67",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 67,
+  "text": "<p> [[179.1]] <b>67. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[179.2]] [Hannover, Juli 1696.] [65.73.]</b></p>\n\n<p> [[179.18]] Si vous avés encor ma lettre pour Mons. Morel, vous aurés la bonté de me la renvoyer. Je\n[[179.19]] vous supplie d'envoyer mes remarques sur la philosophie de Descartes à Mons. Bernoulli\n[[179.20]] professeur de Mathematiques à Groningue. </p>\n<p> [[179.21]] Autant que j'ay pû juger par la <i>Dioptrique</i> de M. Hartsoeker, il n'est pas tout à fait Cartesien,\n[[179.22]] car il pretend qu'il y a des Atomes nageans au milieu de la matiere subtile. Il pretend donc\n[[179.23]] d'innover, mais je ne sçay si ce sera avec succés. La Physique de M. le Clerc est fort sçavante;\n[[179.24]] il est vray que nous sommes encor fort eloignés de l'interieur de la nature. J'ay fort medité\n[[180.1]] sur la matiere des hazards, ainsi je seray bien aise de voir ce que M. le Clerc aura donné là\n[[180.2]] dessus. J'ay esté surpris de voir qu'on vend les Ms. de feu Mons. Golius. J'avois crû qu'ils\n[[180.3]] appartenoient à l'université de Leiden. C'est dissiper un tresor irrecouvrable. Un Anglois de\n[[180.4]] mes amis a obtenu de moy quelques reflexions que j'avois faites sur l'excellent livre de Mons.\n[[180.5]] Lock, intitulé <i>essay of understanding</i>. Il y a bien des belles choses dans cet ouvrage, mais je ne\n[[180.6]] suis pas quelquefois de son sentiment en certaines choses, qui regarde les fondemens du\n[[180.7]] bastiment. Ce M. Cordemoy qui écrit contre les Sociniens est ce le même, qui a écrit du\n[[180.8]] discernement du corps et de l'ame? On me dit que ce qui se fait à Rome sur la vie de la Reine\n[[180.9]] Christine, est un Poëme Latin Heroique. </p>\n<p> [[180.10]] Je plains M. Tollius qui pouvoit encor donner des belles choses, je voudrois sçavoir où ses\n[[180.11]] papiers sont devenus. Vous aurés vû le premier Tome du Julien de M. de Spanhem, que j'ay eu\n[[180.12]] l'honneur de recevoir de sa part. J'admire comment il a si bien allié l'abondance avec le choix\n[[180.13]] dans les remarques sçavantes qui y paroissent. J'[attends] sur tout avec impatience ce qu'il y\n[[180.14]] aura sur la controverse entre Julien et S. Cyrille. Je voudrois pouvoir retrouver un petit livre que\n[[180.15]] j'ay vû autresfois, qui estoit une Apologie de Nestorius contre ce même Cyrille. Un Protestant\n[[181.1]] françois l'avoit faite. J'en ay marqué le nom quelque part; mais ne le trouvant point presentement\n[[181.2]] et ne doutant point que vous ne le sçachiés, Monsieur, je serois bien aise de le\n[[181.3]] rapprendre par vostre moyen. </p>\n<p> [[181.4]] Nous aurons bientost la conclusion de l'<i>Octavia</i> de Monsgr. le Duc Antoine Ulric de\n[[181.5]] Bronsvic. Il y a plusieurs années que quelques Tomes de ce Roman ont paru, depuis le soin du\n[[181.6]] gouvernement ayant empeché l'auteur de continuer. Tous ceux qui goustent les beautés de\n[[181.7]] nostre langue ont temoigné de l'impatience pour en voir la fin, et j'ay esté un des soliciteurs; de\n[[181.8]] sorte que S.A.S. s'y est enfin resolüe tout de bon pour donner cette satisfaction au public.\n[[181.9]] L'ouvrage est veritablement de ce Prince, et les pensées nobles, qu'il y a, le font assez\n[[181.10]] connoistre. </p>\n<p> [[181.11]] En tournant la feuille vous trouverés mon Epigramme sur feu M. Hugens. J'ay tousjours\n[[181.12]] honnoré son merite eminent, aussi bien que son illustre famille. Feu Monsieur son pere me fit\n[[181.13]] beaucoup de civilités, lorsque je passay à la Haye. Je ne connois Monsieur son frere que de\n[[181.14]] reputation. Cependant si je viens jamais en Hollande, je chercheray l'honneur de sa connoissance\n[[181.15]] et l'exhorteray à faire avancer la publication des posthumes de nostre incomparable amy.\n[[181.16]] Si vous aviés occasion, Monsieur, de le luy temoigner un jour, vous me feriés de la faveur, et\n[[181.17]] rendriés peutestre un service au public. Je suis etc. </p></p>\n",
+  "number": "67.",
+  "title": "LEIBNIZ AN HENRI BASNAGE DE BAUVAL",
+  "date": "[Hannover, Juli 1696.] [65.73.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:67. LEIBNIZ AN HENRI BASNAGE DE BAUVAL [Hannover, Juli 1696.] [65.73.] Si vous avés encor ma lettre pour Mons. Morel, vous aurés la bonté de me la renvoyer. Je vous supplie d'envoyer mes remarques sur la philosophie de Descartes à Mons. Bernoulli professeur de Mathematiques à Groningue. Autant que j...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

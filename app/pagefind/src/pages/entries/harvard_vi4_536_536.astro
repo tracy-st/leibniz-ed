@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_536",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 536,
+  "text": "[[2473.8]] <b>423₁.  Sonderbare Erklärung der Offenbarung </p>\n<p> [[2473.10]] Weil ich sehe daß viel gottesfürchtige und wohlmeinende Leute sich durch falsche\n[[2473.11]] oder doch sehr ungewiße erclärungen der <i>offenbahrung</i> Johannis verführen laßen, so gar\n[[2473.12]] daß auch empöhrungen, meutereyen und allerhand weit aussehende anschläge, daher\n[[2473.13]] entstanden; auch einige unterm schein göttlichen befehls sich erkühnet Königen und\n[[2473.14]] Fürsten vorzuschreiben was sie thun solten, und auf den weigerungsfall oder sonst die\n[[2473.15]] gemeine gegen sie zu erregen. So will ich eine sonderbare erclärung der <i>offenbahrung</i>\n[[2473.16]] alhier mit wenigen beybringen, welche diesen gefahrlichen gedancken auf einmahl alle\n[[2473.17]] gelegenheit abschneidet. Nicht daß ich diese erclärung vor die gewißeste und beste halte;\n[[2473.18]] sondern damit man sehe wie so gar leicht sey, wenn man belesen, und hurtige einfalle hat,\n[[2473.19]] etwas artliches aus dem text und historien zusammen zu reimen. </p>\n<p> [[2473.20]] Ob die <i>offenbahrung</i> von Johanne dem Evangelisten und Apostel, oder Johanne\n[[2473.21]] Presbytero hehrrühre, ist bereits vor alters gezweifelt worden, wie dann auch Lutherus\n[[2473.22]] solchen streit nicht erörtern wollen. Es sey aber dieses buch von wem es wolle, so ists auf\n[[2474.1]] eine herrliche und ganz entzückende weise geschrieben; sonderlich zu trost der Christen,\n[[2474.2]] welche verfolget wurden von den Heyden; wie es dann auch zweifels ohne ein großes\n[[2474.3]] vermocht sie zu stärcken und freudig zur marter gehen zu machen. </p>\n<p> [[2474.4]] Ich seze demnach zum fundament das was man füglich von denen zeiten so Johanni\n[[2474.5]] am nächsten verstehen kan auff die dinge nicht zu ziehen so sehr weit davon entfernet.\n[[2474.6]] Vors andere durch Babylon sey Rom zu verstehen, und die zahl des thieres nehmlich\n[[2474.7]] sechshundert sechs und sechzig so eines menschen zahl, nehmlich wie bereits Irenaeus\n[[2474.8]] (so der Apostel discipel gesehen) es ausgeleget,\n [[2474.9]] ^&.bb <Leibniz special character><tab/>0 <tab/><greek>A</greek> <tab/>00 <tab/><greek>E</greek> <tab/>0 <tab/>0 <tab/>0 <tab/>00^&.b</i> <Leibniz special character> <tab/> <greek>L</greek> <tab/><greek>A</greek> <tab/> <greek>T</greek> <tab/><greek>E</greek> <tab/> <greek>I</greek> <tab/><greek>N</greek> <tab/> <greek>O</greek> <tab/> <greek>S</greek>\n [[2474.10]] <tab/>0 <tab/> 1 <tab/>00 <tab/> <tab/>0 <tab/>0 <tab/>0 <tab/>00\n [[2474.11]] welches der nahme eines gewißen königs gewesen, deßen auch Virgilius gedencket; von\n[[2474.12]] welchem die Latiner das ist Römer herkommen. Denn es scheint der autor der <i>offenbahrung</i>,\n[[2474.13]] habe die Römer als damahlige feinde oder verfolger der Christen nicht mit ihren\n[[2474.14]] eignen, sondern etwas entlehnten nahmen bemercken wollen. </p>\n<p> [[2474.15]] Was nun vom fall der babylonischen huhre prophezeyet wird haben die ersten\n[[2474.16]] Christen von zerstörung des Heydnischen Roms verstanden. </p>\n",
+  "number": "423₁.",
+  "title": "Sonderbare Erklärung der Offenbarung",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:423₁. Sonderbare Erklärung der Offenbarung Weil ich sehe daß viel gottesfürchtige und wohlmeinende Leute sich durch falsche oder doch sehr ungewiße erclärungen der offenbahrung Johannis verführen laßen, so gar daß auch empöhrungen, meutereyen und allerhand weit aussehende anschläge, daher entstanden...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

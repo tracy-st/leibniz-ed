@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_205",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 205,
+  "text": "[[802.5]] <b>169.  De cognitione [April bis Oktober 1686 (?)]</b>\n [[802.6]] <tab/>[April bis Oktober 1686 (?)] </p>\n<p> [[802.11]] Cognitio nihil aliud est quam cogitatio relata ad objectum. Ejus enim cognitionem\n[[802.12]] aliquam habere dicimur, de quo cogitamus. Neque tantum veritatum cognitio est, sed et\n[[802.13]] conceptuum et quaestionum. Et qui Mentem habet multis imaginibus instructam, is jam\n[[802.14]] illo provectior est, cui adhuc nuda est. Quemadmodum et qui quaestiones plurimas agitari\n[[802.15]] intellexit doctior est eo qui ne quidem novit dubitare et quaerere. Et si cui caeco nato\n[[802.16]] Deus subito ingeneraret coloris ideam, is quidem non esset ab experientia instructior\n[[802.17]] caecis caeteris, nesciret enim tale quid esse in rerum natura, attamen imaginationem\n[[802.18]] haberet ditiorem. Interim qui instructior est ab imaginibus et quaestionibus etiam caeteris\n[[802.19]] paribus instructior est a veritatibus, nam imagines quae aliquid distincti conceptus continent,\n[[802.20]] quod semper faciunt id praestant ut saltem cognoscamus possibilitates, et quae ab\n[[802.21]] experimentis natae sunt praeterea ostendunt quid actu sit in rerum natura. </p>\n<p> [[802.22]] Quaestionum vero cognitio saltem facit ut judicemus quaenam per se sint manifesta\n[[802.23]] vel non; eae enim veritates de quibus dubitare licet, per se notae non sunt. Et ubi dubitatio\n[[802.24]] cum aliqua inquisitione conjuncta est statim occurrunt menti aliquae alterutrius hypotheseos\n[[802.25]] consequentiae adeoque Hypotheticae veritates. Etsi autem objectum semper non\n[[803.1]] sit, scopus tamen cognitionis omnis est, Veritas. Ideo enim imagines consulimus, et\n[[803.2]] quaestiones instituimus, ut inveniamus veritatem, eaque dirigamur in agendo. </p>\n<p> [[803.3]] Pono Modi perveniendi ad cognitionem varii sunt. Vel enim per recordationem\n[[803.4]] prioris cognitionis vel per novam experientiam, vel denique per meditationem acquiritur\n[[803.5]] cognitio. Et quilibet horum modorum rursus est duplex, vel enim voluntate acquiritur\n[[803.6]] cognitio, vel casu. Voluntaria enim recordatio est, quando conscii nos aliquid scivisse, ex\n[[803.7]] vestigiis quibusdam paulatim reminiscentiam nobis paramus. At involuntaria est, cum\n[[803.8]] subito nobis ac sponte priores notitiae redeunt, in quo alii aliis sunt feliciores. Nova\n[[803.9]] experientia rursus vel casualis vel voluntaria est. </p>\n",
+  "number": "169.",
+  "title": "De cognitione",
+  "date": "[April bis Oktober 1686 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:169. De cognitione [April bis Oktober 1686 (?)] [April bis Oktober 1686 (?)] Cognitio nihil aliud est quam cogitatio relata ad objectum. Ejus enim cognitionem aliquam habere dicimur, de quo cogitamus. Neque tantum veritatum cognitio est, sed et conceptuum et quaestionum. Et qui Mentem habet multis i...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

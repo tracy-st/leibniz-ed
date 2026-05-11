@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_678",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 678,
+  "text": "[[2914.14]] <b>516₁.  De quaestionibus in loco torturae </p>\n<p> [[2914.16]] Marsil. in l. <i>Rep</i>. <i>D. de quaestionibus</i> (citante Anonymi <i>processu juridico contra\n[[2914.17]] sagas et veneficos</i> teutsch Aschaffenburg 1629) sagt es sey ihm selbst als des Herzogs\n[[2915.1]] von Meyland Rath und Richter wiederfahren: <i>Es kam mir ein Ribaldus (loser Vogel) sagt\n[[2915.2]] er, vor, so wegen eines diebstahls angeklagt war, dieser bekant in der tortur, darnach</i> ad\n[[2915.3]] banchum juris, <i>oder vor die gerichtsstatt leugnet er alles wieder, und ich fragte ihn\n[[2915.4]] einsmahls, warumb hastu dir doch in sin vorgenommen, dich so offt foltern zu laßen, wer\n[[2915.5]] es dir nicht viel besser, daß du vor gericht daßelbe gestehest, was du bey der folter\n[[2915.6]] bekand hast, als das du dich so offt peinigen läßest? Und dieser arge Lecker antwortet\n[[2915.7]] mir, Hr. es ist mir besser, daß mir 1000 mahl die Arm zerbrochen werden, als die gurgel\n[[2915.8]] nur ein mahl. Denn man findet noch viel medicos oder barbiere welche die beine oder\n[[2915.9]] zerbrochenen Arme wieder können zusammen sezen, aber es ist kein arzt so guth, daß er\n[[2915.10]] einem die zerbrochene gurgel könne wieder ganz machen. Und darumb will ich lieber\n[[2915.11]] von euren henckersknechten auffgezogen werden, als mit meinen füßen die galgenleiter\n[[2915.12]] aufsteigen. Weiters sagte er warumb kan ich nicht eben so wohl vor der gerichtsstatt, da\n[[2915.13]] mirs mein leben kostet, meine Zung umbwenden, und sagen Nein, als ich sage: Ja. In der\n[[2915.14]] wahrheit es war ein abgefeimter schalck, und doch mußte ich ihn los geben, denn er\n[[2915.15]] wolte nimmer</i> ad banchum juris <i>vor der gerichtsstatt geständig seyn, was er in der folter\n[[2915.16]] bekennt hatte.</i> </p>\n<p> [[2915.17]] Scio similem casum Lipsiae contigisse adversus innocentem, qui etiam ita se liberavit,\n[[2915.18]] et innocentia ejus postea detecta est. Caeterum cautela haec videtur evertere omnem\n[[2915.19]] torturam. Non confitens in loco torturae non potest ultra torqueri, et negans in loco judicii\n[[2915.20]] non potest condemnari. Re-cautela est, ut interrogetur non de iis quae affirmando aut\n[[2915.21]] negando constant, sed in quaestionibus quomodo ad indagandum corpus delicti. </p>\n",
+  "number": "516₁.",
+  "title": "De quaestionibus in loco torturae",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:516₁. De quaestionibus in loco torturae Marsil. in l. Rep. D. de quaestionibus (citante Anonymi processu juridico contra sagas et veneficos teutsch Aschaffenburg 1629) sagt es sey ihm selbst als des Herzogs von Meyland Rath und Richter wiederfahren: Es kam mir ein Ribaldus (loser Vogel) sagt er, vor...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

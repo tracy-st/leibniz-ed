@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_43",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 43,
+  "text": "<p> [[197.7]] <b>44. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[197.8]] Hannover, 10. (20.) Mai 1687. [39.46.]</b></p>\n<p> [[197.15]] Recte <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: Ad Vincent. Placcium</Fn> accepi Tuas sane gratissimas cum responsis amici ad quaesita de eo quod interest,\n[[197.16]] quo nomine plurimum gratias ago. </p>\n<p> [[197.17]] Prodiit nuper in Batavis liber inscriptus <i>Medicina Mentis et Corporis</i> autore Tschirnhusio\n[[197.18]] Equite Lusato, amico meo, in rebus Mathematicis omnique philosophia excellente. Is fuerat\n[[197.19]] initio ex asse Cartesianus, sed cum Parisiis crebro mecum ageret ostendi meliora quaedam\n[[197.20]] fundamenta, inprimis discrimen definitionum Nominalium et realium, quod in eo consistit, ut\n[[198.1]] ex definitione Reali agnoscere possimus, utrum res sit possibilis nec ne; huic ille jam fundamento\n[[198.2]] meditationes suas magnam partem recte inaedificat. Cartesius autem contra hanc observationem\n[[198.3]] peccaverat in sua post Anselmum proposita demonstratione Existentiae Dei, ex eo\n[[198.4]] quod Deus est Ens perfectissimum, atque ita omnes perfectiones, adeoque et existentiam\n[[198.5]] involvat. Quae demonstratio hoc saltem probat Deum necessario existere, si modo sit possibilis,\n[[198.6]] neque enim ex definitionibus aliquid concludi tuto potest, nisi constet eas esse reales, sive de re\n[[198.7]] possibili. Caeterum multa perutilia in suo libro annotat Tschirnhusius licet nonnunquam de\n[[198.8]] aliorum sententiis suisque pronuntiet paulo liberalius, et in quibusdam Geometricis in paralogismos\n[[198.9]] inciderit, promtiore quam par est, asseveratione de rebus nondum excussis. Subjicit\n[[198.10]] etiam nonnulla de Medicina Corporis, quam suasi ut appellaret, (: barbariuscula sed significantissima\n[[198.11]] voce :) <i>provisionalem</i>, ne aliis praejudicare videatur aliquando certiora detecturis,\n[[198.12]] vera enim Medicina adhuc in puteo Democriti latet. </p>\n<p> [[198.13]] Nescio an Cl. V. Samuelis Pufendorfii librum legeris <i>Eridis</i> parum amabili titulo inscriptum,\n[[198.14]] ut in literis ad me loquitur vir quidam illustris. Ego scriptoris ingenium colo atque\n[[198.15]] exosculor, sed vellem moderari sibi nonnihil, minusque acriter invehi in dissentientes. Si\n[[199.1]] voluisset <i>Caesarini Furstenerii</i> autor (exemplo Monzambani) satyra vindictam sumere a dissentientibus,\n[[199.2]] quantum illi chartae quantum temporis impendendum fuisset, melioribus destinatum? </p>\n<p> [[199.4]] Nostine atra an alba sit societas illa, quae se vocat <i>eine ump den Schaden Joseph sich\n[[199.5]] bekümmernde Gesellschaft</i>. Quantum judicari potest, socii illi Dreiero, Zeidlero, et horum\n[[199.6]] discipulis videntur infesti, quos titulo syncretistarum infectantur. Promittunt praeterea nescio\n[[199.7]] quam artis Apodicticae emendationem, Analysi Zeidlerianae oppositam, sed artis tantae nulla\n[[199.8]] in libello illo Germanico <i>Vom Schaden Josephs</i> exstant vestigia. Certe Viottus ipse, quem\n[[199.9]] laudant, meo judicio longe adhuc ab ejus penetralibus abfuit, non minus quam Conringius, qui\n[[199.10]] Epistola praefixa Viottum commendavit. Tametsi Conringium ingenio et judicio valuisse\n[[199.11]] dubium nullum sit, sed difficile est ad artis Analyticae arcana pervenire Matheseos expertem.\n[[199.12]] Verum ego Te diutius teneo quam volebam. Vale. </p>\n<p> [[199.13]] Dabam Hanoverae 10. Maji 1687 </p>\n",
+  "number": "44.",
+  "title": "LEIBNIZ AN VINCENT PLACCIUS",
+  "date": "Hannover, 10. (20.) Mai 1687. [39.46.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:44. LEIBNIZ AN VINCENT PLACCIUS Hannover, 10. (20.) Mai 1687. [39.46.] Recte Am Kopf des Briefes von Leibniz' Hand: Ad Vincent. Placcium accepi Tuas sane gratissimas cum responsis amici ad quaesita de eo quod interest, quo nomine plurimum gratias ago. Prodiit nuper in Batavis liber inscriptus Medici...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

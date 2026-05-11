@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_142",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 142,
+  "text": "<p> [[378.7]] /  <b>142. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[378.8]] Hamburg, 7. (17.) September 1697. [136.144.]</b></p>\n\n<p> [[379.1]] I. N. J. C. </p>\n<p> [[379.2]] Viro Amplissimo, Nobilissimo et Excellentissimo G. G. Leibnitio S. P. D. </p>\n<p> [[379.3]] V. Placcius. </p>\n<p> [[379.4]] Equidem credebam peregre Te, vel quod abhorrebat animus, in morbo esse; quia nil\n[[379.5]] respondebatur. Et ni fallor etiam peregrinaris. Nam Hanoverae antea semper Te puto egisse.\n[[379.6]] Neque scio an Guelpherbytum nunc et imposterum debeam meas destinare. Praesentes sane\n[[379.7]] adhuc Hanoveram misi, sperans etiam inde a[d] te perventuras si absis. Weigelius spem Viros\n[[379.8]] executores suae institutionis dandi plane omnem ademit. Francianae Scholae ad me descriptio\n[[379.9]] etiam pervenit. Sed generalia magis quam specialia delineans. Spenerus edere illam molitur ut\n[[379.10]] audio. Faxit Deus feliciter! De Scepperi altero libro amicus meus spem deponit. Nec ego de\n[[379.11]] Carniolanae linguae Boxhornii libello audivi unquam, aut audire aliunde confido. <Fn><i>Dazu von Leibniz' Hand ergänzt</i>: An me de eo somniasse putat?</Fn> </p>\n<p> [[379.12]] Par illud Anglorum mihi ex suis scriptis, non aliunde notum est, et mirifice commendatum.\n[[379.13]] Nullis lubentius exemplar <i>Accessionum</i> mearum dono mitterem, si scirem occasionem\n[[379.14]] certo ad manus eorum perferendi. Nec enim puto ad eos etiamnum pervenisse; licet jam sesqui\n[[379.15]] anno in bibliopoliis sint. Quaeso si potes hac in re pararium te praestare, id facias; ut eorum\n[[379.16]] mentem de hisce meis accipiam. <i>Pseudonymis</i> jam jam finitis ultra dimidium, et <i>Anonymis</i> fere\n[[379.17]] in totum, quietem ab hoc labore anhelo; ut solis posthac sacris vacem: quorum tamen dum\n[[379.18]] vivam vix aliquid edetur. O si possem eruditam et vere Philosophicam Theologiam eam meae\n[[379.19]] philosophiae superstruere, quae ab imbecillitatibus conceptum de divinis liberet ita; ut intelligant\n[[379.20]] Theologi se hactenus populariter nimis de rebus illis disputasse. Neque ullam nisi\n[[380.1]] vulgarem ideam concepisse, adeoque rejectis omnibus istis hactenus habitis controversiis frustra\n[[380.2]] fuisse. Sane, ni fallor, intelligunt Deum proprie sumtis philosophice vocibus et sensibus, non\n[[380.3]] irasci, non opus habere satisfactione et vindicta. Quid ergo substituent eruditae notioni ut a\n[[380.4]] Socianismo immunes et orthodoxi maneant? Sane aliquid altioris notionis et Deo dignioris in\n[[380.5]] hac sapientia est, quae parvulis ut parvulis non ad disputandum, sed credendum proponitur. In\n[[380.6]] qua quia subsistere nolunt: utinam saltim aliquid Majestate divina dignum substituant notionibus\n[[380.7]] adeo plebejis; ne inter sacrum et saxum positi, nec erudite nec plebeje credant. Sed\n[[380.8]] manum de Tabula. Vale. Hamb. 1697. d. 7. Septembr. </p>\n<p> [[380.9]] Jam nunc Epistolam accipio Helmstadio, in qua haec verba: <i>Placcianam soliditatem (cui\n[[380.10]] Anglorum eruditos, quos et innatum ingenii acumen, et diligens exercitatio idoneos maxime\n[[380.11]] harum rerum aestimatores facit, cum tempore ubique assurgere accepi)</i> etc. </p>\n",
+  "number": "142.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "Hamburg, 7. (17.) September 1697. [136.144.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:/ 142. VINCENT PLACCIUS AN LEIBNIZ Hamburg, 7. (17.) September 1697. [136.144.] I. N. J. C. Viro Amplissimo, Nobilissimo et Excellentissimo G. G. Leibnitio S. P. D. V. Placcius. Equidem credebam peregre Te, vel quod abhorrebat animus, in morbo esse; quia nil respondebatur. Et ni fallor etiam peregri...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

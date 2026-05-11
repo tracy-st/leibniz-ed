@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_183",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 183,
+  "text": "<p> [[569.1]] <b>183. LEIBNIZ AN CHRISTIAN THOMASIUS</p>\n<p> [[569.2]]  Berlin, 25. Februar 1707. [182.] </b></p>\n<p> [[569.21]] Vir Amplissime et Excellentissime Fautor honoratissime </p>\n<p> [[569.22]] Inexpectata <Fn><i>In L^#'1 am Kopf der Seite von Leibniz' Hand</i>: A Monsieur Thomasius Conseiller du Roy de prusse et ICte celebre à Hall Berolin[i] circa finem Febr. 1707</Fn> literarum tuarum voluptate nihil mihi potuit esse gratius; tum quod multam\n[[569.23]] benevolentiae Tuae significationem continerent, tum quod rem novam et egregiam aperirent. </p>\n<p> [[570.1]] Inventum Tibi gratulor, nobis gaudeo, quem Freherus olim laudaverat <i>de Beneficiis</i>\n[[570.2]] veterem librum; et hortor ut quamprimum edas, neque enim unquam uspiam prodiisse puto. Et\n[[570.3]] qui potuit ille liber extare typis, et fugere tot egregios viros qui talia venati sunt? Nam de mea\n[[570.4]] quidem notitia nihil spondeo, etsi non fuerim talium incuriosus. Te certe video usum libris\n[[570.5]] optimis rarissimisque ut alio Nomenclatore vix opus habeas. Caeterum ex ipso opere indicia\n[[570.6]] aliqua eruptura puto, unde de tempore et patria scriptoris judicetur. Utrum scilicet scriptus sit\n[[570.7]] stante Carolingorum stirpe, et in Franciae orientalis an in Galliae regno. Operae etiam pretium\n[[570.8]] erit videre an aliquid, et quidnam de beneficiorum conservatione in familia constituatur, quam\n[[570.9]] jam longe ante Carolum M. receptam constat, ut non nisi magna ratione interrumperetur. </p>\n<p> [[570.10]] Etsi non omnes Tuas lucubrationes egregias, ita ut vellem, evolvere potuerim; complures\n[[570.11]] tamen inspexi cum voluptate et fructu. Et video Te non iisdem pertinaciter inhaerere opinionibus,\n[[570.12]] sed non raro ingenue profiteri, quid in melius mutandum putes. Memini me quoque olim\n[[570.13]] non raro mutare sententiam, donec visus sum constituisse in quibus quiescere possem. Et nunc\n[[570.14]] ipse mihi demonstrationum opinione blandior, quas aliquando in ordinem redigere cogito, ut\n[[570.15]] judicium insignium virorum experiar in quibus Te merito numero. Vale et fave. Dabam Berolini\n[[570.16]] 25 Febr. 1707 </p>\n<p> [[570.17]] deditissimus G. G. Leibnitius </p>\n<p> [[570.18]] P. S. Si quid jubes porro, recte ad me perveniret si sub operculo huc mittatur, ita inscripto:\n[[570.19]] <i>A Monsieur Monsieur Jablonski secretaire du Roy à Berlin</i> </p>\n",
+  "number": "183.",
+  "title": "LEIBNIZ AN CHRISTIAN THOMASIUS",
+  "date": "Berlin, 25. Februar 1707. [182.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:183. LEIBNIZ AN CHRISTIAN THOMASIUS Berlin, 25. Februar 1707. [182.] Vir Amplissime et Excellentissime Fautor honoratissime Inexpectata In L^#'1 am Kopf der Seite von Leibniz' Hand: A Monsieur Thomasius Conseiller du Roy de prusse et ICte celebre à Hall Berolin[i] circa finem Febr. 1707 literarum tu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

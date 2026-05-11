@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_617",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 617,
+  "text": "[[2736.14]] <b>485₁.  Index partium et capitum\n[[2736.15]] <tab/>Typus Medicinae Moralis\n [[2736.16]] I. <tab/><b>Physiologia moralis</b> de Hominis natura et bonis. <tab/>pag. 5.\n [[2736.17]] II. <tab/><b>Hygieine moralis</b> de summo Bono et virtutibus moralibus. <tab/>p. 124.\n [[2736.18]] III.<tab/><b>Nosologia moralis</b> de summo malo et vitiis moralibus. <tab/>p. 148.\n [[2736.19]] IIII.<tab/><b>Semeiotica moralis</b> de signis malorum et bonorum morum. <tab/>p. 175.\n [[2736.20]] V.<tab/><b>Therapeutica moralis</b> de remediis et emendatione morum. <tab/>p. 209.\n [[2736.21]] <b>Diaet<angle bracket>a - </angle bracket></b> libello <angle bracket> - </angle bracket> explicatur; <angle bracket>diaetetica</angle bracket> moralis partiti<angle bracket>oni</angle bracket>bus delineatur partis\n[[2736.22]] ultimae c<angle bracket>ap.</angle bracket> ulti<angle bracket>mo.</angle bracket>\n [[2737.1]] <k>Phy<tab/>siologia</k> <tab/>cap. <tab/> 1. <tab/>de Bonis, malis, et operationibus humanis in genere\n [[2737.2]] <tab/>cap. <tab/> 2. <tab/>de Homine ejusque anima in genere\n [[2737.3]] <tab/>c. <tab/> 3. <tab/>de Mente\n [[2737.4]] <tab/>c. <tab/> 4. <tab/>de voluntate\n [[2737.5]] <tab/>interna <tab/>c. <tab/> 5. <tab/>de corpore ejusque bonis et malis\n [[2737.6]] <tab/>c. <tab/> 6. <tab/>de unione animae et corporis,\n [[2737.7]] <tab/>eaque naturali seu involuntaria\n [[2737.8]] <tab/>c. <tab/> 7. <tab/>de adscititia seu de moribus\n [[2737.9]] <tab/>c. <tab/> 8. <tab/>De mundo et speciatim de aspectabili corporeo\n [[2737.10]] <tab/>externa <tab/>c. <tab/> 9. <tab/>de Mundo Humano, seu genere humano\n [[2737.11]] <tab/>c. <tab/>0. <tab/>De Mundo spiritali, et speciatim de Deo\n [[2737.12]] <k>Hygieine</k> <tab/>cap.<tab/> 1. <tab/>de Pietate\n [[2737.13]] <tab/>c. <tab/> 2. <tab/>de Temperantia\n [[2737.14]] <tab/>c. <tab/> 3. <tab/>de Fortitudine\n [[2737.15]] <tab/>c. <tab/> 4. <tab/>de Charitate sive justitia\n [[2737.16]] <tab/>c. <tab/> 5. <tab/>de communibus virtutum et spe futurae vitae\n [[2737.17]] <k>Nosologia</k> <tab/>c. <tab/> 1. <tab/>de impietate\n [[2737.18]] <tab/>c. <tab/> 2. <tab/>de intemperantia\n [[2737.19]] <tab/>c. <tab/> 3. <tab/>de impotentia\n [[2737.20]] <tab/>c. <tab/> 4. <tab/>de injustitia et inimicitia\n [[2737.21]] <tab/>c. <tab/> 5. <tab/>communia vitiorum et de futurae poenae metu\n [[2737.22]] <k>Semeiotica</k> <tab/>c. <tab/> 1. <tab/>de Examine Morali in genere et signis\n [[2737.23]] <tab/>c. <tab/> 2. <tab/>de triplici examine quo cognoscimus\n [[2737.24]] <tab/>) vel statum bonitatis aut malitiae moralis,\n [[2737.25]] <tab/>) vel certam virtutem certumve vitium, vel\n [[2737.26]] <tab/>) circumstantias singulares\n [[2737.27]] <tab/>c. <tab/> 3. <tab/>de examine nostri, et conscientia\n [[2737.28]] <tab/>c. <tab/> 4. <tab/>de examine morum alienorum\n [[2737.29]] <k>Therapeutica</k> <tab/>c. <tab/> 1. <tab/>de remediis in genere et generalibus\n [[2737.30]] <tab/>c. <tab/> 2. <tab/>de Methodo medendi generali\n [[2737.31]] <tab/>c. <tab/> 3. <tab/>de remediis praeparantibus,\n [[2737.32]] <tab/>inprimis evitationis exercitio\n [[2738.1]] <tab/>c. <tab/> 4. <tab/>de remediis praeservatoriis seu purgatoribus,\n [[2738.2]] <tab/>et exercitio imminuendi actus vitiosos\n [[2738.3]] <tab/>c. <tab/> 5. <tab/>de remediis curatoriis seu exercitio virtutum\n [[2738.4]] <tab/>c. <tab/> 6. <tab/>de remediis minus aptis,\n [[2738.5]] <tab/>et postremo <b>de diaetetica morali</b> </p>\n",
+  "number": "485₁.",
+  "title": "Index partium et capitum",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:485₁. Index partium et capitum Typus Medicinae Moralis I. Physiologia moralis de Hominis natura et bonis. pag. 5. II. Hygieine moralis de summo Bono et virtutibus moralibus. p. 124. III.Nosologia moralis de summo malo et vitiis moralibus. p. 148. IIII.Semeiotica moralis de signis malorum et bonorum ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

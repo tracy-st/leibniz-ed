@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_65",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 65,
+  "text": "<p> [[289.18]] <b>66. LEIBNIZ AN LUDOVICO CASATI</p>\n<p> [[289.19]] [Rom, 14. April bis 21. November 1689.]</b></p>\n<p> [[290.4]] Ad R.P. [Casati] Lectorem Theologiae in Collegio Clementino urbis Romae. </p>\n<p> [[290.5]] Quemadmodum optime ostensum est, <b>nullam esse determinationem pure\n[[290.6]] extrinsecam</i>, hoc est nullam rem ad novam aliquam actionem determinari nisi excitetur nova\n[[290.7]] aliqua ad agendum dispositio in ipsa; ita semper arbitratus sum <b>nullam dari differentiam</b>\n[[290.8]] <b>pure extrinsecam</b>, hoc est (ne quis in verbis cavilletur) nunquam duas res inter se differre,\n[[290.9]] quin discerni possint non tantum per extrinseca, sed etiam per ea quae sunt in ipsis. Res\n[[290.10]] exemplo intelligetur clarius. Si duo dentur ova <i>A</i> et <i>B</i> posita in cista\n[[290.11]] <i>CD</i>, sitque <i>A</i> ovum gallinae albae et <i>B</i> nigrae, eaque Ova sint admodum\n[[290.12]] similia inter se et aequalia, tunc utique licet per se discerni\n[[290.13]] facile et primo aspectu non possint, poterunt discerni facillime ipso\n[[290.14]] situ in cista, ut si unum <i>A</i> ponatur in loculamento cistae medio,\n[[290.15]] alterum <i>B</i> in loculamento quod sit angulo vicinum; tunc optime poterunt discerni per differentiam\n[[290.16]] hanc extrinsecam; dico tamen hanc differentiam extrinsecam duorum ovorum etsi\n[[290.17]] nobis serviat, nihilominus in re non sufficere, sed supponere differentiam aliquam intrinsecam\n[[290.18]] seu in ipsis ovis, adeoque non posse dari duo ova tam perfecte similia, ut nullum in iis\n[[290.19]] discrimen notari possit, si attente considerentur aut perfecte perspicerentur. </p>\n<p> [[290.20]] Nimirum si diversa sunt <i>A</i> et <i>B</i> utique habebunt in se diversitatem, seu principium\n[[290.21]] discernendi, in se inquam, abstrahendo animum ab externis. Nam fingamus externa omnia\n[[290.22]] annihilari et duos globos materiales (quos nunc ovis substituam) solos superesse in spatio\n[[290.23]] imaginario, tunc dico a nemine quanticunque sit intellectus, nec ab angelo imo ne a Deo\n[[291.1]] quidem istos duos globos perfecte aequales et similes posse discerni. Cum principium discernendi\n[[291.2]] non sit in ipsis (ex hypothesi adversariorum), nec in externis ex hypothesi sublatorum\n[[291.3]] externorum, nec partes spatii imaginarii quibus circumdantur globi queant discerni inter se.\n[[291.4]] Absurdum autem est dari duo diversa, quae ne ab infinito quidem intellectu discerni possint. </p>\n<p> [[291.5]] Atque haec per experientiam confirmantur, nunquam enim ovum ovo, lac lacti, folium\n[[291.6]] folio, animal animali, et generaliter res rei ita similis reperietur, quin accurata inspectione facta\n[[291.7]] discrimen aliquod notari possit; quod in foliis arborum et graminibus hortorum aliquando inter\n[[291.8]] deambulandum a foemina principe magni ingenii jucunde observatum memini. </p>\n<p> [[291.9]] Et sane ut a corporibus ad intelligentias transeamus, D. Thomas praeclare notavit, non\n[[291.10]] posse dari duas intelligentias separatas perfecte inter se similes, et licet perfectam similitudinem\n[[291.11]] in corporibus dari posse putarit, hoc tamen ex natura materiae non satis ejus temporibus\n[[291.12]] perspecta natum est. Et fortasse tantum voluit dari corpora quae specie non differant, etsi aliter\n[[291.13]] dissimilia sint. </p>\n<p> [[291.14]] Quod vero ad animas attinet, equidem verum est Humanas Mentes inter se non differre in\n[[291.15]] specie, non tamen hinc inferri debet, eas perfecte similes esse, multa enim quae in specie non\n[[291.16]] differunt, nihilo minus discerni per se posse constat, magnitudine, gradu, variisque proportionibus\n[[291.17]] ut duo homines lineamentis vultus dignoscuntur. Et licet plurimum discriminis in\n[[291.18]] mentibus oriatur ex iis quae corporibus quibus uniuntur accidunt, attamen dicendum est, primo\n[[291.19]] statim infusionis instanti differre animas, nec adeo ullum momentum dari, quo sint perfecte\n[[291.20]] similes. Et certe inter Christi et Judae animas per se spectatas nullum aliquando fuisse discrimen\n[[291.21]] non sine absurditate dici posse videtur. Adeoque tuto sine ullo censurae metu defendere\n[[291.22]] poterimus duas animas perfecte inter se similes nunquam dari, idemque in universum in rebus\n[[291.23]] verum esse. Ex qua jam veritate multa alia momenti maximi, de quibus alias, consequuntur. </p>\n",
+  "number": "66.",
+  "title": "LEIBNIZ AN LUDOVICO CASATI",
+  "date": "[Rom, 14. April bis 21. November 1689.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:66. LEIBNIZ AN LUDOVICO CASATI [Rom, 14. April bis 21. November 1689.] Ad R.P. [Casati] Lectorem Theologiae in Collegio Clementino urbis Romae. Quemadmodum optime ostensum est, nullam esse determinationem pure extrinsecam, hoc est nullam rem ad novam aliquam actionem determinari nisi excitetur nova ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

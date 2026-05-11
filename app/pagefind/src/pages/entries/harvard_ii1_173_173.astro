@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_173",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 173,
+  "text": "<p> [[563.19]] <b>157. HERMANN CONRING AN LEIBNIZ</p>\n<p> [[563.20]] Helmstedt, 8. (18.) September 1677. [156.162.]</b></p>\n<p> [[564.6]] Nobilissime ac Ampliss. Vir </p>\n<p> [[564.7]] Multis nominibus gratae fuerunt literae tuae: cumprimis autem eo, quia visus mihi es\n[[564.8]] significare, ab Optimo Principe AntiCapucinica mea fronte benigna esse excepta. Dionysio\n[[564.9]] oportune evenit suorum conventus. Haud dubie enim deliberabitur, quemadmodum saltim\n[[564.10]] seraphica Francisci stigmata sui existimationem queant recuperare, ut et Novenisticae Revelationes:\n[[564.11]] quae a me malis auctoribus adscriptae sunt. Bibliothecae Agrippinenses scurrilitates et\n[[564.12]] mendacia hominis non fucabunt, scio: parum quoque juvabunt quod reliquum est. Opera\n[[564.13]] collatitia requiritur ad malae caussae patrocinium. Si Stenonius Vicarium egerit Apostolicum\n[[564.14]] ejusque censurae subjecerit sua Capucinus, minus scurrilium sannarum exspectandum mihi\n[[564.15]] fuerit. Moderatum enim et gravem hujus calamum ipse jam tum deprehendi, ex quatuor\n[[564.16]] schediasmatibus sacris Florentiae editis, indeque mihi missis a Bibliothecario Mediceo Antonio\n[[564.17]] Magliabechio: ac proinde confido, rectius ab illo expensum iri, quid exigant boni mores, quam\n[[564.18]] est factum a Capucinici libelli censoribus seraphicis et Capucinicis. Utinam solidam quoque\n[[564.19]] sacrarum rerum peritiam idem Stenonius nobis referat, possitque verbum divinum aeque scite\n[[564.20]] <greek>ŏruotomeĩn,</greek> atque potest animata corpora <greek>ănatomeĩn</greek>! Tempus omnia docebit. </p>\n<p> [[564.21]] Ne Justellianae Epistolae argumentum Te fugiat, mitto ipsam illam et quidem cum\n[[564.22]] Responso meo inobsignato. Illam peto reddi: hoc autem commoda occasione curari. </p>\n<p> [[564.23]] Artis Medicae non minus atque aliarum pene omnium scientiarum, si solas Mathematicas\n[[564.24]] quas puras vocant excipias, duo sunt pridem observata et constituta quasi principia: Experientia\n[[564.25]] et Apodictica ratiocinatio, vel saltim interdum <greek>dojastikh̀</greek>. Nisi utramque hanc artem quis\n[[564.26]] tenuerit, et secutus fuerit, non poterit non graviter labi. A plurimis autem hac parte peccari\n[[564.27]] certum est. Velim abs te expendi, quae de illustrando Pathologico studio disserui in Epistola\n[[564.28]] praefixa <i>Observationibus</i> Salmuthi, quae Operi quoque Epistolico quod Serenissimi Principis\n[[564.29]] nomini consecravi est inserta. Quod si non graveris quoque cum cura legere quae ultimae\n[[565.1]] editioni meorum <i>Hermeticorum</i> praemisi, possis simul accipere meam de Cartesianis pariter\n[[565.2]] Anglicanisque Philosophiae excolendae conatibus, sententiam a tua non sane multum diversam.\n[[565.3]] Unum hoc peto nunc mihi credi: me hactenus justo studio nostri temporis scripta omnia\n[[565.4]] <greek>ĕmpeirikà</greek> quae nancisci potui trivisse: iis vero confirmatum me potius in amplexanda veteri\n[[565.5]] Aristotelica doctrina quam permotum ab ea deserenda. Caeterum ipsam Experientiae et Apodicticae\n[[565.6]] methodum, existimo nondum esse a quoquam perfecte traditam. De hac quid sentiam,\n[[565.7]] poteris, si libet, capere ex Epistola ad Frolingium in Viotti librum <i>de Demonstratione</i>: quae\n[[565.8]] itidem in Opere Epistolico habetur. Quod si negotia fuissent passa, pridem utrumque argumentum\n[[565.9]] singulari opere illustrassem: Jam enim quae isthuc faciunt haud pauca congessi. Sed ut\n[[565.10]] hactenus pene nunquam fui, ita nec jam sum meus. Isthaec igitur curatio videtur aliis relinquenda. </p>\n<p> [[565.12]] Puteanea non reperiri in Bibliotheca Principis, doleo. Forte tamen possint etiamnum ex\n[[565.13]] Gallia curari, donec tertius liber <i>de Finibus</i> fuerit conficiendus. Quod si alia opera me possis\n[[565.14]] juvare, etiam illud utile fuerit commodo publico. </p>\n<p> [[565.15]] Vale et perge favere Tuo H. Conringio. </p>\n<p> [[565.16]] Helmestadii 8 Septembr. 1677. </p>\n<p> [[565.17]] Nobilissimo et Amplissimo Viro Gotfrido W. Leibnitzio Serenissimo Duci Joanni Friderico\n[[565.18]] a Consiliis et Bibliothecis Amico meo honorando. Hannover. Franco per Brunsvic. </p>\n",
+  "number": "157.",
+  "title": "HERMANN CONRING AN LEIBNIZ",
+  "date": "Helmstedt, 8. (18.) September 1677. [156.162.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:157. HERMANN CONRING AN LEIBNIZ Helmstedt, 8. (18.) September 1677. [156.162.] Nobilissime ac Ampliss. Vir Multis nominibus gratae fuerunt literae tuae: cumprimis autem eo, quia visus mihi es significare, ab Optimo Principe AntiCapucinica mea fronte benigna esse excepta. Dionysio oportune evenit suo...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_167",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 167,
+  "text": "[[573.3]] <b>135.  De abstractis [Sommer 1683 bis Ende 1688 (?)]</b>\n [[573.4]] <tab/>[Sommer 1683 bis Ende 1688 (?)]\n[[573.13]] <tit2><b>De abstractis</b></tit2> </p>\n<p> [[573.14]] Sapientia est <greek>tò</greek> <i>esse sapientem</i> quatenus est sapiens. Justitia est <greek>tò</greek> <i>esse justum</i>\n[[573.15]] quatenus est justus. Itaque etsi <i>esse sapientem</i> sit <i>esse justum</i>, non tamen sapientia est\n[[573.16]] justitia. Nam sapientia est scientia felicitatis, justitia est caritas ad normam sapientis. Sed\n[[573.17]] ad justi rationem assumuntur hypotheses aliae, quam quae ad sapientem formandum\n[[573.18]] necessariae sunt, etsi autem constet ex sapientis notione, quid in illa hypothesi ipsi\n[[573.19]] conveniat; non tamen id convenit ei quatenus est sapiens. Quid ergo. </p>\n<p> [[573.20]] An sapientia est felicitas seu an sapiens quatenus sapiens est felix. Id non ita est,\n[[573.21]] nam praeter scientiam felicitatis requiritur laetitia durabilis. Scit igitur sapiens quid pariat\n[[573.22]] laetitiam durabilem, necesse est tamen ut praeter scientiam ejus, accedat ipsa laetitia ut\n[[573.23]] felix fiat, ita novum aliquid quod facti est seu nova hypothesis poni debet tametsi ea ex\n[[573.24]] priore soleat sequi. Sed omnis sapiens quatenus sapit est sciens, est perfectione praeditus,\n[[574.1]] est qualificatus. Itaque sapientia est scientia, est perfectio, est qualitas. Quid ergo quia\n[[574.2]] omnis sapiens quatenus sapiens est laudabilis? An sapientia erit laudabilitas. Sed hoc dici\n[[574.3]] non potest, quia ipsa sapientia est laudabilis. Eodem igitur argumento negabitur etiam\n[[574.4]] quod sapientia sit bonitas. Nam ipsa sapientia est bona. Itaque laboramus adhuc difficultate.\n[[574.5]] An dicemus omnem bonitatem esse bonam, ut datur relatio relationis. An negabimus\n[[574.6]] sapientem quatenus sapiens, laudabilem esse, quia ad intelligendam laudabilitatem\n[[574.7]] assumenda sunt quae in sapiente non continentur scil. consideratio spectatorum, ita <greek>tò</greek>\n[[574.8]] <i>quatenus</i> non tantum in re, sed et consideratione novas hypotheses excludit. </p>\n",
+  "number": "135.",
+  "title": "De abstractis",
+  "date": "[Sommer 1683 bis Ende 1688 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:135. De abstractis [Sommer 1683 bis Ende 1688 (?)] [Sommer 1683 bis Ende 1688 (?)] De abstractis Sapientia est tò esse sapientem quatenus est sapiens. Justitia est tò esse justum quatenus est justus. Itaque etsi esse sapientem sit esse justum, non tamen sapientia est justitia. Nam sapientia est scie...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

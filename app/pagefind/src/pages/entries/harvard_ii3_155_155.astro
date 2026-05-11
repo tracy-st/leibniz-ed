@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_155",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 155,
+  "text": "<p> [[411.1]] <b>155. JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ</p>\n<p> [[411.2]] Bremen, 31. Januar (10. Februar) 1698. [165.]</b></p>\n\n<p> [[411.14]] HochEdler HochAnsehnlicher und Fürtrefflich=Gelehrter, </p>\n<p> [[411.15]] Hochberühmter herr Raht Hoher herr und Gönner! </p>\n<p> [[411.16]] So unglücklich für etwa drey oder vier Jahr, da ich von Nürnberg, Ihrer Excellenz,\n[[411.17]] gehorsahmst auffzuwarten, durch Hannover auff Bremen reisete, dero damahlige Abwesenheit\n[[411.18]] mich gemachet hat; So glücklich bin ich nachdem unbekandter weise durch Vermittelung\n[[411.19]] Etzlicher Wehrten Gönner, welche mich nicht allein Ihres recht herzlich erwünschten Angenehmsten\n[[411.20]] Grußes, sondern auch Ihrer Hohen Affection und Großen Zuneigung versichert\n[[411.21]] haben, erfreuet worden. Ich gestehe wohl, daß, als mich Mons. Sanders, der von Halle kommend\n[[411.22]] sich einige Wochen zu Hannover verweilet, auffs neue mit Ihrem hohen Gruße beglückseeliget\n[[411.23]] hat, er mich zu einiger, meiner seits zwar wenigen und geringen correspondence nach\n[[411.24]] Ihrem hohen befehl antreiben wollen, ich eines theils mich wegen der großen Ehre, deren mich\n[[411.25]] gahr nicht würdig schätze, gewißlich recht erfreuet, eines theils aber auch, und meistens,\n[[411.26]] unglücklich geschätzet habe, weil dero hohen weit und weltberühmten unvergleichlich tieffen\n[[411.27]] und nicht gnug zu bewundernden wißenschafft meine ganz leichte und allerschlechteste Feder\n[[411.28]] gar nicht die geringste Satisfaction geben kan, zumahl ich bey meiner fürnehmlich jezo sehr\n[[411.29]] schwachen und fast ganz schwindsüchtigen Constitution, unter meiner schlavischen allzuschweren\n[[411.30]] und meinen wenigen kräfften übel proportionirten Schul-Arbeit, die mich täglich\n[[411.31]] mehr und mehr abmattet, zu nichts rechtschaffenes tüchtig bin; doch gratulire ich mir <i>quam\n[[411.32]] impensissime</i> Meines Hochgeneigten herrn Rahts unverdinter hohen Affection, von welcher\n[[411.33]] ganze Ströme der Weißheit auff mein dürres Stück= und Anfangs=werk reichlichst flißen\n[[412.1]] können. <i>In magnis voluisse sat est</i>! Gott gebe, weil ich dises noch im ersten Monaht des Jahres\n[[412.2]] schreibe, daß Mein hochgeneigter herr Raht, in allem leibl. und Geistl. Leibes und Seelen\n[[412.3]] heil-gedeien mit starker kraft vom himmel herab, zu dero hohen Landes Obrigkeit sonderbahrer\n[[412.4]] Stütze, der ganzen gelehrten Welt fürtreffliches Auffnehmen, zu selbsteigenen hohen Vergnügen,\n[[412.5]] und aller Clienten, auch meiner eigenen Freude und Wohlfahrt mögen überschüttet\n[[412.6]] werden. In welcher Zuversicht M. h. H. Raht in des Allerhöchsten Schutz empfehlend verbleibe </p>\n<p> [[412.7]] Ihr. Excellenz dinstbereitwilligster M. J. C. Schulenburg,\n [[412.8]] Rector Reg. Athen. et Schol. Cathar. Br. </p>\n<p> [[412.9]] Br. d. 31. Jan. 98 </p>\n<p> [[412.10]] P. S. In disen beyden Disputation ist die bloße Rede <i>ad Respp.</i> meine Arbeit, <i>ut ipsi\n[[412.11]] monstrant paginae</i>. </p></p>\n",
+  "number": "155.",
+  "title": "JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ",
+  "date": "Bremen, 31. Januar (10. Februar) 1698. [165.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:155. JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ Bremen, 31. Januar (10. Februar) 1698. [165.] HochEdler HochAnsehnlicher und Fürtrefflich=Gelehrter, Hochberühmter herr Raht Hoher herr und Gönner! So unglücklich für etwa drey oder vier Jahr, da ich von Nürnberg, Ihrer Excellenz, gehorsahmst auffzuwarten...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

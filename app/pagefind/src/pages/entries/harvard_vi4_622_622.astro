@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_622",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 622,
+  "text": "[[2755.5]] <b>489.  Methodus jurisconsultorum exemplar methodi medicinae [Herbst 1677 bis Sommer 1678 (?)]</b>\n [[2755.6]] <tab/>[Herbst 1677 bis Sommer 1678 (?)] </p>\n<p> [[2755.10]] Cum Medicina plurimum adhuc Empirica sit et magis quam ulla alia scientia, hinc\n[[2755.11]] plurimus in ea debet esse usus testimoniorum quando unus omnia experiri non potest. Ita\n[[2755.12]] velim quod jurisconsulti fecere praeter necessitatem, id potius facere medicos, et si ulla in\n[[2755.13]] re certe in speciali physica, maxime autem in Medicina Bibliothecam et repertoria, et\n[[2755.14]] excerpta prodesse posse arbitror. Vellem igitur viri diligentes collatis operis innumerabilia\n[[2755.15]] observata, quandoque et judicia medicorum redigerent in Enuntiationes, subjectis\n[[2755.16]] cuique autoritatibus, et aliquando verbis, utentes Methodis Jurisconsultorum qui Regulas,\n[[2755.17]] ampliationes, limitationes, replicationes, duplicationes etc. dederunt, quae res valde facit\n[[2755.18]] ad contrahendam prolixitatem; quali Vigelius usus est, et Rulandus in opere <i>Commissarii.</i> </p>\n<p> [[2755.19]] Exempli causa: Esto <k>Regula</k>: </p>\n<p> [[2756.1]] <b>Frigida actualia, topice adhibita dolores minuunt.</b> </p>\n<p> [[2756.2]] Subjiciantur autores insignes approbantes hanc propositionem generaliter. Item\n[[2756.3]] improbantes ejus generalitatem. Item contrariam tuentes. Subjiciantur et exempla in\n[[2756.4]] utramque partem, quae neque ampliationem neque limitationem continent. His absolutis\n[[2756.5]] ponantur Ampliationes seu exceptiones reprobatae, ubi scil. dubitari poterat an locum\n[[2756.6]] haberet regula. Ratione dolorum <k>ampliatur</k> <b>primo</b> in <b>colica.</b> Hipp. 6 <i>Epid.</i> sect. 8.\n[[2756.7]] ubi notanda verba; <b>secundo</b> in <b>calculo vesicae</b>, vid. Sanctor. in <i>1. Fen.</i> p. 668;\n[[2756.8]] tertio in <b>podagra.</b> Hipp. sect. 5. <i>aph.</i> 25. etc. <k>Exceptio</k> si biliosa non sit podagra.\n[[2756.9]] Ratione frigidorum, excipitur aqua frigida, hanc exceptionem reprobat Hippocr. d.\n[[2756.10]] <i>aph.</i> 25, approbant plerique hodierni, partim in theoria, partim in praxi. Replicatur: si\n[[2756.11]] aqua frigida guttatim instilletur. Hanc replicationem seu defensionem regulae, proponit et\n[[2756.12]] probat Mercurialis. </p>\n",
+  "number": "489.",
+  "title": "Methodus jurisconsultorum exemplar methodi medicinae",
+  "date": "[Herbst 1677 bis Sommer 1678 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:489. Methodus jurisconsultorum exemplar methodi medicinae [Herbst 1677 bis Sommer 1678 (?)] [Herbst 1677 bis Sommer 1678 (?)] Cum Medicina plurimum adhuc Empirica sit et magis quam ulla alia scientia, hinc plurimus in ea debet esse usus testimoniorum quando unus omnia experiri non potest. Ita velim ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

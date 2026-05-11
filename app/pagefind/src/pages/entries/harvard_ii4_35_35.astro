@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_35",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 35,
+  "text": "<p> [[105.1]] <b>35. LEIBNIZ AN ISAAC JAQUELOT</p>\n<p> [[105.2]] Berlin, 21. November 1702. [34.37.] </b></p>\n<p> [[105.14]] <b>Reponse</b>: <b>Berlin 21 Novembr</b>. </p>\n<p> [[105.15]] Je n'ay point tardé, Monsieur de jouir du plaisir que vous m'avés fait en me communiquant\n[[105.16]] vos pensées, sur l'argument contesté de M. Des-Cartes et d'executer vos ordres, en y\n[[105.17]] melant les miennes. Si j'avois eu du loisir, j'aurois mis le tout au net, mais n'ayant receu vostre\n[[105.18]] billet qu'hier, et le jour d'aujourdhuy estant un jour de poste, je n'ay pas pû le faire, et je n'ay\n[[105.19]] point voulu differer. Nous avons un meme dessein, qui est celuy d'eclaircir la verité. Je vous\n[[105.20]] feray tousjours connoistre que c'est un de mes premiers interests, et que je mets tout auprés\n[[105.21]] celuy de plaire à des personnes de vostre merite et par consequent de me monstrer en toute\n[[105.22]] occasion, Monsieur vostre etc. </p>\n",
+  "number": "35.",
+  "title": "LEIBNIZ AN ISAAC JAQUELOT",
+  "date": "Berlin, 21. November 1702. [34.37.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:35. LEIBNIZ AN ISAAC JAQUELOT Berlin, 21. November 1702. [34.37.] Reponse: Berlin 21 Novembr. Je n'ay point tardé, Monsieur de jouir du plaisir que vous m'avés fait en me communiquant vos pensées, sur l'argument contesté de M. Des-Cartes et d'executer vos ordres, en y melant les miennes. Si j'avois ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

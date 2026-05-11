@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_153",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 153,
+  "text": "<p> [[544.1]] <b>155. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[544.2]] Padua, 23. Juni [1692]. [149.159.]</b></p>\n<p> [[544.8]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[544.9]] Sono due settimane, che mi trovo con Sua Eccellenza alla visita della Provincia, il che fù\n[[544.10]] caggione che non le scrivessi con l'Ordinario passato; arrivato però oggi in Padova, la prima\n[[544.11]] cosa, che fò, è inchinare con questa V. S. Illu^#'m^#'a, assicurandola della mia ferma risolutione di\n[[544.12]] portarmi costì secondo il concertato. Io già mi sarei partito, se l'Eccell^#'m^#'o Sig^#'r^#'e Capitano non mi\n[[544.13]] havesse ancora con violenza trattenuto, pregandomi di non abbandonarlo, finche si proveda\n[[544.14]] d'altro Soggetto a proposito per dare l'ultima mano all'istruttione del suo Primogenito. Questa\n[[544.15]] mattina hò di nuovo supplicato Il Sig^#'r^#'e Marsilio Pappafava, acciò da mia parte pregasse Sua\n[[544.16]] Eccellenza di lasciarmi andare, con pretesto di dovermi portare in Roma per alcuni miei\n[[544.17]] rilevanti affari. L'Inferno adopera tutte le sue forze per tenermi alla catena dell'errore in Italia,\n[[544.18]] e quando, a Dio piacendo, sarò qui, le raccontarò le difficoltà grandissime, che incontro per\n[[544.19]] separarmi da questo Paese, ove le lusinghe, e preghiere degl'amici, l'amorevoli insidie e larghe\n[[544.20]] promesse di questi Senatori cospirano insieme per tenermi lontano da cotesto Cielo, da me\n[[544.21]] sospirato per mettermi nella vera libertà evangelica, e liberarmi per sempre da questa orribile\n[[544.22]] superstitione, in cui qui viviamo. Se la prima lettera di V. S. Illu^#'m^#'a mi fosse capitata in Venetia,\n[[544.23]] prima di portarmi in questo reggimento con Sua Eccellenza, a questa hora sarei infallibilmente\n[[544.24]] costì, ma l'essermi impegnato a servire questo Sig^#'r^#'e Capitano in tutto il tempo del suo governo\n[[544.25]] qui, è l'unico motivo della mia tardanza. Io farò tutto per partirmi con sodisfattione di S^#'a E^#'a,\n[[544.26]] però quando esso andasse tirando le cose in lungo, e con affettuoso inganno valesse distormi\n[[544.27]] dal mio viaggio, allora io scordato di tutte l' humane convenienze preferirò ad ogni mondano\n[[544.28]] interesse quello di Dio e della mia salute. Priego fratanto V. S. Illu^#'m^#'a patientare ancora, e\n[[544.29]] compatirmi se uso molta cautela nel presente affare, essendo il mio scopo di partirmi con il\n[[544.30]] minore strepito, che si può. Domani, a Dio piacendo, mi portarò dal Sig^#'r^#'e Marchese del Pozzo,\n[[544.31]] che mi hà promesso fare ogni diligenza in Verona per le notitie, che essa brama, e sentirò da\n[[545.1]] Venetia quanto prima qualche cosa circa il diploma delle Carceri. Farò capitare nelle mani del\n[[545.2]] Sig^#'r^#'e Mendelino un Fulvio Testi, e due <i>Gallerie</i> del Marino. Mi comandi con libertà, e\n[[545.3]] pregandole dal Cielo ogni prosperità mi resto </p>\n<p> [[545.4]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o, Oblig^#'m^#'o S^#'r^#'e vero M. A. F. </p>\n<p> [[545.5]] Padova 23 Giugno </p>\n",
+  "number": "155.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 23. Juni [1692]. [149.159.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:155. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 23. Juni [1692]. [149.159.] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o Sono due settimane, che mi trovo con Sua Eccellenza alla visita della Provincia, il che fù caggione che non le scrivessi con l'Ordinario passato; arrivato però o...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

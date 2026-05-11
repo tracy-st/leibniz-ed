@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_192",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 192,
+  "text": "<p> [[489.4]] <b>192. NICOLAS MALEBRANCHE AN LEIBNIZ</p>\n<p> [[489.5]] Paris, 13. Dezember 1698. [183.204.]</b></p>\n\n<p> [[489.22]] Monsieur </p>\n<p> [[489.23]] J'ai recu avec bien de la joye la lettre que M. l'Abbé Torelli m'a rendu de votre part et je\n[[489.24]] vous suis extremement obligé de l'honeur de votre souvenir. Je suis bien persuadé Monsieur\n[[489.25]] que l'amitié dont vous m'honorez n'est pas inconstante comme celles qui ne sont fondées que\n[[489.26]] sur des passions volages. Il n'y a que l'amour de la verité qui lie etroitement les coeurs: Et\n[[489.27]] comme vous me rendez cette justice de croire que j'ai quelque amour pour elle, je suis persuadé\n[[490.1]] que celui que vous lui portez se repandra toujours jusques à votre tres humble serviteur. Les\n[[490.2]] obligations particulieres que vous ont tous ses disciples à cause des nouvelles vues que vous\n[[490.3]] leur avez données pour avancer dans les sciences ne leur permet pas d'être indifferens à l'égard\n[[490.4]] de votre merite; et s'il y en a qui le soient ou qui le paroissent ils ne se font tort qu'à eux memes\n[[490.5]] du moins dans l'esprit des habiles gens. La seule Methode des infiniment petits dont vous etes\n[[490.6]] l'inventeur est une si belle et si feconde découverte qu'elle vous rendra immortel dans l'esprit\n[[490.7]] des scavans. Mais que ne feroit point le calcul integral, si vous vouliez bien communiquer aux\n[[490.8]] Geometres une partie de ce que vous scavez sur cela. Souvenez vous Monsieur que vous y étes\n[[490.9]] comme engagé, et que l'on attend avec impatience l'ouvrage de <i>Scientia infiniti</i> que vous nous\n[[490.10]] avez promis. L'ingratitude des ignorans ou des esprits jaloux ne doit pas frustrer vos admirateurs\n[[490.11]] du bien que vous pouvez leur faire sans en devenir moins riche; et la verité que vous\n[[490.12]] aimez ne souffre pas qu'on la tra<angle bracket>ite</angle bracket> comme les avares leurs richesses. Vous scavez\n[[490.13]] Mons<angle bracket>ieur</angle bracket> mieux que moi ce que j'ai l'honneur de vous dire, et je suis persuadé que vous\n[[490.14]] aimerez en moi cette ardeur qui me fait vous presser et vous importuner de me délivrer de mon\n[[490.15]] ignorance. </p>\n<p> [[490.16]] En relisant à la Campagne où j'avois quelque loisir, le méchant petit traitté de la communication\n[[490.17]] des mouvemens, et voulant me satisfaire sur les troisiemes loix, j'ai reconnu qu'il\n[[490.18]] n'etoit pas possible d'accorder l'experience avec ce principe de Descartes que le mouvement\n[[490.19]] absolu demeure toujours le meme. J'ai donc tout changé ce traité, car je suis maintenant\n[[490.20]] convaincu que le mouvement absolu se perd et s'augmente sans cesse et qu'il n'y a que le\n[[490.21]] mouvement de même part qui se conserve toujours le même dans le choc. J'ai donc tout corrigé\n[[490.22]] ce traitté mais je ne scai pas encore quand on le réimprimera. Je vous dis ceci Monsieur afin\n[[490.23]] que vous continuiez d'etre persuadé que je cherche sincerement la verité, et que je merite en\n[[490.24]] partie par cette disposition de mon esprit que vous continuiez de m'aimer autant que je vous\n[[490.25]] honore. </p>\n<p> [[490.26]] Il n'y a rien de nouveau ce me semble sur les mathematiques et sur la physique, à\n[[490.27]] l'exception de <i>L'Histoire de l'academie des sciences</i> que M. du Hamel nous a donnée en latin.\n[[490.28]] Les esprits sont occupez à refuter le Quietisme et le pretendu pur amour. J'ai été meme engagé\n[[490.29]] malgré moi à ecrire sur cette matiere. Je fis il y a un an un petit <i>traitté</i> <i>de l'amour de Dieu</i>\n[[491.1]] auquel j'ai ajouté <i>trois lettres au P. Lami</i> benedictin qu'on m'a dit etre imprimées chez\n[[491.2]] Plaignard à Lyon. Il n'y en a point encore ici: Et comme cela est imprimé sans Privilege je ne\n[[491.3]] scai s'il en viendra librement à Paris. Je ne vous dis rien du M^#'q^#'u^#'i^#'s de L'Hopital parcequ'il m'a\n[[491.4]] dit qu'il vous écriroit, et peutetre que je mettrai cette lettre dans la sienne. Je suis Monsieur\n[[491.5]] avec bien du respect et tous les sentimens que je dois à vôtre merite </p>\n<p> [[491.6]] Votre tres humble et tres obeissant serviteur Malebranche P. D. L'O. </p>\n<p> [[491.7]] A Paris ce 13. Decembre 1698 </p>\n<p> [[491.8]] A Monsieur Monsieur Leibniz Conseiller aulique de Monseigneur le Duc d'Hanover </p></p>\n",
+  "number": "192.",
+  "title": "NICOLAS MALEBRANCHE AN LEIBNIZ",
+  "date": "Paris, 13. Dezember 1698. [183.204.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:192. NICOLAS MALEBRANCHE AN LEIBNIZ Paris, 13. Dezember 1698. [183.204.] Monsieur J'ai recu avec bien de la joye la lettre que M. l'Abbé Torelli m'a rendu de votre part et je vous suis extremement obligé de l'honeur de votre souvenir. Je suis bien persuadé Monsieur que l'amitié dont vous m'honorez n...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

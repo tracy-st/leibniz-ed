@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_60",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 60,
+  "text": "<p> [[278.7]] <b>61. LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS</p>\n<p> [[278.8]] [Wien, 20. Mai 1688.] [60.62.]</b></p>\n<p> [[279.1]] [ ... ] Je renvoye la Lettre du R.P. Jobert, marquée de <i>Remittatur</i>; je vois qu'il n'a rien à\n[[279.2]] reprocher à M^#'r Arn. pour le traiter d'heretique que les pauvres cinq propositions. Mais puisque\n[[279.3]] M^#'r Arn. les desavoue depuis plus de 20 à 30 ans, que veut il davantage? outre qu'il y a bien\n[[279.4]] d'equivoques cachées dans ces cinq propositions, comme on sçait assez par les divers sentimens\n[[279.5]] des Censeurs. C'est pourquoy je m'imaginois charitablement que les R.R. P.P. Jesuites\n[[279.6]] luy imputent des choses qu'il ne peut desavouer si aisement, comme par exemple la creance de\n[[279.7]] la necessité de la contrition. J'avoue tres volontiers que V.A.S. est mille fois mieux informée\n[[279.8]] que moy des contestations qu'il y a entre les Jesuites et les Jansenistes, et qu'ainsi il y aura bien\n[[279.9]] des controverses qui me seront echappées. De plus quand M^#'r Arnaud avoit mille fois soustenu\n[[279.10]] les cinq propositions avant leur condamnation, méme dans le sens condamné, cela ne le feroit\n[[279.11]] nullement heretique, puisqu'on ne sçauroit nier, qu'il les a desavouées après leur condamnation,\n[[279.12]] pour ne pas dire, que selon les principes du Clergé Gallican, la condamnation des cinq\n[[279.13]] propositions faite par le Pape seul n'en fait point une heresie, et qu'il faut qu'un Concile\n[[279.14]] Universel pour cela, ou bien une Tradition constante et notoire. </p>\n<p> [[279.15]] Je m'imagine aisement que M^#'r Arnaud a bien d'autres choses à faire que de s'amuser à\n[[279.16]] disputer avec moy sur des matieres abstraites; mais je serois content si j'apprends que maintenant,\n[[279.17]] quoyqu'il ne soit peutestre pas encor de mon sentiment, il n'y trouve plus rien de\n[[279.18]] mauvais, comme il avoit crû au commencement, avant que de l'avoir bien compris. Et ce sera\n[[279.19]] assez s'il a la bonté de s'expliquer là dessus, soit à V.A.S. ou à moy. [ ... ] </p>\n",
+  "number": "61.",
+  "title": "LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS",
+  "date": "[Wien, 20. Mai 1688.] [60.62.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:61. LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS [Wien, 20. Mai 1688.] [60.62.] [ ... ] Je renvoye la Lettre du R.P. Jobert, marquée de Remittatur; je vois qu'il n'a rien à reprocher à M^#'r Arn. pour le traiter d'heretique que les pauvres cinq propositions. Mais puisque M^#'r Arn. les desavoue de...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

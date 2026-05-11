@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_275",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 275,
+  "text": "<p> [[836.12]] <b>278. LEIBNIZ AN LOUIS COUSIN</p>\n<p> [[836.13]] Hannover, 17. (17.) Juli 1694. [189.286.]</b></p>\n<p> [[836.23]] Monsieur </p>\n<p> [[836.24]] Je vous avois adressé dernierement quelque meditation sur l'Analyse Mathematique à\n[[836.25]] l'occasion de mon nouveau Calcul, avec un petit mot de lettre. Maintenant je prends la liberté\n[[836.26]] de vous adresser des pensées qui paroistront plus importantes à ceux qui en peuvent juger. C'est\n[[837.1]] pour apprendre leur jugement que je me hazarde de les donner au public, si vous trouvés à\n[[837.2]] propos de leur donner place. Mais comme ces Matieres ne sont goustées que de peu [de]\n[[837.3]] personnes, je souhaitte qu'on n'y mette pas encor mon nom. Ceux qui s'appliquent à ces choses\n[[837.4]] ne laisseront pas de connoistre l'auteur. Si quelqu'un se mettoit à le refuter, et me nommoit, je\n[[837.5]] vous supplie de laisser encor mon nom à l'écart en disant la chose. Je seray tousjours avec\n[[837.6]] reconnoissance </p>\n<p> [[837.7]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[837.8]] Hanover 7 juillet 1694 </p>\n",
+  "number": "278.",
+  "title": "LEIBNIZ AN LOUIS COUSIN",
+  "date": "Hannover, 17. (17.) Juli 1694. [189.286.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:278. LEIBNIZ AN LOUIS COUSIN Hannover, 17. (17.) Juli 1694. [189.286.] Monsieur Je vous avois adressé dernierement quelque meditation sur l'Analyse Mathematique à l'occasion de mon nouveau Calcul, avec un petit mot de lettre. Maintenant je prends la liberté de vous adresser des pensées qui paroistro...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

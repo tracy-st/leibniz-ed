@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_111",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 111,
+  "text": "<p> [[315.1]] <b>96. LEIBNIZ FÜR ─ (?)</p>\n<p> [[315.2]] [Dezember 1671.]</b></p>\n<p> [[315.18]] Alberti von Holten inventum Grammaticae Cylindriaceae utilissimum est, et in multis\n[[315.19]] imitabile. Occasionem talia meditandi ei dedi mea <i>arte combinatoria</i>. Similia Kircherus machinatus\n[[315.20]] est. Caeterum eadem ratione parari cista posset, quae omnia theoremata possibilia inter\n[[315.21]] certas voces contineret, definitionibus earum ultimis fundamenti instar indagatis, eumque in\n[[315.22]] finem elementa formari possent non difficulter primariis vocibus adhibitis. Sed pro universali\n[[315.23]] opere assignanda esset, certa vox cuilibet combinationi, eumque in finem conferendae omnes\n[[315.24]] linguae; una enim rem aliquam sola exprimit, quam caeterae nonnisi circumlocutione dicere\n[[315.25]] possunt. Uni autem voci nonnisi una assignanda esset significatio. Sed fortasse tanta opera non\n[[315.26]] est omnino necessaria. Satis est potissimas combinationes habere, seu voces certas rerum\n[[315.27]] extantium, et prae caeteris consideratione dignarum, v.g. in geometria ad usum vitae humanae\n[[315.28]] paucae propositiones sufficiunt. Eae igitur combinationes attendendae, quarum conjunctione\n[[315.29]] producitur aliquid consideratione dignum, quemadmodum et infiniti sunt processus chymici seu\n[[315.30]] combinationes, sed non quilibet producit aliquid consideratione dignum et extraordinarium. Ii\n[[315.31]] igitur termini qui sunt utilitatum vitae humanae, et rerum eas utilitates producentium, maxime\n[[315.32]] considerandi sunt. In Jurisprudentia constituta accurate tabula facile erit tale quid machinari.\n[[315.33]] Adde conceptus Wilkinsii et Comenii de Panglottide seu lingua universali. </p>\n",
+  "number": "96.",
+  "title": "LEIBNIZ FÜR ─ (?)",
+  "date": "[Dezember 1671.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:96. LEIBNIZ FÜR ─ (?) [Dezember 1671.] Alberti von Holten inventum Grammaticae Cylindriaceae utilissimum est, et in multis imitabile. Occasionem talia meditandi ei dedi mea arte combinatoria. Similia Kircherus machinatus est. Caeterum eadem ratione parari cista posset, quae omnia theoremata possibil...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

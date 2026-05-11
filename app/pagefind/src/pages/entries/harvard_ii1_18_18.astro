@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_18",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 18,
+  "text": "<p> [[56.1]] <b>16b. LEIBNIZ AN PHILIPP JAKOB SPENER</p>\n<p> [[56.2]] Mainz, 10./20. Februar 1670. [33a.]</b></p>\n<p> [[56.16]] [ ... ] Suasu Ill^#'m^#'i Boineburgii (qui Te amice salutat) dedi nuper Bibliopolae vestrati\n[[56.17]] Nizolii libellum <i>de veris principiis et vera ratione philosophandi</i> recudendum, praemissa satis\n[[56.18]] prolixa praefatione <i>de optima philosophi dictione</i> a barbarie, a tropis, ab inutili terminorum\n[[56.19]] ultra modum coacervatione libera, sine qua nihil accurate demonstrari, nihil clare proponi\n[[56.20]] potest. Credo in eo esse, ut absolvat. Quanquam autem Nizolius id ex professo agat, ut\n[[56.21]] Scholasticos denigret, mihi tamen nimis acris nonnunquam visus est, tentavique rigorem illum\n[[56.22]] notulis quibusdam marginalibus mollire. Addidi epistolam ad doctissimum quemdam virum\n[[56.23]] aliquando a me scriptam <i>de Aristotele recentioribus</i> (id est Gassendo, Chartesio, Hobbio,\n[[56.24]] Digbio aliisque id genus philosophiae restauratoribus) <i>reconciliabili.</i> Qui Syncretismus mihi et\n[[56.25]] rectior theologico et tutior videtur. Sententiam Tuam coram audire desidero. Vale. </p>\n",
+  "number": "16b.",
+  "title": "LEIBNIZ AN PHILIPP JAKOB SPENER",
+  "date": "Mainz, 10./20. Februar 1670. [33a.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:16b. LEIBNIZ AN PHILIPP JAKOB SPENER Mainz, 10./20. Februar 1670. [33a.] [ ... ] Suasu Ill^#'m^#'i Boineburgii (qui Te amice salutat) dedi nuper Bibliopolae vestrati Nizolii libellum de veris principiis et vera ratione philosophandi recudendum, praemissa satis prolixa praefatione de optima philosoph...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

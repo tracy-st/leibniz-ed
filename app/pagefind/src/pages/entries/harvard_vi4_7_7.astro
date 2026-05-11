@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_7",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 7,
+  "text": "[[18.1]] <b>7.  De veritatis realitate [August 1677]</b>\n [[18.2]] <tab/>[August 1677] </p>\n<p> [[18.6]] Verum, imo necessarium est, circulum esse capacissimum figurarum isoperimetrarum. </p>\n<p> [[18.8]] Etiamsi nullus existat reapse circulus. </p>\n<p> [[18.9]] Item etiamsi neque ego neque tu, neque alius quisquam nostrum existat. </p>\n<p> [[18.10]] Imo etiamsi nihil earum rerum existat, quae contingentes sunt, seu in quibus nulla\n[[18.11]] intelligitur necessitas, qualis est mundus aspectabilis aliaque similia. </p>\n<p> [[18.12]] Quoniam ergo haec veritas non dependet a nostra cogitatione, necesse est aliquid\n[[18.13]] reale in ea esse. </p>\n<p> [[18.14]] Et quia veritas illa aeterna seu necessaria est, etiam haec quae in ipsa est realitas\n[[18.15]] independens a nostra cogitatione, erit ab aeterno. </p>\n<p> [[18.16]] Haec realitas est quiddam actu existens. Semper enim actu a parte rei haec veritas\n[[18.17]] subsistit. </p>\n<p> [[18.18]] Ergo datur Ens necessarium, seu de cujus essentia est existentia. </p>\n<p> [[18.19]] Brevius: Propositionum necessariarum Veritas est aeterna. Veritas est quaedam\n[[18.20]] realitas independens a nostra cogitatione. Realitas quaedam aeterna utique semper existit.\n[[18.21]] Seu Veritas propositionum necessariarum semper existit. Ergo Quoddam Ens necessarium\n[[18.22]] existit. </p>\n<p> [[18.23]] Quicquid existit, est possibile. Quoddam Ens necessarium existit. Ergo quoddam\n[[18.24]] Ens necessarium est possibile. </p>\n<p> [[18.25]] Probatur minor: quicquid actu, a parte rei est, illud existit. Quoddam necessarium\n[[18.26]] actu a parte rei est. Ergo quoddam necessarium existit. </p>\n<p> [[18.27]] Probatur rursus minor: Veritas propositionum necessariarum, actu a parte rei est.\n[[18.28]] Veritas propositionum necessariarum necessaria est. Ergo quoddam necessarium actu a\n[[18.29]] parte rei est. </p>\n<p> [[19.1]] Ex his patet tot esse necessaria, quot sunt veritates necessariae. Haec necessaria\n[[19.2]] cooperari possunt, quodlibet cuilibet quia duae quaevis propositiones conjungi possunt ad\n[[19.3]] novam probandam, additis mediis eas jungentibus. </p>\n<p> [[19.4]] (Difficultas quod eadem propositio pluribus modis demonstrari potest. Ejusdem\n[[19.5]] tamen rei non sunt plures causae.) </p>\n<p> [[19.6]] Ergo omnes realitates in Veritatibus aeternis nemine cogitante existentes, quandam\n[[19.7]] inter se realem connexionem habebunt. </p>\n<p> [[19.8]] Veritates oriuntur ex naturis seu essentiis. Ergo et essentiae seu naturae sunt quaedam\n[[19.9]] realitates semper existentes. </p>\n<p> [[19.10]] Eadem natura ad innumeras alias constituendas concurrit: et cum qualibet alia\n[[19.11]] concurrere potest. </p>\n<p> [[19.12]] Realitates istae quae sunt in naturis a parte rei seu ut vocant objectivae nec tempore\n[[19.13]] et loco distinguuntur. Quia cooperantur. </p>\n<p> [[19.14]] Realitates objectivae naturarum cogitabilium ac veritatum eaedem simul sunt in\n[[19.15]] pluribus aliis. </p>\n<p> [[19.16]] Realitates istae non sunt substantiae. </p>\n<p> [[19.17]] Substantia necessario existens illimitata est; seu omnes in se continet realitates. </p>\n<p> [[19.18]] Plato dial. 10 <i>de Legibus</i>, animam esse quae se movet. </p>\n",
+  "number": "7.",
+  "title": "De veritatis realitate",
+  "date": "[August 1677]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:7. De veritatis realitate [August 1677] [August 1677] Verum, imo necessarium est, circulum esse capacissimum figurarum isoperimetrarum. Etiamsi nullus existat reapse circulus. Item etiamsi neque ego neque tu, neque alius quisquam nostrum existat. Imo etiamsi nihil earum rerum existat, quae contingen...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

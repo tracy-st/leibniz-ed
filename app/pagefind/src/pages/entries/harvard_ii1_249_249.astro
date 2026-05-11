@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_249",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 249,
+  "text": "<p> [[782.15]] <b>220. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[782.16]] [Dezember 1679.] [205b.235.]</b></p>\n[[783.25]] [<i>L^#'1</i> ] </p>\n<p> [[783.26]] [ ... ] Subjiciam pauca de quibusdam aliis quae ad Geometriam non spectant. Certum est\n[[783.27]] haberi et a me certo determinari posse methodum praestandi omnia sine calculo. Opus est\n[[783.28]] tamen signis aliis sub quibus ego comprehendo imagines et verba. Optima signa sunt imagines,\n[[783.29]] et verba ut apta sint debent imagines accurate repraesentare. Quod cum in Geometricis non\n[[783.30]] faciat Algebra, ideo illi meum calculum geometricum praefero, quem Tibi ostendi. Non experior\n[[783.31]] eam de qua quereris in optimis definitionibus reperiendis difficultatem. Possum enim hoc\n[[783.32]] problema certa analysi solvere: <b>Datis omnium terminorum proprietatibus reciprocis\n[[783.33]] seu definitionibus qualibuscunque, invenire definitiones optimi\n[[783.34]] generis.</b> Per <b>definitiones optimi generis</b> intelligo eas ex quibus constat rem definitam\n[[784.1]] esse possibilem, quia alioqui nihil tuto ex definitionibus concludi potest, nam de impossibilibus\n[[784.2]] possunt duo contradictoria simul concludi. Itaque ad hanc necessariam et primam definitionis\n[[784.3]] bonae notam ipsa me cogitandi methodus duxit id enim denique satis bonum est quod usum\n[[784.4]] praestat quem desideramus. Hujus notae corollarium est tantum, ut causa efficiens includatur in\n[[784.5]] eorum definitionibus, quae causam efficientem habent. Hinc patet etiam quod definitiones non\n[[784.6]] sint arbitrariae ut putavit Hobbius. </p>\n<p> [[784.7]] Annum agens aetatis decimum octavum scribensque libellum <i>de Arte Combinatoria</i> quem\n[[784.8]] biennio post edidi secutus certum meditandi filum inveni admirabile verae analyseos arcanum,\n[[784.9]] cujus corollarium est lingua vel characteristica rationalis. Hanc nemo credo alius intellexit,\n[[784.10]] alioqui qui eam intellexisset, omnibus aliis missis eam fuisset persecutus, nihil enim majus ab\n[[784.11]] homine praestari potest. [ ... ] </p>\n<p> [[784.12]] [<i>L^#'2</i> ] </p>\n<p> [[784.13]] [ ... ] Certum est haberi methodum praestandi omnia sine calculo; sed opus est aliis\n[[784.14]] characteribus, sub characteribus autem et imagines comprehendo et verba. Verba autem ita\n[[784.15]] ordinanda sunt, ut respondeant imaginibus: in his scilicet quorum imagines habentur. </p>\n<p> [[784.16]] Definitiones cujusque rei invenire, etiam optimas difficile non est, datis qualibuscunque:\n[[784.17]] possum enim hoc problema solvere: <b>datis omnium terminorum proprietatibus reciprocis\n[[784.18]] seu definitionibus qualibuscunque, invenire optimas</b>. Hoc inquam problema\n[[784.19]] solvere possum analysi tam certa quam est arithmetica vel algebraica, itaque non reperio\n[[784.20]] eam de qua quereris in definitionibus optimis investigandis difficultatem. Per optimas intelligo\n[[784.21]] eas ex quibus constat rem definitam esse possibilem. Sic enim loqui malo, quam requirere ut\n[[785.1]] involvant causam efficientem, nimirum ut eas etiam complectar quarum causa efficiens nulla\n[[785.2]] est. Ratio autem cur requiram ut constet rem definitam esse possibilem, haec est, quod alioqui\n[[785.3]] nihil tuto de ea concludere possum quia de rebus impossibilibus contradictoria simul possunt\n[[785.4]] esse vera. Itaque ipsa methodus generalis cogitandi me ad hanc optimae definitionis notam\n[[785.5]] duxit: cujus corollarium est tantum quod de causa efficiente ajunt. Haec causa etiam est cur\n[[785.6]] definitiones non sint arbitrariae, ut putavit Hobbius, sed constare nobis debet notiones quas\n[[785.7]] conjungimus consistere posse. [ ... ] </p>\n<p> [[785.8]] Meministi et loci Cartesii de lingua philosophica, sed olim fassus erga me es te nunquam\n[[785.9]] intellexisse quid in ea sibi vellet Cartesius. Haud dubie itaque nunc melius intelligis ex quo\n[[785.10]] mecum locutus es, tametsi alias intelligendi eam occasiones nunc narres. Spinosa etiam ea[m]\n[[785.11]] habuit pro chimaeris. Credo ipsum Cartesium non potuisse praestare quod dixit nisi deserta\n[[785.12]] methodo sua. Ideo fassus est etiam nihil tale sperari debere. Ego cum vix octodecim annorum\n[[785.13]] essem, nondumque vidissem literas Cartesii, paulo melioribus auspiciis verae methodi et\n[[785.14]] linguae principia sum assecutus. Lingua autem methodi non nisi corollarium est. Algebra non\n[[785.15]] est vera characteristica geometriae, sed mea quam tibi monstravi, propius accedit. </p>\n",
+  "number": "220.",
+  "title": "LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS",
+  "date": "[Dezember 1679.] [205b.235.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:220. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS [Dezember 1679.] [205b.235.] [L^#'1 ] [ ... ] Subjiciam pauca de quibusdam aliis quae ad Geometriam non spectant. Certum est haberi et a me certo determinari posse methodum praestandi omnia sine calculo. Opus est tamen signis aliis sub quibus ego co...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

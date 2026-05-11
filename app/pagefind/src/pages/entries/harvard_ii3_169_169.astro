@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_169",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 169,
+  "text": "<p> [[435.1]] <b>169. CLAUDE NICAISE FÜR LEIBNIZ</p>\n<p> [[435.2]] 19. April 1698. [167.172.]</b></p>\n [[435.3]] <p><tab/>Jean-Jacques Boisot an Claude Nicaise (Besançon, 18. April 1698) </p>\n<p> [[435.17]] Besançon 18 avril 1698 </p>\n<p> [[435.18]] Monsieur </p>\n<p> [[435.19]] Il est vray qu'on m'a ecrit de Paris pour faire tomber dans la Biblioteque du Roy les\n[[435.20]] manuscrits de celle de feu mon frere, Et que j'ay faits sur cela des propositions dont j'atends\n[[435.21]] des reponces par le p^#'e^#'r Courier, aussytost que je les auray receües je ne manqueray de Vous en\n[[435.22]] rendre comte. Si M^#'r de Leibnitz croit que je puisse luy fournir quelques copies des papiers qui y\n[[435.23]] sont, Il me semble qu'il n'a poin de temps à perdre parceque si lesdits manuscrits passent en\n[[435.24]] d'autres mains je seray privé du plaisir que je me faisois de luy rendre mes services là dessus\n[[435.25]] comme je souhaiterois de le faire en toutte autre chose, Je Vous suplie Monsieur de l'en\n[[435.26]] informer, et d'estre bien persuadé de ma passion à Vous tesmongner combien j'ay l'honneur\n[[435.27]] d'estre </p>\n<p> [[435.28]] Monsieur Vostre tres humble Et tres obeissant serviteur Boisot\n[[435.29]] <yi>A Monsieur Monsieur l'abbé Nicaise à Dijon </p>\n<p> [[436.1]] [<i>Nachschrift von Nicaise</i>] </p>\n<p> [[436.2]] Le 19. avril </p>\n<p> [[436.3]] Vous reconnoistrés mons^#'r par la lettre de m^#'r le president Boisot que je vous envoye et par\n[[436.4]] la date que je ne perds point de tems à vous faire scavoir ce que je vous ay mandé par celle que\n[[436.5]] je vous ay ecript il n'i a que deux jours; ainsy hastés vous de nous faire scavoir ce que vous\n[[436.6]] desirés; J'i adjouste une lettre pour mons^#'r Ludolphe que je reçûs hier de Rome du p. Bonjour\n[[436.7]] qui me cite dans sa lettre du Syriaque et de l'Arabe, qu'il scait mieux ecrire que le François; et\n[[436.8]] qui est une marque qu'il s'attache fortement à ces Langues. Il ne me dit rien de nouveau de\n[[436.9]] Rome sur le livre de mons^#'r de Cambray que ce que vous en avés appris par ma precedente, si\n[[436.10]] non ces deux ou trois mots. <i>Je ne vous dis rien sur le semiquietisme parcequ'on tiênt cela si\n[[436.11]] secret qu'on ne peut pas y rien penetrer</i> etc. Quand au vocabulaire que vous souhaittés de luy\n[[436.12]] des mots Aegyptiens qui se trouvent parmi les anciens auteurs; voicy comme il m'en ecrit pour\n[[436.13]] ce qui est du Receüil <i>vocabulorum Aegyptiorum apud veteres repertorum</i>: <i>On le trouvera dans\n[[436.14]] mon traicté de la langue Aegyptienne.</i> Voilà monsieur tout ce qu'il s'agit de vous ecrire\n[[436.15]] presentement, J'attends avec impatience vostre reponse pour pouvoir satisfaire à vos intentions;\n[[436.16]] Je suis en l'attendant avec toute la sincerité et le respect possible Tout à vous </p>\n<p> [[436.17]] Nicaise\n[[436.18]] <yi>A Monsieur Monsieur de Brosseau resident de monseig^#'r le Duc d'Hanovre rue du parc\n[[436.19]] Royal chez m^#'r Fermelle pour faire tenir à mons^#'r Leibniz incessamment. <b>Paris</b> </p></p>\n",
+  "number": "169.",
+  "title": "CLAUDE NICAISE FÜR LEIBNIZ",
+  "date": "19. April 1698. [167.172.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:169. CLAUDE NICAISE FÜR LEIBNIZ 19. April 1698. [167.172.] Jean-Jacques Boisot an Claude Nicaise (Besançon, 18. April 1698) Besançon 18 avril 1698 Monsieur Il est vray qu'on m'a ecrit de Paris pour faire tomber dans la Biblioteque du Roy les manuscrits de celle de feu mon frere, Et que j'ay faits su...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

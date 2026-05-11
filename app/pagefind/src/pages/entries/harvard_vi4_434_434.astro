@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_434",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 434,
+  "text": "[[1964.14]] <b>356.  Quod omnis conatus conservatur [1677 bis 1678 (?)]</b>\n [[1964.15]] <tab/>[1677 bis 1678 (?)] </p>\n<p> [[1964.21]] Omnis conatus conservatur. Cum enim unus conatus alteri sit compatibilis, nulla est\n[[1964.22]] causa cur destruatur. Omnem autem conatum cuivis conatui esse compatibilem, patet, ex\n[[1964.23]] compositione motuum. Hinc sequitur de nullo corpore etiam quiescente dici posse quod\n[[1965.1]] actione seu vi agendi careat, intelligi enim potest, in eo duos conatus agendi contrarios\n[[1965.2]] esse aequales. Quaeri tamen adhuc potest, an possibilis sit quies sine actione, seu quies\n[[1965.3]] per se stans, non per accidens ex duobus contrariis conatibus orta. Et quidem cum inter\n[[1965.4]] duo corpora congrua et quiescentia nullum intelligi possit discrimen sequitur in quiete\n[[1965.5]] esse contrarios conatus in omnes partes. Hinc sequitur porro in omni corpore esse conatus\n[[1965.6]] infinitos in omnes partes. Ob contrarios autem conatus aliorum fieri, ut quidam tantum\n[[1965.7]] exitum reperiant. </p>\n<p> [[1965.8]] Porro ex eo quod omnis conatus conservatur hinc sequitur corpore uno in aliud\n[[1965.9]] incurrente, nullum conatum ab uno in aliud transferri, quod ita ostendo: Pono corpora\n[[1965.10]] aequalia <i>A</i> et <i>B</i> aequali velocitate inter se concurrere,\n[[1965.11]] constat ea post ictum non quiescere in loco ictus, sed\n[[1965.12]] potius a se invicem dissilire. Sed si verum esset, corpora\n[[1965.13]] post ictum conatus suos in se invicem transferre; utique unumquodque eorum, binos\n[[1965.14]] haberet simul conatus directe contrarios; atque adeo quiesceret, verbi gratia <i>A</i> positum in\n[[1965.15]] <i>₂A</i> habebit conatus contrarios <i>₂A₁A</i>, et <i>₂AE</i>. Ergo quiescet. Sed hac quiete perderentur\n[[1965.16]] vires. Non est ergo realis haec translatio. Hypothetice tamen admitti potest, ac si omnia\n[[1965.17]] hoc modo se haberent et tunc ope vis elasticae aliis scilicet insequentibus, oritur dissultatio. </p>\n",
+  "number": "356.",
+  "title": "Quod omnis conatus conservatur",
+  "date": "[1677 bis 1678 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:356. Quod omnis conatus conservatur [1677 bis 1678 (?)] [1677 bis 1678 (?)] Omnis conatus conservatur. Cum enim unus conatus alteri sit compatibilis, nulla est causa cur destruatur. Omnem autem conatum cuivis conatui esse compatibilem, patet, ex compositione motuum. Hinc sequitur de nullo corpore et...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

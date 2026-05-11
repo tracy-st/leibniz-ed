@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_174",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 174,
+  "text": "[[592.10]] <b>142.  De Analysi veritatis et judiciorum humanorum [Ende 1684 bis Anfang 1685 (?)]</b>\n [[592.11]] <tab/>[Ende 1684 bis Anfang 1685 (?)]\n[[593.1]] <tit2><b>De Analysi veritatis et judiciorum humanorum</b> </tit2> </p>\n<p> [[593.2]] Apud Theologos libri habentur de Analysi Fidei, qualis extat Gregorii de Valentia\n[[593.3]] Societatis Jesu, et Henrici Holdeni Angli Theologi Parisini. Mirandum est itaque apud\n[[593.4]] philosophos nihil haberi de Analysi veritatis, nam libri <i>Analyticorum</i> Aristotelis sive\n[[593.5]] <i>posteriores</i> sive <i>priores</i> nihil minus quam analysin sive principia ultima humanorum\n[[593.6]] judiciorum continent. Scholastici quoque nonnulli de Primo Cognito potius disputare\n[[593.7]] more suo, quam quae sint prima cognita, et quomodo ex illis aliae cognitiones deriventur\n[[593.8]] monstrare voluere, nam si hoc praestitissent, dedissent nobis philosophiae Elementa\n[[593.9]] accurata, et ad Mathematicum morem exacta. Et viri ingeniosi qui scripsere nostro\n[[593.10]] tempore de inquirenda veritate, multa quidem elegantia et utilia exoterico quodam tractandi\n[[593.11]] modo, disserunt de humanis affectibus et praejudiciis infantiae, sed cum id agitur ut\n[[593.12]] certa judicandi principia substituantur, haerent ipsi et nos tandem revocant ad regulam\n[[593.13]] illam decantatam, quod iis demum fidendum sit, quae clare et distincte percipimus. </p>\n<p> [[593.14]] Verum non magnum usum habet ea regula quamdiu non habetur modus dijudicandi,\n[[593.15]] quid clarum et distinctum sit. Quod non satis novisse video illos ipsos qui regulam hanc\n[[593.16]] maxime celebrant; nam quaedam distinctissime sibi percipere visa sunt, quae falsa esse\n[[593.17]] compertum habemus et quae ipsi omni conatu adhibito cum demonstrare non possent,\n[[593.18]] coacti sunt monere, ut si alii eadem mentis prae oculis videre vellent, quae ipsi, eadem\n[[593.19]] quae ipsi meditarentur diu. Callide profecto, nam certum est consuetudine cogitandi\n[[593.20]] quaedam nobis ita familiaria fieri, ut depravato vel mutato naturali judicio tandem nobis\n[[593.21]] clara videantur. Idque inprimis succedit in his, quae, dictione nitida et ad plausum facta,\n[[593.22]] non sine quadam simplicitatis et evidentiae fucata artificiose specie proponuntur a celebri\n[[593.23]] autore. Et cum denique ad experientiam internam idearum provocant hi scriptores, eo\n[[593.24]] ipso et objectiones declinare et onere probandi se eximere conantur. Alii iisdem principiis\n[[594.1]] insistentes, sed apertiores, professi sunt, id clarum distinctumque censeri debere quod\n[[594.2]] sine interiore quadam repugnantia et conscientiae quasi morsu negari non potest. Verum\n[[594.3]] haec nota uti non contemnenda est, ita tamen dialectica tantum censeri debet. Sunt qui\n[[594.4]] omnia resolvunt in autoritatem. Ultima enim principia ajunt a nobis admitti, quia a\n[[594.5]] nemine revocantur in dubium. Ego quidem fateor in plerisque vulgo judiciis id esse\n[[594.6]] verum, contendo tamen altiora et certiora adesse. </p>\n",
+  "number": "142.",
+  "title": "De Analysi veritatis et judiciorum humanorum",
+  "date": "[Ende 1684 bis Anfang 1685 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:142. De Analysi veritatis et judiciorum humanorum [Ende 1684 bis Anfang 1685 (?)] [Ende 1684 bis Anfang 1685 (?)] De Analysi veritatis et judiciorum humanorum Apud Theologos libri habentur de Analysi Fidei, qualis extat Gregorii de Valentia Societatis Jesu, et Henrici Holdeni Angli Theologi Parisini...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

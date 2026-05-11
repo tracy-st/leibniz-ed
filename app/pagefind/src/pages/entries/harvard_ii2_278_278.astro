@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_278",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 278,
+  "text": "<p> [[839.17]] <b>281. LEIBNIZ AN JOHANN HEINRICH PAPE</p>\n<p> [[839.18]] Hannover, 9. (19.) August 1694. [279.]</b></p>\n<p> [[840.1]] Vir Nobilissime et Consultissime, Fautor Honoratissime </p>\n<p> [[840.2]] Gaudeo meum <i>Codicem diplomaticum</i> praesertimque praefationem, quae sola mea est,\n[[840.3]] Tibi non displicuisse. </p>\n<p> [[840.4]] Caeterum ita est ut scribis, plerisque, ipsique adeo Feldeno acutissimo Viro fraudi fuit,\n[[840.5]] quod juris gradus non satis distinxere. </p>\n<p> [[840.6]] Definitionum condendarum cura mihi pene a puero fuit maxima. Vellemque ipse habere in\n[[840.7]] unam collecta farraginem, quae saepe in hanc rem tentavi. Sed multa periere. Resarcienda\n[[840.8]] tamen fortasse non difficulter, si quando esset, quicum de talibus communicare possem. </p>\n<p> [[840.9]] Scripseram aliquando rogatu Baronis Boineburgii, in Poloniam Neoburgici Ducis nomine\n[[840.10]] Legaturientis, libellum de Regis in Polonia electione, Neoburgicis desideriis accomodatum,\n[[840.11]] titulo Georgii Ulicovii Lithuani, quo nunc ipse careo. Spem tamen recuperandi fecit Dn.\n[[840.12]] Avemannus ViceCancellarius Ostfrisius, Vir non minus doctrina, quam rerum usu insignis.\n[[840.13]] Boeclerus in libello quodam in publicum edito ita commendavit scriptum, ut sine exemplo esse\n[[840.14]] dicat. Et mihi ipse significavit olim, definitiones sibi inprimis placuisse, quae quales fuerint,\n[[840.15]] nec ego satis memini. </p>\n<p> [[840.16]] Sane cum omnis ratiocinatio a notionum evolutione pendeat, satis manifestum est definitiones\n[[840.17]] esse potissimum accuratae ratiocinationis instrumentum, quod etiam Aristoteles\n[[840.18]] optime vidit. Idem enim praestat in omni doctrina, quod valor quantitatum in Logica Mathematicorum\n[[840.19]] seu Algebra. </p>\n<p> [[840.20]] Caeterum etsi non male fortasse possim dicere, quid fieri possit debeatve; et acturis\n[[840.21]] aliquid praeclari, Consilia dare non aspernanda: Vereor tamen, ut aliquid magnopere praestem\n[[840.22]] per me, nisi ab amicis adjuver, quoniam sentio et valetudinem nonnihil vacillare. </p>\n<p> [[840.23]] Te quidem, Vir Consultissime, video tam accurate judicare de vera jurisprudentiae emendandae\n[[840.24]] promovendaeque ratione, ut nihil mihi gratius futurum sit, quam adjuvare meditationes\n[[840.25]] tuas, iisque adjuvari. Quod fateor coram fieri posse facilius et jucundius. Eoque mihi gratius\n[[840.26]] fuit intelligere Tuum consilium aliquando ad nos accedendi. </p>\n<p> [[840.27]] Caeterum etsi commendatione mea nemo Te minus egeat, egoque non sim ex eorum\n[[840.28]] numero qui multum possunt, spero tamen occasiones se daturas, quibus probare Tibi optimam\n[[840.29]] meam Voluntatem queam. Vale. Dabam Hanoverae 9 Augusti 1694.\n [[840.30]] / <i>A Monsieur Jean Henry Pape ICte à Lunebourg.</i> </p>\n",
+  "number": "281.",
+  "title": "LEIBNIZ AN JOHANN HEINRICH PAPE",
+  "date": "Hannover, 9. (19.) August 1694. [279.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:281. LEIBNIZ AN JOHANN HEINRICH PAPE Hannover, 9. (19.) August 1694. [279.] Vir Nobilissime et Consultissime, Fautor Honoratissime Gaudeo meum Codicem diplomaticum praesertimque praefationem, quae sola mea est, Tibi non displicuisse. Caeterum ita est ut scribis, plerisque, ipsique adeo Feldeno acuti...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

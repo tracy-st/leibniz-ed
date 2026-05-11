@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_572",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 572,
+  "text": "[[2659.9]] <b>449.  De gratia sententiae ex Jurieu excerptae [Frühjahr bis Sommer 1686 (?)]</b>\n [[2659.10]] <tab/>[Frühjahr bis Sommer 1686 (?)] </p>\n<p> [[2659.23]] Selon Jurieu <i>apologie de la reforme</i> <i>contre</i> <i>M. Maimbourg</i>, ch. 17, les Jesuites\n[[2659.24]] disent que l'homme peut faire sans la grace les memes bons actes selon leur substance et\n[[2660.1]] degrés, qu'avec la grace, mais qu'estans sans la grace ils ne sont point salutaires. Mais\n[[2660.2]] c'est rendre Dieu injuste qui traite inegalement ceux qui font la meme chose et damnant\n[[2660.3]] ceux qui font bien par leurs forces, et ne sauvant que ceux qui font les memes choses avec\n[[2660.4]] son aide. Ils sont obligés de parler ainsi pour n'estre point pelagiens. </p>\n<p> [[2660.5]] Les Thomistes <i>appellent grace suffisante, avec laquelle seule on ne sçauroit estre\n[[2660.6]] sauvé</i>, les Semipelagiens disent <i>que la grace peut estre aneantie par la malice de\n[[2660.7]] l'homme</i>. Les Thomistes et Jansenistes avouent <i>que la grace efficace a son effect infalliblement.\n[[2660.8]] Dieu predetermine la volonté d'une maniere physique du costé du bien</i>,\n[[2660.9]] autrement <i>l'homme ne sçauroit faire aucune bonne oeuvre</i>. Les <i>Messieurs du Port Royal\n[[2660.10]] au lieu de la liberté mettent l'indifference</i>. </p>\n<p> [[2660.11]] Scot. <i>in sent.</i> lib. 1. dist. 41. primo instanti vult Petrum et Judam fuisse in eodem\n[[2660.12]] statu, et Deum ante praevisa opera decrevisse dare gloriam Petro, et respectu Judae se\n[[2660.13]] habuit negative. In secundo instanti Deus decernit gratiam Petro, et rursus erga Judam se\n[[2660.14]] habet negative. In tertio instanti, Deus permittit culpam Petri et Judae. Circa Thomae\n[[2660.15]] sententiam Thomistae dissentiunt: Didacus Alvares hominem sub peccato originali jacentem\n[[2660.16]] facit objectum praedestinationis in Epit. libri <i>de Auxiliis</i> lib. 4. c. 7, quae est commune\n[[2660.17]] et Protestantium. At Ledesma, Rispolis, Dom. Bannes tenent secundum Thomam,\n[[2660.18]] Deum eligere et reprobare hominem, quem considerat adhuc innocentem. Disputatio quae\n[[2660.19]] est inter Protestantes de objecto praedestinationis, est inter Romanenses de causis et\n[[2660.20]] effectibus ejusdem. </p>\n<p> [[2660.21]] Novi Thomistae creationem faciunt effectum reprobationis, seu Deus reprobavit\n[[2660.22]] hominem, antequam creare decrevit. Ita Estius <i>in sent.</i> lib. 1, dist. 40, sect. 10 (+ hoc non\n[[2660.23]] aliter explicari potest, quam quod reprobatio in notione hominis tanquam possibilis\n[[2660.24]] continetur +), idem ait Estius de Angelis et donis excellentibus quae his data esse scilicet\n[[2660.25]] effectu reprobationis. Rispolis in <i>statu controversiae de praefinitionibus</i> statuit posse dici\n[[2661.1]] odium aliquod negativum, et quando Deus non amat satis hominem ut velit ei salutem\n[[2661.2]] dare, et tamen actu positivo permittit ut peccet dici posse habere odium negativum\n[[2661.3]] eorum, etiam ante peccati praevisionem. </p>\n<p> [[2661.4]] Et Pet. Ledesma <i>de grat. divin. auxil.</i> quaest. un. art. 17. Deum quosdam coelo\n[[2661.5]] excludere praedeterminantem eorum damnationem ante omnem praevisionem actus.\n[[2661.6]] Dominicus Bannes haec prolixe tuetur ex Thoma, Bannes <i>in 1 Thom.</i> quaest. 25, art. 5. </p>\n<p> [[2661.7]] Non posset Deus permissive se habere ad peccatum nisi [<i>bricht ab</i>] </p>\n",
+  "number": "449.",
+  "title": "De gratia sententiae ex Jurieu excerptae",
+  "date": "[Frühjahr bis Sommer 1686 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:449. De gratia sententiae ex Jurieu excerptae [Frühjahr bis Sommer 1686 (?)] [Frühjahr bis Sommer 1686 (?)] Selon Jurieu apologie de la reforme contre M. Maimbourg, ch. 17, les Jesuites disent que l'homme peut faire sans la grace les memes bons actes selon leur substance et degrés, qu'avec la grace,...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

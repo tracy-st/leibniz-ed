@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_15",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 15,
+  "text": "<p> [[36.4]] <b>15. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[36.5]] Hamburg, 15. (25.) April [1695]. [13.19.]</b></p>\n\n<p> [[36.13]] I. N. J. C. </p>\n<p> [[36.14]] Nobilissimo et Excellentissimo Dn. G. G. Leibnutzio </p>\n<p> [[36.15]] S. P. D. V. Placcius </p>\n<p> [[36.16]] Ne quod existimabam tibi deberi privilegium vulnerarem improvidus, missionem distuli\n[[36.17]] eorum quae nunc accipies, uti benigne promisisti, perlegenda monitisque tuis exquisitissimi\n[[36.18]] judicii honoranda simul ac vacaverit. Non potes mihi dare beneficium majus. Eritque illud suo\n[[36.19]] tempore publicum D[eo] V[olente]. </p>\n<p> [[36.20]] Jungianae schedae in miserrimo sunt statu. Ex 400 pene, vix 100 restant fasciculi, et hi\n[[36.21]] nullius fere pretii. Optima quaeque perierunt omnia, cum exemplis autographa. Etiam Aristoteles\n[[36.22]] illius ob loca parallela, et notas, non nisi tota sua vita ex professo Philosophum tanto ac\n[[36.23]] ipse cum judicio tractanti scribendas inaestimabilis. V. gr. haec vox (<greek>^%)/orejiw</greek>) nusquam definitur:\n[[36.24]] sumiturque tot modis etc. </p>\n<p> [[36.25]] Valetudo mea per Dei gratiam cum senectute incipiente incipit meliorari. Lactea diaeta\n[[36.26]] quidem continuanda, sed cum libertate jungendi propemodum quae velim modicis dosibus\n[[37.1]] vicibusque. Abhinc mense proximo jusculo etiam bubulo reficior mirum in modum. Hoc si\n[[37.2]] porro succedit, spero alvi siccitatem et virium a laboribus defectum omnem posse corrigi. Quae\n[[37.3]] duo sola me adhuc infestant. Vale. Hamb. [1695.] d. 15. Aprilis </p>\n",
+  "number": "15.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "Hamburg, 15. (25.) April [1695]. [13.19.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:15. VINCENT PLACCIUS AN LEIBNIZ Hamburg, 15. (25.) April [1695]. [13.19.] I. N. J. C. Nobilissimo et Excellentissimo Dn. G. G. Leibnutzio S. P. D. V. Placcius Ne quod existimabam tibi deberi privilegium vulnerarem improvidus, missionem distuli eorum quae nunc accipies, uti benigne promisisti, perleg...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

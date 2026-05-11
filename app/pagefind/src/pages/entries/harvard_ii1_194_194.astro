@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_194",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 194,
+  "text": "<p> [[619.23]] <b>176. HERMANN CONRING AN LEIBNIZ</p>\n<p> [[619.24]] Helmstedt, 8. (18.) Mai 1678. [168.181.]</b></p>\n<p> [[620.11]] S. P. </p>\n<p> [[620.12]] Quoniam ad Baluzium meas literas curaturum te promisisti, Amplissime Leibnitzi, mitto\n[[620.13]] illas: haud dubitans, fieri posse ut propediem illae sine molestia tua in Galliam abeant; nec vero\n[[620.14]] velim equidem tibi esse gravis. Mitto vero simul etiam librum novissime editum: ut in Bibliotheca\n[[620.15]] Serenissimi Principis reponatur nisi tu isthoc loco censeas indignum, aut Princeps vetuerit\n[[620.16]] recipi. Quod Tuas postremas attinet sunt quidem illae longe mihi acceptissimae multis nominibus,\n[[620.17]] cumprimis vasti ingenii tui eximia curiositate: utinam vero liceat pariter omnia quae\n[[620.18]] attigisti, probare consensu meo aut saltim de singulis tecum agere. Verum illa eorum est\n[[620.19]] varietas et multitudo, ut non vacet iis tractandis tempus nunc impendere: illa praeterea, ne quid\n[[620.20]] dissimulem, ratio, ut perquam paucis queam assentiri, quandoquidem non duntaxat nova mihi\n[[620.21]] videntur sed etiam (liceat tua hoc pace addere) a vero perquam aliena. Si famae quoque\n[[620.22]] credendum, nec tibi imposterum otium concedetur talia agendi: quia nempe jus dicendum tibi\n[[620.23]] erit de litigantium controversiis in curia, domi autem legendi ejusmodi libelli fuerint, adeoque\n[[620.24]] seponenda omnia isthaec, quae voluisti literarum tuarum esse argumentum. Spero equidem hoc\n[[620.25]] munus ab Optimo Principe esse tibi impositum: ideoque non dubito jam tum hanc dignitatem\n[[620.26]] tibi gratulari, cum quod honorifica sit tibi, tum [quod] saltim ad reipublicae utiles meditationes\n[[620.27]] ingenium appellere cogeris, relictis paradoxis commentis et vagis speculationibus. Nec tamen\n[[620.28]] non etiam mihi fuerit jucundum, vacuas horas interdum impendere tecum mutuo, inter nos de\n[[620.29]] aliis quoque illis tuis colloquio, si propius viveremus: quia et haec et similia me quoque pridem\n[[620.30]] habuerunt occupatum: sed scriptis literis isthaec agitare neutri nostrum convenit. Ista igitur\n[[620.31]] quidem serra posthac inter nos conquiescat, donec licuerit coram mutua amicitiae officia\n[[620.32]] praestare. Quod tibi quoque haud ingratum esse arbitror, jam aliis et quidem forensibus\n[[620.33]] districto. Nihilominus me tibi ex animo bene cupere etsi absentem, non est quod dubites: et\n[[621.1]] vicissim de te paria mihi polliceor. Vale igitur, Vir Amplissime, et salve\n [[621.2]] Nominis ac virtutis et eruditionis tuae cultor </p>\n<p> [[621.3]] Helmstadii 8 Maji 1678. Herm. Conringius. </p>\n",
+  "number": "176.",
+  "title": "HERMANN CONRING AN LEIBNIZ",
+  "date": "Helmstedt, 8. (18.) Mai 1678. [168.181.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:176. HERMANN CONRING AN LEIBNIZ Helmstedt, 8. (18.) Mai 1678. [168.181.] S. P. Quoniam ad Baluzium meas literas curaturum te promisisti, Amplissime Leibnitzi, mitto illas: haud dubitans, fieri posse ut propediem illae sine molestia tua in Galliam abeant; nec vero velim equidem tibi esse gravis. Mitt...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

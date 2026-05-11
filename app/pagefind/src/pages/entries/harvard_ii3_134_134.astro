@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_134",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 134,
+  "text": "<p> [[357.16]] <b>134. LEIBNIZ AN LOUIS COUSIN</p>\n\n[[358.1]] <e21>Mit der nicht gefundenen Abfertigung unseres Briefes wendet sich Leibniz an Louis Cousin als den Herausgeber\n[[358.2]] des <i>Journal des Sçavans</i>, um auf die gegen seinen Willen anonym durch Pierre-Sylvain Régis am 17. Juni 1697\n[[358.3]] dort mit dem Titel <i>Reflexions sur une letre de M. Leibnits ecrite à M. l'Abé Nicaise, dans laquelle il pretend faire\n[[358.4]] voir que les principes de la Filosofie de M. Descartes, renferment des consequences contraires à la Religion et à\n[[358.5]] la pieté</i> (S. 273-276) veröffentlichten Äußerungen aus seinem Brief an Nicaise (N. 100) zu reagieren. Einer\n[[358.6]] zuvor geäußerten Bitte (nicht gefunden) wohl zur Verhinderung dieser Publikation war Cousin nicht nachgekommen.\n[[358.7]] Aus diesem Grund übersendet Leibniz ihm mit unserem Schreiben seine Antwort, die er aufgrund ihrer\n[[358.8]] Länge in zwei Artikel für das <i>Journal</i> unterteilt: <i>Réponse aux réflexions qui se trouvent dans le 23. Journal des\n[[358.9]] Savans de cete anée, touchant les conséquences de quelques endroits de la Filosofie de Descartes</i> (19. August\n[[358.10]] 1697, S. 381-384) und <i>Suite de la reponse aux reflexions sur les conséquences de quelques endroits de la\n </p>\n<p> [[358.12]] Monsieur </p>\n<p> [[358.13]] J'avois pris la liberté de vous écrire dernierement pour deux raisons; mais ayant appris que\n[[358.14]] l'une ne peut plus avoir lieu, j'espere que vous prendrés l'autre en bonne part. Cependant pour\n[[358.15]] redresser ce qui pourroit tourner à mon prejudice, j'ay esté obligé de faire l'Apologie que voicy\n[[358.16]] dont je vous supplie de faire part au public suivant vostre bonté et vostre equité ordinaire. Je me\n[[358.17]] flatte que vous trouverés, Monsieur, comme qu'il n'y a rien que de moderé, et qu'aussi\n[[358.18]] Messieurs les Cartesiens mieux informés me feront la justice de croire, que ce je n'ay point\n[[358.19]] parlé ny par animosité, ny par ambition, comme on m'impute[,] mais pour le bien public, et que\n[[358.20]] je n'attaque point la pieté de M. des Cartes non plus que la leur. Lorsque je croy qu'on peut tirer\n[[358.21]] des mauvaises consequences de quelques endroits des principes de cet auteur, j'ay eu soin\n[[358.22]] d'adjouter des eclaircissemens, qui auront peutestre quelque utilité, car je ne crois pas que des\n[[358.23]] simples Apologies ou disputes personnelles doivent charger vostre <i>Journal des Sçavans</i>. J'ay\n[[358.24]] partagé ce discours cyjoint en deux, parce qu'il est trop grand pour un journal. Je suis\n[[358.25]] cependant avec zele </p>\n<p> [[358.26]] Monsieur vostre etc. </p>\n<p> [[358.27]] P.S. J'ose aussi vous supplier, que lors qu'on repliquera peutestre contre moy, ou en des\n[[358.28]] rencontres semblables, vous vouliés avoir la bonté de faire marquer mon nom seulement par les\n[[358.29]] lettres initiales. </p>\n",
+  "number": "134.",
+  "title": "LEIBNIZ AN LOUIS COUSIN",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:134. LEIBNIZ AN LOUIS COUSIN Mit der nicht gefundenen Abfertigung unseres Briefes wendet sich Leibniz an Louis Cousin als den Herausgeber des Journal des Sçavans, um auf die gegen seinen Willen anonym durch Pierre-Sylvain Régis am 17. Juni 1697 dort mit dem Titel Reflexions sur une letre de M. Leibn...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

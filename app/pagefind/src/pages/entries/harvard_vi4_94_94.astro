@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_94",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 94,
+  "text": "[[316.3]] <b>78₂.  Zweiter Ansatz ZWEITER ANSATZ </p>\n<p> [[316.4]] In Generali Mathematica, sive de Numeris ac Figuris, sive de Motibus, aliisque\n[[316.5]] rebus mensurabilibus agatur, omnia problemata huc redeunt, ut cujusdam magnitudinis\n[[316.6]] determinatio per alias datas reperiatur talis, quae sufficiat ad quaesitae ipsius productionem.\n[[316.7]] <b>Determinatio</b> est enumeratio conditionum quae sufficiant ad rem unam ab aliis\n[[316.8]] omnibus distinguendam. <b>Productio</b> est operatio quaedam exacta cujus requisita in\n[[316.9]] potestate sunt, et qua certum aliquid efficitur. </p>\n<p> [[316.10]] An autem problema ex propositis initio conditionibus satis determinatum sit, quanquam\n[[316.11]] multis modis, praevideri possit, nullum tamen generalius indicium est, quam ipse\n[[316.12]] eventus, si quaedam productio procedens inveniri potest; facile enim apparebit inter\n[[316.13]] operandum, an id quod producitur sit unicum, an vero plura prodeant, quorum unum non\n[[316.14]] minus quam alterum quaesito satisfaciat. </p>\n<p> [[316.15]] Itaque in hoc unum tantummodo incumbere debemus, ut ex conditionibus initio\n[[316.16]] propositis inveniamus determinatam quaesiti productionem.\n </p>\n<p> [[316.18]] <i>Die beiden folgenden Absätze in Kleindruck sind Vorstufen, die Leibniz durch den nachfolgenden Absatz\n[[316.19]] ersetzt hat</i>: </p>\n<p> [[316.20]] Omnis magnitudo a nobis exprimetur vel litera quadam, ut <i>a, b</i>, aliove symbolo simplici qualicunque, vel\n[[316.21]] formula ex literis composita, quales mox explicabimus. Si plures designandae sint magnitudines quas aequales\n </p>\n<p> [[317.2]] Quaecunque magnitudinem habent, etiam partibus constant, quae si assignentur\n[[317.3]] aequales inter se, magnitudo totius solo partium aequalium numero determinatur, et\n[[317.4]] unaquaeque pars totum metiri dicetur, sed etsi partium inter se aequalium [<i>bricht ab</i>] </p>\n",
+  "number": "78₂.",
+  "title": "Zweiter Ansatz",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:78₂. Zweiter Ansatz ZWEITER ANSATZ In Generali Mathematica, sive de Numeris ac Figuris, sive de Motibus, aliisque rebus mensurabilibus agatur, omnia problemata huc redeunt, ut cujusdam magnitudinis determinatio per alias datas reperiatur talis, quae sufficiat ad quaesitae ipsius productionem. Determ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

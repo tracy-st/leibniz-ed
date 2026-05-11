@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_36",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 36,
+  "text": "<p> [[156.16]] <b>37. JOHANN VAGETIUS AN LEIBNIZ</p>\n<p> [[156.17]] Hamburg, 22. Februar (4. März) 1687. [35.47.]</b></p>\n<p> [[157.1]] Vir Nobilissime et Clarissime </p>\n<p> [[157.2]] Pergratae mihi fuerunt, omni ex parte, literae Tuae, et satisfacere omni desiderio Tuo, si\n[[157.3]] possem, haud quaquam intermitterem. Cum omni non possim, cui possum, id ut pro virili\n[[157.4]] expleam, </p>\n<p> [[157.5]] 1. Isagoges <i>Phoranomicae</i> textum excusum jam esse, nuncio, addendae restant solae\n[[157.6]] figurarum delineationes. </p>\n<p> [[157.7]] 2. Schedas nondum omnes vidi. Quae penes Dn. Siverum sunt, eas perlustrandas nunc\n[[157.8]] demum accepi, neque credo, de contentis schedarum tantum posse cognosci ex inscriptionibus,\n[[157.9]] quantum Fogelius in <i>Vita Jungii</i> aperuit, nedum amplius quicquam, quare 300 fasciculorum et\n[[157.10]] quod excurrit catalogum manuscribere, nullo sperato fructu, saepius vereor unquam ut possim. </p>\n<p> [[157.11]] 3. Heureticam peculiarem numerat scientiam, sed in quantitatibus occupatam. Heureticam\n[[157.12]] quae Logicae pars possit censeri, credo, ipse aptis locis per Logicae corpus fuerit distributurus,\n[[157.13]] artis sc. inveniendi et dijudicandi veritatem, nec objectum agnoscentis aliud, quam Tres mentis\n[[157.14]] operationes, quarum singulis singuli libri sunt attributi generatim dirigendis; speciatim a[utem]\n[[157.15]] pro materiae diversitate singuli universis, ut alii praeter has partes parti non videatur posse esse\n[[157.16]] locus. </p>\n<p> [[157.17]] 4. <i>Texturae</i> schedas aliquot, inquit Dn. Siverus a se D. Fogelio esse datas. Quae v[ero]\n[[157.18]] Fogelii in manibus fuerant Jungiana, D. Kirstenius ad se recepta, tandem Bibliothecae publicae\n[[157.19]] tradidit. Requirenda ergo haec istis in schedarum manipulis erunt folia. </p>\n<p> [[157.20]] 5. <i>Becceleriana</i> petivi, obtinui, et Dn. Lic. Placcio misi, per occasionem transmittenda.\n[[157.21]] Venibunt 5000 Imperialibus et qui emptorem suppeditarit, ei honorarium obtinget. </p>\n<p> [[157.22]] 6. Typothetas obsequentes si quando Deus dabit, non intermittam iis uti, et chartis per\n[[157.23]] hebdomadem binis, non dubito, quin possim vacare. Interea id dum expectatur, descriptionem\n[[157.24]] urgere non desinam, nec requirere unum post alterum, quod ni<angle bracket>mis a</angle bracket>bstrusum aut diffusum\n[[157.25]] non sit, expetentium in gratiam, gravabor. </p>\n<p> [[158.1]] Denique [7.] Volupe fuit, Contemplationes de consequentia a rectis demonstranda cognoscere,\n[[158.2]] magnasque de communicatis illis ago gratias. Videtur autem prior modus, ipsam hanc\n[[158.3]] consequentiam, ad quam confirmandam arcessitur, in II, 3, 4, supponere, adeoque a petitione\n[[158.4]] principii defendi non posse. Posterior et firmus videtur, et observatu propter alios etiam quos\n[[158.5]] pollicetur usus, dignissimus. Suas habet consequentia a compositis ad divisa quae num. 3.\n[[158.6]] supponitur exceptiones, sed hic, quantum adhuc video, non metuendas. Militat quippe ex <i>Log.\n[[158.7]] Hamb.</i> V, IIX, 12, et IX, 33, quicquid hic requiri credo. Ipse numerus II, nititur etiam\n[[158.8]] V, X, 4, II. </p>\n<p> [[158.9]] Deus porro patefaciat disciplinarum arcana, et patefacta efficiat Sanctissimo Suo Nomini\n[[158.10]] gloriosa, Hominumque veris commodis proficua. Is Te servet et optatis omnibus beet. Ego\n[[158.11]] persevero </p>\n<p> [[158.12]] Tui, Vir Clarissime Studiosissimus, et ad officia paratissimus </p>\n<p> [[158.13]] Hamb. 22. Febr. 1687. Joh. Vagetius manu propria </p>\n<p> [[158.14]] Viro Nobilissimo, Clarissimoque Dn. Gotfrid-Guilielmo Leibnizio J^#'c^#'t^#'o et Philosopho praecellenti,\n[[158.15]] et Illustrissimi Ducis Lunaeb. Hanoverae Bibliothecario, Amico meo pl. colendo.\n[[158.16]] Hanoveram. </p>\n",
+  "number": "37.",
+  "title": "JOHANN VAGETIUS AN LEIBNIZ",
+  "date": "Hamburg, 22. Februar (4. März) 1687. [35.47.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:37. JOHANN VAGETIUS AN LEIBNIZ Hamburg, 22. Februar (4. März) 1687. [35.47.] Vir Nobilissime et Clarissime Pergratae mihi fuerunt, omni ex parte, literae Tuae, et satisfacere omni desiderio Tuo, si possem, haud quaquam intermitterem. Cum omni non possim, cui possum, id ut pro virili expleam, 1. Isag...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

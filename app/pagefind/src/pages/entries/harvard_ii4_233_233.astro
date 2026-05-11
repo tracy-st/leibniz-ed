@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_233",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 233,
+  "text": "<p> [[708.1]] <b>233. LEIBNIZ AN DEMOISELLE LETI</p>\n<p> [[708.2]] Hannover, 19. Dezember 1707. [234.] </b></p>\n<p> [[708.13]] Hanover ce 19 Xbr. 1707\n [[708.14]] Mademoiselle </p>\n<p> [[708.15]] Vous <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A M^#'l^#'l^#'e Leti</Fn> estes peutestre curieuse de savoir ce que vous m'avés envoyé, et quand vous ne le\n[[708.16]] seriés pas, c'est assés que vous pourriés l'estre. Ainsi je vous le dois communiquer, Mademoiselle,\n[[708.17]] en vous en remerciant. </p>\n<p> [[708.18]] J'y joins ma reponse à Monsieur Coste, quoyque je m'imagine bien qu'elle ne sera point\n[[708.19]] un objet de vostre curiosité. Mais je le fais pour vous supplier de l'envoyer à Monsieur vostre\n[[708.20]] beaufrere, qui vous aura envoyé apparement la lettre de M. Coste pour moy, et je laisse la\n[[708.21]] mienne ouverte, à fin qu'il la puisse lire, et que je puisse profiter de son jugement, autant qu'il\n[[708.22]] le trouvera à propos. Cependant je le remercie tres humblement de ses soins. </p>\n<p> [[708.23]] La lettre de M. Coste estant écrite au mois d'Aoust, sur le bruit qui couroit des merveilles\n[[708.24]] prophetiques des Sevennois refugiés à [Londres], je m'imagine qu'il saura mieux apresent ce\n[[708.25]] qu'il en faut juger, et qu'il nous en pourra donner plus d'éclaircissement. Le tribunal où ils ont\n[[708.26]] esté appellés ne leur a point esté favorable à ce que la gazette nous apprend. Je ne m'en étonne\n[[709.1]] pas, et je suis seulement en peine de M. Fatio, gentilhomme Suisse tres habile, qu'on dit avoir\n[[709.2]] esté mêlé dans cette affaire, abusé sans doute par des belles apparences. </p>\n<p> [[709.3]] J'aurois l'honneur de vous venir faire la reverence, quand je sortiray, et de reprendre la\n[[709.4]] lettre de M. Coste, cependant je suis avec respect </p>\n<p> [[709.5]] Mademoiselle vostre tres humble et tres obeissant serviteur Leibniz </p>\n",
+  "number": "233.",
+  "title": "LEIBNIZ AN DEMOISELLE LETI",
+  "date": "Hannover, 19. Dezember 1707. [234.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:233. LEIBNIZ AN DEMOISELLE LETI Hannover, 19. Dezember 1707. [234.] Hanover ce 19 Xbr. 1707 Mademoiselle Vous Am Kopf der Seite von Leibniz' Hand: A M^#'l^#'l^#'e Leti estes peutestre curieuse de savoir ce que vous m'avés envoyé, et quand vous ne le seriés pas, c'est assés que vous pourriés l'estre....">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

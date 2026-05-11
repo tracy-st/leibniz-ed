@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_198",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 198,
+  "text": "<p> [[629.3]] <b>180. JOHANN VAGETIUS AN LEIBNIZ</p>\n<p> [[629.4]] Hamburg, 6. (16.) Juni 1678. [200.]</b></p>\n<p> [[629.17]] S. et O. Nobilissime, Amplissime Dⁿ^#'e Consiliarie, Dⁿ^#'e Honoratissime. </p>\n<p> [[629.18]] Honorificentiorem vidi, quam mereor, binis literis factam abs te mei mentionem, cum\n[[629.19]] significatione sane mihi gratissima propensi in me animi; simul ea perspexi singularis Eruditionis\n[[629.20]] et subtilissimi Ingenii indicia, ut tam Animi Tui hae dotes expetendam faciant Tui\n[[629.21]] Notitiam, quam amplissima, qua merito tuo fulges, Dignitas. Quare pro magno thesauro\n[[629.22]] amplector oblatum Ampl^#'a^#'e T^#'a^#'e Dign^#'t^#'i^#'s favorem, et Cultorem Tanti Nominis quacunque potero\n[[629.23]] probare me connitar strenuum, enixe facturus omnia quibus conservari benevolentia tam optabilis\n[[629.24]] possit. Atque Jungianis de scriptis cognoscere cum desideres, inprimis ejus de <i>Vermium\n[[629.25]] historia</i>, inquisivi eam, et sparsam per schedas reperi, concinnari tamen a B. Fogelio jam\n[[629.26]] coeptas. <i>Doxoscopias</i> itaque <i>Physicas</i> majores cum perlustravero, recensendae illi et concinnandae,\n[[629.27]] describendaeque juvante Deo, admovebuntur manus. Haec et horum similia opera\n[[629.28]] majora dum vel colliguntur, vel, editionis qui ferre sumptus velit, inveniunt, dum item totius\n[[630.1]] schedarum massae conficitur catalogus et numerantur folia, visum est, luci paulatim dare\n[[630.2]] opuscula quaedam, qualia discipulis ab ipso Auctore fuerunt tradita. Id genus meditationum\n[[630.3]] Jungianarum primitias, <i>Harmonicam</i>, nunc mitto, Exemplaria si forte pro amicis desideras,\n[[630.4]] lubens quot postulaveris, missurus. Vale, Vir Amplissime et favere perge. </p>\n<p> [[630.5]] T. Nob^#'m^#'a^#'e Amplitⁿ^#'i^#'s Cultor obsequiosissimus </p>\n<p> [[630.6]] Scribeb. Hamb. 6. Junii 1678. Joh. Vagetius. </p>\n<p> [[630.7]] <i>Dem WohlEdlen Vesten und Hochgelahrten Herrn, Gottfried Wilhelm Leibnitz, Fürstlichen\n[[630.8]] Hannoverschem Hochverdientem Raht, Meinem Insonders Hochgeehrten Herrn und Gönner.\n[[630.9]] Hannover.</i> </p>\n",
+  "number": "180.",
+  "title": "JOHANN VAGETIUS AN LEIBNIZ",
+  "date": "Hamburg, 6. (16.) Juni 1678. [200.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:180. JOHANN VAGETIUS AN LEIBNIZ Hamburg, 6. (16.) Juni 1678. [200.] S. et O. Nobilissime, Amplissime Dⁿ^#'e Consiliarie, Dⁿ^#'e Honoratissime. Honorificentiorem vidi, quam mereor, binis literis factam abs te mei mentionem, cum significatione sane mihi gratissima propensi in me animi; simul ea perspe...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

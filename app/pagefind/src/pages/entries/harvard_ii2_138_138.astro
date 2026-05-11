@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_138",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 138,
+  "text": "<p> [[505.6]] <b>140. EDME PIROT AN LEIBNIZ</p>\n<p> [[505.7]] [Paris,] 23. Februar 1692. [130.148.]</b></p>\n[[505.11]] <petit> <p> Der Brief, Beischluß zu dem Brief gleichen Datums von Pirot an Pellisson (I, 7 N. 140) und dann zu dem\n[[505.12]] Brief von Pellisson an Leibniz vom 24. Februar 1692 (I, 7 N. 142), antwortet auf N. 130 und wird beantwortet\n[[505.13]] durch N. 148. Ihm lag das folgende Schreiben von Mallement bei (N. 141). </petit> </p>\n<p> [[505.14]] [ ... ] Mais, Monsieur, il faut vous parler de vous mesme, et j'aurois de commencer par là\n[[505.15]] pour m'excuser d'avoir esté si long temps sans respondr[e] une lettre aussy obligeante que la\n[[505.16]] vostre, comme vous m'ordonniés de fa[ire] voir un papier à quelque physicien, je priay\n[[505.17]] M. Pelisson de m'en fair[e] faire une copie que je communiquay à un de mes amys en mesme\n[[505.18]] temps qu'il se faisoit fort de sa part de faire voir vostre original à MM. de l'academie royalle\n[[505.19]] des sciences et d'en tirer leurs sentiments. L'amy à qui je le fis voir c'est M. Mallement regent\n[[505.20]] de philosophie au college du Plessis habille en physique et de doctrine assés libre sur la\n[[505.21]] philosophie qui est presentement recteur de l'université, je l'ay prié de mettre un mot sur vostre\n[[505.22]] principe pour marquer son advis, ses affaires luy ont fait tenir long temps ce papier et il ne fait\n[[505.23]] que de me le rendre, c'est Monsieur la seule rayson qui m'a empesché de vous remercier\n[[505.24]] plustost. Vous verrés qu'il n'est pas de vostre sentiment par son billet que je vous envoye, mais\n[[505.25]] cela ne doit pas vous rebuter, je ne sçays ce qu'en penseront les autres, pour moy je ne me\n[[505.26]] connois pas assés en ces sortes de raysonnements pour y prononcer. </p>\n<p> [[505.27]] MM. de l'academie royalle des sciences ont commencé au moys de Janvier à donner\n[[505.28]] quelques extraits de leurs registres sur leurs observations et en promettent tous les moys, mais à\n[[505.29]] juger par l'eschantillon, ce sera peu de chose, ce pays icy n'est ny heureux ny fecond en ces\n[[506.1]] sortes de journaux, ceux d'Hollande en françoys et les vostres latins dont j'ay veu quelques\n[[506.2]] foys des fragments sont d'une autre beauté. Il y a de petits livres sur M. des Cartes pour et\n[[506.3]] contre. M. Regis avoit respondu à M. Huet, M. du Hamel luy replique, il y a un petit livret de\n[[506.4]] 2 feuilles que j'ay leu pour le sceau qui pourra avoir de la suitte, c'est pour tourner en ridicule\n[[506.5]] M. des Cartes sur des faits mesme tirés de la vie qu'en a fait depuis peu imprimer M. Baillet.\n[[506.6]] [ ... ] </p>\n",
+  "number": "140.",
+  "title": "EDME PIROT AN LEIBNIZ",
+  "date": "[Paris,] 23. Februar 1692. [130.148.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:140. EDME PIROT AN LEIBNIZ [Paris,] 23. Februar 1692. [130.148.] Der Brief, Beischluß zu dem Brief gleichen Datums von Pirot an Pellisson (I, 7 N. 140) und dann zu dem Brief von Pellisson an Leibniz vom 24. Februar 1692 (I, 7 N. 142), antwortet auf N. 130 und wird beantwortet durch N. 148. Ihm lag d...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

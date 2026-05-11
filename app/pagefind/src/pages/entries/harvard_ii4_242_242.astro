@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_242",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 242,
+  "text": "<p> [[737.1]] <b>242. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[737.2]] [Berlin, 19. Februar 1707 (?)]. [241.243.] </b></p>\n<p> [[737.17]] <petit> <k>[Definitio] CLXX. Monadatum (Substantiatum)</k>\n[[737.18]] est compositum ex monadibus per aggregationem [ ... ].\n[[737.19]] Scholion I. Sicut ex non-mixtura fit mixtura, ex non-exercitu fit exercitus per compositionem: ita pariter ex non-aggregato\n[[737.20]] (simplicibus) fit aggregatum (compositum) per compositionem.\n[[737.21]] Scholion II. LEIBNITIUS in Epistola Brunsuiga IV. Septembr. MDCCXVI. ad me data: </petit>\n [[737.22]] \"<i>Substantiatum</i> ego appello aggregatum ex monadibus.\" </p>\n[[737.23]] <petit> Scholion III. Dici possent Monades, stylo Leibnitiano, <i>partes Monadatorum</i>, sed non nisi <i>infinite parvae</i>, quae\n[[737.24]] scilicet infinities sumtae partem aliquam Monadati constituunt [ ... ].\n[[737.25]] Scholion IV. <k>Leibnitius</k> ita rationes inire solebat: </petit>\n [[737.26]] \"Substantiale vel est substantia simplex, vel substantiatum: hoc vel Unum per se, vel Unum per\n[[737.27]] accidens\",\n [[737.28]] <petit> in Epistola Berolino XIX. Febr. MDCCVII. ad me data.</petit> </p>\n[[738.1]] <petit>Scholion V. Alias compositum ex Monadibus in <i>Principiis Philosophiae</i> §. 1. 2. et dans sa Replique aux\n[[738.2]] reflexions de Mr. <k>Bayle</k> Tom. II. <i>du Recueil p. 400.</i> vocat <i>Compositum absolute</i>, quia omne compositum ens est\n[[738.3]] propter Monades in partes ejus ingredientes. Hae autem solae sunt verae atque reales Unitates. Minus accurate\n[[738.4]] dicitur <i>Substantia composita</i>; quamvis ipse <k>Leibnitius</k> interdum cum vulgo loquatur, in his ipsis principiis §. 7.\n[[738.5]] et 30. [ ... ]. </petit> </p>\n",
+  "number": "242.",
+  "title": "LEIBNIZ AN MICHAEL GOTTLIEB HANSCH",
+  "date": "[Berlin, 19. Februar 1707 (?)]. [241.243.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:242. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH [Berlin, 19. Februar 1707 (?)]. [241.243.] [Definitio] CLXX. Monadatum (Substantiatum) est compositum ex monadibus per aggregationem [ ... ]. Scholion I. Sicut ex non-mixtura fit mixtura, ex non-exercitu fit exercitus per compositionem: ita pariter ex non-aggr...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

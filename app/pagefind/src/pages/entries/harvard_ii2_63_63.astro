@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_63",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 63,
+  "text": "<p> [[287.9]] <b>64. LEIBNIZ AN HEINRICH AVEMANN</p>\n<p> [[287.10]] Wien, 6./16. Januar 1689. [117.]</b></p>\n<p> [[287.21]] [ ... ] Nuper autem, cum forte inciderem inter reculas meas, in binos libellos elegantissimos\n[[287.22]] celeberrimi Praschii Vestri, quorum alterum de jure naturae secundum disciplinam\n[[287.23]] Christianorum, alterum Tibi dicatum de Lege Caritatis inscripsit, venit in mentem veteris\n[[288.1]] schedae, qua Justitiam ad Caritatem revocaveram. Quam cum ego (ut soleo ad manum habere\n[[288.2]] talia breviuscula) inter chartas meas circumferaneas reperissem, descriptam, Tibi et si occasio\n[[288.3]] ferat atque Tibi ita videatur etiam Ampl^#'m^#'o Praschio (cui [me] commendari peroptem), dijudicandam\n[[288.4]] mittere volui. Digna enim sunt juris et aequi vera principia, ut attenta consideratione\n[[288.5]] poliantur. Communicavi eadem olim cum aliis id genus Henrico Justello Christophori filio,\n[[288.6]] notissimae doctrinae viro, tunc Parisiis, nunc religionis causa apud Anglos degenti, qui et ipse\n[[288.7]] de jure Gentium aliquid contra Grotium moliebatur; nec mediocriter ille judicio suo in Epistola\n[[288.8]] expresso probavit cogitata. Tentavi etiam descendere ad species juris, et definitiones axiomataque\n[[288.9]] condidi, unde Elementa quaedam derivarentur. Quibus Romana decreta accommodari\n[[288.10]] possent subnotatis passim illis, ubi additum aliquid aut derogatum est communi juri. Sed multae\n[[288.11]] distractiones ideam operis animo concepti in conspectum proferre nondum permisere. [ ... ] </p>\n",
+  "number": "64.",
+  "title": "LEIBNIZ AN HEINRICH AVEMANN",
+  "date": "Wien, 6./16. Januar 1689. [117.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:64. LEIBNIZ AN HEINRICH AVEMANN Wien, 6./16. Januar 1689. [117.] [ ... ] Nuper autem, cum forte inciderem inter reculas meas, in binos libellos elegantissimos celeberrimi Praschii Vestri, quorum alterum de jure naturae secundum disciplinam Christianorum, alterum Tibi dicatum de Lege Caritatis inscri...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_348",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 348,
+  "text": "[[1490.1]] <b>292.  De natura Mentis et Corporis [Sommer 1683 bis Winter 1685/86 (?)]</b>\n [[1490.2]] <tab/>[Sommer 1683 bis Winter 1685/86 (?)]\n[[1490.7]] <tit2><b>De natura Mentis et corporis</b></tit2> </p>\n<p> [[1490.8]] Illae solae animae sunt Mentes in quas cadit cognitio sui ipsius seu conscientia. Hae\n[[1490.9]] solae praemiorum poenarumque sunt capaces, et solae habendae sunt pro civibus ejus\n[[1490.10]] Reipublicae cujus Rex est Deus. Ex mentibus autem eae solae felices sunt, quibus datur\n[[1490.11]] cognitio Dei. Aliud est percipere, aliud percipere quod perceperis, seu meminisse. In\n[[1490.12]] brutis itaque perceptionem agnosco sive sensum eorum quae fiunt, agnosco et imaginationem,\n[[1490.13]] sensu cessante manentem, et ideo recursum priorum imaginum, si qua nova\n[[1490.14]] imago uni priorum similis occasionem praebeat; sed non agnosco in illis conscientiam, ut\n[[1490.15]] scilicet oblata quadam cogitatione percipiant eam vel aliam similem, jam sibi affuisse.\n[[1490.16]] Reflexio itaque seu memoria vel conscientia, mentium propria est. Reflexio proprie est\n[[1490.17]] memoria cogitationis proxime praecedentis. In sui ipsius perceptione consistit imago\n[[1490.18]] divina nobis indita. Non puto ab ullo bruto exerceri illam vim quam in me experior cum\n[[1490.19]] volo ut cogitem me nunc cogitare, et hoc ipsum admirer, et continue in me replicem,\n[[1490.20]] nullo signi alicujus usu interveniente sed intima quadam perceptione, ubi vim simul nobis\n[[1490.21]] facimus imagines ab ea cogitatione avocantes amoliendo. <Fn><i>Am Rande</i>: Cogitatio videtur esse circa aliquam distinctam propositionem, secus perceptio.</Fn> Etiamsi fingeretur dissolutis\n[[1491.1]] membris Mentem nostram aliquandiu nova valde distincta non percipere, sed dormire, vel\n[[1491.2]] etiam nova percipere quae cum prioribus nullam habeant connexionem, ita ut illis\n[[1491.3]] durantibus non recordetur prioris status; tamen si quando post multos annorum milliones\n[[1491.4]] (nam intervallum finitum in aeternitate pro nullo est, et mille annis aut uno dormiisse\n[[1491.5]] perinde est) rediret status congruus ei qui aliquando fuit (proxime praecedenti tamen\n[[1491.6]] quippe diverso memoria non connexus), et praecedentium memoria rediret. Nullane in\n[[1491.7]] bruto cognitio distincta? </p>\n<p> [[1491.8]] Si fingamus animal aliquod instar papilionis ex verme factum, et antequam talis\n[[1491.9]] fieret vermis rursus ex alio forte adhuc minore factum, et ita porro retro, usque ad initium\n[[1491.10]] mundi, et ubi extinguitur rursus in vermiculum, vel aliquod animalculum insensibile\n[[1491.11]] redigi (neque enim de his vermibus loquor, qui per accidens ex membris oriuntur), anima\n[[1491.12]] semper in omnibus eadem manente, non erit quidem sola Metempsychosis in hoc animali,\n[[1491.13]] sed etiam Metasomatosis seu transformatio eritque non tantum eadem semper anima, sed\n[[1491.14]] et eadem semper substantia corporea. Poterit autem hoc animal post innumerabiles\n[[1491.15]] transformationes aliquando rursus redire ad prioris continuationem atque exaltationem\n[[1491.16]] seu perfectionem. Et credibile est ita esse ordinata haec omnia ut pulchrius id fieri non\n[[1491.17]] possit. In transformationibus quodammodo membra exurgentia jam affuerunt. Quaestio:\n[[1491.18]] an omnia animalia ejusdem speciei extinctione in eandem speciem transformentur. Sane\n[[1491.19]] ex erucis combustis non fierent papiliones. </p>\n",
+  "number": "292.",
+  "title": "De natura Mentis et Corporis",
+  "date": "[Sommer 1683 bis Winter 1685/86 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:292. De natura Mentis et Corporis [Sommer 1683 bis Winter 1685/86 (?)] [Sommer 1683 bis Winter 1685/86 (?)] De natura Mentis et corporis Illae solae animae sunt Mentes in quas cadit cognitio sui ipsius seu conscientia. Hae solae praemiorum poenarumque sunt capaces, et solae habendae sunt pro civibus...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_177",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 177,
+  "text": "[[607.15]] <b>145.  De modo docendi ludimagistrorum [Mitte 1685 (?)]</b>\n [[607.16]] <tab/>[Mitte 1685 (?)] </p>\n<p> [[608.1]] Vossius aliique majorum gentium eruditi de paedagogis et modo docendi ab ipsis\n[[608.2]] recepto interdum contemtim loquuntur, et re tantum obiter inspecta culpant quae probari\n[[608.3]] merentur. Ita Vossius in <i>Aristarcho</i> notat non esse cur Paedagogi in declinando ad\n[[608.4]] ablativum <i>Patre</i> addunt <greek>tò</greek> <i>A, a patre</i>, alioqui pari jure deberent accusativo addere <i>ad</i>, et\n[[608.5]] declinare non <i>patrem</i>, sed <i>ad patrem</i>. Ego fateor istud <i>a patre</i> habere incommoda, pueris\n[[608.6]] enim videri possit praepositionem <i>a</i> semper cum ablativo cohaerere; fuit tamen gravis\n[[608.7]] ratio quae Grammaticos impulit, ut <i>a</i> adderent ad ablativum, non <i>ad</i> ad accusativum.\n[[608.8]] Quia scilicet ludimagistri linguis vernaculis (quas jam norunt pueri), accommodare volebant\n[[608.9]] declinationes. </p>\n<p> [[608.10]] <i>Der Vater, <tab/>des Vaters, <tab/>dem Vater, <tab/>den Vater, <tab/>o Vater, <tab/>von dem Vater</i> </p>\n<p> [[608.11]] <i>Pater, <tab/>patris, <tab/>patri, <tab/>patrem, <tab/>o pater, <tab/>a patre</i>.\n [[608.12]] Scilicet vocativo praeponunt <i>o</i>, Ablativo <i>a</i>, quia aliter discerni non possunt, vocativus a\n[[608.13]] nominativo, ablativus a dativo, saltem in lingua Germanica. Cum ergo necesse esset\n[[608.14]] addere ad <i>dem Vater</i> praepositionem <i>von</i>, ut posset in Germanico agnosci ablativus;\n[[608.15]] coacti sunt similiter praepositionem in latino ponere, Germanicae respondentem. </p>\n<p> [[608.16]] Itaque bonis ludimagistris saepe fit injuria, ab his qui eorum rationes necessitatesque\n[[608.17]] non satis tenent. Quod in aliis quoque vitae generibus plerumque usu venire solet. </p>\n",
+  "number": "145.",
+  "title": "De modo docendi ludimagistrorum",
+  "date": "[Mitte 1685 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:145. De modo docendi ludimagistrorum [Mitte 1685 (?)] [Mitte 1685 (?)] Vossius aliique majorum gentium eruditi de paedagogis et modo docendi ab ipsis recepto interdum contemtim loquuntur, et re tantum obiter inspecta culpant quae probari merentur. Ita Vossius in Aristarcho notat non esse cur Paedago...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

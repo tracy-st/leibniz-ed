@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_92",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 92,
+  "text": "<p> [[253.12]] /  <b>92. HEINRICH HORCH AN LEIBNIZ</p>\n<p> [[253.13]] Herborn, 6. (16.) Januar 1697. [97.]</b></p>\n\n<p> [[254.1]] Vir Nobilissime ac Prae-Strenue, Domine ac Fautor Honoratissime. </p>\n<p> [[254.2]] Etiamsi tot tantaque sint Tua in Remp. literariam merita, ut omnes Mathematum Cultores\n[[254.3]] ob praeclara Tua inventa, quibus omnium retro seculorum Mathematicos longo post Te intervallo\n[[254.4]] reliquisti, merito Te suspiciant ac venerentur tanquam communem suum Praeceptorem;\n[[254.5]] non ausus tamen fuissem, incomtis unquam literis meis temere ad Te affectare gradum, nisi per\n[[254.6]] Gravissimos Viros, quorum merita non aliter ac jussa revereri queo, ad commercium me\n[[254.7]] literarium quam humanissime invitasses. Ex qua proinde humanitate Tua ut quoddam in studia\n[[254.8]] mea redundet emolumentum, veniam dabis, Vir Nobiliss. quod hoc Tibi Problema resolvendum\n[[254.9]] proponam. Nimirum <b>Tradere <Fn><b>Tradere ... extensae</b>: <i>Am Rande wohl von Leibniz durch Doppelstriche gekennzeichnet.</i></Fn> modum, quo Deus in mente sua formare quiverit\n[[254.10]] ideam extensionis, posito esse eum naturae tantum cogitantis et minimae\n[[254.11]] extensae.</b> Dignum sane autumo hoc Problema cum Theologo, cujus interest nosse, quomodo,\n[[254.12]] ajente S. Paulo, ex Deo sint omnia, et quomodo, ut Jesaias loquitur, coelos extenderit ex semet\n[[254.13]] ipso? tum etiam Mathematico et Philosopho; quum id agat de extensione, communi objecto et\n[[254.14]] Geometriae et Physicae. Cujus proinde genesin, si quam habet, sibi habere accuratius perspectam,\n[[254.15]] multum sane apparet facere ad solidanda ipsam et principia harum disciplinarum: et\n[[254.16]] praeterea etiam ad finiendam illam controversiam, quae hodie exercet eruditos, nimirum an\n[[254.17]] extensio accensenda sit attributis Dei? Si enim hoc Problema deprehenditur esse contradictorium,\n[[254.18]] ut multis videtur, manifestum fit, agnoscendam esse in Deo extensionem; si vero reale ac\n[[254.19]] possibile, citra dubium referenda erit in censum rerum a Deo diversarum. Modum denique\n[[254.20]] aperiet illius solutio, aliarum quoque rerum conceptus eruendi quasi ex sinu ipsius Dei,\n[[254.21]] tanquam primi omnium rerum Exemplaris: quod quam proficuum sit perspiciendis intime rebus\n[[254.22]] et quoad suam radicem, me etiam non dicente intelligit quivis. Neque dubito, solutionem illius\n[[254.23]] Tibi, Vir Nobiliss. dudum jam esse in promptu, quum ea, ni admodum fallor, inveniri debeat ea\n[[254.24]] via, qua Tu in rebus Mathematicis Orbi erudito adeo admirandum Te praestitisti. Vale interim ad\n[[254.25]] rei literariae decus, ac favere perge </p>\n<p> [[254.26]] Praeclarissimarum Virtutum Tuarum Cultori perpetuo Henrico Horchio </p>\n<p> [[254.27]] Herbornae die 6 Jan. 1697. </p>\n",
+  "number": "92.",
+  "title": "HEINRICH HORCH AN LEIBNIZ",
+  "date": "Herborn, 6. (16.) Januar 1697. [97.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:/ 92. HEINRICH HORCH AN LEIBNIZ Herborn, 6. (16.) Januar 1697. [97.] Vir Nobilissime ac Prae-Strenue, Domine ac Fautor Honoratissime. Etiamsi tot tantaque sint Tua in Remp. literariam merita, ut omnes Mathematum Cultores ob praeclara Tua inventa, quibus omnium retro seculorum Mathematicos longo post...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

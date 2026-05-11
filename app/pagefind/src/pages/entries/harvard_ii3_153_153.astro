@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_153",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 153,
+  "text": "<p> [[407.17]] <b>153. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT</p>\n<p> [[407.18]] Hannover, 29. Dezember 1697 (8. Januar 1698). [151.158.]</b></p>\n\n<p> [[408.12]] Monsieur Hanover 29 decembre 1697 </p>\n<p> [[408.13]] J'estois sur le point d'ecrire pour m'informer de Vous, lors que Mad. L'Electrice m'a fait\n[[408.14]] la grace de m'envoyer la vostre, qui m'a rejoui, en m'apprenant des nouvelles de vostre santé,\n[[408.15]] et en nous faisant esperer que nous vous reverrons bientost. Ce que je souhaitte avec tous vos\n[[408.16]] amis. </p>\n<p> [[408.17]] Le changement de Berlin a esté peu attendu. Mad. nostre Electrice vous en dira quelque\n[[408.18]] chose dans la sienne. </p>\n<p> [[408.19]] C'est un service digne de vostre amitié, que vous nous avés rendu chez Monsgr le prince\n[[408.20]] palatin de Sulzbac, duc de Baviere. Nous esperons que son exemple sera suivi du chef de la\n[[408.21]] Maison. Car Mons. le Baron de Goritz est maintenant allé faire un tour à Dusseldorf. </p>\n<p> [[408.22]] A force de temporiser, et de ne pas vouloir topper quand il estoit temps on a fait une\n[[408.23]] mechante paix pour l'Empire, et particulierement pour la maison palatine. Car il estoit impossible\n[[408.24]] à l'Angleterre de continuer. Il n'y a que l'Empereur et la France qui y gagnent. S'ils\n[[408.25]] s'accordent ils partageront l'Europe entre eux. S'ils ne s'accordent point les autres se pourront\n[[408.26]] encore sauver. </p>\n<p> [[408.27]] Je souhaitte ce que Dieu voudra. Mais en attendant que Dieu se declare, je souhaitte\n[[408.28]] preferablement le bien de nos amis, et de ceux qui le meritent le plus. Et pour vous Monsieur je\n[[408.29]] vous souhaitte encore beaucoup de nouvelles années avec pouvoir de rendre visite à ceux qui\n[[408.30]] vous honnorent autant que je fais. Estant avec zele etc. </p>\n<p> [[409.1]] P.S. Nous avons receu le grand miroir qui ressemble à une porte cochère quand il est\n[[409.2]] monté avec ses ornemens. </p>\n",
+  "number": "153.",
+  "title": "LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT",
+  "date": "Hannover, 29. Dezember 1697 (8. Januar 1698). [151.158.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:153. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT Hannover, 29. Dezember 1697 (8. Januar 1698). [151.158.] Monsieur Hanover 29 decembre 1697 J'estois sur le point d'ecrire pour m'informer de Vous, lors que Mad. L'Electrice m'a fait la grace de m'envoyer la vostre, qui m'a rejoui, en m'apprenant des n...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

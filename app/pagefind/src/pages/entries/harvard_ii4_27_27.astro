@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_27",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 27,
+  "text": "<p> [[77.1]] <b>27. PIERRE BAYLE AN LEIBNIZ</p>\n<p> [[77.2]] Rotterdam, 3. Oktober 1702. [25.31.] </b></p>\n<p> [[77.19]] Monsieur </p>\n<p> [[77.20]] Je suis bien aise que M^#'r Toland se soit souvenu de la priere que je lui avois faite de vous\n[[77.21]] asseurer de mes respects. La lettre que vous me fites l'honneur de m'ecrire le 19. d'aout dernier\n[[77.22]] me fut envoiée par Monsieur de Volder il y a deux ou trois jours avec le manuscrit où vous avez\n[[77.23]] bien voulu examiner mes petites objections. Je l'ai lu avec un plaisir extreme et avec une\n[[77.24]] nouvelle admiration de la beauté, et de la profondeur de votre genie qui sait si bien developer\n[[77.25]] les matieres les plus dificiles. Quant aux loüanges que vous m'y donnez, Monsieur, vous me\n[[77.26]] permettrez de les attribuer à vos manieres honnetes et polies, car je suis bien convaincu que tout\n[[77.27]] ce que je puis penser et dire est petit, et principalement par raport à un philosophe aussi grand,\n[[77.28]] et aussi sublime que vous l'etes. Ainsi quelque gloire qu'il y ait à etre loüé par un si grand\n[[77.29]] homme la connoissance que j'ai de mon indignité m'oblige à vous prier d'oter ces eloges quand\n[[78.1]] vous publierez (ce que je souhaitte passionnement que vous fassiez) votre reponse. Je la renvoie\n[[78.2]] à M^#'r de Volder afin de vous epargner la peine d'en faire faire une autre copie. Il aura la bonté de\n[[78.3]] vous la faire tenir avec cette lettre. </p>\n<p> [[78.4]] Je voi[s] plus clair dans votre hypothese, Monsieur, depuis que j'ai lu votre manuscrit, et\n[[78.5]] je me felicite de vous avoir donné lieu à l'orner de nouvelles considerations qui developent de\n[[78.6]] plus en plus un point de doctrine tres relevée. Je ne vous envoie point de nouveaux doutes car\n[[78.7]] tout ce que je pourrois repliquer, autant que je le prevois, ne seroient que des appendice[s] des\n[[78.8]] premieres obiections qui à proprement parler ne contiendroient rien de plus qu'elles, et reviendroient\n[[78.9]] à la meme chose par des circuits. On ne peut ce me semble, bien combatre la possibilité\n[[78.10]] de votre hypothese, pendant que l'on ne conoit pas distinctement le fond substantiel de l'ame,\n[[78.11]] et la maniere dont elle se peut transformer d'une pensée à une autre. Et peut etre que si l'on\n[[78.12]] connoissoit tres distinctement cela, on verroit que rien n'est plus possible que ce que vous\n[[78.13]] suposez. Personne n'est plus capable que vous, Monsieur de nous eclairer sur ce grand point, et\n[[78.14]] je suis seur que cette analyse des idées dont vous parlés à la fin de votre ecrit seroit le plus\n[[78.15]] grand secours qu'on puisse donner à l'esprit humain, et l'une des plus importantes choses de la\n[[78.16]] philosophie. Je souhaitte que celui qui l'a concuë la produise au public. C'est de vous Monsieur\n[[78.17]] que je parle. Il me faudroit plusieurs pages si je voulois vous indiquer tous les endroits de votre\n[[78.18]] reponse qui m'ont charmé, et si j'entrois dans ce detail j'oublierois moins que toute autre chose\n[[78.19]] ce que vous dites sur le suiet du Chevalier de Meré. Cela est tout à fait curieux. </p>\n<p> [[78.20]] Mais je ne m'apercois pas que quand on a l'honneur d'ecrire à une personne si occupée\n[[78.21]] que vous, on doit etre court. Je finis donc ici en vous souhaitant une parfaite santé afin que vous\n[[78.22]] continuiez à travailler à la propagation des veritez les plus sublimes de la philosophie, et en\n[[78.23]] vous asseurant que je suis avec un profond respect, et toute la gratitude imaginable. </p>\n<p> [[78.24]] Monsieur votre tres humble et tres obeissant serviteur Bayle </p>\n<p> [[78.25]] à Rotterdam le 3. d'octobre 1702. </p>\n<p> [[78.26]] A Monsieur Monsieur de Leibniz. </p>\n",
+  "number": "27.",
+  "title": "PIERRE BAYLE AN LEIBNIZ",
+  "date": "Rotterdam, 3. Oktober 1702. [25.31.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:27. PIERRE BAYLE AN LEIBNIZ Rotterdam, 3. Oktober 1702. [25.31.] Monsieur Je suis bien aise que M^#'r Toland se soit souvenu de la priere que je lui avois faite de vous asseurer de mes respects. La lettre que vous me fites l'honneur de m'ecrire le 19. d'aout dernier me fut envoiée par Monsieur de Vo...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

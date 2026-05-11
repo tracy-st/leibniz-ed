@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_52",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 52,
+  "text": "<p> [[225.8]] <b>53. ANTOINE ARNAULD AN LANDGRAF ERNST VON HESSEN-RHEINFELS</p>\n<p> [[225.9]] 31. August [1687]. [52.54.]</b></p>\n[[227.1]] Ce 31. Aoust </p>\n<p> [[227.2]] Voilà, Monseigneur, la reponse à la derniere lettre de M. Libnits qui m'a esté envoiée par\n[[227.3]] V.A.S. dès le mois d'Avril dernier, mais je n'ay pu m'appliquer plus tost à y repondre. Je la\n[[227.4]] supplie d'y faire mettre le dessus, parceque je ne sçay pas ses qualitez. Si elle la veut parcourir,\n[[227.5]] elle verra qu'il a des opinions de Physique bien estranges, et qui ne paroissent gueres soutenables.\n[[227.6]] Mais j'ay taché de luy en dire ma pensée d'une maniere qui ne le pust pas blesser. ll\n[[227.7]] vaudroit bien mieux, qu'il quittast, du moins pour quelque temps, ces sortes de speculations,\n[[227.8]] pour s'appliquer à la plus grande affaire qu'il puisse avoir, qui est le choix de la veritable\n[[227.9]] religion, suivant ce qu'il en avoit écrit à V.A. il y a quelques années. ll est bien à craindre que la\n[[227.10]] mort ne le surprenne à moins qu'il n'ait pris une resolution si importante pour son salut. </p>\n<p> [[227.11]] Le livre de M. Nicole contre le nouveau systeme de l'Eglise du Sieur Jurieu est achevé\n[[227.12]] d'imprimer. Nous en attendons de Paris dans cinq ou six jours. Nous en envoierons à V.A. par\n[[227.13]] les chariots de Cologne, avec quelques autres livres qu'elle sera bien aise de voir. </p>\n",
+  "number": "53.",
+  "title": "ANTOINE ARNAULD AN LANDGRAF ERNST VON HESSEN-RHEINFELS",
+  "date": "31. August [1687]. [52.54.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:53. ANTOINE ARNAULD AN LANDGRAF ERNST VON HESSEN-RHEINFELS 31. August [1687]. [52.54.] Ce 31. Aoust Voilà, Monseigneur, la reponse à la derniere lettre de M. Libnits qui m'a esté envoiée par V.A.S. dès le mois d'Avril dernier, mais je n'ay pu m'appliquer plus tost à y repondre. Je la supplie d'y fai...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

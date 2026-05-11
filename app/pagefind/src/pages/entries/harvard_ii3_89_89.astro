@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_89",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 89,
+  "text": "<p> [[247.4]] <b>89. LEIBNIZ AN ─ (?)</p>\n<p> [[247.5]] [1696 (?).]</b></p>\n\n<p> [[247.15]] Je vous renvoye, Monsieur, avec remerciment les <i>Conjectures sur le peché Originel</i>.\n[[247.16]] L'Auteur a droit de rejetter l'opinion de Flacius, et il a raison de dire, que ce [qui] est\n[[247.17]] substantiel à l'ame, n'est point corrompu. Et je crois méme qu'on peut accorder, que la\n[[247.18]] depravation de la nature humaine par peché n'est autre chose que l'infection de la source des\n[[247.19]] pensées. Mais lorsque l'auteur veut que le peché originel ne consiste que dans les pensées\n[[247.20]] mêmes, et qu'il n'y a point d'autre dereglement, il semble qu'il dit un peu trop. Je croy\n[[247.21]] pourtant, qu'on le doit expliquer favorablement par luy méme, puisqu'il entend par pensées non\n[[247.22]] seulement l'acte de la pensée, mais encor les habitudes et les dispositions, et c'est je croy ce\n[[247.23]] qu'il appelle pensées habituelles. </p>\n<p> [[247.24]] Il faut faire distinction dans l'ame entre l'essence et les proprietés essentielles d'un costé,\n[[247.25]] et les modifications accidentelles de l'autre. Mais il faut encor distinguer les modifications en\n[[247.26]] qualités, et en actions ou passions. Les qualités sont durables, mais les actions ou passions sont\n[[247.27]] transitives. Ces qualités sont des dispositions, des habitudes, ou des inclinations à l'action et à\n[[248.1]] la passion, et sont encor ou nées avec nous, ou acquises. Ainsi quand on considere bien ces\n[[248.2]] distinctions, toutes difficultés disparoissent d'elles mémes. Il est manifeste que ce qui est\n[[248.3]] essentiel à l'ame, n'est point changé; autrement l'ame [seroit] destruite. Donc le peché originel\n[[248.4]] ne sçauroit étre autre chose, que [ce] qui s'appelle chez les philosophes <i>habitus innatus</i>, dont le\n[[248.5]] sujet est la substance méme avec ses facultés, où le mal a pris racine, puisqu'il est durable, et\n[[248.6]] consiste ainsi non seulement dans les pensées, mais encor dans la source, qui les produit.\n[[248.7]] Maintenant pour rechercher plus particulierement, ce que c'est que cette habitude, on peut dire,\n[[248.8]] qu'il y a des idées dans l'entendement, et des inclinations dans la volonté, qui sont nées avec\n[[248.9]] l'homme, et qui en repondant aux imperfections du corps, font que l'homme est porté au mal.\n[[248.10]] Et l'auteur reconnoist luy méme, qu'on peut naître non seulement avec l'idée de quelque chose,\n[[248.11]] mais encor avec une inclination ou aversion, qui accompagne une idée corporelle. Ainsi\n[[248.12]] l'homme dans cet estat de la nature corrompuë a la disposition de n'estre frappé aisement que\n[[248.13]] par les sentiments confus des biens et maux sensibles, jusqu'à ce qu'il se desabuse par\n[[248.14]] l'experience ou par l'instruction: au lieu que dans un éstat plus sublime il avoit des sentiments\n[[248.15]] plus distincts, qui l'empéchoient de se borner aux sens et autres biens particuliers. Cependant il\n[[248.16]] faut croire, qu'il y avoit encor dans cet estat de la nature entiere une vicissitude de pensées, et\n[[248.17]] que l'esprit ne pouvant pas estre toujours bandé aux choses intelligibles, s'abbaissoit quelques\n[[248.18]] fois pour jouir des objets sensuels, et ce fut dans cet estat qu'il fut surpris par le peché. Ainsi\n[[248.19]] lorsque l'auteur demande <i>l'origine du peché d'Adam</i>, il faut repondre, qu'il est venu de\n[[248.20]] l'imperfection ou limitation originelle des creatures, qui les empéche d'estre des Dieux. </p></p>\n",
+  "number": "89.",
+  "title": "LEIBNIZ AN ─ (?)",
+  "date": "[1696 (?).]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:89. LEIBNIZ AN ─ (?) [1696 (?).] Je vous renvoye, Monsieur, avec remerciment les Conjectures sur le peché Originel. L'Auteur a droit de rejetter l'opinion de Flacius, et il a raison de dire, que ce [qui] est substantiel à l'ame, n'est point corrompu. Et je crois méme qu'on peut accorder, que la depr...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

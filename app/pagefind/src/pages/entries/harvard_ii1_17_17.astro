@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_17",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 17,
+  "text": "<p> [[54.20]] <b>16a. LEIBNIZ AN GOTTLIEB SPITZEL</p>\n<p> [[54.21]] 10./20. Februar 1670. [19a.]</b></p>\n<p> [[55.4]] [ ... ] Ad monstrum <b>Atheismi</b> debellandum, utinam quicquid eruditorum est vires\n[[55.5]] conjungeret, nec pateretur serpere latius etiam inter ipsos hoc malum, a quo nihil praeter\n[[55.6]] Anarchiam universalem atque eversionem Societatis humanae expectari potest. Cl^#'m^#'u^#'s <b>Conringius</b>\n[[55.7]] pec. tr. promisit <i>de veritate religionis Christianae</i> solito accuratius stabilienda, emendandisque\n[[55.8]] illis quae in Grotii libello ejusdem argumenti et ipso, et Episcopio dudum monentibus,\n[[55.9]] desiderari possunt. Vidi nuper Gerardi <b>van der Meulen</b> librum <i>de veritate Religionis\n[[55.10]] Christianae Reformatae</i>, cujus priora in Christianismo firmando, reliqua in Religione, quam\n[[55.11]] Reformatam vocant, defendenda consumuntur; sunt tamen, quibus pretium operae magnum\n[[55.12]] fecisse non videtur. In Anglia prodiisse accepi <i>Apologiam generis humani adversus accusationem\n[[55.13]] Atheismi</i>, cujus autor Fabricius, tueri dicitur: nullam unquam uspiam gentem prorsus\n[[55.14]] <greek>^%)/aueon</greek> extitisse, quod et ego verissimum judico. </p>\n<p> [[55.15]] Cum vero operae sit latissime fusae, solide atque accurate elidere, quicquid religioni\n[[55.16]] Christianae objici potest, praesertim cum ea res gravissimos quosque Theologiae Exegeticae,\n[[55.17]] historicae, scholasticae ac polemicae nodos contineat; rationis est compendia sectari, donec sit\n[[55.18]] qui justo opere tantam molem debellet. Id est praedemonstrari accurate debet religionis naturalis\n[[55.19]] veritas, nimirum Existentia Entis Potentissimi et Sapientissimi, id est Dei, animaeque\n[[55.20]] praeterea nostrae inmortalitas. His confectis, cum rationi congruum sit Deum aliquam mortalibus\n[[55.21]] veram religionem aperuisse, nec caeterarum ulla cum Christianae rationalitate comparari\n[[55.22]] possit, compendiosior erit ad victoriam via. Quanquam, ne quid hostium a tergo relinquatur,\n[[55.23]] optem exoriri aliquando, qui omnigenae eruditionis, historiaeque ac linguarum, tum philosophiae\n[[55.24]] quoque subsidiis instructus, illustrata omni Christianae religionis harmonia ac pulchritudine,\n[[55.25]] discussisque objectionum innumerabilium, contra dogmata, textum, historiam, nebulis,\n[[55.26]] plenam sine exceptione victoriam reportet. Cui operi utinam tantum Tibi temporis, quantum\n[[55.27]] virium esset! [ ... ] </p>\n",
+  "number": "16a.",
+  "title": "LEIBNIZ AN GOTTLIEB SPITZEL",
+  "date": "10./20. Februar 1670. [19a.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:16a. LEIBNIZ AN GOTTLIEB SPITZEL 10./20. Februar 1670. [19a.] [ ... ] Ad monstrum Atheismi debellandum, utinam quicquid eruditorum est vires conjungeret, nec pateretur serpere latius etiam inter ipsos hoc malum, a quo nihil praeter Anarchiam universalem atque eversionem Societatis humanae expectari ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

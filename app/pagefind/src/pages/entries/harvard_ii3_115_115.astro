@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_115",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 115,
+  "text": "<p> [[303.5]] <b>115. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[303.6]] Padua, 22. Mai 1697. [78.118.]</b></p>\n\n<p> [[303.19]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o </p>\n<p> [[303.20]] È <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: respondi </Fn> molto tempo che non ricevo la consolatione di qualche risposta di V. S. Ill^#'m^#'a, doppo\n[[303.21]] haverle scritto più volte, dubito che le mie si sieno smarrite, quel che più mi turba si è, il non\n[[303.22]] havere saputo finora nulla del ricapito d'un mio piego del settembre passato, che fù da me\n[[304.1]] consegnato al Sig^#'r^#'e Mendelino, insieme con un fagottino, ove vi era un manuscritto in foglio\n[[304.2]] dell'Ongarelli, e l'opera del Sig^#'r^#'e Della Scala della <i>Phlebotomia damnata</i>. Tutto ciò fù consegnato\n[[304.3]] dal Sig^#'r^#'e Mendelino ad un Gentiluomo della fameglia della vecchia Principessa nel suo\n[[304.4]] passagio per Venetia. Molto mi dispiacerebbe che si fosse smarrito l'Ongarelli, che lo trovai\n[[304.5]] con tanto stento, e lo feci copiare all'infretta. Se V. S. Ill^#'m^#'a mi havesse assicurato del ricapito di\n[[304.6]] questo manuscritto, l' haverei a questa ora mandato una copia del Vergerio. Da Venetia sono\n[[304.7]] stato pregato di fare diligenza, se qui si trovassero i manuscritti del Petrarca, e del Tomasini,\n[[304.8]] ove sono delle cose appartenenti alla casa d'Este. Hò contratta confidente Amicitia col Sig^#'r^#'e\n[[304.9]] Conte Bertolo, Consultore di stato, da questo potrei ricevere la bramata notitia di quel che\n[[304.10]] riguarda le scritture del Monastero delle Carceri, che si trovano in Segreta, ove il Sig^#'r^#'e Conte\n[[304.11]] per i publici interessi dimora una gran parte del giorno, perciò la priego avvisarmi il bisogno,\n[[304.12]] che farò tutto per servirla. Già sono entrate le nostre vacanze, ed io incessantemente m'affatico\n[[304.13]] per terminare il mio libro sopra Sant'Agostino, e presentemente scrivo sopra la natura\n[[304.14]] dell'Unità, di cui Agostino sottilmente ed alla platonica ragiona nel suo dotto libro <i>de Vera</i>\n[[305.1]] <i>Religione</i>. Per Settembre penso, a Dio piacendo, fare un viaggio per coteste parti, ed haverò un\n[[305.2]] gran contento di rivederla, e piacesse a Dio, potessi incontrare la fortunata occasione che ella un\n[[305.3]] tempo m'offeri per l'Accademia di Volfembutel, o quanto volintieri la riceverei, ora che sono in\n[[305.4]] mia libertà, e che senza pregiuditio del mio onore, nessuno potrà sospettare di Fuga, o che il\n[[305.5]] bisogno m' havesse indotto ad abbandonare l'Italia, o pure l'uscire dal Chiostro trovandomi\n[[305.6]] Prete secolare, Professore dello Studio di Padova, con speranza d'ottenere presto la prima\n[[305.7]] catedra di filosofia, occupata dal Conte Rinaldini. Se V. S. Ill^#'m^#'a vedesse il mio cuore, vederebbe\n[[305.8]] l'egualità e costanza de' miei sentimenti e s'assicurarebbe, che lo stato in cui allora mi trovava,\n[[305.9]] mi fù di grandissimo impedimento ad eseguire, quanto sempre hò havuto nell'animo. La priego\n[[305.10]] umilmente non scordarsi di me, ed assicurarsi, che sempre mi ricordarò delle sue pretiosissime\n[[305.11]] gratie, conservandone una memoria grata e costante. Non sò nulla de' manuscritti rimasti in\n[[305.12]] Salisburgo, ne desiderarei qualche notitia. Nella mia Opera che stamparò, stenderò l'idea che\n[[305.13]] V. S. Ill^#'m^#'a mi comunicò in Venetia sopra l'ordine e costitutione delle cose, e la priego di\n[[305.14]] scrivermi qualche altro suo pensiero circa la natura dell'Unità, e della vera notione della\n[[305.15]] Sostanza, per stabilire con magiore forza l'immortalità dell'Anima. Il Sig^#'r^#'e Abbate Merenzi\n[[305.16]] direttore degli Ecc^#'m^#'i Tiepoli divotamente la riverisce, ed io profondamente inchinandola inalterabilmente\n[[305.17]] mi protesto </p>\n<p> [[305.18]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Oblig^#'m^#'o Cord^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[305.19]] Padova 22 Maggio 1697. </p>\n",
+  "number": "115.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 22. Mai 1697. [78.118.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:115. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 22. Mai 1697. [78.118.] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o È Am Kopf der Seite von Leibniz' Hand: respondi molto tempo che non ricevo la consolatione di qualche risposta di V. S. Ill^#'m^#'a, doppo haverle scritto più volte, dub...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

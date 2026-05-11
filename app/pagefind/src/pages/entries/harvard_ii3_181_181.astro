@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_181",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 181,
+  "text": "<p> [[462.8]] <b>181. LEIBNIZ AN CLAUDE NICAISE</p>\n<p> [[462.9]] Hannover, 16./26. September 1698. [180.184.]</b></p>\n\n<p> [[462.17]] Hanover ce 16/26 Septembr. 1698 </p>\n<p> [[462.18]] Pour marquer que je ne suis pas entierement oublié, vous avés eu la bonté, Monsieur, de\n[[462.19]] m'envoyer par Monsieur le Resident Brosseau un petit imprimé d'un arrest rendu contre un\n[[462.20]] certain Curé Quietiste dont je vous remercie. Il est vray qu'à mon avis ces sortes d'Historiettes\n[[462.21]] ne doivent point faire du tort, qu'aux personnes qui y sont interessées, et que ce seroit une\n[[462.22]] grande injustice, si on s'en vouloit servir pour noircir ou decrier Mons. Archeveque de\n[[462.23]] Cambray. Les meilleures choses sont les plus sujettes aux abus; et, c'est l'artifice dont le diable\n[[462.24]] se sert ordinairement pour en eloigner les hommes. Je vous parle sur ce ton, après avoir lû la\n[[462.25]] lettre cyjointe de Mons. Morel, qui parle de tres bon sens là dessus. </p>\n<p> [[463.1]] Mais laissons là les Quietistes et ceux qu'on veut ranger parmi eux; et voyons ce que font\n[[463.2]] les sçavans de France après la paix faite. </p>\n<p> [[463.3]] Il me semble qu'ils se devroient remuer un peu et que la presence de Mons. de Spanhem\n[[463.4]] devroit contribuer à les mettre en humeur. </p>\n<p> [[463.5]] Les lettres de feu Mons. Peiresk ne paroistront elles pas bien tost? </p>\n<p> [[463.6]] Celles de Vargas Espagnol, qui decrient tant le Concile de Trente paroissent maintenant en\n[[463.7]] Hollande traduites en françois avec une preface de Mons. le Vassor autrement le pere le Vassor. </p>\n<p> [[463.8]] On y imprime aussi le <i>dictionnaire</i> de Furetiere augmenté de la moitié. </p>\n<p> [[463.9]] Le Comte de Marsili qui est un des plenipotentiaires pour le traité entre l'Empereur et la\n[[463.10]] porte travaille et fait travailler à une nouvelle Topographie du Danube. </p>\n<p> [[463.11]] J'attends une Replique de vostre pere Bonjour à la reponse de Mons. Ludolphi et je vous\n[[463.12]] supplie de me la faire tenir quand elle arrivera. </p>\n<p> [[463.13]] J'espere au moins que Vous aurés receu cette reponse de Mons. Ludolphi, que je vous ay\n[[463.14]] fait tenir, aussi bien que ma lettre pour Mons. le President Boisot, [dont] je n'ay point appris\n[[463.15]] l'effect. Je vous demande pardon, de vous avoir importuné de ces choses. </p>\n<p> [[463.16]] Au reste je suis avec zele </p>\n<p> [[463.17]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[463.18]] J'ay esté terriblement embarassé cette année, autrement je n'aurois pas tant tardé de vous\n[[463.19]] importuner de nouveau. </p>\n",
+  "number": "181.",
+  "title": "LEIBNIZ AN CLAUDE NICAISE",
+  "date": "Hannover, 16./26. September 1698. [180.184.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:181. LEIBNIZ AN CLAUDE NICAISE Hannover, 16./26. September 1698. [180.184.] Hanover ce 16/26 Septembr. 1698 Pour marquer que je ne suis pas entierement oublié, vous avés eu la bonté, Monsieur, de m'envoyer par Monsieur le Resident Brosseau un petit imprimé d'un arrest rendu contre un certain Curé Qu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

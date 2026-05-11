@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_246",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 246,
+  "text": "<p> [[766.22]] <b>217. LEIBNIZ AN CHRISTIAN PHILIPP</p>\n<p> [[766.23]] [Anfang Dezember 1679.] [216.221.]</b></p>\n<p> [[767.8]] Extrait d'une de mes lettres à M. Philippi. </p>\n<p> [[767.9]] Pour ce qui est de la Philosophie de des Cartes dont vous demandés mon sentiment, je\n[[767.10]] n'ay garde de dire absolument qu'elle mene à l'Atheisme. Il est vray qu'il y a quelques choses\n[[767.11]] fort suspectes à moy, qui l'a considerée avec attention. Par exemple ces deux passages qu'il ne\n[[767.12]] faut pas considerer la cause finale en Physique et que la matiere prend successivement toutes\n[[767.13]] les formes dont elle est capable. Il y a un passage admirable dans le <i>Phedon</i> de Platon qui\n[[767.14]] blame Anaxagore justement pour la même chose qui me deplait en Monsieur des Cartes. Pour\n[[767.15]] moy je croy que les loix de la Mecanique qui servent de fondement à tout le systeme, dependent\n[[767.16]] des causes finales, c'est à dire de la volonté de Dieu determinée à faire ce qui est le plus parfait,\n[[767.17]] et que la matiere ne prend pas toutes les formes possibles mais seulement les plus parfaites,\n[[767.18]] autrement il faudroit dire, qu'il y aura un temps où tout sera mal en ordre ce qui est bien éloigné\n[[767.19]] de la perfection de l'auteur des choses. Au reste si Mons. des Cartes avoit donné moins à ses\n[[767.20]] hypotheses imaginaires et s'il s'estoit attaché d'avantage aux experiences, je croy que sa\n[[767.21]] Physique auroit esté digne d'estre suivie. Car il faut avouer, qu'il avoit une grande penetration.\n[[767.22]] Pour sa Geometrie et Analyse il s'en faut beaucoup qu'elle soit aussi parfaite que le pretendent\n[[767.23]] ceux qui ne se sont mis qu'à chercher des petits problemes. Il y a plusieurs erreurs dans sa\n[[767.24]] metaphysique, et il n'a pas connu la veritable source des verités ny cette analyse generale des\n[[767.25]] notions que Jungius à mon avis a mieux entendu que luy. Cependant j'avoue que la lecture de\n[[767.26]] des Cartes est tres utile et tres instructive et j'aime mieux sans comparaison d'avoir l'affaire à\n[[767.27]] un Cartesien qu'à un homme sorti d'une autre école. Enfin je considere cette philosophie\n[[767.28]] comme l'antichambre de la veritable. </p>\n",
+  "number": "217.",
+  "title": "LEIBNIZ AN CHRISTIAN PHILIPP",
+  "date": "[Anfang Dezember 1679.] [216.221.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:217. LEIBNIZ AN CHRISTIAN PHILIPP [Anfang Dezember 1679.] [216.221.] Extrait d'une de mes lettres à M. Philippi. Pour ce qui est de la Philosophie de des Cartes dont vous demandés mon sentiment, je n'ay garde de dire absolument qu'elle mene à l'Atheisme. Il est vray qu'il y a quelques choses fort su...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

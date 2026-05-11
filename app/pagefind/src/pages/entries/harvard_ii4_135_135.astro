@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_135",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 135,
+  "text": "<p> [[451.9]] <b>135. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[451.10]] Hannover, 11. Juli 1706. [132.140.] </b></p>\n<p> [[452.1]] Admodum Reverende Pater </p>\n<p> [[452.2]] Libros <Fn><i>Am Kopf des Konzepts von Leibniz' Hand</i>: R. ­P. Bartholomaeo des Bosses soc. Jes. Theologo Hildesiam</Fn> quos remiseras recte accepi. Utinam esset in quo Tibi utilior esse possem. Hactenus\n[[452.3]] distractissimus, nunc primum respondendi officio satisfacio, et morae veniam peto. </p>\n<p> [[452.4]] Credo si superfuisset diutius Pelissonius, utile aliquid praestari potuisse; sed Meldensis\n[[452.5]] Episcopus (qui cum continuatum est aliquandiu commercium), quanquam superior illo Scientia\n[[452.6]] Theologica, tamen si dicere fas est, inferior visus est humanitate. </p>\n<p> [[452.7]] Fateor demonstratione certa nobis data non esse necesse nostri gratia (sed tantum propter\n[[452.8]] alios) ut objectionibus respondeamus: sed hoc tamen nobis semper prodesse puto, cum difficilis\n[[452.9]] objectio est, neque unquam esse defugiendum a peritis. Sublata enim speciosa difficultate nova\n[[452.10]] lux affulget. Itaque ego, etsi passim certus sententiarum, tamen objectiones amo plausibiles, et\n[[452.11]] puto semper satisfieri posse: nam si qua esset invicta, ea demonstrationem in contrarium\n[[452.12]] faceret. Nec video cur argumentum magis sit demonstratio affirmationis, quam objectio negationis.\n[[452.13]] Itaque non largior Baylio aut alteri cuiquam posse rationem fidei argumenta insolubilia\n[[452.14]] opponere; neque cum Huetio et Jaquelotio (etsi viris insignibus et mihi amicis) tantum adversariis\n[[452.15]] concedere velim. </p>\n<p> [[452.16]] Do operam, ut quamprimum licebit, Deo volente campo Historico excedam, opere affecto. </p>\n<p> [[452.17]] Ad binas dubitationes Tuas venio: Cum perceptio nihil aliud sit, quam multorum in uno\n[[452.18]] expressio, necesse est omnes Entelechias seu Monades perceptione praeditas esse. Neque ulla\n[[452.19]] naturae Machina sua Entelechia propria caret. Meae Enuntiationes Universales esse solent, et\n[[452.20]] servare Analogiam. </p>\n<p> [[452.21]] Peccatum originale nec Entelechia nec substantia esse potest: cum non sit aliquod animal\n[[452.22]] vel quasi-Animal, nec Anima ejus; sed imperfectio quaedam nostrae Animae, cui et imperfectio\n[[452.23]] in corpore nostro respondet. Quemadmodum Horologii vel alterius Machinae imperfectio orta,\n[[452.24]] si placet, ex Elasmate debilitato, Machina utique non est. <Fn><i>Die folgende Passage im Konzept L^#'1 hat Leibniz in eckige Klammern gesetzt, um sie von der Abfertigung auszuschließen</i>: Puto non tantum motui corporis a nobis apperceptibili, sed et alteri cuicunque perceptionem in nobis respondere, sed quam non animadvertimus, ob talium perceptionum multitudinem, exiguitatem et confusionem. Uti assueti strepitus (qualis molendini vicini nostris aedibus) apperceptione carere solemus. Primus homo utique alius condi poterat, et posteri ejus[,] sed Deus eam seriem possibilium elegit, in qua peccatum praevidebat, quod ea aliunde praestaret. Nam etsi quidam vestrorum dubitent, ego pro certo habendum censeo, Deum fecisse quod optimum erat factu. Nunc autem electa serie, in uno quoque individuo omnia alia sed salva libertate involvuntur.</Fn> </p>\n<p> [[453.1]] Quoniam ita permittis, literas Antverpiam destinatas hic adjungo. Vale et me ama. Dabam\n[[453.2]] Hanoverae 11 Julii 1706 </p>\n<p> [[453.3]] deditissimus Godefridus Guilielmus Leibnitius </p>\n<p> [[453.4]] P. S. Contra quendam Ptolemaei nostri viri summi librum novum Censores (qui persaepe\n[[453.5]] morosi, et in invidiam proni sunt) nescio quid movisse intellexi. Literas mihi Hildesia semper\n[[453.6]] per Luneburgicam non per Caesaream postam mitti peto. </p>\n",
+  "number": "135.",
+  "title": "LEIBNIZ AN BARTHÉLEMY DES BOSSES",
+  "date": "Hannover, 11. Juli 1706. [132.140.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:135. LEIBNIZ AN BARTHÉLEMY DES BOSSES Hannover, 11. Juli 1706. [132.140.] Admodum Reverende Pater Libros Am Kopf des Konzepts von Leibniz' Hand: R. ­P. Bartholomaeo des Bosses soc. Jes. Theologo Hildesiam quos remiseras recte accepi. Utinam esset in quo Tibi utilior esse possem. Hactenus distractiss...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

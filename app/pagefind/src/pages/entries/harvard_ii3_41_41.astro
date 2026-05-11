@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_41",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 41,
+  "text": "<p> [[113.1]] <b>41. GERHARD MEIER (HAMBURG) AN LEIBNIZ</p>\n<p> [[113.2]] Hamburg, 28. Dezember 1695 (7. Januar 1696). [47.]</b></p>\n\n<p> [[114.1]] Illustris Excellentissimeque Vir,\n [[114.2]] Patrone ac Promotor plurimum colende\n [[114.3]] Suspiciende </p>\n<p> [[114.4]] Incomptis occupationes magis arduas interpellare neutiquam fuissem ausus, nisi ad Vagetium\n[[114.5]] datae luculenti fuissent Tuae erga me benevolentiae interpretes. Incredibile memoratu est,\n[[114.6]] quantopere in mea fuerim sinu gavisus, meas qualescunque dissertationes quendam a viro\n[[114.7]] laudato calculum impetrasse. Nolui eorum imitari consuetudinem, qui nulla locorum habita\n[[114.8]] ratione quaedam protrudunt abstrusiora, in emporiis adeo non vendibilia, ut nauseam prius\n[[114.9]] excitent, quam introspiciantur, et nondum lecta condemnentur. Seculi vivendum est moribus,\n[[114.10]] ne ad pauciores recidant studia favore omnium dignissima. Parum aberat, quin <i><greek>parádojon</greek> de\n[[114.11]] Archangelis enthymema</i> multum mihi creasset molestiae, quandoquidem tantum solet praejudicata\n[[114.12]] posse opinio, ut etiam sine ratione valeat auctoritas. Verum fato nescio quo causam\n[[114.13]] omnem sub dissertationis finem peroraram, ne ultra limites protrahi posset sententia. Quod si\n[[114.14]] per collegia et respondentem licuerit, carnis resurrectionem, quoad licuerit, ex naturae libro\n[[114.15]] illustrandam mihi sumam. Dein logicam analysin illi sum scripto applicaturus, quod foeminas\n[[114.16]] esse homines negat. Videtur auctor illius a D. Sim. Gedicco aliisque minus comiter esse\n[[114.17]] habitus, eo quod meris per comparationem responsionibus argumentationes Anabaptistarum\n[[114.18]] Deitatem Christi labefactaturas elidere allaborat. Quod institutum adeo gravem promeritum\n[[114.19]] esse censuram nullus arbitror. </p>\n<p> [[114.20]] Nunc quidem accuratior <i>Epistolae ad Romanos</i> analysis me tenet sollicitum. Fateor, ea\n[[114.21]] nonnunquam suboriri dubia, ex quibus ne per <i>Hamburgensem</i> quidem <i>Logicam</i> licet eluctari.\n[[114.22]] <i>Noëmaticas</i> B. Jungii <i>Disputationes</i> Vagetio tradidi juxta cum hisce literulis transmittendas. Si\n[[114.23]] quid praeterea officii a me vel proficisci potest vel expectari, id omne libens Vestris dicabo\n[[115.1]] usibus. Deus immortalis annum, qui illucescit, ex voto transigere jubeat, ut identidem, de\n[[115.2]] fortuna optatis majori possim </p>\n<p> [[115.3]] illustri T. Excellentiae gratulari deditissimus Gerhardus Mejer </p>\n<p> [[115.4]] Hamb. A. XCV. XXVIII. Dec. L. et PP.\n[[115.5]] <yi>Illustri Excellentissimoque Viro Dn. Godefrido Guilielmo Leibnitio Potentissimo Electori\n[[115.6]] a consiliis aulicis <angle bracket>etc.</angle bracket> Domino, Promotori ac Patrono plurimum colendo suspiciendo <angle bracket>etc.</angle bracket> <i>par\n[[115.7]] Couvert.</i> </p></p>\n",
+  "number": "41.",
+  "title": "GERHARD MEIER (HAMBURG) AN LEIBNIZ",
+  "date": "Hamburg, 28. Dezember 1695 (7. Januar 1696). [47.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:41. GERHARD MEIER (HAMBURG) AN LEIBNIZ Hamburg, 28. Dezember 1695 (7. Januar 1696). [47.] Illustris Excellentissimeque Vir, Patrone ac Promotor plurimum colende Suspiciende Incomptis occupationes magis arduas interpellare neutiquam fuissem ausus, nisi ad Vagetium datae luculenti fuissent Tuae erga m...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_122",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 122,
+  "text": "<p> [[322.12]] <b>122. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[322.13]] Venedig, 14. Juni [1697]. [118.123.]</b></p>\n\n<p> [[322.21]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[322.22]] Le premure del Sig^#'r^#'e Mocenigo ed il desiderio che hò di servire V. S. Ill^#'m^#'a e cotesto gran\n[[322.23]] Prencipe mi han fatto risolvere di non portarmi in Padova se prima non trovo il diploma del\n[[322.24]] Convento delle carceri tanto sospirato. Doppo molte diligenze si è trovato nel libro della\n[[323.1]] Secreta, ove stanno scritti i privileggii del Convento delle carceri l'incluso paragrafo in cui si fa\n[[323.2]] mentione d'una concessione fatta al Monastero delle carceri dal Duca Enrico di Sassonia, che\n[[323.3]] stimo sia quello m'accenna V. S. Ill^#'m^#'a. Sotto il paragr[af]o, vi trovarà alcune note del Sig^#'r^#'e\n[[323.4]] Conte Bertolli Consultore di Stato, col nome di due Marchesi d'Este. Questo Sig^#'r^#'e fara tutte le\n[[323.5]] diligenze per havere le bolle e diplomi da cui si sono cavate le notitie che si contengano nel\n[[323.6]] libro della Secreta e nel caso che si trovarà come spero, le ne trasmetterò subito una copia. </p>\n<p> [[323.7]] In quanto al manuscritto del Petrarca, per le diligenze ultimamente fatte dal Sig^#'r^#'e Conte\n[[323.8]] Bertolli e l'Ecc^#'m^#'o Procu^#'r^#'e Giulio Giustiniani si è trovato che i manuscritti del Petrarca non sono\n[[323.9]] nella publica Biblioteca, come nella mia passata le scrissi, ma <i>in Sacrae Aedis fastigio prope\n[[323.10]] equos aeneos</i>, come ella scrisse, ove v'è un piccolo ed angustissimo luoghetto vicino alla Cella\n[[323.11]] dell'Abbate Gioachino. Il Sig^#'r^#'e Procuratore darà quanto prima l'indice di tutti i manuscritti, ed\n[[323.12]] hà la cura di farlo un Secretario, e da quello cavaremo la notitia di questo piccolo Dittionario\n[[323.13]] della lingua Cumana e se vi sarà, assicuro V. S. Ill^#'m^#'a che l' haveremo ed io non mi partirò se\n[[323.14]] prima non me n'assicuro, col solo oggetto di servire V. S. Ill^#'m^#'a a cui professo un'infinita\n[[323.15]] obligatione. La priego rispondermi per sapermi regolare, e comandarmi con libertà prontissimo\n[[323.16]] ad eseguire quanto da essa mi sarà imposto; e divotamente riverendola all'infretta mi resto </p>\n<p> [[323.17]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Obg^#'m^#'o, Affett^#'m^#'o Michel Angelo Fardella </p>\n<p> [[323.18]] Venetia 14 Giugno\nDie folgenden Aufzeichnungen von Graf Bertolli für Leibniz aus dem Kopialbuch des Klosters Carceri (LBr 258,\n </p>\n<p> [[323.22]] L'anno 1036 Enrico Duca di Sassonia donò alla Chiesa di S. Maria delle Carceri la bontea\n[[323.23]] del Cavalille con tutte le decime, et altro, che lui godeva, con patto di tener una basa per\n[[323.24]] raccoglier Hospiti, et Infermi, di fabricar un Monasterio, e di celebrar i divini officii. </p>\n<p> [[324.1]] Si deve notare, che fabricato il Monasterio fù quello consignato alli Canonici Portuanti\n[[324.2]] come si prova da un Diploma di S. Bellino 1144 all' hora Vescovo di Padova, mà che prima era\n[[324.3]] stato Arciprete delle Carceri, col qual Diploma concesse a quella Chiesa, et a quei sacerdoti\n[[324.4]] regolari le decime di alcune Ville. </p>\n<p> [[324.5]] Si deve notare in 2^#'d^#'o luoco, che detti Canonici a causa delle guerre abbandorno la Chiesa, e\n[[324.6]] Monasterio, onde l'anno 1408 fù data in comenda al Card^#'l^#'e S. Angelo summo Ripa Camaldolense,\n[[324.7]] quale lo rassegnò nelle mani di Gregorio XII Pontefice, e da questo fù unito perpetuamente\n[[324.8]] con tutti suoi membri, reg<angle bracket>ione</angle bracket>, dipendente, e pertinente alla religione de' Camaldolensi,\n[[324.9]] che sino al tempo della suppressione fatta da Alessandro 8^#'o l' hà goduto. </p>\n<p> [[324.10]] L'anno 1198 il Marchese Azon da Este rinoncio alcune decime nella Villa di Vigizzol, che\n[[324.11]] passorno nel Monasterio delle Carceri. </p>\n<p> [[324.12]] Un altro Marchese Azo da Este 1235 infendò la medesima Chiesa delle Carceri di altre\n[[324.13]] decime. </p>\n",
+  "number": "122.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 14. Juni [1697]. [118.123.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:122. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 14. Juni [1697]. [118.123.] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o Le premure del Sig^#'r^#'e Mocenigo ed il desiderio che hò di servire V. S. Ill^#'m^#'a e cotesto gran Prencipe mi han fatto risolvere di non portarmi in Padova se pri...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

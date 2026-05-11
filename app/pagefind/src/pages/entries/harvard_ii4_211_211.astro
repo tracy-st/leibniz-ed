@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_211",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 211,
+  "text": "<p> [[655.1]] <b>211. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[655.2]] Venedig, 19. August 1707. [208.212.] </b></p>\n<p> [[655.17]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[655.18]] Si <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> è finalmente portato in Venetia il gentil^#'m^#'o Sig^#'r^#'e Herman che io l'hò fin ora servito ed\n[[655.19]] assistito in tutto ciò che riguarda il lunghissimo ceremoniale di questo Paese, ed hò procurato\n[[655.20]] che nel medesimo tempo acquisti la cognitione ed amicitia de più curiosi e dotti di questa Città,\n[[655.21]] che tutti restano contentissimi del suo profondo sapere, e della sua veramente cristiana Morale\n[[655.22]] che si concilia l'amore e stima di chiunque lo conosce. Io poi non posso ora ringratiare\n[[655.23]] abbastanza V. S. Ill^#'m^#'a che è la felice cagione che la nostra Università abbia meritato un Soggetto\n[[655.24]] ornato di cose rare e sublimi virtu, e che io ora mi trovi in possesso di quell'eroico Amico che\n[[655.25]] io fin ora hò tanto desiderato, e non hò potuto qui mai trovare. Esso è così docile e di tanta\n[[655.26]] modestia dotato, che aggiuntovi l'elevato e purgati^#'m^#'o suo intendimento sarà certamente qui\n[[655.27]] adorato non che amato e principalmente da coloro che sono bramosi d'apprendere la nuova\n[[655.28]] Analisi, qui ora da molti ricercata, inventione grande dell'incomparabile e vastissima Mente di\n[[655.29]] V. S. Ill^#'m^#'a. Io penso perciò dargli per abitatione la mia piccola casa, per poterne godere l'erudita\n[[655.30]] ed amena sua conversatione, che sommamente conferirà alla mia salute, ed in cui averò la\n[[655.31]] fortunata occasione d'ammirare incessantemente i dottissimi ritrovati di V. S. Ill^#'m^#'a, ed insieme\n[[655.32]] riverirla in un sì cospicuo letterato tanto da lei amato, e che si gloria d'essere suo Scolare. Spero\n[[656.1]] quanto prima ricevere i semi da Vicenza, che le saranno subito trasmessi, e divotamente\n[[656.2]] riverendola, con tutta veneratione mi rassegno </p>\n<p> [[656.3]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Col^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[656.4]] Venetia 19 Agosto 1707. </p>\n",
+  "number": "211.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 19. August 1707. [208.212.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:211. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 19. August 1707. [208.212.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Si Am Kopf der Seite von Leibniz' Hand: resp è finalmente portato in Venetia il gentil^#'m^#'o Sig^#'r^#'e Herman che io l'hò fin ora servito ed assistito in tutto ciò c...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_232",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 232,
+  "text": "<p> [[729.13]] <b>235. LEIBNIZ FÜR JACQUES L'ENFANT</p>\n<p> [[729.14]] [Sommer 1693.] [224.244.]</b></p>\n<p> [[730.1]] Pour tacher de satisfaire aux objections dont je me tiens honoré, je diray </p>\n<p> [[730.2]] 1) que je n'ay pas en main presentement le <i>journal des Sçavans</i>, ce qui m'empeche de dire\n[[730.3]] precisement, si dans l'endroit marqué mon opinion est bien exprimée. Je m'imagine pourtant,\n[[730.4]] qu'elle le sera. </p>\n<p> [[730.5]] (2) <b>La force par la quelle les corps peuvent agir ou resister</b> est chez moy:\n[[730.6]] un Estat du corps, d'où il s'ensuit une action ou resistence selon les occasions, entant que rien\n[[730.7]] ne l'empeche. </p>\n<p> [[730.8]] 3) Je n'entends donc pas quelque chose d'exterieur par la force, comme seroit par exemple\n[[730.9]] la volonté de Dieu. Et bien que je tienne, qu'il y a dans la force quelque chose d'independant\n[[730.10]] des notions de la pure geometrie; je ne la mets point pour cela hors du corps. Il est vray que la\n[[730.11]] figure des corps depend entierement de l'étendue, mais il n'en est pas ainsi de leur mouvement,\n[[730.12]] car on ne sçauroit rendre raison des loix du mouvement par la seule Geometrie. Cependant ces\n[[730.13]] loix estant une fois bien établies, je demeure d'accord, que tout le reste s'en peut tirer\n[[730.14]] Geometriquement dans la matiere. Ainsi toutes les choses materielles se peuvent expliquer\n[[730.15]] mecaniquement, mais les fondemens mêmes de la Mecanique dependent de quelque chose de\n[[730.16]] superieur, sçavoir de ce theorème de Metaphysique: <b>Effectus integer aequipollet causae\n[[730.17]] plenae</i>. Car de recourir simplement et immediatement à la volonté ou Immutabilité de\n[[730.18]] Dieu, cela ne me paroist gueres digne d'un philosophe. Et la personne qui me fait l'honneur de\n[[730.19]] me mander ses reflexions, paroist estre de mon opinion, en ce point. </p>\n<p> [[730.20]] 4) J'ay demonstré dans les Actes de Leipzig mois de Mars 1686. comment la même\n[[730.21]] quantité de la force se conserve, et non pas la même quantité de mouvement. Je ne suis point\n[[731.1]] d'accord en cela avec M. des Cartes, ny avec M. Regis, comme il semble qu'on suppose. Mes\n[[731.2]] loix du mouvement dependent du principe de la conservation de la Force, et j'estime la force\n[[731.3]] par la quantité de l'effect qu'elle peut produire en se consumant. C'est ce qu'on n'a pas assez\n[[731.4]] observé. </p>\n<p> [[731.5]] 5) Je demeure d'accord que l'ame pense tousjours actuellement, et je tiens aussi que le\n[[731.6]] corps agit et resiste tousjours actuellement; mais non pas tousjours notablement, ny autant qu'il\n[[731.7]] pourroit, si rien ne l'empechoit. </p>\n<p> [[731.8]] 6) <b>La force primitive</b> des corps (qui en fait l'essence) est modifiée par les circomstances.\n[[731.9]] C'est ce qui fait la force secondaire, ou exercée; qu'on considere dans la mecanique. Et\n[[731.10]] c'est cette force, qui est changeable, qui reçoit du plus et du moins, et qui se trouve tantost dans\n[[731.11]] un corps, et tantost dans un autre. </p>\n<p> [[731.12]] 7) Pour ce qui est de la presence reelle, je crois qu'on avouera du moins, que celuy qui\n[[731.13]] l'admet, ne doit pas mettre l'essence du corps dans l'étendue; et hors de l'étendue je n'y voy\n[[731.14]] rien d'intelligible que la force. Elle se rapporte au temps, comme l'étendue ne regarde que le\n[[731.15]] lieu. Et le temps est encor plus essentiel aux creatures, que le lieu. </p>\n",
+  "number": "235.",
+  "title": "LEIBNIZ FÜR JACQUES L'ENFANT",
+  "date": "[Sommer 1693.] [224.244.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:235. LEIBNIZ FÜR JACQUES L'ENFANT [Sommer 1693.] [224.244.] Pour tacher de satisfaire aux objections dont je me tiens honoré, je diray 1) que je n'ay pas en main presentement le journal des Sçavans, ce qui m'empeche de dire precisement, si dans l'endroit marqué mon opinion est bien exprimée. Je m'im...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

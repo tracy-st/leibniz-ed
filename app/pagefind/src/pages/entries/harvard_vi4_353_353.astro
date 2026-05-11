@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_353",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 353,
+  "text": "[[1496.1]] <b>297.  De animarum creatione atque mentium origine [Sommer 1683 bis Winter 1684/85 (?)]</b>\n [[1496.2]] <tab/>[Sommer 1683 bis Winter 1684/85 (?)] </p>\n<p> [[1496.7]] Animas dicendum est aut quotidie a Deo creari, aut inde ab initio mundi semel\n[[1496.8]] creatas prae-extitisse atque in seminibus latuisse donec formatis organis exerendi se\n[[1496.9]] potestas daretur. Prius de animabus brutorum posterius de anima humana dicere, rationi\n[[1496.10]] non satis consentaneum videtur. Nam si animae brutorum a Deo creantur, atque\n[[1496.11]] infunduntur, erunt omnia plena miraculorum, sive operationum extraordinariarum, quod\n[[1496.12]] non satis verisimile arbitror. Quodsi animas quoque humanas a Deo initio creatas in\n[[1496.13]] seminibus latere, atque conceptionem expectare statuamus, in aliud paradoxum incidimus,\n[[1496.14]] quod scilicet innumerae animae humanae inutiles maneant in seminibus, nec\n[[1496.15]] unquam perveniant ad rationis usum; quod si quis dicat animam quae in seminibus etiam\n[[1496.16]] humanis latet, brutam esse, demumque rationalem organis formatis fieri, is dicere cogetur\n[[1496.17]] animam brutam et rationalem non specie, sed organis differre, quod adhuc intolerabilius\n[[1496.18]] est. Quod si quis dicat solas humanas animas creari tempore conceptionis, is semina\n[[1496.19]] humana seminibus brutorum deteriora facit, quis enim credat omnium animalium seminibus\n[[1496.20]] sive ovariis potius inesse animas, humanis solis inesse nullas. An ergo dicemus\n[[1496.21]] esse in homine quandam animam brutam sive sensitivam, quae sit in semine, sed rationalem\n[[1496.22]] in conceptione a Deo infundi. Verum hoc definitioni cujusdam Concilii censetur\n[[1497.1]] adversum, et revera non nisi una est unius corporis forma. Quodsi igitur non admittendum\n[[1497.2]] est, duas esse animas unam quae sit mens, alteram quae sit sensitiva, quoniam\n[[1497.3]] concilium definivit animam rationalem esse formam corporis; relinquitur ut dicamus ex\n[[1497.4]] anima sensitiva in momento infusionis a Deo novae perfectionis accreatione, sive transmutatione\n[[1497.5]] supernaturali fieri Mentem sive animam rationalem. </p>\n",
+  "number": "297.",
+  "title": "De animarum creatione atque mentium origine",
+  "date": "[Sommer 1683 bis Winter 1684/85 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:297. De animarum creatione atque mentium origine [Sommer 1683 bis Winter 1684/85 (?)] [Sommer 1683 bis Winter 1684/85 (?)] Animas dicendum est aut quotidie a Deo creari, aut inde ab initio mundi semel creatas prae-extitisse atque in seminibus latuisse donec formatis organis exerendi se potestas dare...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

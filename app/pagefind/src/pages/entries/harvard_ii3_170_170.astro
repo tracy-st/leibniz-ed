@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_170",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 170,
+  "text": "<p> [[436.20]] <b>170. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[436.21]] [Ende April bis Ende Mai 1698.] [164.171.]</b></p>\n\n<p> [[437.5]] Non literas tantum Tuas gratissimus sed et munus elegans literarium accepi, quo Cartesium\n[[437.6]] contra Dn. D. Matthaeum Georgium tueris, quod facis sane acute et ingeniose. Tametsi ut\n[[437.7]] verum fatear mihi ipsimet falsissima videatur illa thesis, quam oppugnat Dn. Matthaeus\n[[437.8]] Georgius. Interim vacuum non admitto, et spatium non concipio ut substantiam immobilem,\n[[437.9]] quod plerosque facere video, sed ut tempus; ita ut nihil aliud sit quam ordo quidam coexistendi.\n[[437.10]] Et sane tute ipse magis videris id agere, ut Georgii objectionibus respondeas, quam ut stabilias\n[[437.11]] Cartesianam thesin, quin etiam non animadverto Te facere. Theses Dn. Georgii quas refers\n[[437.12]] pag. 6. puto recte oppugnari, et recte etiam defendi prout rem accipias. Circa ea quae pag. 20. in\n[[437.13]] philosophia Cartesiana commendas habeo ego monita quaedam Animadversionibus meis in\n[[437.14]] Cartesium aliquando explicata. Nam non videtur mihi satis bene ordinasse dubitationes ad\n[[437.15]] eruendum verum, tum abutendo fictione dubiorum pro falsis, tum saltum faciendo a dubitationibus\n[[437.16]] ad asseverationes tum negligendo Analysin notionum veritatumque simpliciorum.\n[[437.17]] Character etiam quo discriminat verum a falso per clarum et distinctum mihi nullius aut exigui\n[[437.18]] usus videtur, cum non det notas clari et distincti, et dum ad ideas provocat, magnum fingendi\n[[437.19]] campum [aperuit.] Alius longe adhibendus est character et criterion veri. Et cum Dei veracitatem\n[[437.20]] ex machina advocat mihi prorsus praeter ratiocinandi ordinem facere videtur et in\n[[437.21]] existentia ejus demonstranda non absolvisse quod promiserat, plurimumque a Geometrica\n[[437.22]] accuratione abesse. Horum nonnulla jam sunt a me in <i>actis eruditorum</i> exposita, alia alibi\n[[437.23]] indicata, quae optarem a Tuo acutissimo ingenio examinari ut veritas in luce collocetur.\n[[437.24]] Gratissimum erit videre aliquando quae de novis quibusdam meditationibus meis Tibi non\n[[437.25]] improbatis disserere constituisti; et cum aliquid mihi inscribere Te velle ais, facis quidem pro\n[[437.26]] benevolentia erga me Tua, sed nescio an satis ad publicos applausus dum homini apud vestros\n[[437.27]] minus noto, eum honorem habes. </p>\n<p> [[438.1]] Id agit professor Academiae Mathematicus ut praefecturam rei Architectonicae consequatur,\n[[438.2]] successum curabo significari amico Tuo, ne locus si quando vacaverit ei elabatur. Res in\n[[438.3]] fermento adhuc est sed nondum confecta. </p>\n<p> [[438.4]] Celeberrimum Guglielminum ad vos venire gaudeo. </p>\n",
+  "number": "170.",
+  "title": "LEIBNIZ AN MICHEL ANGELO FARDELLA",
+  "date": "[Ende April bis Ende Mai 1698.] [164.171.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:170. LEIBNIZ AN MICHEL ANGELO FARDELLA [Ende April bis Ende Mai 1698.] [164.171.] Non literas tantum Tuas gratissimus sed et munus elegans literarium accepi, quo Cartesium contra Dn. D. Matthaeum Georgium tueris, quod facis sane acute et ingeniose. Tametsi ut verum fatear mihi ipsimet falsissima vid...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

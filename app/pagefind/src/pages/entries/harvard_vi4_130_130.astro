@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_130",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 130,
+  "text": "[[424.12]] <b>105₂.  Zweite Aufzeichnung ZWEITE AUFZEICHNUNG </p>\n<p> [[424.17]] <k>De Arte Combinatoria</k> Libellus componi posset utilis, jucundus, pulcher. Multa\n[[424.18]] in eo inseri possunt perelegantia, ut de variis ludorum generibus. De eo quod interest\n[[424.19]] solvendo ad vitam, ut vocant; ubi de moriendi verisimilitudine; et de catalogis mortuariorum.\n[[424.20]] Addatur Caramuelis <i>Mathesis audax</i>, ubi etiam de quibusdam ludis. <i>Combina-</i>\n[[425.1]] <i>toria</i> Kircheri. Izquierdo <i>Pharos scientiarum</i>. Excogitandum aliquid Lullianae arti vicarium\n[[425.2]] eaque melius. P. Ivo Capucinus subjecta omittit. De arte observandi aliquid Curiosum\n[[425.3]] ex oblatis Tabulis. Keplerus ex calculo conjecit hyperbolam fore aptam dioptricae,\n[[425.4]] quod postea Cartesius demonstravit. Huddenius ex Tabulis aliquot millium qui Amstelodami\n[[425.5]] reditus ad vitam habebant inde ab 80 annis condidit regulam quam alibi retuli.\n[[425.6]] Tabulae condendae de declinationibus magneticis, unde homo aliquis ingenio praeditus\n[[425.7]] aliquam struat hypothesin. </p>\n<p> [[425.8]] Quomodo a simili ratiocinandum. Veterum methodus pro demonstranda aequalitate\n[[425.9]] angulorum refractionis et incidentiae; hanc Fermatius egregie transtulit a catoptrica ad\n[[425.10]] dioptricam. Ita ex eo quod ostensum est in omni machina semper centrum gravitatis\n[[425.11]] descendere, ingeniosus aliquis inferet, ergo centrum gravitatis semper eadem celeritate\n[[425.12]] ferri, etiam in eodem plano, et corporibus non connexis. </p>\n<p> [[425.13]] De Cryptographicis, tentandum quomodo possit inveniri clavis, si forte sit nomen\n[[425.14]] aliquod, remotis auxiliis quae a lingua sumuntur. De non valentibus. </p>\n<p> [[425.15]] Solutio problematis quod Fr. Christian Rosencreuz proposuit. De arte casus formandi,\n[[425.16]] fingendi casus difficiles, formandi dubia, faciendi instantias. De arte casuandi ut\n[[425.17]] vocat Jacobus Gothofredus. </p>\n<p> [[425.18]] Datis duabus rebus earum convenientiam et disconvenientiam invenire magis est\n[[425.19]] analyticum. Sed data re aliam invenire valde similem aut valde dissimilem magis Combinatorium.\n[[425.20]] Caput praemittendum de differentia Methodi Analyticae et Combinatoriae, et\n[[425.21]] de differentia ingenii Analytici et ingenii combinatorii. In analysi magis opus attentione\n[[425.22]] ad pauca, sed valde acri, in combinatoria opus respectu ad multa simul, itaque simile est\n[[425.23]] discrimen atque inter pictores rerum minutissimarum et statuarios. Analytici magis Myo-\n[[426.1]] ­pes; Combinatorii magis similes presbitis. Analysis ubi semel reperta est, solam requirit\n[[426.2]] attentionem seu firmitatem mentis cui respondet in exercitiis corporeis firmitas manuum;\n[[426.3]] et tali ingenio sunt, qui non vagi sunt, sed possunt etiam sine calamo, sola imaginatione\n[[426.4]] calculare. At Combinatoria magis requirit subitam per multa discursationem cui in corporis\n[[426.5]] exercitiis agilitas respondet. Et ut his qui imaginatione firma non valent, ad res\n[[426.6]] attente considerandas succurritur figuris et characteribus, ita his qui memoria non valent,\n[[426.7]] nec multa simul sibi exhibere possunt, succurritur ope Tabularum. </p>\n<p> [[426.8]] Characteristica vera et tabulis et analysi auxiliatur. De Tabulis ita condendis ex\n[[426.9]] cognitis, ut ex interpretatione vel continuatione seriei divinentur incognita. </p>\n<p> [[426.10]] Ex multis modis unam eandemque rem quaerendi et inveniendi semper est aliquis,\n[[426.11]] qui longius ducit et ad altiora servire potest. Ex inquisitione rei ejusdem per diversas vias\n[[426.12]] efflorescit quaedam ut ita dicam aequatio seu comparatio non inter duas quantitates sed\n[[426.13]] inter duas methodos, unde semper nova et praeclara theoremata condi possunt. Est ars\n[[426.14]] quaedam condendi theoremata. Combinatoria non semper demonstrativa est, sed saepe\n[[426.15]] agit variis divinationibus et tentamentis. </p>\n<p> [[426.16]] Methodus exclusiva Freniclii. </p>\n<p> [[426.17]] Algebra non est res magna, hic indignabuntur, qui eam pro mysterio aliis venditant.\n[[426.18]] Est tamen nihil aliud quam talis calculi gubernatio ut incognitum quantum licet solum vel\n[[426.19]] paucis expressum habeatur. Haec est investigatio aequationis. Resolutio autem aequationis\n[[426.20]] species est tantum artis inveniendi clavem rei involutae. Hoc fit hic non difficulter per\n[[426.21]] synthesin et syncrisin. </p>\n<p> [[426.22]] Algebra plurimum habet de synthesi. Datur methodus quaedam magis analytica, qua\n[[426.23]] problema aliquod reducitur ad aliud problema facilius unum vel plura; hoc vere est\n[[426.24]] retrorsum vestigia legere. </p>\n",
+  "number": "105₂.",
+  "title": "Zweite Aufzeichnung",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:105₂. Zweite Aufzeichnung ZWEITE AUFZEICHNUNG De Arte Combinatoria Libellus componi posset utilis, jucundus, pulcher. Multa in eo inseri possunt perelegantia, ut de variis ludorum generibus. De eo quod interest solvendo ad vitam, ut vocant; ubi de moriendi verisimilitudine; et de catalogis mortuario...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

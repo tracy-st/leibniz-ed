@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_493",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 493,
+  "text": "[[2160.13]] <b>388₅.  De utilissimo controversiarum genere\n[[2161.1]] <tit2><b>De Utilissimo Controversiarum Genere</b></tit2> </p>\n<p> [[2161.2]] In tanto controversiarum numero minime necessarias maxime agitari semper sum\n[[2161.3]] miratus. Communis opinio est non errorem sed improbitatem pertinacem facere haereticum.\n[[2161.4]] Schisma quoque non alia magis in re quam caritatis laesione constare. Ante omnia\n[[2161.5]] ergo de vera probitatis atque caritatis natura disputandum esset nobis, si solida magis\n[[2161.6]] quam speciosa amaremus. Quoniam valde verisimile est non nocere errorem sine impietate,\n[[2161.7]] et plane certum est non prodesse fidem sine caritate. </p>\n<p> [[2161.8]] Neque vero putandum est exploratam satis omnibus verae Caritatis naturam esse,\n[[2161.9]] alioqui omnes divino quodam ardore succensos videremus; cum cognita bona non possint\n[[2161.10]] non desiderari. Neque vero dubitassent aliqui an nullo actu amoris Dei super omnia\n[[2161.11]] exercito salvari quisquam possit; neque contritionem minime in potestate esse arbitrarentur,\n[[2161.12]] neque ineptas saepe et a vera caritate alienas praescriberent formulas, neque\n[[2161.13]] amorem Deo debitum in creaturas transferrent, si satis scirent quid sit Deum super omnia\n[[2161.14]] amare. </p>\n<p> [[2161.15]] Amplius dico nemo gloriari potest se Deum amare ut oportet, nisi paratus sit non\n[[2161.16]] opum tantum, et voluptatum, sed et famae vitaeque jactura redimere gloriam Dei, et\n[[2161.17]] publicum bonum. </p>\n<p> [[2161.18]] Quisquis Deum vere amat, quisquis bonum publicum sincero affectu quaerit, is vere\n[[2161.19]] in Ecclesia Catholica est, reliqui omnes schismatici sunt. Nam schisma est quod laedit\n[[2161.20]] illud caritatis vinculum generale. </p>\n<p> [[2161.21]] Fateor maximi ad bonum publicum momenti fore, Christianorum reunionem sub\n[[2161.22]] capite communi: ideo non abnuo [<i>bricht ab</i>] </p>\n",
+  "number": "388₅.",
+  "title": "De utilissimo controversiarum genere",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:388₅. De utilissimo controversiarum genere De Utilissimo Controversiarum Genere In tanto controversiarum numero minime necessarias maxime agitari semper sum miratus. Communis opinio est non errorem sed improbitatem pertinacem facere haereticum. Schisma quoque non alia magis in re quam caritatis laes...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

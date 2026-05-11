@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_151",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 151,
+  "text": "<p> [[402.12]] <b>151. FRANCISCUS MERCURIUS VAN HELMONT AN LEIBNIZ</p>\n<p> [[402.13]] Sulzbach, 22. Dezember 1697 (1. Januar 1698). [102.153.]</b></p>\n\n<p> [[403.1]] Monsieur Solzbach le 22 de 10.^#'b^#'r^#'e 1697 </p>\n<p> [[403.2]] J'ay reseu lagreable Vostre[.] Larest de mon depart disi à cause ca partie ma maladie de\n[[403.3]] lautre part la triste nouuelle de la mort de son altesse Ser^#'m^#'e Lelecteur de Lunebourg et\n[[403.4]] BronsWyck laquelle nouuelle on nous a mande pluiurs fois. Dieu donne et le continue sa vie en\n[[403.5]] une longe duree à la ioye de ses amis. Si ioint va la lettre de Son Altese Ser^#'m^#'e de Solzbach à Son\n[[403.6]] Altese Ser^#'m^#'e Lelecteur de Lunebourg et BronsWyck. Le souhait d'une nouuelle annee ioint le\n[[403.7]] titre dure selon la Commission que j'ay reseu en Vostre presense de Son Altese Ser^#'m^#'e Madame\n[[403.8]] Lelectrise de Lunebourg. </p>\n<p> [[403.9]] Lantimoine se peut trouuer à 5 lieu disi pour fondre de statues dantimoine du fer et du\n[[403.10]] plon à bon marche le quele sont dure et de duree. Leques sont en usage. </p>\n<p> [[403.11]] A Londre à mon arrivee Vous aures le dessein du modelle de la presse pour imprimer de\n[[403.12]] livres ausi bien le livre du Zohar etc. Je me recommande à Vous en Vous souhaitant une\n[[403.13]] salutaire nouuelle annee et demeure </p>\n<p> [[403.14]] Vostre oblige serviteur Helmont </p>\n",
+  "number": "151.",
+  "title": "FRANCISCUS MERCURIUS VAN HELMONT AN LEIBNIZ",
+  "date": "Sulzbach, 22. Dezember 1697 (1. Januar 1698). [102.153.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:151. FRANCISCUS MERCURIUS VAN HELMONT AN LEIBNIZ Sulzbach, 22. Dezember 1697 (1. Januar 1698). [102.153.] Monsieur Solzbach le 22 de 10.^#'b^#'r^#'e 1697 J'ay reseu lagreable Vostre[.] Larest de mon depart disi à cause ca partie ma maladie de lautre part la triste nouuelle de la mort de son altesse ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

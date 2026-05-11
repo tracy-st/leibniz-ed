@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_43",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 43,
+  "text": "<p> [[145.15]] <b>43. FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ</p>\n<p> [[145.16]] Berlin, 17. März 1703. [36.] </b></p>\n<p> [[146.1]] à Berlin ce 17^#'m^#'e de Mars 1703 à dix heures et demi avant midi </p>\n<p> [[146.2]] Monsieur </p>\n<p> [[146.3]] Dans ce moment mon laquais vient de me rendre le billet que vous m'avez fait l'honneur\n[[146.4]] de m'escrire au suiet de ma maison dont M^#'r le Baron de Görtz souhaitte le plan. Je devrois peut\n[[146.5]] estre faire de la difficulté là desus pour ne pas detruire la bonne opinion qu'il en a, mais comme\n[[146.6]] je ne scais qu'obeir aux amis qui ont autant de pouvoir sur moi que M^#'r le Baron de Görtz je\n[[146.7]] vous prie de lui mander que par le premier ordinaire ou en huit jours au plus tard il recevra les\n[[146.8]] marques de mon obeissance et du respect que je lui porte. J'espere qu'avant ce temps là j'aurai\n[[146.9]] l'honneur de vous voir à la cour ou chez vous pour vous assurer que mon absence n'a point fait\n[[146.10]] de tort à la passion avec la quelle je suis </p>\n<p> [[146.11]] Monsieur Vostre treshumble tresobeissant Serviteur F. B. Dobrzensky\n[[146.12]] A Monsieur Monsieur de Leibnitz Conseiller privé de la Chambre de Justice de S. S. E.\n[[146.13]] M^#'gⁿ^#'e^#'u^#'r l'El^#'t^#'e^#'u^#'r de Brunsvig </p>\n",
+  "number": "43.",
+  "title": "FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ",
+  "date": "Berlin, 17. März 1703. [36.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:43. FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ Berlin, 17. März 1703. [36.] à Berlin ce 17^#'m^#'e de Mars 1703 à dix heures et demi avant midi Monsieur Dans ce moment mon laquais vient de me rendre le billet que vous m'avez fait l'honneur de m'escrire au suiet de ma maison dont M^#'r le Baron de Gört...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

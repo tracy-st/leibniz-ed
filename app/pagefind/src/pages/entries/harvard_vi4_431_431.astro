@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_431",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 431,
+  "text": "[[1960.7]] <b>353.  Physicae Partes [1677 (?)]</b>\n [[1960.8]] <tab/>[1677 (?)]\n[[1960.11]] <tit2><b>Physicae Partes</b></tit2> </p>\n<p> [[1960.12]] Duplex est physica tractatio, de formis seu affectionibus singulatim spectatis et de\n[[1960.13]] subjectis in quibus plures affectiones concurrunt. De formis exempli causa de figura,\n[[1960.14]] motu, duritie, colore: et de subjectis exempli causa, de igne, aqua, arena, quae scilicet\n[[1960.15]] pluribus formis concurrentibus constituuntur. Ita ignis est lucidum et calidum. Aqua est\n[[1960.16]] perspicuum album liquidum, insipidum frigidum (si sibi relinquatur), certique ponderis\n[[1960.17]] ac certae tenacitatis quae comparatione definiri possunt. Formae rursus aliae sunt simplices\n[[1960.18]] quae a nobis perfecte intelliguntur, ut magnitudo, figura, motus, resistentia, atque\n[[1960.19]] hae geometrico plane rigore tractari possunt. Aliae sunt compositae, quas satis quidem\n[[1961.1]] sensu non tamen satis ratione percipimus, ut calor, color, aliaeque sensiles qualitates:\n[[1961.2]] quae quatenus cum prioribus formis constanti ratione eas conjungi experimur, eatenus\n[[1961.3]] etiam ad Mathematicas rationes revocari possunt. </p>\n<p> [[1961.4]] Subjecta vel singulatim tractantur vel in systemate. Singulatim, si omnes dati subjecti\n[[1961.5]] exempli gratia aquae qualitates et affectiones enumeremus, et quando nimis vagae\n[[1961.6]] sunt certis gradibus definiamus. Deinde qualitates confusas ad simplices revocando\n[[1961.7]] texturam subjecti constituamus qua semel habita saltem aliquatenus non tantum causas\n[[1961.8]] phaenomenorum reddere sed et inexplorata adhuc phaenomena praedicere, et rem propositam\n[[1961.9]] ad varios vitae usus adhibere poterimus. </p>\n<p> [[1961.10]] Quodsi jam plura subjecta et inprimis simpliciora ac maxime diffusa hoc modo\n[[1961.11]] tractaverimus, tandem de toto nostri saltem mundi <b>systemate</b> partibusque certum\n[[1961.12]] aliquid statuere fas erit. </p>\n",
+  "number": "353.",
+  "title": "Physicae Partes",
+  "date": "[1677 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:353. Physicae Partes [1677 (?)] [1677 (?)] Physicae Partes Duplex est physica tractatio, de formis seu affectionibus singulatim spectatis et de subjectis in quibus plures affectiones concurrunt. De formis exempli causa de figura, motu, duritie, colore: et de subjectis exempli causa, de igne, aqua, a...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_106",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 106,
+  "text": "<p> [[327.1]] <b>106. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[327.2]] Venedig, 29. Juli 1705. [102.107.] </b></p>\n<p> [[327.8]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[327.9]] Essendomi <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> portato ora in Venetia, ove dimorarò forse fin al venturo mese d'ottobre, sono\n[[327.10]] rimasto con grand^#'m^#'o dolore non avendo trovate lettere di V. S. Ill^#'m^#'a in casa del Sig^#'r^#'e Zanovelli, il\n[[327.11]] quale non sa capire come avendo trasmesse a V. S. Ill^#'m^#'a tre mie lettere in varii tempi, ed ancora\n[[327.12]] esso dato parte del mio stato e delle mie operationi per l'affare del Sig^#'r^#'e Herman al Sig^#'r^#'e Abbate\n[[327.13]] Guidi per informarne V. S. Ill^#'m^#'a, non n'abbia fin ora ricevuta risposta niuna, non ostante che\n[[327.14]] V. S. Ill^#'m^#'a mostrasse tanta brama di sapere il mio stato, ed i passi che si facevano per il Sig^#'r^#'e\n[[327.15]] Herman. Il che ora mi obligà a scrivere nuovamente alla V. S. Ill^#'m^#'a pregandola consolarmi con\n[[327.16]] quattro sue righe per assicurarmi dell'ottima sua salute, e della continuatione del suo amore e\n[[327.17]] stimatissimo patrocinio. Oggi scrivo al Sig^#'r^#'e Herman da cui V. S. Ill^#'m^#'a averà gia inteso quanto\n[[327.18]] hò qui operato per fargli conferire la catedra matematica con utile ed onore, e presentemente fò\n[[327.19]] tutto l'impeto possibile per venire all'ultima deliberatione[,] senza che fin ora l'oppositioni e\n[[327.20]] l'alteratione di molte cose m'abbiano sgomentato, e distolto dalla mia operatione, e gia\n[[327.21]] ultimamente l'Ecc^#'m^#'o Sig^#'r^#'e Procuratore Lando Capo dell'Ecc^#'m^#'o Magistrato de Riformatori dello\n[[327.22]] Studio di Padova m'hà promesso di stabilire e conchiudere tutto per il venturo mese, ed a suo\n[[327.23]] tempo V. S. Ill^#'m^#'a sarà pienamente informata di quanto io hò fatto per terminare quest' affare col\n[[327.24]] principale oggetto di servire in primo luogo V. S. Ill^#'m^#'a a cui io infinitamente devo, e poi per\n[[328.1]] avere mio Collega in Padova il dott^#'m^#'o Sig^#'r^#'e Herman da cui riceverò tutti i lumi che m'abbisognano\n[[328.2]] per intendere bene il calcolo differentiale ritrovato della felicissima e vastissima mente\n[[328.3]] di V. S. Ill^#'m^#'a e divotamente riverendola mi protesto </p>\n<p> [[328.4]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[328.5]] Venetia 29 Luglio 1705. </p>\n",
+  "number": "106.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Venedig, 29. Juli 1705. [102.107.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:106. MICHEL ANGELO FARDELLA AN LEIBNIZ Venedig, 29. Juli 1705. [102.107.] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Essendomi Am Kopf der Seite von Leibniz' Hand: resp portato ora in Venetia, ove dimorarò forse fin al venturo mese d'ottobre, sono rimasto con grand^#'m^#'o dolore non ave...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

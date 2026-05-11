@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_185",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 185,
+  "text": "<p> [[614.1]] <b>187. LEIBNIZ AN PAUL PELLISSON-FONTANIER</p>\n<p> [[614.2]] [Hannover, 2. Hälfte November 1692.] [180.191.]</b></p>\n<p> [[614.14]] Monsieur </p>\n<p> [[614.15]] Puisque vous témoignés que les objections qu'on vous a envoyées contre nostre sentiment\n[[614.16]] viennent de bon lieu, je tacheray d'y repondre. Il est vray qu'il y a des expressions, qui m'ont\n[[614.17]] fait douter si cela pourroit servir. La question est en quoy consiste l'essence du corps. L'auteur\n[[614.18]] de l'objection dit que par le mot d'<i>essence</i> il entend <i>le premier de tous les attributs et dont tous\n[[614.19]] les autres attributs dependent.</i> </p>\n<p> [[614.20]] <petit><i>Der folgende kleingedruckte Text wurde von Leibniz gestrichen und durch den anschließenden ersetzt</i>:\n [[614.21]] Il luy est permis de l'entendre ainsi, pour moy ce n'est pas ainsi que je l'entendois; et les autres peut estre non\n[[614.22]] plus. Tout predicat necessaire est de l'essence du sujet, ainsi on peut dire que l'egalité des angles à deux droits est\n[[614.23]] essentielle au triangle; mais tout predicat reciproque epuise l'essence du sujet; de sorte que tous les predicats\n[[614.24]] essentiels en peuvent estre tirés. Ainsi pour sçavoir <b>en quoy consiste l'essence d'un sujet</b>, il n'est pas\n[[614.25]] necessaire de sçavoir le premier de tous ses attributs (que nous ne connoissons que rarement), mais il suffit d'en\n[[614.26]] sçavoir un qui luy soit reciproque, que les logiciens appellent <b><i>proprium in quarto modo</b>. </petit>\n [[615.1]] Je ne luy veux point contester cette definition du mot, mais je diray seulement, que pour sçavoir\n[[615.2]] en quoy consiste l'essence d'une chose, il n'est pas tousjours necessaire de sçavoir distinctement\n[[615.3]] ce premier attribut; et le plus souvent on se contente de connoistre des proprietés\n[[615.4]] reciproques du sujet, les quelles en contiennent et enveloppent tousjours toute l'essence, en\n[[615.5]] sorte que toutes les affections essentielles en peuvent estre tirées. D'où vient aussi, qu'on peut\n[[615.6]] donner plusieurs bonnes definitions d'un même sujet. Qui est ce qui ne pense sçavoir en quoy\n[[615.7]] consiste l'essence de la ligne droite? Cependant je ne connois encor personne qui en ait donné\n[[615.8]] au public le premier attribut. Et celuy qui me paroist le plus approchant est, que c'est une ligne\n[[615.9]] dont chaque partie est semblable au tout. </p>\n<p> [[615.10]] Pour parler de l'essence du corps, on peut distinguer entre predicats essentiels, reciproques\n[[615.11]] et primitifs. Tout predicat necessaire est de l'essence d'une chose ou essentiel, tout\n[[615.12]] predicat reciproque epuise toute l'essence, et lors qu'on le connoist, on peut dire qu'on connoist\n[[615.13]] en quoy consiste l'essence de la chose; mais lors qu'on en connoist les attributs primitifs on se\n[[615.14]] peut vanter de la connoistre parfaitement. Or il s'en faut tant que l'essence du corps consiste\n[[615.15]] dans l'étendue que ceux qui avouent qu'un corps peut estre en plusieurs [lieux], sont obligés\n[[615.16]] d'avouer que l'etendue n'est pas mêmes de l'essence du corps. </p>\n",
+  "number": "187.",
+  "title": "LEIBNIZ AN PAUL PELLISSON-FONTANIER",
+  "date": "[Hannover, 2. Hälfte November 1692.] [180.191.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:187. LEIBNIZ AN PAUL PELLISSON-FONTANIER [Hannover, 2. Hälfte November 1692.] [180.191.] Monsieur Puisque vous témoignés que les objections qu'on vous a envoyées contre nostre sentiment viennent de bon lieu, je tacheray d'y repondre. Il est vray qu'il y a des expressions, qui m'ont fait douter si ce...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

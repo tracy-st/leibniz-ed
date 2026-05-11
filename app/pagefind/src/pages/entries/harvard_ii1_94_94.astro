@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_94",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 94,
+  "text": "<p> [[252.19]] <b>80. LEIBNIZ AN BARUCH DE SPINOZA</p>\n<p> [[252.20]] Frankfurt, 5. Oktober 1671. [89.]</b></p>\n<p> [[254.3]] Illustri et Clarissimo Viro B. d. S. Gottfredus Leibnitius. </p>\n<p> [[254.4]] Illustris et Amplissime Vir, </p>\n<p> [[254.5]] Inter caeteras laudes Tuas quas fama publicavit, etiam insignem rei Opticae peritiam esse\n[[254.6]] intelligo. Quae res efficit, ut qualemcunque conatum meum ad Te destinare voluerim, quo\n[[254.7]] meliorem in hoc studiorum genere censorem non temere reperero. Schedulam hanc quam mitto,\n[[254.8]] ac <i>Notitiam Opticae promotae</i> inscripsi, ideo publicavi, ut commodius possem communicare\n[[254.9]] cum amicis aut curiosis. Audio et Amplissimum Huddenium in eodem genere florere, nec\n[[254.10]] dubito Tibi cognitissimum esse. Unde si hujus quoque judicium et favorem mihi impetraveris,\n[[254.11]] beneficium mirifice auxeris. </p>\n<p> [[254.12]] Schedula ipsa, quid rei sit, satis explicat. </p>\n<p> [[254.13]] Credo ad manus tuas pervenisse <i>Prodromum</i> Francisci Lanae Soc. Jes. Italice scriptum,\n[[254.14]] ubi Dioptrica quoque nonnulla insignia proponit; sed et Joh. Ottius Helvetius juvenis in his\n[[254.15]] rebus pereruditus, publicavit <i>Cogitationes Physico-Mechanicas de Visione</i>, in quibus partim\n[[254.16]] machinam quandam poliendis omnis generis vitris simplicem admodum et universalem pollicetur,\n[[254.17]] partim ait se reperisse modum quendam colligendi <b>omnes</b> radios ab <b>omnibus</b> objecti\n[[254.18]] punctis venientes, in totidem alia puncta respondentia. Sed tantum in certa distantia, figuraque\n[[254.19]] objecti. </p>\n<p> [[254.20]] Caeterum id quod a me propositum est, huc redit, non ut omnes <b>omnium</b> punctorum\n[[254.21]] radii recolligantur, id enim in qualibet objecti distantia aut figura, quantum hactenus cognitum\n[[254.22]] sit, impossibile est; sed ut aeque colligantur radii punctorum extra axem opticum, ac in axe\n[[254.23]] optico, ac proinde aperturae vitrorum salva distincta visione, possint fieri quantaecunque. Sed\n[[254.24]] haec acutissimo judicio Tuo stabunt. Vale faveque, </p>\n<p> [[254.25]] Vir Amplissime, Cultori sedulo Gottfredo Guilielmo Leibnitio, J.U.D. </p>\n<p> [[254.26]] Francofurti 5. Octobr. styl. nov. 1671. et Consil. Mogunt. </p>\n<p> [[254.27]] P. S. Si qua me responsione dignabere, curabit eam spero non illubenter Nobil^#'m^#'u^#'s Diemerbroeckius\n[[254.28]] JC^#'t^#'u^#'s. Puto visam Tibi <i>Hypothesin</i> meam <i>Physicam novam</i>; sin minus, mittam. </p>\n<p> [[254.29]] <i>A Monsieur Monsieur Spinosa Medecin tres celebre et philosophe tres profond à Amsterdam.\n[[254.30]] par couvert.</i> </p>\n",
+  "number": "80.",
+  "title": "LEIBNIZ AN BARUCH DE SPINOZA",
+  "date": "Frankfurt, 5. Oktober 1671. [89.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:80. LEIBNIZ AN BARUCH DE SPINOZA Frankfurt, 5. Oktober 1671. [89.] Illustri et Clarissimo Viro B. d. S. Gottfredus Leibnitius. Illustris et Amplissime Vir, Inter caeteras laudes Tuas quas fama publicavit, etiam insignem rei Opticae peritiam esse intelligo. Quae res efficit, ut qualemcunque conatum m...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

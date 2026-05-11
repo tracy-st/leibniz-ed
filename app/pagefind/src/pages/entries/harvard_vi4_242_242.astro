@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_242",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 242,
+  "text": "[[938.1]] <b>199.  Definitiones: Aliquid, nihil, possibile, positivum [August 1688 bis Januar 1689 (?)]</b>\n [[938.2]] <tab/>[August 1688 bis Januar 1689 (?)] </p>\n<p> [[938.5]] <b>Aliquid</b> est quicquid cogitari potest, ut <i>A</i>, vel <i>B</i> vel <i>C</i>, vel alius terminus quicunque.\n[[938.6]] Generalissima haec notio est, complectiturque etiam impossibilia ea quae confuse\n[[938.7]] tantum cogitari possunt, distincte autem explicari nequeunt. Ut <i>triangulum quadrilaterum</i>,\n[[938.8]] <i>corpus indivisibile</i>. </p>\n<p> [[938.9]] <b>Nihil</b> est a quo removetur quicquid cogitari potest, ut <i>non A, neque B, neque C\n[[938.10]] neque D, neque etc.</i> </p>\n<p> [[938.11]] Atque hoc est quod vulgo ajunt <i>Nihili nulla esse attributa</i>. </p>\n<p> [[938.12]] <b>Possibile</b> est quicquid distincte cogitari potest, seu cujus notio non involvit\n[[938.13]] contradictionem. Hoc est si sit <i>A</i> ^&.SE <Leibniz special character> ^#6+<i>B</i>, <i>C</i>, etc.^#6- et sit <i>B</i> ^&.SE <Leibniz special character> ^#6+<i>D</i>, <i>E</i>, etc.^#6- et <i>C</i> ^&.SE <Leibniz special character> ^#6+<i>F</i>, <i>G</i>, etc.^#6- et ita\n[[938.14]] porro, nec unquam prodeat <i>L non L</i>, erit <i>A</i> <b>Ens</b> vel <b>possibile.</b> </p>\n<p> [[938.15]] <b>Positivum</b> est quod sine negatione distincte cogitari potest. Hoc est si sit\n[[938.16]] <i>A</i> ^&.SE <Leibniz special character> ^#6+<i>B</i>, <i>C</i>, etc.^#6- et ita porro, ut paulo ante, nec unquam prodeat terminus negativus ut\n[[938.17]] <i>non L</i>, nisi is sit negativus negativi, erit <i>A</i> <b>positivum.</b> </p>\n",
+  "number": "199.",
+  "title": "Definitiones: Aliquid, nihil, possibile, positivum",
+  "date": "[August 1688 bis Januar 1689 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:199. Definitiones: Aliquid, nihil, possibile, positivum [August 1688 bis Januar 1689 (?)] [August 1688 bis Januar 1689 (?)] Aliquid est quicquid cogitari potest, ut A, vel B vel C, vel alius terminus quicunque. Generalissima haec notio est, complectiturque etiam impossibilia ea quae confuse tantum c...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

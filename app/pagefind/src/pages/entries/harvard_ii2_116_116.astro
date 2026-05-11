@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_116",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 116,
+  "text": "<p> [[429.1]] <b>117. LEIBNIZ AN HEINRICH AVEMANN</p>\n<p> [[429.2]] Wolfenbüttel, 1. (11.) Juli 1691. [64.125.]</b></p>\n<p> [[429.11]] [ ... ] <b>Librum</b> nescio cujus <b>Realis de Vienna Thomasianae <i>in Philosophiam</b>,\n[[429.12]] <b><i>Aulicam Introductioni</i> oppositum</b>, ignotum prorsus ante indicium tuum, legi, multaque\n[[429.13]] agnosco acute et ex vero dicta, credoque si autor ipse limam adhibeat sibi, si fervidum et acre\n[[429.14]] dicendi genus temperet, et ut verbo dicam, si ad Judicii maturitatem perveniat, aliquid praeclari\n[[429.15]] nobis daturum. Sed ut nunc scribit, multa neque in dicendi ratione, neque in sententiis probare\n[[429.16]] possum. Quis enim probet <b>Logicam omnem tanquam perniciosam damnari</b>, immortalitatemque\n[[429.17]] animae et divinam providentiam naturali lumine notas negari et de scriptoribus\n[[429.18]] sacris judicari liberius. Interea laudandus est, quod fortiter tuetur <b>Germanicae nationis\n[[429.19]] dignitatem</i>, et Gallicismorum nostrorum ineptias explodit. </p>\n<p> [[429.20]] Nihil magis praeter opinionem evenire mihi potuit, quam quae de me dicta vidi, neque\n[[429.21]] enim laudes mediocritatem supergressas agnosco (ipse mihi non ignotus) multo minus invidendas\n[[429.22]] et prope odiosas. Nec quicquam magis vereor, quam ne me homines conscium suspicentur,\n[[429.23]] et ineptissimae vanitatis accusent, quanquam qui me norunt propius, facile innocentiam\n[[429.24]] meam agnoscent. Volui praestare aliquid in cognitione naturae et matheseos arcanis, et applausum\n[[429.25]] habui insignium etiam apud exteros virorum, visus, eruisse aliqua quae hactenus latebant,\n[[429.26]] quantum tamen absim a desideratis nemo me rectius agnoscit. [ ... ] </p>\n",
+  "number": "117.",
+  "title": "LEIBNIZ AN HEINRICH AVEMANN",
+  "date": "Wolfenbüttel, 1. (11.) Juli 1691. [64.125.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:117. LEIBNIZ AN HEINRICH AVEMANN Wolfenbüttel, 1. (11.) Juli 1691. [64.125.] [ ... ] Librum nescio cujus Realis de Vienna Thomasianae in Philosophiam, Aulicam Introductioni oppositum, ignotum prorsus ante indicium tuum, legi, multaque agnosco acute et ex vero dicta, credoque si autor ipse limam adhi...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

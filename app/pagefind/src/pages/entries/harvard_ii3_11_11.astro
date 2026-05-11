@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_11",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 11,
+  "text": "<p> [[28.11]] <b>11. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[28.12]] Hamburg, 3. (13.) April 1695. [13.]</b></p>\n\n[[29.1]] <petit> 1. <i>Accessiones juris naturalis privati et publici, quorum hoc politica doctrina, jus imperiorum, et gentium\n[[29.2]] continentur, nunc primum publicatae, cum indicibus necessariis</i>\n [[29.3]] 2. <i>Consilii de studio philosophiae practicae optime instituendo</i> <i>epitome et praxios rhetoricae lemmatica repraesentatio:\n[[29.4]] destinatae modo editi juris naturalis accessionum appendices geminae, culpa typographi omissae, nunc\n[[29.5]] seorsim editae</i> (Diese 12 Seiten umfassende Schrift hatte der Drucker zunächst vergessen. Sie wurde separat\n[[29.6]] Hamburg 1695 nachgedruckt und teilweise später eingefügt.)\n [[29.7]] 3. <i>Accessiones rhetoricae artis Aristotelicae nunc demum editae una cum promptuario triplici inventionis\n[[29.8]] enthymematicae, affectuosae et moratae</i>\n [[29.9]] 4. <i>Accessiones ethicae sive medicinae moralis, compendio nunc tertium publicatae ex opere systematico majori,\n[[29.10]] cum indicibus necessariis</i>\n [[29.11]] 5. <i>Appendix epistola ad patronos et amicos, quare sibi cum clarissimo Christiano Thomasio (qui libro 2.\n[[29.12]] Jurisprudentiae divinae a p. 372. ad 422. de favorabilibus et odiosis adversus Placcium disputaverat) nihil nunc\n[[29.13]] auctor amplius censeat publice disputandum, indicans</i>. </petit> </p>\n<p> [[29.14]] I. N. J. C. </p>\n<p> [[29.15]] Excellentissimo omnigenae eruditionis soliditate Viro Dⁿ^#'o G. G. Leibnutzio. </p>\n<p> [[29.16]] V. Placcius S. P. D. </p>\n<p> [[29.17]] Diu, fateor tacitus amicitiam nostram continuavi. Non alia de caussa, quam ne intempestive\n[[29.18]] interpellando illam violarem. Nunc ut adjuncta, quae vides, opuscula mea, censurae\n[[29.19]] offeram Tuae intermittere non potui. Quaeso illa digneris quantum occupationes tuae gravissimae\n[[29.20]] concedunt hanc opellam, sin minus statim omnem: at saltem aliquam partem quam\n[[29.21]] volueris. Ut admoneas me de iis, quae tua perspicacitas non poterit non emendanda pluscula\n[[29.22]] depraehendere; quando, et prae me subtilius longe philosophari sueta, fatigato mihi, desertis\n[[29.23]] potius quam ad finem perductis, imo praeruptis superaccedit. Quaeso da hoc, non tam precibus\n[[29.24]] meis, quae tantum non merentur: sed argumenti pretio, et bono publico inde juvando. Certe quo\n[[29.25]] monueris me de pluribus, et gravioribus; eo magis tibi placuisse judicabo scriptionem, quam\n[[29.26]] tanta cura sis dignatus, tot aliis occupatior. Vale. Hamb. 1695. d. 3. Aprilis. </p>\n<p> [[29.27]] P. S. Si forte, ut alias memini factum, detrectante tabellarium fasciculo ut nimis grandi\n[[29.28]] (est autem quinque alphabetorum et tamen adhuc desunt folia 6 vel 7) onerari, hae litterae ad Te\n[[29.29]] veniant sine fasciculo quaeso aliam occasionem transmittendi mihi suppedites quamprimum.\n[[29.30]] Vale iterum. </p>\n",
+  "number": "11.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "Hamburg, 3. (13.) April 1695. [13.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:11. VINCENT PLACCIUS AN LEIBNIZ Hamburg, 3. (13.) April 1695. [13.] 1. Accessiones juris naturalis privati et publici, quorum hoc politica doctrina, jus imperiorum, et gentium continentur, nunc primum publicatae, cum indicibus necessariis 2. Consilii de studio philosophiae practicae optime instituen...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

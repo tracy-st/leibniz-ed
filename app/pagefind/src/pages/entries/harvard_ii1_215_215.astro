@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_215",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 215,
+  "text": "<p> [[675.5]] <b>195. LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER</p>\n<p> [[675.6]] [1678.] [187a.197a.]</b></p>\n<p> [[675.17]] Monseigneur </p>\n<p> [[675.18]] J'ay leu le <i>traité de religion contre les Athées</i>. Il dit fort bien des choses ordinaires, et il\n[[675.19]] peut toucher des libertins tels qu'on rencontre ordinairement, qui le sont plus tost par inclination\n[[675.20]] que par raisonnement. Mais il n'est pas propre à persuader des gens qui raisonnent avec\n[[675.21]] application; qui aimeront mieux une pensée toute nüe comme elle est proposée par M. Pascal\n[[675.22]] que revestue de tant de paroles inutiles. Car voulant mettre la main à la plume, pour en faire des\n[[675.23]] extraits, je n'y ay pas trouvé de quoy. Ce qui est une marque asseurée qu'un livre manque de\n[[675.24]] realités. </p>\n<p> [[675.25]] La pensée fondamentale de cet ouvrage est déja en effect dans Ciceron, qui parlant de\n[[675.26]] l'immortalité de l'ame dit qu'il ne veut pas qu'on luy oste de l'esprit cette erreur si c'en est\n[[676.1]] un[e]. Car dit il si c'est une verité j'en puis esperer des biens immenses; et si je me trompe, je\n[[676.2]] ne dois pas craindre que les morts se mocquent un jour de moy. Au lieu que ceux qui sont dans\n[[676.3]] des sentimens contraires pour obtenir icy quelques petits avantages, hazardent ce qui est bien\n[[676.4]] plus considerable infiniment. L'auteur de <i>l'art de bien penser</i> (qui est Mons. Arnaud) a fait un\n[[676.5]] chapitre exprés, qui contient la même chose, en substance. </p>\n<p> [[676.6]] Mais pour dire ce qui en est, ce raisonnement ne conclut rien de ce qu'on doit croire, mais\n[[676.7]] seulement de ce qu'on doit faire. C'est à dire il prouve seulement, que ceux même qui ne\n[[676.8]] croyent ny Dieu ny ame immortelle, doiuvent agir, comme s'il y en avoit, tandis qu'il[s] ne\n[[676.9]] peuvent demonstrer qu'il n'y en a point. Car [ce] sont deux questions tout à fait separées:\n[[676.10]] sçavoir ce qui est le plus seur dans la practique, et sçavoir ce qui est le plus probable dans la\n[[676.11]] creance. Ce que les Casuistes mêmes ont fort bien distingué. Car souvent on est obligé de\n[[676.12]] suivre le plus seur, lors même qu'il n'est pas le plus probable. Ainsi il faut de tout autres raisons\n[[676.13]] pour convertir les athées, celles-cy sont propres à les persuader seulement de vivre comme les\n[[676.14]] autres et non pas à les faire croire. Aussi la creance n'est pas une chose volontaire, et toutes les\n[[676.15]] exhortations n'y servent de rien. Il y faut des raisons et il n'est pas possible que l'ame se puisse\n[[676.16]] rendre à d'autres armes. En effect nous ne manquons pas de veritables raisons pour maintenir la\n[[676.17]] religion, et je suis marry qu'il y a si peu de gens qui s'en servent comme il faut. </p>\n",
+  "number": "195.",
+  "title": "LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER",
+  "date": "[1678.] [187a.197a.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:195. LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER [1678.] [187a.197a.] Monseigneur J'ay leu le traité de religion contre les Athées. Il dit fort bien des choses ordinaires, et il peut toucher des libertins tels qu'on rencontre ordinairement, qui le sont plus tost par inclination que par raisonnem...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

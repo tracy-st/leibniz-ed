@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_176",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 176,
+  "text": "<p> [[546.1]] <b>176. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[546.2]] Leipzig, 12. Februar 1707. [174.178.] </b></p>\n<p> [[546.8]] Vir Illustris atque Excellentissime, Patrone gratiosissime! </p>\n<p> [[546.9]] Etsi <Fn><i>Am Kopf des Briefes von Leibniz Hand</i>: resp</Fn> nihil jam memoratu dignum occurrat, cujus Excellentiam Tuam facere possim certiorem,\n[[546.10]] ut tamen voluntati Tuae silentio meo ne desim, tribus saltem verbis significo Dominum\n[[546.11]] Generalem de Schulenburg hic apud Serenissimum Regem nostrum esse, nec, prout ex Secretario\n[[546.12]] percepi, ante Paschatae festum here esse discessurum. Nuper autem Regem Torgam\n[[546.13]] euntem venandi gratia secutus est. Ut primum redierit Dominus Generalis statim Excellentiae\n[[546.14]] Tuae voluntatem apud Ipsum exequar. </p>\n<p> [[546.15]] <i>Actorum</i> continuandorum curam B. Menckenius lethaliter decumbens filio doctissimo\n[[546.16]] injunxit, voluitque suo nomine gratias agi amicis, qui sibi adjunctores hactenus extiterunt\n[[546.17]] strenui, et eosdem simul decenter invitari ut in componendis <i>actis</i> eadem sedulitate pergant.\n[[546.18]] Faciet hoc etiam filius sine dubio, et quae promisit Parenti magna sua cum laude praestabit. Is\n[[546.19]] Excellentiam Tuam praevia salute observantissima de obsequiis suis, me interprete, vult esse\n[[546.20]] securam, et data occasione commoda Programma et Carmina in honorem Parentis conscripta\n[[546.21]] Excell. Tuae mittet. Illustris Dominus de Tschirnhausen Dresdae hoc tempore agit. Dn.\n[[546.22]] D. Cyprianus et Dnus D. Rechenberg Excellentiam Tuam salutant, quantum officiosissime\n[[547.1]] possunt. Quod superest vale, Vir Excellentissime, neque, ut coepisti, patrocinio Tuo porro\n[[547.2]] dignare, qui sum maneoque </p>\n<p> [[547.3]] Excellentiae Tuae Cliens observantissimus </p>\n<p> [[547.4]] M. G. Hansch A. M. </p>\n<p> [[547.5]] Dabam desubito Lipsiae MDCCVII. Prid. Iduum Febr. </p>\n<p> [[547.6]] A Son Excellence Monseigneur de Leibnitz, Conseiller de Sa Majesté le Roy de Prusse\n[[547.7]] etc. tres humble à Berlin </p>\n",
+  "number": "176.",
+  "title": "MICHAEL GOTTLIEB HANSCH AN LEIBNIZ",
+  "date": "Leipzig, 12. Februar 1707. [174.178.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:176. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ Leipzig, 12. Februar 1707. [174.178.] Vir Illustris atque Excellentissime, Patrone gratiosissime! Etsi Am Kopf des Briefes von Leibniz Hand: resp nihil jam memoratu dignum occurrat, cujus Excellentiam Tuam facere possim certiorem, ut tamen voluntati Tuae silen...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

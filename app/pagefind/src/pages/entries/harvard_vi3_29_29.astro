@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi3_29",
+  "series": "Band VI 3 (1672-1676); durchgesehener Nachdruck 1980",
+  "seq": 29,
+  "text": "[[376.9]] <b>29 Maximes </b> <span>376.9;0:63:029:72       :L:f^</span>.\n[[376.16]] Des Maximes les plus ordinaires du monde, donnent des applications à la morale,\n[[376.17]] assez considerables. Par exemple: c'est une maxime ordinaire, lorsque vous\n[[376.18]] voyez qu'un homme a besoin de vous n'attendez pas qu'il vous prie. Consequence,\n[[377.1]] quand vous entendez qu'un homme conte une histoire, qui est arrivée en vostre\n[[377.2]] presence, n'attendez pas qu'il vous cite, et allez au devant du besoin qu'il peut avoir\n[[377.3]] de vostre témoignage. Item Maxime: il faut jamais se servir des raisons ou la mauvaise\n[[377.4]] consequence est apparente. Consequence: il ne faut pas qu'on cite ses valets\n[[377.5]] pour témoigns, car suspectus est testis domesticus, et cui imperari potest. Pour la\n[[377.6]] precedente j'adjoute une raison pour quoy, il ne faut pas attendre que vostre amy\n[[377.7]] vous cite. Parceque vostre témoignage ne luy sera plus si utile, quand il vous aura cité;\n[[377.8]] car il sera un peu suspect; à cause que vous ne voudriez pas luy donner ny dementi\n[[377.9]] facilement, ny le délaisser au besoin.\n[[377.14]] Il faut tousjours regarder les gens par leur bon costé, excepté, quand on est obligé\n[[377.15]] de s'embarquer avec eux dans quelqu'affaire, car alors il est raisonnable de prendre\n[[377.16]] ses precautions.\n[[377.22]] Il est quelques fois utile que nous souffrions qu'on nous fasse quelque tort dans\n[[377.23]] une matiere de peu de consequence, car si quelque grand y a trempé, cela luy donnera\n[[377.24]] quelque penchant (s'il est d'un bon naturel) à nous faire du bien dans quelque autre\n[[377.25]] rencontre; et on peut menager la chose en sorte, que la seconde soit plus importante à\n[[377.26]] nous, que la premiere.\n[[378.3]] Cavendum est ne his quibus imperamus inutilia ac superflua mandata demus,\n[[378.4]] aut ea minute nimis explicemus, quae ipsi per se judicare debent. Ita enim relaxatur\n",
+  "number": "29",
+  "title": "Maximes",
+  "date": ""
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:29 Maximes 376.9;0:63:029:72 :L:f^. Des Maximes les plus ordinaires du monde, donnent des applications à la morale, assez considerables. Par exemple: c'est une maxime ordinaire, lorsque vous voyez qu'un homme a besoin de vous n'attendez pas qu'il vous prie. Consequence, quand vous entendez qu'un hom...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

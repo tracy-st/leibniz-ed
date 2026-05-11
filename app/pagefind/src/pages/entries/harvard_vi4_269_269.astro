@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_269",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 269,
+  "text": "[[1043.1]] <b>222₄.  Demonstratio a Cavallerio quaesita 21. Juni (1. Juli) 1678 </p>\n<p> [[1043.5]] 21 Junii 1678 </p>\n<p> [[1043.6]] Mariottus in specimine logico negat propositiones quasdam Geometricas in <i>Elementis</i>\n[[1043.7]] extantes demonstrari per calculum, quia calculus ipse, v.g. quod ─ in ─ facit + ex\n[[1043.8]] <i>Elementis</i> demonstrari debet. Et sane Analytici plerique qui demonstrationes operationum\n[[1043.9]] dare voluere, recursum habuere ad propositiones Geometricas et inter hos Renaldinus, qui\n[[1043.10]] refert Cavallerium quoque questum quod hae propositiones non haberentur demonstratae.\n[[1043.11]] Ego puto Cavallerium quaesivisse demonstrationem Analyticam: nam linearem dudum\n[[1043.12]] dederant Algebristae, ut Bombellus aliique. Ecce ergo demonstrationem pure analyticam\n[[1043.13]] a me repertam, absurdum enim videbatur arithmeticae communis regulas (quas inter illa\n[[1043.14]] est quod ─ in ─ facit +) non nisi per lineas demonstrari posse. Primum autem quaesivi\n[[1043.15]] rem in aequatione ut si sit <i>x</i> ─ <i>b aequ. 0</i>, ducenda in <i>x</i> ─ <i>c</i>, vel in <i>f</i> ─ <i>c</i>, sumendoque pro\n[[1043.16]] vero quod quaeritur incidi in verum. Inde per regressum concinnavi demonstrationem\n[[1043.17]] syntheticam in casu aequationis. Unde facilius postea fuit concinnare propositionem\n[[1043.18]] generalem, quemadmodum scheda separata praestiti.\n[[1043.19]] ^&.bb <Leibniz special character><tab/><i>x^#'2</i> <tab/>─ <tab/><i>b</i><tab/><i>x</i>^&.b</i> <Leibniz special character> <tab/><i>x</i> ─ <i>b</i>\n [[1043.20]] <tab/><i>x</i> ─ <i>c</i>\n [[1043.21]] <tab/>^#6+<i>x^#'2</i> <tab/>─ <i>bx</i> + <i>bc aequ. 0</i>.^#6-\n [[1043.22]] <tab/><i>cx</i> </p>\n<p> [[1044.1]] Ergo <i>x^#'2</i> + <i>bc aequ. bx</i> + <i>cx</i> </p>\n<p> [[1044.2]] Ergo <i>x</i> + <i>c aequ. b</i> + <i>c</i>\n [[1044.3]] seu <i>x aequ. b</i>\n [[1044.4]] <tab/><i>x</i> ─ <i>b</i>\n [[1044.5]] <tab/><i>f</i> ─ <i>c</i>\n [[1044.6]] <tab/>^#6+<i>xf</i> <tab/>─ <i>bf</i> ─ <i>cx</i> + <i>bc</i>^#6-\n [[1044.7]] <i>xf</i> + <i>bc</i> ^&.zg <Leibniz special character> <i>bf</i> + <i>cx</i> </p>\n",
+  "number": "222₄.",
+  "title": "Demonstratio a Cavallerio quaesita 21. Juni (1. Juli) 1678",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:222₄. Demonstratio a Cavallerio quaesita 21. Juni (1. Juli) 1678 21 Junii 1678 Mariottus in specimine logico negat propositiones quasdam Geometricas in Elementis extantes demonstrari per calculum, quia calculus ipse, v.g. quod ─ in ─ facit + ex Elementis demonstrari debet. Et sane Analytici plerique...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

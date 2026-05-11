@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_89",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 89,
+  "text": "<p> [[355.5]] <b>90. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[355.6]] 16. (26.) Oktober 1690. [96.]</b></p>\n<p> [[356.1]] [ ... ] De Cartesianis habes sententiam meam a Tua non abhorrentem, parum ab ipsis\n[[356.2]] praestari hodie, dignum Magistri ingenio coeptisque. Et vix quicquam ab illis inventum nomines\n[[356.3]] dignum memoratu; usque adeo fatale est torpore occupari animos autoritati mancipatos. Ne\n[[356.4]] in Geometricis quidem uno Huddenio demto quicquam praestitere Cartesiani. Nam Hugenium\n[[356.5]] ego inter Cartesianos minime numero. Unde intelligas, vel Cartesium non publicasse suas artes\n[[356.6]] vel a discipulis non fuisse intellectas. Quanquam ipse Cartesius in Geometriam illam sublimiorem\n[[356.7]] non satis penetraverit. Unde fassus est alicubi in sua potestate non esse problemata, ubi\n[[356.8]] ex proprietate tangentium quaeritur natura lineae. </p>\n<p> [[356.9]] Huetius in <i>Censura</i> sua quanquam interdum paulo acrius, multa tamen in Cartesianos\n[[356.10]] recte dixit. Itaque velim aliquem ex primipilis in Batavis Galliaque respondere Viro Doctissimo\n[[356.11]] et Magistri doctrinam et existimationem multis modis laborantem vindicare. Id expectare\n[[356.12]] aequum videtur, ut utraque parte audita judicemus. Ac tum demum tertio intervenienti medium\n[[356.13]] quodammodo interponere se partibus fas erit. Quod si quis facere occupet festinatione nimia\n[[356.14]] vereor ne neutris satisfaciat. Nam nec Huetius auxilia non necessaria sibi mitti probabit, nec\n[[356.15]] Cartesiani defensionem suam praeveniri aequo animo ferent. Et sane nondum mihi visus qui\n[[356.16]] Huetio responderit. </p>\n<p> [[356.17]] Sed nec cujusvis est hoc sibi vindicare officium, quod illi facere debent, qui primores\n[[356.18]] gentis habentur. [ ... ] </p>\n<p> [[356.19]] P. S. In Lipsiensium Actis per occasionem jam aliqua admoneri curavi de Cartesii artificio\n[[356.20]] in aliorum inventa in sua convertendis. Observatum est ab Anglis et a Wallisio fuse ostensum in\n[[356.21]] opere novissimo Algebraico magnam partem libri tertii <i>Geometriae</i> Cartesianae sumtam fuisse\n[[356.22]] ex Harrioto, quem egomet vidi, et miram consonantiam deprehendi. Cum tamen Harrioti liber\n[[356.23]] et quidem posthumus ante Cartesianum opus prodierit. Cum igitur rogantibus Actorum Autoribus\n[[356.24]] relationem de Wallisiano opere mitterem, sane plagii accusationem non praetermisi. Et ab\n[[356.25]] Isaaco Vossio primum observatum deinde a Mariotto et Neutono repetitum est, veram regulam\n[[357.1]] refractionum a Willebrordo Snellio fuisse inventam et ab Hortensio nonnullis discipulis traditam.\n[[357.2]] Quae cum ad Cartesii in Batavis versantis notitiam pervenisset, coquus elegans suo jure\n[[357.3]] addito ferculum inde nobis adornavit, sed demonstrationem infeliciter tentavit, quod ignoraret,\n[[357.4]] quo artificio Snellius ad praeclarum illud Theorema devenisset; id ego quoque alicubi in actis\n[[357.5]] Lipsiensium admonui post Cl. Spleissium, qui jam in iisdem actis rei mentionem fecerat. </p>\n<p> [[357.6]] Ab Ismaële Bulialdo observatum est Keplerum in <i>paralipomenis ad Vitellionem</i> Cartesio\n[[357.7]] viam praeivisse ad reddendam rationem aequalitatis angulorum incidentiae et reflexionis per\n[[357.8]] compositionem duorum motuum normalis et transversalis. Idem notavit Keplerum ex calculo\n[[357.9]] deprehendisse Lineam Refractionibus aptam ad Hyperbolam accedere. Unde Cartesius meliore\n[[357.10]] jam Analysi instructus facile deprehendere potuit ipsam Hyperbolam satifacere. A me notatum\n[[357.11]] est in Lipsiensium actis Keplerum primum invenisse adumbrationem Gravitatis per conatum\n[[357.12]] recedendi a Centro, quod inter elegantissima Cartesii merito censetur et Hugenius nuper\n[[357.13]] correxit ac perfecit. </p>\n<p> [[357.14]] Cum Romae essem, Cl. Auzoutus mihi referebat esse nunc in Gallia qui Cartesii vitam\n[[357.15]] scribere pararent; et cum nonnulla a me audiisset vulgo non cognita, quae ad hoc institutum\n[[357.16]] facere possent, petiit ut in chartam conjicerem amicis illis transmittenda. Quod et feci et Tibi,\n[[357.17]] Vir Cl^#'m^#'e, hic adjunctam schedam mitto, quam recipere desidero. Dubito autem an illi quibus\n[[357.18]] missa fuit scheda, sint usuri meis observationibus, fortasse enim ea tantum quaerunt, quae\n[[357.19]] Cartesio honorifica sunt. </p>\n",
+  "number": "90.",
+  "title": "LEIBNIZ AN GERHARD MEIER (BREMEN)",
+  "date": "16. (26.) Oktober 1690. [96.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:90. LEIBNIZ AN GERHARD MEIER (BREMEN) 16. (26.) Oktober 1690. [96.] [ ... ] De Cartesianis habes sententiam meam a Tua non abhorrentem, parum ab ipsis praestari hodie, dignum Magistri ingenio coeptisque. Et vix quicquam ab illis inventum nomines dignum memoratu; usque adeo fatale est torpore occupar...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

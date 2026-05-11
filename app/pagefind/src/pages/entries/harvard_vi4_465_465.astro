@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_465",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 465,
+  "text": "[[2065.12]] <b>377₁.  De motu in rigore mathematico accepto </p>\n<p> [[2065.16]] Motu in rigore mathematico accepto demonstravi, nullum dari principium determinandi\n[[2065.17]] quodnam corpus absolute quiescat, aut absolute tali motu moveatur. </p>\n<p> [[2065.18]] Sic fieri potest, ut corpus aliquod percussionem aut aliam vim movendi exerceat et\n[[2065.19]] tamen non moveatur absolute in rigore mathematico sed quiescat ut si globus manu\n[[2065.20]] impulsus in navi currat per lineam rectam horizontalem, a prora versus puppim, et navis\n[[2065.21]] interim aequali celeritate contraria moveatur in directione a puppi ad proram; nullus\n[[2066.1]] absolute erit motus globi, et tamen globus et ictum a manu recepit et in alium globum in\n[[2066.2]] navi quiescentem ictum fecit. </p>\n<p> [[2066.3]] Et speciatim demonstravi eam esse miram naturae Legem, ut omnia phaenomena\n[[2066.4]] non tantum corporum libere motorum, sed et inter se concurrentium eodem modo prodeant,\n[[2066.5]] ubicunque demum quies aut determinatus motus absolutus existat. </p>\n<p> [[2066.6]] Hinc sequitur quoties unum systema alteri praefertur, non posse id aliter accipi,\n[[2066.7]] quam ut unum alio sit intelligibilius et rebus de quibus agitur explicandis accommodatius\n[[2066.8]] et proinde cum una Hypothesis dicitur vera altera falsa, suo intelligendum est certo\n[[2066.9]] respectu. Sic tam sphaerica Ptolemaei doctrina quam Theorica planetaria Copernici\n[[2066.10]] verissima est quia idem hic est verum quod rectum et conveniens optimusque est uterque\n[[2066.11]] explicandi modus; et utrinque peccaretur vel motum terrae in sphaericam inferciendo vel\n[[2066.12]] statione terrae in theoricis utendo. Sic qui in navi est cum nullus fit ad ripam respectus\n[[2066.13]] male negabit globum supradictum moveri; qui vero in ripa stans globum videt non recte\n[[2066.14]] negabit eum quiescere, cum de mutatione intra navim non agitur, absolute autem nil\n[[2066.15]] definiri potest, cum nova redeat quaestio de ipsa ripa. </p>\n<p> [[2066.16]] Itaque Historici et ipsi scriptores sacri statione terrae non tantum uti potuerunt sed et\n[[2066.17]] debuerunt. Quod dicere dignius est Deo autore libri maximos scientiae thesauros continentis,\n[[2066.18]] quam minus accurate aut populariter locutum asserere, aut a litera hic recedere. </p>\n<p> [[2066.19]] Et quia permissum est salva Censura Copernicanum systema prae aliis adhibere\n[[2066.20]] tanquam Hypothesin ad intelligendos planetarum motus aptissimam; defendere autem\n[[2066.21]] ejus veritatem ut explicuimus nihil aliud est revera, quam defendere ejus summam\n[[2066.22]] intelligibilitatem; itaque hoc sensu, salva Censura quilibet in summo gradu Copernicanus\n[[2066.23]] esse potest. </p>\n<p> [[2067.1]] Id vero agnosci tandem aliquando non parum interest et Ecclesiae, et scientiarum, et\n[[2067.2]] honoris Italiae neque erit hoc modo metuendum ne Censores ad retractationem a novis\n[[2067.3]] inventis aliquando cogantur aut se torrenti seculi publicoque eruditorum voci frustra\n[[2067.4]] opponant; et falsis eorum improperationibus occurretur, qui veritatem opprimi dicunt; et\n[[2067.5]] proinde egregia ingenia non in Italia minus quam apud alias gentes frui poterunt luce\n[[2067.6]] seculi, et praeclaris inventis incumbere, quae nunc ab aliis praeripiuntur. Neque aliam\n[[2067.7]] ego esse puto summorum virorum mentem penes quos censurae jus est. </p>\n<p> [[2067.8]] Et vero tanta est Copernicani Systematis praestantia ad explicanda phaenomena\n[[2067.9]] planetarum, ut fatendum sit Astronomum qui id non intelligeret in maximis tenebris\n[[2067.10]] versaturum. Tantaque indies nova inventa ejus harmoniam et simplicitatem confirmant, ut\n[[2067.11]] nolle ipso uti, sit ipsius Dei gloriam obscurare, ademta agnoscendae ejus admirabilis\n[[2067.12]] sapientiae occasione. </p>\n<p> [[2067.13]] Et nos ipsi nunc universalibus planetarii motus legibus a Keplero repertis, in principia\n[[2067.14]] sua, circulationem scilicet harmonicam materiae celestis tanquam orbis fluidi planetarii\n[[2067.15]] deferentis circa solem, et accessionem rectam planetae tanquam gravis et ad solem\n[[2067.16]] tanquam magnetem et geometrice resolutis, ni fallor contulimus aliquid ut optima\n[[2067.17]] phaenomenorum explicatio, id est verissima hypothesis habeatur. </p>\n",
+  "number": "377₁.",
+  "title": "De motu in rigore mathematico accepto",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:377₁. De motu in rigore mathematico accepto Motu in rigore mathematico accepto demonstravi, nullum dari principium determinandi quodnam corpus absolute quiescat, aut absolute tali motu moveatur. Sic fieri potest, ut corpus aliquod percussionem aut aliam vim movendi exerceat et tamen non moveatur abs...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

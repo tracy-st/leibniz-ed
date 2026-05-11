@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_62",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 62,
+  "text": "<p> [[160.1]] <b>55. LEIBNIZ AN OTTO TACHENIUS</p>\n<p> [[160.2]] Frankfurt, 4. Mai 1671.</b></p>\n<p> [[160.14]] Vir Experientissime et Celeberrime </p>\n<p> [[160.15]] Nolui praetermittere occasionem gratulandi Tibi patriaeque nostr<angle bracket>ae</angle bracket> de fama quam egregiis\n[[160.16]] inventis scriptisque es consecutus. Mirifice placent omn<angle bracket>ia</angle bracket> quae de primis illis pugilibus\n[[160.17]] acido et alcali disseris: ego in his quae mitto Schediasmatibus non probavi tantum, sed et\n[[160.18]] provexi, et hoc occultum naturae mysterium ad causas manifestas reduxi. Miraberis congruentiam\n[[160.19]] diversarum, et ex diversis principiis petitarum speculationum, insigni veritatis argumento.\n[[160.20]] Videbis ex unico motu aetheris cum luce circa terram non tantum reactionem inter\n[[160.21]] acidum et alcali, sed et pene omnia naturae phaenomena, et quod mirabilissimum est, ipsam\n[[160.22]] <b>naturam</b> et directionem <b>magnetis</b> derivatam. Et ex occultis qualitatibus factas manifestas.\n[[160.23]] Spero aliquando frui me posse colloquio Tuo, distinctiusque et discere Tua et explicare mea.\n[[160.24]] Nunc quaeso judicium mihi Tuum, et si ita videtur, amicorum ne denega. Ecce praeterea quid\n[[160.25]] quaerere in mentem venerit, <b>nonne putas rationem iniri posse capiendi subtilissimum\n[[160.26]] illud quod in reactionibus acidi et alcali fermentationibusque exhalat</b>.\n[[160.27]] Scis Basilium Valentinum commendare spiritum album Vitrioli, ut vocat, qui inter\n[[160.28]] reagendum cum Tartaro, exhalat: nec commendare tantum, sed et capi posse supponere. Idem\n[[161.1]] Basilius putavit, aut certe tradidit, spiritum album sola lenta digestione a rubro separari posse.\n[[161.2]] Tu in hoc negotio exercitatissimus unus omnium optime judicare potes quid de his rebus sit\n[[161.3]] sperandum. Quid sentis de <i>Physica subterranea</i> ingeniosi certe Viri Joh. Joach. Becheri? quid\n[[161.4]] de novo ejus experimento ex solo limo communi, et oleo lini faciendi ferrum. Quo experimento\n[[161.5]] illi refutantur, qui negant naturam perinde ut artem transitus facere posse de regno in regnum.\n[[161.6]] Quod superest vale faveque </p>\n<p> [[161.7]] Vir Nobiliss^#'e Cultori Tuo Gottfredo Guilielmo Leibnitio J.U.D. </p>\n<p> [[161.8]] Francofurti 4 Maii styl. novi 1671 et Consil. Mog. </p>\n<p> [[161.9]] P. S. Si rescribis, literis ad me directis aliud circumda operculum, ita inscriptum: <i>à\n[[161.10]] Monsieur Monsieur Lasser Conseiller de Son Altesse Electorale de Mayence, à Mayence.</i> </p>\n<p> [[161.11]] Nobilissimo Viro Dⁿ^#'o Ottoni Tachenio Medico Celeberrimo. Venetiis. </p>\n",
+  "number": "55.",
+  "title": "LEIBNIZ AN OTTO TACHENIUS",
+  "date": "Frankfurt, 4. Mai 1671."
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:55. LEIBNIZ AN OTTO TACHENIUS Frankfurt, 4. Mai 1671. Vir Experientissime et Celeberrime Nolui praetermittere occasionem gratulandi Tibi patriaeque nostrae de fama quam egregiis inventis scriptisque es consecutus. Mirifice placent omnia quae de primis illis pugilibus acido et alcali disseris: ego in...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

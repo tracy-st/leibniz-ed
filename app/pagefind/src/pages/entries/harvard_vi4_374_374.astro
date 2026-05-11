@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_374",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 374,
+  "text": "[[1638.1]] <b>317.  Motum non esse absolutum quiddam [März 1689 bis März 1690 (?)]</b>\n [[1638.2]] <tab/>[März 1689 bis März 1690 (?)] </p>\n<p> [[1638.8]] Motum non esse absolutum quiddam, sed relativum Aristoteles et Cartesius consentiunt,\n[[1638.9]] ille dum locum definivit a superficie ambientis, hic dum motum a mutatione\n[[1638.10]] vicinitatis. Spatium absolutum non magis res est quam tempus, etsi imaginationi blandiatur;\n[[1638.11]] imo demonstrari potest talia non esse res, sed tantum relationes mentis omnia ad\n[[1638.12]] hypotheses intelligibiles, hoc est motus uniformes et loca immota revocare conantis;\n[[1638.13]] atque inde deductas aestimationes. </p>\n<p> [[1638.14]] Porro nec influxus substantiae in substantiam ullus est in Metaphysico rigore,\n[[1638.15]] (praeterquam quod in dependentia creaturarum, quae continua productio est) nec revera a\n[[1638.16]] corpore in corpus ullus transfertur impetus sed ut phaenomena quoque confirmant, omne\n[[1638.17]] corpus vi proprii Elastri ab alio recedit quod est a motu partium ipsi inexistentium. Et\n[[1638.18]] vero unaquaeque substantia est vis quaedam agendi, seu conatus mutandi sese respectu\n[[1638.19]] caeterorum omnium secundum certas suae naturae leges. Unde quaelibet substantia totum\n[[1638.20]] exprimit universum, secundum aspectum suum. Et in phaenomenis motuum res egregie\n[[1638.21]] apparet, unumquodque enim corpus ibi supponi debet habere motum communem cum\n[[1638.22]] altero quovis, quasi in eadem navi et proprium praeterea moli reciprocum; quale quid\n[[1638.23]] fingi non posset, si motus essent absoluti, nec corpus unumquodque omnia alia exprimeret. </p>\n",
+  "number": "317.",
+  "title": "Motum non esse absolutum quiddam",
+  "date": "[März 1689 bis März 1690 (?)]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:317. Motum non esse absolutum quiddam [März 1689 bis März 1690 (?)] [März 1689 bis März 1690 (?)] Motum non esse absolutum quiddam, sed relativum Aristoteles et Cartesius consentiunt, ille dum locum definivit a superficie ambientis, hic dum motum a mutatione vicinitatis. Spatium absolutum non magis ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

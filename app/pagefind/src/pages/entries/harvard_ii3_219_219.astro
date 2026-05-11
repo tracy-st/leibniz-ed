@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_219",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 219,
+  "text": "<p> [[585.9]] <b>219. BURCHARD DE VOLDER AN LEIBNIZ</p>\n<p> [[585.10]] Leiden, 1. (11.) August 1699. [214.223.]</b></p>\n\n<p> [[585.21]] Illustri Viro Godefrido, Guilielmo Leibnitio S. P. B. De Volder. </p>\n<p> [[585.22]] Inexpectatum tibi accidit, Vir Amplissime, negare me <i>pluris esse Actionem, quae idem\n[[585.23]] promtius praestet</i>. Ego vero miror, te hoc pro tam certo axiomate habere, ut nihil speres illo\n[[585.24]] producere clarius, praesertim cum in hoc ipso tota causa consistat. Vellem equidem ex responso\n[[585.25]] tuo me percipere potuisse, huic evidentiae nihil officere rationes, quas in meis attuli, cur hoc\n[[585.26]] negandum existimarem; quae adhucdum mihi videntur, si nihil amplius, tantum certe habere\n[[585.27]] virium, ut enuntiationem tuam merito dubiam faciant. Tempus siquidem, quod merum ens\n[[585.28]] rationis est, quatenus ab actione distinguitur, nihil efficit. Solae actiones sive effectuum causae\n[[586.1]] inter se comparandae sunt. Hae vero cum aequales sunt effecto, nonne sequitur eandem\n[[586.2]] causarum aut actionum aut virium esse rationem, quae est effectuum? Quo ipso tamen nequaquam\n[[586.3]] nego, <i>in motu ipso promtiore plus esse realitatis et perfectionis</i>, ut nec, <i>eum differre a\n[[586.4]] tardiori in majus;</i> sed quod putem id quod plus realitatis est in motu promtiori, compensari in\n[[586.5]] tardiori duratione longiori. </p>\n<p> [[586.6]] Quae quidem omnia niti mihi videntur iisdem principiis, quibus uteris in responsione ad\n[[586.7]] Abb. D. C. in novell. Reip. litt. 1687, p. 137, ubi expresse ais, <i>qu'il y a tousjours une parfaite\n[[586.8]] equation entre la cause pleine et l'effet entier</i>, et quae illic porro habentur. In nostro casu\n[[586.9]] effectum unum et idem est. Erunt itaque et causae quae totae in actionibus consistunt earundem\n[[586.10]] virium. </p>\n<p> [[586.11]] Interruptio, si quae foret in motu, cum nec ex motus celeritate, nec ex directione sequatur,\n[[586.12]] aliam haberet a motu causam; nec determinare possum num quid sit, quod prohibeat Deum\n[[586.13]] transcreare corpora de loco in locum per saltum, observando ut loca sibi sint in directum. Cum\n[[586.14]] enim talis causae, quae hunc saltum efficeret, notionem nullam habeam, de ea ratiocinari nihil\n[[586.15]] possum. </p>\n<p> [[586.16]] In grege et exercitu pluralitatem agnosco, quia partes habent nullo necessario inter se nexu\n[[586.17]] conjunctas; quod in extenso secus se habet, cujus unam partem omnino putem alteri necessariam\n[[586.18]] esse. Nec inter partes extensionis substantiale discrimen admitto, sed tantum modorum;\n[[586.19]] quod mihi commune esse existimo tantum non cum omnibus, qui soli motui, utpote qui unice\n[[586.20]] modorum discrimen facit, omnem corporum varietatem ascribunt. </p>\n<p> [[586.21]] Subjectum mutationis Logicam notionem an metaphysicam dicas, parum mihi videtur\n[[586.22]] referre. Logicam dixi, eo quod in eo ita generaliter sumto, nec accuratius determinato nihil\n[[586.23]] reperirem, quod non explanaret. </p>\n<p> [[586.24]] Omne corpus habet conatum perseverandi in suo statu, nec ab eo deturbabitur nisi ab\n[[586.25]] externa causa. Haec illi dat conatum ad motum, recte; sed cum plus causae requiratur, ut\n[[586.26]] moveatur corpus majus quam ut minus, manebit quidem eadem vis motus, sed ejus velocitas\n[[586.27]] minuetur necessario. </p>\n<p> [[586.28]] De principio activo, ipsa extensione priori, nihil quod addam habeo, cum qui meus est\n[[586.29]] stupor, nihil horum intelligam. </p>\n<p> [[586.30]] Quod ad alteram quaestionem respondes, videor mihi intelligere; sed quaesitum hoc volui,\n[[586.31]] eandem ob causam qua primum, de <greek>ĕntelexeíä</greek> corporis animati, quatenus spectatur tanquam\n[[586.32]] unicum, neglectis partibus, quatenus illae privatim animatae sunt. </p>\n<p> [[587.1]] Utrumque autem hoc quaerebam, quia si illud sive principium activum sive <greek>ĕnteléxeia</greek> ab\n[[587.2]] extensione plane differrent, ex eo sequi existimabam nihil aut hoc aut illam, in extensionem\n[[587.3]] posse. </p>\n<p> [[587.4]] Doleo, Vir Amplissime, me non potuisse plane accedere opinioni tuae, quod tibi persuadeas\n[[587.5]] velim, neutiquam fieri ullo contradicendi studio. Imo e contrario, auctoritate tua, quae\n[[587.6]] apud me maxima est, vel sola moverer, nisi te nec ipsum probaturum existimarem, si rei non\n[[587.7]] satis perceptae assentirer. Vale. </p>\n<p> [[587.8]] Lugd. Batav. ipsis Calendis Augusti MDCXCIX. </p></p>\n",
+  "number": "219.",
+  "title": "BURCHARD DE VOLDER AN LEIBNIZ",
+  "date": "Leiden, 1. (11.) August 1699. [214.223.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:219. BURCHARD DE VOLDER AN LEIBNIZ Leiden, 1. (11.) August 1699. [214.223.] Illustri Viro Godefrido, Guilielmo Leibnitio S. P. B. De Volder. Inexpectatum tibi accidit, Vir Amplissime, negare me pluris esse Actionem, quae idem promtius praestet. Ego vero miror, te hoc pro tam certo axiomate habere, u...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

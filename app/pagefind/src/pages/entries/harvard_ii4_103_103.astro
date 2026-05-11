@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_103",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 103,
+  "text": "<p> [[320.15]] <b>103. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[320.16]] Quedlinburg, 2. Mai 1705. [78.104.] </b></p>\n<p> [[321.1]] Hochwolgebohrner Herr. </p>\n<p> [[321.2]] Zu <Fn><i>Am oberen Rand von Leibniz' Hand</i>: resp</Fn> guter lezt habe nochmals vernemen wollen, ob ich nicht von Inen die übrigen 24. Thl,\n[[321.3]] indem von dem bekommenen, nur di lezten 10. Thl rechnen kan, zu hoffen habe, weil von den\n[[321.4]] hohen personen nichts zu erhalten gewesen. Ich zweifle nicht, wenn Si mir selbige erlegt, daß\n[[321.5]] Si leicht erstattung erlangen: Doch wenns auch nicht erfolgte, würde es Inen ein leidliger\n[[321.6]] schade sein; mir aber ist es di ganze barschaft gewesen: Zudem kan ich nicht davor, daß Si von\n[[321.7]] hohen personen hintergangen sind, denn ja Si, nicht ich, von denselben hintergangen worden;\n[[321.8]] Si, nicht jene, haben mir die hofnung wo nicht zu bestallung, doch zu widererhaltung der\n[[321.9]] zerungskosten gemacht, darauf bin ich nach Berlin gereiset. </p>\n<p> [[321.10]] Gewiß nicht weisheit u. klugheit machen einen Weltweisen, sondern deren Vereinigung\n[[321.11]] mit Recht u. billigk. etc. Ist eine rache in der Natur, so wird si dis rächen, wo ich nicht das\n[[321.12]] meinige widerbekomme: nicht alle wünsche sind vergeblig, die sele würkt auch außer dem\n[[321.13]] leibe darin sie stekt; zugeschweigen des schlechten namens, der daraus folgen würde. </p>\n<p> [[321.14]] Ob ich das geld baar widerbekomme, oder der Hr. Kuno zu aushändigung meiner bücherei\n[[321.15]] vermacht wird, sol mir gleich viel sein, weils onedem hizu bestimt war. Ich erwarte ehests\n[[321.16]] antw., welche zuwenigsten hoffen werde, damit ich wiße woran ich sei, weil vileicht über\n[[321.17]] 3. wochen nicht mehr werde hir sein. Di aufschrift an mich, weil ich unbekant sein wil, wird\n[[321.18]] stat meines namens, diese sein müßen: Hn. Gotfried Wesener, buchhändler, so izt sich aufhaltend\n[[321.19]] in Qvedlburg: abzugeben auf der Hohenstraße in der AmtRaht Heikelin hause, bei der\n[[321.20]] Frau Garken. </p>\n<p> [[321.21]] Ich verbl. Wolgebohrner Herr, Dero Verpflichtester </p>\n<p> [[321.22]] G Wagner. </p>\n<p> [[321.23]] Gwedlburg 2. May [1]705. </p>\n",
+  "number": "103.",
+  "title": "GABRIEL WAGNER AN LEIBNIZ",
+  "date": "Quedlinburg, 2. Mai 1705. [78.104.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:103. GABRIEL WAGNER AN LEIBNIZ Quedlinburg, 2. Mai 1705. [78.104.] Hochwolgebohrner Herr. Zu Am oberen Rand von Leibniz' Hand: resp guter lezt habe nochmals vernemen wollen, ob ich nicht von Inen die übrigen 24. Thl, indem von dem bekommenen, nur di lezten 10. Thl rechnen kan, zu hoffen habe, weil v...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_22",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 22,
+  "text": "<p> [[54.9]] <b>22. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[54.10]] [Hannover,] 5./15. Juli 1695. [16.]</b></p>\n [[54.11]] <p>\n [[54.12]] 1. <k>Azcárate</i>, <i>Obras de Leibnitz</i>, Bd 4, 1878, S. 90-91. - 2. <k>Wiater</k>, <i>Briefe</i>, 1989, S. 45. </petit> </p>\n<p> [[55.13]] Extrait de ma lettre à M. l'Abbé Foucher 5/15 Juillet 1695 </p>\n<p> [[55.14]] Vous aurés vû que tout mon systeme est fondé sur la consideration de l'unité reelle qui est\n[[55.15]] indestructible et <i>sui juris</i>, et dont chacune exprime l'univers tout entier d'une maniere qui luy\n[[55.16]] est particuliere; et cela par les loix de sa propre nature sans recevoir des influences de dehors,\n[[55.17]] excepté celle de Dieu, qui la fait subsister depuis qu'il l'a créé, par un renouvellement\n[[55.18]] continuel. Si Monsieur Lantin vivoit, je crois qu'il prendroit un plaisir particulier dans ces\n[[55.19]] considerations, comme on peut juger par une lettre qu'il m'écrivit il y a 24 ans ou environ,\n[[55.20]] jugeant deslors que mes meditations dynamiques <i>de conatu</i> pourroient éclaircir encor les\n[[55.21]] matieres de Metaphysique. </p>\n<p> [[55.22]] Si le public reçoit bien ces meditations, on m'encouragera à donner encor des pensées\n[[55.23]] assez singulieres que j'ay pour lever les difficultés <i>de fato et contingentia</i>; et pour éclaircir une\n[[55.24]] différence essentielle qu'on peut concevoir entre les formes materielles et les intelligences ou\n[[55.25]] esprits. Ce qu'on trouvera d'autant plus curieux que les Mathematiques y servent merveilleusement,\n[[55.26]] en sorte que sans en avoir quelque teinture, il seroit difficile de s'en aviser. </p>\n",
+  "number": "22.",
+  "title": "LEIBNIZ AN SIMON FOUCHER",
+  "date": "[Hannover,] 5./15. Juli 1695. [16.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:22. LEIBNIZ AN SIMON FOUCHER [Hannover,] 5./15. Juli 1695. [16.] 1. Azcárate, Obras de Leibnitz, Bd 4, 1878, S. 90-91. - 2. Wiater, Briefe, 1989, S. 45. Extrait de ma lettre à M. l'Abbé Foucher 5/15 Juillet 1695 Vous aurés vû que tout mon systeme est fondé sur la consideration de l'unité reelle qui ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

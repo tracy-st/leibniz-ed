@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_86",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 86,
+  "text": "<p> [[349.18]] <b>87. LEIBNIZ AN CHRISTIAAN HUYGENS</p>\n<p> [[349.19]] [Hannover, Ende September bis Anfang Oktober 1690.] [88.]</b></p>\n<p> [[350.20]] [<i>L^#'1</i> ] </p>\n<p> [[350.21]] [ ...] <i>J'admets le vuide sans difficulté, et je crois que la nature du corps ne consiste pas\n[[350.22]] seulement dans l'étendue, mais dans la dureté parfaite qui le rende impenetrable et incapable\n[[350.23]] d'etre rompu.</i> [ ... ] </p>\n<p> [[350.24]] [<i>L^#'2</i> ] </p>\n<p> [[350.25]] Vous avés raison Monsieur, de dire p. 162 que la seule etendue ne fait pas l'essence de la\n[[350.26]] matiere, et j'ay tousjours crû, qu'outre cela il faut luy donner de la resistence. Mais je n'avois\n[[350.27]] pas crû qu'il estoit necessaire de luy accorder une dureté parfaite à quoy je vois que vous\n[[350.28]] inclinés. Cependant quand j'avois consideré l'uniformite de la matiere en elle meme, et\n[[351.1]] <angle bracket>qu'on</angle bracket> ne sçauroit approuver une position dont il est impossible de concevoir qu'il y ait une\n[[351.2]] raison, ce qu'il semble qu'on peut dire de l'inseparabilité des parties d'un corps, au lieu qu'on\n[[351.3]] conçoit aisement des corps qui sont à un grain de sable de meme que celuicy est à une\n[[351.4]] montagne (comme vous dites en quelque endroit de vostre ouvrage), item ce que vous dites\n[[351.5]] p. 13 que c'est <i>ce progres infini de differentes grosseurs et vistesses dont la nature se sert à\n[[351.6]] operer tant de merveilleux effects</i>; j'ay crû qu'on devoit raisonner des petits corps comme des\n[[351.7]] grands à proportion et qu'il est aussi peu convenable d'admettre des atomes que des montagnes\n[[351.8]] d'une dureté infinie car il n'y peut avoir de raison pourquoy cette indissolubilité ne passe pas\n[[351.9]] une certaine grandeur et je ne voy rien qui nous oblige de l'admettre. J'avois eu du panchant\n[[351.10]] autre fois pour le vuide et pour les Atomes, mais plusieurs raisons m'avoient fait croire depuis\n[[351.11]] que ce poste n'estoit pas tenable. Cependent j'avoue que cette controverse n'est pas fort\n[[351.12]] importante pour expliquer les phenomenes particuliers de la nature, pourveu qu'on n'admette\n[[351.13]] point de grand vuide. [ ... ] </p>\n",
+  "number": "87.",
+  "title": "LEIBNIZ AN CHRISTIAAN HUYGENS",
+  "date": "[Hannover, Ende September bis Anfang Oktober 1690.] [88.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:87. LEIBNIZ AN CHRISTIAAN HUYGENS [Hannover, Ende September bis Anfang Oktober 1690.] [88.] [L^#'1 ] [ ...] J'admets le vuide sans difficulté, et je crois que la nature du corps ne consiste pas seulement dans l'étendue, mais dans la dureté parfaite qui le rende impenetrable et incapable d'etre rompu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

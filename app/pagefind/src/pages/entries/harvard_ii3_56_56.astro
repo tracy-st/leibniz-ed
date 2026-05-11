@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_56",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 56,
+  "text": "<p> [[159.1]] <b>56. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[159.2]] Hamburg, 11. (21.) April 1696. [52.58.]</b></p>\n\n<p> [[159.9]] I. N. J. C. </p>\n<p> [[159.10]] Excell^#'m^#'o et Amplissimo Dⁿ^#'o G. G. Leibnitio </p>\n<p> [[159.11]] V. Placcius S. P. D. </p>\n<p> [[159.12]] Responsurus <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: <i>Brand von Lubec. China.</i></Fn> ultimis tuis remitto commodatam dissertationem cum gratiis, et auctario\n[[159.13]] levidensi Amanuensis mei Rostochium propediem migraturi. Quem ut vides in Logicis Jungianis\n[[159.14]] ita exercui, ut alios docere cum fructu possit. Illius Jungii aliqua Cimeliis tuis inserere si\n[[159.15]] volueris, nil erit dignius ejusdem <i>Noematicis definitionibus et divisionibus</i>, cum cura summa\n[[159.16]] elaboratis, et folia pauca conficientibus. <i>Ethicae</i> quoque paucissimorum foliorum <i>disputationes</i>\n[[160.1]] adsunt, sed non aequi valoris. Responsio ad <i>limam</i> Scharffii non est penes me, sed ab amico\n[[160.2]] impetrari credo possit. Sunt alia parvae molis, edita aeque ac si non edita essent; combustis\n[[160.3]] nempe plerisque omnibus exemplaribus, aut perpaucis ab initio impressis, adeo ut vix exstent.\n[[160.4]] Id quod de <i>Geometriae</i> ipsius <i>Empiricae</i> foliis Germanice versis, quae cum Fogelii Bibliotheca\n[[160.5]] ad vos pervenere, dictum etiam volo. Quorum aliud exemplar nullum extare putem. Dⁿ^#'i Weigelii\n[[160.6]] reditum huc avidus expecto. Ex Cabalisticis Helmontii et Knorrii ego fateor me parum aut nihil\n[[160.7]] proficere potuisse. Non video fundamenta illius rei solida ulla. Opinionum vero et placitorum\n[[160.8]] arbitrariorum plus nimis est ferax imaginatio humana. Utinam iis relictis ad <greek>ĕpidóseiw tṽn\n[[160.9]] texnṽn</greek> accuratas tandem accingerentur Philosophi omnes, Tecum et cum similibus Tui, quos\n[[160.10]] veneror. Vale. Hamb. 1696. d. 11. Aprilis. </p></p>\n",
+  "number": "56.",
+  "title": "VINCENT PLACCIUS AN LEIBNIZ",
+  "date": "Hamburg, 11. (21.) April 1696. [52.58.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:56. VINCENT PLACCIUS AN LEIBNIZ Hamburg, 11. (21.) April 1696. [52.58.] I. N. J. C. Excell^#'m^#'o et Amplissimo Dⁿ^#'o G. G. Leibnitio V. Placcius S. P. D. Responsurus Am Kopf der Seite von Leibniz' Hand: Brand von Lubec. China. ultimis tuis remitto commodatam dissertationem cum gratiis, et auctari...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

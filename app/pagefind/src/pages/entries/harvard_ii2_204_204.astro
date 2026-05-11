@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_204",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 204,
+  "text": "<p> [[657.1]] <b>206. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[657.2]] [Hannover, 30. Januar 1693.] [203.217.]</b></p>\n<p> [[657.11]] [ ... ] Weil Mein hochwerthester H. so viel liecht in der Naturkundigung erlanget, so bitte\n[[657.12]] ich sonderlich auch auff Medicinam Corporis mit mehreren zu gedencken; und darinn den\n[[657.13]] überschwencklichen nuzen und gebrauch Medicinae mentis zu zeigen. </p>\n<p> [[657.14]] Was Sie sonst de Cabala gedencken, daß dadurch die grösten geheimnißen zu entdecken,\n[[657.15]] verstehe ich de Cabala sapientum das ist Characteristica, deswegen sie meine gedancken wißen.\n[[657.16]] Solten sie aber noch eine andere Cabbalam meinen, so werde erläuterung dero verstandes\n[[657.17]] erwarten. Sonst wäre freylich wohl zum hochsten zu wündschen, was Sie gedencken daß ein\n[[657.18]] forum sapientiae wäre, welches nicht weniger [bestehen] würde, als die Leipzigische Meße. Ein\n[[657.19]] baar arcana lucrifera wären guth dazu, aber darauff muß man nicht warten. Inzwischen können\n[[657.20]] briefe auch etwas thun; aber die solche schreiben können wie mein hochwerther Herr deren\n[[657.21]] sind wenig oder vielleicht niemand in teutschland. Ich zweifle nicht, es werden nach der zeit da\n[[657.22]] M. h. H. ich nicht gesehen, Sie noch ein viel größer liecht erlanget haben, zumahl in physicis,\n[[657.23]] und da steckts am meisten. Kondte man dermahleins einige guthe abreden nehmen; so zu unser\n[[657.24]] vergnügung und gemeinen Nuz dienen möchte, so wundsche dazu gelegenheit von herzen. </p>\n<p> [[657.25]] (: Den <Fn>(: Den ... dingen. :): <i>Diesen Abschnitt hat Leibniz eingeklammert, wohl um ihn von der Abfertigung auszuschließen.</i></Fn> guthen alten H. Krafft hoffe bey uns anzubringen, maßen bey Churfurstl. Durchl.\n[[657.26]] ihn vorzuschlagen mich erkühnet; darauff seine gedancken angehöhret und zimlich wohl\n[[658.1]] aufgenommen worden. Schade ists daß er nicht zwanzig jahr jünger. Doch ist er noch frisch\n[[658.2]] gnug. Er hat große Experienz in vielen dingen. :) Es ist schade daß man so wenig auff das\n[[658.3]] nothigste denket. Man stifftet eine Academi oder Schuhle uber die andere, aber die darinn\n[[658.4]] eigentlich realia tractirt würden, soll noch fundiret werden. Schade ists, daß vor etlich hundert\n[[658.5]] jahren einem vor heilig gehaltenen Mann nicht in sinn gekomen aus dem grund der Christlichen\n[[658.6]] liebe, umb die arme Krancke umbsonst zu versehen, einen orden der Erzte oder Naturkündiger\n[[658.7]] zu stifften. Dem orden würde die welt offen und zu dienste stehen, zumahl wenn trefliche leute\n[[658.8]] darinn wären, die ihr gemuth auff nüzliche entdeckungen richteten und naturliche wunder thun\n[[658.9]] köndten. Aber was halt ich mich auff mit Wündschen. Mein hochwehrtester H., als eine zierde\n[[658.10]] unser zeit scheinet solche Dinge dermahleins leisten zu können die ich kaum mit Wündschen\n[[658.11]] erreiche. [ ... ] </p>\n",
+  "number": "206.",
+  "title": "LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS",
+  "date": "[Hannover, 30. Januar 1693.] [203.217.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:206. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS [Hannover, 30. Januar 1693.] [203.217.] [ ... ] Weil Mein hochwerthester H. so viel liecht in der Naturkundigung erlanget, so bitte ich sonderlich auch auff Medicinam Corporis mit mehreren zu gedencken; und darinn den überschwencklichen nuzen und ge...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

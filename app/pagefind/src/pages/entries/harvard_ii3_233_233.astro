@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_233",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 233,
+  "text": "<p> [[633.10]] <b>233. LEIBNIZ AN ERNST SALOMON CYPRIAN</p>\n<p> [[633.11]] Hannover, [8.] April 1700. [231.234.]</b></p>\n\n<p> [[633.19]] Vir Celeberrime </p>\n<p> [[633.20]] Gaudeo Te salvum rediisse, doleo non diu apud nos mansurum. Sed quis Tibi meliora non\n[[633.21]] recusanti irascatur? Nam apud nos agnosco multa adhuc obstare, quo minus Tui ratio statim\n[[633.22]] habeatur, quam mereris. Susurrones equidem nescio quos, qui Guelfebyti Tibi nocere possint,\n[[633.23]] non esse puto cur metuas; et, si spatium detur, caetera etiam recte successura sperem. De\n[[633.24]] desiderio Tuo etiam Dn. Abbas Schmidius aliquid tetigit. </p>\n<p> [[634.1]] <i>Observationes</i> quas memoras nondum vidi, nec nisi titulus ad me pervenit. Utilis erit labor\n[[634.2]] et a me commendatus non raro; recensendi libros anteriores, ut compleatur paulatim Historia\n[[634.3]] literaria. Huic rei proderit Index chronologicus librorum inde ab inventa Typographia, cujus\n[[634.4]] specimen ex Guelfebytana Bibliotheca confici curavi. </p>\n<p> [[634.5]] Cum Dn. Thomasius publice ac solenniter promiserit abstinere cavillis, quos attingis,\n[[634.6]] spero promissis staturum, ne quae utilia afferre poterit admistis odiosis gratiam et fructum\n[[634.7]] perdant. Si quid in me tale jactum deprehendatur facile condono. </p>\n<p> [[634.8]] Optarim Hofmannum, et Cellarium et Ludovicum viros egregie doctos satis otii habere, ut\n[[634.9]] operam conferre possint. Ex literis quas ad amicum scripsisti, intelligo Dn. Struvium consilio\n[[634.10]] utili accessisse, cujus certe doctrina facit, ut sperem aliquid non protritum. Ceterum nec\n[[634.11]] philosophos nec theologos extraordinarios a Dⁿ^#'o Thomasio aut amicis recenseri improbavero, ut\n[[634.12]] Schwenckfeldium, Davidem Georgium, Weigelium et similes, dummodo id ea qua par est\n[[634.13]] circumspectione fiat. </p>\n<p> [[634.14]] Campanella non indignus est qui a Te producatur; tametsi mihi ille Cardano nec ingenio\n[[634.15]] nec eruditione ulla ratione comparandus videatur. Doctrinam tamen viri et quae affert meliora\n[[634.16]] velut in systema redigi non inutile foret. Varia ejus nondum edita passim habentur. Ipse vidi\n[[635.1]] librum inscriptum <i>de Monarchia Messiae</i>, qua Papae consilium dare voluit, potiundi imperio\n[[635.2]] orbis. Satis apparet monachum chimaeris assuetum, de rebus humanis parum sane judicasse. <Fn><i>In L^#'2</i> : judicasse. Ad Dn. Cyprianum Prof. Helmst. 8 April 1700</Fn>\n[[635.3]] Vale. Dabam Hanoverae April. 1700 </p>\n<p> [[635.4]] Deditissimus G. G. Leibnitius </p></p>\n",
+  "number": "233.",
+  "title": "LEIBNIZ AN ERNST SALOMON CYPRIAN",
+  "date": "Hannover, [8.] April 1700. [231.234.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:233. LEIBNIZ AN ERNST SALOMON CYPRIAN Hannover, [8.] April 1700. [231.234.] Vir Celeberrime Gaudeo Te salvum rediisse, doleo non diu apud nos mansurum. Sed quis Tibi meliora non recusanti irascatur? Nam apud nos agnosco multa adhuc obstare, quo minus Tui ratio statim habeatur, quam mereris. Susurron...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

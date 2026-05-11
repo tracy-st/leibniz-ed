@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_179",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 179,
+  "text": "<p> [[457.16]] <b>179. HENRI BASNAGE DE BAUVAL AN LEIBNIZ</p>\n<p> [[457.17]] 12. September [1698]. [141.196.]</b></p>\n\n<p> [[458.9]] Le 12 de Sept. </p>\n<p> [[458.10]] Il <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> est vrai Monsieur qu'il y a long temps que je ne vous ay ecrit, et je vous en demande\n[[458.11]] pardon. Mais en verité mes occupations ne me laissent presque pas le loisir de m'acquitter de ce\n[[458.12]] que je dois. Je vous prie donc de m'excuser si je suis si peu regulier. J'ay montré votre memoire\n[[458.13]] à M. Bayle qui vous en ecrit lui même. Il sera inseré dans le premier quartier du Journal; c'est à\n[[458.14]] dire celui qui paroîtra au commencement du mois d'octobre. Pour vous Monsieur il me semble\n[[458.15]] que vous me negligez un peu; puisque nous n'avons point vu icy vos <i>Accessiones</i> <i>historicae</i>\n[[458.16]] dont vous me parlez, ni le supplément que vous venez de publier. Vous devriez du moins en\n[[458.17]] faire passer quelques exemplaires dans ces Provinces, et ne nous priver pas de l'utilité des vos\n[[458.18]] soins. Pardon de la liberté que je prends de vous faire ce petit reproche. Le <i>recueil des traitez de\n[[458.19]] paix</i> va bientôt paroître. Il sera de 4 volumes <i>in folio</i>. On commence effectivement par\n[[458.20]] l'alliance de Dieu avec les hommes; comme etant le premier Traité de paix qui se soit fait. Je ne\n[[458.21]] doute pas qu'il n'y ait bien des choses à suppléer; mais vous jugez bien que 4 gros volumes\n[[458.22]] contiendront bien des Traitez. Avant la paix le debit en eût eté plus prompt. On travaille à\n[[458.23]] l'impression des pieces qui concernent la paix de Reswick. Dans quelques mois cela sera\n[[459.1]] achevé. La traduction des Lettres de du Vargas est achevée. Il y a à la tête une preface de M. le\n[[459.2]] Vassor. Nous sommes en effet dans un temps où les Dictionnaires se multiplient beaucoup.\n[[459.3]] C'est une methode commode et aisée pour s'instruire en peu de temps de ce que l'on veut\n[[459.4]] sçavoir. Je travaille avec une grande application à la revision du <i>dictionnaire</i> de Furetiere, qui\n[[459.5]] sera augme<angle bracket>nté</angle bracket> presque de la moitié. On imprime la lettre <i>D</i>. C'est un prodigieux travail. Dans\n[[459.6]] peu de jours M. Leers debitera l'<i>Histoire</i> <i>d'Angleterre</i> en 2 vol. <i>in folio</i> par M. de Larrey. C'est\n[[459.7]] un bon ouvrage. J'ay vu icy M. Bernoulli de Groninghen. C'est d'une conversation agreable et\n[[459.8]] ouverte. Je lui donnai le livre de M. Hugens qui venoit alors de paroître. Vous ne m'en dites\n[[459.9]] rien. Je m'imagine que la 2^#'e partie vous aura plus attaché que la premiere. Adieu Monsieur.\n[[459.10]] Soyez persuadé que je vous estime tres sincerement, et que l'on ne peut être plus que je le suis </p>\n<p> [[459.11]] Votre tres humble et tres obeyssant serviteur Basnage de Bauval\n[[459.12]] <yi>A Monsieur Monsieur de Leibnits Conseiller de S.A.E. A Hanover </p>\n",
+  "number": "179.",
+  "title": "HENRI BASNAGE DE BAUVAL AN LEIBNIZ",
+  "date": "12. September [1698]. [141.196.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:179. HENRI BASNAGE DE BAUVAL AN LEIBNIZ 12. September [1698]. [141.196.] Le 12 de Sept. Il Am Kopf der Seite von Leibniz' Hand: resp. est vrai Monsieur qu'il y a long temps que je ne vous ay ecrit, et je vous en demande pardon. Mais en verité mes occupations ne me laissent presque pas le loisir de m...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

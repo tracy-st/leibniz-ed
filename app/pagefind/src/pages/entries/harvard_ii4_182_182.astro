@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii4_182",
+  "series": "Band II 4 (1701 - 1707)",
+  "seq": 182,
+  "text": "<p> [[566.19]] <b>182. CHRISTIAN THOMASIUS AN LEIBNIZ</p>\n<p> [[566.20]]  Halle, 19. Februar 1707. [183.] </b></p>\n<p> [[567.25]] Vir perillustris et excellentissime, Patrone maxime colende </p>\n<p> [[567.26]] Ignosce <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: semiresp.</Fn> turbanti negotia et meditationes tuas, quas partim civilis partim literaria Respublica\n[[567.27]] sibi vindicat. Operam dabo ut importunitatem meam brevitate compensem. Refert Marquardus\n[[567.28]] Freherus in notis ad constitutionem quandam (ut credidit) Caroli III. de expeditione Romana,\n[[567.29]] quod possideat librum antiquum <i>de beneficiis</i>, consuetudinibus vulgatis antiquiorem, in quo\n[[567.30]] nunquam vox Feudi occurrat, sed semper beneficii mentio injiciatur. Ibidem etiam nonnulla\n[[567.31]] loca ex isto libro ad illustrationem dictae Constitutionis Carolinae apposuit, ejusque editionem\n[[568.1]] promisit. Sed frustra hactenus iste liber ab eruditis et expectatus fuit, et quaesitus. Goldastus\n[[568.2]] erronee putavit, Codicem Juris Feudalis Saxonici Cracoviensem esse hunc ipsum tractatum\n[[568.3]] Freheri. Nec magis vere arbitratus est Schilterus Jure Feudali Alemannico seu Suevico eundem\n[[568.4]] tractatum contineri. Non ita pridem, dum nihil minus expectabam, Vir quidam illustris Halam\n[[568.5]] nostram transiens, libri illius Freheriani <i>de beneficiis</i> copiam mihi dedit. Sed dum ejus editionem\n[[568.6]] paro, idem mihi memorat, rem caute tractandam esse, cum vir quidam in Historia et\n[[568.7]] antiquitatibus Germanicis versatissimus ipsum admonuerit, librum hunc Freherianum jam editum\n[[568.8]] esse, neque tamen dictum esse a quo et quando. Ego vero multis ex causis suspicatus sum,\n[[568.9]] monitum illud datum fuisse a decepto vel decipere volente. Ne tamen temere hic quicquam\n[[568.10]] suscipiam, cum alias de Autoris illius moniti singulari eruditione sim persuasus, ad Te, Vir\n[[568.11]] Perillustris et Excellentissime confugio. Si liber iste antiquus <i>de beneficiis</i> jam editus est, certus\n[[568.12]] sum, Te, qui viva Bibliotheca es rerum ad studia elegantiora et antiquitates Germanicas\n[[568.13]] pertinentium, ejus rei notitiam habere. Contra, si istam editionem ignoras, ne minima causa\n[[568.14]] restabit differendi ulterius quam meditor, ejus editionem, tum videlicet securissimus, libros in\n[[568.15]] hoc studiorum genere, quos Tu ignoras, non extare. Ergo, nisi grave erit, vel saltem duobus\n[[568.16]] verbis Bertramum, qui epistolam hanc exhibebit, de eo, quid mihi agendum sit, certiorem redde.\n[[568.17]] Neque enim adeo sum arrogans, ut scriptam a Te, cujus otium etiam submissa reverentia\n[[568.18]] veneror, responsionem postulem. Deus Te servet. Dabam Halae d. 19. Februarii 1707. </p>\n<p> [[568.19]] Perillustris Excellentiae Tuae sincere devotus cultor et admirator </p>\n<p> [[568.20]] Thomasius. </p>\n",
+  "number": "182.",
+  "title": "CHRISTIAN THOMASIUS AN LEIBNIZ",
+  "date": "Halle, 19. Februar 1707. [183.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:182. CHRISTIAN THOMASIUS AN LEIBNIZ Halle, 19. Februar 1707. [183.] Vir perillustris et excellentissime, Patrone maxime colende Ignosce Am Kopf der Seite von Leibniz' Hand: semiresp. turbanti negotia et meditationes tuas, quas partim civilis partim literaria Respublica sibi vindicat. Operam dabo ut ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

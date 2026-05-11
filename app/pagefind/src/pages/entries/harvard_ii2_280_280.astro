@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_280",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 280,
+  "text": "<p> [[842.1]] <b>283. GIOVANNI BATTISTA TOLOMEI AN LEIBNIZ</p>\n<p> [[842.2]] Rom, 4. September 1694. [269.]</b></p>\n<p> [[842.7]] Ill^#'m^#'o Sig^#'r^#'e e Padron mio Col^#'m^#'o </p>\n<p> [[842.8]] Mi impedirono alcune mie replicate occupazioni di rispondere alla prima di V.S. Ill^#'m^#'a, e\n[[842.9]] sostituij in mio luogo il P. Isensehe che la ringraziassi e riverissi a mio nome scusando la mia\n[[842.10]] mancanza. Di presente non voglio commettere il secondo mancamento, e con tutte le espressione\n[[842.11]] a me possibile mi professo obligatissimo alla di lei Gentilezza, e desiderosissimo di\n[[842.12]] haver<angle bracket>e</angle bracket> le sue sì degne notizie letterarie, delle quali se si compiacerà continuarmi il favore o a\n[[842.13]] me o al P. Isensehe con cui convivo, lo riceverò a somma grazia, e quando non possa io,\n[[842.14]] risponderà il detto P^#'r^#'e. </p>\n<p> [[842.15]] Quanto alla opera che ella destina di publicare <i>de Dynamicis</i> sommamente l'applaudisco e\n[[842.16]] la prego a sbrigarla stimandola utilissima. Nel sistema di Cartesio la notione del <b>corpo\n[[842.17]] naturale</i> è la prima petra scandali, e in queste scuole del Collegio nostro Romano sono stato\n[[842.18]] io il primo ad impugnarla in Filosofia introducendovi tal questione per avanti non dibattutavi:\n[[842.19]] benche par altro ammiri la maniera con cui Cartesio e i suoi spiegano moltissimi fenomeni\n[[842.20]] naturali, e stimo che non con grandissima difficoltà si possa accordare la diferenza che corre\n[[842.21]] nella filosofia e farne una terza Hipotesi che habbia il buono de moderni fisici, e degl'antichi\n[[842.22]] Filosofi specialmente Platone e Aristotele: e ciò per il mezzo che ella tanto bene auvisa col\n[[842.23]] riconoscere un Entelechia a virtu innata attiva ne'corpi corrispondente per analogia al niso\n[[842.24]] de' gravi al centro, o al globo: e consistente in un attuale nozione de' corpi impressa continuamente,\n[[842.25]] o conservata in essi dal Autore della natura. Di che pero la spiegazione spero che\n[[842.26]] haverò la sorte di leggere nella sua opera, non havendo trovato chi chiaramente e distintamente\n[[842.27]] ne parli: e per altro parendomi che tutte le sette de Filosofi sotto diversi vocaboli l'ammettano\n[[842.28]] eccetto forse i Peripatetici scolastici. Se il tempo me lo permettesse volontierissime m'allargherei\n[[842.29]] con V.S. Ill^#'m^#'a sù quest'argumento. </p>\n<p> [[843.1]] Quanto alla correzzione del Calendario è vero che ne fù parlato in Roma, mà attese le altre\n[[843.2]] gravi occupazioni della Corte si crede che se non si fà instanza a Prencipi e segnatamente dal\n[[843.3]] Imperatore l'affare qui non sia per promuoversi: in tal caso però non si mancherebbe dal\n[[843.4]] P. Generale (il quale è alto stimatore del merito di V.S.) di conconcorrere e offerire l'opera de\n[[843.5]] suoi sudditi. E per fine resto riverendola con tutto l'ossequio del mio animo </p>\n<p> [[843.6]] Devo^#'m^#'o et obl^#'m^#'o servi^#'r^#'e Gio. Batt^#'a Tolomei. </p>\n<p> [[843.7]] Roma 4 7^#'b^#'r^#'e 1694. </p>\n",
+  "number": "283.",
+  "title": "GIOVANNI BATTISTA TOLOMEI AN LEIBNIZ",
+  "date": "Rom, 4. September 1694. [269.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:283. GIOVANNI BATTISTA TOLOMEI AN LEIBNIZ Rom, 4. September 1694. [269.] Ill^#'m^#'o Sig^#'r^#'e e Padron mio Col^#'m^#'o Mi impedirono alcune mie replicate occupazioni di rispondere alla prima di V.S. Ill^#'m^#'a, e sostituij in mio luogo il P. Isensehe che la ringraziassi e riverissi a mio nome sc...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

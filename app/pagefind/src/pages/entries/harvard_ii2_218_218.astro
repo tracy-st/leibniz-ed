@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_218",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 218,
+  "text": "<p> [[703.18]] <b>221. GUILLAUME DE L'HOSPITAL AN LEIBNIZ</p>\n<p> [[703.19]] Paris, 15. Juni [1693]. [205.231.]</b></p>\n<p> [[704.5]] [ ... ] Je n'ai point touché jusqu'ici à la question de mecanique qui est de savoir si la force\n[[704.6]] se doit estimer par la quantité de mouvement, parceque n'y ayant pas une evidence entiere dans\n[[704.7]] ces sortes de questions, il arrive souvent qu'après avoir disputé longtemps on n'en demeure que\n[[704.8]] plus attaché à son sentiment, cependant puisque vous le souhaittés, je vous dirai en deux mots de\n[[704.9]] quelle maniere je crois qu'on peut repondre à vôtre difficulté. Voici donc ce me semble vôtre\n[[704.10]] principale objection. Des forces egales etant appliquées sous les corps <i>A</i> de 4 ^&.pf <Leibniz special character> et <i>B</i> de 1 ^&.pf <Leibniz special character>\n[[704.11]] doivent elever reciproquement le corps <i>B</i> à une hauteur quadruple de celle du corps <i>A</i>. Or des\n[[704.12]] quantités de mouvement egales etant distribuées dans ces deux corps elevent le corps <i>B</i> 16 fois\n[[704.13]] plus haut que le corps <i>A</i>. Donc la force ne se doit pas estimer par la quantité de mouvement. Je\n[[704.14]] reponds à cet argument en distinguant la majeure, des forces egales etant appliquées sous les\n[[704.15]] corps <i>A</i> de 4 ^&.pf <Leibniz special character> et <i>B</i> de 1 ^&.pf <Leibniz special character> doivent elever le corps <i>B</i> à une hauteur quadruple de celle du corps\n[[704.16]] <i>A</i>, je l'accorde et cela est tres vrai si l'on veut que rien ne s'oppose d'ailleurs au mouvement des\n[[704.17]] corps <i>A</i> et <i>B</i> ou du moins si la resistance est egale, mais si elle est inegale, je le nie, car il est\n[[704.18]] evident que si rien ne s'opposoit à l'elevation du corps <i>B</i>[,] c'est à dire que sa pesanteur fust\n[[704.19]] aneantie, la mesme force qui n'auroit pû elever le corps <i>A</i> qu'à la hauteur d'un pied parceque sa\n[[704.20]] pesanteur lui resistoit, eleveroit le corps <i>B</i> à une hauteur infinie. Mais la pesanteur du corps <i>B</i> qui\n[[704.21]] s'oppose à son elevation n'etant que la 4^#'e partie de celle du corps <i>A</i>, le corps <i>B</i> doit monter 4 fois\n[[704.22]] plus haut qu'il ne monteroit si les resistances etoient egales c'est à dire 16 fois plus haut que le\n[[704.23]] corps <i>A</i>. Donc etc. On peut encore ajouster à ceci que si l'on prend d'une part la somme de toutes\n[[704.24]] les vitesses du corps <i>A</i> pendant son elevation à la hauteur d'un pied, et de l'autre celle de toutes\n[[704.25]] les vitesses du corps <i>B</i> pendant son elevation à la hauteur de 4 pieds, et qu'on les multiplie par la\n[[704.26]] masse de ces corps, on aura de part et d'autre des quantités de mouvement egales. De sorte qu'il\n[[704.27]] sera vrai de dire en ce sens avec les Cartesiens que la mesme force qui se consomme pour elever\n[[704.28]] le corps <i>A</i> à la hauteur d'un pied, se consomme aussi pour elever le corps <i>B</i> à la hauteur de 4\n[[704.29]] pieds. Enfin il me semble que pour eviter de plus longues disputes on pouroit decider la question\n[[704.30]] par une experience facile. Il faudroit laisser tomber le corps <i>A</i> de 4 ^&.pf <Leibniz special character> d'un pied de haut sur le\n[[704.31]] bras d'une balance ou levier dont l'autre bras seroit chargé d'un poids appuyé sur un plan\n[[704.32]] horizontal, et qui doit estre tel que le corps <i>A</i> par sa chûte le puisse soulever. On laisseroit tomber\n[[704.33]] ensuite le corps <i>B</i> de 1 ^&.pf <Leibniz special character> de 4 pieds de haut et on examineroit soigneusement s'il auroit la force\n[[704.34]] de soulever le poids. Pour moi je suis persuadé qu'il ne le pouroit soulever qu'en tombant de 16\n[[704.35]] pieds. Ce qui feroit voir clairement que le corps <i>A</i> en tombant d'un pied et le corps <i>B</i> en tombant\n[[704.36]] de 16, auroient aquis precisement la mesme force, puisqu'ils produiroient alors le mesme effet. Je\n[[704.37]] suis tres veritablement Monsieur vôtre tres humble et tres obeissant serviteur\n [[704.38]] / Le M. de l'Hospital.\n [[704.39]] / A Paris ce 15^#'e juin. </p>\n",
+  "number": "221.",
+  "title": "GUILLAUME DE L'HOSPITAL AN LEIBNIZ",
+  "date": "Paris, 15. Juni [1693]. [205.231.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:221. GUILLAUME DE L'HOSPITAL AN LEIBNIZ Paris, 15. Juni [1693]. [205.231.] [ ... ] Je n'ai point touché jusqu'ici à la question de mecanique qui est de savoir si la force se doit estimer par la quantité de mouvement, parceque n'y ayant pas une evidence entiere dans ces sortes de questions, il arrive...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

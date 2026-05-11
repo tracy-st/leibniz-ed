@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_284",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 284,
+  "text": "<p> [[852.11]] <b>287. LEIBNIZ AN CHRISTIAAN HUYGENS</p>\n<p> [[852.12]] Hannover, 4./14. September 1694. [282.]</b></p>\n[[853.1]] <petit> </p>\n<p> [[853.10]] [ ... ] Comme je vous disois un jour à Paris qu'on avoit de la peine à connoistre le\n[[853.11]] veritable sujet du Mouvement, vous me répondîtes, que cela se pouvoit par le moyen du\n[[853.12]] mouvement circulaire, cela m'arresta; et je m'en souvins en lisant à peu près la même chose\n[[853.13]] dans le livre de Mons. Newton; mais ce fut lorsque je croyois déja voir que le mouvement\n[[853.14]] circulaire n'a point de privilege en cela. Et je voy que vous estes dans le meme sentiment. Je\n[[853.15]] tiens donc que toutes les hypotheses sont equivalentes, et lors que j'assigne certains mouvemens\n[[853.16]] à certains corps, je n'en ay ny puis avoir d'autre raison, que la simplicité de l'Hypothese\n[[853.17]] croyant qu'on peut tenir la plus simple (tout consideré) pour la veritable. Ainsi n'en ayant point\n[[853.18]] d'autre marque, je crois que la difference entre nous, n'est que dans la maniere de parler; que je\n[[853.19]] tache d'accommoder à l'usage commun, autant que je puis <i>salva veritate</i>. Je ne suis pas meme\n[[853.20]] fort eloigné de la vostre, et dans un petit papier que je communiquay à M. Viviani, et qui me\n[[853.21]] paroissoit propre à persuader Messieurs de Rome à permettre l'opinion de Copernic, je m'en\n[[853.22]] accommodois. Cependant si vous estes dans ces sentimens sur la realité du mouvement, je\n[[853.23]] m'imagine que vous deuvriés en avoir sur la nature du corps de differens de ceux qu'on a\n[[853.24]] coustume d'avoir. J'en ay d'assez singuliers et qui me paroissent demonstrés. Je souhaiterois\n[[853.25]] d'apprendre un jour vos reflexions que vous m'aviés fait esperer tant sur mes <i>animadversions\n[[853.26]] in Cartesium</i>, que sur ce que je vous avois écrit contre le vuide et les Atomes. [ ... ] </p>\n<p> [[854.1]] Quelques uns ayant vû des definitions que j'ay données dans la preface de mon <i>Code\n[[854.2]] Diplomatique</i> (dont pour le dire en passant je vous feray remettre un exemplaire) m'ont exhorté\n[[854.3]] de mettre en ordre un amas d'autres que j'ay fabriquées autres fois. Voicy celles de la preface\n[[854.4]] que je soûmets à vostre jugement. Je dis que la justice est une charité conforme à la sagesse. La\n[[854.5]] sagesse est la science de la felicité. La charité est une bienveuillance generale. La bienveuillance\n[[854.6]] est <i>habitus diligendi</i>. <i>Diligere</i>, <tab/>^#T: <i>Aimer</i> <tab/>^#H: <i>Cherir</i> (en nostre sens) est se faire un plaisir de la felicité\n[[854.7]] d'autruy. [ ... ] </p>\n",
+  "number": "287.",
+  "title": "LEIBNIZ AN CHRISTIAAN HUYGENS",
+  "date": "Hannover, 4./14. September 1694. [282.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:287. LEIBNIZ AN CHRISTIAAN HUYGENS Hannover, 4./14. September 1694. [282.] [ ... ] Comme je vous disois un jour à Paris qu'on avoit de la peine à connoistre le veritable sujet du Mouvement, vous me répondîtes, que cela se pouvoit par le moyen du mouvement circulaire, cela m'arresta; et je m'en souvi...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

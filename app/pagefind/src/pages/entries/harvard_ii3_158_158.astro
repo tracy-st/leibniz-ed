@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii3_158",
+  "series": "Band II 3 (1695 - 1700)",
+  "seq": 158,
+  "text": "<p> [[417.1]] <b>158. FRANCISCUS MERCURIUS VAN HELMONT AN LEIBNIZ</p>\n<p> [[417.2]] Sulzbach, 6. (16.) März 1698. [153.185.]</b></p>\n\n<p> [[417.11]] Solzbach le 6 de Mars 1698 </p>\n<p> [[417.12]] Monsieur ie Vous suis oblige de la lettre de Madame de Merode que m'aves envoye et par\n[[417.13]] la reponse à SAltese sern^#'m^#'e Madame l'electrice de BrosWyck sur la triste nouuelle de la mort du\n[[417.14]] fu l'electeur. Je ne Vous puis da present Communiquer nulle nouuelle sinon que iespere de\n[[417.15]] Vous baiser les mains en peu de temps car ie mapreste à faire mon Voyage en 14 jours si Dieu\n[[417.16]] masiste en sante et le temps me sera favorable. Touchant la brasserie du Vin de rin ne pas\n[[417.17]] nouuau en Angleterre Hollande etc. Set une autre sorte entre de tromperies pour avoir du gain à\n[[417.18]] nostre entreveue plus ample cependant ie demeure </p>\n<p> [[417.19]] Monsieur Vostre obeissant serviteur Helmont\n[[417.20]] <yi>A Monsieur Monsieur Leibnitz Conseillier de son Altese Ser.^#'m^#'e Lelecteur de Lunebourg et\n[[417.21]] bronsWyck etc. A Hanover </p>\n",
+  "number": "158.",
+  "title": "FRANCISCUS MERCURIUS VAN HELMONT AN LEIBNIZ",
+  "date": "Sulzbach, 6. (16.) März 1698. [153.185.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:158. FRANCISCUS MERCURIUS VAN HELMONT AN LEIBNIZ Sulzbach, 6. (16.) März 1698. [153.185.] Solzbach le 6 de Mars 1698 Monsieur ie Vous suis oblige de la lettre de Madame de Merode que m'aves envoye et par la reponse à SAltese sern^#'m^#'e Madame l'electrice de BrosWyck sur la triste nouuelle de la mo...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

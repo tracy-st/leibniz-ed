@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii1_243",
+  "series": "Band II 1 (1663 - 1685)",
+  "seq": 243,
+  "text": "<p> [[759.18]] <b>214. LEIBNIZ FÜR HERZOG JOHANN FRIEDRICH VON HANNOVER (?)</p>\n<p> [[759.19]] [Herbst 1679.] [213.]</b></p>\n<p> [[760.1]] Estant à Paris je fis connoissance avec une personne de la religion, dont le merite estoit\n[[760.2]] reconnu generalement. Cet homme avoit medité fort long temps sur les controverses, il estoit\n[[760.3]] versé dans l'antiquité, la lecture des saints peres faisoit un de ses plus grands plaisirs: il avoit\n[[760.4]] de la veneration pour eux, mais elle n'alloit pas jusqu'à l'excés. C'estoit l'homme du monde le\n[[760.5]] plus propre à expliquer un passage et à en faire voir le vray sens: il le faisoit avec une force et\n[[760.6]] avec une netteté toute singuliere. Il possedoit parfaitement ce qu'on appelle les humanitez,\n[[760.7]] quand il se mettoit à faire des vers, ce qui luy arrivoit pourtant fort rarement, on en estoit\n[[760.8]] touché, et on croyoit qu'il n'avoit fait autre chose de sa vie; son style estoit naturel et simple\n[[760.9]] soit en latin soit en langue vulgaire, mais fort et rehaussé bien à propos en quelques endroits. Il\n[[760.10]] estoit serré sans obscurité, agreable sans fard. Il n'aimoit pas les couleurs empruntez, et il\n[[760.11]] croyoit que la beauté d'un discours devoit consister dans la force des raisons. Aussi estoit il\n[[760.12]] maistre dans l'art de raisonner: tout le monde en tomboit d'accord. Il avoit fait pour cela tout ce\n[[760.13]] qu'il falloit. Lors que nous eumes fait amitié ensemble il me conta quelques fois de quelle\n[[760.14]] maniere il avoit fait ses estudes. Il avoit cultivé les humanitez et les histoires jusqu'à l'aage de\n[[760.15]] 13 à 14 ans. Depuis 15 jusqu'à 17 il avoit tellement approfondi les subtilitez des scholastiques\n[[760.16]] qu'il embarassoit les maistres. Bien des gens trouvent cette etude inutile. Mais il me témoigna\n[[760.17]] bien souvent de s'en sçavoir bon gré, et qu'il croyoit d'avoir reconnu par là où le dernier\n[[760.18]] rafinement de l'esprit humain peut aller. Il me dit qu'il y avoit dans les scholastiques beaucoup\n[[760.19]] de choses si solides et si belles, qu'on les admireroit dans le monde, si elles estoient enoncées\n[[760.20]] d'une maniere claire et nette. Mais il ne s'y arresta pas comme ses amis l'apprehendoient, et\n[[760.21]] depuis l'aage de 18 à 21 ans il etudia la jurisprudence avec un si grand succés qu'il luy fut\n[[760.22]] applaudi publiquement, et qu'un grand Prince entendu en ces choses le crût capable de\n[[760.23]] travailler à la reforme de cette science. On luy donna une place dans une cour souveraine, et il\n[[760.24]] fit voir qu'au besoin il estoit aussi propre à la practique qu'à la theorie. Cela dura jusqu'à l'aage\n[[760.25]] de 25 ans, et pendant ce temps là il avoit eu occasion d'etudier les controverses. </p>\n<p> [[761.1]] Il estoit là dessus lors que le bruit des nouvelles decouvertes en mathematiques et en\n[[761.2]] physique reveilla sa curiosité. Quoy dit il j'aurois passé pour quelque chose, et je ne pourray\n[[761.3]] pas contribuer à l'avancement des sciences? Cela luy donna du dépit contre toutes ses études\n[[761.4]] passées, il voyoit bien qu'une invention d'importance en mathematiques est la marque la plus\n[[761.5]] asseurée d'un esprit solide: car on ne s'y paye pas de paroles, il faut des demonstrations dont la\n[[761.6]] bonté et les défauts sont visibles. Il quitta et ses études et sa charge pour estre quelque temps à\n[[761.7]] Paris qui est le centre des belles curiositez. Ce fut alors qu'il fit voir ce qu'il pouvoit, car en\n[[761.8]] deux ans de temps il se distingua de tous les autres. Il fut reconnu par les grands hommes qui\n[[761.9]] sont à Paris pour un des premiers geometres, capable de faire des découvertes de consequence.\n[[761.10]] Il fit voir des machines de son invention qui passerent pour surprenantes. Et on peut dire que\n[[761.11]] jamais etranger de sa sorte (car il l'estoit) ait esté receu plus favorablement par les gens de\n[[761.12]] merite. </p>\n<p> [[761.13]] Ce fut en ce temps là que je fis connoissance avec luy; son abord ne promettoit rien\n[[761.14]] d'extraordinaire, ses entretiens ordinaires estoient assez foibles, il n'avoit pas, ou il n'affectoit\n[[761.15]] pas l'art de se faire valoir. Et j'estois surpris de ne pas reconnoistre en luy les marques de ce\n[[761.16]] qu'on m'avoit dit [de] luy. Mais je fus bien desabusé dans la suite. Je le surpris un jour en lisant\n[[761.17]] des livres des controverses, je luy témoigna mon étonnement, car on me l'avoit fait passer pour\n[[761.18]] un mathematicien de profession, par ce qu'il n'avoit presque fait autre chose à Paris. Ce fut\n[[761.19]] alors qu'il me dit qu'on se trompoit fort, qu'il avoit bien d'autres veues, et que ses Meditations\n[[761.20]] principales estoient sur la Theologie. Qu'il s'estoit appliqué aux mathematiques comme à la\n[[761.21]] scholastique, c'est à dire seulement pour la perfection de son esprit, et pour apprendre l'art\n[[761.22]] d'inventer et de demonstrer. Qu'il croyoit d'y estre allé apresent aussi loin qu'aucun autre. </p>\n",
+  "number": "214.",
+  "title": "LEIBNIZ FÜR HERZOG JOHANN FRIEDRICH VON HANNOVER (?)",
+  "date": "[Herbst 1679.] [213.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:214. LEIBNIZ FÜR HERZOG JOHANN FRIEDRICH VON HANNOVER (?) [Herbst 1679.] [213.] Estant à Paris je fis connoissance avec une personne de la religion, dont le merite estoit reconnu generalement. Cet homme avoit medité fort long temps sur les controverses, il estoit versé dans l'antiquité, la lecture d...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

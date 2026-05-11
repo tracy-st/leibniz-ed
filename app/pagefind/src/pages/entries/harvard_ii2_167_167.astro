@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_167",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 167,
+  "text": "<p> [[576.1]] <b>169. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[576.2]] Padua, 12. September [1692]. [168.170.]</b></p>\n<p> [[576.9]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[576.10]] Con questo istesso ordinario hò scritto a V. S. Illu^#'m^#'a per mezo delli Sig^#'r^#'i Hopfer, e\n[[576.11]] Bacmeister, dandole distintissimo raguaglio del mio stato, e delle ragioni, che mi trattengono\n[[576.12]] ancora in Italia, ma perche temo, che le mie lettere si smarriscano, mi hà parso bene replicare\n[[576.13]] questa altra, indrizzandola al Sig^#'r^#'e Mendelino essendo necessitato ad importunarla con doppie\n[[576.14]] lettere, affine d'assicurarmi del loro ricapito. Stimavo a questa hora trovarmi costì, però ne\n[[576.15]] sono stato distolto da vari accidenti, fra quali il principale sì è l'impegno preso di servire questo\n[[576.16]] Eccell^#'m^#'o Sig^#'r^#'e Capitano in tutto il suo reggimento qui in Padova, e benché esso habbia mostrato\n[[576.17]] di condescendere al mio desiderio, limitò talmente la licenza datami, che mi sopragionge\n[[576.18]] l'inverno senza accorgermene. Havevo risolto di prendere licenza con pretesto di divertirmi in\n[[576.19]] queste vacanze in Villa, però da un Sig^#'r^#'e mio confidentissimo ne sono stato dissuaso, non\n[[576.20]] stimando egli cosa onesta ed onorata partirmi con inganno; e perche nell'istesso tempo che\n[[576.21]] termina l'inverno, finisce il reggimento di questo mio Senatore, senza contravenire alle leggi\n[[576.22]] della gratitudine, e dell'onore lungi da ogni strepito, mi potrò mettere in viaggio per la ventura\n[[576.23]] primavera, stagione più propria per accommodarmi al temperamento di cotesto Clima. Mi creda\n[[576.24]] V. S. Illu^#'m^#'a, che i soli motivi dell'onore, e della gratitudine mi trattengono ancora qui, e se\n[[576.25]] havessi ricevuta la prima lettera di V. S. Illu^#'m^#'a in Venetia, pria di portarmi in Padova, senza\n[[576.26]] dubio, che haverei eseguito, quanto hò promesso. Mi potevo partire senza licenza è vero, ma\n[[576.27]] però l'attione sarebbe stata universalmente biasimata, ed haverei ad un tratto perduta quella\n[[576.28]] riputatione, che mi hò qui acquistata per molti anni, e di più mi sarei esposto a pericolo d'essere\n[[576.29]] fermato, essendo questo mio Senatore molto autorevole e potente. Priego dunque la somma\n[[577.1]] bontà di V. S. Illu^#'m^#'a patientare per qualche altro tempo, assicurandola, che per il vegnente aprile\n[[577.2]] al [più tardi] mi portarò senza fallo in Germania, e ciò allora accaderà con sodisfattione\n[[577.3]] universale, e consenso di questo Capitano, a cui sono molto obligato. V. S. Illu^#'m^#'a è così\n[[577.4]] prudente, e dotata d'ottima morale, che approverà certamente i miei sentimenti, che nascono\n[[577.5]] dall'amore dell'onesto, e dell'onore, essendo io tenacissimo ne' miei impegni quando però\n[[577.6]] sono ragionevoli. Del resto s'assicuri che mi piange il cuore di vedermi ancora in Italia,\n[[577.7]] sospirando ardentemente la Germania. Consegnarò quanto prima l'Ongarello con le due <i>Gallerie</i>\n[[577.8]] del Marino e le poesie del Testi al Sig^#'r^#'e Mendelino. La priego avvisarmi se hà ricevuto\n[[577.9]] quattro altre mie lettere che l' hò inviato, come anche a comandarmi liberamente ed assicurarsi\n[[577.10]] che sono </p>\n<p> [[577.11]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o, Oblig^#'m^#'o Affett^#'m^#'o S^#'r^#'e Fardella </p>\n<p> [[577.12]] Padova 12 Settembre </p>\n<p> [[577.13]] All'Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o il Sig^#'r^#'e Leibniz Consigliere di Sua Altezza\n[[577.14]] Elettorale. Hannover </p>\n",
+  "number": "169.",
+  "title": "MICHEL ANGELO FARDELLA AN LEIBNIZ",
+  "date": "Padua, 12. September [1692]. [168.170.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:169. MICHEL ANGELO FARDELLA AN LEIBNIZ Padua, 12. September [1692]. [168.170.] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o Con questo istesso ordinario hò scritto a V. S. Illu^#'m^#'a per mezo delli Sig^#'r^#'i Hopfer, e Bacmeister, dandole distintissimo raguaglio del mio stato,...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

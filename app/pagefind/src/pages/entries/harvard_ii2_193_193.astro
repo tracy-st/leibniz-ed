@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_193",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 193,
+  "text": "<p> [[636.12]] <b>195. JACQUES-BENIGNE BOSSUET AN LEIBNIZ</p>\n<p> [[636.13]] Meaux, 27. Dezember 1692. [184.214.]</b></p>\n<p> [[637.19]] [ ... ] Vous me demandez Monsieur dans une des lettres dont vous m'honorez s'il ne\n[[637.20]] pour[r]oit pas y avoir des instances contraires à la regle que je croy avoir esté invariable dans\n[[637.21]] l'Eglise, qui est qu'on y a toujours maintenu ce qu'on a trouvé etabli: en matiere de foy; car\n[[637.22]] c'est ainsi qu'il le faut entendre. Je vous reponds hardiment Monsieur que jamais vous ne\n[[637.23]] trouverez d'exemple contraire. Vous alleguez celuy des Monothelites et vous demandez si de\n[[637.24]] bonne foy on s'est toujours avisé que J. C. eust deux volontez. Cela depend de sçavoir si on\n[[637.25]] s'est toujours avisé qu'il eust deux natures: la divine et l'humaine et toutes deux tres entieres.\n[[637.26]] La croyance des deux volontez est visiblement renfermée là dedans: on pensera aussitost qu'il\n[[637.27]] n'a pas d'ame que de penser que cette ame ni n'entend ni ne veut rien. On entend dire tant de\n[[637.28]] fois à Jesus Christ <i>je veux</i> ou <i>je ne veux pas</i> dans les choses qui le regardent en qualité\n[[637.29]] d'homme qu'on ne peut non plus oublier de luy que des autres hommes, qu'ils ne soient\n[[637.30]] voulants: ce qui est penser en termes formels qu'ils ont une volonté et si on ne s'avise pas\n[[637.31]] toujours de dire que J. C. a une volonté humaine non plus que de dire qu'il a une ame humaine,\n[[637.32]] c'est que cela se presente si naturellement à l'esprit qu'on n'a pas besoin de s'expliquer d'une\n[[637.33]] chose si manifeste. Il faut que les heretiques qui ont peu douter d'une verité si sensible ayent\n[[637.34]] fait à leur esprit de ces violences que se font ceux que leur orgueil ou leur curiosité embrouille\n[[637.35]] et confond. [ ... ] </p>\n<p> [[637.36]] Quant à la nature du corps je suis déja parvenu à croire que vous avez demonstré que\n[[637.37]] l'etendue actuelle n'en peut pas estre l'essence et qu'il faut admettre le, <i>ce qui</i>, ou pour parler\n[[637.38]] en termes d'ecole le sujet mesme de l'etendüe, comme il faut trouver dans l'ame non seulement\n[[637.39]] la pensée mais ce qui pense. Je croy aussi que c'est là le sentiment de M. des Cartes. Pour le\n[[638.1]] reste de la dynamique quelque nettement que vous me l'ayez expliquée en peu de mots, je ne\n[[638.2]] puis me rendre que je n'en voye d'avantage. Tout ce que je puis vous dire c'est que j'estime\n[[638.3]] tout ce que vous faites. [ ... ] </p>\n",
+  "number": "195.",
+  "title": "JACQUES-BENIGNE BOSSUET AN LEIBNIZ",
+  "date": "Meaux, 27. Dezember 1692. [184.214.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:195. JACQUES-BENIGNE BOSSUET AN LEIBNIZ Meaux, 27. Dezember 1692. [184.214.] [ ... ] Vous me demandez Monsieur dans une des lettres dont vous m'honorez s'il ne pour[r]oit pas y avoir des instances contraires à la regle que je croy avoir esté invariable dans l'Eglise, qui est qu'on y a toujours maint...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

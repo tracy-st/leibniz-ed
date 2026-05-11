@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_ii2_241",
+  "series": "Band II 2 (1686 - 1694)",
+  "seq": 241,
+  "text": "<p> [[752.5]] <b>244. JACQUES L'ENFANT FÜR LEIBNIZ</p>\n<p> [[752.6]] [7. November 1693.] [235.245.]</b></p>\n<p> [[752.12]] Monsieur de Leibnitz fait trop d'honneur à mes petites difficultés d'y répondre en termes\n[[752.13]] si obligeans et avec tant d'exactitude, et il est bien rare de trouver un si grand savoir joint à un\n[[752.14]] si facile accés. </p>\n<p> [[752.15]] Un extrait semblable à celui du <i>Journal des Savans</i> ne peut gueres donner une idée\n[[752.16]] complette d'un systéme, sur tout quand des matieres de controverse s'y trouvent enchainées.\n[[752.17]] Ainsi j'attens avec impatience le traitté du Dynamisme <Fn><i>Leibniz hat verbessert</i>: de Dynamique</Fn> que ce savant homme fait esperer au\n[[752.18]] public. Cependant je prendray encore la liberté de proposer quelques doutes qui me restent sur\n[[752.19]] ses doctes éclaircissemens. </p>\n<p> [[753.1]] 1. Je conviens qu'il y a dans les corps une force d'agir et de resister à l'action, mais il me\n[[753.2]] semble que la notion de l'étenduë est anterieure à celle de cette force, puisque l'action et la\n[[753.3]] resistance suppose dans les corps <i><b>partes extra partes et erga se invicem agentes</i></b>. </p>\n<p> [[753.4]] 2. Je veux bien que le mouvement ne soit qu'un resultat de la force d'agir des corps, mais\n[[753.5]] cela ne me donne pas encore une idée positive de cette force; or c'est de quoy il s'agit. </p>\n<p> [[753.6]] 3. Je ne comprens pas bien que l'axiome Metaphysique, <i><b>effectus integer respondet\n[[753.7]] causae plenae</i></b> rende raison de la force primitive et originaire, d'où naît la force secondaire\n[[753.8]] et exercée. </p>\n<p> [[753.9]] 4. Pour la controverse de la presence reele je ne voy pas qu'elle soit terminée quand on\n[[753.10]] ôteroit à l'étenduë le rang que les Cartesiens lui donnent, en la regardant comme l'essence du\n[[753.11]] corps. Et il suffit que les corps soient impenetrables pour renverser entierement cette hypothese\n[[753.12]] Theologique. Mais peut etre vaut il mieux laisser cette dispute aux Theologiens qui ont toujours\n[[753.13]] dans l'autorité de celui qui parle, ou qu'ils font parler, un recours assûré. </p>\n<p> [[753.14]] 5. Toute la question est donc de savoir si la force d'agir des corps est dans la matiere\n[[753.15]] quelque chose de distinct et d'independant de tout ce qu'on y concoît d'ailleurs. Sans quoy\n[[753.16]] cette force n'en peut etre l'essence, et demeurera le resultat de quelque qualité primitive. </p>\n<p> [[753.17]] Mais c'est peut être fatiguer trop longtems Monsieur de Leibnitz qui a des occupations\n[[753.18]] plus importantes, et le faire trop souffrir de mon ignorance. </p>\n",
+  "number": "244.",
+  "title": "JACQUES L'ENFANT FÜR LEIBNIZ",
+  "date": "[7. November 1693.] [235.245.]"
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:244. JACQUES L'ENFANT FÜR LEIBNIZ [7. November 1693.] [235.245.] Monsieur de Leibnitz fait trop d'honneur à mes petites difficultés d'y répondre en termes si obligeans et avec tant d'exactitude, et il est bien rare de trouver un si grand savoir joint à un si facile accés. Un extrait semblable à celu...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

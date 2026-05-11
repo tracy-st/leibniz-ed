@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entry = {
+  "id": "harvard_vi4_665",
+  "series": "Band VI 4 (1677 - 1690)",
+  "seq": 665,
+  "text": "[[2861.11]] <b>505₅.  Fünfter Ansatz FÜNFTER ANSATZ </p>\n<p> [[2861.15]] Jus in quo versamur est scientia caritatis et justitia caritas sapientis. Est enim\n[[2861.16]] <b>caritas</b> habitus amandi omnes, et qui ita affectus est <b>vir bonus</b> vocatur. Justitia vero\n[[2861.17]] virtus est quae affectum hominis erga hominem ratione moderatur. Porro <b>sapientia</b> est\n[[2861.18]] scientia felicitatis. Felicitas autem in eo posita est, ut in Dei gratia atque amore vivamus\n[[2861.19]] cujus potentia et perfectio summa est. Cumque idem sapientissimus sit, perfectionem\n[[2861.20]] rerum generalem, et maxime praestantissimarum creaturarum quae scilicet ratione utuntur\n[[2861.21]] sibi propositam habebit. Itaque qui Deum amat, id est qui sapit omnes amabit, sed\n[[2861.22]] unumquemque eo magis quo expressiora in eo divinae virtutis vestigia lucebunt, et quo\n[[2861.23]] promtiorem validioremque in communi bono, vel quod eodem redit gloria Dei omnium\n[[2861.24]] bonorum autoris procuranda socium habebit. </p>\n<p> [[2862.1]] Si jam omnes ita animati atque exercitati essent, quod recta educatione consequi\n[[2862.2]] possimus, neque Magistrorum praeceptis, neque legum potestate admodum opus esset;\n[[2862.3]] nunc jam vero plerique neque ipsi per se intelligunt veras justi injustique causas; nec\n[[2862.4]] facile ad omnes species factorum generales juris regulas accommodare possint: in horum\n[[2862.5]] gratiam demonstrandum est, justitiam, non ut quidam veterum dicebat, stultitiam, sed\n[[2862.6]] potius sapientiam esse: et enumeratis potissimis causarum figuris admonendum est quid\n[[2862.7]] justum sit. Quia vero plurimi non tam intelligentia <Fn><i>Über</i> intelligentia: ingenio</Fn> quam quod pejus est bona mente et\n[[2862.8]] recte agendi voluntate, alii autem virtutis exercitio carent facileque affectibus abripiuntur,\n[[2862.9]] necesse fuit societatis tuendae causa regulas a prudentibus praescriptas publica potestate\n[[2862.10]] armari, unde in majoribus societatibus communis felicitatis causa initis quas vocant\n[[2862.11]] <b>Respublicas</b>, jura civilia nata esse constat. </p>\n",
+  "number": "505₅.",
+  "title": "Fünfter Ansatz",
+  "date": null
+};
+---
+
+<Layout title={`${entry.title || entry.id} - Leibniz Writings`}>
+  <article data-pagefind-body>
+    <header class="entry-header">
+      <h1 data-pagefind-meta="title">{entry.title || entry.id}</h1>
+
+      <div class="entry-meta">
+        {entry.date && (
+          <div class="meta-item">
+            <strong>Date:</strong>
+            <span data-pagefind-meta="date">{entry.date}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Series:</strong>
+          <span data-pagefind-meta="series">{entry.series}</span>
+        </div>
+
+        {entry.number && (
+          <div class="meta-item">
+            <strong>Number:</strong>
+            <span data-pagefind-meta="number">{entry.number}</span>
+          </div>
+        )}
+
+        <div class="meta-item">
+          <strong>Sequence:</strong>
+          <span>{entry.seq}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="entry-content" data-pagefind-meta="excerpt:505₅. Fünfter Ansatz FÜNFTER ANSATZ Jus in quo versamur est scientia caritatis et justitia caritas sapientis. Est enim caritas habitus amandi omnes, et qui ita affectus est vir bonus vocatur. Justitia vero virtus est quae affectum hominis erga hominem ratione moderatur. Porro sapientia est scientia ...">
+      <div class="text-content">
+        {entry.text.split('\n').map(paragraph =>
+          paragraph.trim() && <p set:html={paragraph} />
+        )}
+      </div>
+    </div>
+  </article>
+
+  <nav class="entry-navigation">
+    <a href="/" class="back-link">← Back to Search</a>
+  </nav>
+</Layout>
+
+<style>
+  .entry-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .entry-header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .entry-meta {
+    display: grid;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .meta-item strong {
+    color: var(--text);
+    min-width: 80px;
+  }
+
+  .meta-item span {
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .entry-content {
+    margin-bottom: 40px;
+  }
+
+  .text-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    line-height: 1.7;
+  }
+
+  .text-content :global(p) {
+    margin-bottom: 16px;
+  }
+
+  .text-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .text-content :global(b) {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .entry-navigation {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .entry-meta {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
