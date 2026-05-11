@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_176","series":"Band II 4 (1701 - 1707)","seq":176,"text":"<p> [[546.1]] <b>176. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[546.2]] Leipzig, 12. Februar 1707. [174.178.] </b></p>\n<p> [[546.8]] Vir Illustris atque Excellentissime, Patrone gratiosissime! </p>\n<p> [[546.9]] Etsi <Fn><i>Am Kopf des Briefes von Leibniz Hand</i>: resp</Fn> nihil jam memoratu dignum occurrat, cujus Excellentiam Tuam facere possim certiorem,\n[[546.10]] ut tamen voluntati Tuae silentio meo ne desim, tribus saltem verbis significo Dominum\n[[546.11]] Generalem de Schulenburg hic apud Serenissimum Regem nostrum esse, nec, prout ex Secretario\n[[546.12]] percepi, ante Paschatae festum here esse discessurum. Nuper autem Regem Torgam\n[[546.13]] euntem venandi gratia secutus est. Ut primum redierit Dominus Generalis statim Excellentiae\n[[546.14]] Tuae voluntatem apud Ipsum exequar. </p>\n<p> [[546.15]] <i>Actorum</i> continuandorum curam B. Menckenius lethaliter decumbens filio doctissimo\n[[546.16]] injunxit, voluitque suo nomine gratias agi amicis, qui sibi adjunctores hactenus extiterunt\n[[546.17]] strenui, et eosdem simul decenter invitari ut in componendis <i>actis</i> eadem sedulitate pergant.\n[[546.18]] Faciet hoc etiam filius sine dubio, et quae promisit Parenti magna sua cum laude praestabit. Is\n[[546.19]] Excellentiam Tuam praevia salute observantissima de obsequiis suis, me interprete, vult esse\n[[546.20]] securam, et data occasione commoda Programma et Carmina in honorem Parentis conscripta\n[[546.21]] Excell. Tuae mittet. Illustris Dominus de Tschirnhausen Dresdae hoc tempore agit. Dn.\n[[546.22]] D. Cyprianus et Dnus D. Rechenberg Excellentiam Tuam salutant, quantum officiosissime\n[[547.1]] possunt. Quod superest vale, Vir Excellentissime, neque, ut coepisti, patrocinio Tuo porro\n[[547.2]] dignare, qui sum maneoque </p>\n<p> [[547.3]] Excellentiae Tuae Cliens observantissimus </p>\n<p> [[547.4]] M. G. Hansch A. M. </p>\n<p> [[547.5]] Dabam desubito Lipsiae MDCCVII. Prid. Iduum Febr. </p>\n<p> [[547.6]] A Son Excellence Monseigneur de Leibnitz, Conseiller de Sa Majesté le Roy de Prusse\n[[547.7]] etc. tres humble à Berlin </p>\n","number":"176.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 12. Februar 1707. [174.178.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

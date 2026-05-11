@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_201","series":"Band II 3 (1695 - 1700)","seq":201,"text":"<p> [[532.1]] <b>201. BURCHARD DE VOLDER AN LEIBNIZ</p>\n<p> [[532.2]] [28. Februar 1699.] [200.207.]</b></p>\n\n<p> [[532.11]] Humaniss[im]e communicavit mecum Clariss. Bernoullius, quaedam excerpta ex litteris,\n[[532.12]] quae inter vos hac de re ultro citroque missae sunt; in his reperio argumentum, quo concludis\n[[532.13]] vires corporis <i>L</i> easdem esse, sive continuo tractu ascendat ad altitudinem <i>PT</i>, sive ascendat\n[[532.14]] quatuor vicibus repetitis, <i>PQ</i>, <i>QR</i>, <i>RS</i>, <i>ST</i>, nova semper excitatione. Cujus argumenti vim\n[[532.15]] nescio qui fiat, quod non percipiam; culpam autem penes me\n[[532.16]] esse, eo facilius mihi persuadeo, quoniam et sagacissimum\n[[532.17]] Bernoullium acquiescere video. Addam tamen quid sit, quod\n[[532.18]] in eo desiderem, aut potius, quod non intelligam, ut pro tua\n[[532.19]] humanitate eo facilius me ab hoc scotomate liberare possis.\n[[532.20]] Dabo quidem facile, si pondus <i>L</i> descendens a <i>T</i> in <i>S</i> vires\n[[532.21]] habet, quibus stylus <i>F</i> superans elaterium <i>G</i> perveniat ex 1<i>F</i> in\n[[532.22]] 2<i>F</i>, illud idem descendens per <i>TP</i>, effecturum ut stylus ex 1<i>F</i>\n[[532.23]] superans 4 elateria perveniat in 5<i>F</i>, eademque elastra habere\n[[532.24]] vires, quibus corpus <i>L</i> novis quatuor excitationibus perducatur\n[[532.25]] ad <i>T</i>. Sed negabo vires simul sumtas, quibus ita descendit ex <i>T</i>\n[[532.26]] in <i>P</i>, aequipollens viribus quibus corpus <i>L</i> continuo tractu ascendere ex <i>P</i> in <i>T</i> posset. Nam cum\n[[532.27]] impetus, quem acquirit corpus ex <i>T</i> in <i>S</i> tollatur ab elaterio 1<i>F</i>, ille idem impetus quatuor\n[[532.28]] sumendus est ut perveniat a <i>T</i> in <i>P</i>, enim si impetus in <i>S</i> acquisitus conservetur, nec a contrario\n[[532.29]] tollatur, corpus <i>L</i> duplum impetum demum acquisiturus sit in <i>P</i>, non quadruplum; qui duplus\n[[532.30]] impetus sufficit ascensui corporis <i>L</i> ex <i>P</i> in <i>T</i>. </p>\n<p> [[532.31]] In iisdem illis excerptis, alterum video argumentum, quo uteris, metaphysicum a priori ex\n[[532.32]] natura actionis concludens tuam virium aestimationem; in quo admodum haereo, praesertim cum\n[[532.33]] illae voces <i>virtualiter</i>, et <i>formaliter</i>, quas adhibes, me turbent nec quid illis velis, clare perspiciam. <Fn><i>Am Rande wohl von Leibniz' Hand</i>: dicendum f</Fn>\n[[533.1]] <i>Actio</i>, ais, <i>faciens duplum tempore simplo est dupla (virtualiter) actionis facientis idem duplum\n[[533.2]] tempore duplo</i>. Id capio, priorem actionem qualibet parte sui, quo agit temporis, duplum certe\n[[533.3]] viae conficere ejus, quam aequali parte temporis conficit altera actio. Hinc concluderem,\n[[533.4]] actionem aequalibus illis temporis partibus, alteram alterius duplam esse, cum effectum duplum\n[[533.5]] sit (quae tamen actio ex tua opinione erit quadrupla) et tunc totum tempus, omnemque utriusque\n[[533.6]] actionem si spectes, priorem actionem posteriori aequalem esse. Si duo homines transferrent\n[[533.7]] duo corpora aequalia, ea ratione, ut alter continuo progrederetur tractu, alter vero per\n[[533.8]] vices nunc transferendo, nunc otiando tempus tereret, ea lege, ut tempus otii aequale quidem\n[[533.9]] foret tempori laboris, sed eo quo transfert tempore, adhiberet vires, quibus duplam viam\n[[533.10]] absolveret, nonne, postquam ambo corpora translata essent per idem spatium, vires illius qui\n[[533.11]] nulla interruptione effectum edidisset forent aequales viribus omnibus alterius simul sumtis?\n[[533.12]] Effectum equidem foret unum et idem. Et 2 + 0 ^&!|∝ 1 + 1, quod de 4 + 0 dici nequit. </p></p>\n","number":"201.","title":"BURCHARD DE VOLDER AN LEIBNIZ","date":"[28. Februar 1699.] [200.207.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

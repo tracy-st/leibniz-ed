@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_436","series":"Band VI 4 (1677 - 1690)","seq":436,"text":"[[1967.7]] <b>358.  La meilleure apologie pour Descartes: ses lunettes hyperboliques [1677 bis 1679 (?)]</b>\n [[1967.9]] <tab/>[1677 bis 1679 (?)] </p>\n<p> [[1967.16]] La meilleure Apologie qu'on sçauroit faire pour Mons. Des Cartes; ce seroit d'achever\n[[1967.17]] ses lunettes Hyperboliques. Qui sont la seule chose d'utile, qu'il ait trouvé; si elle\n[[1967.18]] avoit pû s'executer; et je voudrois que le Pere de Malebranche et d'autres qui prennent à\n[[1967.19]] tache de defendre tout ce qu'il a dit fussent obligez de le faire. </p>\n","number":"358.","title":"La meilleure apologie pour Descartes: ses lunettes hyperboliques","date":"[1677 bis 1679 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

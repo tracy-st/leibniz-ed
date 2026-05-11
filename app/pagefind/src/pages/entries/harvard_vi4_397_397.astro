@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_397","series":"Band VI 4 (1677 - 1690)","seq":397,"text":"[[1681.14]] <b>332₂.  Metaphysica S. Augustini METAPHYSICA S. AUGUSTINI\n[[1681.16]] <tit2><b>Metaphysica S. Augustini </b></tit2> </p>\n<p> [[1681.17]] Deus ubique totus nec per partes a creatura capitur <i>Confessionum</i> lib. 1, c. 3. Ubi\n[[1681.18]] eleganter ait Deum ita in vasis contineri, ut licet frangantur illa, ipse non effundatur. </p>\n<p> [[1681.19]] Id (demum) vere est quod incommutabiliter manet. Creaturae nec omnino sunt, nec\n[[1681.20]] omnino non sunt <i>Confess.</i> lib. 7, cap. 11. </p>\n<p> [[1681.21]] Quaecunque sunt bona sunt <i>Confess.</i> lib. 7, c. 13. </p>\n<p> [[1681.22]] Omnia vera sunt in quantum sunt <i>Confess.</i> lib. 7, c. 15. </p>\n<p> [[1681.23]] De memoriae natura <i>Confess.</i> lib. 10, c. 8, multaque alia sequentibus capitibus de\n[[1681.24]] anima. </p>\n<p> [[1681.25]] Ego sum qui memini, ego animus lib. 10, c. 17, addatur locus <i>Philosophi Autodidacti</i>\n[[1681.26]] a Pokokio editi, quod corpus tantum institutum. </p>\n<p> [[1682.1]] Non homines nos persuadent, sed veritas quae intus est in domicilio cogitationis\n[[1682.2]] nostrae <i>Confess.</i> lib. 11, cap. 3. </p>\n<p> [[1682.3]] De aeternitate Dei, <i>Confess.</i> lib. 11, cap. 11, et alibi passim. </p>\n<p> [[1682.4]] Deus ante mundi creationem <i>non faciebat aliquid</i>. <i>Confess.</i> lib. 11, c. 12, <i>nullum\n[[1682.5]] erat tempus</i> c. 13. </p>\n<p> [[1682.6]] De natura temporis eleganter lib. 11, c. 14 seqq. </p>\n<p> [[1682.7]] De materia prima multis <i>Confess.</i> lib. 12 c. 4 et seqq. passim. </p>\n<p> [[1682.8]] De coelo coeli, sive substantia quadam spirituali Deo proxima, quam aliae mentes\n[[1682.9]] participant, et quae materiae primae ex adverso respondet, posses credo appellare formam\n[[1682.10]] primam. De hac substantia multis Augustinus lib. 12, c. 9 et seqq. Videtur haec forma\n[[1682.11]] esse ipsa anima mundi. </p>\n<p> [[1682.12]] Quod mutabile est aeternum non est <i>Confess.</i> lib. 12, c. 13. </p>\n<p> [[1682.13]] Quot modis dicatur aliquid prius, et de his quae sunt priora origine, quae Scholastici\n[[1682.14]] dicunt natura priora, eleganter lib. 12, c. 29. </p>\n<p> [[1682.15]] Explicare conatur Trinitatem per haec tria: Esse, posse, velle. <i>Confess.</i> lib. 13, c. 11. </p>\n","number":"332₂.","title":"Metaphysica S. Augustini","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_225","series":"Band II 4 (1701 - 1707)","seq":225,"text":"<p> [[684.17]] <b>225. PIERRE HUMBERT AN LEIBNIZ</p>\n<p> [[684.18]] Amsterdam, 18. November 1707. [226.] </b></p>\n<p> [[685.11]] Monsieur </p>\n<p> [[685.12]] Je <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: semiresp.</Fn> me donne la liberté de vous ecrire ces lignes pour vous donner avis que M.^#'r de la Croze\n[[685.13]] de Berlin m'a fait proposer un de vos ouvrages qui traite de l'origine du mal. Je serai bien aise\n[[685.14]] de sçavoir par vous mesme un peu plus en detail ce que c'est. Je ne doute pas M.^#'r que ce ne soit\n[[685.15]] un excellent ouvrage partant d'une aussi habile main. Vous n'avés donc qu'a m'informer de vos\n[[685.16]] prétentions à cet égard et je me flatte que vous conviendrés mieux avec moy qu'avec aucun\n[[685.17]] libraire de ces provinces. J'attendrai Monsieur avec impatience l'honneur de votre reponce et\n[[685.18]] vous m'obligerés de me faire part de vos lumières sur ce qui se passe dans la Republique des\n[[685.19]] Lettres. Je vous offre mes tres humbles services et suis avec une parfaite estime </p>\n<p> [[685.20]] Monsieur Votre tres humble et tres obeissant serviteur Pierre Humbert </p>\n<p> [[685.21]] Amst. le 18. Nov. 1707 </p>\n<p> [[685.22]] A Monsieur Monsieur de Leibnitz Conseiller d'Estat de son Altesse Mgr. le Duc de\n[[685.23]] Hanovre A Hanover </p>\n","number":"225.","title":"PIERRE HUMBERT AN LEIBNIZ","date":"Amsterdam, 18. November 1707. [226.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

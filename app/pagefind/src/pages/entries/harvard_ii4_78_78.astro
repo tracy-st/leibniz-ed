@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_78","series":"Band II 4 (1701 - 1707)","seq":78,"text":"<p> [[262.1]] <b>78. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[262.2]] Berlin, 27. Juli 1704. [103.] </b></p>\n<p> [[263.15]] Hochwolgebohrner Herr Hochgebitender Hr. GeheimRaht </p>\n<p> [[263.16]] Wi das glück allenthalben, also ists auch hir ungütig mit mir umgangen. Der Hr. General\n[[263.17]] braucht keine solche person, wovon geredet: Er hat mir zwar einen aufenthalt zu Buckau\n[[263.18]] angetragen, bis Si hiher kämen, da Si mir denn ohn Zweif. zur Professur bei hisiger Academie,\n[[263.19]] indem man noch 2. personen suchte, verhelfen würden: meine hofnung aber ist klein, weil ich\n[[263.20]] des glüks <i>ceremonien</i> gegen mich kenne, Si mir auch davon nichts entdekt, u. ich vor 2. jaren\n[[263.21]] schon dazu wäre fertig gewest. Unterdeßen sind 12. Thl bald fort; 9 ^#'1/₂ hat di reise, 2. di\n[[263.22]] verweilung alhir verzehrt; reise ich wider zurük, so gehen noch 10. darauf. Auf ersetzung darf\n[[263.23]] ich nicht hoffen, weil man meiner hir nicht bedarf, u. der bloße aufenthalt schon eine gnade ist. </p>\n<p> [[263.24]] Dise umstände dräuen mir einen Hannöverschen winter, da kälte und teürung meister sein\n[[263.25]] werden. Dises habe gehorsamst berichten, u. guten raht erwarten wollen, </p>\n<p> [[263.26]] verharrend Hochwolgebohr. Hr., dero gehorsamster G Wagner. </p>\n<p> [[263.27]] Berlin 27. Jul. 1704. </p>\n<p> [[263.28]] Dem Hochwolgebohrenen Hern, Hern Von Leibniz, Ihr. Kön. Maj. Von Preüßen OberDirector\n[[263.29]] der Berlinis. Academie Ihr. Kurf. durchl. zu Brunsw. Geheim. Justiz-Rath, u.a.m.\n[[263.30]] Wolfenbüttel. </p>\n","number":"78.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Berlin, 27. Juli 1704. [103.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

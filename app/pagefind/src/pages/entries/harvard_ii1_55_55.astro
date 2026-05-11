@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_55","series":"Band II 1 (1663 - 1685)","seq":55,"text":"<p> [[150.1]] <b>48. HEINRICH OLDENBURG AN LEIBNIZ</p>\n<p> [[150.2]] London, 14. (24.) April 1671. [46.56.]</b></p>\n<p> [[150.15]] Ampliss^#'o et Consultiss^#'o Viro </p>\n<p> [[150.16]] Dⁿ^#'o Gothofredo Guilielmo Leibnitzio J.U.D. et </p>\n<p> [[150.17]] Consilio Moguntino Digniss^#'o </p>\n<p> [[150.18]] H. Oldenburg Sal. </p>\n<p> [[150.19]] Recte accepi, Vir Nobiliss^#'e, <i>Hypothesin</i> tuam <i>Physicam,</i> typis Moguntinis editam, et mox\n[[150.20]] prima ferente occasione coram Soc. Regia produxi. Praelecta ipsi fuit honorifica Dedicatio,\n[[150.21]] protinusque nonnullis ejus sociis in mandatis datum, ut libellum istum evolverent et expenderent,\n[[150.22]] suamque de eo sententiam, quam primum fieri commode posset, in caetu publico\n[[150.23]] referrent. Id dum agitur, suadere velim, Vir optime, ut partem alteram quantocyus ad me, tuta\n[[150.24]] occasione, expedire ne graveris, cum intelligam Ego, viros illos, quibus examinis hujus provincia\n[[150.25]] est demandata, vix quicquam de re tota pronunciaturos esse, nisi et tuam de <i>Abstracta\n[[150.26]] Motus theoria</i> doctrinam, saepe a Te citatam et pluribus positionibus substratam, cognoverint.\n[[150.27]] Interim, quantum colligo, non displicet opera tua iis qui inspexere, certe mihi perplacet, qui ad\n[[150.28]] multa Te respexisse percipio. Cum posteriora videro scripti hujus, mox Hypothesi tota <i>Transactiones\n[[150.29]] Philosophicas</i> exornare satagam. </p>\n<p> [[151.1]] Quamprimum de Machinae Wernerianae successu certi quid acceperis, nobis quoque\n[[151.2]] impertiri ne graveris. Rationem dulcificandi aquam Marinam invenies impressam N^#'o 67. <i>Transact.\n[[151.3]] philosophicarum</i>, <Fn><i>Dazu von Leibniz' Hand</i>: N. 67. <i>transactionum</i> nondum habeo.</Fn> quantum quidem ejus retegere Inventori visum fuit. </p>\n<p> [[151.4]] Famigeratum illud Grandamici de Terrella Magnetica Experimentum successu carere,\n[[151.5]] satis liquet ex iis, quae ex Dn. Petiti epistola in <i>Transact. phil.</i> n^#'o 28. inserta habentur. <Fn><i>Dazu von Leibniz' Hand</i>: Locutus sum de experimento Grandamici, sed in <i>Transact.</i> n. 28 refutatur tantum experimentum Gilberti de conversione spontanea terrellae.</Fn> </p>\n<p> [[151.6]] Operam dabo, ut cura Martini nostri libros a Te hinc desideratos accipias; <Fn><i>Dazu zwei Randbemerkungen von Leibniz' Hand</i>: Dan. Plate <i>de rebus subterraneis</i>, Anglice, <so> ex <Leibniz special character: an = Antimon>ⁿ^#'i^#'o sine fructu. ^&.za <Leibniz special character> ex <so> inter experimenta Societatis. <i>Daneben</i>: Inclinatio magnetica. Sprat contra Sorberium. Wilkins.</Fn> Vale et porro\n[[151.7]] Tui studiosissimo fave. Raptim Londini d. 14. April. 1671. </p>\n<p> [[151.8]] P. S. Ne, quaeso, invideas mihi peculiares illas, quas dicis, de Deo ac mente demonstrationes;\n[[151.9]] circa quas nonnulla innuis, quae me perquam attonitum habent, adeoque stimulant,\n[[151.10]] ut tanto importunius eorum communicationem expetam. </p>\n<p> [[151.11]] Literae tuae mihi destinatae per tabellionem semper, quaeso, inscribantur <i>A Monsieur\n[[151.12]] Mons^#'r Grubendol à Londres. Franc à Anvers ou Amsterdam.</i> </p>\n<p> [[151.13]] Nobilliss^#'o et Consultiss^#'o Viro Dⁿ^#'o Gothofredo Guilielmo Leibnitzio J.U.D. et Consiliario\n[[151.14]] Moguntino etc. Mogunt. </p>\n","number":"48.","title":"HEINRICH OLDENBURG AN LEIBNIZ","date":"London, 14. (24.) April 1671. [46.56.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

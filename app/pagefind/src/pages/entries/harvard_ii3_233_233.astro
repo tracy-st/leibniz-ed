@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_233","series":"Band II 3 (1695 - 1700)","seq":233,"text":"<p> [[633.10]] <b>233. LEIBNIZ AN ERNST SALOMON CYPRIAN</p>\n<p> [[633.11]] Hannover, [8.] April 1700. [231.234.]</b></p>\n\n<p> [[633.19]] Vir Celeberrime </p>\n<p> [[633.20]] Gaudeo Te salvum rediisse, doleo non diu apud nos mansurum. Sed quis Tibi meliora non\n[[633.21]] recusanti irascatur? Nam apud nos agnosco multa adhuc obstare, quo minus Tui ratio statim\n[[633.22]] habeatur, quam mereris. Susurrones equidem nescio quos, qui Guelfebyti Tibi nocere possint,\n[[633.23]] non esse puto cur metuas; et, si spatium detur, caetera etiam recte successura sperem. De\n[[633.24]] desiderio Tuo etiam Dn. Abbas Schmidius aliquid tetigit. </p>\n<p> [[634.1]] <i>Observationes</i> quas memoras nondum vidi, nec nisi titulus ad me pervenit. Utilis erit labor\n[[634.2]] et a me commendatus non raro; recensendi libros anteriores, ut compleatur paulatim Historia\n[[634.3]] literaria. Huic rei proderit Index chronologicus librorum inde ab inventa Typographia, cujus\n[[634.4]] specimen ex Guelfebytana Bibliotheca confici curavi. </p>\n<p> [[634.5]] Cum Dn. Thomasius publice ac solenniter promiserit abstinere cavillis, quos attingis,\n[[634.6]] spero promissis staturum, ne quae utilia afferre poterit admistis odiosis gratiam et fructum\n[[634.7]] perdant. Si quid in me tale jactum deprehendatur facile condono. </p>\n<p> [[634.8]] Optarim Hofmannum, et Cellarium et Ludovicum viros egregie doctos satis otii habere, ut\n[[634.9]] operam conferre possint. Ex literis quas ad amicum scripsisti, intelligo Dn. Struvium consilio\n[[634.10]] utili accessisse, cujus certe doctrina facit, ut sperem aliquid non protritum. Ceterum nec\n[[634.11]] philosophos nec theologos extraordinarios a Dⁿ^#'o Thomasio aut amicis recenseri improbavero, ut\n[[634.12]] Schwenckfeldium, Davidem Georgium, Weigelium et similes, dummodo id ea qua par est\n[[634.13]] circumspectione fiat. </p>\n<p> [[634.14]] Campanella non indignus est qui a Te producatur; tametsi mihi ille Cardano nec ingenio\n[[634.15]] nec eruditione ulla ratione comparandus videatur. Doctrinam tamen viri et quae affert meliora\n[[634.16]] velut in systema redigi non inutile foret. Varia ejus nondum edita passim habentur. Ipse vidi\n[[635.1]] librum inscriptum <i>de Monarchia Messiae</i>, qua Papae consilium dare voluit, potiundi imperio\n[[635.2]] orbis. Satis apparet monachum chimaeris assuetum, de rebus humanis parum sane judicasse. <Fn><i>In L^#'2</i> : judicasse. Ad Dn. Cyprianum Prof. Helmst. 8 April 1700</Fn>\n[[635.3]] Vale. Dabam Hanoverae April. 1700 </p>\n<p> [[635.4]] Deditissimus G. G. Leibnitius </p></p>\n","number":"233.","title":"LEIBNIZ AN ERNST SALOMON CYPRIAN","date":"Hannover, [8.] April 1700. [231.234.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

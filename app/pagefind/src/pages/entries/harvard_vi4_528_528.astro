@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_528","series":"Band VI 4 (1677 - 1690)","seq":528,"text":"[[2346.1]] <b>416.  De trinitate [Herbst 1685 (?)]</b>\n [[2346.2]] <tab/>[Herbst 1685 (?)] </p>\n<p> [[2346.6]] Principium illud <i>quae sunt eadem uni tertio ea sunt eadem inter se</i>, si cum summo\n[[2346.7]] rigore sumatur identitas non minus in divinis quam naturalibus locum habet. Cum\n[[2346.8]] dicimus <i>pater est Deus</i>, et <i>filius est Deus</i>, et <i>Unus est Deus</i> tam pater quam filius utique\n[[2346.9]] idem esset pater et filius, nisi <i>Deus</i> in prioribus duabus propositionibus acciperetur pro\n[[2346.10]] persona divinitatis in ultima pro natura divina seu substantia singulari absoluta quam\n[[2346.11]] Deum dicimus. Hinc dicimus tres personas divinitatis non tamen tres Deos, eoque sensu\n[[2346.12]] discrimen aliquod facimus inter personam divinitatis et Deum, nam si inter duas voces\n[[2346.13]] discrimen est pluraliter enuntiatas, ita ut una alteri substitui non possit, erit et inter\n[[2346.14]] easdem discrimen aliquod in singulari cum pluralis sit repetitio singularis. Cum dicitur\n[[2346.15]] <i>idem ille qui est pater est etiam filius</i> sensus est in eadem Dei substantia absoluta esse\n[[2346.16]] duas relativas inter se numero differentes. Itaque locutiones illae recte explicandae sunt\n[[2346.17]] ne manifestam implicent contradictionem, utraque tamen propria est locutio cum nulla\n[[2346.18]] ratio sit cur unam alia magis propriam dicamus, nam in humanis talis loquendi modi\n[[2346.19]] exemplum non est, et inde ab usu de proprietate argumentemur. An dici potest: <i>pater est\n[[2346.20]] unicus ille Deus</i>? non puto, sed pater naturae divinae quae una numero est particeps. </p>\n","number":"416.","title":"De trinitate","date":"[Herbst 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_183","series":"Band VI 4 (1677 - 1690)","seq":183,"text":"[[641.1]] <b>151.  Definitio conferentis [Herbst bis Winter 1685/86 (?)]</b>\n [[641.2]] <tab/>[Herbst bis Winter 1685/86 (?)] </p>\n<p> [[641.15]] Non satis exacta haec definitio est: Conferens esse requisitum inferentis. <Fn><i>Über</i> inferentis: causae</Fn> Sic\n[[641.16]] quadratum est inferens aequilateri, et rectangulum est requisitum quadrati, nec tamen est\n[[641.17]] conferens aequilateri. Possunt enim in inferente plura esse requisita quam ad rem pertineant,\n[[641.18]] et ad illationem sint necessaria. Conferens igitur potius est requisitum illationis,\n[[641.19]] seu requisitum inferentis, quatenus est inferens. Nempe <i>si A est</i>, <i>B est</i>; <i>A</i> est inferens <i>B</i>\n[[641.20]] illatum. <i>Si C non est, A non est</i>; <i>C</i> est conditio, <i>A</i> conditionatum, seu <i>C</i> requisitum, <i>A</i>\n[[641.21]] requirens. Ergo <i>C</i> respectu <i>B</i> est requisitum inferentis. Denique praeterea sit <i>D</i> simile <i>A</i>\n[[641.22]] praeterquam quod non <i>si C non est, D non est</i> et non ^#6+<i>si D est, B est</i>^#6-, erit <i>C</i> conferens\n[[641.23]] respectu ipsius <i>B</i>. Idem esse videtur ac si diceremus, <i>C</i> dicitur conferens ipsius <i>B</i>, quando\n[[641.24]] si <i>C</i> non esset, non sequeretur ex eo quod <i>A</i> est, <i>B</i> esse. </p>\n","number":"151.","title":"Definitio conferentis","date":"[Herbst bis Winter 1685/86 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

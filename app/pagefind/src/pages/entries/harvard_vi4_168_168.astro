@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_168","series":"Band VI 4 (1677 - 1690)","seq":168,"text":"[[574.9]] <b>136.  Divisiones [Sommer 1683 bis Winter 1685/86 (?)]</b>\n [[574.10]] <tab/>[Sommer 1683 bis Winter 1685/86 (?)]\n [[574.14]] Omne Vocabulum significans est vel Terminus, vel particula, vel ex his compositum. </p>\n<p> [[574.15]] Verbum componitur ex Nomine seu termino, et ex particula: <i>est</i>. Adverbium se\n[[574.16]] habet ad verbum ut adjectivum ad substantivum. Sub particulis et affixas seu vocum\n[[574.17]] partes separatim non significantes comprehendo, ut <i>re, tivus</i>.\n [[574.18]] Terminus omnis est vel Concretus vel Abstractus. </p>\n<p> [[574.19]] Placet autem abstracta nunc removere, quia illis si opus careri potest.\n [[574.20]] Terminus Concretus est vel substantia seu Res, vel accidens seu Modus, qui conceptum\n[[574.21]] perfectum non exhibet, nisi res subintelligatur. </p>\n<p> [[574.22]] Quia abstracta exclusi, exclusi etiam nomina substantiva, quae non substantiam sed\n[[574.23]] accidens significant. In concretis ergo omne substantivum significat substantiam,\n[[574.24]] omne adjectivum significat accidens. Ita <i>circulus</i> (substantivum) significat rem seu\n[[574.25]] substantiam circularem. Et semper sub adjectivo intelligitur [accidens,] nisi sub-\n[[575.1]] ­stantive intelligatur per Ellipsin.\n [[575.2]] Terminus concretus completus est, qui jam omnia comprehendit, quae de eodem subjecto\n[[575.3]] praedicari possunt, dicitur et <b>substantia singularis</b>. </p>\n<p> [[575.4]] Seu qui notionem singularis alicujus substantiae perfecte intelligeret jam omnia ejus\n[[575.5]] praedicata ex ea cognosceret. Ita in Petri Apostoli conceptu Deus omnia concipit\n[[575.6]] quae Petro huic unquam contigere aut contingent, ut in circulari omnia concipit quae\n[[575.7]] Geometrae de eo possunt demonstrare. Sed in circularis conceptu non concipit\n[[575.8]] omnia quae de circulari possunt enuntiari, quia non simul concipitur subjectum quod\n[[575.9]] circulare intelligi potest.\n [[575.10]] Substantia est Terminus qui de subjecto suo completo non potest praedicari per accidens\n[[575.11]] sed tantum per se. Accidens vero sua natura indefinitum est an per accidens an vero per\n[[575.12]] se praedicetur. </p>\n<p> [[575.13]] Ita cum dico <i>Homo, Animal, corpus, substantia</i> seu <i>Res</i>, eo ipso dico terminum hunc\n[[575.14]] esse de essentia eorum singularium de quibus dicitur, nam per se dicitur de Petro\n[[575.15]] esse hominem, esse animal etc., per accidens vero dicitur de Petro quod fuit peccator,\n[[575.16]] quod cruci suffixus, haec enim ex serie rerum externarum concurrente fluxerunt.\n[[575.17]] Ita habemus tandem dissolutum nodum, quem hactenus philosophi insolubilem\n[[575.18]] reliquere, neque enim ulla accurata notione hactenus explicuere, quomodo\n[[575.19]] substantia ab accidente distingueretur. At inquies <i>omnipotentia</i> non potest dici nisi\n[[575.20]] per se non enim dicitur nisi de Deo, responderi potest, dici et de Homine quem Deus\n[[576.1]] omnipotentem fecit. Propositio autem: <i>hic</i> <i>Homo est omnipotens</i>, utique est vera per\n[[576.2]] accidens.\n [[576.3]] Ens est aut reale aut apparens, </p>\n<p> [[576.4]] Reale ut sol, imaginarium ut parhelius vel iris aliave phaenomena.\n [[576.5]] Omnis Res est aut Ens per se, aut Ens per Accidens; Ens per se quod revera unum est, ut\n[[576.6]] Homo, Animal, Ens per Accidens, quod et dicitur Ens per aggregationem, ut multitudo\n[[576.7]] hominum, strues lignorum; Machina. </p>\n<p> [[576.8]] Si animalia sunt Machinae, si corpora carent forma substantiali, erunt Entia per\n[[576.9]] Accidens, imo tandem ostendi potest posito corpus omne esse Ens per accidens,\n[[576.10]] corpus fore rem imaginariam seu phaenomenon ad instar iridis.\n [[576.11]] Res omnis est aut perfecta seu absoluta quae dicitur <b>Deus</b>, aut limitata quae dicitur\n[[576.12]] <b>creatura</b>. </p>\n<p> [[576.13]] Hinc patet Deum ex ipsa definitione sua esse terminum completum seu substantiam\n[[576.14]] singularem adeoque esse unicum. </p>\n","number":"136.","title":"Divisiones","date":"[Sommer 1683 bis Winter 1685/86 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

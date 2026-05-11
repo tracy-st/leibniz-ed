@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_145","series":"Band II 2 (1686 - 1694)","seq":145,"text":"<p> [[523.1]] <b>147. LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF</p>\n<p> [[523.2]] [Hannover,] 24. April (4. Mai) 1692. [134.163.]</b></p>\n<p> [[523.14]] [ ... ] Ex Anglia mihi scribit Celeberrimus Justellus, a Boylio legatum quinquaginta\n[[523.15]] librarum sterlinarum fuisse relictum habendis sex concionibus in Atheos, Naturalistas, Socinianos,\n[[523.16]] caeterosque id genus ab Ecclesia Catholica devios; jamque primum sermonem fuisse\n[[523.17]] pronuntiatum a quodam Bentleio pererudito et eloquente. </p>\n<p> [[523.18]] Reverendissimus Episcopus Meldensis misit huc quaedam sua polemica in quibus est\n[[523.19]] scriptum cui titulus: <i>Estat present des controverses et de la religion protestante</i>, superiore anno\n[[523.20]] editum. Ibi artic. 105 multum exaggerat indifferentismum quem vocat, qui potissimum in\n[[523.21]] ditionibus Brandeburgicis Electoralibus sese ostendat. Citat eam in rem scriptum quoddam\n[[523.22]] doctissimi Viri Samuelis Strimesii praefationis vice Conradi Bergii Thesibus theologicis adjectum,\n[[523.23]] multumque paratragoediatur, quod condemnare is non audeat, eos qui ultra scripturae\n[[524.1]] sacrae expressa verba quaedam affirmare non audent. Et verbis ejus allatis ita subjicit: <i>Telle est\n[[524.2]] la doctrine, qu'on enseigne en Allemagne dans les Academies de l'Estat de Brandebourg, celle\n[[524.3]] de Strimesius professeur en Theologie de l'université de Francfort sur l'Oder, celle de Conrad\n[[524.4]] Bergius cy devant professeur en theologie de la même université, celle de Jean Bergius, de\n[[524.5]] Gregoire Franc, une des lumieres de la même université, comme il l'appelle, celle de Martin\n[[524.6]] Hundius, celle de toute l'Academie de Duisbourg dans le Duché de Cleves et de plusieurs\n[[524.7]] docteurs celebres dans la Reforme, et qu'il cite aussi avec honneur</i>. Sed praeterquam quod nihil\n[[524.8]] constitit Episcopo de Becmanni viri egregie docti in Strimesium censura, aliisque in eo negotio\n[[524.9]] actis, videtur mihi nonnihil permutari controversiae status. Aliud enim longe est praejudicare\n[[524.10]] abdito nobis divino judicio, et districtas atque absolutas condemnationes pronuntiare nolle,\n[[524.11]] aliud est sententiam aliquam tolerabilem judicare et fraternitati sacrae non adversam. Mihi enim\n[[524.12]] Burnetus (cujus itidem verba Bossuetus citat) et Strimesius non videntur negare periculosissimas\n[[524.13]] saluti esse Socinianorum opiniones. Neque uspiam credo Concilii Nicaeni subscriptionem\n[[524.14]] non debere exigi ab his quibus dextras fraternitatis jungere volent: quod tamen illis\n[[524.15]] imputat Episcopus. Haec illa perpetua Romanensium gloriatio, quasi ipsi soli infantem cum\n[[524.16]] vera matre non dividant, effecerat, ut mihi a Serenissima Ducissa aliquid in Celeberrimi\n[[524.17]] Pelissonii <i>Reflexiones</i> aptare jusso, in mentem venerit observare multo majorem indifferentismum\n[[524.18]] in ipsa Ecclesia Romana regnare, quam apud Protestantes, tametsi in controversiis\n[[524.19]] agitandis dissimuletur. Unde nata est illo humanissime respondente concertatio inter nos Epistolica,\n[[524.20]] quam ipse edidit in publicum. Unum exemplum per publicum cursorem ad nos pervenit,\n[[524.21]] sed hoc delatum est ad eas manus, unde recuperare non possum. Habeo tamen ipse omnia\n[[525.1]] dudum manuscripta. Itaque nescius quando iterum habiturus sim exemplum typis editi libri, ex\n[[525.2]] schedis hanc quam vides relationem confeci, tuo summittendum arbitrio, sive <i>actis</i> aptam sive\n[[525.3]] mutandam etiam sive rejiciendam putes. [ ... ] </p>\n<p> [[525.4]] P. S. Insignis quidam Vir pontificiarum partium magnum nobis schisma ominatur, ex\n[[525.5]] pietistico negotio. Ego securum esse jussi, nam esse nobis non minus Papas quam ipsis, qui\n[[525.6]] finire queant controversias, quanquam melius saepe contentiones negligendo intereant, animentur\n[[525.7]] ventilando ut faces. Visionum illa et Chiliasmi mentio multum noceat bonis alioqui\n[[525.8]] viris, quod judicarent qui rebus praesunt, non tuto talibus imbui vulgus. </p>\n","number":"147.","title":"LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF","date":"[Hannover,] 24. April (4. Mai) 1692. [134.163.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

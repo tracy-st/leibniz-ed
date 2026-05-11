@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_141","series":"Band II 3 (1695 - 1700)","seq":141,"text":"<p> [[375.9]] <b>141. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[375.10]] Wolfenbüttel, 31. August (10. September) 1697. [133.179.]</b></p>\n\n<p> [[376.1]] Extrait de ma reponse </p>\n<p> [[376.2]] Bien loin de payer ma remarque en monnoye dont le metal soit aigre, comme c'est\n[[376.3]] l'ordinaire des sçavans (: mais des sçavans ordinaires :) vous me remerciés d'une maniere\n[[376.4]] reelle, en me procurant enfin une reponse de Mons. Leers. Je luy envoyeray une liste des livres\n[[376.5]] que je souhaitte après mon retour. </p>\n<p> [[376.6]] Le Pere du Londel a mis les Fastes à la mode. A l'exemple de ceux de Louys le Grand\n[[376.7]] Monsieur Junker (: connu par sa dissertation <i>de Ephemeridibus eruditorum</i> :) en a fait de\n[[376.8]] l'Empereur regnant, un autre du Roy de la Grande Bretagne. Et maintenant il nous est venu un\n[[376.9]] si grand nombre de ces fastes que nous en sommes accablés. Par exemple de Brandebourg, de\n[[376.10]] la maison Electorale de Saxe, de tous les Electeurs qui regnent presentement, du roy de Suede\n[[376.11]] mort dernierement. On en donnera bien tost de la Maison de Bronsvic. On appelle tous ces\n[[376.12]] ouvrages des Calendriers Historiques, où les années, et les mois et jours de chaque année\n[[376.13]] auxquels quelque chose de remarquable est arrivé, sont marquées. Quand il ne s'agit pas de la\n[[376.14]] vie d'une personne mais d'une maison, on se borne ordinairement à nostre siecle. On aura donc\n[[376.15]] mieux fait d'en attendre la fin. </p>\n<p> [[376.16]] Si Monsieur Hugens est entré dans un grand detail à l'egard des habitans qu'on peut\n[[376.17]] attribuer aux planetes, ce sera tant mieux. Un aussi grand esprit que le sien ne pouvoit rien dire\n[[376.18]] qui ne merite quelque attention. Quand ce <i>Cosmotheoros</i> paroistra vous jugerés Monsieur, s'il\n[[376.19]] sera àpropos de joindre mon Epigramme à vostre recension, puisque l'Epigramme parle de la\n[[376.20]] reception que Messieurs les planetes et particulierement Saturne son favori luy ont faite, lors\n[[376.21]] qu'il nous a quitté pour leur rendre visite. </p>\n<p> [[377.1]] Le <i>Nodus praedestinationis</i> que le Cardinal Sfondrati embarassoit plustost qu'il ne le\n[[377.2]] resolvoit, me paroist tout resolu. Et si quelques intelligences ou habitans des autres planetes\n[[377.3]] sont informés de nos disputes là dessus, ils auront sujet de rire de nos folies et de nos\n[[377.4]] logomachies. Car il me paroist clair comme le jour que presque tous, au moins dans les trois\n[[377.5]] religions autorisées dans nos quartiers, sont obligés de revenir à la même chose (quoyque en\n[[377.6]] d'autres termes) si on les presse comme il faut. </p>\n<p> [[377.7]] Si Monsieur Cramer, informateur du prince Electoral de Brandebourg, Apologiste des\n[[377.8]] Allemands contre le pere Bouhours, avoit vû les <i>Chevraeana</i>, il en auroit bien profité. Monsieur\n[[377.9]] Chevreau connoist l'Allemagne et le Nord un peu mieux que des François qui se melent\n[[377.10]] d'en juger sur un ouy dire et se font une idée des nations sur le modelle de quelque jeune\n[[377.11]] etourdi qu'ils ont vû à Paris. </p>\n<p> [[377.12]] Je suis faché des chicanes qu'on employe contre Mons. Bayle dont j'estime infiniment le\n[[377.13]] merite. J'aurois souhaité qu'on l'eut appellé à Cassel où le Bibliothecaire est mort. Mais on m'a\n[[377.14]] repondu que des personnes du lieu considerées du Prince y pretendoient pour joindre cette\n[[377.15]] charge à la leur, ce qui est favorable à cause de l'epargne quoyque ce ne soit peutestre pas le\n[[377.16]] moyen de faire valoir la Bibliotheque. Je voudrois qu'on put accorder Mons. Bayle avec\n[[377.17]] Monsieur Jurieu qui a aussi son merite. Ils y gagneroient tous deux. Ses pensées sur les\n[[377.18]] Cometes sont un des livres favoris de Madame l'Electrice de Bronsvic. Il y remarque fort bien,\n[[377.19]] que la religion de la maniere qu'on la prend vulgairement ne rend gueres les gens meilleurs. </p>\n<p> [[377.20]] Monsieur Tenzelius va donner un abregé en Allemand de l'incomparable Histoire de la\n[[377.21]] Reforme d'Allemagne de Monsieur de Seckendorf, et il y joindra encor quelques bonnes\n[[377.22]] choses. </p>\n<p> [[378.1]] Monsieur Weigelius Mathematicien de Jena propose un Accord des Calendriers et est allé\n[[378.2]] à Vienne pour cela. Monsieur Reiher mathematicien de Kiel en propose un autre. Il semble que\n[[378.3]] la fin prochaine du siecle contribue à ces sortes de pensées. Je voudrois qu'on negotiât à\n[[378.4]] Riswick aussi heureusement qu'en Pologne où les Saxons ont damé le pion aux François. Mais\n[[378.5]] il semble qu'ils auront leur revange aux negotiations de la paix generale etc. </p>\n<p> [[378.6]] Wolfenbutel 31 Aoust 1697. </p></p>\n","number":"141.","title":"LEIBNIZ AN HENRI BASNAGE DE BAUVAL","date":"Wolfenbüttel, 31. August (10. September) 1697. [133.179.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

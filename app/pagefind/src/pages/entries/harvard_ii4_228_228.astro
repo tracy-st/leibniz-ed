@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_228","series":"Band II 4 (1701 - 1707)","seq":228,"text":"<p> [[690.6]] <b>228. SAMUEL CRELLIUS AN LEIBNIZ</p>\n<p> [[690.7]]  Berlin, 1. Dezember 1707</b></p>\n<p> [[690.14]] Vir Illustrissime </p>\n<p> [[690.15]] Metaphysicam Stegmanni tandem descriptam tradidi Domino Kirchio, Amico meo, ad Te\n[[690.16]] dirigendam. Doleo, quod non citius id factum sit. Sed partim expectatio alterius exemplaris,\n[[690.17]] partim alia impedimenta opus hucusque protraxerunt. Cum vero aliud nancisci non potuerim,\n[[690.18]] ex meo vitiosissime descripto exemplari, hocce describendum fuit. Operam istam libenter\n[[690.19]] quidem in se suscepit Adolescens ille nobilis, qui commendatione Tua in Gymnasium Joachimicum\n[[690.20]] mensamque ibi communem receptus est, et hac occasione gratissimum suum animum\n[[691.1]] exiguo hocce labore testari voluit. Sed cum viderem Tractatibus quibusdam Dni Kirchii describendis\n[[691.2]] fuisse distentum, ego ipse coetera absolvi, quia Codicem meum, in quo alii quidam\n[[691.3]] Tractatus cum ista Metaphysica sunt compacti, ignoto homini concredere nolebam. Mercedem\n[[691.4]] pro descriptione hujus Tractatus nullam admittemus, Illustrissimo Tuo Nomini addictissimi et\n[[691.5]] devinctissimi, quin potius Christophori Ostorodi similem Tractatus philosophicum Msctum, si\n[[691.6]] volueris, addam. Coeterum non per omnia mihi placet ista Metaphysica. De corporeo Deo\n[[691.7]] crasse satis philosophatur. Sed et Socini placita jamdudum deserui non pauca. Correcto Systemate\n[[691.8]] Theologiae Socini, et rejectis Terminis Scholasticis in Theologia vulgo receptis, bene se\n[[691.9]] haberent res Christianae, et facilius Judaeos Gentilesque converteremus. Sed de his nunc non\n[[691.10]] est agendi locus nec tempus. Vale, Vir Illustrissime, et fave </p>\n<p> [[691.11]] Tui studiosissimo et Tibi ad officia quaevis paratissimo </p>\n<p> [[691.12]] Samueli Crellio </p>\n<p> [[691.13]] Die 1 Decembris A^#'o 1707 dabam Berolini, discedens ideoque festinante calamo. </p>\n<p> [[691.14]] D. Kirch forsan expectabit donec responsum Tuum advenerit, quo eum certiorem facies,\n[[691.15]] qua ratione Tractatus iste sit transmittendus. </p>\n<p> [[691.16]] Illustrissimo atque Excellentissimo Viro Domino de Leibnitz Serenissimi Prussiae Regis,\n[[691.17]] Electorisque Brunsuigensis Consiliario Status Intimo. </p>\n","number":"228.","title":"SAMUEL CRELLIUS AN LEIBNIZ","date":"Berlin, 1. Dezember 1707"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

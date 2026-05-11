@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_675","series":"Band VI 4 (1677 - 1690)","seq":675,"text":"[[2913.1]] <b>514.  Indices librorum in jure tam pontificio quam civili [1677 bis 1682 (?)]</b>\n [[2913.2]] <tab/>[1677 bis 1682 (?)] </p>\n<p> [[2913.5]] Joh. Fichardus edidit librum de veteribus Jurisconsultis, secundum diversas materias,\n[[2913.6]] quem <i>Partitionum universalium</i> libro 19 recenset Gesnerus. </p>\n<p> [[2913.7]] Habet autem tantum priscos. Longe diffusior est <i>Index omnium librorum</i> <i>in jure tam\n[[2913.8]] pontificio quam civili passim editorum et primum compositus a Johanne Nevisano,\n[[2913.9]] deinde auctus per Ludovicum Gomesium, et rursus per Joh. Fichardum ingenti accessione\n[[2913.10]] locupletatus</i> quem eodem loco <i>pandectarum</i> inseruit secundo loco relatum adjectis\n[[2913.11]] corollariis idem Gesnerus. Eundem postea Joh. Bapt. Ziletus et demum Joh. Wolfg.\n[[2913.12]] Freymonius multo auctiorem in lucem dedit. Hac inscriptione <i>Elenchus</i> <i>omnium autorum\n[[2913.13]] qui in jure tam civili quam canonico vel committendo vel quibuscunque modis explicando\n[[2913.14]] ad nostram usque aetatem claruerunt</i> nomina et monumenta complectens. Est et index\n[[2913.15]] nostro operi <i>tractatuum universi juris autoritate pontificis in unum congestorum</i> praemissus,\n[[2913.16]] sed ultra scriptores inclusos se non extendens. Demum Felicis Contelorii <i>Index\n[[2913.17]] legalis autorum materias juris ex professo tractantium</i> ex Bibl. Joh. Bapt. Coccini\n[[2913.18]] collectus subjunctusque tomo 5^#'t^#'o collectaneorum in <i>Jus pontificium</i> Augustini Barbosae. </p>\n","number":"514.","title":"Indices librorum in jure tam pontificio quam civili","date":"[1677 bis 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

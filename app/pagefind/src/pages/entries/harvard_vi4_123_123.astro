@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_123","series":"Band VI 4 (1677 - 1690)","seq":123,"text":"[[408.1]] <b>100.  Enumeratio particularum terminorumque primitivorum [Sommer 1680 bis Sommer 1684 (?)]</b>\n [[408.2]] <tab/>[Sommer 1680 bis Sommer 1684 (?)]\n [[408.19]] <tab/>Ab. <Fn><i>Oben rechts am Kopf der Seite</i>: dummodo: conjunctio an adverbium</Fn> Ad. Ante. Apud. Circa. <i>Causa. Gratia</i>. Citra. Contra. Coram. <i>Cum</i>. De. E. Erga.\n[[408.20]] <i>Ergo</i>. Extra. In. Inter. Intra. Juxta. Ob. Per. Post. Prae. Praeter. (Praeterea.) <i>Pridie</i>.\n[[408.21]] Pro. Prope. Propter. <i>Quoad</i>. Secundum. Sine. Sub. Super. Supra. Tenus. Trans. <i>Ubi\n[[408.22]] locorum. Ultra</i>. Versus.\n [[408.23]] <tab/><i>Abhinc. Adeo</i>. Adhuc. Aeque. <i>Alias.</i> Alibi. Alio. Alioqui. Aliquando. <i>Aliquanto.</i> Aliter.\n[[408.24]] Age. Ad summum. Ad unum. An. <i>Ante</i>. Circum. Cur <i>Certe. Circiter</i>. Commodum.\n[[408.25]] Deinde. (^&.!! <Leibniz special character: distilletur>) <i>Deinceps. Imposterum. Demum</i>. Denique. Deorsum. <i>Donec. Dudum.\n[[408.26]] Dummodo. Eatenus. Ex quo</i>. Fere. Forte. <i>Hac. Hactenus</i>. Hic. <i>Hinc</i>. Jam. (^&.!! <Leibniz special character: distilletur>)\n[[408.27]] <i>Identidem</i>. Illic. <i>Inde. Inde usque</i>. Interim. Interdum. <i>Imposterum. Impraesentiarum</i>.\n[[408.28]] Invicem. Ita. Iterum. <i>In summa</i>. Item. <i>Longe</i>. Magis. <i>Magis magisque. Maxime</i>.\n[[408.29]] <angle bracket><i>Modi istius</i></angle bracket>. <i>Modo. Mox. Mutuo</i>. Ne. (^&.!! <Leibniz special character: distilletur>) Nimis. Nimis-parum. Non. Nunc. <i>Olim</i>.\n[[409.1]] Praeterea. Quam. Quando. Quasi. <i>Quatenus. Saepe. Saltem</i>. Satis. <i>Sic</i>. Simul. <i>Sin.\n [[409.2]] Solum. Statim</i>. Sursum. Tam. Tandem. Tenus. <i>Velut</i>. Ultra. Vix.\n [[409.3]] <tab/>Ac. <i>Aut. At. Alioqui. Atqui. Attamen. Autem. Caeterum</i>. Cum. Denique. <i>De reliquo. Ecce</i>.\n[[409.4]] Ergo. Et. Etiam. Etsi. <i>Exempli gratia. Hinc</i>. Jam. Ideo. Ita. (^&.!! <Leibniz special character: distilletur>) Nam. Ne. (^&.!! <Leibniz special character: distilletur>) Nunc.\n[[409.5]] (^&.!! <Leibniz special character: distilletur>) Quam. (^&.!! <Leibniz special character: distilletur>) Sed. <i>Sin</i>. Tam. Tamen. Vel. <i>Veluti</i>. Ut.\n [[409.6]] <tab/><i>Aequalis</i>. Aliquis. <i>Antecedens</i>. Ego. Alius. Alter. Alternus. Alteruter. Certus quidam.\n[[409.7]] <i>Ecquis</i>. Hic. Idem. Idem ille. Ille. Illud. Ipse. Is. Id. Id quod. Iste. <i>Loco</i>. Majus.\n[[409.8]] Minus. Multa. Nemo. Nemo non. Neuter. Nullus. Omnis. Par. <i>Pauci</i>. Plerique.\n[[409.9]] Plures. Posterior. <i>Praesens</i>. Prior. Proximus. Qualis. Qualiscunque. Quantus.\n[[409.10]] Quantuscunque. Quidam. Quisquam. Quisque. Quisquis. Quivis. Quot. Quotquot.\n[[409.11]] Quotus. Quotusquisque. <i>Se. Sibi</i>. Secundus. Similis. Solus. Superior. Talis. Tantus.\n[[409.12]] Tanti est. Tempore brevi etc. Totus. Totum. Tu. Unus. Unusquisque. Uter. Uterlibet.\n[[409.13]] Uterque.\n [[409.14]] <tab/>Individuum. Universale. Proprium. Commune. Sunt non rerum sed Terminorum. Terminus\n[[409.15]] Essentialis, terminus accidentalis, qui mutabile aliquid dicit salva re de qua\n[[409.16]] dicitur.\n [[409.17]] <tab/>Ens, Non Ens. Reale, apparens. Positivum, privativum. Absolutum, Limitatum. Abstractum,\n[[409.18]] Concretum. Res, Modus. Substantia, accidens. </p>\n<p> [[409.19]] Possumus abstracta omittere. </p>\n","number":"100.","title":"Enumeratio particularum terminorumque primitivorum","date":"[Sommer 1680 bis Sommer 1684 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

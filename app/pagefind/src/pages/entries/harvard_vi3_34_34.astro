@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_34","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":34,"text":"[[386.34]] <b>34. Über Descartes Nachlaß </b> <span>386.0;0:63:034:76?      :L:f^</span>.\n[[386.18]] J'ay esté aujourdhuy avec Mons. de Tschirnhaus pour luy donner la connoissance\n[[386.19]] de Mons. Clerselier, et pour luy faire voir les restes de Mons. des Cartes. Il nous\n[[386.20]] montra un discours de Mons. des Cartes de la recherche de la verité, il y avoit environ\n[[386.21]] 22 regles expliquées et illustrées. En latin. Il y avoit un petit dialogue françois entre\n[[386.22]] Epistemon et Polyandre, qui n'estoit pas achevé. Item une Comedie, en françois\n[[386.23]] pousse, jusqu'au quatrieme acte. Les personnes sont Alixan, et Parthenie, qui s'ayment:\n[[386.24]] tous deux fils de Princes et tous deux se croyent l'un et l'autre bergers. Mais je\n[[386.25]] m'étonne d'une chose, que je remarquay en feuilletant. C'est qu'il decouvre d'abord\n[[387.1]] ce qui devvoit estre gardé jusqu'au dénouement, sçavoir Parthenie ayant appris\n[[387.2]] qu'elle est princesse en parle à soy méme, et delibere si elle doit aimer encore Alixan, et\n[[387.3]] conclut en sa faveur. Alixan est caché et entend cela; et va declarer sur le champ, qu'il\n[[387.4]] l'a entendu. Elle estoit princesse de l'isle heureuse d'Island, qui luy estoit ostée par le\n[[387.5]] Tyran de Stockholm; la scene est en Islande.\n[[387.6]] Mons. Clerselier a encor deux volumes de Miscellanea reliés, l'un en 4, l'autre\n[[387.7]] en 8, où il y a beaucoup de choses physiques; des experiences et observations anatomiques\n[[387.8]] de Mons. des Cartes, quelques experiences, sur les metaux, et en fait de\n[[387.9]] medecine. Je m'étonne pourtant, qu'il n'y a rien davantage de cette nature. Il y a encor\n[[387.10]] un traité de la lumiere. Voila son titre. Mais le traité méme est ce que Mons. des\n[[387.11]] Cartes appelle son Monde, ou Meditations physiques faites comme les Metaphysiques\n[[387.12]] d'un style familier; quoyqu'elles ne disent en substance que ce qui est dans ses principes\n[[387.13]] philosophiques.\n[[387.14]] In Miscellaneis, il y avoit quelques pensées, comme par exemple de faire paroistre\n[[387.15]] la muraille, verte, jaune; etc. par le moyen d'une lampe dont le verre vert, le\n[[387.16]] cotton vert; et dans l'huyle du ver de gris broyé. Item proposition pour faire paroistre\n[[387.17]] des chiffres et autres figures par le moyen des rayons du soleil, et des miroirs.\n","number":"34.","title":"Über Descartes Nachlaß","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

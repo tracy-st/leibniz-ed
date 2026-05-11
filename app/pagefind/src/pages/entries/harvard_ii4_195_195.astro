@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_195","series":"Band II 4 (1701 - 1707)","seq":195,"text":"<p> [[611.1]] <b>195. LEIBNIZ AN PIERRE COSTE</p>\n<p> [[611.2]] Hannover, 16. Juni 1707. [190.214.] </b></p>\n<p> [[611.10]] Monsieur </p>\n<p> [[611.11]] Je suis ravi d'apprendre par l'honneur de vostre lettre, que mes reflexions sur le livre de\n[[611.12]] l'amour divin ne vous ont point deplû. Je tiens pour demonstré, que tout ce qui arrive à une\n[[611.13]] substance simple, telle que l'ame, ne sauroit luy venir après Dieu que de son propre fonds, et\n[[611.14]] qu'excepté les miracles, Dieu n'y a part que par son concours conservatif commun à toutes les\n[[611.15]] creatures. Ainsi nos idées sont en nous, mais elles se developpent peu à peu d'une maniere qui\n[[611.16]] repond au mouvement des organes, en vertu de l'Harmonie préétablie. </p>\n<p> [[611.17]] Cependant on peut dire, en un sens, que Dieu est le seul objet immediat externe des ames,\n[[611.18]] luy seul pouvant agir sur elles. C'est dans ce sens, qu'on peut sauver quelques unes des\n[[611.19]] expressions du R. P. de Mallebranche. </p>\n<p> [[611.20]] Le Grand merite de Monsieur Lock, et l'estime generale que son ouvrage a gagné avec\n[[611.21]] tant de justice, joint à quelque commerce de lettres que j'avois eu le bonheur d'avoir avec\n[[611.22]] Mylady Masham, m'a fait employer quelques semaines à des remarques sur cet important\n[[611.23]] ouvrage, dans l'esperance d'en conferer avec Mr. Lock luy même. Mais sa mort m'a rebuté et a\n[[612.1]] fait que mes reflexions sont demeurées en arriere, quoyqu'elles soyent achevées. Mon but a esté\n[[612.2]] plustost d'eclaircir les choses, que de refuter les sentimens d'autruy. Cependant je seray ravi,\n[[612.3]] Monsieur, de recevoir les Additions et les Corrections de cet Excellent homme, pour en profiter. </p>\n<p> [[612.4]] J'ay suivi vostre version Françoise, parce que j'ay jugé à propos d'ecrire mes remarques\n[[612.5]] en françois, puisque aujourdhuy ces sortes de recherches ne sont gueres à la mode dans le pays\n[[612.6]] Latin. </p>\n<p> [[612.7]] Je vous supplie aussi, Monsieur, de marquer mes respects à Mylady Masham dont j'espere\n[[612.8]] que la santé aura esté retablie, comme je le souhaite de tout mon coeur; et je suis entierement </p>\n<p> [[612.9]] Monsieur Vostre tres humble et tres obeïssant serviteur Leibniz </p>\n<p> [[612.10]] Hanover ce 16 juin 1707 </p>\n","number":"195.","title":"LEIBNIZ AN PIERRE COSTE","date":"Hannover, 16. Juni 1707. [190.214.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

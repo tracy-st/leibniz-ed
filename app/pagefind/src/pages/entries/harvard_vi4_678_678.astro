@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_678","series":"Band VI 4 (1677 - 1690)","seq":678,"text":"[[2914.14]] <b>516₁.  De quaestionibus in loco torturae </p>\n<p> [[2914.16]] Marsil. in l. <i>Rep</i>. <i>D. de quaestionibus</i> (citante Anonymi <i>processu juridico contra\n[[2914.17]] sagas et veneficos</i> teutsch Aschaffenburg 1629) sagt es sey ihm selbst als des Herzogs\n[[2915.1]] von Meyland Rath und Richter wiederfahren: <i>Es kam mir ein Ribaldus (loser Vogel) sagt\n[[2915.2]] er, vor, so wegen eines diebstahls angeklagt war, dieser bekant in der tortur, darnach</i> ad\n[[2915.3]] banchum juris, <i>oder vor die gerichtsstatt leugnet er alles wieder, und ich fragte ihn\n[[2915.4]] einsmahls, warumb hastu dir doch in sin vorgenommen, dich so offt foltern zu laßen, wer\n[[2915.5]] es dir nicht viel besser, daß du vor gericht daßelbe gestehest, was du bey der folter\n[[2915.6]] bekand hast, als das du dich so offt peinigen läßest? Und dieser arge Lecker antwortet\n[[2915.7]] mir, Hr. es ist mir besser, daß mir 1000 mahl die Arm zerbrochen werden, als die gurgel\n[[2915.8]] nur ein mahl. Denn man findet noch viel medicos oder barbiere welche die beine oder\n[[2915.9]] zerbrochenen Arme wieder können zusammen sezen, aber es ist kein arzt so guth, daß er\n[[2915.10]] einem die zerbrochene gurgel könne wieder ganz machen. Und darumb will ich lieber\n[[2915.11]] von euren henckersknechten auffgezogen werden, als mit meinen füßen die galgenleiter\n[[2915.12]] aufsteigen. Weiters sagte er warumb kan ich nicht eben so wohl vor der gerichtsstatt, da\n[[2915.13]] mirs mein leben kostet, meine Zung umbwenden, und sagen Nein, als ich sage: Ja. In der\n[[2915.14]] wahrheit es war ein abgefeimter schalck, und doch mußte ich ihn los geben, denn er\n[[2915.15]] wolte nimmer</i> ad banchum juris <i>vor der gerichtsstatt geständig seyn, was er in der folter\n[[2915.16]] bekennt hatte.</i> </p>\n<p> [[2915.17]] Scio similem casum Lipsiae contigisse adversus innocentem, qui etiam ita se liberavit,\n[[2915.18]] et innocentia ejus postea detecta est. Caeterum cautela haec videtur evertere omnem\n[[2915.19]] torturam. Non confitens in loco torturae non potest ultra torqueri, et negans in loco judicii\n[[2915.20]] non potest condemnari. Re-cautela est, ut interrogetur non de iis quae affirmando aut\n[[2915.21]] negando constant, sed in quaestionibus quomodo ad indagandum corpus delicti. </p>\n","number":"516₁.","title":"De quaestionibus in loco torturae","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

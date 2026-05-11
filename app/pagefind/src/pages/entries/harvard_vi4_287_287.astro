@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_287","series":"Band VI 4 (1677 - 1690)","seq":287,"text":"[[1163.19]] <b>237₂.  Tetractys tetracty Pythagoreae Burgeri correspondens </p>\n<p> [[1163.23]] <i>Tetractys Trigonometrica</i> Collegae nostri Pythagorici, D[omini] M. Georg[ii]\n[[1163.24]] Arnoldi Burgeri. Societas Pythagorea Jenae. </p>\n<p> [[1164.1]] Sparta autori delata, directoris Artium Architectonicarum. </p>\n<p> [[1164.2]] Jamblichus in <i>vita Pythagorae</i> lib. 1, c. 28. ei tribuit <greek>th̀n ^%(/eyresin th̃w tetraktýow</greek>,\n[[1164.3]] quod videtur intelligendum de hoc numerandi modo. </p>\n<p> [[1164.4]] Nonnemo Pythagorice numeraturus apud Lucianum in <i>vita autoris</i>, ubi dixisset\n[[1164.5]] unum, duo, tria quatuor (1. 2. 3. 10) substiterit, cui Pythagoreus quasi per moram\n[[1164.6]] responsurus: <b>vides</b>, inquit, 10) <b>decem esse quae tu quatuor existimas</b> (+ rectius\n[[1164.7]] ergo Weigelius, retinuisset <i>Zehn, Hundert, Tausend</i>, ita <i>Zehn</i> significasset IV, <i>Hundert</i>\n[[1164.8]] significasset LXIV et 1000 significasset 256 +) et triangulum perfectum\n[[1164.9]] (aequilaterum) nostrumque jusjurandum constituere. Thraces constat hoc\n[[1164.10]] numerandi modo usos, forte a Zamolxe, qui eis teste Herod[oto] in <i>Melpomene</i>\n[[1164.11]] dogmata Pythagorae communicavit. Cujus doctrinae et pertinacissime\n[[1164.12]] adhaesisse eos probat Rob. Scheringhamus in <i>De Anglorum origine</i> p. 224 et\n[[1164.13]] seqq. ex Jornande, et Strabone lib. 16. aliisque, ut eum pro Deo habuerint. Conferatur et\n[[1164.14]] de Tetracty Meursius in <i>Denario Pythagorico</i>. </p>\n<p> [[1164.15]] Theon Smyrnaeus vim Tetractyos Pythagoricae parum intellexit. </p>\n<p> [[1164.16]] Unitas punctis; binarius lineis, ternarius superficiebus,\n[[1164.17]] quaternarius solidis <angle bracket>decatus</angle bracket>, denarius. </p>\n<p> [[1164.18]] M. Joach[imus] Heinricus Hagenius P. L. Amico suo.\n[[1164.19]] Laus tetractyos Weigelianae. </p>\n","number":"237₂.","title":"Tetractys tetracty Pythagoreae Burgeri correspondens","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_120","series":"Band VI 4 (1677 - 1690)","seq":120,"text":"[[399.1]] <b>98₂.  Zweiter Ansatz ZWEITER ANSATZ </p>\n<p> [[399.2]] Omnia quae cogitamus, his fere continentur quae sunt, <b>Generaliter</b>: Realitas,\n[[399.3]] Varietas, Consequentia, Ordo, Mutatio. <b>Medio loco</b> modi res discriminandi: Qualitas,\n[[399.4]] Quantitas et Positio. <b>Speciatim</b> ipsa discrimina: Extensio, Sensibilis Qualitas, Cogitatio. </p>\n<p> [[399.6]] <b>Realitas</b> complectitur possibile excluso impossibili, positivum excluso negativo.\n[[399.7]] Positivum autem rursus suos habet gradus, nam si completum sit, constituit substantiam,\n[[399.8]] sin minus accidens; si absolutum sit constituit Deum, sin limitatum sit, creaturam. <Fn><i>Am Rande</i>: Existentia seu praesentia ponenda videtur post realitatem.</Fn> </p>\n<p> [[399.9]] Ad <b>Varietatem</b> pertinent: idem et diversum, unum et plura. </p>\n<p> [[399.10]] Ad <b>Consequentiam</b> incompatibilia, inconnegabilia, opposita, conditio et conditionatum,\n[[399.11]] inferens et illatum; et haec quidem omnia vel absolute vel per se seu si nihil\n[[399.12]] impediat. </p>\n<p> [[399.13]] Ad <b>Ordinem</b>, scilicet naturalem, prius et posterius natura. Causa et Effectus. Nam\n[[399.14]] ex ordine et consequentia fit causa; ex causa enim tanquam natura priore sequitur\n[[399.15]] effectus. </p>\n<p> [[399.16]] Ad <b>Mutationem</b>, status, duratio, tempus; tempore prius, posterius et simul.\n[[399.17]] Agens, Patiens. Acturiens. </p>\n<p> [[399.18]] Ad <b>Qualitatem</b> Simile et Dissimile. </p>\n<p> [[399.19]] Ad <b>Quantitatem</b>, Proportio, totum, pars (seu continens contentum), Numeri. </p>\n<p> [[399.20]] Ad <b>Positionem</b> seu modum discernendi non per aliquid essentiam exprimens ut\n[[399.21]] qualitas et quantitas, sed per modum existendi, pertinent: Termini, continuum, contiguum,\n[[399.22]] intervalla. </p>\n<p> [[399.23]] Ad <b>Extensionem</b>, situs, distantia, motus, quies, vis, resistentia. </p>\n<p> [[399.24]] Ad <b>Sensiles Qualitates</b>, Color, Sonus, Odor, Sapor, Calor, aliaque tactus\n[[399.25]] objecta. </p>\n<p> [[400.1]] Ad <b>Cogitationem.</b> Conceptus, intellectio; sensus, perceptio, Memoria, Sententia,\n[[400.2]] Scientia, Voluntas, Voluptas et Dolor. Affectus; Habitus. </p>\n<p> [[400.3]] Videntur et res posse dividi in Metaphysicas, Mathematicas et Physicas. Metaphysicae\n[[400.4]] substantiae sunt, Deus, mens, anima, Entelechia prima seu forma substantialis.\n[[400.5]] <b>Mathematicae</b> tempus, spatium, motus. </p>\n","number":"98₂.","title":"Zweiter Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

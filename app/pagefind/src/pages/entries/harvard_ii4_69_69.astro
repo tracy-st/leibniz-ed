@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_69","series":"Band II 4 (1701 - 1707)","seq":69,"text":"<p> [[228.1]] <b>69. LEIBNIZ AN ISAAC JAQUELOT</p>\n<p> [[228.2]] [Nach dem 6. Mai 1704]. [68.83.] </b></p>\n<p> [[228.13]] Extrait de ma reponse </p>\n<p> [[228.14]] J'ay lû et relû vostre abregé du systeme que vous vous estes fait de l'Ame humaine et je\n[[228.15]] puis vous dire, Monsieur, que je n'y trouve pas un mot que je ne puisse avouer et expliquer\n[[228.16]] conformement à mon sens: Car je crois que lors que vous dites que les Ecluses des Esprits\n[[228.17]] animaux s'ouvrent et se ferment selon la volonté de l'Ame, vous ne determinés pas si cela se\n[[228.18]] fait par une influence de l'ame sur ces Esprits et Ecluses, ou par une entremise nouvelle et\n[[228.19]] extraordinaire de Dieu qui troublât les loix des corps pour les faire obéir à l'ame, ou si c'est\n[[228.20]] suivant mon sentiment par une harmonie préestablie, car il sera tousjours vray que ces écluses\n[[228.21]] s'ouvriront ou se fermeront suivant la volonté de l'ame. Quand vous dites, Monsieur, que dans\n[[228.22]] l'ame les raisons ne l'emportent pas necessairement comme un poids, parce qu'autrement la\n[[228.23]] volonté <b>se haberet mere passive</b>, et qu'il faut dire qu'elle se determine elle même par les\n[[228.24]] raisons, vous parlés parfaitement suivant mon sens. </p>\n<p> [[228.25]] Je me suis estonné plusieurs fois comment un aussi habile homme que Mons. Bayle a pû\n[[228.26]] se plaire à debiter les raisonnemens des Manicheens, qui me paroissent de peu de poids, comme\n[[228.27]] il le juge sans doute luy même. Mais la grande fertilité de son esprit actif fait qu'il se donne\n[[228.28]] carriere sur la matiere qu'il a justement devant luy, quand il ecrit. Je ne vois pas la moindre\n[[228.29]] apparence pour les deux principes, et le mal n'est rien au prix du bien. </p>\n<p> [[229.1]] Je suis avec vous Monsieur contre M. Locke, à l'egard des idées que je crois estre dans\n[[229.2]] l'ame essentiellement, car l'ame est innée à elle meme, pour ainsi dire, et par consequent\n[[229.3]] existence, substance, unité, meme, divers, etc. et les verités enveloppées dans ces idées le sont\n[[229.4]] aussi, quoyque les sens fournissent à l'ame l'occasion de s'appercevoir et des idées et des\n[[229.5]] verités. </p>\n","number":"69.","title":"LEIBNIZ AN ISAAC JAQUELOT","date":"[Nach dem 6. Mai 1704]. [68.83.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

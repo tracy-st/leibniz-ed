@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_49","series":"Band VI 4 (1677 - 1690)","seq":49,"text":"[[122.1]] <b>41.  Tabulae. Divisiones. Methodus. Genera et species subalternae November 1678</b>\n [[122.3]] <tab/> November 1678 </p>\n<p> [[122.8]] Novembr. 1678\n[[122.9]] <b>Tabulae. Divisiones. Methodus.</b>\n [[122.10]] <b>Genera et species subalternae.</b> </p>\n<p> [[122.11]] Utile est plurium eandem rem tractantium methodos in tabulam redactas inter se\n[[122.12]] conferri, ita enim pro variis dispositionibus variae rerum inter se cognationes, ac varia\n[[122.13]] genera subalterna animo a speciebus imis abstracta, comparebunt. </p>\n<p> [[122.14]] Cuncta inveniri possunt per divisiones, imo quia quodcunque specierum <b>genus\n[[122.15]] proprium</i> reperiri potest, cuncta possunt reperiri per dichotomias, v.g. </p>\n<p> [[122.16]] <tab/>a <tab/> <tab/>b <tab/> c d\n [[122.17]] <tab/><picture>9012</picture> </p>\n<p> [[122.18]] <tab/>g\n [[122.19]] <tab/><picture>9018</picture>\n [[122.20]] <tab/> f\n [[122.21]] <tab/><picture>9022</picture>\n [[122.22]] <tab/> e\n [[122.23]] Nempe <i>e</i> dividetur in <i>f</i> et <i>d</i>, et <i>f</i> dividetur in <i>g</i> et <i>c</i>, et <i>g</i> dividetur in <i>a</i> et <i>b</i>. </p>\n<p> [[122.24]] Cunctae inquam imae species <i>a, b, c, d</i> inveniri per subdivisionem unam, sed non\n[[122.25]] cuncta genera subalterna, v.g. genus proprium his tribus: <i>a, b, d</i>, sic non comparebit.\n[[122.26]] Itaque ut hoc quoque inveniatur adhuc alia opus erit dichotomia, v.g. </p>\n<p> [[123.1]] <tab/>a <tab/>d <tab/> b c\n [[123.2]] <tab/><picture>9012</picture> </p>\n<p> [[123.3]] <tab/> i\n [[123.4]] <tab/><picture>9018</picture>\n [[123.5]] <tab/> h\n [[123.6]] <tab/><picture>9022</picture>\n [[123.7]] <tab/> e\n [[123.8]] Enumeratio facienda est quot diversis opus sit subdividendi modis, ut omnes prodeant\n[[123.9]] species subalternae. </p>\n<p> [[123.10]] Itaque methodus subdivisionum tum demum sufficiens est, cum de solis speciebus\n[[123.11]] infimis inveniendis soliciti sumus: non vero cum rubricas quas vocant et titulos rerum\n[[123.12]] constituere, ac varia genera venari volumus. Species infimas hoc loco intelligo non\n[[123.13]] absolute, sed relate ad genus suum proprium, ut: <i>a, b, c, d</i> considero ut species infimas,\n[[123.14]] earum scilicet quae quaeruntur. </p>\n<p> [[123.15]] Quaeritur an species infimae conjungendae quae sunt aeque remotae a genere. </p>\n","number":"41.","title":"Tabulae. Divisiones. Methodus. Genera et species subalternae","date":"November 1678"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

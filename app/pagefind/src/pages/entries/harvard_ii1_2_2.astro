@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_2","series":"Band II 1 (1663 - 1685)","seq":2,"text":"<p> [[5.15]] <b>2. JOHANN STRAUCH AN LEIBNIZ</p>\n<p> [[5.16]] Braunschweig, 6. (16.) Juli 1665.</b></p>\n<p> [[6.1]] Joh. Strauchius D. Gottfredo Guilielmo Leibnuzio suo Affini Carissimo. </p>\n<p> [[6.2]] Binas a Te accepi literas, et alteras priores una cum dissertatione tua elegantissima.\n[[6.3]] Equidem fere pudet ad illam tam diu tacuisse. Sane possum quam plurimas intermissi officii\n[[6.4]] allegare causas, quas etiam probare Tibi non dubitem: sed malo hanc deprecari quam purgare\n[[6.5]] culpam. Nunc hoc ex animi mei sententia habe, in tua dissertatione nupera, an ingenii felicitatem\n[[6.6]] magis, an scientiam et industriam laudarem, hactenus me ambegisse. Certe videris viam,\n[[6.7]] quam vulgo (praefiscini dicam) monstrare non solent, tute tibi reperisse, ad prudentiae nostrae\n[[6.8]] adyta, expeditam, praeclaram, rectam; adeoque ire non qua itur, sed qua eundum. Quare\n[[6.9]] conatus tuos valde laudo, atque vellem [adesse] propius, quo provehere etiam si possem liceret.\n[[6.10]] Caeterum <i>de Conditionibus</i> Galganettum in bibliotheca publica Academiae Salanae vidi. Est et\n[[6.11]] alius de hoc argumento in libris meis, Philibertus Brusselius, Consiliarius olim Karoli V. et\n[[6.12]] Philippi Hisp. R. Lovanii editus, qui si non plenius certe elegantius scripsisse videtur. De\n[[6.13]] methodo tua sane non negem vel difficultate sua esse spetiosam, sed vereor ut in omni\n[[6.14]] argumento tenere eam possis. Quod eo dictum velim, non ut [Te] deterream sed ut excitem.\n[[6.15]] Quod super est, vale, et in affectu erga me persevera. Brunsvigae 6. Julii 1665. </p>\n","number":"2.","title":"JOHANN STRAUCH AN LEIBNIZ","date":"Braunschweig, 6. (16.) Juli 1665."}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

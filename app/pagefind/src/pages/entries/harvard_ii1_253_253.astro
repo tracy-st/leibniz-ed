@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_253","series":"Band II 1 (1663 - 1685)","seq":253,"text":"<p> [[792.21]] <b>224. CHRISTIAN PHILIPP AN LEIBNIZ</p>\n<p> [[792.22]] Hamburg, 25. Februar (6. März) 1680. [223.225.]</b></p>\n<p> [[793.3]] Hamb. ce 25. Fevr. 1680. </p>\n<p> [[793.4]] Monsieur </p>\n<p> [[793.5]] Comme M^#'r Rabel est icy presentement, je n'ay pas manqué de luy faire un compliment de\n[[793.6]] vostre part, dont il a témoigné vous estre extremement obligé, en regrettant pareillement de\n[[793.7]] n'avoir pas eu l'honneur de vous connoitre à Paris, lors que vous y estiez l'un et l'autre, et où il\n[[793.8]] avoit plus de loisir de rechercher les belles lettres, qu'à cette heure, qu'il est tout accablé\n[[793.9]] d'affaires qui sont directement contraires à son genie. </p>\n<p> [[793.10]] Pour ce qui est de la philosophie de M^#'r Descartes, il dit, qu'il n'en est pas idolatre, mais\n[[793.11]] qu'il croit, qu'il s'y trouvent plusieurs fautes. Avec tout cela il croit qu'on peut defendre en\n[[793.12]] quelque façon cet auteur de ce que vous y trouvez à redire; car premierement M^#'r Rabel croit,\n[[793.13]] que la morale et par consequent la justice ne concerne point la matiere, qui n'y peut avoir aucun\n[[793.14]] rapport, mais que le bien et le mal ne peut regarder que l'ame raisonnable. Aprés cela il croit,\n[[793.15]] que M^#'r Descartes n'ait pas voulu dire, que la matiere reçoive absolument toutes les formes\n[[793.16]] possibles, mais seulement celles dont elle est capable (<i>quarum est capax</i>) c'est à dire les formes\n[[793.17]] auxquelles Dieu l'a destinée, qui ne peuvent estre autres que bonnes. </p>\n<p> [[793.18]] M^#'r Rabel croit de plus, que M^#'r Descartes n'ait point voulu exclure les causes finales, en\n[[793.19]] disant, que Dieu a determiné le bien par un acte libre de sa volonté; par où il entend, que Dieu\n[[793.20]] par une liberté et grace absoluë a donné à connoitre à l'ame raisonnable ce qui est bon ou\n[[793.21]] mauvais (<i>scriptum in cordibus</i>). </p>\n<p> [[793.22]] Quand M^#'r Descartes dit, qu'il estoit impossible de trouver la proportion entre une ligne\n[[793.23]] courbe et une ligne droite, M^#'r Rabel croit, qu'il a voulu parler des lignes qui estoient alors\n[[793.24]] connuës, mais non pas de celles qu'on pouvoit encore connoitre et examiner. Et s'il avoit vêcu\n[[793.25]] plus long-temps, que peut-estre il auroit trouvé le moyen, de reduire à des equations tous les\n[[793.26]] problemes qu'on a proposez après sa mort. </p>\n<p> [[793.27]] Voilà, Monsieur, ce que M^#'r Rabel a dit en passant. Il voudroit bien sçavoir, si M^#'r Huygens\n[[793.28]] a mis au jour le traité du mouvement et de la percussion, qu'il promet au <i>journal des</i> <i>sçavans</i>\n[[794.1]] de l'année 1669. et s'il ne se trouvent pas d'autres sçavans, qui dépuis peu ayent traité de cette\n[[794.2]] matiere. [ ... ] </p>\n","number":"224.","title":"CHRISTIAN PHILIPP AN LEIBNIZ","date":"Hamburg, 25. Februar (6. März) 1680. [223.225.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

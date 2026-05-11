@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_111","series":"Band II 1 (1663 - 1685)","seq":111,"text":"<p> [[315.1]] <b>96. LEIBNIZ FÜR ─ (?)</p>\n<p> [[315.2]] [Dezember 1671.]</b></p>\n<p> [[315.18]] Alberti von Holten inventum Grammaticae Cylindriaceae utilissimum est, et in multis\n[[315.19]] imitabile. Occasionem talia meditandi ei dedi mea <i>arte combinatoria</i>. Similia Kircherus machinatus\n[[315.20]] est. Caeterum eadem ratione parari cista posset, quae omnia theoremata possibilia inter\n[[315.21]] certas voces contineret, definitionibus earum ultimis fundamenti instar indagatis, eumque in\n[[315.22]] finem elementa formari possent non difficulter primariis vocibus adhibitis. Sed pro universali\n[[315.23]] opere assignanda esset, certa vox cuilibet combinationi, eumque in finem conferendae omnes\n[[315.24]] linguae; una enim rem aliquam sola exprimit, quam caeterae nonnisi circumlocutione dicere\n[[315.25]] possunt. Uni autem voci nonnisi una assignanda esset significatio. Sed fortasse tanta opera non\n[[315.26]] est omnino necessaria. Satis est potissimas combinationes habere, seu voces certas rerum\n[[315.27]] extantium, et prae caeteris consideratione dignarum, v.g. in geometria ad usum vitae humanae\n[[315.28]] paucae propositiones sufficiunt. Eae igitur combinationes attendendae, quarum conjunctione\n[[315.29]] producitur aliquid consideratione dignum, quemadmodum et infiniti sunt processus chymici seu\n[[315.30]] combinationes, sed non quilibet producit aliquid consideratione dignum et extraordinarium. Ii\n[[315.31]] igitur termini qui sunt utilitatum vitae humanae, et rerum eas utilitates producentium, maxime\n[[315.32]] considerandi sunt. In Jurisprudentia constituta accurate tabula facile erit tale quid machinari.\n[[315.33]] Adde conceptus Wilkinsii et Comenii de Panglottide seu lingua universali. </p>\n","number":"96.","title":"LEIBNIZ FÜR ─ (?)","date":"[Dezember 1671.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

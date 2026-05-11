@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_41","series":"Band II 1 (1663 - 1685)","seq":41,"text":"<p> [[121.1]] <b>35a. LEIBNIZ AN JOHANN HEINRICH HORB</p>\n<p> [[121.2]] [Mainz,] 2.(12.) Januar 1671</b></p>\n<p> [[121.12]] Ex responsione ad literas Horbianas 2 Jan. 1671. Styl. vet. </p>\n<p> [[121.13]] Memorabile est quod de Joach. Stollii sudore lucido refers. Memini in Borelli <i>observationibus</i>\n[[121.14]] similia exempla legere, sed obiter, ac sine circumstantiarum luce relata. Constat et\n[[121.15]] Bartolinum peculiari opusculo <i>de animalium luce</i> disseruisse. Hyeme efflorescere, rationi\n[[121.16]] consentaneum est, quo tempore intestini caloris vis major. Saccarum collisum, pilos felium\n[[121.17]] mulcendo frictos, in tenebris micare, squamas etiam piscium nonnullorum lucere constat.\n[[121.18]] <b>Lucem</b> equidem certum est esse motum partium corporis lucidi intestinum tam fortem ut\n[[121.19]] partes emissae in omne circa punctum sensibile motum propagent, differreque a <b>calore</b> sola\n[[121.20]] subtilitate. Erit ergo flos quasi quidam caloris bene depurati. Nec refert, quod calor tactu non\n[[122.1]] sentitur, nam et cicindelae tactu frigidae sunt, quas tamen lucem longa ad solem apricatione\n[[122.2]] aestivis diebus colligere credibile est. Erit ergo sudor lucens, nihil aliud quam calor (ignis)\n[[122.3]] purus et subtilis, humori viscoso sed bene subacto et transparenti, uno verbo <b>Gelatinae</b>\n[[122.4]] mixtus. Gelatinae enim omnes die lucent, noctu non omnes. Stollianam autem etiam noctu\n[[122.5]] lucere ex tuis suspicor, quod discrimen in solo gradu consistit. </p>\n<p> [[122.6]] Cum diu multumque cogitassem de hypothesi quadam Physica struenda, quae phaenomenis\n[[122.7]] omnibus satisfaceret, visus sum mihi tandem pretium operae nonnullum fecisse, detexisse\n[[122.8]] enim mihi videor motum quendam universalem in globo nostro, ex quo solo quod mireris\n[[122.9]] pene omnium globi nostri phaenomenorum, directionum, attractionum, sympathiarum, antipathiarum,\n[[122.10]] reactionum, praecipitationum, gravitatis, vis Elasticae, ratio peti possit. Forte dicta\n[[122.11]] hic sunt quaedam quae hactenus a nullo. Non quod possim aut ego, aut quisquam, paucis\n[[122.12]] exceptis, in quibus ars naturam imitari potest (quod unicum causae proximae cognitae <greek>krith́rion</greek>\n[[122.13]] est), proximas atque plenas rerum naturalium causas exhibere. Nam qui hoc posset,\n[[122.14]] esset in natura omnipotens, quidlibet ex quolibet facturus: materia enim omnium eadem est.\n[[122.15]] Sed quod non contemnendus ad veram causam integram gradus sit, nosse veram causam\n[[122.16]] motricem, etsi omnes ejus determinationes, vias, gradus, combinationes, applicationes nosse\n[[122.17]] hactenus nemini mortalium datum sit. </p>\n","number":"35a.","title":"LEIBNIZ AN JOHANN HEINRICH HORB","date":"[Mainz,] 2.(12.) Januar 1671"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

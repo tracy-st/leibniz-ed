@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_335","series":"Band VI 4 (1677 - 1690)","seq":335,"text":"[[1465.5]] <b>279.  Mira de natura substantiae corporeae [29. März 1683]</b>\n [[1465.6]] <tab/>[29. März 1683]\n[[1465.10]] <tit2><b>Mira de natura substantiae corporeae</b></tit2> </p>\n<p> [[1465.11]] Etsi extensio et motus prae aliis qualitatibus distinctius intelligantur, caeterae enim\n[[1465.12]] ipsis adhibitis sunt explicandae, revera tamen fatendum est, neque extensionem, neque\n[[1465.13]] motum a nobis omnino distincte intelligi tum quia semper involvimur difficultatibus de\n[[1465.14]] compositione continui atque infinito, tum quia revera nullae certae figurae extant in\n[[1465.15]] natura rerum ac proinde nec certi motus. Et quemadmodum color et sonus, ita etiam\n[[1465.16]] extensio et motus sunt phaenomena potius quam vera rerum attributa quae sine respectu\n[[1465.17]] ad nos absolutam quandam naturam contineant. Revera enim dici non potest cuinam\n[[1465.18]] subjecto insit motus, et proinde nihil in motu reale est, praeter vim et potentiam in rebus\n[[1465.19]] inditam, seu talem earum constitutionem, ut inde sequatur phaenomenorum mutatio certis\n[[1465.20]] regulis alligata. </p>\n<p> [[1465.21]] Extensio non pertinet ad substantiam corporis, ut nec motus sed tantum <b>materia</b>\n[[1465.22]] seu principium passionis, sive limitatae naturae, et <b>forma</b> seu principium actionis sive\n[[1465.23]] naturae illimitatae. Nam est in omni creatura et limitatum et infinitum. Limitatum\n[[1465.24]] respectu cognitionis distinctae, et potentiae irresistibilis. Illimitatum vero respectu cogni\n[[1466.1]] tionis confusae, et actionis refractae. Est enim omnis Anima aut potius omnis substantia\n[[1466.2]] corporea omniscia confuse et omnipotens refracte. Nihil enim in toto mundo fit, quod non\n[[1466.3]] percipiat, et nihil ipsa conatur, quod non in infinitum pertingat. Forma non male dicetur\n[[1466.4]] actus primus. Omnis creatura habet materiam et formam sive corporea est. Omnis\n[[1466.5]] substantia est immortalis. Omnis substantia corporea habet animam. Omnis anima est\n[[1466.6]] immortalis. Probabile est omnem animam imo omnem substantiam corpoream semper ab\n[[1466.7]] initio rerum extitisse. Strues aliqua seu ens per aggregationem ut lapidum congeries non\n[[1466.8]] dicetur substantia corporea sed est phaenomenon tantum. Substantia corporea nullam\n[[1466.9]] habet extensionem definitam. </p>\n<p> [[1466.10]] Quot sunt animae Tot sunt Atomi substantiales seu substantiae corporeae. </p>\n<p> [[1466.11]] Si moles est de essentia humanae substantiae explicari non potest quomodo homo\n[[1466.12]] idem maneat. </p>\n<p> [[1466.13]] Difficultates inextricabiles de origine rerum et formarum cessant, quia nulla earum\n[[1466.14]] origo aut substantiarum generatio. </p>\n","number":"279.","title":"Mira de natura substantiae corporeae","date":"[29. März 1683]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_97","series":"Band II 1 (1663 - 1685)","seq":97,"text":"<p> [[259.4]] <b>83. OTTO VON GUERICKE FÜR LEIBNIZ</p>\n<p> [[259.5]] [13. Oktober 1671.] [82.101.]</b></p>\n<p> [[259.23]] <i>Usus Globi Sulphurei,</i> </p>\n<p> [[259.24]] davon <i>in Tractatu meo de Spatio Vacuo, lib. 4. Cap. 15</i>, tractiret wirdt. </p>\n<p> [[259.25]] Eß ist bey dieser kugel zuwißen, Daß dieselbe an keinen feüchten orthe liegen, weniger\n[[259.26]] mit unsaubern händen, noch die feücht sindt, tractiret oder atteriret werden muß, sondern ie\n[[259.27]] hertere hände iemandt hat, undt ie druckner die seindt, ie beßer die kugel, uff vorhergehendes\n[[259.28]] bestreichen mit der handt undt atteriren, operiret. </p>\n<p> [[259.29]] Zu augenscheinlicher Darstellung (1) der <i>Virtutis Conservativae</i> oder <i>attractivae Telluris,</i>\n[[259.30]] pflege ich nuhr hopffen blätterlein zugebrauchen, wie wohl die kugel alles ann sich zeügt (doch\n[[259.31]] daß es nicht zu schwär, dan alles waß sie zeügt, muß sie der Erden nehmen, undt also stercker\n[[259.32]] ziehen alß <i>ipsa Tellus</i>). Aber (2) zu bezeigung der <i>Virtutis Expulsivae</i>, brauche ich dergleichen\n[[260.1]] Pflaumfäderlein von der größe wie hirbey geleget, welche (wan zuvor die kugel etwaß begriffen\n[[260.2]] oder bestrichen, undt auch ein mahl oder 3 mit dem handschlagk perstringiret worden) sie\n[[260.3]] an sich zeügt, hernach die ästlein sich von ein ander spreitzendt machet, undt entlich gar von\n[[260.4]] sich expelliret, auch also in ihren <i>orbe virtutis</i> umbher geführet werden kan; wie, so wohl in\n[[260.5]] diesen, alß andern, ermeltes Caput 15, mehrere anzeige gibt, auch die praxis ie mehr undt mehr\n[[260.6]] dociren wirdt. Dabey dan auch zuwißen, daß die kugel nicht alle zeit einerley effect praestiret,\n[[260.7]] sondern eine zeit mehr an sich zeügt, die ander zeit mehr expelliret, oder auch, so in diesen, so\n[[260.8]] in jenem, stärcker oder weniger operiret. </p>\n<p> [[260.9]] Die <i>Plumulae</i> so hirbey geschickt werden, weil sie in dem Brieffe gantz breit zusammen\n[[260.10]] gepräßet seindt, müßen zuvor in die warme Sonne geleget werden, damit sie sich wieder von\n[[260.11]] ein ander spreitzen, undt ihre rechte arth bekommen, oder man müste, wie diese sindt, neüe\n[[260.12]] suchen, die nehmblich fein rondt, nicht lange äste, auch gar keine keile haben. </p>\n<p> [[260.13]] Otto von Guericke. </p>\n","number":"83.","title":"OTTO VON GUERICKE FÜR LEIBNIZ","date":"[13. Oktober 1671.] [82.101.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

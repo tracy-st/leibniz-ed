@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_93","series":"Band II 3 (1695 - 1700)","seq":93,"text":"<p> [[255.1]] <b>93. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[255.2]] Hamburg, 13. (23.) Januar 1697. [90.104.]</b></p>\n\n<p> [[255.9]] I. N. J. C. </p>\n<p> [[255.10]] Excellentissimo Dno. Guilielmo Gothofredo Leibnitio </p>\n<p> [[255.11]] V. Placcius S. P. D. </p>\n<p> [[255.12]] Serius respondeo, dum ad litteras reperiendas Tuas, quibus aliquid Dno. Bussingio communicandum\n[[255.13]] inerat[,] omnes superioris anni et semestris praecedentis epistolas recenseo. Nec\n[[255.14]] tamen invenio quidquam, repetita ter et amplius lustratione. Puto itaque me tunc illico eas ipsi\n[[255.15]] misisse per communem quem habebamus auditorem, qui jam interim in Academias abiit. Erant\n[[255.16]] sane, quantum recordor, lineolae perpaucae, quae ad ipsum pertinebant. Neque nos convenimus,\n[[255.17]] nisi per accidens et valde raro. Neque conveniemus in posterum saepius, Weigelio etiam\n[[255.18]] defuncto in itinere. Quod miror te nescire. De Hinubero piget meminisse. Adeo me ludificatus\n[[255.19]] est, et mensibus quinque totis ita moratus ut nec tantum illis potuerim proficere quantum nunc\n[[255.20]] totidem diebus solus cum binis amanuensibus satis etiam inidoneis absolvo. Non poterat\n[[255.21]] alienior ingenio genioque ad hoc opus sese obtulisse tanto molimine. Rideres affatim, si vel\n[[255.22]] decimam partem enarrarem absurdorum, quae committebat. Neque mores hominis satisfaciebant.\n[[255.23]] Sane praesagiebat animus aliquomodo haec omnia. Sed ut in eo semper ego decipior et\n[[255.24]] decipiar dum vivam quod alios puto quam sunt meliores: ita hic insuper et Tua me commendatio,\n[[255.25]] et aviditas voto meo potiundi magis obfirmabat ad magnam patientiam. Ita ut non omnia\n[[255.26]] modo quae exigeret honorarii loco promte offerrem, sed additurus etiam ultra multum fuissem,\n[[255.27]] si candide aperteque id quod oblique volebat extorquere, petivisset. Ego interim eo adactus\n[[255.28]] tandem, ut, quod integro decennio amplius obstinate detrectaveram, manus operi admoverem\n[[256.1]] ipse; nunc bonam partem jam in mundum habeo redactam, et: D. V. si sic liceat pergere, intra\n[[256.2]] annum opus bibliopolae edituro potero tradere. Licet moles sit ultra expectationem magna, et\n[[256.3]] ultra semimyriadem adscensura. Nondum Caput octavum <i>Anonymorum</i> absolvi et jam ultra\n[[256.4]] 1400 sum nactus. Jam vero pseudonymi facile anonymos superabunt. Quo etiam citius et\n[[256.5]] certius faciliusque me expediam, id ago unice, ut quae jam parata sunt in collectaneis meis aut\n[[256.6]] symbolis alienis, ea sola in ordinem redacta describantur, nulla nisi plane obvia ulteriori aut\n[[256.7]] absolute necessaria inquisitione, alias sensum non habiturorum superaddita. Caetera perficiant\n[[256.8]] qui volunt et valent. Mihi abrumpere ac protrudere, ne pereant illa, quae parata sunt, suffecerit.\n[[256.9]] Nam absolvere hoc opus vel si saeculum vivam non potero. Adeo quotidie vel lectio vel\n[[256.10]] communicatio scripta, cumulat laborem, abrumpendum, noctu, non finiendum. </p>\n<p> [[256.11]] Interim occurrunt etiam his ipsis diebus oblata de quibus peto mihi, si fieri potest rescribi. </p>\n<p> [[256.12]] 1. In Fogeliana bibliotheca erant 4 quaterniones sive plagulae in 4. <b><i>Geometriam</i> Jungianam\n[[256.13]] Germanice</b> versam nondum integram sed sine capite atque calce continentes.\n[[256.14]] Earum exemplar aliud nullum extare amplius puto, adeoque Manuscripto hoc aequiparandum.\n[[256.15]] Quaeso an in Hanoverana etiamnum Bibliotheca illud extat? Puto Jungianam aut Tassianam,\n[[256.16]] certe alterutrius esse illam versionem, imo communicatis operis factam, omnibus technicis\n[[256.17]] vocibus accurate redditis. </p>\n<p> [[256.18]] 2. An aliquis <b>Magellottus</b> in Italia tibi innotuit, cujus anonyma quaedam mihi tam\n[[256.19]] deliris sunt liris indicata ut ipse supplere non possim inarticulatam adeo scriptionem et sensum\n[[256.20]] hinc inde hiantem amicae desuper symbolae acceptae. Ex Academia del Cimento Florentina\n[[256.21]] scribitur fuisse. De qua indubitato etiam tibi constat. </p>\n<p> [[256.22]] 3. In <i>Menagianis</i> pag. 274. mentio sit tui occasione libelli cui titulus <i>Histoire d'Yoland</i>,\n[[256.23]] tibi contra voluntatem tuam imputatae. Quid libri sit et cujus quaeso perscribe ut anonymis\n[[256.24]] meis inservire possit in quibus alias etiam absque hoc scripto tui sat erit crebra mentio\n[[256.25]] honorifica facienda. Vale. Hamb. 1697. Idibus Januariis, quoties expedit divinitus ut tibi\n[[256.26]] recurrant a me optatis semper ac optandis.\n [[256.27]] /  <i>A Monsieur, Monsieur Leibnitius, Conseiller de son Altesse Electorale à Hanover.</i> </p>\n","number":"93.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 13. (23.) Januar 1697. [90.104.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

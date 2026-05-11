@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_425","series":"Band VI 4 (1677 - 1690)","seq":425,"text":"[[1801.10]] <b>347.  De Pallavicini axiomatibus [1686 bis 1689 (?)]</b>\n [[1801.11]] <tab/>[1686 bis 1689 (?)] </p>\n<p> [[1801.17]] Nec sufficiunt nec vero conducunt ad ratiocinandum, quasi conclusionum praemissa\n[[1801.18]] capita, initia illa: <i>quodlibet vel est vel non est</i>, item <i>Non potest idem simul esse et non\n[[1801.19]] esse</i>. </p>\n<p> [[1801.20]] Sex omnino axiomata sunt, quae nec probari per aliquid se perspectius possunt, et\n[[1801.21]] unicuique hominum, ac ferme etiam belluarum suopte ingenio constant; Eademque\n[[1801.22]] necessaria sunt atque idonea, quibuscunque argumentationibus qua physicis, qua moralibus: </p>\n<p> [[1802.1]] Primum: <i>nil novum oritur ex se ipso, sed ab alia quadam causa producitur.</i> </p>\n<p> [[1802.2]] 2. <i>Ab eadem plane causa</i> (volendi facultatem excipio) <i>produci nequeunt nova\n[[1802.3]] effectorum genera.</i> </p>\n<p> [[1802.4]] 3. <i>Si postquam extitit certa quaepiam res certam aliam rem oriri semper videmus,\n[[1802.5]] illa hujus fuit causa.</i> </p>\n<p> [[1802.6]] 4. <i>Proximae causae</i> (praeter volendi facultatem) <i>ex quibus diuturno et semper simili\n[[1802.7]] experimento manare vidimus certum effectorum genus, ejusdem generis effecta dabunt\n[[1802.8]] etiam in posterum, modo nil novum ponatur nisi alius locus et aliud tempus.</i> </p>\n<p> [[1802.9]] 5. <i>Illud effectorum agmen quod antehac semper a certa quadam specie propinquarum\n[[1802.10]] causarum duntaxat prodire vidimus, imposterum quoque ab ejusdem modi causis\n[[1802.11]] duntaxat prodibit.</i> Hoc intra moralis, quod ajunt, evidentiae fines concluditur. </p>\n<p> [[1802.12]] 6. <i>Plerumque id ipsum causae imposterum efficient, atque in praesentia efficiunt,\n[[1802.13]] quod plerumque ab iisdem vel a maxime similibus causis antea effectum novimus.</i> Hoc\n[[1802.14]] sola pariter evidentia morali contentum est, et ei omnis practica ratiocinatio innititur. </p>\n<p> [[1802.15]] 7. Huic sexto generali praejudicio communiter adjiciunt homines natura suadente in\n[[1802.16]] singulis eventibus peculiarem quandam anticipationem ac persuasionem, ex qua tota\n[[1802.17]] <i>probabilitas</i> emergit, quae fallax utique, sed plerumque vera est, nimirum: <i>in hoc ancipiti\n[[1802.18]] eventu id contingit, quod in similibus circumstantiis plerumque contingere consuevit.</i> </p>\n<p> [[1802.19]] Haec P. Sforza Pallavicinus (postea Cardinalis) lib. 2. <i>de Bono</i> quemadmodum ipse\n[[1802.20]] in libri Epitoma exhibet. </p>\n<p> [[1802.21]] Sunt quaedam in his Pallavicini quae non satisfaciunt. </p>\n<p> [[1802.22]] 1) Verum est generaliter prolatum contradictionis principium nihil novi dare, sed si\n[[1802.23]] per ecthesin quandam applicetur rebus, ut <i>Omne A est A</i>; <i>unumquodque sibi ipsi aequale\n[[1802.24]] vel simile est</i>, et his similia efficit aliquid, quemadmodum exemplis comperi. Ignorant\n[[1802.25]] hos usus non philosophi, quia multa de demonstrationibus disserentes, raro ad ipsasmet\n[[1802.26]] conficiendas perveniunt. </p>\n<p> [[1802.27]] 2) Principia quae hic affert Pallavicinus non sunt indemonstrabilia ut statuit, sed\n[[1802.28]] fluunt ex definitione veritatis, <b>vera</b> enim propositio est ad identicas resolubilis, seu\n[[1802.29]] cujus ratio reddi potest, hinc vulgo ajunt nihil sine causa vel ratione fieri posse vel asseri\n[[1802.30]] debere. </p>\n<p> [[1802.31]] 3) Etiam axioma tertium non minus quam quintum ad moralem certitudinem pertinet.\n[[1802.32]] Imo tertium paulo est incertius et vix excedit praesumtionem. Sextum quoque ad\n[[1802.33]] moralem certitudinem non assurgit. </p>\n<p> [[1803.1]] 4) Non est cur volendi facultatem excipiat in axiomatibus secundo et quarto, nam et\n[[1803.2]] in voluntate nunquam eveniet ut omnibus tam intra quam extra volentem positis iisdem,\n[[1803.3]] diversum; aut diversis, idem, prodeat. Semper erit aliqua ratio inclinans voluntatem, etsi\n[[1803.4]] necessitatem non afferat. </p>\n","number":"347.","title":"De Pallavicini axiomatibus","date":"[1686 bis 1689 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

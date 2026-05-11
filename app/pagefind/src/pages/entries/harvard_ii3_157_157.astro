@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_157","series":"Band II 3 (1695 - 1700)","seq":157,"text":"<p> [[416.1]] <b>157. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[416.2]] Wolfenbüttel, 17. (27.) Februar 1698. [154.160.]</b></p>\n\n<p> [[416.6]] Wolgebohrner Herr Hochgeehrter Gönner. </p>\n<p> [[416.7]] Es <Fn><i>Am unteren Rand vermerkt Leibniz</i>: <angle bracket>r</angle bracket>escripsi mir zu schreiben daß ich antworten könne.</Fn> wird nicht unnöhtig sein, beizeiten von mir zusagen, daß ich nicht werde können hir\n[[416.8]] bleiben, ohne das Professer- oder Bibliothecarii prädicat u. unter 200 Thl., weil das stetige\n[[416.9]] absteigen sonst mich endl. würde zum famulo oder schreiber, der des jahrs 30 Thl. bekömt,\n[[416.10]] machen, welches sich zu meinen vorhabenden sachen nicht schikt. Solte nun das hir nicht\n[[416.11]] beliebt werden, werden Si sich erinnern, daß ich mit der bedingung hisige arbeit bis auf den\n[[416.12]] frühling auf mich genommen, nebst dem was in Hannover verzehrt, auch nöthige reisekosten zu\n[[416.13]] empfangen: dises zu erwehnen zwingt mich di böse zeitung, daß vom Grafen nichts zu hoffen.\n[[416.14]] Di billigk. u. viel andere ursachen werden mir 400, freie wohnung u. holz zuerkennen. </p>\n<p> [[416.15]] Meinen <zl>^#h(+5)1<ne>2<be> bogen den ich länger nicht entbehren, u. selber vor 8. wochen hätte abschreiben\n[[416.16]] können, bitte eiligst zu senden, damit das buch ins reine zu bringen, länger nicht gehindert werde,\n[[416.17]] zu meinem höchsten nachtheil. Di untersuchung unserer frage sol bald folgen. Indeßen verbl. </p>\n<p> [[416.18]] Wolgebohrner Hr. Ihr gehors. G. Wagner </p>\n<p> [[416.19]] Wolf. 17. Hornung 98.\n [[416.20]] /  Dem Wolgebohrenen Hrn. Hrn. Gotfried Wilhelm von Leibniz, Ihr. Churf. Durchl. von\n[[416.21]] Brunschw. Geheim. Justiz Raht u. a. m. etc. Hannover </p>\n","number":"157.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Wolfenbüttel, 17. (27.) Februar 1698. [154.160.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

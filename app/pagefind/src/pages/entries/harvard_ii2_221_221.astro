@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_221","series":"Band II 2 (1686 - 1694)","seq":221,"text":"<p> [[708.15]] <b>224. JACQUES L'ENFANT FÜR LEIBNIZ</p>\n<p> [[708.16]] [30. Juni 1693.] [235.]</b></p>\n[[709.8]] <b>Memoires des articles sur les quels il seroit necessaire de consulter\n [[709.9]] Monsieur de Leibniz, pour être mieux instruit de son Projet de <i>Dynamique</i>\n [[709.10]] dont il est fait mention dans le XX. volume du <i>Journal des savans</i> de Paris</b> </p>\n<p> [[709.11]] 1. Il faudroit savoir si la pensée de Monsieur de Leibniz touchant la force des corps est\n[[709.12]] bien expliquée dans le journal p. 304.305 de l'Edit. d'Amsterdam. </p>\n<p> [[709.13]] 2. Supposé qu'elle y soit bien expliquée, comme il s'agit d'une route toute nouvelle en\n[[709.14]] Philosophie, où il faut éviter les termes vagues, Monsieur de Leibnitz est tres humblement prié\n[[709.15]] d'expliquer avec beaucoup de précision, ce qu'il entend par <b>la force par laquelle les\n[[709.16]] corps peuvent agir et resister</b>. </p>\n<p> [[709.17]] Car, on peut entendre par cette <b>force</b>, ou, quelque chose d'exterieur et d'etranger aux\n[[709.18]] corps, ou quelque chose qui leur est tellement propre et interne, qu'on ne l'en peut jamais\n[[709.19]] separer. </p>\n<p> [[709.20]] Il semble méme que l'auteur du Journal l'ait entendu dans le premier sens, lors qu'il a dit\n[[709.21]] p. 304. que la <b>notion</b> de cette force des corps est superieure <b>aux notions de la pure\n[[709.22]] Geometrie</b>. Car tout ce que l'on peut imaginer dans les corps, comme, figure, mouvement\n[[709.23]] etc. etant inferieur aux <b>notions de la pure Geometrie</b>, et en dependant absolument, on ne\n[[709.24]] peut rien concevoir au dessus, que ce principe superieur qui avec l'existence a donné aux corps\n[[709.25]] toutes leurs proprietés. </p>\n<p> [[709.26]] Si c'etoit là la pensée de Monsieur de Leibnitz elle se rapporteroit à celle de M. Regis,\n[[709.27]] lequel au 1. livre de sa <i>Physique</i> Part. II. chap. IV p.m. 306. dit que <i>comme la volonté de Dieu\n[[709.28]] est immuable, la quantité de la force mouvante doit aussi toujours demeurer la méme</i> etc. En\n[[709.29]] quoy il me semble surprenant que M. Regis ait fondé cette <b>égale quantité de force</b> sur une\n[[709.30]] raison aussi Metaphysique qu'est <b>l'immutabilité de Dieu</b>, au lieu de la fonder sur le\n[[709.31]] <b>Mechanisme</b> du monde qui semble demander la même quantité de mouvement, determinée\n[[709.32]] d'une maniere infiniment diverse. </p>\n<p> [[710.1]] Quoy qu'il en soit, la pensée de Monsieur de Leibnitz n'a peu être, que cette force des\n[[710.2]] corps consiste en quelque chose d'exterieur, puis qu'il regarde cette <b>force</b> comme l'essence\n[[710.3]] des choses corporelles. </p>\n<p> [[710.4]] Mais cette hypothese là méme qui êtablit l'essence des corps dans la force de resister et\n[[710.5]] d'agir me paroit sujette à deux difficultés les quelles je m'asseure que Monsieur de Leibnitz\n[[710.6]] levera d'abord, s'il veut bien avoir cette complaisance. </p>\n<p> [[710.7]] L'une est, qu'elle met dans la necessité de concevoir toujours le corps comme agissant, ou\n[[710.8]] comme resistant, puisqu'on ne peut jamais concevoir un sujet sans ses qualités essentielles. Or\n[[710.9]] il me semble qu'il est beaucoup plus facile de concevoir le corps sans action et sans resistance\n[[710.10]] que de le concevoir sans etenduë. Il est vray qu'on pourroit dire à cela que l'essence du corps\n[[710.11]] ne consiste pas à agir et à resister actuellement, mais à en avoir la force, à peu prés comme\n[[710.12]] plusieurs Philosophes soutiennent que l'essence de l'ame ne consiste pas dans la pensée\n[[710.13]] actuelle, mais dans la capacité de penser. Comme cette maniere de philosopher, sauve beaucoup\n[[710.14]] d'inconveniens, je l'embrasserois avidement, si mon esprit pouvoit s'accoutumer à regarder\n[[710.15]] une pure <b>capacité</b>, comme l'essence d'aucune chose. </p>\n<p> [[710.16]] La seconde difficulté dans l'hypothese qui regarde la force d'agir et de resister, comme\n[[710.17]] l'essence du corps, consiste en ce qu'il s'ensuit de là, qu'il n'y a point de differens degrés de\n[[710.18]] force dans les corps, par la maxime, <b>qu'essentia non suscipit magis et minus</b>, un ciron\n[[710.19]] n'etant pas moins etendu qu'un elephant. </p>\n<p> [[710.20]] 3. Supposé l'hypothese de M. de Leibnitz, degagée de toute sorte d'inconveniens, il n'est\n[[710.21]] pas encore aisé de comprendre la consequence qu'il en tire pour la presence reele, que ce\n[[710.22]] Philosophe aussi equitable que penetrant, a jugé incompatible avec l'hypothese de Descartes\n[[710.23]] touchant l'essence du corps. </p>\n","number":"224.","title":"JACQUES L'ENFANT FÜR LEIBNIZ","date":"[30. Juni 1693.] [235.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

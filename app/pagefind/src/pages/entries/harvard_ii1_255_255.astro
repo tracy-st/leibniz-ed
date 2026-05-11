@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_255","series":"Band II 1 (1663 - 1685)","seq":255,"text":"<p> [[795.1]] <b>226. CHRISTIAN PHILIPP AN LEIBNIZ</p>\n<p> [[795.2]] Hamburg, 3. (13.) März 1680. [225.230.]</b></p>\n<p> [[795.10]] Hambourg ce 3^#'e Mars, 1680. </p>\n<p> [[795.11]] [ ... ] M^#'r Rabel, qui vous baise tres-humblement les mains, croit toûjours, qu'on peut\n[[795.12]] remarquer facilement dans les écrits de M^#'r Descartes, qu'il estoit fort respectueux envers Dieu,\n[[795.13]] et que par consequent il n'ayt jamais eu l'intention de rien avancer, qui pût chocquer sa gloire;\n[[795.14]] de sorte qu'il falloit interpreter en bonne part, ce qu'on y pourroit trouver à redire aux\n[[795.15]] consequences qu'on en voudroit tirer; il croit de plus, que la moralité ne consiste pas dans la\n[[795.16]] posture ou situation des atomes ou des particules, et qu'une chose qui en resulte n'est bonne ou\n[[795.17]] mauvaise, qu'à l'egard de quelqu'estre intelligent; pour ce qui est de la volonté de Dieu, M^#'r\n[[795.18]] Rabel croit, qu'il n'en faut point parler comme de celle d'un homme, et quand M^#'r Descartes dit,\n[[795.19]] que les choses sont bonnes parce que Dieu les a voulu ainsy, il avoit entendu en mesme temps\n[[795.20]] qu'il les a voulu, parce [que] leurs idées estoient bonnes en effect. Enfin M^#'r Rabel s'imagine,\n[[795.21]] que s'il pouvoit un jour avoir le bien de vous voir et de vous parler, il vous reconcilieroit\n[[795.22]] entierement avec ce Philosophe. [ ... ] </p>\n","number":"226.","title":"CHRISTIAN PHILIPP AN LEIBNIZ","date":"Hamburg, 3. (13.) März 1680. [225.230.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

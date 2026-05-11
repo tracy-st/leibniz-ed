@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_204","series":"Band II 2 (1686 - 1694)","seq":204,"text":"<p> [[657.1]] <b>206. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[657.2]] [Hannover, 30. Januar 1693.] [203.217.]</b></p>\n<p> [[657.11]] [ ... ] Weil Mein hochwerthester H. so viel liecht in der Naturkundigung erlanget, so bitte\n[[657.12]] ich sonderlich auch auff Medicinam Corporis mit mehreren zu gedencken; und darinn den\n[[657.13]] überschwencklichen nuzen und gebrauch Medicinae mentis zu zeigen. </p>\n<p> [[657.14]] Was Sie sonst de Cabala gedencken, daß dadurch die grösten geheimnißen zu entdecken,\n[[657.15]] verstehe ich de Cabala sapientum das ist Characteristica, deswegen sie meine gedancken wißen.\n[[657.16]] Solten sie aber noch eine andere Cabbalam meinen, so werde erläuterung dero verstandes\n[[657.17]] erwarten. Sonst wäre freylich wohl zum hochsten zu wündschen, was Sie gedencken daß ein\n[[657.18]] forum sapientiae wäre, welches nicht weniger [bestehen] würde, als die Leipzigische Meße. Ein\n[[657.19]] baar arcana lucrifera wären guth dazu, aber darauff muß man nicht warten. Inzwischen können\n[[657.20]] briefe auch etwas thun; aber die solche schreiben können wie mein hochwerther Herr deren\n[[657.21]] sind wenig oder vielleicht niemand in teutschland. Ich zweifle nicht, es werden nach der zeit da\n[[657.22]] M. h. H. ich nicht gesehen, Sie noch ein viel größer liecht erlanget haben, zumahl in physicis,\n[[657.23]] und da steckts am meisten. Kondte man dermahleins einige guthe abreden nehmen; so zu unser\n[[657.24]] vergnügung und gemeinen Nuz dienen möchte, so wundsche dazu gelegenheit von herzen. </p>\n<p> [[657.25]] (: Den <Fn>(: Den ... dingen. :): <i>Diesen Abschnitt hat Leibniz eingeklammert, wohl um ihn von der Abfertigung auszuschließen.</i></Fn> guthen alten H. Krafft hoffe bey uns anzubringen, maßen bey Churfurstl. Durchl.\n[[657.26]] ihn vorzuschlagen mich erkühnet; darauff seine gedancken angehöhret und zimlich wohl\n[[658.1]] aufgenommen worden. Schade ists daß er nicht zwanzig jahr jünger. Doch ist er noch frisch\n[[658.2]] gnug. Er hat große Experienz in vielen dingen. :) Es ist schade daß man so wenig auff das\n[[658.3]] nothigste denket. Man stifftet eine Academi oder Schuhle uber die andere, aber die darinn\n[[658.4]] eigentlich realia tractirt würden, soll noch fundiret werden. Schade ists, daß vor etlich hundert\n[[658.5]] jahren einem vor heilig gehaltenen Mann nicht in sinn gekomen aus dem grund der Christlichen\n[[658.6]] liebe, umb die arme Krancke umbsonst zu versehen, einen orden der Erzte oder Naturkündiger\n[[658.7]] zu stifften. Dem orden würde die welt offen und zu dienste stehen, zumahl wenn trefliche leute\n[[658.8]] darinn wären, die ihr gemuth auff nüzliche entdeckungen richteten und naturliche wunder thun\n[[658.9]] köndten. Aber was halt ich mich auff mit Wündschen. Mein hochwehrtester H., als eine zierde\n[[658.10]] unser zeit scheinet solche Dinge dermahleins leisten zu können die ich kaum mit Wündschen\n[[658.11]] erreiche. [ ... ] </p>\n","number":"206.","title":"LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS","date":"[Hannover, 30. Januar 1693.] [203.217.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

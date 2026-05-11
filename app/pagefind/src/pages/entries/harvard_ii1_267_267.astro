@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_267","series":"Band II 1 (1663 - 1685)","seq":267,"text":"<p> [[819.3]] <b>232. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[819.4]] Hannover, 26. Juli (5. August) 1681. [202.]</b></p>\n<p> [[819.11]] Hanoverae 26. Julii 1681. </p>\n<p> [[819.12]] Legi Nicetae Spilii libellum. Et Nicetam quidem Vincentium esse manifestum est. Spilium\n[[819.13]] autem non difficulter divinabit qui quod Germanis <i>Spiel</i>, Ludum, id Anglo-Saxonibus\n[[819.14]] <i>Play</i> esse noverit. Autor quisquis est, eleganter in classes dispescit jurisprudentiae reformatores\n[[819.15]] et de singulis non inique judicat. </p>\n<p> [[819.16]] Unum nollem Veridici a Justiniano libellum <i>de Corpore Juris Reconcinnando</i> mihi\n[[819.17]] fuisse imputatum. Quem ego quidem non contemno; meum tamen haberi, et mihi parum\n[[819.18]] convenire, et in autorem injurium esse judico. Et qui meam Jurisprudentiae methodum cum hoc\n[[819.19]] libello confert; et in dictione et in ratiocinandi modo magnum discrimen depraehendet. At\n[[819.20]] potius prioris illius libelli Anonymi <i>de Corpore Juris Reconcinnando</i>, autorem me dici patiar.\n[[819.21]] Etsi non essem ipse illa, quae in eo facta est, propositione contentus. Sed Elector Moguntinus,\n[[819.22]] in cujus aula tunc agebam, caetera velut altioris indaginis moliminisque, rectius differri judicabat.\n[[819.23]] Itaque et arctioribus me limitibus inclusi, et jejunius dixi, quam fecissem meo usus\n[[820.1]] arbitratu. Veridici autem autorem comperi eundem esse cum eo qui se vocat Relfendso, cujus <i>de\n[[820.2]] summa potestate principum Germaniae</i> scriptum habemus, quod conferenti utrumque libellum\n[[820.3]] satis apparebit. Relfendso autem est Rosenfeld. </p>\n","number":"232.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"Hannover, 26. Juli (5. August) 1681. [202.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi2_4","series":"Band VI 2 (1663-1672); durchgesehener Nachdruck 1990","seq":4,"text":"[[145.34]] <b>34. De baptismo liberorum invitis parentibus </b> <span>145.0;0:62:034:7001-7112:L:l^</span>.\n[[145.1]] Incidit nuper ex tali casu meditatio. Chirurgus nescio quis ad Judaei cujusdam\n[[145.2]] Moguntini infantem periculose decumbentem vocatus, aquam poscit, cum nemo adesset,\n[[145.3]] baptizat puerum in nomine Patris, Filii et Spiritus S. Infans moritur. Judaei re comperta\n[[145.4]] mire indignantur, Chirurgus a se animam Deo assertam gloriatur. Mihi hoc incidit, Canones\n[[145.5]] legesque vetare invitis Judaeis parentibus liberos baptizari. Hoc non facerent, si tam facile\n[[145.6]] iis salutem asseri posse crederent. Ergo hoc ad salutem sufficere non putant. Quid ergo\n[[145.7]] requiritur? an fides parentis? Quid igitur, si ille mortuus, cujus ergo, an tum nullius, ergo\n[[145.8]] deterioris conditionis qui habet, quam non habet. Cujus ergo tum? an omnino eius qui\n[[145.9]] jus regendi habet? Quid si igitur nemo eum habeat, qui jure habeat, sed qui detinet, de\n[[145.10]] facto detineat, an iste infans deterioris conditionis erit. An ille qui detinet? ergo qui Judaeis\n[[145.11]] abripit, puerum baptizat, recte facit, Deo enim vindicat animam thesauris mundi\n[[145.12]] pretiosiorem. Cur ergo leges Canonesque rem tam utilem vetuerunt. Si illae recte vetuerunt,\n[[145.13]] necesse est aliud quiddam requiri, quam baptismum et alterius fidem. Requiritur ergo\n[[145.14]] Baptismus et fides praevisa per scientiam vel absolutam vel mediam, neque aliud quiddam\n[[145.15]] mihi apparet. Nam ubi videt Deus infantem, si superstes esset, crediturum, proficit ei\n[[145.16]] baptismus ad salutem, sin non crediturum, et felicitatis et damnationis expers est, quasi\n[[145.17]] non baptizatus. Et haec ratio est, cur Leges Canonesque Christianorum liberos baptizari\n[[145.18]] tam severe jubeant, Judaeorum vetent, quia credibile est Judaeorum liberos, si praeter\n[[145.19]] baptismum eis tribuatur nihil, in Judaismo educatum iri, et baptismum irritum fore;\n[[145.20]] contra liberos Christianorum Christianos fore praesumitur, neque nisi rarissime aliter\n[[145.21]] contingit. Caeterum eodem haec res fundamento nititur quo praedestinatio. DEus iis\n[[145.22]] salutem dabit, quorum fidem praevidet, quod si igitur intercipiantur mature antequam se\n[[145.23]] fides exerat, nihilominus dabit, ne sine culpa sua tanto bono spolientur. Duo requiruntur:\n[[145.24]] Baptismus et fides B aptizati. Dico: baptizati. Nam ita verba sonant: qui crediderit\n[[145.25]] et baptizatus fuerit, salvus erit. Ejusdem igitur est credere et baptizari. Fides baptizati\n[[145.26]] vel praesens, vel futura, nam praeterita nulla cogitari potest. Praesens in adulto: Futura\n[[145.27]] in infante. Infans aut adolescet, aut immaturus decedet. Si adolescet fides requiritur\n[[145.28]] absolute futura. Si decedet immaturus, fides requiritur sub conditione futura, si nempe\n[[145.29]] viveret. Unde non dicitur: qui credet et baptizabitur salvus erit, sed qui crediderit. Non\n[[145.30]] dicitur ho pisteusyn qui credet, crediturus; sed ho pisteusas, Aoriston seu indefinitum tempus,\n[[146.1]] quod in se haec omnia complectitur: qui credit, credebat, credidit, credet, crederet,\n[[146.2]] crediderit, credidisset, crediturus esset. Breviter: Infanti baptizato morienti eadem felicitas\n[[146.3]] evenit, quae superstiti evenisset. Ita moritur, quasi nondum moreretur. Aut quod fidem\n[[146.4]] infantis morientis post baptismum et salutem attinet, idem evenit quod eveniret, si primo\n[[146.5]] adolescentiae momento moreretur.\n","number":"34.","title":"De baptismo liberorum invitis parentibus","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

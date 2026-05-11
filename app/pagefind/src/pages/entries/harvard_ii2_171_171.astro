@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_171","series":"Band II 2 (1686 - 1694)","seq":171,"text":"<p> [[581.1]] <b>173. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[581.2]] Padua, 25. September [1692]. [171.177.]</b></p>\n<p> [[581.11]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[581.12]] L'altro giorno incontrandomi casualmente con il Sig^#'r^#'e Mendelino hebbi notitia, che qui era\n[[581.13]] capitato l'Abbate Stefani, che vive al servitio di cotesto Principe. Questo av[v]iso mi pervenne\n[[581.14]] tardi trovando il Sig^#'r^#'e Abbate in punto di partirsi, non havendo havuto tempo di mettere insieme\n[[581.15]] alcune scritture per inviarle a V. S. Ill^#'m^#'a attendendo dal Sig^#'r^#'e Marchese del Pozzo, che si\n[[581.16]] trattiene in Verona, l'Ongarello con alcune altre notitie circa la Casa Estense, solamente gli\n[[581.17]] consegnai le due <i>Gallerie</i> del Marino, con un Fulvio Testi, che mi furono da essa richieste, a cui\n[[581.18]] aggionsi un libretto per li Bombisti, nuovamente pubblicato dal Sig^#'r^#'e Alberghetti, come anche\n[[581.19]] alcune mie tesi, sostenute molti anni sono dal Sig^#'r^#'e Rozzini Nepote del Sig^#'r^#'e Procuratore\n[[581.20]] Rozzini, acciò V. S. Illu^#'m^#'a conosca con quanta buona volontà, ed attentione hò istruito questa\n[[581.21]] Nobiltà, attaccandomi sul principio alla Filosofia cartesiana non ostante il fremito de' Scolastici,\n[[581.22]] che non volevano ascoltare che il solo Aristotile. Mi sono informato dall'istesso Sig^#'r^#'e\n[[581.23]] Abbate Stefani della qualità di cotesto Clima, e dell'Illustre Accademia di Volfembutel, e ne\n[[581.24]] sono rimasto contentissimo, havendomi confermato, quanto essa mi accennò nell'ultima sua, il\n[[581.25]] che mi hà magiormente animato a sollecitare il mio viaggio, e fare tutto per indurre alcuni\n[[581.26]] Giovani nobili di questo Dominio a portarsi in una Accademia favorita con speciale protettione\n[[582.1]] da un Principe, non meno potente, che letterato, ove coll'insegnamento delle più belle arti\n[[582.2]] cavaleresche si coltivano a meraviglia l'ingegno, ed il costume. Il Sig^#'r^#'e Abbate mi hà detto tanto\n[[582.3]] bene di cotesto Paese, havendomi interamente capacitato dell'ottima Morale, e soavissima\n[[582.4]] indole di cotesta Gente, che sospiro il fine di questo reggimento, per eseguire quanto hò\n[[582.5]] promesso, e fermamente deliberato, piangendomi il cuore di dovere ancora passare l'inverno\n[[582.6]] qui, e mi creda, che non abadarei alli rigori del freddo, e mi partirei subito, se gl'onesti motivi,\n[[582.7]] che nelle mie passate l' hò esposto, non m'obligassero a trattenermi qui questi altri pochi mesi. </p>\n<p> [[582.8]] Vorrei sentire il parere di V. S. Illu^#'m^#'a circa l'origine dell'Anima nostra, an scilicet sit\n[[582.9]] immediate creata a Deo, an potius ex traduce per propagationem, etenim mihi non videtur\n[[582.10]] saltem improbabile Animam rationalem propagari, non more corporum, sed modo spirituali\n[[582.11]] pure intelligibili, qui non pugnet cum Animae immortalitate, et spiritualitate. Vellem etiam a te\n[[582.12]] scire, an in Deo praeter Ideam sui, eluceat aliqua Idea puta rerum possibilium, et producibilium,\n[[582.13]] quae sit etiam necessaria, et naturalis ante omne liberum decretum. Scholastici cum Aquinate,\n[[582.14]] et Scoto sustinent ante omne liberum Dei decretum dari in Deo Scientiam rerum possibilium,\n[[582.15]] quam Simplicis intelligentiae appellant; mihi autem videtur in Deo tantum Ideam sui esse\n[[582.16]] essentialem, naturalem, et necessariam, Ideas vero aliarum rerum, quae non sunt Deus, esse\n[[582.17]] contingentes, arbitrarias, a libero Dei decreto pendentes, cum Deo sufficiat Idea sui, ut sit\n[[582.18]] infinite sapiens, sicuti et amor sui, ut sit infinite felix. Hinc moveri potest quaestio an Deus\n[[582.19]] suspendere possit cognitionem alicujus creaturae existentis, ut de ipsa nil actu Deus cogitet.\n[[582.20]] Quid citra erroris suspicionem statuendum sit de origine motus prorsus ignoro, dubito enim an\n[[582.21]] Corpori insit intrinsecum principium motus, eo modo quo Menti inest intrinsecum principium\n[[582.22]] cogitandi, neque modum quo corporum motus propagatur et communicatur satis intelligo,\n[[582.23]] quidquid recenter Cartesianae Philosophiae sectatores asserant. </p>\n<p> [[582.24]] Coll'Ordinario vegnente le darò parte del profitto, che hò cavato dalla sua universalissima\n[[582.25]] regola per l'Equationi, mentre che adesso non hò tempo ed il Corriere si parte. </p>\n<p> [[582.26]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o S^#'r^#'e vero Fardella </p>\n<p> [[582.27]] Padova 25 Settembre </p>\n","number":"173.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 25. September [1692]. [171.177.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

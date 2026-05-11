@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_206","series":"Band II 3 (1695 - 1700)","seq":206,"text":"<p> [[543.1]] <b>206. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[543.2]] [Helmstedt, Anfang April 1699.] [205.210.]</b></p>\n\n<p> [[543.9]] Illustris Domine, </p>\n<p> [[543.10]] Jubent me et Indulgentia Tua, quam plenissimam experior, et mea pietas, omnem studiorum\n[[543.11]] meorum rationem ad Te referre. Itaque binos hosce quaterniones mittendos reputavi, ut\n[[543.12]] intelligere digneris, ea me modestia cum Liberio conversari, qua id fieri aetatem meam decet.\n[[543.13]] Si Tuo judicio exornabor, praeclare mecum actum fuerit. Neque enim doctis displicere potest,\n[[543.14]] quicquid Tuo calculo probas. </p>\n<p> [[543.15]] Vitam Lutheri, a Christiano Junckero descriptam, ac plusculis nummis illustratam, puto\n[[543.16]] Tibi a Venerando D. Schmidio missum iri: alioqui pietatis meae fuisset, librum exhibuisse, ab\n[[543.17]] autore mecum communicatum. Nescio an ejusmodi operae multum autoritatis deferri queat,\n[[543.18]] quandoquidem nummi plerique privata autoritate, nec eo tempore cusi sunt, quo contigere facta,\n[[543.19]] quae illustrant. Vale, Illustris ac Gratiose Patrone, Deus Te servet. </p>\n<p> [[543.20]] Illustr. Nomin. T. subjectissimus cliens M. Ernestus Salomo Cyprianus.\n[[543.21]] <yi>Illustri ac Excellentissimo Domino, Domino Gothofredo Guilielmo Leibnitzio, Consiliario\n[[543.22]] Intimo Hannoverano Eminentissimo, Patrono suo Gratioso. Hannoveram. <i>par couvert</i>. </p>\n","number":"206.","title":"ERNST SALOMON CYPRIAN AN LEIBNIZ","date":"[Helmstedt, Anfang April 1699.] [205.210.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi1_16","series":"Band VI 1 (1663-1672); unveränderter Nachdruck der Erstausgabe 1930","seq":16,"text":" [[547.3]] <b>21 De Unitate Ecclesiae Romanæ 1669-1671 (?</b> Romana Ecclesia Unitatem suam mirifice jactat. Ego vero tueri ausim illam unionem\n [[547.4]] non esse veram, sed tantum exteriore aliqvo Politico Syncretismo simulatam. Probo:\n [[547.5]] Magna Pars Romanensium non credit articulos fidei in Romana Ecclesia definitos qvia\n [[547.6]] Papa definivit, sed qvia ita in antiqvitate Ecclesiastica se reperire putat.\n [[547.7]] Qvi autem non credit aliqvid verum, qvia Papa definivit, is secundum Romanam\n [[547.8]] Ecclesiam non est vere Catholicus.\n [[547.9]] Ergo Magna Pars Romanensium non est vere Catholica.\n [[547.10]] Assum tum probatur ex facto: Galli fere omnes, et ex eorum sententia Walemburgii,\n [[547.11]] Thomas Albius, Veronius, hanc qvam nunc exeqvar Analysin fidei se habere docent (confer\n [[547.12]] Franc. Macedum contra Albium, et Walenburgii notas ad Honoratum Fabri contra\n [[547.13]] Indifferentes Ms.). Nimirum Neminem posse salvari nisi credat articulos fidei fide divina. Fidem\n [[547.14]] divinam esse, credere qvod Deus dixit, qvia dixit. (Hactenus consensit Ecclesia Romana et\n [[547.15]] Gallicana. Iam seqvitur divortium.) Deum dixisse constare nobis per Christi et Apostolorum\n [[547.16]] praedicationem miraculis confirmatam. Apostolos sic praedicasse, constare nobis ex Historia,\n [[547.17]] seu antiqvitate Ecelesiastica, vel qvod idem est, traditione sive scripta sive non scripta. Ergo\n [[547.18]] ultima Analysis Fidei Gallicanae est in Antiqvitatis Ecclesi asticae hist oricam t\n [[547.19]] raditionem Haec est ubiqve Analysis Walenburgii, Veronii, Arnaldi, et Gallorum controversias\n [[547.20]] scribentium prope omnium\n [[547.21]] Nunc intueamur Analysin Romanam, seu Curialem, qvam et tuentur Iesuitae, vide\n [[547.22]] Honoratum Fabri libro de una fide contra indifferentes, et contra qvam proprie concussio Couringii\n [[547.23]] directa est. Unde nec declinarunt certamen Iesuitae, agnoscentes qvam oppugnat sententiam\n [[547.24]] suam esse, qvod fecerunt Walenburgii, qvi non responderunt concussioni, sed tantum\n [[547.25]] eam retorserunt. Analysis igitur Curialis haec est. Nemo potest salvari, nisi articulos fidei\n [[547.26]] credat fide divina. Fide divina credere est credere, qvia DEUS dicit. DEUS hodie nihil dicit,\n [[547.27]] nisi per hominem habentem a DEO donum infallibilitatis. Is homo habens a Deo donum\n [[547.28]] infallibilitatis nemo datur alius, qvi vel ipse praetendat se id habere, praeter solum pontificem\n [[547.29]] Romanum. Ergo nemo potest salvari, nisi articulos fidei credat qvia definivit Pontifex\n [[547.30]] Romanus. Huc redeunt argumentationes Bonartis, Honorati Fabri, Valeriani Magni aliorumqve id\n [[547.31]] genus. In hoc Sorite est manifestus paralogismus, inseritur enim to hodie in propositione tertia,\n [[548.1]] qvasi necesse sit hodie DEI vocem habere, nec sufficiat probare, DEUM sic locutum olim\n [[548.2]] Qvanqvam ut verum fatear etiam prima propositio est valde dubitabilis.\n [[548.3]] Caeterum ex his apparet Analysin fidei Romanae tantum differre ab Analysi fidei\n [[548.4]] Gallicanae, qvantum Analysis fidei Romanae differt ab Analysi fidei Augustanae. Et hinc omnes\n [[548.5]] illos, qvos etiam politicos Zelotae vocant, non vere sacramentorum gratiae fieri participes,\n [[548.6]] qvippe extra Ecclesiam constitutos, et Galliam suis libertatibus inhaerentem externo tantum\n [[548.7]] politice simulato syncretismo, qvam vero animorum consensu Ecelesiae Romanae cohaerere.\n [[548.8]] Haec scil. est jactata illa Ecclesiae Romanae unio. Caeterum Connexio ex hac ipsa illa\n [[548.9]] Analyseon oppositione patet Dicunt enim exerte Honoratus Faber et alii, salvari non posse, nisi\n [[548.10]] qvi potestatem et infallibilitatem pontificis credat.\n","number":"21","title":"De Unitate Ecclesiae Romanæ","date":"1669-1671 (?"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

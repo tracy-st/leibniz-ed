@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_431","series":"Band VI 4 (1677 - 1690)","seq":431,"text":"[[1960.7]] <b>353.  Physicae Partes [1677 (?)]</b>\n [[1960.8]] <tab/>[1677 (?)]\n[[1960.11]] <tit2><b>Physicae Partes</b></tit2> </p>\n<p> [[1960.12]] Duplex est physica tractatio, de formis seu affectionibus singulatim spectatis et de\n[[1960.13]] subjectis in quibus plures affectiones concurrunt. De formis exempli causa de figura,\n[[1960.14]] motu, duritie, colore: et de subjectis exempli causa, de igne, aqua, arena, quae scilicet\n[[1960.15]] pluribus formis concurrentibus constituuntur. Ita ignis est lucidum et calidum. Aqua est\n[[1960.16]] perspicuum album liquidum, insipidum frigidum (si sibi relinquatur), certique ponderis\n[[1960.17]] ac certae tenacitatis quae comparatione definiri possunt. Formae rursus aliae sunt simplices\n[[1960.18]] quae a nobis perfecte intelliguntur, ut magnitudo, figura, motus, resistentia, atque\n[[1960.19]] hae geometrico plane rigore tractari possunt. Aliae sunt compositae, quas satis quidem\n[[1961.1]] sensu non tamen satis ratione percipimus, ut calor, color, aliaeque sensiles qualitates:\n[[1961.2]] quae quatenus cum prioribus formis constanti ratione eas conjungi experimur, eatenus\n[[1961.3]] etiam ad Mathematicas rationes revocari possunt. </p>\n<p> [[1961.4]] Subjecta vel singulatim tractantur vel in systemate. Singulatim, si omnes dati subjecti\n[[1961.5]] exempli gratia aquae qualitates et affectiones enumeremus, et quando nimis vagae\n[[1961.6]] sunt certis gradibus definiamus. Deinde qualitates confusas ad simplices revocando\n[[1961.7]] texturam subjecti constituamus qua semel habita saltem aliquatenus non tantum causas\n[[1961.8]] phaenomenorum reddere sed et inexplorata adhuc phaenomena praedicere, et rem propositam\n[[1961.9]] ad varios vitae usus adhibere poterimus. </p>\n<p> [[1961.10]] Quodsi jam plura subjecta et inprimis simpliciora ac maxime diffusa hoc modo\n[[1961.11]] tractaverimus, tandem de toto nostri saltem mundi <b>systemate</b> partibusque certum\n[[1961.12]] aliquid statuere fas erit. </p>\n","number":"353.","title":"Physicae Partes","date":"[1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

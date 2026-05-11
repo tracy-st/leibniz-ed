@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_172","series":"Band VI 4 (1677 - 1690)","seq":172,"text":"[[583.1]] <b>140.  De vera hominis perfectione [Frühjahr 1684 bis Anfang 1685 (?)]</b>\n [[583.2]] <tab/>[Frühjahr 1684 bis Anfang 1685 (?)] </p>\n<p> [[583.9]] Quemadmodum omnes qui certant ad primam palmam aspirant, ita semper erectae\n[[583.10]] mentes ad id contendunt, quod in unoquoque genere summum est. Nam etsi plerique in\n[[583.11]] secundis tertiisque consistere cogantur, tamen ad haec ipsa facilius perveniunt, qui sibi\n[[583.12]] ulteriora proposuerunt. Itaque qui veri nominis eruditionem, hoc est cultum mentis\n[[583.13]] quaerunt ante omnia considerare debent, in quo consistat Felicitas seu vera Hominis\n[[583.14]] perfectio, neque enim aliud est Philosophia, quam sapientiae studium, nec aliud est\n[[583.15]] sapientia, quam scientia felicitatis; virtus autem est potentia hominis interna, ne scilicet\n[[583.16]] propriae mentis affectibus a recta ad felicitatem via dimoveatur. Quemadmodum fortuna\n[[583.17]] est hominis potentia in res externas, cujus etsi ea non omnino a nobis pendeat, tamen\n[[583.18]] saepe fabri sumus, et in summa tenendum est, qui cum ratione egit, non tantum felicem\n[[583.19]] sed et proportione virtutis fore fortunatum, quoniam omnes res externas una quaedam\n[[583.20]] Mens gubernat, cujus sapientia potentiaque summa est, quae caeterarum inprimis mentium\n[[583.21]] pro cujusque perfectione curam gerit. Unde sequitur omnia pulcherrima ratione\n[[583.22]] ordinata esse, cujus dogmatis demonstratio potissimus est humanae inquisitionis fructus;\n[[583.23]] nam et Amor Dei super omnia, et quod hinc divinae gratiae munere sequitur, aeterna\n[[583.24]] beatitudo in ejus cognitione continentur. Quae quidem suo loco ostendenda erunt, quemadmodum\n[[583.25]] et quod ratio exigat, et Deus postulet, ut semper Dei voluntate, eventu declarata,\n[[583.26]] hoc est praeteritis praesentibusque contenti simus, circa futura autem sequamur\n[[584.1]] voluntatem ejus praesumtam, et nosmet ipsos ac quae circa nos sunt, quantum in nobis est\n[[584.2]] perficere, sive Spartam nostram ornare conemur; licet fortasse voluntatem Dei eventu\n[[584.3]] declarandam aliorsum ivisse aliquando sit appariturum, neque enim Deo tempora ponere\n[[584.4]] nostrum est, et soli perseverantes coronabuntur. Inter ea autem quae circa nos sunt,\n[[584.5]] maxime perfici meretur, simile nobis animal, homo scilicet quisque cum quo nobis\n[[584.6]] agendi occasio est, quem Scriptura Sacra sine discrimine proximum vocat. Itaque ad\n[[584.7]] sapientiam pertinet benevolentia universalis; nec aliud est Justitia quam Caritas sapientis.\n[[584.8]] Sed nec majus in rebus externis bonum est quam vera amicitia, quae tum demum perfecta\n[[584.9]] est, cum ambo amici rationem sequuntur, ita enim alter alteri fidere potest, nam ratio est\n[[584.10]] res quaedam infallibilis atque aeterna; quae autem amicitiae aliis principiis nituntur\n[[584.11]] fluxae instabilesque sunt. Atque haec quidem pendent a cognitione Mentium. Sed quia a\n[[584.12]] sensibus externis validissimae in mentem impressiones fiunt, ex quibus varii affectus\n[[584.13]] nascuntur, quibus in felicitatis itinere juvari atque impediri possumus, nihil autem ex illis\n[[584.14]] magis nocet, quam quod ipsam vim intelligendi in nobis debilitat, qualia sunt quae sensus\n[[584.15]] nostros destruunt, et corrumpunt, nec quicquam ex illis magis juvat mentem, quam quod\n[[584.16]] organa perficit, itaque ad corporea quoque phaenomena veniendum est, cogitandumque,\n[[584.17]] quomodo vis externorum evitari aut domari aut in usum nostrum verti, et sanitas vigorque\n[[584.18]] corporis atque animi tranquillitas servari possint; hinc quaerendum est quae voluptatem\n[[584.19]] facere possint aut dolorem; et cognoscenda est natura tum corporis nostri, tum vicinorum,\n[[584.20]] itaque Mentium corporumque causa accurate tradenda est Historia civilis et naturalis.\n[[584.21]] Huic sociandae sunt scientiae purae seu abstractae a phaenomenis pendentesque a sola\n[[584.22]] idearum sive essentiarum possibilium et necessariarum contemplatione; unde Scientiae\n[[584.23]] quaedam mistae exurgunt, quae debent omnes ad felicitatem nostram ac publicam, seu\n[[584.24]] quod eodem redit propagandam Dei gloriam ordinari. </p>\n","number":"140.","title":"De vera hominis perfectione","date":"[Frühjahr 1684 bis Anfang 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_5","series":"Band VI 4 (1677 - 1690)","seq":5,"text":"[[16.1]] <b>5.  De notionibus empiricis [Mitte 1677 (?)]</b>\n [[16.2]] <tab/>[Mitte 1677 (?)] </p>\n<p> [[16.7]] In <b>Notionibus Empiricis</b>, ut auri, et aliorum in quibus de possibilitate non\n[[16.8]] constat nisi a posteriori; non habentur definitiones nisi provisionales. Ex. gr. si aurum\n[[16.9]] aliquod artificiale inveniretur, quod omnes haberet proprietates auri naturalis hactenus\n[[16.10]] consideratas, et subsisteret in examinibus consuetis, exurgeretque aliquis qui novum\n[[16.11]] quoddam indicaret examen ab artificiali illo auro non sustinendum, is utique defectum\n[[16.12]] aliquem definitionis auri eatenus explevisset. Notandum praeterea est, non sufficere ad\n[[16.13]] condendas definitiones <b>notionum Empiricarum</b> (ut ego voco) si quis norit catalogum\n[[16.14]] attributorum rei, nam si omnes illas in unum cumularet ad definiendum, fieret\n[[16.15]] definitio prolixa praeter necessitatem; sed opus est ut ex collatione cum aliis notionibus\n[[16.16]] quaedam attributa communia habentibus videat quaenam sufficiant ad rem (ut aurum), a\n[[16.17]] notis omnibus discriminandam, idque cum pluribus modis fieri potest, tot dantur auri\n[[16.18]] definitiones diversae. Sic aurum potest definiri, corpus gravissimum; metallum ductilissimum,\n[[16.19]] metallum cupellabile flavum vel metallum cupellabile et quartabile. </p>\n","number":"5.","title":"De notionibus empiricis","date":"[Mitte 1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

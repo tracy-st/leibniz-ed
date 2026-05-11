@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_152","series":"Band VI 4 (1677 - 1690)","seq":152,"text":"[[524.8]] <b>125.  De divisione orbis scientiarum universi [Sommer 1683 bis Anfang 1685 (?)]</b>\n [[524.9]] <tab/>[Sommer 1683 bis Anfang 1685 (?)] </p>\n<p> [[524.14]] Orbis Scientiarum universus hanc habet ab ipsa natura divisionem certam, quod\n[[524.15]] cognitio nostra versatur vel circa conceptus puros atque aeternas veritates vel circa\n[[524.16]] perceptiones confusas eorum quae contingere observantur; hoc est vel a solis notitiis\n[[524.17]] menti nostrae innatis proficiscitur tractatque de rerum possibilitate sive essentia; vel\n[[524.18]] praeterea indiget experimentis sensuum, tractatque de his quae facti sunt atque actu\n[[524.19]] existunt. Unius enim Dei est, omnia ex seipso distincteque et a priori cognoscere per\n[[524.20]] modum aeternae veritatis. Ex solis ergo rerum ideis demonstrantur Logica, et Metaphysica,\n[[524.21]] et Scientiae Mathematicae purae, quin et magna pars doctrinae de eo quod\n[[524.22]] justum atque utile est. Quod vero mixtae matheseos esse dicitur, et Mundi corporumque\n[[525.1]] in eo versantium, ac denique humanarum consuetudinum cognitio (ut divinitus revelata\n[[525.2]] nunc praeteream) inductionibus quibusdam ex Historia naturali atque civili, sed abstractis\n[[525.3]] superiorum scientiarum ratiociniis sociata derivatur. Itaque divisis scientiis in Experimentales\n[[525.4]] et Intellectuales, subdivisiones reliquae non aeque fixos limites habent, non\n[[525.5]] magis quam Oceanus Germanicus a mari Atlantico aut Deucaledonio ulla certa linea\n[[525.6]] separatur, cum unus continuus sit oceanus. </p>\n","number":"125.","title":"De divisione orbis scientiarum universi","date":"[Sommer 1683 bis Anfang 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

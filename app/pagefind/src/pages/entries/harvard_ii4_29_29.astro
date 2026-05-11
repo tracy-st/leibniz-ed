@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_29","series":"Band II 4 (1701 - 1707)","seq":29,"text":"<p> [[82.11]] <b>29. LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY</p>\n<p> [[82.12]] Berlin, 4. November 1702. [30.] </b></p>\n<p> [[83.1]] Monsieur </p>\n<p> [[83.2]] Je ne say s'il m'est permis de vous supplier de la faveur suivante. J'en fais cependant\n[[83.3]] l'essay parce que c'est quelque chose de fort raisonnable et charitable même à mon avis. Il y a\n[[83.4]] un soldat de la garnison de Spandau, qui a quelque talent naturel comme il a monstré par la\n[[83.5]] petite fortification qu'il a faite tout proche de Luzenbourg avec des petites sentinelles et canons\n[[83.6]] qu'il a fondus d'estain. Comme ce garçon pourroit aller plus loin et cultiver son talent pour le\n[[83.7]] service du public, et comme j'ay coustume de faire apprendre quelque chose à mes valets, j'ay\n[[83.8]] quelque envie de le prendre, si on le pouvoit tirer delà sans beaucoup de difficulté; et alors je\n[[83.9]] luy ferois apprendre à compter, desseigner, tourner, etc. </p>\n<p> [[83.10]] Mais il faudroit luy faire parler auparavant et apprendre de luy s'il en estoit bien aise, et\n[[83.11]] comment s'y prendre. Peutestre seroit il bon qu'il essayât cela comme de luy même. Souvent on\n[[83.12]] laisse aller les soldats s'ils peuvent trouver dix ecus qu'il faut pour lever un autre; et je ne\n[[83.13]] regretterois pas une petite somme comme cela. Il est dans la compagnie du commendant qui est\n[[83.14]] Mons. Bulow ce me semble. Peutestre que celuy cy ne feroit point le difficile, et au besoin on\n[[83.15]] pourroit employer nostre M. de Bulo pour favoriser la chose. Ainsi je vous supplie, Monsieur, de\n[[83.16]] faire parler premierement à ce soldat en secret, luy recommendant le silence jusqu'à ce qu'on\n[[83.17]] sache comment s'y prendre. Mais il n'y a point de temps à perdre, parce qu'il faut que je m'en\n[[83.18]] aille bien tost. Ainsi je vous supplie, Monsieur, de m'en faire savoir bien tost ce qui en est, en cas\n[[83.19]] que vous trouvés à propos de vous en mêler. Je demande mille pardon de cette liberté, souhaitant\n[[83.20]] de meriter vos bontés, et vous remerciant de celles que j'ay deja eprouvées, et je suis avec zele </p>\n<p> [[83.21]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[83.22]] Berlin 4 Novembr 1702 </p>\n<p> [[83.23]] A Monsieur Monsieur le Baron de Dobrzenski Grand maistre de la Maison de la Reine et\n[[83.24]] Conseiller intime de guerre du Roy </p>\n","number":"29.","title":"LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY","date":"Berlin, 4. November 1702. [30.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

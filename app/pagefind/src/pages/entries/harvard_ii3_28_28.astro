@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_28","series":"Band II 3 (1695 - 1700)","seq":28,"text":"<p> [[72.1]] <b>28. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[72.2]] Dijon, 29. August 1695. [23.30.]</b></p>\n\n<p> [[72.18]] Dijon le 29. aoust <b>1695</b> </p>\n<p> [[72.19]] Je croyois monsieur n'avoir plus de part dans vostre souvenir aprés le long silence que\n[[72.20]] vous aviés gardé en mon endroict; vous reconnoistrés par celle de mons^#'r le president Boisot que\n[[72.21]] je vous envoye que je pense en vous et que je prends part à ce qui vous regarde; J'ay oublié l'un\n[[72.22]] des trois Tiltres que nostre cher deffunct m'avoit promis de vous envoyer. Le 1^#'e^#'r estoit les\n[[72.23]] promesses de mariage de Marie de Bourg[og]ne avec Nicolas dûc de Calabre. Le 2. le traicté de\n[[72.24]] paix entre Charles V. et Muley Assen pour la rep. de Tunis; prenés la peine de me mander le\n[[73.1]] 3^#'e^#'m^#'e que j'ay oublié ayant égaré la lettre où il en estoit faict mention; mons^#'r le president Boisot\n[[73.2]] ne s'en tiendra pas lâ; Comme il est fort obligeant il fera son possible pour enrichir vostre <i>code\n[[73.3]] diplomatique</i> et contribuera tout ce que vous desirerez de luy. L'on n'a point mis dans nostre\n[[73.4]] <i>journal des scavants</i>, l'eloge que je vous ay envoyé quoy que j'en eusse faict donner un\n[[73.5]] exemplaire à mons^#'r le president Cousin pour cela; Il y en a mis un autre qui est venû bien long\n[[73.6]] tems après où l'auteur avance un mensonge, que vous avés recû beaucoup de piêces de m^#'r\n[[73.7]] l'abbé Boisot pour enrichir vostre ouvrage; on n'y a pas mis non plus ce que j'avois faict pour\n[[73.8]] mons^#'r Lantin comme je le mande à mons^#'r de Spanheim, tant je suis descrié dans l'esprit de ce\n[[73.9]] journaliste ou pour mieux dire tant il a de complaisance aveugle pour d'autres gens qui ne\n[[73.10]] connoissent pas mons^#'r Lantin et qui luy ont inspiré des choses qui ne sont point à sa louange; je\n[[73.11]] parlois fort de vous mons^#'r dans cet eloge de m^#'r Lantin et de l'histoire des plaisirs dont vous\n[[73.12]] m'aviés parlé; j'avois mesme pris occasion de là de faire une epigramme de dix vers à sa\n[[73.13]] loüange; nous pourrons retablir tout cela; Je vous remercie de vos belles et agreables nouvelles;\n[[73.14]] vostre reflexion sur le livre qui a pour Tiltre <i>Conjuration contre Descartes</i> m'a faict rire; je ne\n[[73.15]] scay ce que c'est ni qui en est l'auteur; j'ay mandé à mons^#'r Baillet de me le faire scavoir. </p>\n<p> [[73.16]] J'ay bien de la joye d'apprendre tout ce que vous, et mons^#'r de Spanheim me dites de\n[[73.17]] nostre amy mons^#'r Morel, je ne sçaurois m'empescher de la luy temoigner à luy meme par un\n[[74.1]] petit mot que je vous adresse; dites nous des nouvelles du <i>dictionnaire historique</i> de m^#'r Teissier\n[[74.2]] s'il avance fort; je parts dans deux jours pour nostre Campagne d'Is sur Tille où vous\n[[74.3]] pourrés m'adresser vos commandemens. Je suis du meilleur de mon Coeur tout à vous </p>\n<p> [[74.4]] Nicaise </p>\n","number":"28.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 29. August 1695. [23.30.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

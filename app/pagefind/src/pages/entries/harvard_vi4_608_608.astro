@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_608","series":"Band VI 4 (1677 - 1690)","seq":608,"text":"[[2724.1]] <b>477.  De munitione contra animi dissipationem [Winter 1685/86 (?)]</b>\n [[2724.2]] <tab/>[Winter 1685/86 (?)] </p>\n<p> [[2724.6]] Animus noster in bivium cogitandi delatus semper illuc fertur, ubi major ipsi realitas\n[[2724.7]] objectiva offertur; sed tamen ea res nocere potest ejus perfectioni atque felicitati, si\n[[2724.8]] scilicet realitates illae sint valde multae et parvae; quod appellari potest <b>dissipatio\n[[2724.9]] animi</i>, et locum habet cum obstupescimus, simileque est motui corporis perdito ex ictu\n[[2724.10]] in molle, ubi impetus per innumeras corporis partes dispergitur; itaque contra hanc\n[[2724.11]] dissipationem animi munire nos debemus creberrimis respectibus ad finem nostrum, et ad\n[[2724.12]] generales quasdam regulas veritatum, legesque vivendi semel praescriptas crebroque\n[[2724.13]] cogitandi atque agendi usu familiares nobis redditas. </p>\n<p> [[2724.14]] Videndum tamen an fieri possit et quomodo ut plus minusve realitatis objectivae sit\n[[2724.15]] in mente nostra. </p>\n<p> [[2724.16]] Est et obstupefactio animi, cum in gyrum brevem cogitando saepissime revertimur\n[[2724.17]] atque ita videmur diu eadem cogitare.\n[[2725.1]] E 2. MORALIA </p>\n<p> [[2725.2]] EXCERPTA ET NOTAE MARGINALES </p>\n","number":"477.","title":"De munitione contra animi dissipationem","date":"[Winter 1685/86 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_161","series":"Band II 3 (1695 - 1700)","seq":161,"text":"<p> [[421.3]] <b>161. JOHANN JAKOB LUNGERSHAUSEN AN LEIBNIZ</p>\n<p> [[421.4]] Jena, 18. (28.) März 1698. [174.]</b></p>\n\n<p> [[421.11]] Illustris atque Excellentissime Domine, Maecenas Magne! </p>\n<p> [[421.12]] Quae superiori anno transmittere audebam <i>specimina</i>, recte credam perlata: nunc his se\n[[421.13]] sociat opella quaedam Hermeneutica, benevolo intuitu ut beare velis, submisse rogito, studia\n[[421.14]] mea quaecumque Gratioso patrocinio Tuo ulterius commendans. Proxime mittam <i>Specimen\n[[421.15]] Arabicum</i>, pactum Scil. Mahummedis cum Nazarenis, quos vocat, seu Christianis initum, quod\n[[421.16]] juxta indolem Arabismi Latine transtuli, annexa simul crisi de ejus origine, an sit genuinus\n[[421.17]] Mahummedis foetus? Vale Vir Magne ac fave </p>\n<p> [[421.18]] Illustris Dominis Tui cultori devotissimo M. Joh. Jac. Lungershausen, </p>\n<p> [[421.19]] Jenae d. 18. Mart. Anno 1698. Fac. Phil. Adj. </p>\n<p> [[421.20]] P.S. Audio quod D. Niemeier Prof. Log. et Met. Helmst. B. Sandhagenii locum occupaturus\n[[421.21]] sit, quod si ita sit, liceat ab Illustri Tua Excell. percunctari quis spem successionis\n[[422.1]] hactenus conceperit. Studia mea quaec. per 15. annos Academicos Log. et Met. Prof. <greek>kaddýnamin</greek>\n[[422.2]] praeparavi. Si beneficio Tuo ambire liceret professionem illam Helmst., praesigni\n[[422.3]] favore me mactatum putarem.\n[[422.4]] <yi>Viro Illustri atque Excellentissimo, Domino Leibniz, Potentiss. Elect. Brunsv. ac Luneb.\n[[422.5]] Consiliario intimo etc. Domino meo Gratioso. <i>Hannover. par Amy.</i> </p>\n","number":"161.","title":"JOHANN JAKOB LUNGERSHAUSEN AN LEIBNIZ","date":"Jena, 18. (28.) März 1698. [174.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

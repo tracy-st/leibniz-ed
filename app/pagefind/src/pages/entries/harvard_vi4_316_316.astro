@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_316","series":"Band VI 4 (1677 - 1690)","seq":316,"text":"[[1372.1]] <b>260.  Causa sui November 1677</b>\n [[1372.2]] <tab/>November 1677 </p>\n<p> [[1372.7]] Spinosa hac utitur definitione: <b>Causa sui</b> est, quod necessariam involvit existentiam.\n[[1372.8]] Postea pergens ratiocinari voce: <i>causa sui</i>, utitur in recepto sensu. Quod non debet\n[[1372.9]] facere, sed perinde fieri debet ratiocinatio, ac si in locum termini: <i>causa sui</i> substituisset\n[[1372.10]] hunc: <i>Blitiri.</i> Nam si utitur significatione peculiari vocis: <i>causa sui</i>, eo ipso praeter\n[[1372.11]] valorem ei uni voci assignatum, novum ei valorem assignat, resolvendo vocem <i>causa.</i>\n[[1372.12]] Ergo ostendere debet prius has duas significationes coincidere, alioqui abutitur ratiocinatione. </p>\n<p> [[1372.14]] Regula utilis: non tantum debet substitui posse definitio in locum definiti, sed et\n[[1372.15]] quoties definitionem pro arbitrio assignavimus, debet posse substitui pro definito quodlibet\n[[1372.16]] aliquod, exempli gratia <i>Blitiri</i>, salva ratiocinatione. </p>\n<p> [[1372.17]] Novembr. 1677 </p>\n","number":"260.","title":"Causa sui","date":"November 1677"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

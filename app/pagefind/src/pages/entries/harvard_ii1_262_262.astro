@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_262","series":"Band II 1 (1663 - 1685)","seq":262,"text":"<p> [[809.17]] <b>228a. LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE</p>\n<p> [[809.18]] [Hannover, 6. Januar 1681.] [227b.231a.]</b></p>\n<p> [[810.9]] Cl^#'m^#'o viro Theodoro Haakio </p>\n<p> [[810.10]] Gothofredus Gulielmus Leibnitius. </p>\n<p> [[810.11]] Schedam ab Ingeniosissimo ac merito suo celeberrimo Hookio vestro ad te scriptam\n[[810.12]] accepi. Gaudeoque ei probari sententiam meam de usu maximo ac pene incredibili quem\n[[810.13]] habitura esset lingua plane rationalis qua cogitationes nostrae distinctissime exprimerentur.\n[[810.14]] Non enim tantum commercio generis humani serviret, sed et ipsas cogitationes mirifice sublevaret\n[[810.15]] et calculum universalem exhiberet ad algebrae instar in omnibus Scientiis tractabilem.\n[[810.16]] Quem sane usum in hoc charactere R^#'m^#'u^#'s Episcopus Wilkinsius ne quidem animo designavit.\n[[810.17]] Nihilominus tentamen ejus magni facio, et usus etiam ad hoc institutum fore arbitror. Quanquam\n[[810.18]] longe aliis auxiliis opus esse agnoscam, quod in Wilkinsiano Opere Celeberrimus\n[[810.19]] Hookius praecipue mutandum senserit qua ratione contrahi posse putet libenter discam. Recte\n[[810.20]] notat Hookius eandem artem Ratiocinandi quae in Algebra arithmeticae et Geometriae servit\n[[810.21]] etiam aliis Scientiis valere debere. Ego plus etiam addo, ipsam algebram non esse veram\n[[810.22]] characteristicam Geometriae sed longe aliam invenire debere, quam certus sum ad usus Geometriae\n[[810.23]] in mechanicis disciplinis fore algebra ipsa utiliorem. Et hoc miror hactenus a nemine\n[[810.24]] animadversum. Plerique enim omnes algebram pro vera arte inveniendi mathematica habent, et\n[[810.25]] quam diu hoc praejudicio laborabunt, nunquam veros Scientiarum reliquarum characteres\n[[810.26]] invenient. Habeo ego hujus novae Analyseos mathematicae specimina quaedam eaque arbitror\n[[810.27]] plane diversa ab omni eo quod veteribus vel recentioribus in hoc genere in mentem venit. Atque\n[[810.28]] huic fundamento character meus saltem pro parte modificabitur. Nam illa pars quae de rebus\n[[810.29]] tractat, imaginationi per se non subjacentibus diverso nonnihil characterum genere adhibito\n[[810.30]] imaginationi subjicienda est. Haec si tam praestita essent quam ego fieri posse clarissime\n[[810.31]] intelligo, haberemus organon quod magis intellectum juvaret quam ullus tubus opticus visum\n[[810.32]] possit. Sed non is ego sum qui tale quid promittam, majoris ea res momenti est, quam ut ab uno\n[[810.33]] homine absolvi possit. Denique eam curam arbitror dignam integra societate neque uspiam\n[[810.34]] temere nunc tam profundissimorum Ingeniorum copiam alibi reperias, quam ego in Anglia\n[[811.1]] agnosco. Sed vereor ne praesens ejus Regni status virorum ingenio praestantium cogitationes\n[[811.2]] alio vertat. Itaque id tempus hujus modi meditationibus parum aptum arbitror. Eoque magis\n[[811.3]] Illustris Societatis vestrae heroica plane consilia aestimo, quo magis opportunitate praesentium\n[[811.4]] conjunctionum atque ut ita dicam aspectuum destituuntur. Vale </p>\n","number":"228a.","title":"LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE","date":"[Hannover, 6. Januar 1681.] [227b.231a.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

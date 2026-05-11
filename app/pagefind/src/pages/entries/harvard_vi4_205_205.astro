@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_205","series":"Band VI 4 (1677 - 1690)","seq":205,"text":"[[802.5]] <b>169.  De cognitione [April bis Oktober 1686 (?)]</b>\n [[802.6]] <tab/>[April bis Oktober 1686 (?)] </p>\n<p> [[802.11]] Cognitio nihil aliud est quam cogitatio relata ad objectum. Ejus enim cognitionem\n[[802.12]] aliquam habere dicimur, de quo cogitamus. Neque tantum veritatum cognitio est, sed et\n[[802.13]] conceptuum et quaestionum. Et qui Mentem habet multis imaginibus instructam, is jam\n[[802.14]] illo provectior est, cui adhuc nuda est. Quemadmodum et qui quaestiones plurimas agitari\n[[802.15]] intellexit doctior est eo qui ne quidem novit dubitare et quaerere. Et si cui caeco nato\n[[802.16]] Deus subito ingeneraret coloris ideam, is quidem non esset ab experientia instructior\n[[802.17]] caecis caeteris, nesciret enim tale quid esse in rerum natura, attamen imaginationem\n[[802.18]] haberet ditiorem. Interim qui instructior est ab imaginibus et quaestionibus etiam caeteris\n[[802.19]] paribus instructior est a veritatibus, nam imagines quae aliquid distincti conceptus continent,\n[[802.20]] quod semper faciunt id praestant ut saltem cognoscamus possibilitates, et quae ab\n[[802.21]] experimentis natae sunt praeterea ostendunt quid actu sit in rerum natura. </p>\n<p> [[802.22]] Quaestionum vero cognitio saltem facit ut judicemus quaenam per se sint manifesta\n[[802.23]] vel non; eae enim veritates de quibus dubitare licet, per se notae non sunt. Et ubi dubitatio\n[[802.24]] cum aliqua inquisitione conjuncta est statim occurrunt menti aliquae alterutrius hypotheseos\n[[802.25]] consequentiae adeoque Hypotheticae veritates. Etsi autem objectum semper non\n[[803.1]] sit, scopus tamen cognitionis omnis est, Veritas. Ideo enim imagines consulimus, et\n[[803.2]] quaestiones instituimus, ut inveniamus veritatem, eaque dirigamur in agendo. </p>\n<p> [[803.3]] Pono Modi perveniendi ad cognitionem varii sunt. Vel enim per recordationem\n[[803.4]] prioris cognitionis vel per novam experientiam, vel denique per meditationem acquiritur\n[[803.5]] cognitio. Et quilibet horum modorum rursus est duplex, vel enim voluntate acquiritur\n[[803.6]] cognitio, vel casu. Voluntaria enim recordatio est, quando conscii nos aliquid scivisse, ex\n[[803.7]] vestigiis quibusdam paulatim reminiscentiam nobis paramus. At involuntaria est, cum\n[[803.8]] subito nobis ac sponte priores notitiae redeunt, in quo alii aliis sunt feliciores. Nova\n[[803.9]] experientia rursus vel casualis vel voluntaria est. </p>\n","number":"169.","title":"De cognitione","date":"[April bis Oktober 1686 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

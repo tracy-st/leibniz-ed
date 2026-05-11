@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_147","series":"Band VI 4 (1677 - 1690)","seq":147,"text":"[[507.14]] <b>120.  Reflexio mathematica de transformatione corporum [Herbst 1682 (?)]</b>\n [[507.15]] <tab/>[Herbst 1682 (?)] </p>\n<p> [[508.1]] <b>Homogenea</b> sunt quae sunt similia vel transformari possunt in similia. </p>\n<p> [[508.2]] <b>Transformatio</b> est mutatio quae fit in situ partium, nullis additis vel ademtis. </p>\n<p> [[508.3]] <b>Aequalia</b> sunt quae sunt congrua, vel transformari possunt in congrua. </p>\n<p> [[508.4]] <b>Similia</b> sunt quae sola comperceptione distingui possunt. </p>\n<p> [[508.5]] <b>Congrua</b> sunt, quae per se discerni non possunt, secundum modos scilicet illius\n[[508.6]] quod in ipsis commune est. Ut extensio est in duabus lineis, duratio in duabus horis, spatii\n[[508.7]] et temporis relatio in duabus velocitatibus. </p>\n<p> [[508.8]] Omne corpus transformari potest in aliud quod generari potest modo successivo\n[[508.9]] uniformi quo partes generantur ante totum toti similes: seu <b>omne corpus transformari\n[[508.10]] potest in corpus uniforme</i>. Tale est rectangulum, prisma. Item sphaera et\n[[508.11]] omne corpus regulare, quod intelligi potest formari continua intumescentia uniformi in\n[[508.12]] ambitum majorem. Demonstratur propositio ex natura corporis liquidi, potest enim\n[[508.13]] infundi in vas uniforme. </p>\n<p> [[508.14]] Si duo corpora uniformia sint similia inter se, seu eodem modo generata necesse est,\n[[508.15]] esse vel aequalia cum eodem tempore absolvuntur, vel si unum absolvitur ante aliud\n[[508.16]] necesse est partem hujus aequalem esse illi toti, quia eodem momento absolvitur pars\n[[508.17]] hujus aliqua; quae autem uniformi generatione simul absolvuntur congrua sunt adeoque\n[[508.18]] aequalia. Discrimen enim nisi temporis intelligi non potest. </p>\n<p> [[508.19]] Hinc cum omnia corpora transformari possunt in uniformia, sequitur, duo corpora\n[[508.20]] semper aut aequalia esse, aut unum alio majus aut minus. </p>\n","number":"120.","title":"Reflexio mathematica de transformatione corporum","date":"[Herbst 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

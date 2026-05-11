@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_29","series":"Band VI 4 (1677 - 1690)","seq":29,"text":"[[69.1]] <b>23.  Acervus Chrysippi März 1678</b>\n [[69.2]] <tab/> März 1678\n[[69.11]] <tit2><b>Acervus Chrysippi</b></tit2> </p>\n<p> [[69.12]] Martii 1678 </p>\n<p> [[69.13]] Tandem aliquando: </p>\n<p> [[69.14]] <i>Inventus Chrysippe</i> <i>tui finitor acervi.</i> <Fn><i>Von fremder Hand</i>: Persius, <i>Sat.</i> 6. extr.</Fn> Nimirum omnes illae notiones, in quibus\n[[69.15]] locum habet acervus sive sorites Stoicorum, ut <i>divitiae</i>, <i>paupertas</i>, <i>calvities</i>, <i>calor</i>, <i>frigus</i>;\n[[69.16]] <i>tepor</i>, <i>album nigrum</i>, <i>magnum parvum</i>, absolute sumtae sunt notiones vagae imaginariae,\n[[69.17]] imo falsae, seu nullam ideam habentes. Eae demum notiones, quibus objectio ista fieri\n[[69.18]] non potest, a nobis pure ac liquide intelliguntur. Scilicet priores respectum dicunt ad\n[[69.19]] nostram opinionem, quae variat, ex. g. quod uni frigidum id alteri calidum videtur,\n[[69.20]] utrumque vere, imo et eidem diverso tempore. Idem est de paupertate. Nam quem certo\n[[69.21]] respectu pauperem dicemus, alio respectu esse negabimus. Si <i>pauperies</i> absolute sumta\n[[69.22]] esset vera notio, deberet certo obolorum numero definiri, quia necesse est aliquem uno\n[[69.23]] obolo [abjecto] fieri ex non paupere pauperem; aut nunquam. Hinc defectui isti succurrunt\n[[69.24]] leges, et pauperem definiunt qui certum solidorum numerum non habet. Et aetate\n[[70.1]] majorem, qui 25 annos egressus est. De notionibus imaginariis verae saltem manent\n[[70.2]] propositiones comparativae, neque illis potest objici Sorites. </p>\n<p> [[70.3]] Notiones imaginarias voco, quae non sunt in rebus extra nos, sed quarum essentia\n[[70.4]] est nobis apparere. Hinc ubi dubitare incipimus, ut uno obolo detracto, cessat quaestio, et\n[[70.5]] is de quo agitur, mihi nec pauper est nec dives. Si definiamus rem effectu quodam certo\n[[70.6]] aliud est, ut pauper est, qui certum aliquid emere non potest. Calida res est, quae\n[[70.7]] thermometrum ascendere facit, tunc enim res reducitur ad sensum aliquem certum. Cum\n[[70.8]] dubitamus res sit calida an frigida, tepidam dicimus, tepor ergo non certa idea extra nos,\n[[70.9]] sed nostra dubitatione constat. </p>\n","number":"23.","title":"Acervus Chrysippi","date":"März 1678"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

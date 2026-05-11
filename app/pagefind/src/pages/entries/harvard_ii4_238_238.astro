@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_238","series":"Band II 4 (1701 - 1707)","seq":238,"text":"<p> [[715.21]] <b>238. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[715.22]] Hannover, 24. Dezember 1707. [237.] </b></p>\n<p> [[716.3]] Admodum Reverende Pater, Fautor Honoratissime </p>\n<p> [[716.4]] Magna <Fn><i>Am Kopf von L^#'2 von Leibniz' Hand</i>: Au R. P. des Bosses Jesuite à Hildesheim 24 X^#'b^#'r 1707</Fn> spe decidi, non secuto adventu Tuo. Mitto ecce tandem librum Thomae Bonartis\n[[716.5]] expectoque ut ubi vacaverit, sententiam aliquando Tuam mihi de eo exponas. Sed inprimis\n[[716.6]] nomen viri et fortunam beneficio Tuo nosse optem. </p>\n<p> [[716.7]] Exscriptor noster sophistam non ineptum egit. Vetustior Codex non describendi, sed\n[[716.8]] describentem juvandi causa additus erat. Nolo tamen rigide uti jure meo, itaque ubi descriptionem\n[[716.9]] absolverit, dabitur adhuc quod jam descripti pretio proportione respondeat; quod ex\n[[716.10]] numero foliorum absolutorum et residuorum aestimari potest. </p>\n<p> [[716.11]] Versus satyrici quos misisti, non sunt inelegantes. Recte ne an secus ad Rempium applicentur\n[[716.12]] non dixerim nec nosse curo. Neque enim scripta ejus polemica legi aut lego. </p>\n<p> [[716.13]] Hartsoekerus, cujus opiniones ex R. P. Orbani literis memoras, videtur mihi ita sentire ut\n[[716.14]] hodie multi eruditorum in Batavis solent. Ingenio non caret, sed de plerisque phaenomenis\n[[716.15]] naturae judicat tumultuarie ut sic dicam, quadam condendi systematis physici ambitione, cui\n[[716.16]] nostrae notitiae nondum sunt satis maturae. Praeterea profundior Mathesis pariter et Metaphysica\n[[716.17]] ni fallor non est ad ejus palatum. </p>\n<p> [[716.18]] Ignosce quaeso quod elegantem librum inscriptum, <i>esprit des nouveaux disciples de\n[[717.1]] S. Augustin</i>, nondum remitto. Impedimenta intervenerant, quo minus lectionem absolverem.\n[[717.2]] Faciam tamen quamprimum. </p>\n<p> [[717.3]] Gratias ago quod Excerptum Peresii sane ingeniosum mihi misisti. Optime judicavit\n[[717.4]] Perezius, incrementum caritatis novum quod ipsa meretur caritas, non esse ejusdem cum ipsa\n[[717.5]] dimensionis. Si fuisset versatus in meo calculo infinitesimali dixisset incrementa esse infinite\n[[717.6]] parva vel infinitesima respectu caritatis quae [ea] meretur. Notandum est cum incrementa in\n[[717.7]] gravibus descendentibus quovis momento sint aequalia, hoc loco caritatis incrementa esse\n[[717.8]] ipsamet continue crescentia. <Fn><i>Dazu zeichnet Leibniz im Auszug</i>:  </Fn> Nam major caritas etiam majus meretur augmentum. Itaque\n[[717.9]] lineam quae velocitates gravis ad quodvis temporis momentum repraesentat esse rectam, sed\n[[717.10]] lineam quae caritates completas quovis momento acquisitas repraesentaret (fingendo augmentum\n[[717.11]] non interruptum) fore curvam, cujus constructio penderet ex Logarithmis. </p>\n<p> [[717.12]] Saepe dixi ad eos qui non nisi recentioris philosophiae sectatores probant, non esse\n[[717.13]] prorsus spernendos Scholasticos, saepeque in eorum luto aurum latere: ut adeo operae pretium\n[[717.14]] ingens facturus sit, qui selecta inde in usum publicum aliquando congeret. </p>\n<p> [[717.15]] Doleo deesse Theologiae et Philosophiae Scholasticae historiam; et vellem oriretur aliquando,\n[[717.16]] qui quae Petavius et Tomasinus de dogmatis Theologicis coepere ex patribus, ex\n[[717.17]] scholasticis absolveret. Ita Historiam dogmatum ad nostra usque tempora nancisceremur. </p>\n<p> [[717.18]] Nihilne amplius de Ptolemaeo vestro intelligimus? Quod superest vale et fave. Dabam\n[[717.19]] Hanoverae 24 X^#'b^#'r 1707. </p>\n<p> [[717.20]] G. G. Leibnitius </p>\n<p> [[718.1]] P. S. Instantem annum cum multis aliis faustum et felicem precor. <Fn><i>Darunter notiert Leibniz als Verweis auf das 2. P. S. auf Bl. 58 v^#'o</i> : vertatur si placet</Fn> </p>\n<p> [[718.2]] P. S. Nuper forte inter schedas occurrit, quod mihi communicasti ex chartis Monasterii\n[[718.3]] Heinigensis. Equidem multas Tibi eo nomine gratias debeo, sed quod ibi narratur, haud dubie\n[[718.4]] fictitium est, et ab omni Historia alienum. </p>\n<p> [[718.5]] Suppositiones ejusmodi faciunt, ut quidam etiam de genuinis dubitent, quemadmodum\n[[718.6]] hypocritae faciunt, ut multi nullum sincere pium credant. Hoc vitio laborat Germonius cum suis\n[[718.7]] Trivultianis amicis, qui omnia diplomata Carolinae familiae [videntur] rejicere, in quo valde\n[[718.8]] excedunt mensuram boni critici. Ego ipse nuper Cassellis genuinum Caroli M. diploma vidi\n[[718.9]] datum secundo imperii anno.\n [[719.2 ANHANG\n\n","number":"238.","title":"LEIBNIZ AN BARTHÉLEMY DES BOSSES","date":"Hannover, 24. Dezember 1707. [237.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

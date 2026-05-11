@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_33","series":"Band II 2 (1686 - 1694)","seq":33,"text":"<p> [[146.1]] <b>34. LEIBNIZ AN JOHANN VAGETIUS</p>\n<p> [[146.2]] [Hannover, 20. Januar 1687.] [30.35.]</b></p>\n<p> [[146.14]] Vir Clarissime et Excellentissime </p>\n<p> [[146.15]] De Jungianis Capellianisque missis multas ago gratias, ac tuam in extinctos pietatem\n[[146.16]] laudo. </p>\n<p> [[146.17]] Du Cangius autor Magni <i>Glossarii</i> de rebus Byzantinis volumen spissum maxima eruditione\n[[146.18]] refertum, ut ejus viri omnia, aut mox edet Parisiis, aut jam edidit. Multae in eo\n[[146.19]] delineationes aeri incisae, quae nondum prostabant. </p>\n<p> [[146.20]] In Jungianis omnibus, maximis minimis, inveniuntur aliqua exquisita et utilia, ut recte\n[[146.21]] scribis; itaque optandum erat in urbe vestra subsidia editionibus superiori autoritate parari, quod\n[[146.22]] etiam ad laudem vestram pertineret. Nobilissimum Westermannum a me salutari rogo. </p>\n<p> [[146.23]] Reductionem consequentiae a rectis ad obliqua factam ad hoc quod vos apte vocatis\n[[146.24]] <i>Relationis inversionem</i>, probo, ut Jungiana pleraque. Semper enim danda opera est ut\n[[146.25]] composita reducamus ad simpliciora, quamdiu autem rem nondum reduximus ad omnium\n[[146.26]] simplicissima, fit (saltem in certo genere) ut variae ejusdem rei fieri possint Analyses, itaque\n[[147.1]] ego aliam resolutionem institui, nimirum obliquum specialem reduco ad obliquum generalem\n[[147.2]] cum recto speciali, quod etiam ad demonstrandum sufficit. Possumus etiam omnes praedicationes\n[[147.3]] reducere ad aequipollentias supplendo aliquid ad complendam reciprocationem, unde\n[[147.4]] rursus apparet propositum. </p>\n<p> [[147.5]] Si forte proxima aestate Hamburgum Deo volente excurrere vacabit, potero vestra venia,\n[[147.6]] (ut fieri posse innuis) Apographa quaedam Jungiana inspicere. </p>\n<p> [[147.7]] Cl. Siverus quem etiam a me salutari peto ni fallor aliquando et <i>Textoriam</i> Jungianam\n[[147.8]] pertexendi spem fecerat, quod perutile foret, praesertim si vacaret illi theoriam cum praxi\n[[147.9]] conferre, cujus rei multiplex Hamburgi materia est. Ea occasione possit adjici accurata descriptio\n[[147.10]] instrumenti aliquot abhinc annis in Scotia inventi, quo Tibialia fiunt. Interea <greek>F</i>oranomiam\n[[147.11]] Jungianam tandem edi, e publica re erit; sed addi desiderarem non tantum figuras, ut Siverum\n[[147.12]] facturum scribis, sed et demonstrationes, quae magis adhuc placent intelligentibus. </p>\n<p> [[147.13]] Fateor me nondum capere potuisse cur Jungius Heureticam excluserit a Logica, nisi forte\n[[147.14]] maluit eam considerare ut partem logicae secretiorem promiscue non vulgandam. </p>\n<p> [[147.15]] Nondum etiam satis intelligo quo sensu Metaphysicam non admiserit inter scientias. </p>\n<p> [[147.16]] Utrum in Heureticis et Zetesi praecepta aliqua conscripserit, beneficio tuo discere desiderarem.\n[[147.17]] Sed et utrum inter tot praeclara cogitata, non etiam in rebus Medicis aliquid tentaverit,\n[[147.18]] ipsemet doctor Medicinae et aliquando practicus; saltem in rite constituendis definitionibus\n[[147.19]] morborum nominalibus per symptomata seu signa in sensus incurrentia potuisset operae\n[[147.20]] pretium facere; tales enim certe haberi possunt debentque licet causae ignorentur, et hae ipsae\n[[147.21]] tamen utiles sunt causis aliquando investigandis.\n [[147.22]] Denique indicem Fasciculorum Jungianorum [<i>bricht ab</i>] </p>\n","number":"34.","title":"LEIBNIZ AN JOHANN VAGETIUS","date":"[Hannover, 20. Januar 1687.] [30.35.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

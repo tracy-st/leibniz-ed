@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_375","series":"Band VI 4 (1677 - 1690)","seq":375,"text":"[[1639.1]] <b>318.  Mentes ipsae per se dissimiles sunt inter se [März 1689 bis März 1690 (?)]</b>\n [[1639.2]] <tab/>[März 1689 bis März 1690 (?)] </p>\n<p> [[1639.8]] Contra Libertatem nostram objicitur rationem volendi esse ab externis, nempe a\n[[1639.9]] corporis temperamento, et objecti impressione. </p>\n<p> [[1639.10]] Respondeo: concurrere et dispositiones internas ipsius mentis. </p>\n<p> [[1639.11]] Instabis: dispositiones mentis praesentis, esse ab impressionibus praeteritis corporis\n[[1639.12]] et externorum praeteritis. </p>\n<p> [[1639.13]] Respondeo, concedendo de quibusdam, negando de omnibus, sunt enim quaedam in\n[[1639.14]] mente dispositiones primitivae quae non sunt ab externo. Itaque dicendum est Mentes\n[[1639.15]] ipsas per se, ex natura sua primitiva dissimiles esse inter se, contra quam vulgo putatur.\n[[1639.16]] Cujus rei etiam aliunde certa argumenta habeo in promtu. Ut una mens alia perfectior sit\n[[1639.17]] fortiorque ad resistendum externis. Radix libertatis est in dispositionibus primitivis. </p>\n<p> [[1639.18]] Instabis: queri te posse, cur Deus tibi non plus virium dederit. </p>\n<p> [[1639.19]] Respondeo: si hoc fecisset, tu non esses, nam non te, sed aliam creaturam produxisset. </p>\n","number":"318.","title":"Mentes ipsae per se dissimiles sunt inter se","date":"[März 1689 bis März 1690 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

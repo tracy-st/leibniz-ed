@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_1","series":"Band II 2 (1686 - 1694)","seq":1,"text":"<p> [[3.2]] <b>1. LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS</p>\n<p> [[3.3]] 1./11. Februar 1686. [2.]</b></p>\n<p> [[3.28]] Extrait de ma lettre à Mg^#'r le Landgrave Ernest 1/11 Febr. 1686 </p>\n<p> [[3.29]] J'ay fait dernierement (estant à un endroit où quelques jours durant je n'avois rien à faire)\n[[3.30]] un petit discours de Metaphysique, dont je serois bien aise d'avoir le sentiment de Mons.\n[[3.31]] Arnaud. Car les questions de la grace, du concours de Dieu avec les creatures, de la nature des\n[[4.1]] miracles, de la cause du peché et de l'origine du mal, de l'immortalité de l'âme, des idées, etc. y\n[[4.2]] sont touchées d'une maniere qui semble donner de nouvelles ouvertures propres à eclaircir des\n[[4.3]] difficultés tres grandes. J'ay joint icy le sommaire des articles qu'il contient, car je ne l'ay pas\n[[4.4]] encor pû faire mettre au net. </p>\n<p> [[4.5]] Je supplie donc V.A.S. de luy faire envoyer ce sommaire et de le faire prier de le\n[[4.6]] considerer un peu et de dire son sentiment. Car comme il excelle egalement dans la Theologie\n[[4.7]] et dans la philosophie, dans la lecture et dans la meditation, je ne trouve personne qui soit plus\n[[4.8]] propre que luy d'en juger. Et je souhaiterois fort d'avoir un censeur aussi exact, aussi éclairé et\n[[4.9]] aussi raisonnable que l'est Monsieur Arnaud, estant moy même l'homme du monde le plus\n[[4.10]] disposé de ceder à la raison. Peut estre que M. Arnaud trouvera ce peu de choses pas tout à fait\n[[4.11]] indignes de sa consideration, sur tout puisqu'il a esté assez occupé à examiner ces matieres. S'il\n[[4.12]] trouve quelque obscurité, je m'expliqueray sincerement et ouvertement, et enfin s'il me trouve\n[[4.13]] digne de son instruction, je feray en sorte, qu'il aye sujet de n'en estre point mal satisfait. </p>\n<p> [[4.14]] Je supplie V. A. S. de joindre cecy au sommaire que je luy envoye, et d'envoyer l'un et\n[[4.15]] l'autre à M. Arnaud. </p>\n","number":"1.","title":"LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS","date":"1./11. Februar 1686. [2.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

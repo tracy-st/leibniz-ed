@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_183","series":"Band II 3 (1695 - 1700)","seq":183,"text":"<p> [[465.1]] <b>183. LEIBNIZ AN NICOLAS MALEBRANCHE</p>\n<p> [[465.2]] Hannover, 2./12. Oktober 1698. [1.192.]</b></p>\n\n<p> [[465.19]] Mon Reverend Pere Hanover 2/12 Octobr. 1698 </p>\n<p> [[465.20]] Comme <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: Au R.P. de Malebranche</Fn> Mons. l'Abbé Torelli m'a temoigné d'avoir l'honneur de vous connoistre, je n'ay\n[[465.21]] pas voulu qu'il partist d'icy sans vous porter des marques qui vous puissent faire connoistre\n[[465.22]] combien je continue de vous honorer. J'en ay souvent donné d'autres, lors même que j'ay\n[[465.23]] avoué que nous n'estions pas en tout d'un même sentiment. Nous nous faisons tous deux un si\n[[465.24]] grand interest à avancer la connoissance de la verité, que nous nous sçaurons tousjours bon gré\n[[465.25]] des eclaircissemens que l'un peut fournir à l'autre ou au public. Je vous ay eu de l'obligation de\n[[466.1]] ce que vous avés bien voulu m'en avoir, lorsque vous avés retouché à vos loix du mouvement;\n[[466.2]] et quoyque à mon avis la loy de la continuité que j'avois mise autresfois en avant dans le\n[[466.3]] Journal de Hollande, et qui vous avoit plû jusqu'à donner occasion à vostre changement, s'y\n[[466.4]] trouve encor un peu interessée quoyque d'une manière moins perceptible qu'au commencement;\n[[466.5]] neantmoins j'ay crû que je n'aurois pas bonne grace d'y insister à vostre égard, pouvant\n[[466.6]] m'expliquer sans cela. Car je crois en effect que les loix de la nature ne sont pas si arbitraires\n[[466.7]] qu'on pourroit bien s'imaginer. Tout est determiné dans les choses, ou par des raisons comme\n[[466.8]] geometriques de la necessité, ou par des raisons comme morales de la plus grande perfection.\n[[466.9]] Vos beaux écrits Mon Reverend Pere, ont rendus les hommes beaucoup plus capables qu'ils\n[[466.10]] n'estoient auparavant d'entrer dans les verités profondes. Si je pretends d'en profiter je ne\n[[466.11]] manqueray pas aussi de le reconnoistre. Mons. Bayle a fait des objections contre mon systeme\n[[466.12]] dans son beau <i>Dictionnaire</i> à l'article de <i>Rorarius</i>. Mons. de Beauval publiera mes solutions\n[[466.13]] dans <i>l'Histoire des ouvrages des sçavans</i>, après [les avoir communiquées] à Mons. Bayle, qui\n[[466.14]] m'a écrit là dessus une lettre tres obligeante où il reconnoist la force de ma reponse. Je ne\n[[466.15]] laisseray pas de le prier de me marquer, s'il y a encor quelque chose qui l'arreste. Et rien ne\n[[466.16]] m'est plus agreable que de pouvoir estre instruit par des personnes aussi profondes et aussi\n[[466.17]] eclairées que vous et luy. Je suis avec zele </p>\n<p> [[466.18]] Mon Reverend Pere vostre tres humble et tres obeissant serviteur Leibniz </p>\n","number":"183.","title":"LEIBNIZ AN NICOLAS MALEBRANCHE","date":"Hannover, 2./12. Oktober 1698. [1.192.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

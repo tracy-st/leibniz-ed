@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_315","series":"Band VI 4 (1677 - 1690)","seq":315,"text":"[[1369.9]] <b>259.  Quid sit Idea [Herbst 1677 (?)]</b>\n [[1369.10]] <tab/>[Herbst 1677 (?)]\n[[1370.1]] <tit2><b>Quid sit Idea </b></tit2> </p>\n<p> [[1370.2]] Ante omnia <k>Ideae</k> nomine intelligimus <b>aliquid</b>, <b>quod in mente nostra est</b>,\n[[1370.3]] vestigia ergo impressa cerebro non sunt ideae, pro certo enim sumo Mentem aliud esse\n[[1370.4]] quam cerebrum aut subtiliorem substantiae cerebri partem. </p>\n<p> [[1370.5]] Multa autem sunt in mente nostra, exempli causa, cogitationes, perceptiones, affectus,\n[[1370.6]] quae agnoscimus non esse ideas, etsi sine ideis non fiant. Idea enim nobis <b>non in\n[[1370.7]] quodam cogitandi actu, sed facultate consistit</i>, et ideam rei habere dicimur,\n[[1370.8]] etsi de ea non cogitemus, modo data occasione de ea cogitare possimus. </p>\n<p> [[1370.9]] Est tamen et in hoc difficultas quaedam, habemus enim facultatem remotam cogitandi\n[[1370.10]] de omnibus, etiam quorum ideas forte non habemus, quia facultatem habemus eas\n[[1370.11]] recipiendi. Idea ergo postulat <b>propinquam quandam cogitandi de re facultatem,\n[[1370.12]] sive facilitatem.</i> </p>\n<p> [[1370.13]] Sed ne hoc quidem sufficit, nam qui methodum habet quam si sequatur ad rem\n[[1370.14]] pervenire possit, non ideo habet ejus ideam. Ut si ordine enumerem Coni sectiones,\n[[1370.15]] certum est me venturum in cognitionem Hyperbolarum oppositarum, quamvis nondum\n[[1370.16]] earum ideam habeam. Necesse est ergo esse aliquid in me, <b>quod non tantum ad rem\n[[1370.17]] ducat, sed etiam eam exprimat.</i> </p>\n<p> [[1370.18]] <b>Exprimere</b> aliquam rem dicitur illud in quo habentur habitudines, quae habitudinibus\n[[1370.19]] rei exprimendae respondent. Sed eae expressiones variae sunt; exempli causa\n[[1370.20]] modulus Machinae exprimit machinam ipsam, scenographica rei in plano delineatio\n[[1370.21]] exprimit solidum, oratio exprimit cogitationes et veritates; characteres exprimunt numeros,\n[[1370.22]] aequatio Algebraica exprimit circulum aliamve figuram: et, quod expressionibus istis\n[[1370.23]] commune est, ex sola contemplatione habitudinum exprimentis, possumus venire in\n[[1370.24]] cognitionem proprietatum respondentium rei exprimendae. Unde patet non esse necessarium\n[[1370.25]] ut id quod exprimit simile sit rei expressae, modo habitudinum quaedam analogia\n[[1370.26]] servetur. </p>\n<p> [[1371.1]] Patet etiam expressiones alias fundamentum habere in natura, alias vero saltem ex\n[[1371.2]] parte fundari in arbitrio ut sunt expressiones quae fiunt per voces aut characteres. Quae in\n[[1371.3]] natura fundantur, eae vel similitudinem aliquam postulant, qualis est inter circulum\n[[1371.4]] magnum et parvum, vel inter regionem et regionis tabulam geographicam; vel certe\n[[1371.5]] connexionem qualis est inter circulum et ellipsin quae eum optice repraesentat, quodlibet\n[[1371.6]] enim punctum ellipseos secundum certam quandam legem alicui puncto circuli respondet.\n[[1371.7]] Imo circulus per aliam figuram similiorem in tali casu male repraesentaretur. Similiter\n[[1371.8]] omnis effectus integer, repraesentat causam plenam, possum enim semper ex cognitione\n[[1371.9]] talis effectus devenire in cognitionem suae causae. Ita facta cujusque repraesentant\n[[1371.10]] ejus animum, et Mundus ipse quodammodo repraesentat Deum; fieri etiam potest ut ea\n[[1371.11]] sese mutuo exprimant quae oriuntur ab eadem causa, exempli causa gestus et sermo. Ita\n[[1371.12]] surdi quidam loquentes non ex sono, sed ex motu oris intelligunt. </p>\n<p> [[1371.13]] Ideam itaque rerum in nobis esse, nihil aliud est, quam Deum autorem pariter et\n[[1371.14]] rerum et mentis eam menti facultatem cogitandi impressisse, ut ex suis operationibus ea\n[[1371.15]] ducere possit quae perfecte respondeant his quae sequuntur ex rebus. Etsi itaque idea\n[[1371.16]] circuli non sit circulo similis, tamen ex ea veritates duci possunt, quas in vero circulo\n[[1371.17]] experientia haud dubie esset confirmatura. </p>\n","number":"259.","title":"Quid sit Idea","date":"[Herbst 1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

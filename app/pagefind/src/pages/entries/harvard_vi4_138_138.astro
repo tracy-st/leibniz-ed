@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_138","series":"Band VI 4 (1677 - 1690)","seq":138,"text":"[[445.11]] <b>113.  Ad praefationem elementorum veritatis aeternae [Frühjahr 1682 (?)]</b>\n [[445.12]] <tab/>[Frühjahr 1682 (?)] </p>\n<p> [[446.1]] In praefatione Elementorum veritatis aeternae, dicendum aliquid fortasse erit de his,\n[[446.2]] qui antea Methodum demonstrative scribendi sunt secuti, quid scilicet possit in iis\n[[446.3]] desiderari, et cur eorum nonnulli lectores etiam attentos, convincere non possint. </p>\n<p> [[446.4]] Euclides, et Geometrae obtinuere, ut nemo refragetur, sed hoc factum est, tum quia\n[[446.5]] passiones hominum in tali argumento non obstant, tum quia semper experiri licet veritatem\n[[446.6]] theorematum sive in numeris, sive in lineis. Fatendum est tamen nonnulla desiderari\n[[446.7]] posse in Euclidis demonstrationibus, et Franc. Sanchez miserat difficultates quasdam\n[[446.8]] suas ad Clavium, negabatque sibi satisfactum ejus responsis. Sed haec tamen\n[[446.9]] suppleri posse dubium nullum est; primus quantum nobis constet Geometriam ad res\n[[446.10]] physicas transtulit Archimedes, cujus libellum <i>De aequiponderantibus</i>, aliumque Hydrostaticum\n[[446.11]] habemus; scio complures in Archimedis demonstrationibus Mechanicis desiderare\n[[446.12]] aliquid; mihi tamen accuratae satis, aut certe facile supplebiles videntur. De motu\n[[446.13]] primus scientiam condere coepit Galilaeus; quidam Florentius (Fleurance) <i>Elementa rei\n[[446.14]] pyrobolicae</i> olim Gallica lingua scripsit, affectata Geometrarum Methodo, sed mihi\n[[446.15]] parum videtur scopum assecutus. </p>\n<p> [[446.16]] Dicam nunc de illis qui Methodum demonstrativam ad Metaphysica et Moralia\n[[446.17]] transtulere. Primus aliquid in hoc genere praestitit Aristoteles, cujus libri <i>Primorum\n[[446.18]] Analyticorum</i> utique sunt demonstrativi, et scientiam condunt circa materiam ab imaginatione\n[[446.19]] remotam. Inter Scholasticos quidam Joh. Suisset, vulgo dictus calculator, Mathematicum\n[[446.20]] aliquid affectavit, et de intensione ac remissione qualitatum solito subtilius\n[[446.21]] ratiocinatus est. </p>\n<p> [[447.1]] Demonstrare Existentiam Dei complures aggressi sunt ex absurditatibus quae ipsis\n[[447.2]] consequi videntur progressum in infinitum, ita autor <i>Tentaminis philosophici</i> qui fuit ni\n[[447.3]] fallor Sethus Wardus, et Joh. Bapt. Morinus, ut judico ex Epistola quadam Cartesii ad\n[[447.4]] Mersennum. Verum praesupponunt illi infinitum numerum posse concipi ut unum congregatum,\n[[447.5]] quod est falsum; et ideo multi recte docuerunt, potuisse Mundum esse ab\n[[447.6]] aeterno, nec quicquam inde absurdum sequi. </p>\n<p> [[447.7]] Cartesius cum sibi videretur existentiam Dei et discrimen animae a corpore\n[[447.8]] demonstrasse in <i>Meditationibus Metaphysicis</i>, urgentibus amicis ratiocinationes suas\n[[447.9]] redegit in formam demonstrationis, sed nulla magis ratione earum imperfectionem detexit,\n[[447.10]] ut examinanti diligenter patebit. Thomas Hobbes quaedam in moralibus, metaphysicis\n[[447.11]] et physicis egregie scripsit mathematica servata forma, idem dici potest de Honorato\n[[447.12]] Fabry, Thoma Anglo, et Benedicto Spinosa, sed innumera intercurrunt, in quibus apparens\n[[447.13]] potius quam vera est severitas, et in his quoque quae admitti possunt, propositiones\n[[447.14]] satis sunt perturbatae, ut taceam multitudinem propositiuncularum confundere mentem.\n[[447.15]] Nihil nunc dicam de scriptis quibusdam Conringii, Fabrii, Fabricii quibus controversias\n[[448.1]] Theologicas tali methodo tractare sunt aggressi, neque de his quae Trew in <i>Physica\n[[448.2]] Aristotelica</i>, Feldenus in <i>Jurisprudentia</i> praestiterunt. </p>\n","number":"113.","title":"Ad praefationem elementorum veritatis aeternae","date":"[Frühjahr 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

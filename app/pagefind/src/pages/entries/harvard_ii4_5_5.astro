@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_5","series":"Band II 4 (1701 - 1707)","seq":5,"text":"<p> [[21.5]] <b>5. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[21.6]] Dijon, 30. Mai 1701. [7.] </b></p>\n<p> [[21.16]] Dijon le 30 may <b>1701</b> </p>\n<p> [[21.17]] Il <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: resp.</Fn> y a long tems monsieur que je n'ay eû l'honneur de vous écrire, et que je n'ay recû de\n[[21.18]] vos cheres nouvelles; j'ay esté prés d'une année entiere à la campagne persecuté de toutes\n[[21.19]] sortes de maux, qui m'ont derangé, et qui m'ont empeché de satisfaire à mon devoir à l'egard\n[[21.20]] de mes amis, et surtout envers vous monsieur que je regarde comme le meilleur et le plus\n[[21.21]] important de Tous; Je n'ay écrit uniquement cette année qu'à nostre S^#'t pere Clement XI, à qui\n[[21.22]] j'estois obligé de le faire dans son exaltation, ayant recû auparavant de luy une excellente lettre\n[[21.23]] qui m'engageoit à le feliciter. On nous prosne ce pape comme un grand protecteur des Muses et\n[[21.24]] des scavants; tous les grands sont assés portés à souhaitter cette qualité dont ils tirent avantage;\n[[21.25]] mais il fault outre cela aymer les lettres, et il ne suffit pas ancor de les aymer il fault les\n[[22.1]] connoistre, c'est ce que mons^#'r d'Avranches trouve tres difficile surtout à un Italien qui n'a\n[[22.2]] travaillé toute sa vie qu'à se rendre capable d'arriver aux dignités et aux grands emploicts par la\n[[22.3]] politique; Il fault neanmoins se contenter des bons desirs et de la bonne volonté. Je laisse à\n[[22.4]] mons^#'r Pinsson à vous dire toutes les nouvelles litteraires dont je suis fort ignorant. J'ay veû\n[[22.5]] seullement ces jours passés le nouvau Journal qui s'imprime à Trevoux, dont je croy que mons^#'r\n[[22.6]] Pinsson vous aura faict part. Voicy ce que m'en ecrit un de mes amis qui est à Paris et qui a faict\n[[22.7]] une fort bonne critique du <i>Telemaque</i>. </p>\n<p> [[22.8]] <i>Puisque vous voyés le nouveau Journal de Trevoux Je n'ay plus de nouvelles à vous dire.\n[[22.9]] Je prevoys qu'ils nous vont divertir. Les Jesuites qui en sont les auteurs y attaquent les\n[[22.10]] Journalistes hollandois qui ne manqueront pas de chamailler avec leurs feû ordinaire. Il y dans\n[[22.11]] le second <b>Journal de Trevoux</b> une seconde Touche au <b>dictionnaire</b> de Furetiere r'imprimé\n[[22.12]] par Basnage: Les journalistes de Trevoux ont bien senti, que cela leur alloit faire des\n[[22.13]] affaires avec ce calviniste qui n'est pas endurant, et ont voulu adoucir la chose en chargeant\n[[22.14]] une preface d'un mensonge officieux, qui ne sert de rien, et qui pourra leur estre reproché:\n[[22.15]] quelle apparence que l'imprimeur se soit ingeré de fourrer dans le Journal la lettre pour\n[[22.16]] laquelle ils demandent excuse, et ne voit on pas qu'elle est de la composition de quelqu'un\n[[22.17]] d'entr'eux.</i> </p>\n<p> [[22.18]] Je me rejouis mons^#'r de voir le Suidas qu'on dit qui s'imprime à Paris avec beaucoup\n[[22.19]] d'augmentation et de correction; nous aurons bientost le Pollux de Hollande avec plusieurs\n[[22.20]] commentaires de scavants et surtout de mons^#'r Saumaise à ce que mons^#'r Graevius m'a ecript,\n[[22.21]] dites nous mons^#'r ce que vous faictes qui vaudra mieux que tout ce que nous attendons des\n[[23.1]] autres; nous aurons bientost les poesies de mons. d'Avranches avec son nouveau <i>paradis\n[[23.2]] terreste</i> r'imprimé en Hollande et augmenté. Mons^#'r Graevius me mande que quoyque le\n[[23.3]] Hesychius de Foppaeus paroisse desesperé qu'il y a neanmoins un Hollandois qui pretend nous\n[[23.4]] le donner; ce dictionnaire avec celluy de Pollux et de Suidas seront d'un grand secours aux\n[[23.5]] scavants et rendent bien le Furetiere[,] le Richelet et celluy de m^#'r Bayle; ne soyiés pas mons^#'r si\n[[23.6]] long à m'ecrire que je l'ay esté à vostre egard; soulagés mes maux par vos excellentes et\n[[23.7]] agreables lettres et croyés moy toujours Tout à vous </p>\n<p> [[23.8]] Nicaise </p>\n<p> [[23.9]] A Monsieur Monsieur de Leibniz prés de Son Altesse Electorale monseig^#'r le Duc\n[[23.10]] d'Hanovre. <b>Hanovre</b>. </p>\n","number":"5.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 30. Mai 1701. [7.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

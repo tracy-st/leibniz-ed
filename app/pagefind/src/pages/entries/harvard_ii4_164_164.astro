@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_164","series":"Band II 4 (1701 - 1707)","seq":164,"text":"<p> [[516.7]] <b>164. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[516.8]] Aschersleben, 14. November 1706. [161.194.] </b></p>\n<p> [[516.13]] Hochwolgebohrner Herr Hoher Gönner. </p>\n<p> [[516.14]] Allem ansehn nach hat Si mein briefchen vor 14. tagen nicht angetroffen wegen des\n[[516.15]] beilagers, daher ich den inhalt hir widerholen wollen. Ich bin nun an der deüts. <i>Weltweisen\n[[517.1]] Geschicht</i> so weit kommen, daß ich one di <i>Acta erud.</i>, <i>Ephem. Cur.</i> u.d.g. durchzulaufen nicht\n[[517.2]] weiter fort kan, wenn ich meinen zweck, Spraten einzuholen erreichen wil, drum hätte nun wol\n[[517.3]] größere lust das <i>reale</i> wörter-buch, so Si mir etligemal vorgeschlagen, zu versuchen; hätte ichs\n[[517.4]] vor disem auf mich genommen, wäre di <i>weltw. Geschicht</i> nimmer dahin kommen da si izt ist.\n[[517.5]] So wolte nun vernemen, ob Si noch des sinnes, gelegenh. zu besagtem wörterbuch zugeben; so\n[[517.6]] wolte mich auf befehl gleich einstellen; ich würde doch one zweif. di <i>Acta er.</i> u. <i>Ephem. nat.\n[[517.7]] Cur.</i> daneben haben können, meine <i>Geschicht</i> endlich einmal zu volfüren. Hirauf bitte gehorsamst,\n[[517.8]] bald eine antw. zu gönnen, weil ich mich sonst mit vergebligem warten in schaden\n[[517.9]] setzen würde: indessen verbleibe </p>\n<p> [[517.10]] Hochwolgebohr. Herr Dero gehorsamster </p>\n<p> [[517.11]] Gabriel Wagner. </p>\n<p> [[517.12]] Aschersleb. 14. Nov. [1]706 </p>\n<p> [[517.13]] Di antw. an mich wird abzugeben sein alhir bei dem Hn. Pfarrer Kortüm. </p>\n","number":"164.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Aschersleben, 14. November 1706. [161.194.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

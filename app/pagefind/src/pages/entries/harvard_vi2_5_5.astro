@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi2_5","series":"Band VI 2 (1663-1672); durchgesehener Nachdruck 1990","seq":5,"text":"[[146.6]] <b>35. Miracula Sacrae Coenae </b> <span>146.6;0:62:035:7001-7204:L:l^</span>.\n[[146.7]] Miracula Sacrae Coenae quae cum Axiomatibus Naturae pugnant.\n[[146.8]] I. Nihil potest simul duo disparata esse. Sed contra quod in Coena nobis proponitur\n[[146.9]] DEUS est et Homo.\n[[146.10]] II. Nihil est extra seipsum. Sed contra in coena,\n[[146.11]] non amans tam se penes\n[[146.12]] Quam penes amatum est.  H. Grot. Carm. de Euchar.\n[[146.13]] III. Nihil agit in seipsum. Sed contra in Coena Salvator se proponit suis edendum, se\n[[146.14]] propinat bibendum. Idem est Conviva, convivium; Comedens et qui comeditur.\n[[146.15]] Hieron. ad Hebr. q. 2.\n[[146.16]] IV. Nihil simul integrum et divisum est. Sed contra in Coena Christus totus in calice et\n[[146.17]] pane simul indivisim datur. Christus enim est in hoc sacramento non per modum\n[[146.18]] quantitatis, sed substantiae quae uti tota in minima parte continetur. Ita Christus\n[[146.19]] in singulis portionibus est totus. Augustin. tr. 26 in Joh.\n[[147.1]] V. Totum est majus parte. Sed contra in coena pars est aequalis toti. Nam\n[[147.2]] Sumit unus sumunt mille\n[[147.3]] Tantum iste quantum ille\n[[147.4]] Nec sumtus consumitur.\n[[147.5]] VI. Alimentum in nutritione assimilatur ei quod nutritur. Sed contra in coena caro et\n[[147.6]] sanguis Salvatoris tanquam alimentum spirituale non assimilatur corpori nostro,\n[[147.7]] sed nos assimilat sibi id est Spirituales facit. Thom. P. III. q. 73. art. 3.\n","number":"35.","title":"Miracula Sacrae Coenae","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

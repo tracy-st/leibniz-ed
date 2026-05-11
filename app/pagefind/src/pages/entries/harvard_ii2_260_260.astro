@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_260","series":"Band II 2 (1686 - 1694)","seq":260,"text":"<p> [[800.14]] <b>263. LEIBNIZ AN ERHARD WEIGEL</p>\n<p> [[800.15]] [Wolfenbüttel,] 10.(20.) Mai 1694. [86.]</b></p>\n<p> [[801.1]] HochEdler Vest und Hochgelahrter, insonders Hochg. H. und fürnehmer Gönner </p>\n<p> [[801.2]] [ ... ] Bin ganz damit einig, daß supremus juris gradus nicht ex socialitate oder usu hujus\n[[801.3]] vitae, sed Amore divino zu ziehen, davon ich ein und anders in der praefation meines <i>Codicis\n[[801.4]] Diplomatici</i> gemeldet, worüber M. h. H. hochvernünfftiges Urtheil verlange. Wiewohl ich nicht\n[[801.5]] sowohl ex beneficentia Dei als amabilitate vel pulchritudine solchen amorem hehrhohle, damit\n[[801.6]] es sey eine liebe über alles, ut Deus propter se ametur, obschohn alle andere glückseeligkeit\n[[801.7]] daraus quillet. </p>\n<p> [[801.8]] Ich habe unlängst H. Sturmii <i>Theosophiam</i> [gesehen], finde viel schohnes darinn, doch\n[[801.9]] nicht ohne Cartesianischen praejudiciis und bin ich gar nicht der meinung daß extensio naturam\n[[801.10]] corporis exhaurire. Und wiewohl nicht ohne daß Gott die creaturen immer schaffe oder\n[[801.11]] bewerckstellige, so bin ich doch mit dem Systemate causae occasionalis nicht einig, sondern\n[[801.12]] der meinung, daß specialis ratio mutationis in creaturis (verbi gratia in corpore nostro) nicht\n[[801.13]] bloß in causa generali (v.g. in voluntate vel decreto producendi in corpore quod vult anima),\n[[801.14]] sondern in denen creaturen beschaffenheit selbst zu suchen. Es stecket noch ein arcanum\n[[801.15]] dahinter, davon einsmahls bey gelegenheit ein mehrers. </p>\n<p> [[801.16]] Aus Italien hat man mir geschrieben ich wäre von H. Sturmio in seiner <i>Mathesi Enucleata</i>\n[[801.17]] touchiret worden, darüber man meine erclärung begehret. Ich bekenne, daß ichs nicht gewust\n[[801.18]] gehabt, als ich aber den orth angesehen, so hätte wündschen mögen, daß dieser trefliche Mann\n[[801.19]] mir seinen Zweyfel zu erkennen geben, so hätte ihm vielleicht davon abgeholffen. </p>\n<p> [[801.20]] Er verwundert sich über Meine dimensionem areae Circularis <zl>1<ne>1<be> ─ <zl>1<ne>3<be> + <zl>1<ne>5<be> ─ <zl>1<ne>7<be> etc. posito\n[[801.21]] quadrato diametri <zl>1<ne>1<be> (so doch demonstrationibus et experimentis numerorum erwiesen) und gibt\n[[801.22]] zu verstehen, daß köndte nicht seyn, denn weil aus bloßen numeris rationalibus nichts anders\n[[801.23]] als ein numerus rationalis entstehen köndte, so würde folgen, der circulus mit dem darumbgeschriebenen\n[[801.24]] Viereck commensurabel wäre, so ich selbst nicht zuließe. Es erscheinet aber\n[[801.25]] darauß daß er naturam serierum infinitarum nicht genugsam erwogen, dann quod numeri\n[[802.1]] rationales quotcunque componant rationalem, ist nur in serie finita war; in seriebus infinitis\n[[802.2]] aber so weit von der Wahrheit entfernet, daß ich die diagonalem quadrati, und alle anderen\n[[802.3]] surdas quantitates per series infinitas rationales exprimiren kan. </p>\n<p> [[802.4]] Meine Analysis Algebram Transcendens ist in der that nichts anders ipsa scientia infiniti,\n[[802.5]] und gleichsam scientiae Mathematicae generalis, seu de quantitate, pars superior, tractans de\n[[802.6]] quantitatis aestimatione per interventum infiniti. Ich verhoffe ein eigen wercklein davon einsmahls\n[[802.7]] zu geben, zumahlen ich zuerst durch den neuen calculum differentialem ad analysin\n[[802.8]] bringe was Cartesius selbst davon als Mechanisch ausgeschloßen gehabt, aber de infinito\n[[802.9]] Concreto in ipsis rebus habe nicht weniger viel admiranda, unter andern die demonstration, daß\n[[802.10]] in quavis particula materiae sey eine welt von unzahlbaren substanzen und also infinitum actu.\n[[802.11]] [ ... ] </p>\n","number":"263.","title":"LEIBNIZ AN ERHARD WEIGEL","date":"[Wolfenbüttel,] 10.(20.) Mai 1694. [86.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

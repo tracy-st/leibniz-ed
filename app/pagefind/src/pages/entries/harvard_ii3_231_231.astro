@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_231","series":"Band II 3 (1695 - 1700)","seq":231,"text":"<p> [[628.1]] <b>231. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[628.2]] Helmstedt, 4. April 1700. [226.233.]</b></p>\n\n<p> [[628.8]] Illustris Domine, </p>\n<p> [[628.9]] Publicum munus, Serenissimorum Nutritorum auspiciis Tuoque beneficio in me collatum,\n[[628.10]] ea, qua par est, fide sustinebo. Edidi hanc in rem, quod Tuae censurae submitto, programma,\n[[628.11]] olim, si conatum probaveris, exasciandum, ac sub titulo dissertationis <i>de vita et philosophia\n[[628.12]] Thomae Campanellae</i> edendum. Laudavi aliquot libros, non omnibus visos, qui heic philosophiam\n[[628.13]] interpretantur, idque ea potissimum ratione factum est, ut mihi servem amorem Tuum,\n[[628.14]] quo res admodum tritae indignae sunt. Thomasius societatem literariam instituit, quae singulis\n[[628.15]] mensibus vetustos ac fere neglectos libros recensebit, integrasve dissertationes varii argumenti\n[[628.16]] adjiciet. Insunt coetui mentes quaedam bene literatae, quibus nihil commercii erit cum cavillis\n[[628.17]] Thomasii, in nupera de fide historica dissertatione summum quendam virum aliosque minorum\n[[628.18]] gentium deos impugnantis. Haesi aliquandiu in patria, Principum Gothani et Römhildensis\n[[628.19]] colloquio dignatus ac mensae aliquoties admotus. Uterque me suffectum vult Doctori Sauerbrey,\n[[628.20]] qui hactenus Gymnasio Academico Coburgensi directoris nomine praefuit, ac spes est, me\n[[628.21]] propediem vocatum iri. Testor Deum, Illustris Here, nunquam me id muneris ambiisse: nec\n[[628.22]] video tamen rationem sat idoneam, cur subterfugere debeam onus illud. Est quidem mens mea\n[[629.1]] ad <greek>paideían</greek> academicam, ipsaque forte lingua, satis accommodata, nec est, cur Deo nullas\n[[629.2]] gratias agam pro plausu literatorum pectorum, qui mihi aliorum illo nunquam minor contigit.\n[[629.3]] At sunt tamen, quae vitam nonnihil molestam reddant. Primo certum est, susurrones quosdam\n[[629.4]] me Guelpherbyti invidia onerare ob modestissimas illas ac luculentissimis rationibus superstructas\n[[629.5]] in Arnoldi historiam animadversiones, quae nunc typographos fatigant. Deinde procul\n[[629.6]] dubio munus, historiam publice docendi, Dn. Cörberus sibi vindicabit: quo quidem ego indignus\n[[629.7]] sum; sed poteram forte industria et judicio dignus censeri olim. Neque enim ante hos\n[[629.8]] XV annos is fuit Cörberus, qui nunc est, et tamen eloquentiae professione ornabatur: ac video\n[[629.9]] sane frequenti usu comprobatum esse, ut muneribus, cum susciperent primum, impares essent\n[[629.10]] quidam ex nostris. Tandem D. Niemeierus cotidie protestatur contra lectiones meas metaphysicas\n[[629.11]] et logicas, nihilque harum deliciarum sibi eripi passurus est: Bohmeri autem Professionem\n[[629.12]] alii iam decretam esse, constat. Ignoscas autem, Illustris Domine, Here parente propensior,\n[[629.13]] meae dicacitati, qua in sinum Tuum effundo, quae ad fortunam meam spectare videntur. Scio\n[[629.14]] enim Dei ope factum esse, ut me diligeres, Tuoque adeo judicio cadam et stabo. Literatissimus\n[[629.15]] Struvius ut Tibi innotescat, his literis conatus est efficere. Vale, Domine Illustris, Numen Te\n[[629.16]] servet. Scrib. Helmstadii in Acad. Jul. MDCC d. IV. April. </p>\n<p> [[629.17]] Illustr. Nom. T. subiectissimus E. S. Cyprianus, Prof. Publ. </p>\n<p> [[629.18]] P.S. Perillustri Dn. Vicecancellario alterutrum programmatis exemplum exhiberi rogo et\n[[629.19]] obtestor. </p>\n<p> [[629.20]] P.S. De Professione historiarum penes neminem verba feci, nisi apud Deum et Te, Vir\n[[629.21]] perillustris, ut me consilio Tuo regas. </p>\n","number":"231.","title":"ERNST SALOMON CYPRIAN AN LEIBNIZ","date":"Helmstedt, 4. April 1700. [226.233.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

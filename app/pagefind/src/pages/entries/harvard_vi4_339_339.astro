@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_339","series":"Band VI 4 (1677 - 1690)","seq":339,"text":"[[1470.1]] <b>283.  Reflexio [1683 bis 1685 (?)]</b>\n [[1470.2]] <tab/>[1683 bis 1685 (?)]\n[[1470.5]] <tit2><b>Reflexio</b> </tit2> </p>\n<p> [[1470.6]] Autor <i>objectionum septimarum in Meditationes Cartesii</i> prope finem in resp. 12. ita\n[[1470.7]] habet: <i>Si dicat</i> (Cartesius) <i>se cogitare, hoc est se intelligere, velle, imaginari, sentire, et\n[[1470.8]] sic cogitare, ut suam illam cogitationem actu reflexo intueatur, et consideret, adeoque\n[[1470.9]] cogitet sive sciat, et consideret se cogitare (quod vere est esse conscium, et actus alicujus\n[[1470.10]] habere conscientiam), id vero esse proprium facultatis aut rei quae posita sit supra\n[[1470.11]] materiam, quaeque sit plane spiritualis, eoque pacto se esse Mentem se spiritum, dicet\n[[1470.12]] quod nondum dixit, et quod debuit dicere, et quod expectabam ut diceret, et quod saepius</i>\n[[1470.13]] [<i>ubi</i>] <i>vidi parturientem, sed inani conatu, volui suggerere; dicet inquam boni aliquid, sed\n[[1470.14]] novi nihil, cum illud nos a nostris olim praeceptoribus acceperimus, et illi a suis, atque\n[[1470.15]] opinor alii ab aliis jam inde ab Adamo. ... Si vero dicat intelligere, velle, imaginari,\n[[1470.16]] sentire, hoc est cogitare sic esse propria Mentis, ut nulla prorsus animalia praeter\n[[1470.17]] hominem cogitent, nulla imaginentur, sentiant, videant, audiant, novi dicet aliquid sed\n[[1470.18]] nihil boni</i>. </p>\n<p> [[1470.19]] Respondet Cartesius: <i>Hallucinatur objector, cum ait non sufficere quod substantia\n[[1470.20]] aliqua sit cogitans, ut sit posita supra materiam, et plane spiritualis quam solam vult</i>\n[[1470.21]] [<i>vocari</i>] <i>mentem, sed insuper requiri ut actu reflexo cogitet se cogitare, sive habeat\n[[1470.22]] cogitationis suae conscientiam ... Neque enim talis consideratio vel reflexio requiritur\n[[1470.23]] ut substantia cogitans sit posita supra materiam. Etenim prima quaevis cogitatio per\n[[1470.24]] quam aliquid animadvertimus, non magis differt a secunda per quam animadvertimus\n[[1471.1]] nos istud prius animadvertisse, quam haec a tertia per quam advertimus nos advertisse,\n[[1471.2]] nec ulla vel minima ratio afferri potest, si prima concedatur rei corporeae, cur non et\n[[1471.3]] secunda. Et periculosus est hic error tollendo enim veram et maxime intelligibilem\n[[1471.4]] differentiam quae est inter res corporeas et incorporeas quod nempe hae cogitent, illae\n[[1471.5]] non item, et aliam in ejus locum substituendo quae nullo modo essentialis videri potest,\n[[1471.6]] quod scilicet hae considerent se cogitare, illae non considerent, facit omne quod in se est\n[[1471.7]] ad impediendum ne realis humanae mentis a corpore distinctio intelligatur: eoque minus\n[[1471.8]] excusandus est quod brutorum animantium causae faveat, eisque non minus quam hominibus\n[[1471.9]] cogitationem tribui velit</i>. </p>\n<p> [[1471.10]] Mihi haec Cartesii responsio non satisfacit, nam ut taceam non debere eum insultare\n[[1471.11]] magis objectori quam aliis omnibus, qui hactenus cogitationem (posito quod et sensus sit\n[[1471.12]] cogitatio), brutis tribuere; Mentem vero humanam ab anima bruti potissimum actu\n[[1471.13]] reflexo distinxere, haec inquam ut taceam, quia nolo autoritate pugnare; non video cur\n[[1471.14]] discrimen inter animas quae conscientiam sui habent et quae non habent ipsi parum\n[[1471.15]] essentiale videatur. Nam res quae agere potest in seipsam, essentialiter differre videtur,\n[[1471.16]] ab ea quae id non potest. Certe quaecunque demum sit natura cogitationis (quae quamdiu\n[[1471.17]] non cognita est, utique nec sciri potest, an per modos extensionis explicari queat), illud\n[[1471.18]] saltem manifestum est, ex extensionis conceptu non posse deduci modum agendi in\n[[1471.19]] seipsum. Cum autem conscientiam nobis inesse dico eorum quae in anima nostra geruntur,\n[[1471.20]] non hoc volo nos semper actus reflexos exercere, et cogitationes nostras atque\n[[1471.21]] considerationes considerare, sed nos semper nostrae cogitationis ita conscios esse, ut si\n[[1471.22]] quis nos admoneat, aut ipsi nos admoneamus cogitationis nostrae praecedentis sciamus\n[[1471.23]] nos eam habuisse. Et quod perceptio ipsius rei a nostrae perceptionis perceptione non\n[[1471.24]] magis differat, quam perceptio perceptionis rei, a perceptione perceptionis perceptae, non\n[[1471.25]] video quo jure asserat, nulla allata probatione. </p>\n","number":"283.","title":"Reflexio","date":"[1683 bis 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

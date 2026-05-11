@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_161","series":"Band II 1 (1663 - 1685)","seq":161,"text":"<p> [[503.19]] <b>145. HERMANN CONRING AN LEIBNIZ</p>\n<p> [[503.20]] Helmstedt, 18. (28.) Mai 1677. [144.150.]</b></p>\n<p> [[504.7]] S.P.D. </p>\n<p> [[504.8]] Ex literis ad Eisenhartum nostrum exaratis, Clar^#'m^#'e et Consultissime Leibnitzi, summa\n[[504.9]] animi delectatione percepi, superesse tibi amicum erga me animum, et concessum ab Optimo\n[[504.10]] Principe locum virtute atque eruditione dignum. Utroque nomine et mihi pariter et tibi gratulor.\n[[504.11]] Et vero utar ego hac commoda occasione ad amicitiam coeptam imposterum quoque sancte\n[[504.12]] colendam. Epistolam, quam mitto, accepi Spira Nemetum heri demum, a necessario quodam\n[[504.13]] meo et populari ex Gallia reduce. Agnosco autem manum, ni fallor, Henrici Justelli: quoniam\n[[504.14]] cis menses duos circiter ab eadem manu aliquid accepi. Cui pridem respondissem, nisi tuta\n[[504.15]] mittendi Lutetiam commoditas mihi defuisset, et calumniis esset apud improbos obnoxium\n[[504.16]] quodvis meum cum Gallis literarium commercium quamvis innocentissimum. Mitto autem\n[[504.17]] simul et librum, Bibliothecae Optimi Principis inserendum: si quidem tu illum tanto loco\n[[504.18]] dignum judicaveris. Lipsiae adjungitur illi index; quem mittam propediem, modo ille responderit\n[[504.19]] exspectationi, hactenus enim nihil ejus vidi. Quod si existimaveris, non offensum iri\n[[504.20]] Principem; mittam brevi et meum pro <i>Animadversione in Novenam Antonianam</i> Apologeticum;\n[[504.21]] qui excrevit sub manu propter infinitas calumnias et improbam doctrinam Capucini cujusdam\n[[504.22]] vestri; quae omnia discutere et veritatis sanctae et boni nominis mei interest. Restant praeter\n[[504.23]] propter excudendae plagulae decem; operae autem nostrae typographicae perquam lento procedunt\n[[504.24]] gressu. Imperfectum opus non desiderabitur fortassis: alias et ita nunc misissem. Valetudo\n[[504.25]] minus favens septuagenario mihi impedit conatus quammultos bono publico alias consecratos.\n[[505.1]] Haud parum tamen recreaverit me, si pristina Optimus Princeps gratia me fuerit\n[[505.2]] prosecutus: quam proinde ut mihi concilies etiam atque etiam rogo, </p>\n<p> [[505.3]] Virtutis ac doctrinae Tuae justus aestimator </p>\n<p> [[505.4]] Helmstadii 1677. 18 Maji. Hermannus Conringius. </p>\n<p> [[505.5]] Ampliss. et Consult^#'m^#'o Viro Gotfredo Guilelmo Leibnitz Sereniss. Principi J. Frid. D. B. et\n[[505.6]] L. a Consiliis et Bibliothecis, Domino atque amico honorando. <Fn><i>Unter der Adresse von Leibniz' Hand</i>: <i>Lettre de M. Conring</i></Fn> </p>\n","number":"145.","title":"HERMANN CONRING AN LEIBNIZ","date":"Helmstedt, 18. (28.) Mai 1677. [144.150.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

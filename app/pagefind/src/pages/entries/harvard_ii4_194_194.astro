@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_194","series":"Band II 4 (1701 - 1707)","seq":194,"text":"<p> [[609.12]] <b>194. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[609.13]] Halle, 7. Juni 1707. [164.] </b></p>\n<p> [[610.1]] Hochwolgebohrner Herr, Hoher Gönner. </p>\n<p> [[610.2]] Eürer Excell. habe im neüligsten WinterM. durch zwei briefchen berichtet, daß ich mit\n[[610.3]] meiner <i>Geschicht der neüen Weltweisheit</i> weiter nicht fort könte, wegen mangel der Leipzig.\n[[610.4]] Monate, <i>Ephemer. nat Cur.</i>, etc. daher nun wider herumschweifen müste, solche bücher, u.\n[[610.5]] einen verleger zusuchen: dabei entdeckte ich meine izt größere lust zum weltweisen wörterbuche,\n[[610.6]] u. daß ich bereit stünde, auf Eür. Excell. befehl nach Hannover zu kommen, üm Dero\n[[610.7]] vorschub zugeniessen. Nach 4. wöchentliger vergebliger hofnung auf antw., reiste ich mit\n[[610.8]] großem leidwesen den 1. KristM. nach Jena, u. vergangenen 20. Merz nach Halle: hir erfuhr\n[[610.9]] ich, daß im kristM. ein brief an mich nach Jena wäre gangen; ich habe mich auf vilerlei art\n[[610.10]] bemühet, den brief von Jena zuerlangen, aber ümsonst. Weil man nun in Aschersleben gemuhtmast,\n[[610.11]] der brief sei von Eür. Excell. gewesen, so habe himit deßen mich gehorsamst erkundigen\n[[610.12]] wollen. Ersuche demnach Eür. Excell., mir ie ehe ie liber zu berichten, ob diselbe noch mir\n[[610.13]] gelegenheit an hand geben wolle zum <i>weltweisen wörterbuch</i>, oder auch di <i>weltw. Geschicht</i>,\n[[610.14]] <i>VernunftsKunst</i>, u. d. g. endlich zu verfertigen. Ich erwarte geneigte antw., in Verbleibung </p>\n<p> [[610.15]] Hochwolgebohr. Hr., Eür. Excell. gehorsamster </p>\n<p> [[610.16]] Gabriel Wagner. vormal. Prof. in Erlangen </p>\n<p> [[610.17]] Halle 7. Jun. [1]707. </p>\n<p> [[610.18]] Di antw. an mich ist abzugeben in der Märckerstraße bei Hn. Doct. Golen. </p>\n","number":"194.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Halle, 7. Juni 1707. [164.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

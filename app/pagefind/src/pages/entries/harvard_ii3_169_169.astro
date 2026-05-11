@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_169","series":"Band II 3 (1695 - 1700)","seq":169,"text":"<p> [[435.1]] <b>169. CLAUDE NICAISE FÜR LEIBNIZ</p>\n<p> [[435.2]] 19. April 1698. [167.172.]</b></p>\n [[435.3]] <p><tab/>Jean-Jacques Boisot an Claude Nicaise (Besançon, 18. April 1698) </p>\n<p> [[435.17]] Besançon 18 avril 1698 </p>\n<p> [[435.18]] Monsieur </p>\n<p> [[435.19]] Il est vray qu'on m'a ecrit de Paris pour faire tomber dans la Biblioteque du Roy les\n[[435.20]] manuscrits de celle de feu mon frere, Et que j'ay faits sur cela des propositions dont j'atends\n[[435.21]] des reponces par le p^#'e^#'r Courier, aussytost que je les auray receües je ne manqueray de Vous en\n[[435.22]] rendre comte. Si M^#'r de Leibnitz croit que je puisse luy fournir quelques copies des papiers qui y\n[[435.23]] sont, Il me semble qu'il n'a poin de temps à perdre parceque si lesdits manuscrits passent en\n[[435.24]] d'autres mains je seray privé du plaisir que je me faisois de luy rendre mes services là dessus\n[[435.25]] comme je souhaiterois de le faire en toutte autre chose, Je Vous suplie Monsieur de l'en\n[[435.26]] informer, et d'estre bien persuadé de ma passion à Vous tesmongner combien j'ay l'honneur\n[[435.27]] d'estre </p>\n<p> [[435.28]] Monsieur Vostre tres humble Et tres obeissant serviteur Boisot\n[[435.29]] <yi>A Monsieur Monsieur l'abbé Nicaise à Dijon </p>\n<p> [[436.1]] [<i>Nachschrift von Nicaise</i>] </p>\n<p> [[436.2]] Le 19. avril </p>\n<p> [[436.3]] Vous reconnoistrés mons^#'r par la lettre de m^#'r le president Boisot que je vous envoye et par\n[[436.4]] la date que je ne perds point de tems à vous faire scavoir ce que je vous ay mandé par celle que\n[[436.5]] je vous ay ecript il n'i a que deux jours; ainsy hastés vous de nous faire scavoir ce que vous\n[[436.6]] desirés; J'i adjouste une lettre pour mons^#'r Ludolphe que je reçûs hier de Rome du p. Bonjour\n[[436.7]] qui me cite dans sa lettre du Syriaque et de l'Arabe, qu'il scait mieux ecrire que le François; et\n[[436.8]] qui est une marque qu'il s'attache fortement à ces Langues. Il ne me dit rien de nouveau de\n[[436.9]] Rome sur le livre de mons^#'r de Cambray que ce que vous en avés appris par ma precedente, si\n[[436.10]] non ces deux ou trois mots. <i>Je ne vous dis rien sur le semiquietisme parcequ'on tiênt cela si\n[[436.11]] secret qu'on ne peut pas y rien penetrer</i> etc. Quand au vocabulaire que vous souhaittés de luy\n[[436.12]] des mots Aegyptiens qui se trouvent parmi les anciens auteurs; voicy comme il m'en ecrit pour\n[[436.13]] ce qui est du Receüil <i>vocabulorum Aegyptiorum apud veteres repertorum</i>: <i>On le trouvera dans\n[[436.14]] mon traicté de la langue Aegyptienne.</i> Voilà monsieur tout ce qu'il s'agit de vous ecrire\n[[436.15]] presentement, J'attends avec impatience vostre reponse pour pouvoir satisfaire à vos intentions;\n[[436.16]] Je suis en l'attendant avec toute la sincerité et le respect possible Tout à vous </p>\n<p> [[436.17]] Nicaise\n[[436.18]] <yi>A Monsieur Monsieur de Brosseau resident de monseig^#'r le Duc d'Hanovre rue du parc\n[[436.19]] Royal chez m^#'r Fermelle pour faire tenir à mons^#'r Leibniz incessamment. <b>Paris</b> </p></p>\n","number":"169.","title":"CLAUDE NICAISE FÜR LEIBNIZ","date":"19. April 1698. [167.172.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

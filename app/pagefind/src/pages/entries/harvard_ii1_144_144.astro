@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_144","series":"Band II 1 (1663 - 1685)","seq":144,"text":"<p> [[419.1]] <b>129. LEIBNIZ AN EDME MARIOTTE</p>\n<p> [[419.2]] [Mai ─ Juli 1676.] [116a.130.]</b></p>\n<p> [[419.18]] A Mons. l'Abbé Mariotte. </p>\n<p> [[419.19]] Monsieur </p>\n<p> [[419.20]] J'ay parcouru les commencemens de vostre <i>Logique</i> le même jour que vous me l'aviez\n[[419.21]] donnez. J'y ay trouvé bien des choses fort conformes à mes sentimens; et mêmes j'y ay appris\n[[419.22]] quelques unes sur lesquelles je n'avois pas fait reflexion. J'ay envie de voir le reste; et je me\n[[419.23]] persuade que ce sera quelque chose de beau. Car les découvertes que vous avez faites en\n[[419.24]] physique ne sont pas des effects d'un pur hazard, et quoyqu'il y ait du bonheur dans les pensées\n[[419.25]] aussi bien qu'au jeu; il est tousjours constant que les balles cherchent plustost les bons que les\n[[420.1]] mauvais joueurs. Et comme je ne doute point de vostre sincerité, je croy que vous nous ferez\n[[420.2]] part des lumieres dont vous avez esté éclairés dans la recherche de la nature. J'avoue qu'il faut\n[[420.3]] entrer dans le détail, mais je reconnois aussi fort bien qu'il y a quelques grandes veritez dont\n[[420.4]] dependent la plus part des découvertes particulieres. La veritable metaphysique est sans doute\n[[420.5]] la plus importante des sciences; et c'est dans elle qu'il faut puiser l'art d'inventer. La Metaphysique\n[[420.6]] est à toutes les sciences et à la Geometrie même ce que la Geometrie est aux\n[[420.7]] mathematiques: Mais il y a peu des gens capables d'y entrer; car si la plus part des hommes\n[[420.8]] méprisent la Geometrie, que doit on esperer de la metaphysique qui est encor plus abstraite. Je\n[[420.9]] suis ravi de voir que vous [n']estes pas du grand nombre, et je suis fort content de cette maniere\n[[420.10]] familiere et intelligible dont vous [vous] servez pour traiter des choses, qui sont obscures quand\n[[420.11]] elles sont proposées dans les termes de l'ecole, et qui paroissent inutiles, quand elles ne sont\n[[420.12]] pas éclaircies par des exemples choisis. </p>\n<p> [[420.13]] Voicy ce que je puis dire en general de vostre dessein; mais vous voulez que je vous dise\n[[420.14]] mon opinion sur les particularitez qui s'y trouvent. Je sçay que cela ne m'appartient pas, mais je\n[[420.15]] dois vous contenter, d'autant qu'il est fort aisé d'opiner du bonnet, et de dire qu'il n'y a rien à\n[[420.16]] redire. Et c'est le party que je dois prendre icy, sans vous flatter, car je ne voy presque rien,\n[[420.17]] dont je ne demeure d'accord: aussi faut il que les principes ne soyent pas sujets aux doutes. Et\n[[420.18]] comme je n'ayme pas les chicanes je n'ay garde de critiquer sur quelques phrases, dont à la\n[[420.19]] verité je ne me servirois pas moy même, si j'avois entrepris de parler de ces matieres. Par\n[[420.20]] exemple je ne dirois pas qu'il y aye d'autres veritez premieres ou evidentes d'elles [mêmes],\n[[420.21]] que celles qui sont absolument indemonstrables. Or les veritez indemonstrables ne sont que les\n[[420.22]] propositions identiques comme cellecy, <i>une chose est elle même, est egale à elle même, est\n[[420.23]] semblable à elle même</i>; etc. Toutes les autres sont demonstrables, et dependantes, quoyqu'il ne\n[[421.1]] soit pas tousjours necessaire de se mettre en peine de les demonstrer; et c'est en ce sens que je\n[[421.2]] demeure d'accord que les veritez premieres ne doiuvent estre prouvées puisqu'on ne les\n[[421.3]] sçauroit prouver, et par consequent qu'il ne faut pas disputer <i>contra negantem principia</i>. La\n[[421.4]] distinction que vous faites entre les veritez intellectuelles et sensibles, est tout à fait bonne et\n[[421.5]] importante, je m'en suis tousjours servi quoyque sous d'autres noms; et elle a quelque rapport à\n[[421.6]] la difference que nous avons coutume de faire entre le droit et le fait. Toutes les difficultez des\n[[421.7]] Pyrrhoniens ne sont qu'à l'egard des veritez sensibles. </p>\n","number":"129.","title":"LEIBNIZ AN EDME MARIOTTE","date":"[Mai ─ Juli 1676.] [116a.130.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

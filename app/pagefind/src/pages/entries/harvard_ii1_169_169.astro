@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_169","series":"Band II 1 (1663 - 1685)","seq":169,"text":"<p> [[554.14]] <b>153. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[554.15]] Hamburg, 17. (27.) Juli 1677. [126.166.]</b></p>\n<p> [[554.26]] S. P. Vir Nobilissime et Amplissime, Domine Fautor honoratissime. </p>\n<p> [[555.1]] Communicavit mecum pro familiaritate nostra Tuas ad se scriptas d. 7. Julii litteras,\n[[555.2]] Collega meus longe charissimus Dⁿ^#'u^#'s Henr. Siverus. Ex quibus uti cum gaudio cognovi summo,\n[[555.3]] non esse me parvo apud Te in pretio: ita indolui aliquid a me proficisci potuisse, quod non\n[[555.4]] usque Tibi placere intelligam. Nimirum ingratiis tuis assertum esse Tibi librum tuum scribis: id\n[[555.5]] quod ego minime futurum arbitrabar, quandoquidem et initialibus litteris nominis Tui praefixis,\n[[555.6]] et aliis indiciis, non admodum anxie tibi ut lateres quaesitum esse testabaris, et caussa nulla cur\n[[555.7]] citra noxam non assereretur tibi quod tuum erat apparebat. Absque hoc fuisset, una cum aliis\n[[555.8]] multis ex alterutra caussarum harum, in abdito mihi, quamvis probari possent eruti, relictis,\n[[555.9]] etiam tuos hosce libros recondidissem. Quod vero nugacem libellum eum appellas, eam, mihi\n[[555.10]] crede, modestiam Tuam nimiam, eruditorum haud ulli satis unquam approbabis, utrumvis etiam\n[[555.11]] sive n. 123. sive 131. detectum ex scriptis tuis velis intellectum. Ego sane quo minus doctrinam\n[[555.12]] tuam atque judicii facultatem insignem, aliunde licet magis adhuc conspicuam, vel inde quoque\n[[555.13]] praedicem, atque doctissimum ingeniosissimumque scriptum utrumque, ceu feci, commendem,\n[[555.14]] a me nunquam impetrabo. Quod vero minari me nescio quid insuper scribis, eas si modo minae\n[[555.15]] sint, ex pelvi crede profectas, si lubet. Neque sane unquam refutandi Te nominatim consilium\n[[555.16]] mihi fuit. Aliqua Tuis insistenti humeris latius, ni fallor, clariusque conspecta, publicare in\n[[555.17]] communem usum, et modeste cum aliquibus tuis conferre propositum mihi me habuisse non\n[[555.18]] dissimulabo. Quod tamen ipsum an exequi labores alii magis necessarii, moramque minus\n[[555.19]] ferentes, sint passuri, corpusque valetudinarium valde sit permissurum, vehementer ambigo.\n[[555.20]] Quidquid ejus sit, hoc, postquam adeo vicinum Te nobis atque litterarii commercii non impatientem,\n[[555.21]] intelligo, ultro nunc promitto: nihil me publicaturum ejus argumenti, quod ad Te\n[[555.22]] tuaque pertineat imposterum, nisi per litteras prius id tibi sit indicatum, ut si velis mentem tuam\n[[555.23]] cum mea collatam aperire mihi possis, adeoque privatis ejuscemodi monitionibus mutuis\n[[555.24]] publicae disputationis invidia facile queat evitari. Tu si quid in meis maxime moralibus\n[[555.25]] opusculis emendandum, augendumve notaveris, gratius mihi facere nihil potes, quam si de\n[[555.26]] plurimis commonefacias auditurum Te tanto lubentius, quanto planius pleniusque, in quibus tibi\n[[555.27]] non satisfecerim dederis indicatum. Sane jam olim ego Amicum mihi talem optavi, qualem in\n[[555.28]] Tacito Plinius lib. 7. <i>Ep.</i> 20. se habuisse testatur. Eum hucusque non repertum in Te si possem\n[[555.29]] invenire, profecto mihi serio gratularer. Quamvis enim in Mathematicis ego parum prae tua illa,\n[[556.1]] uti video, accurata scientia cognoverim, attamen in practica philosophia tanto minus desperem\n[[556.2]] tuae curiositati aliquatenus respondere. De Logicis accessionibus quid animo conceperim, ex\n[[556.3]] edito postremis nundinis <i>commentario in Verulamium</i> p. 198 et seqq. conjicies. Quamvis et hac\n[[556.4]] in parte longe plura Tibi ab honoratissimo Collega meo Joh. Vagetio, discipulo Jungiano,\n[[556.5]] Fogeliique successore dignissimo, ac ad ipsius moribundi commendationem nostri collegii\n[[556.6]] totius unanimi voto, precibusque ad superiores devolutis suffecto, promittere possim, ad cujus\n[[556.7]] amicitiam me pararium offero, si prius ad tuam intromittere me non fueris dedignatus. Denique\n[[556.8]] si quid in litterariis rebus Te juvare vel oblectare possim, aut alioquin hac in urbe gratum quid\n[[556.9]] Tibi sit efficere, scito me vehementer ea felicitate gavisurum. Vale. </p>\n<p> [[556.10]] Clariss^#'i et Ampliss^#'i T. Nomin. cultor observantiss^#'u^#'s </p>\n<p> [[556.11]] Hamb. 1677. d. 17. Julii. Vincentius Placcius. </p>\n<p> [[556.12]] Nobilissimo et Amplissimo Dⁿ^#'o Gottfrido Guilielmo Leibnitzio, Seren. Principis Hanoverani\n[[556.13]] Consiliario, Domino et Patrono meo honoratissimo. Hanoverae. </p>\n","number":"153.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 17. (27.) Juli 1677. [126.166.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

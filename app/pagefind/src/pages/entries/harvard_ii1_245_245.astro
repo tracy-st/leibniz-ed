@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_245","series":"Band II 1 (1663 - 1685)","seq":245,"text":"<p> [[766.6]] <b>216. CHRISTIAN PHILIPP AN LEIBNIZ</p>\n<p> [[766.7]] Hamburg, 22. November (2. Dezember) 1679. [184.217.]</b></p>\n<p> [[766.17]] Hambourg ce 22^#'e Nov. 1679. </p>\n<p> [[766.18]] [ ... ] Je me souviens, Monsieur, quand nous estions une fois chez M^#'r de Pufendorf, que\n[[766.19]] vous disiez, que les principes de M^#'r des Cartes menoient assez fortement à l'atheïsme: mais\n[[766.20]] comme je ne me souviens plus de la connexion de ce raisonnement, je vous supplie d'avoir la\n[[766.21]] bonté de m'en rafraichir la memoire. [ ... ] </p>\n","number":"216.","title":"CHRISTIAN PHILIPP AN LEIBNIZ","date":"Hamburg, 22. November (2. Dezember) 1679. [184.217.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

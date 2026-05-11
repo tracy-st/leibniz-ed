@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_25","series":"Band VI 4 (1677 - 1690)","seq":25,"text":"[[63.6]] <b>19.  Vocabula [1678 bis 1684 (?)]</b>\n [[63.7]] <tab/>[1678 bis 1684 (?)]\n[[63.15]] <tit2><b>Vocabula</b></tit2> </p>\n<p> [[63.16]] Die worth sind wie rechenpfennige, bey verständigen, und wie geld bey unverständigen. <Fn><i>Am\n[[63.17]] Rande</i>: Sunt nobis signa, sunt vobis fercula digna.</Fn> </p>\n<p> [[63.18]] Denn bey verständigen dienen sie vor zeichen, bey unverständigen aber gelten sie\n[[63.19]] als ursachen und vernunfftsgründe. Dahehr in gemeiner rede, wer dem andern eine\n[[63.20]] gewiße manirliche und in der welt gebräuchliche redens-art in den weg werffen kan, der\n[[64.1]] hat ihn schohn geschlagen, es sey dann daß ihm jener alsbald einen andern gleichmäßigen\n[[64.2]] streich zu versezen wiße, welches gemeiniglich denen so in reden geübt, und fertig seyn,\n[[64.3]] unschwehr, die weil die worte so viel bedeutungen haben. Wenn nun die beyden fechter\n[[64.4]] also eine weile mit lust der zuhörer gekämpfet, fallen sie auff eine andre materi, oder die\n[[64.5]] zuhörer fallen in die rede, oder die höfligkeit erfodert, daß man mit manier abbricht will\n[[64.6]] man nicht vor einen zänker oder pedanten gehalten werden, Und mus sich der so\n[[64.7]] abbrechen will der zeit bedienen, da sein gegner entweder nicht alsbald fertig ist, oder da\n[[64.8]] er etwas sagt, so eben der wichtigkeit nicht scheinet, daß es beantwortet werden muß.\n[[64.9]] Denn man muß nicht eben alle mahl das lezte worth haben wollen. Und damit endet sich\n[[64.10]] der streit, zumahlen wenn nur zeitvertreibs wegen gesprochen worden. Wenn man aber\n[[64.11]] einen schluß faßen und etwas wahlen mus, da fallet man gemeiniglich auf die lezten\n[[64.12]] scheingründe so noch im frischen gedächtnüß bleiben, oder man giebet dem nach so das\n[[64.13]] meiste ansehn hat. </p>\n<p> [[64.14]] Ist also kein wunder, das nicht allein in unterredungen nichts beschloßen, sondern\n[[64.15]] auch offt in berathschlagungen übel geschloßen wird. </p>\n","number":"19.","title":"Vocabula","date":"[1678 bis 1684 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

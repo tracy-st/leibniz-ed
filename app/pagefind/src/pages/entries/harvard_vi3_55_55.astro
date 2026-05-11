@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_55","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":55,"text":"[[453.17]] <b>55. Ars inveniendi maxime discenda </b> <span>453.17;0:63:055:76       :L:l^</span>.\n[[453.25]] 4\n[[454.1]] Scientia illa maxime discenda est, quae semper est utilis. La science des Romans,\n[[454.2]] et de l'eloquence françoise ne serviroit pas, parmy les Turcs. La science de la medecine\n[[454.3]] y serviroit; mais voyons s'il n'y a pas un estat de l'homme, ou la medecine ne sert\n[[454.4]] point, c'est par exemple l'estat d'un homme qui songe, supposons qu'un homme songe\n[[454.5]] fort longtemps; par exemple quelques années de suite, que pourroit il faire en ce\n[[454.6]] temps; il ne pourroit pas lire dans les livres, ny chercher les plantes dans les champs,\n[[454.7]] ny examiner les corps avec un microscope. Il ne pourroit méme faire des experiences\n[[454.8]] sur son corps; il ne luy resteroient que celles qui se peuvent faire sur l'esprit, or les\n[[454.9]] experiences qui se peuvent faire sur l'esprit, ce sont celles, qui se font en examinant\n[[454.10]] nos idées, et qui nous donnent des demonstrations en Geometrie, Arithmetique, Metaphysique.\n[[454.12]] Ainsi on m'avouera que celuy qui songe n'est capable d'autres verités que de\n[[454.13]] celles qui se tirent de l'esprit méme. Donc l'art d'inventer, et de perfectionner l'esprit\n[[454.14]] en luy méme, servant à tous les estats de l'ame, doit estre sur tout estimée.\n","number":"55.","title":"Ars inveniendi maxime discenda","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

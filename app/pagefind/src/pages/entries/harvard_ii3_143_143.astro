@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_143","series":"Band II 3 (1695 - 1700)","seq":143,"text":"<p> [[380.12]] <b>143. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[380.13]] [September 1697.] [139.149.]</b></p>\n\n<p> [[380.22]] J'ay prié Monsieur l'Abbé Mauro de faire tous les remercimens imaginables à\n[[380.23]] Monsieur le Comte Bertolli qui nous a favorisé d'une maniere si obligeante et je vous supplie\n[[380.24]] Monsieur de continuer de le faire de la maniere la plus expressive. J'auray occasion de m'en\n[[380.25]] louer publiquement un jour, et cependant je feray ces efforts pour marquer mon obligation.\n[[380.26]] Peutestre qu'un jour j'auray l'occasion de faire encor un tour en Italie et je pourray profiter\n[[380.27]] alors de ses bontés d'une maniere qui donne moins de peine à mes amis, puisqu'il est difficile\n[[381.1]] que d'autres puissent assez entrer dans mes intentions. Cependant vous avés eu la bonté\n[[381.2]] d'ouvrir le chemin dont je vous suis bien obligé des Diplomes que vous m'avés déja obtenus\n[[381.3]] dont le plus considerable est celuy qui commence: <i>ego Fulco Marchio filius domini Azonis</i> tiré\n[[381.4]] <i>ex catastro vel catastico Monasterii Carcerum.</i> Cependant comme ces copies ont demandé de\n[[381.5]] la depense il faut donner ordre pour satisfaire et je vous supplie de m'en faire donner notice car\n[[381.6]] il seroit injuste Monsieur que vous ayés non seulement pris de la peine mais encor fait de la\n[[381.7]] depense. <i>Nemini suum officium debet esse damnosum.</i> A l'egard des diplomes que je desire le\n[[381.8]] plus, ce sont sur tout ceux qui sont anterieurs à l'an 1300. Car ce qui s'est fait après regarde\n[[381.9]] plustost Messieurs de Modene. Vous aurés la bonté Monsieur de me mander en confidence s'il\n[[381.10]] faut faire quelque chose presentement pour conserver la bonne volonté de Monsieur le Comte\n[[381.11]] Bertolli, à fin que j'en puisse jouir, venant moy même en Italie ce que j'espere de faire plustost\n[[381.12]] qu'on n'a crû, à cause de la paix conclue. Car je pourrois m'en retourner par la France. Quand\n[[381.13]] je viendray moy même en Italie, je tacheray de luy apporter quelque medaille pour temoigner\n[[381.14]] ma reconnoissance et pour profiter d'avantage de ses bontés. Et cependant je vous supplie\n[[381.15]] Monsieur de faire en sorte qu'il en soit persuadé et qu'il n'ait pas sujet d'estre malsatisfait. Je\n[[381.16]] vous mande cecy en confidance, Monsieur, pour en apprendre vostre sentiment. </p>\n<p> [[381.17]] Je suis bien aise d'apprendre que mon petit papier de la Dynamique, ne vous a point\n[[381.18]] deplû. Quand il vous plaira de m'envoyer vos doutes ou reflexions je seray bien aise de les\n[[381.19]] recevoir et je tacheray de les éclaircir. Cependant je vous remercie fort de vos deux lettres qui\n[[381.20]] sont écrites avec une eloquence male, et contiennent des pensées solides. Effectivement, si vous\n[[381.21]] continués ainsi, vous serés l'Apostre de l'Italie pour les convertir en matiere de sciences où ils\n[[381.22]] ont besoin de missionaires comme les Chinois en ont besoin pour la religion. </p>\n<p> [[381.23]] Vous aurés remarqué dans mon papier, que je crois que dans le fonds, les anciens et les\n[[381.24]] scholastiques n'ont pas tort d'avoir crû quelque chose d'approchant de ce qu'on appelle Forme\n[[381.25]] substantielle. Car en effect il y a une forme primitive en toute substance corporelle qu'il faut\n[[381.26]] distinguer de sa masse ou machine, dont cette force se sert. Mais ils n'ont pas bien expliqué ny\n[[382.1]] la nature de cette Entelechie ny son usage, et ils s'en sont servi mal àpropos pour expliquer les\n[[382.2]] phenomenes particuliers de la nature. Je ne suis pas tout à fait de l'opinion des Cartesiens.\n[[382.3]] Cependant je considere le Cartesianisme comme l'Antichambre de la veritable philosophie.\n[[382.4]] Ainsi je seray bien aise de voir ce que vous aurés repondu à Monsieur Mattheo Giorgi. </p>\n<p> [[382.5]] Au reste je suis etc. </p>\n","number":"143.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"[September 1697.] [139.149.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

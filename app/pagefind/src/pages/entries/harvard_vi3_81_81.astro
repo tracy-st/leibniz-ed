@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_81","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":81,"text":"[[578.81]] <b>81. Quod ens perfectissimum existit </b> <span>578.0;0:63:081:76!      :L:l^</span>.\n[[578.12]] Quod Ens Perfectissimum existit\n[[578.13]] Perfectionem voco omnem qualitatem simplicem quae positiva est et absoluta\n[[578.14]] seu quae quicquid exprimit sine ullis limitibus exprimit.\n[[578.15]] Qualitas autem ejusmodi quia simplex est ideo est irresolubilis, sive indefinibilis,\n[[578.16]] alioqui enim vel non una erit simplex qualitas, sed plurium aggregatum, vel si una\n[[578.17]] erit limitibus circumscripta erit, adeoque per negationes ulterioris progressus intelligetur\n[[578.18]] contra hypothesin, assumta est enim pure positiva.\n[[578.19]] Ex his non est difficile ostendere, omnes perfectiones esse compatibiles\n[[578.20]] inter se, sive in eodem esse posse subjecto.\n[[578.21]] Nam sit propositio ejusmodi: A et B sunt incompatibiles (intelligendo per A et B\n[[578.22]] duas ejusmodi formas simplices, sive perfectiones, idemque est si plures assumantur\n[[578.23]] simul). Patet eam non posse demonstrari sine resolutione terminorum A vel B,\n[[578.24]] alterutrius vel utriusque; alioqui enim natura eorum non ingrederetur ratiocinationem\n[[578.25]] ac posset incompatibilitas aeque de quibusvis aliis rebus ac de ipsis demonstrari.\n[[578.26]] Atqui (ex hypothesi) sunt irresolubiles. Ergo haec propositio de ipsis demonstrari non\n[[578.27]] potest.\n[[578.28]] Posset autem utique de ipsis demonstrari si vera esset quia non est per se nota,\n[[578.29]] omnes autem propositiones necessario verae sunt aut demonstrabiles aut per se notae.\n[[579.1]] Ergo necessario vera non est haec propositio sive non est necessarium ut A et B in\n[[579.2]] eodem subjecto non sint. Possunt ergo esse in eodem subjecto et cum eadem sit\n[[579.3]] ratiocinatio de quibuslibet aliis ejusmodi qualitatibus assumtis, ideo compatibiles\n[[579.4]] sunt omnes perfectiones.\n[[579.5]] Datur ergo sive intelligi potest subjectum omnium perfectionum, sive Ens perfectissimum.\n[[579.7]] Unde ipsum quoque existere patet, cum in numero perfectionum existentia contineatur.\n[[579.9]] (Idem ostendi potest etiam de formis compositis ex absolutis modo dentur.)\n[[579.10]] Ostendi hanc ratiocinationem D. Spinosae cum Hagae Comitis essem qui solidam\n[[579.11]] esse putavit, cum enim initio contradiceret, scripto comprehendi et hanc schedam\n[[579.12]] ei praelegi.\n[[579.13]] Schol.\n[[579.14]] Cartesii ratiocinatio de Entis perfectissimi existentia supposuit Ens perfectissimum\n[[579.15]] intelligi posse, sive possibile esse. Hoc enim posito quod detur ejusmodi notio,\n[[579.16]] statim sequitur existere illud Ens, quoniam ipsum tale finximus ut statim existentiam\n[[579.17]] contineat. Quaeritur autem an sit in nostra potestate tale Ens fingere, sive an talis\n[[579.18]] notio sit a parte rei, clareque ac distincte sine contradictione intelligi possit. Dicent\n[[579.19]] enim adversarii talem notionem Entis perfectissimi sive Entis per Essentiam existentis\n[[579.20]] esse chimaeram. Nec sufficit Cartesium provocare ad experientiam, et allegare\n[[579.21]] quod idem ejusmodi in se clare distincteque sentiat, hoc enim est abrumpere non\n[[579.22]] absolvere demonstrationem, nisi ostendat modum, per quem alii quoque ad ejusmodi\n[[579.23]] experientiam venire possint. Quotiescunque enim inter demonstrandum experientias\n[[579.24]] allegamus, debemus aliis quoque modum ostendere faciendi eandem experientiam,\n[[579.25]] nisi eos sola tantum autoritate nostra convincere velimus.\n","number":"81.","title":"Quod ens perfectissimum existit","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

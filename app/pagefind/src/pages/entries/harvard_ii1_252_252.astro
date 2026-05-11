@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_252","series":"Band II 1 (1663 - 1685)","seq":252,"text":"<p> [[791.5]] <b>223a. LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE</p>\n<p> [[791.6]] [Hannover, Februar 1680.] [227b.]</b></p>\n<p> [[791.26]] [ ... ] Dn. Hook plurimum meo Nomine, quaeso salutes. Scriptis ejus multum defero et\n[[791.27]] delector, et ad investigationem Naturae (quo pollet Genio et Ingenio) magis ac magis promovendam\n[[791.28]] et illustrandam ipsi omnia prospera animitus exopto. Quae antehac circa Instrumentum\n[[792.1]] Arithmeticum in animo habui, ea spero tandem aliquando proditura in effectum;\n[[792.2]] Quamprimum id ad perfectionem deduxero, de omnibus ejus Circumstantiis Vos edocebo. </p>\n<p> [[792.3]] Video, eximium illum Virum magni facere Reverendiss^#'i quondam Episcopi Wilkinsii\n[[792.4]] Characterem Philosophicum, quem ego quoque ex merito aestimo: Illud tamen dissimulare non\n[[792.5]] possum fieri potuisse aliquid multo majus, et in tantum utilius, in quantum Characteres Algebraici\n[[792.6]] potiores sunt characteribus Chemicorum. Ego enim scripturam quandam universalem\n[[792.7]] excogitari posse arbitror, cujus ope calculare in omni genere rerum et Demonstrationes invenire\n[[792.8]] possimus, perinde ac in Algebra et Arithmetica. Atque utinam, quo tempore Willkinsius in\n[[792.9]] opere suo adhuc versabatur, innotuisset illud Consilium meum, fortasse eodem propemodum\n[[792.10]] labore haberemus nunc aliquid, quo nescio an utilius aliud generi humano, in rebus ad Scientias\n[[792.11]] pertinentibus, Munus dari possit. Locutus sum olim ea de re cum D^#'o Oldenburgio, qui mihi cum\n[[792.12]] egregiis vestrae Societatis Viris ea de re Consilia communicare promiserat, quod an fecerit\n[[792.13]] nescio. Nimirum saepe mecum cogitavi, tot praeclara Instrumenta, quae nunc in paratu habemus,\n[[792.14]] non satis in usum transferri, neque inde duci, quae ex ipsis tum ad rerum causas\n[[792.15]] indagandas tum ad vitae usus duci possent. Huic malo tandem aliquando ope hujus Calculi\n[[792.16]] unice succurri posse puto. Organumque nos habituros, quo non minus in Cogitando juvari\n[[792.17]] possimus, quam Tubis in Videndo. Sed hoc pro Dignitate exequi, certum est rem non Unius\n[[792.18]] Hominis esse, Volui tamen Cogitata haec mea sciret Hookius; nam pro excellenti Ingenio suo\n[[792.19]] judicare de illis potest, eo magis quo attentius ipse in Willkinsiano opere versatus videtur.\n[[792.20]] [ ... ] </p>\n","number":"223a.","title":"LEIBNIZ AN THEODOR HAAK FÜR ROBERT HOOKE","date":"[Hannover, Februar 1680.] [227b.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

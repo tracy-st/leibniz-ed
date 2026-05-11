@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_95","series":"Band II 2 (1686 - 1694)","seq":95,"text":"<p> [[369.1]] <b>96. GERHARD MEIER (BREMEN) AN LEIBNIZ</p>\n<p> [[369.2]] Bremen, 12. (22.) Dezember 1690. [90.99.]</b></p>\n<p> [[369.9]] [ ... ] Mire me affecerunt suavissimae Tuae, quibus non tantum non deposuisse omnem\n[[369.10]] memoriam nostri, sed et amore erga nos ferri abunde significas. Ego quidem nihil mihi prius\n[[369.11]] unquam ducam, quam ut memori sequar mente animi erga Te mei benevolentiam. Egregiam\n[[369.12]] proinde rem fecisti, quod, quae ex Te efflagitabam, ad Carthesiana philosophemata vid. pertinentia,\n[[369.13]] in iis te facilem atque exorabilem praestiteris. Jube in vicem quae potis meae sententiae\n[[369.14]] et animum ad quae licet expositissimum experieris. Remitto quae remissa cupiebas, atque\n[[369.15]] interea veniam ut concedas procrastinationibus meis oro, rejiciunt enim a <greek>proairésh</greek>, praesentissima\n[[369.16]] in medium saepe venientia negotia. Explicavi acta Lipsiensia et quae ad anni XC\n[[369.17]] Mensem Majum illis inseruisti attenta, quantum licuit mihique fas fuit per alias, quae mentem\n[[369.18]] occupant, ideas, cura pervolvi, verum enim cum in altissime reductas retrusasque materias\n[[369.19]] condantur; ut difficile est ad ea penetrare! At vero illud mihi jam nunc perspectissimum est\n[[369.20]] Dⁿ^#'u^#'m Abb. D. C. (cujus integrum nomen, ut proximis explices rogo) plane a janua aberrasse, nec\n[[369.21]] alterum illum Gallum Cl. Dn. P. (qui itidem ex hisce notis solis mihi imperspectus est) Dⁿ^#'o\n[[369.22]] Abbati succenturiatum statum controversiae recte percepisse. Nescio, Vir Celeberrime, an non\n[[369.23]] hoc multis Gallorum ingeniis frequentatum et pervagatum veluti vitium esse animadverteris,\n[[369.24]] animadvertisti autem dubio omni procul, ut quarum saepe rerum nonnisi coecas imagines et\n[[369.25]] adumbrata nomina norint videantque, earum intimos etiam recessus sibi vindicent, et non\n[[369.26]] possint non cum cornicula risum movere. Erant meo tempore qui <i>Les oeuvres de M^#'r Vajer La\n[[369.27]] Motthe</i> veluti in numerato habebant, hujusque viri docti vestiti plumis in publicum passim\n[[369.28]] procedebant, intemperantius se jactantes etiam de ipsis apud inferos, uti in proverbio est,\n[[369.29]] ternionibus, quos si quis propius exploraret, sive ad alias differentesque hypotheses deduceret,\n[[370.1]] si contrarias veritates proferret, mere <greek>kṽfa prósvpa</greek> et piscibus magis mutos eos deprehendebat.\n[[370.2]] Nolim tamen hanc labem affricare solidioribus Gallis, quanquam in tam vasto gurgite\n[[370.3]] revera paucissimis. Quam recte hypothesin falsam Carthesianam ad Keplerum reduxisti! Ut\n[[370.4]] taceam reliqua omnia, quae ubique vim ingenii Tui penetrantissimam repraesentant. Macte hac\n[[370.5]] Tua virtute, Excell^#'e Vir, recrea porro Rempublicam eruditorum. [ ... ] </p>\n","number":"96.","title":"GERHARD MEIER (BREMEN) AN LEIBNIZ","date":"Bremen, 12. (22.) Dezember 1690. [90.99.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_87","series":"Band II 2 (1686 - 1694)","seq":87,"text":"<p> [[351.14]] <b>88. LEIBNIZ AN CHRISTIAAN HUYGENS</p>\n<p> [[351.15]] Hannover, 3./13. Oktober 1690. [87.102.]</b></p>\n<p> [[352.12]] [ ... ] J'avois aussi certaines notions philosophiques que j'ay remarquées depuis dans sa\n[[352.13]] <i>Medicina Mentis</i>. Considerant par exemple autresfois la demonstration pretendue de M. de[s]\n[[352.14]] Cartes sur l'existence de Dieu, qui a esté inventée premierement par S. Anselme, je voyois que\n[[352.15]] l'argument est effectivement demonstratif, quand on accorde que Dieu est possible. Cela me fit\n[[352.16]] remarquer, qu'on ne sçauroit se fier sur une demonstration lors qu'on n'est pas asseuré de la\n[[352.17]] possibilité du sujet. Car s'il implique contradiction ce qu'on demonstrera de lui, pourra estre\n[[352.18]] vray et faux en meme temps. Cela me donna occasion de faire cette distinction entre les\n[[352.19]] definitions reelles et nominelles, que les nominelles se contentent de nous donner moyen de\n[[352.20]] discerner ou reconnoistre la chose definie, si elle se recontroit; mais les reelles doivent faire\n[[352.21]] connoistre de plus, qu'elle est possible. Et je jugeay aussi que c'estoit là le moyen de discerner\n[[352.22]] les idées vraies et fausses; ne demeurant pas d'accord du principe de M. des Cartes, que nous\n[[353.1]] avons l'idée des choses dont nous parlons, lors que nous nous entendons. Sur cette reflexion,\n[[353.2]] qu'il faut tacher de connoistre les possibilités de[s] notions, M. D. T. a basti une partie de sa\n[[353.3]] <i>Medicina Mentis</i>. [ ... ] </p>\n","number":"88.","title":"LEIBNIZ AN CHRISTIAAN HUYGENS","date":"Hannover, 3./13. Oktober 1690. [87.102.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

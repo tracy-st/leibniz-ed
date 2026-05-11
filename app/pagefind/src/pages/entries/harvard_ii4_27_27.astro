@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_27","series":"Band II 4 (1701 - 1707)","seq":27,"text":"<p> [[77.1]] <b>27. PIERRE BAYLE AN LEIBNIZ</p>\n<p> [[77.2]] Rotterdam, 3. Oktober 1702. [25.31.] </b></p>\n<p> [[77.19]] Monsieur </p>\n<p> [[77.20]] Je suis bien aise que M^#'r Toland se soit souvenu de la priere que je lui avois faite de vous\n[[77.21]] asseurer de mes respects. La lettre que vous me fites l'honneur de m'ecrire le 19. d'aout dernier\n[[77.22]] me fut envoiée par Monsieur de Volder il y a deux ou trois jours avec le manuscrit où vous avez\n[[77.23]] bien voulu examiner mes petites objections. Je l'ai lu avec un plaisir extreme et avec une\n[[77.24]] nouvelle admiration de la beauté, et de la profondeur de votre genie qui sait si bien developer\n[[77.25]] les matieres les plus dificiles. Quant aux loüanges que vous m'y donnez, Monsieur, vous me\n[[77.26]] permettrez de les attribuer à vos manieres honnetes et polies, car je suis bien convaincu que tout\n[[77.27]] ce que je puis penser et dire est petit, et principalement par raport à un philosophe aussi grand,\n[[77.28]] et aussi sublime que vous l'etes. Ainsi quelque gloire qu'il y ait à etre loüé par un si grand\n[[77.29]] homme la connoissance que j'ai de mon indignité m'oblige à vous prier d'oter ces eloges quand\n[[78.1]] vous publierez (ce que je souhaitte passionnement que vous fassiez) votre reponse. Je la renvoie\n[[78.2]] à M^#'r de Volder afin de vous epargner la peine d'en faire faire une autre copie. Il aura la bonté de\n[[78.3]] vous la faire tenir avec cette lettre. </p>\n<p> [[78.4]] Je voi[s] plus clair dans votre hypothese, Monsieur, depuis que j'ai lu votre manuscrit, et\n[[78.5]] je me felicite de vous avoir donné lieu à l'orner de nouvelles considerations qui developent de\n[[78.6]] plus en plus un point de doctrine tres relevée. Je ne vous envoie point de nouveaux doutes car\n[[78.7]] tout ce que je pourrois repliquer, autant que je le prevois, ne seroient que des appendice[s] des\n[[78.8]] premieres obiections qui à proprement parler ne contiendroient rien de plus qu'elles, et reviendroient\n[[78.9]] à la meme chose par des circuits. On ne peut ce me semble, bien combatre la possibilité\n[[78.10]] de votre hypothese, pendant que l'on ne conoit pas distinctement le fond substantiel de l'ame,\n[[78.11]] et la maniere dont elle se peut transformer d'une pensée à une autre. Et peut etre que si l'on\n[[78.12]] connoissoit tres distinctement cela, on verroit que rien n'est plus possible que ce que vous\n[[78.13]] suposez. Personne n'est plus capable que vous, Monsieur de nous eclairer sur ce grand point, et\n[[78.14]] je suis seur que cette analyse des idées dont vous parlés à la fin de votre ecrit seroit le plus\n[[78.15]] grand secours qu'on puisse donner à l'esprit humain, et l'une des plus importantes choses de la\n[[78.16]] philosophie. Je souhaitte que celui qui l'a concuë la produise au public. C'est de vous Monsieur\n[[78.17]] que je parle. Il me faudroit plusieurs pages si je voulois vous indiquer tous les endroits de votre\n[[78.18]] reponse qui m'ont charmé, et si j'entrois dans ce detail j'oublierois moins que toute autre chose\n[[78.19]] ce que vous dites sur le suiet du Chevalier de Meré. Cela est tout à fait curieux. </p>\n<p> [[78.20]] Mais je ne m'apercois pas que quand on a l'honneur d'ecrire à une personne si occupée\n[[78.21]] que vous, on doit etre court. Je finis donc ici en vous souhaitant une parfaite santé afin que vous\n[[78.22]] continuiez à travailler à la propagation des veritez les plus sublimes de la philosophie, et en\n[[78.23]] vous asseurant que je suis avec un profond respect, et toute la gratitude imaginable. </p>\n<p> [[78.24]] Monsieur votre tres humble et tres obeissant serviteur Bayle </p>\n<p> [[78.25]] à Rotterdam le 3. d'octobre 1702. </p>\n<p> [[78.26]] A Monsieur Monsieur de Leibniz. </p>\n","number":"27.","title":"PIERRE BAYLE AN LEIBNIZ","date":"Rotterdam, 3. Oktober 1702. [25.31.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

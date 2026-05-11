@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_80","series":"Band II 3 (1695 - 1700)","seq":80,"text":"<p> [[205.12]] <b>80. FRANCISCUS MERCURIUS VAN HELMONT AN LEIBNIZ</p>\n<p> [[205.13]] [Terborg, vor dem 26. Oktober 1696.] [55.81.]</b></p>\n\n<p> [[206.1]] Monsieur et tres cher Amis </p>\n<p> [[206.2]] Vous <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: dans la lettre à Mad. l'Electrice: <i>de brieven konnen geaddresseert werden aen my, ten Huyse van Mad. la Baronne de Merode</i> <i>dict Mutzfeld à Emmerick om vort te bestellen near ter Borg</i>.</Fn> aures isi les 150 aforisme joint le livre du retour des Ames auquel je sus entre autre\n[[206.3]] Contraire le duuze Retours etc. </p>\n<p> [[206.4]] Au dict livre Vous trouueres au dict titre inclose le titre anglois Promis du nom de l'auteur\n[[206.5]] du livre de l'enfer. </p>\n<p> [[206.6]] Les autres escripts pour Monsieur le Professeur de Hart pour joindre au livre de la\n[[206.7]] Concordanse du Nouvau testam.^#'t que M.^#'r Knor de Rozenrot et l'auteur, Vous supplie de luy les\n[[206.8]] seur addresser en faisant mes baisemains et lui dire qu'il poura faire et disposer à l'imprimerie\n[[206.9]] en liberte selon qui trouuera bon puis que j'ay connue qu'il et sage et discret. </p>\n<p> [[206.10]] Les escript de M^#'r Knor de Rosenrot que S.A.Ser^#'m^#'e Monseig^#'r le Ducq Antoine Ulrich de\n[[206.11]] Bronsuic demande pur le faire imprimer. Je juge à propos comme en peu de jours ispere daller à\n[[206.12]] Amsterdam de les prendre auecq moy pour voir si la ie les peu mieux fair imprimer quoy\n[[206.13]] faisant Vous aures part de mesme je doennerey à S.A.L.Ser^#'m^#'e. Je demeure Comme Vous saues </p>\n<p> [[206.14]] Monsieur H\n[[206.15]] <yi>Aen den Heer Leybnitz etc. Hoffraet </p>\n","number":"80.","title":"FRANCISCUS MERCURIUS VAN HELMONT AN LEIBNIZ","date":"[Terborg, vor dem 26. Oktober 1696.] [55.81.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

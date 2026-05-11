@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_181","series":"Band II 3 (1695 - 1700)","seq":181,"text":"<p> [[462.8]] <b>181. LEIBNIZ AN CLAUDE NICAISE</p>\n<p> [[462.9]] Hannover, 16./26. September 1698. [180.184.]</b></p>\n\n<p> [[462.17]] Hanover ce 16/26 Septembr. 1698 </p>\n<p> [[462.18]] Pour marquer que je ne suis pas entierement oublié, vous avés eu la bonté, Monsieur, de\n[[462.19]] m'envoyer par Monsieur le Resident Brosseau un petit imprimé d'un arrest rendu contre un\n[[462.20]] certain Curé Quietiste dont je vous remercie. Il est vray qu'à mon avis ces sortes d'Historiettes\n[[462.21]] ne doivent point faire du tort, qu'aux personnes qui y sont interessées, et que ce seroit une\n[[462.22]] grande injustice, si on s'en vouloit servir pour noircir ou decrier Mons. Archeveque de\n[[462.23]] Cambray. Les meilleures choses sont les plus sujettes aux abus; et, c'est l'artifice dont le diable\n[[462.24]] se sert ordinairement pour en eloigner les hommes. Je vous parle sur ce ton, après avoir lû la\n[[462.25]] lettre cyjointe de Mons. Morel, qui parle de tres bon sens là dessus. </p>\n<p> [[463.1]] Mais laissons là les Quietistes et ceux qu'on veut ranger parmi eux; et voyons ce que font\n[[463.2]] les sçavans de France après la paix faite. </p>\n<p> [[463.3]] Il me semble qu'ils se devroient remuer un peu et que la presence de Mons. de Spanhem\n[[463.4]] devroit contribuer à les mettre en humeur. </p>\n<p> [[463.5]] Les lettres de feu Mons. Peiresk ne paroistront elles pas bien tost? </p>\n<p> [[463.6]] Celles de Vargas Espagnol, qui decrient tant le Concile de Trente paroissent maintenant en\n[[463.7]] Hollande traduites en françois avec une preface de Mons. le Vassor autrement le pere le Vassor. </p>\n<p> [[463.8]] On y imprime aussi le <i>dictionnaire</i> de Furetiere augmenté de la moitié. </p>\n<p> [[463.9]] Le Comte de Marsili qui est un des plenipotentiaires pour le traité entre l'Empereur et la\n[[463.10]] porte travaille et fait travailler à une nouvelle Topographie du Danube. </p>\n<p> [[463.11]] J'attends une Replique de vostre pere Bonjour à la reponse de Mons. Ludolphi et je vous\n[[463.12]] supplie de me la faire tenir quand elle arrivera. </p>\n<p> [[463.13]] J'espere au moins que Vous aurés receu cette reponse de Mons. Ludolphi, que je vous ay\n[[463.14]] fait tenir, aussi bien que ma lettre pour Mons. le President Boisot, [dont] je n'ay point appris\n[[463.15]] l'effect. Je vous demande pardon, de vous avoir importuné de ces choses. </p>\n<p> [[463.16]] Au reste je suis avec zele </p>\n<p> [[463.17]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[463.18]] J'ay esté terriblement embarassé cette année, autrement je n'aurois pas tant tardé de vous\n[[463.19]] importuner de nouveau. </p>\n","number":"181.","title":"LEIBNIZ AN CLAUDE NICAISE","date":"Hannover, 16./26. September 1698. [180.184.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

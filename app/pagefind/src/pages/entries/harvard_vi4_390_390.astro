@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_390","series":"Band VI 4 (1677 - 1690)","seq":390,"text":"[[1672.1]] <b>329₂.  De corpore et substantia vere una </p>\n<p> [[1672.5]] Corpus non est substantia, sed aggregatum substantiarum. Constat enim ex pluribus\n[[1672.6]] realiter distinctis, quemadmodum strues lignorum, congeries lapidum, grex, exercitus,\n[[1672.7]] piscina in qua multi natant pisces; et unumquodque corpus actu divisum est in plura\n[[1672.8]] corpora contenta. </p>\n<p> [[1672.9]] Jam non dantur substantiae, ubi non datur substantia, nec dantur numeri, nisi sint\n[[1672.10]] unitates, itaque necesse est praeter corpora dari substantias quasdam vere unas seu\n[[1672.11]] indivisibiles quarum aggregatis corpora constituantur. </p>\n<p> [[1672.12]] Error philosophorum materialium in eo est, quod agnita necessitate unitatis, substantiam\n[[1672.13]] in materia quaesivere, quasi corpus ullum dari posset, quod revera esset una\n[[1672.14]] substantia. Itaque ad atomos confugere tanquam terminos analyseos. Cum tamen omne\n[[1672.15]] corpus constet ex diversis substantiis, nec referat utrum partes cohaereant an non. Praeterquam\n[[1672.16]] quod ratio indivisibilitatis in atomis reddi non potest. </p>\n<p> [[1672.17]] Itaque cum omne corpus sit massa seu aggregatum plurium corporum; nullum\n[[1672.18]] corpus est substantia; et proinde substantia extra corpoream naturam quaerenda est. </p>\n<p> [[1672.19]] Est autem substantia aliquid vere unum, indivisibile, adeoque ingenerabile et\n[[1672.20]] incorruptibile, quod est subjectum Actionis et passionis; et ut verbo dicam, id ipsum quod\n[[1672.21]] intelligo cum dico <i>Ego</i> (<i>moy</i>), quod subsistit, etsi corpore meo per partes sublato, uti certe\n[[1672.22]] corpus meum in perpetuo fluxu est, superstite me. Nulla assignari potest pars corporis\n[[1672.23]] mei quae ad subsistentiam mei necessaria sit, nunquam tamen ego sum sine aliqua\n[[1672.24]] materiae parte unita. </p>\n<p> [[1672.25]] Interim ego corpore organico opus habeo, quanquam nihil in eo sit, quod sit necessarium\n[[1672.26]] ad subsistentiam mei. </p>\n<p> [[1673.1]] Analogum aliquid in omni intelligo animali, et ut verbo dicam in omni substantia\n[[1673.2]] vera vereque una. </p>\n<p> [[1673.3]] Infinitae autem sunt substantiae simplices seu creaturae in qualibet materiae particula;\n[[1673.4]] et componitur ex illis materia, non tanquam ex partibus, sed tanquam ex principiis\n[[1673.5]] constitutivis, seu requisitis immediatis, prorsus ut puncta continui essentiam ingrediuntur\n[[1673.6]] non tamen ut partes; neque enim pars est, nisi quod toti homogeneum est, sed substantia\n[[1673.7]] materiae seu corpori homogenea non est; non magis quam lineae punctum. </p>\n<p> [[1673.8]] In omni substantia nihil aliud est quam natura illa seu vis primitiva, ex qua sequitur\n[[1673.9]] series operationum ejus internarum. </p>\n<p> [[1673.10]] Ex quolibet statu substantiae seu natura ejus cognosci potest series, seu omnes ejus\n[[1673.11]] status praeteriti et futuri. </p>\n<p> [[1673.12]] Praeterea quaevis substantia involvit totum universum, et cognosci potest ex statu\n[[1673.13]] ejus etiam status aliarum. </p>\n<p> [[1673.14]] Diversarum substantiarum series perfecte consentiunt inter se, et unaquaeque\n[[1673.15]] exprimit totum universum secundum modum suum. Et in hoc consensu consistit unio\n[[1673.16]] animae et corporis, itemque id quod operationem substantiarum extra se appellamus. </p>\n<p> [[1673.17]] Quo perfectior substantia est, eo distinctius exprimit universum. </p>\n","number":"329₂.","title":"De corpore et substantia vere una","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

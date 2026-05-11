@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_22","series":"Band II 1 (1663 - 1685)","seq":22,"text":"<p> [[65.1]] <b>19a. LEIBNIZ AN GOTTLIEB SPITZEL</p>\n<p> [[65.2]] 7./17. April 1670. [16a.]</b></p>\n<p> [[65.16]] [ ... ] Esset igitur optandum magnopere, ut extaret aliquis qui meritissimos de re literaria\n[[65.17]] viros inde usque ab inventa Typographia recenseret ordine temporum; annotaretque illud\n[[65.18]] maxime: quid quisque potissimum in Rempublicam contulerit. Ita fiet ut multi licet doctissimi\n[[65.19]] sint fortasse initio praetereundi (neque enim simul omnes dari possunt), qui tamen nominare\n[[65.20]] non possunt, quid potissimum iis eruditio debeat. Nominandi igitur illi, quibus primae autorum\n[[65.21]] veterum eruderationes debentur, qui difficiles in antiquitate, in Chronologia Geographiaque\n[[65.22]] nodos primi solverunt, quicunque proprias nobis meditationes suas, easque si non veras, saltem\n[[65.23]] ingeniosas reliquere; qui novum aliquod dicendi genus, novam sectam orsi sunt, quibus in\n[[65.24]] medicina ac mathesi, sed et artibus mechanicis utilia reperta debentur, qui historias non aliunde\n[[65.25]] descriptas, sed earum rerum quibus interfuere ipsi, earumque memorabilium scripsere: breviter,\n[[65.26]] illi, qui si non vixissent, caeteris rebus in eo qui secutus est statu manentibus, aliquid Res\n[[65.27]] literaria detrimenti passa esset. Hos annotari, non est res adeo vasta, utilis tamen, sed et non\n[[65.28]] nego, recondita, et profunda. Neque enim tanti esset de patria eorum, de varia fortuna, de exitu\n[[65.29]] inquiri quam de iis meritis, quibus aeternum memorandi sunt. </p>\n<p> [[65.30]] Ac vereor ne plerique illi qui vitas nobis dedere hoc non satis attenderint. Quotusquisque\n[[65.31]] enim est qui in vitis Erasmi, Rhenani, Melanchthonis, Camerarii meminerit, quos illi autores e\n[[65.32]] tenebris primi eruerint. Quis est qui eum IC^#'t^#'u^#'m nominet, qui primus Jurisprudentiam in artem\n[[66.1]] redigere aggressus est, qui fere dixerim Apelles fuit. Ubi nominatur qui primus in re nautica\n[[66.2]] accurate philosophatus sit, ostenderitque cursum navis, si magnetem sequatur, necessario esse\n[[66.3]] rhomboeid<greek>h̃</greek> non <greek>kykloeidh̃</greek>. Ubi est catalogus compositionum apud Medicos celebriorum\n[[66.4]] atque usitatiorum, suis autoribus, a quibus saepe denominantur, vindicatarum. Quis refert\n[[66.5]] primum prope eorum qui Mathesin ad Physicam applicarunt, fuisse Joh. Suisset Calculatorem\n[[66.6]] ideo Scholasticis appellatum, primos Circuli pseudo-quadratores fuisse Bovillum et Orontium;\n[[66.7]] et ut ad Theologica transeam, primum omnipraesentiam carnis Christi docuisse Fabrum Stapulensem;\n[[66.8]] M. Ant. de Dominis et Arminianis primum praelusisse Acontium, quaeque sunt alia\n[[66.9]] id genus, oppido multa, quae etsi sparsim nonnulla habeantur, nullibi tamen collecta sunt. Ex\n[[66.10]] hoc demum opere, quod talia complecteretur, vera ac solida historia literaria esset expectanda,\n[[66.11]] qua omnis verae eruditionis origines et progressus ostenderentur. Quemadmodum audi Josephum\n[[66.12]] Glanvillum Anglum nuperrime de incrementis scientiarum inde usque ab Aristotele\n[[66.13]] auctarum scripsisse. Sed sufficeret nunc quidem, qui recentes, id est inde usque ab inventa\n[[66.14]] Typographia editos percurreret eosque demum qui aliquid de suo ad augendam supellectilem\n[[66.15]] publicam contulere, instar Monasteriorum benefactoribus suis, quantum in se est non ingratorum,\n[[66.16]] in Necrologia, ut sic loquar referret, suaque cuique merita ascriberet. Huic instituto\n[[66.17]] arbitror conferre aliquid posse <i>Pinacothecas</i> Nicii, vitas Germanorum Adami, Gallorum per\n[[66.18]] Sammarthanos, Orientalizantium per Colomesium, Mathematicorum per Blancanum, Medicorum\n[[66.19]] per Lindium, et Meybomium (quanquam Meybomius hactenus tantum expectetur),\n[[66.20]] Theologorum per Bismarcum. Huc pertinent singulares vitae, ut Tychonis per Gassendum,\n[[67.1]] Peireskii per Gassendum, F. Pauli per Fulgentium, Cartesii per Borellum, Gassendi per Sorberium;\n[[67.2]] Cardani, Campanellae, Thuani, per se ipsum. Utinam Tibi vacet, Vir Ampliss^#'e, tanti\n[[67.3]] momenti instituto Te accingere, aut saltem initio scripta extantiora dare! Fracta enim semel\n[[67.4]] glacie, non deerunt, sive Tu sive alii qui et veteres addant, et suppleant recentiores. [ ... ] </p>\n","number":"19a.","title":"LEIBNIZ AN GOTTLIEB SPITZEL","date":"7./17. April 1670. [16a.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

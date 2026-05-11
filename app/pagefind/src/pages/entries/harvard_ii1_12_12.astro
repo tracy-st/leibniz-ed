@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_12","series":"Band II 1 (1663 - 1685)","seq":12,"text":"<p> [[39.1]] <b>12. JAKOB THOMASIUS AN LEIBNIZ</p>\n<p> [[39.2]] Leipzig, 6. (16.) Mai 1669. [11.13.]</b></p>\n<p> [[39.12]] Ignosce quaeso, si literis prolixis nihil minus, quam prolixas reddidero; non quod\n[[39.13]] gratiam illis prolixitas abstulerit (addidit potius), sed quod otium exiguum, ac nundinarum\n[[39.14]] strepitus non sinat de prolixitate cogitare, quam ipse quoque mihi ultro remittis. Commodum\n[[39.15]] autem sic cecidit, ut ad disputationem illam tuam honeste silere possim, cui quemadmodum\n[[39.16]] satisfacerem, non reperirem. Quanquam enim, quae disseris, legenti mihi non plane excusserunt\n[[39.17]] opinionem pristinam, labefactare tamen sunt visa, et parare me non mediocriter, vel ad abjiciendam\n[[39.18]] sententiam, vel forte ad conciliandam cum tua aliquo modo. Sed verum ut fatear,\n[[39.19]] nescio, si rationes computo meas, sitne consultum mihi, hoc in campo tecum congredi, in quo\n[[39.20]] non sum ita ego versatus, ut paria tecum audeam facere, praesertim cum res ipsa non mediocrem\n[[39.21]] requirat artium mathematicarum peritiam, in quibus desipiam, si tecum congrediar.\n[[39.22]] Adde, quo longe tu me es felicior, cujus vernantissima aetas in ea incidit tempora, in quibus\n[[39.23]] prope debellatum foret: mea contra juventus omnis consumta est in illis aevi barbari reliquiis, e\n[[39.24]] quibus utcunque paullatim emersisse satis habui ad qualemcunque eruditionis profectum. Quare\n[[39.25]] feres aequo animo, si tecum ita jam paciscar, ut si maxime nihil umquam eruditissimae\n[[39.26]] disquisitioni respondero, feram impune sane; cum in proelium me voces plane insuetum mihi,\n[[39.27]] liceat, quod cautorum est militum, intra vallum me continere. Si tamen erit otium cogitandi,\n[[39.28]] rescribam aliquid fortasse aliquando. </p>\n<p> [[39.29]] De illustrissimo Boineburgio non reperio, quin gratias agam tibi, qui tanti herois non\n[[39.30]] favorem mihi modo, sed amorem plane singularem conciliaveris. Quid enim quaeris? Scioppium\n[[39.31]] suum donavit mihi ultro, cum alterius exempli copiam speret. Caetera prae pudore taceo.\n[[40.1]] Te rogo, perficias apud eum, ut et in benevolentia perseveret (quamquam virtus ejus dubitare\n[[40.2]] me non sinit), et in me laudando sit parcior. Quae nova mihi non pauca nuncias, gratissima\n[[40.3]] fuerunt: Magis me tibi devincies, si per te cognovero, quemadmodum illa tua <i>confessio naturae\n[[40.4]] contra Atheistas</i>, quam Cl. Spizelius edidit, emendanda sit. </p>\n<p> [[40.5]] De Sarcmasio quid alii sentiant, ipsi viderint. Apud nos quidem neminem scio, cui se\n[[40.6]] insania hominis cum flagitiosa rabie conjuncta probet. Nec dubitare possumus, quin illi viri,\n[[40.7]] quibus blanditur, malint eum de se siluisse in libello famoso. Nec enim unquam ipsi per\n[[40.8]] calcatas aliorum ruinas emergere pulchrum putaverunt. Sed tanta hominem agit vesania, nescio\n[[40.9]] dicam an malitia, ut adscito jam Xavierii Parani nomine, vindicias adversus Lentulum, Nasturtium,\n[[40.10]] Burgoldensem emiserit. Imprimi haec talia nemine vetante, non possum satis mirari.\n[[40.11]] Nec spero futurum esse, ut ad se homo redeat, nisi majori vi coërceatur. </p>\n<p> [[40.12]] Haberes cum his literis meam de origine animae humanae disputationem, nisi monuisset\n[[40.13]] Freislebius, commodius a mercatoribus, si quid tale vellem, quam per postam fieri posse. Ipse\n[[40.14]] interim et ejus curandae negotium suscepit. In ea, cum poscente argumento disputanda quaedam\n[[40.15]] mihi fuerint adversus Pontificios doctores, nescio num et Illustrissimo Boineburgio mittendum\n[[40.16]] sit exemplum, ne forte incivilitati imputet, si ea mittam, in quibus aliter de argumento\n[[40.17]] gravissimo a me disputatur, quam ipse vellet. Promisi interim ad futuras nundinas disputationes\n[[40.18]] quasi sex, <greek>sỳn ue^ṽ eĭpeĩn</greek>, quas jam diu affectas <i>de stoica mundi exustione</i> habeo. Tu optimum\n[[40.19]] Maecenatem meo nomine humillime salutabis, proque egregio munere gratias una mecum ages.\n[[40.20]] Vale, et aridae scriptioni ignosce. Lips. d. 6 Maii, 1669. </p>\n<p> [[40.21]] De studiorum meorum ratione nondum potui fuse ad Illustrissimum Boineburgium disserere,\n[[40.22]] angustia temporis praeclusus. Faciam id alias. </p>\n","number":"12.","title":"JAKOB THOMASIUS AN LEIBNIZ","date":"Leipzig, 6. (16.) Mai 1669. [11.13.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

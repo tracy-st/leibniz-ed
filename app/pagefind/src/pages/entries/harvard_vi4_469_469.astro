@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_469","series":"Band VI 4 (1677 - 1690)","seq":469,"text":"[[2075.9]] <b>378₁.  Gestrichener erster Ansatz GESTRICHENER ERSTER ANSATZ </p>\n<p> [[2075.10]] <k>Effectus motuum formales</k> <b>sunt</b> <b>qui nihil aliud continent quam\n[[2075.11]] quantitatem materiae per spatium esse translatam. Et</i> <k>actiones motuum\n[[2075.12]] formales</i> <b>sunt quae nihil aliud continent quam quantitatem materiae per\n[[2075.13]] spatium in tempore transferri</i>. </p>\n<p> [[2075.14]] Itaque nulla hic ratio habetur obstaculi superati quod nasci forte potuit a corpore alio\n[[2075.15]] occurrente aut ipsius corporis moti adhaesione vel attractione, aliisque materiae concretae\n[[2075.16]] accidentibus. Sed consideratur tantum materiae quantitas locum mutans per tempus, quae\n[[2075.17]] scilicet motui essentialia sunt, itaque Effectum vel actionem, <b>formalem</b> appellavi.\n[[2075.18]] Differt autem <b>Effectus</b> ab <b>Actione</b> quod in Effectu solum ejus quod praestitum est,\n[[2075.19]] nempe ejus quod est translatum et spatii per quod facta est translatio; in actione vero\n[[2075.20]] integra etiam temporis, quo praestitus est effectus, ratio habetur. </p>\n","number":"378₁.","title":"Gestrichener erster Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

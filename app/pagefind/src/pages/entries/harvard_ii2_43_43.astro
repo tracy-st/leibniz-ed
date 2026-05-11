@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_43","series":"Band II 2 (1686 - 1694)","seq":43,"text":"<p> [[197.7]] <b>44. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[197.8]] Hannover, 10. (20.) Mai 1687. [39.46.]</b></p>\n<p> [[197.15]] Recte <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: Ad Vincent. Placcium</Fn> accepi Tuas sane gratissimas cum responsis amici ad quaesita de eo quod interest,\n[[197.16]] quo nomine plurimum gratias ago. </p>\n<p> [[197.17]] Prodiit nuper in Batavis liber inscriptus <i>Medicina Mentis et Corporis</i> autore Tschirnhusio\n[[197.18]] Equite Lusato, amico meo, in rebus Mathematicis omnique philosophia excellente. Is fuerat\n[[197.19]] initio ex asse Cartesianus, sed cum Parisiis crebro mecum ageret ostendi meliora quaedam\n[[197.20]] fundamenta, inprimis discrimen definitionum Nominalium et realium, quod in eo consistit, ut\n[[198.1]] ex definitione Reali agnoscere possimus, utrum res sit possibilis nec ne; huic ille jam fundamento\n[[198.2]] meditationes suas magnam partem recte inaedificat. Cartesius autem contra hanc observationem\n[[198.3]] peccaverat in sua post Anselmum proposita demonstratione Existentiae Dei, ex eo\n[[198.4]] quod Deus est Ens perfectissimum, atque ita omnes perfectiones, adeoque et existentiam\n[[198.5]] involvat. Quae demonstratio hoc saltem probat Deum necessario existere, si modo sit possibilis,\n[[198.6]] neque enim ex definitionibus aliquid concludi tuto potest, nisi constet eas esse reales, sive de re\n[[198.7]] possibili. Caeterum multa perutilia in suo libro annotat Tschirnhusius licet nonnunquam de\n[[198.8]] aliorum sententiis suisque pronuntiet paulo liberalius, et in quibusdam Geometricis in paralogismos\n[[198.9]] inciderit, promtiore quam par est, asseveratione de rebus nondum excussis. Subjicit\n[[198.10]] etiam nonnulla de Medicina Corporis, quam suasi ut appellaret, (: barbariuscula sed significantissima\n[[198.11]] voce :) <i>provisionalem</i>, ne aliis praejudicare videatur aliquando certiora detecturis,\n[[198.12]] vera enim Medicina adhuc in puteo Democriti latet. </p>\n<p> [[198.13]] Nescio an Cl. V. Samuelis Pufendorfii librum legeris <i>Eridis</i> parum amabili titulo inscriptum,\n[[198.14]] ut in literis ad me loquitur vir quidam illustris. Ego scriptoris ingenium colo atque\n[[198.15]] exosculor, sed vellem moderari sibi nonnihil, minusque acriter invehi in dissentientes. Si\n[[199.1]] voluisset <i>Caesarini Furstenerii</i> autor (exemplo Monzambani) satyra vindictam sumere a dissentientibus,\n[[199.2]] quantum illi chartae quantum temporis impendendum fuisset, melioribus destinatum? </p>\n<p> [[199.4]] Nostine atra an alba sit societas illa, quae se vocat <i>eine ump den Schaden Joseph sich\n[[199.5]] bekümmernde Gesellschaft</i>. Quantum judicari potest, socii illi Dreiero, Zeidlero, et horum\n[[199.6]] discipulis videntur infesti, quos titulo syncretistarum infectantur. Promittunt praeterea nescio\n[[199.7]] quam artis Apodicticae emendationem, Analysi Zeidlerianae oppositam, sed artis tantae nulla\n[[199.8]] in libello illo Germanico <i>Vom Schaden Josephs</i> exstant vestigia. Certe Viottus ipse, quem\n[[199.9]] laudant, meo judicio longe adhuc ab ejus penetralibus abfuit, non minus quam Conringius, qui\n[[199.10]] Epistola praefixa Viottum commendavit. Tametsi Conringium ingenio et judicio valuisse\n[[199.11]] dubium nullum sit, sed difficile est ad artis Analyticae arcana pervenire Matheseos expertem.\n[[199.12]] Verum ego Te diutius teneo quam volebam. Vale. </p>\n<p> [[199.13]] Dabam Hanoverae 10. Maji 1687 </p>\n","number":"44.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"Hannover, 10. (20.) Mai 1687. [39.46.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

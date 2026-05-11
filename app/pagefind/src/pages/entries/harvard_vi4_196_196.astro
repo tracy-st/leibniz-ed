@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_196","series":"Band VI 4 (1677 - 1690)","seq":196,"text":"[[692.5]] <b>161₁.  Gestrichener Ansatz GESTRICHENER ANSATZ </p>\n<p> [[692.7]] Il est constant que de toutes les choses visibles l'homme est ce qui peut contribuer le\n[[692.8]] plus au bonheur de l'homme; mais le mal est, qu'on ne s'unit pas assez et que chacun\n[[692.9]] croit trouver son avantage par des routes particulieres, au lieu que s'ils travailloient tous\n[[692.10]] de concert au bien commun, chacun se trouveroit plus heureux sans comparaison qu'il ne\n[[692.11]] sçauroit estre dans cette confusion et même dans cette opposition de desseins. Nous\n[[692.12]] marchons dans les tenebres, et au lieu de nous tenir par la main pour nous entreguider, et\n[[692.13]] pour asseurer nostre chemin, nous courons confusement et heurtons les uns contre les\n[[692.14]] autres. Cependant j'avoue qu'il est plus aisé de remarquer ces desordres que d'y remedier.\n[[692.15]] La bonne intention d'un seul n'y suffit pas, plus il la fera connoistre et plus il\n[[692.16]] s'exposera à l'envie, ou au mepris; à moins qu'il n'ait des qualités fort extraordinaires ou\n[[692.17]] beaucoup d'autorité pour se faire aimer et considerer; mais on voit que ces sortes de\n[[692.18]] personnes sont ordinairement plus portées à l'ambition pour se distinguer qu'à la charité\n[[692.19]] pour s'unir avec les autres. Il faudroit donc que plusieurs se rencontrassent egalement\n[[693.1]] bien intentionnés et raisonnables, et qui se connussent assez pour se hazarder de s'ouvrir\n[[693.2]] l'un à l'autre. Mais on sçait qu'il n'y a rien de si rare, que de trouver deux amis\n[[693.3]] veritables, et cependant il faudroit qu'il y en eût beaucoup; ou du moins il faudroit que\n[[693.4]] l'interest les fit agir constamment comme s'ils l'estoient. Ce qui n'est pas aisé dans l'estat\n[[693.5]] où les hommes se trouvent par leur education negligée et par leur mauvaises habitudes,\n[[693.6]] qui les rendent emportés et incapables de toute application de longue haleine, lors qu'elle\n[[693.7]] n'est pas soutenue par la veue d'un interest present. </p>\n<p> [[693.8]] C'est pourquoy tout bien consideré, je croy que rien n'est plus avantageux aux\n[[693.9]] hommes, que d'estre sousmis à des princes, qui soyent egalement grands et éclairés. Un\n[[693.10]] prince est l'abregé de tout son peuple, on peut même dire en quelque façon qu'il est aux\n[[693.11]] autres ce que l'ame est aux corps, et qu'il fait plus que tout le reste. Et je trouve qu'un\n[[693.12]] poëte de mes amis, n'avoit pas grand tort de dire: </p>\n<p> [[693.13]] <i>Tu quoque nunc florens Ludovico Gallia rege</i> </p>\n<p> [[693.14]] <i>Acceptos uni disce referre Deos.</i>\n [[693.15]] Caligula souhaittoit que [tous] les Romains n'eussent qu'une teste afin de la pouvoir faire\n[[693.16]] trancher d'un seul coup à tout le peuple. Il le desiroit pour les rendre tous malheureux, et\n[[693.17]] nous le souhaitterons pour la felicité publique et nous nous rejouirons quand le vaste\n[[693.18]] corps d'une grande nation aura une teste dont les perfections fassent le commun bonheur.\n[[693.19]] Il ne faut qu'une ferme resolution d'un grand prince, pour faire reussir les plus beaux\n[[693.20]] desseins. Mais ces princes assez autorisés non seulement par leur merite mais encor par le\n[[693.21]] bonheur, c'est à dire par la providence sont fort rares. J'en ay familierement connu\n[[693.22]] d'infiniment éclairés, mais ils n'estoient ny assez puissans ny assez dégagés pour executer\n[[693.23]] les belles veues qu'ils avoient pour le soulagement de leur sujets et pour le bien de\n[[693.24]] tout le genre humain. </p>\n","number":"161₁.","title":"Gestrichener Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_87","series":"Band II 4 (1701 - 1707)","seq":87,"text":"<p> [[282.5]] <b>87. BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ</p>\n<p> [[282.6]] Paris, 9. September 1704. [51.94.] </b></p>\n<p> [[282.24]] Je n'ai point encore eu, Monsieur, l'honneur de vous répondre sur l'Arithmetique Dyadique,\n[[282.25]] et sur les caracteres de Fohi, par ce que je ne soupçonnois pas que nous en pussiés être en\n[[282.26]] peine. Dés que vous avés marqué que vous consentiés que cela fust imprimé dans nos <i>Memoires</i>,\n[[282.27]] l'Academie a reglé qu'on l'imprimeroit, et votre défense seule avoit empéché que l'on\n[[283.1]] n'imprimast plustost l'idée de l'Arithmetique Binaire. Mais il faut que tout cela soit dans son\n[[283.2]] temps. C'est à l'année 1703 que ces <i>Memoires</i> apartiennent, et nous achevons presentement\n[[283.3]] 1702, qui ne sera entierement fini que dans 15 jours. Si nos <i>Histoires</i> avoient pu penetrer\n[[283.4]] jusqu'à vous, vous verriés ou nous en sommes, et vous n'auriés pas eu d'inquietude sur ce que\n[[283.5]] vous nous avés envoyé. </p>\n<p> [[283.6]] Quant à votre Ecrit pour répondre au P. Lami, M. l'Abbé Bignon n'a pas jugé à propos de\n[[283.7]] le mettre dans son <i>Journal</i>, parce qu'on n'y met rien de polemique. Voilà, Monsieur, les deux\n[[283.8]] seuls articles dont j'avois à vous rendre conte. Quand vous voudrés nous envoyer quelque\n[[283.9]] morceau de vous, quelque échantillon de vos sublimes découvertes en Geometrie, l'Academie\n[[283.10]] en ornera ses <i>Memoires</i> avec un extréme plaisir, et fera sonner bien haut que vous étes de son\n[[283.11]] corps. Je suis avec beaucoup de respect, et une estime trés singuliere </p>\n<p> [[283.12]] Monsieur Votre trés humble et trés obeïssant serviteur Fontenelle </p>\n<p> [[283.13]] de Paris ce 9 Sept. 1704. </p>\n<p> [[283.14]] A Monsieur Monsieur Leibnits </p>\n","number":"87.","title":"BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ","date":"Paris, 9. September 1704. [51.94.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

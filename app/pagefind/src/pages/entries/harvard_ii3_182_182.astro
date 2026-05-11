@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_182","series":"Band II 3 (1695 - 1700)","seq":182,"text":"<p> [[464.1]] <b>182. JOHANN JAKOB LUNGERSHAUSEN AN LEIBNIZ</p>\n<p> [[464.2]] Jena, 21. September (1. Oktober) 1698. [174.]</b></p>\n\n<p> [[464.10]] Illustris atque Excellentissime Domine! Patrone Magne! </p>\n<p> [[464.11]] Literas Tuas, lapso Paschate, recte accepi atque ex iis curas Hermeneuticas Te juvene\n[[464.12]] susceptas non sine voluptate perlegi: constitueram id propter publicam, in praesenti scheda\n[[464.13]] patula, earum mentionem facere, cui audaciae Humanitas Tua facilem promittit veniam. Jam in\n[[464.14]] eo sum ut Sciagraphiam istam tabularem in corpus redigam, quod si exierit copiam ejus\n[[464.15]] impertiri ausim. Vale et studiorum meorum promotioni favere perge, quem ad cineres usque\n[[464.16]] habeas </p>\n<p> [[464.17]] Illustris Dominus Tui cultorem devotissimum M. Joh. Jac. Lungershausen, </p>\n<p> [[464.18]] Jenae d. 21. Sept. Anno 1698. Fac. Phil. Adj. </p>\n<p> [[464.19]] P.S. Quo pacto Lynkerus noster in suo <i>Instructorio</i> Tui fecerit mentionem, a quodam\n[[464.20]] Antagonista, in Indice quodam, increpatam, ab ipso Lynkero vero in Indice repetito defensam,\n[[464.21]] credo illustrem Tuam Excellentiam habere compertum. </p>\n","number":"182.","title":"JOHANN JAKOB LUNGERSHAUSEN AN LEIBNIZ","date":"Jena, 21. September (1. Oktober) 1698. [174.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

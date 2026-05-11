@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_167","series":"Band VI 4 (1677 - 1690)","seq":167,"text":"[[573.3]] <b>135.  De abstractis [Sommer 1683 bis Ende 1688 (?)]</b>\n [[573.4]] <tab/>[Sommer 1683 bis Ende 1688 (?)]\n[[573.13]] <tit2><b>De abstractis</b></tit2> </p>\n<p> [[573.14]] Sapientia est <greek>tò</greek> <i>esse sapientem</i> quatenus est sapiens. Justitia est <greek>tò</greek> <i>esse justum</i>\n[[573.15]] quatenus est justus. Itaque etsi <i>esse sapientem</i> sit <i>esse justum</i>, non tamen sapientia est\n[[573.16]] justitia. Nam sapientia est scientia felicitatis, justitia est caritas ad normam sapientis. Sed\n[[573.17]] ad justi rationem assumuntur hypotheses aliae, quam quae ad sapientem formandum\n[[573.18]] necessariae sunt, etsi autem constet ex sapientis notione, quid in illa hypothesi ipsi\n[[573.19]] conveniat; non tamen id convenit ei quatenus est sapiens. Quid ergo. </p>\n<p> [[573.20]] An sapientia est felicitas seu an sapiens quatenus sapiens est felix. Id non ita est,\n[[573.21]] nam praeter scientiam felicitatis requiritur laetitia durabilis. Scit igitur sapiens quid pariat\n[[573.22]] laetitiam durabilem, necesse est tamen ut praeter scientiam ejus, accedat ipsa laetitia ut\n[[573.23]] felix fiat, ita novum aliquid quod facti est seu nova hypothesis poni debet tametsi ea ex\n[[573.24]] priore soleat sequi. Sed omnis sapiens quatenus sapit est sciens, est perfectione praeditus,\n[[574.1]] est qualificatus. Itaque sapientia est scientia, est perfectio, est qualitas. Quid ergo quia\n[[574.2]] omnis sapiens quatenus sapiens est laudabilis? An sapientia erit laudabilitas. Sed hoc dici\n[[574.3]] non potest, quia ipsa sapientia est laudabilis. Eodem igitur argumento negabitur etiam\n[[574.4]] quod sapientia sit bonitas. Nam ipsa sapientia est bona. Itaque laboramus adhuc difficultate.\n[[574.5]] An dicemus omnem bonitatem esse bonam, ut datur relatio relationis. An negabimus\n[[574.6]] sapientem quatenus sapiens, laudabilem esse, quia ad intelligendam laudabilitatem\n[[574.7]] assumenda sunt quae in sapiente non continentur scil. consideratio spectatorum, ita <greek>tò</greek>\n[[574.8]] <i>quatenus</i> non tantum in re, sed et consideratione novas hypotheses excludit. </p>\n","number":"135.","title":"De abstractis","date":"[Sommer 1683 bis Ende 1688 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_34","series":"Band II 1 (1663 - 1685)","seq":34,"text":"<p> [[107.4]] <b>30. JAKOB THOMASIUS AN LEIBNIZ</p>\n<p> [[107.5]] Leipzig, 11. (21.) Oktober 1670. [29.35.]</b></p>\n<p> [[107.15]] Utinam gaudium illud tuum, quo perfusum te scribis, lecto in Francofurtensium indice\n[[107.16]] nomine meo, non sequatur poenitentia, ubi rem ipsam videris. Sane vero ne <i>dialogos</i> illos\n[[107.17]] quidem <i>physicos</i> tibi scripsi, aut similibus tui, sed juvenibus, non male quidem illis institutis, a\n[[107.18]] te tamen longissimo dissitis intervallo. Quare ubi oculos illis tuos donaveris, te rogo, ut si\n[[107.19]] exuas philosophum, induas amicum. Quamquam nec illud displicebit, gratum erit potius, si\n[[107.20]] mihi errores meos demonstraveris. Fateor enim, in scientia praecipue naturalium rerum, imperitiam\n[[107.21]] meam, nec de ea dubitavi, vel in praefatione ad lectorem confiteri. Nizoliana tua\n[[107.22]] superioribus nundinis inspexi, communicata mihi ab amico: ac visus sum benevolentiae in me\n[[107.23]] tuae multa deprehendere indicia. De cetero, quae suades ibi, aut disseris, ea mihi talia videbantur,\n[[107.24]] ut, tametsi non omnia meis cogitatis congruerent, praecipitari tamen judicium non\n[[107.25]] oporteret: tempore autem repetendi ea, et meditandi nunc maxime destituor. Programmati de\n[[107.26]] libertate philosophandi, quod vidisse te scribis, nunc aliud addo, quod per otium legas. Vale.\n[[107.27]] Lips. d. 11 Oct. 1670. </p>\n","number":"30.","title":"JAKOB THOMASIUS AN LEIBNIZ","date":"Leipzig, 11. (21.) Oktober 1670. [29.35.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

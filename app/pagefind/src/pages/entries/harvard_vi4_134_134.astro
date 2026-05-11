@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_134","series":"Band VI 4 (1677 - 1690)","seq":134,"text":"[[440.1]] <b>109.  Praefatio operis ad instaurationem scientiarum [Frühjahr 1682 (?)]</b>\n [[440.2]] <tab/>[Frühjahr 1682 (?)] </p>\n<p> [[440.8]] Mihi si dicendum quod res est statum humanae cognitionis consideranti in mentem\n[[440.9]] venit imago exercitus, in fugam conjecti, vel praedae causa per agros palantis, a quo nulla\n[[440.10]] signa nulli ordines servantur; vel, ut aptiori similitudine utar; eruditionis hodiernae\n[[440.11]] apparatus, videtur comparari posse tabernae amplissimae, omnigena mercium varietate\n[[440.12]] instructae, sed plane eversae et perturbatae, omnibus inter se confusis, nullis accedentibus\n[[440.13]] numeris literisve indicibus, nullo inventario, nullis rationum libris, unde lux aliqua hauriri\n[[440.14]] possit. Ubi quanto majorem massam conficient res collectae, tanto minus usui erunt.\n[[440.15]] Itaque non tantum novis mercibus undique convectandis, sed et his quae habentur rite\n[[440.16]] ordinandis opera danda est, talisque eligendus ordo, ut nova supplementa semper imposterum\n[[440.17]] locum suum certum inveniant, nec pristina semper ob accessiones quotidianas\n[[440.18]] turbari immutarique indies necesse sit, quod promtis quidem, sed parum judiciosis patribus\n[[440.19]] familias usu venire solet, qui nunquam sibi satisfacientes, singulis noctibus rerum\n[[440.20]] suarum familiarium faciem statumque mutare deliberant. Idem nobis in scientiis usu\n[[440.21]] venire videtur, ubi perpetua reformandi innovandique libidine prurimus, nec tamen\n [[440.22]] quaesitis utimur, sed indigesta relinquentes mox alia captamus, neque aliquid certi constituimus,\n[[440.23]] cui postea inaedificare tuto possimus. Nec parum turbat infinita librorum\n[[440.24]] eadem reciprocantium moles, de qua latius deinde dicendi locus erit. </p>\n<p> [[440.25]] Duobus ergo nobis opus est, ut ex illa confusione eluctemur, inventario amplo suis\n[[440.26]] multiplicibus ac fidelissimis indicibus instructo, et libro subductarum rationum; quorum\n[[440.27]] operum prius, nempe inventarium, Historiam omnem Naturae artisque, et quicquid sensu\n[[441.1]] et relatione constat dignum memoratu vel contineat, vel indicet, at posterius, nimirum\n[[441.2]] Liber rationum ipsas (vel absolutas, vel cum aliter non licet hypothesi nixas), sive\n[[441.3]] veritatis, sive etiam probabilitatis maximae praesumtionisque demonstrationes ex sensu\n[[441.4]] cognitis ductas, comprehendat. Sed neutrum ego sperandum arbitror, in tanta humanarum\n[[441.5]] opinionum varietate, nisi utamur Methodo cujus hic Elementa tradentur, quae omnes\n[[441.6]] controversias e medio tollit, efficitque ut in rebus etiam a sensu et figura remotissimis,\n[[441.7]] calculo quodam irrefragabili ordineque determinato procedere possimus. Ita denique\n[[441.8]] imposterum in omnibus disciplinis magno reipublicae fructu fiet quod in Geometria\n[[441.9]] dudum factum est ut ingeniosi homines famam non evertendis majorum traditis, sed quod\n[[441.10]] jam supra admonui augendis eorum inventis quaerere cogantur, <b>Rationumque</b> semel\n[[441.11]] subductarum examinatarumque publice <b>liber</b>, irrefractabilis habeatur. Et quaecunque in\n[[441.12]] humanam cogitationem cadunt nostra notionum analysi locum ac sedem constantem\n[[441.13]] invariabilemque in generali <b>inventario</b> accipient, licet alioqui saepe eadem res ob\n [[441.14]] usum respectumque multiplicem ad varia loca alia, sed obiter designando tantum per\n[[441.15]] indicis modum referri possit. </p>\n","number":"109.","title":"Praefatio operis ad instaurationem scientiarum","date":"[Frühjahr 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

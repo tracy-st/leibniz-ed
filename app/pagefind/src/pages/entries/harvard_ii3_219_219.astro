@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_219","series":"Band II 3 (1695 - 1700)","seq":219,"text":"<p> [[585.9]] <b>219. BURCHARD DE VOLDER AN LEIBNIZ</p>\n<p> [[585.10]] Leiden, 1. (11.) August 1699. [214.223.]</b></p>\n\n<p> [[585.21]] Illustri Viro Godefrido, Guilielmo Leibnitio S. P. B. De Volder. </p>\n<p> [[585.22]] Inexpectatum tibi accidit, Vir Amplissime, negare me <i>pluris esse Actionem, quae idem\n[[585.23]] promtius praestet</i>. Ego vero miror, te hoc pro tam certo axiomate habere, ut nihil speres illo\n[[585.24]] producere clarius, praesertim cum in hoc ipso tota causa consistat. Vellem equidem ex responso\n[[585.25]] tuo me percipere potuisse, huic evidentiae nihil officere rationes, quas in meis attuli, cur hoc\n[[585.26]] negandum existimarem; quae adhucdum mihi videntur, si nihil amplius, tantum certe habere\n[[585.27]] virium, ut enuntiationem tuam merito dubiam faciant. Tempus siquidem, quod merum ens\n[[585.28]] rationis est, quatenus ab actione distinguitur, nihil efficit. Solae actiones sive effectuum causae\n[[586.1]] inter se comparandae sunt. Hae vero cum aequales sunt effecto, nonne sequitur eandem\n[[586.2]] causarum aut actionum aut virium esse rationem, quae est effectuum? Quo ipso tamen nequaquam\n[[586.3]] nego, <i>in motu ipso promtiore plus esse realitatis et perfectionis</i>, ut nec, <i>eum differre a\n[[586.4]] tardiori in majus;</i> sed quod putem id quod plus realitatis est in motu promtiori, compensari in\n[[586.5]] tardiori duratione longiori. </p>\n<p> [[586.6]] Quae quidem omnia niti mihi videntur iisdem principiis, quibus uteris in responsione ad\n[[586.7]] Abb. D. C. in novell. Reip. litt. 1687, p. 137, ubi expresse ais, <i>qu'il y a tousjours une parfaite\n[[586.8]] equation entre la cause pleine et l'effet entier</i>, et quae illic porro habentur. In nostro casu\n[[586.9]] effectum unum et idem est. Erunt itaque et causae quae totae in actionibus consistunt earundem\n[[586.10]] virium. </p>\n<p> [[586.11]] Interruptio, si quae foret in motu, cum nec ex motus celeritate, nec ex directione sequatur,\n[[586.12]] aliam haberet a motu causam; nec determinare possum num quid sit, quod prohibeat Deum\n[[586.13]] transcreare corpora de loco in locum per saltum, observando ut loca sibi sint in directum. Cum\n[[586.14]] enim talis causae, quae hunc saltum efficeret, notionem nullam habeam, de ea ratiocinari nihil\n[[586.15]] possum. </p>\n<p> [[586.16]] In grege et exercitu pluralitatem agnosco, quia partes habent nullo necessario inter se nexu\n[[586.17]] conjunctas; quod in extenso secus se habet, cujus unam partem omnino putem alteri necessariam\n[[586.18]] esse. Nec inter partes extensionis substantiale discrimen admitto, sed tantum modorum;\n[[586.19]] quod mihi commune esse existimo tantum non cum omnibus, qui soli motui, utpote qui unice\n[[586.20]] modorum discrimen facit, omnem corporum varietatem ascribunt. </p>\n<p> [[586.21]] Subjectum mutationis Logicam notionem an metaphysicam dicas, parum mihi videtur\n[[586.22]] referre. Logicam dixi, eo quod in eo ita generaliter sumto, nec accuratius determinato nihil\n[[586.23]] reperirem, quod non explanaret. </p>\n<p> [[586.24]] Omne corpus habet conatum perseverandi in suo statu, nec ab eo deturbabitur nisi ab\n[[586.25]] externa causa. Haec illi dat conatum ad motum, recte; sed cum plus causae requiratur, ut\n[[586.26]] moveatur corpus majus quam ut minus, manebit quidem eadem vis motus, sed ejus velocitas\n[[586.27]] minuetur necessario. </p>\n<p> [[586.28]] De principio activo, ipsa extensione priori, nihil quod addam habeo, cum qui meus est\n[[586.29]] stupor, nihil horum intelligam. </p>\n<p> [[586.30]] Quod ad alteram quaestionem respondes, videor mihi intelligere; sed quaesitum hoc volui,\n[[586.31]] eandem ob causam qua primum, de <greek>ĕntelexeíä</greek> corporis animati, quatenus spectatur tanquam\n[[586.32]] unicum, neglectis partibus, quatenus illae privatim animatae sunt. </p>\n<p> [[587.1]] Utrumque autem hoc quaerebam, quia si illud sive principium activum sive <greek>ĕnteléxeia</greek> ab\n[[587.2]] extensione plane differrent, ex eo sequi existimabam nihil aut hoc aut illam, in extensionem\n[[587.3]] posse. </p>\n<p> [[587.4]] Doleo, Vir Amplissime, me non potuisse plane accedere opinioni tuae, quod tibi persuadeas\n[[587.5]] velim, neutiquam fieri ullo contradicendi studio. Imo e contrario, auctoritate tua, quae\n[[587.6]] apud me maxima est, vel sola moverer, nisi te nec ipsum probaturum existimarem, si rei non\n[[587.7]] satis perceptae assentirer. Vale. </p>\n<p> [[587.8]] Lugd. Batav. ipsis Calendis Augusti MDCXCIX. </p></p>\n","number":"219.","title":"BURCHARD DE VOLDER AN LEIBNIZ","date":"Leiden, 1. (11.) August 1699. [214.223.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

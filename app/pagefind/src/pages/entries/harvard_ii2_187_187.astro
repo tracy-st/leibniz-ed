@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_187","series":"Band II 2 (1686 - 1694)","seq":187,"text":"<p> [[621.1]] <b>189. LEIBNIZ AN LOUIS COUSIN</p>\n<p> [[621.2]] [Ende November 1692.] [278.]</b></p>\n<p> [[621.12]] Monsieur </p>\n<p> [[621.13]] Puisque <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Monsieur le president Cousin</Fn> outre vos affaires ordinaires, vous vous estes chargé d'un travail aussi estendu, que\n[[621.14]] celuy du <i>Journal des Sçavans</i>, je n'ay point osé vous interrompre par mes lettres. Cependant je\n[[621.15]] vous dois des grands remercimens, et vos expressions trop favorables à mon egard que je ne\n[[621.16]] prends point à la lettre, et que je considere comme un effect de vostre genie obligeant, et de la\n[[621.17]] civilité des personnes distinguées de vostre nation envers les estrangers, m'engagent à ces mots\n[[621.18]] témoins de ma reconnoissance. J'ay pris la liberté, Monsieur, de vous envoyer de temps en temps\n[[621.19]] quelques pensées, qu'il dependra de vous d'employer dans le <i>journal</i>, lorsque vous le jugerés à\n[[621.20]] propos. Les dernieres contenoient une <i>Regle de la composition des mouvemens</i>; item une reponse\n[[622.1]] à l'objection d'un Cartesien mise dans vostre <i>journal</i> contre ce que j'y avois dit de la nature de la\n[[622.2]] matiere. </p>\n<p> [[622.3]] Je joins icy quelques errata que j'ay remarqués dans ce qu'il y a déja de moy. Quelques\n[[622.4]] uns sont du libraire ou graveur, d'autres viennent de ce que l'extrait de ma lettre a laissé\n[[622.5]] quelque obscurité. Il y en a peut estre qui viennent de moy. Cela se peut remarquer sur la fin de\n[[622.6]] l'année, si vous le jugés convenable. Car vous en estes le maistre, Monsieur, et je n'ay garde de\n[[622.7]] vous rien prescrire. Je ne pretends pas que cecy vous doive engager à une reponse. Vous\n[[622.8]] n'auriés jamais fait si vous vouliés repondre à ceux qui ont relation à vostre journal qui repond\n[[622.9]] pour vous à tout le monde. </p>\n<p> [[622.10]] Je suis avec zele </p>\n<p> [[622.11]] Monsieur </p>\n","number":"189.","title":"LEIBNIZ AN LOUIS COUSIN","date":"[Ende November 1692.] [278.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

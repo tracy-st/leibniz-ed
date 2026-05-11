@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_50","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":50,"text":"[[432.4]] <b>50. Additio natura prior substractione </b> <span>432.4;0:63:050:75       :L:l^</span>.\n[[432.15]] Additio natura prior substractione. Natura priora.\n[[432.16]] Demonstratio axiomatum.\n[[432.17]] Additio est natura prior substractione, seu  a  b est natura prius quam\n[[432.18]]  a - b quia natura prius est ut duo a, b eodem modo tractentur quam ut tractentur\n[[432.19]] modo diverso, et cum modo diverso tractantur nondum ratio apparet, cur potius\n[[432.20]] dicamus  a - b, quam - a  b. Ea igitur causa forinsecus petenda est, quod non\n[[432.21]] est necesse cum dicimus  a  b; eodem modo ostenditur et ab seu multiplicationem\n[[432.22]] esse natura priorem ipso a / b seu divisione. Et haec quidem ita generalem hominum\n[[432.23]] assensum habent, ut pro monstro futurus sit arithmeticus, qui substractionem\n[[432.24]] tractet ante additionem. Itaque mea sententia Robervallius non inepte demonstravit\n[[432.25]] axioma: (si ab aequalibus auferas aequalia, residua sunt aequalia) ex axiomate natura\n[[433.1]] priore: (si aequalibus addas aequalia, summae sunt aequales) quamvis eum ideo reprehensum\n[[433.2]] sciam a collegis in Academia Regia Parisina, quia scilicet aeque illud ex hoc\n[[433.3]] demonstrare potuisset, quam hoc ex illo. Sed praeferenda sunt quae natura priora\n[[433.4]] sunt, et peccatum videri potest pro axiomate habere quod ex positis demonstrari\n[[433.5]] potest.\n","number":"50.","title":"Additio natura prior substractione","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

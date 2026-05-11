@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_531","series":"Band VI 4 (1677 - 1690)","seq":531,"text":"[[2354.4]] <b>419.  Propositiones theologicae [Herbst 1685 bis Frühjahr 1686 (?)]</b>\n [[2354.5]] <tab/>[Herbst 1685 bis Frühjahr 1686 (?)]\n[[2354.10]] </i> </p>\n<p> [[2354.11]] Cum versio vulgata Scripturae in Concilio Tridentino <b>Authentica</b> declaratur, hoc\n[[2354.12]] non ita intelligendum est quasi haec versio nunquam discedat ab originali, sed quia\n[[2354.13]] Ecclesia pro comperto habuit discrimen nullius quoad res fidei morumque esse momenti;\n[[2354.14]] ac proinde versionem hanc tuto adhiberi posse declaravit. </p>\n<p> [[2354.15]] Dum Sancti invocantur, cavendum est ne majorem ipsis quam Deo misericordiam\n[[2354.16]] tribuamus. Est enim Misericordia, virtus quaedam; virtutes autem Deus in summo possidet\n[[2354.17]] gradu. </p>\n<p> [[2354.18]] Sanctorum auxilium consistit in intercessione. </p>\n<p> [[2354.19]] Ecclesia non definivit an purgatorii poena consistat in igne proprie dicto. </p>\n<p> [[2354.20]] Utile est communionem sub utraque specie concedi populis inprimis qui ei assuevere. </p>\n<p> [[2354.22]] Conjugium quoque Clericorum alicubi recte concedetur. </p>\n<p> [[2355.1]] Liberum arbitrium non pugnat cum ea necessitate aliquid amplectendi quae oritur ex\n[[2355.2]] clara apparentia boni majoris, electio enim sua natura tendit ad optimum apparens: et\n[[2355.3]] objectum formale voluntatis est bonum apparens; minus autem bonum habet rationem\n[[2355.4]] mali. </p>\n<p> [[2355.5]] Nemo sine vero Dei amore justificari potest. </p>\n<p> [[2355.6]] Adoratio in Eucharistia non est terminanda in visibile et sensibile tanquam objectum\n[[2355.7]] latriae, sed in Deum praesentem. </p>\n","number":"419.","title":"Propositiones theologicae","date":"[Herbst 1685 bis Frühjahr 1686 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

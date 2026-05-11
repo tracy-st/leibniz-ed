@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_265","series":"Band II 1 (1663 - 1685)","seq":265,"text":"<p> [[815.7]] <b>231. LEIBNIZ AN FRIEDRICH SCHRADER</p>\n<p> [[815.8]] [Hannover, März ─ April 1681.]</b></p>\n<p> [[815.35]] [ ... ] Tam multa nunc habemus egregia naturae phaenomena ut mihi jam tandem\n[[815.36]] tempus esse videatur accingendi sese ad ordinandam earum congeriem, constituendasque conclusiones.\n[[816.1]] Nam ut olim inopia, ita nunc confusione laboramus. Idque saepe monui doctissimos\n[[816.2]] quosdam amicos ex Societate Regia Anglicana, qui et assensi sunt. Nam si sic pergimus,\n[[816.3]] posteritati quidem ingentis aedificii materiam relinquemus, sed ipsi agemus sub dio, nec\n[[816.4]] laboribus nostris fruemur. Unde fieri etiam video, ut homines practici nova ista experimenta\n[[816.5]] contemnere soleant, quasi nihil inde duci possit ad usum vitae. In quo falluntur sane, sed\n[[816.6]] ipsorum philosophorum experimentalium plerumque culpa, qui saepe conclusiones quas possent\n[[816.7]] non eliciunt. Cur autem id non fiat duo in causa esse arbitror, <b>primo</b> quod experimenta\n[[816.8]] atque observata dispersa sunt, neque in quoddam inventarium relata; pleraeque enim conclusiones\n[[816.9]] exurgunt ex multis experimentis inter se certa quadam ratione combinatis; <b>secundo</b>\n[[816.10]] quod hi qui experimenta colunt fere ratiocinandi artem ipsam, nempe mathesin (quae logica\n[[816.11]] quaedam physica est) negligunt. Quanquam logica quoque ipsa generalis, seu ars demonstrandi\n[[816.12]] impune a physico contemni non possit; imo compererim ego, sine quibusdam demonstrationibus\n[[816.13]] metaphysicis non posse demonstrari veras motuum leges; unde hactenus nondum quod\n[[816.14]] sciam ita extant, quemadmodum oportet. Etsi enim omnia fiant in natura secundum leges\n[[816.15]] mathematicas et mechanicas, comperi tamen ipsas leges mechanicas ex altioribus principiis\n[[816.16]] oriri quia, etsi materia per se sit mobilis, motum tamen actu ipso a se habere non potest, sed a\n[[816.17]] causa quadam incorporea excitari debet. Constitutis autem legibus motuum tam in solidis,\n[[816.18]] quam in liquidis, tum demum et mechanica reduci poterunt ad terminos purae Geometriae, et\n[[816.19]] physica ad terminos purae mechanices; et poterimus elicere ex datis experimentis, quicquid\n[[816.20]] inde elici debet: nec dubito quin hac methodo ab aliquot viris industriis inter se conspirantibus\n[[816.21]] plura intra decennium agi possint ad usum vitae, quam alias intra seculum et ultra. Sed ut dixi\n[[816.22]] methodo opus esset duplici, tum experimenta ordinandi atque in inventarium redigendi, tum ex\n[[816.23]] illis ratiocinandi, seu mathesin physicae applicandi. Quod postremum nemo novorum autorum\n[[816.24]] hactenus praestitit, si Galilaeum et Cartesium aliosque paucissimos excipias. </p>\n<p> [[816.25]] Boylii et judicium et industriam experimentalem magni sane facio, saepe tamen miror, ex\n[[816.26]] multis egregiis observationibus nullas eum elicere conclusiones alicujus momenti; plerumque\n[[816.27]] enim illud tantum protritum concludit, quod scilicet omnia debeant explicari per magnitudinem\n[[816.28]] figuram et motum. Mihi vero tempus tandem esse videtur, ut tentemus, qua magnitudine,\n[[817.1]] quibus figuris motibusque phaenomena sint explicanda. Alioqui philosophia nostra non multo\n[[817.2]] ad praxin utilior erit, quam vulgata. Quodsi itaque multos in observando quidem Verulamio et\n[[817.3]] Boylio, in ratiocinando autem Galilaeo et Cartesio similes haberemus; si experimenta ordine\n[[817.4]] institueremus et disponeremus; si ratiocinationes experimentis inaedificando mathesin physicam\n[[817.5]] magis excoleremus [<i>bricht ab</i>] </p>\n","number":"231.","title":"LEIBNIZ AN FRIEDRICH SCHRADER","date":"[Hannover, März ─ April 1681.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

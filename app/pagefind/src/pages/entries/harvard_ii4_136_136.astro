@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_136","series":"Band II 4 (1701 - 1707)","seq":136,"text":"<p> [[453.7]] <b>136. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[453.8]] Venedig, 6. August 1706. [130.137.] </b></p>\n<p> [[454.6]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[454.7]] In <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> questa settimana mi capitò il benign^#'m^#'o foglio di V. S. Ill^#'m^#'a che mi pervenne da Padova,\n[[454.8]] ove l'aveva mandato il Sig^#'r^#'e Zanovelli figurandosi che io fossi colà, nell'istesso tempo che\n[[454.9]] m'era trasferito in Venetia, ove ora mi trovo. Io godo infinitamente dell'ottima salute di V. S.\n[[454.10]] Ill^#'m^#'a tanto necessaria e proficua all'accrescimento e riforma delle buone lettere, e poi tanto da\n[[454.11]] me sospirata, mentre in V. S. Ill^#'m^#'a non solamente adoro il maggiore letterato che abbia il Secolo,\n[[454.12]] ma anche il mio maggiore e piu benefico Amico e Protettore. Il Sig^#'r^#'e Ramazzini e Valsinieri\n[[454.13]] dott^#'m^#'i Professori di Padova hanno è molto tempo scritto a Modona e Reg[g]io per avere diversi\n[[454.14]] semi de Celsi Mori, che cola assai abbondano, ma con i strepiti ora degli eserciti, rendendosi\n[[454.15]] difficile il comercio, non l'averemo che tardi. Io hò gia scritto al mio Servitore in Padova accio\n[[454.16]] mi mandi subito i semi che aveva gia preparato, ed in averli tutti le saranno da me con ogni\n[[454.17]] cautela e diligenza trasmessi. Ho nuovamente scritto al Sig^#'r^#'e Herman in Basilea assicurandolo\n[[454.18]] della ferma deliberatione e nomina degli Ecc^#'m^#'i Riformatori che nella prima congiuntura porteranno\n[[454.19]] la parte nell'Ecc^#'m^#'o Senato, non essendosi ciò ancora fatto per l'angustie e strettezze in\n[[454.20]] cui s'è trovata la Republica per la guerra presente. Ora che gli eserciti stranieri si vano\n[[454.21]] allontanando speriamo che lo Studio possa alquanto respirare, e che il Sig^#'r^#'e Herman sia per\n[[454.22]] essere presto chiamato per prendere possesso in Padova della Catedra che gli è stata gia\n[[454.23]] assegnata, e che ora niuno gli[e]la può levare. Coll'ordinario venturo risponderò a quello essa\n[[454.24]] s'è degnata scrivermi intorno alle cose letterarie, non avendo ora tempo di farlo per le molte\n[[454.25]] occupationi in cui mi tengono questi miei Ecc^#'m^#'i Padroni. Le rendo infinite gratie dell'onore de\n[[454.26]] suoi stimat^#'m^#'i caratteri, e la prego persuadersi, che con tutta veneratione sono e sarò </p>\n<p> [[454.27]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[454.28]] Venetia 6 Agosto 1706.\n[[454.29]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. Hannover </p>\n","number":"136.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 6. August 1706. [130.137.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

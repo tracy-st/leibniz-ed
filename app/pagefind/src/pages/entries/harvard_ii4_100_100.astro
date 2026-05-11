@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_100","series":"Band II 4 (1701 - 1707)","seq":100,"text":"<p> [[314.4]] <b>100. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[314.5]] Padua, 7. April 1705. [99.102.] </b></p>\n<p> [[315.33]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[315.34]] Domenica caduta mi capitò l'umani^#'m^#'o foglio di V. S. Ill^#'m^#'a colla data 12 marzo. Non sò in\n[[315.35]] primo luogo capire come si sia smarrita una mia che l'aveva trasmessa per mezo del Sig^#'r^#'e\n[[315.36]] Zanovelli di cui V. S. Ill^#'m^#'a non mi fà mentione veruna. In ricevere la lettera del Dotti^#'m^#'o Sig^#'r^#'e\n[[315.37]] Herman, la mandai subito all'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Marcello Capo del Magistrato de gli Ecc^#'m^#'i\n[[315.38]] Sig^#'r^#'i Riformatori, accio potessi ricevere i suoi ordini intorno a ciò che doveva rispondere al\n[[316.1]] Sig^#'r^#'e Herman. Per la difficolta incontrata in Venetia di radunare il Magistrato non ebbi la\n[[316.2]] fortuna di potere rispondere subito, il che poi eseguii con ogni diligenza, quando ricevei i\n[[316.3]] comandi dell'Ecc^#'m^#'o Magistrato, avendo scritto per tre diverse parti al Sig^#'r^#'e Herman, da cui poi\n[[316.4]] ricevei la risposta che nuovamente trasmessi al Magistrato, e mi fù ordinato che scrivessi subito\n[[316.5]] al Sig^#'r^#'e Herman, ricercandolo della sua intentione circa lo stipendio, gia risoluti gli Ecc^#'m^#'i\n[[316.6]] Riformatori di promoverlo alla catedra matematica di questo Studio[,] in virtù di che scrissi nel\n[[316.7]] mese caduto una lunghissima lettera al Sig^#'r^#'e Herman per via di Zurigo informandolo di tutto, e\n[[316.8]] pregandolo di rispondermi con ogni celerita accio il Magistrato potesse venire alla deliberatione.\n[[316.9]] Ed ora attendo la risposta con impatienza, ed oggi mi capita una lettera dell' Ecc^#'m^#'o\n[[316.10]] Procu^#'r^#'e Marcello, che molto si duole di non vedere comparire lettere del Sig^#'r^#'e Herman, non\n[[316.11]] dovendo dimorare nel Magistrato che fin alli 20 del corrente. Spero però ricevere lettere del\n[[316.12]] Sig^#'r^#'e Herman in questa settimana per il calcolo che hò fatto, e mi creda che sto per quest'affare\n[[316.13]] coll'animo molto agitato e sospeso e non vorrei che uscisse di Magistrato l'Ecc^#'m^#'o Marcello,\n[[316.14]] senza avere ricevute le risposte del Sig^#'r^#'e Herman, per cui fin ora in riguardo principalmente di\n[[316.15]] V. S. Ill^#'m^#'a hò operato con tutto il calore, e vigore possibile, e se mi capita a tempo la risposta del\n[[316.16]] Sig^#'r^#'e Herman, il negotio gia è conchiuso in questo mese, tanto le cose sono ben disposte. Di\n[[316.17]] quel che accaderà V. S. Ill^#'m^#'a ne sarà subito pienamente informato, e divotamente riverendola,\n[[316.18]] mi resto </p>\n<p> [[316.19]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e M. A. Fardella </p>\n<p> [[316.20]] Padova 7 Aprile 1705 </p>\n","number":"100.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 7. April 1705. [99.102.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

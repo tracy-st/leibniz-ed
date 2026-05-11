@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_173","series":"Band II 1 (1663 - 1685)","seq":173,"text":"<p> [[563.19]] <b>157. HERMANN CONRING AN LEIBNIZ</p>\n<p> [[563.20]] Helmstedt, 8. (18.) September 1677. [156.162.]</b></p>\n<p> [[564.6]] Nobilissime ac Ampliss. Vir </p>\n<p> [[564.7]] Multis nominibus gratae fuerunt literae tuae: cumprimis autem eo, quia visus mihi es\n[[564.8]] significare, ab Optimo Principe AntiCapucinica mea fronte benigna esse excepta. Dionysio\n[[564.9]] oportune evenit suorum conventus. Haud dubie enim deliberabitur, quemadmodum saltim\n[[564.10]] seraphica Francisci stigmata sui existimationem queant recuperare, ut et Novenisticae Revelationes:\n[[564.11]] quae a me malis auctoribus adscriptae sunt. Bibliothecae Agrippinenses scurrilitates et\n[[564.12]] mendacia hominis non fucabunt, scio: parum quoque juvabunt quod reliquum est. Opera\n[[564.13]] collatitia requiritur ad malae caussae patrocinium. Si Stenonius Vicarium egerit Apostolicum\n[[564.14]] ejusque censurae subjecerit sua Capucinus, minus scurrilium sannarum exspectandum mihi\n[[564.15]] fuerit. Moderatum enim et gravem hujus calamum ipse jam tum deprehendi, ex quatuor\n[[564.16]] schediasmatibus sacris Florentiae editis, indeque mihi missis a Bibliothecario Mediceo Antonio\n[[564.17]] Magliabechio: ac proinde confido, rectius ab illo expensum iri, quid exigant boni mores, quam\n[[564.18]] est factum a Capucinici libelli censoribus seraphicis et Capucinicis. Utinam solidam quoque\n[[564.19]] sacrarum rerum peritiam idem Stenonius nobis referat, possitque verbum divinum aeque scite\n[[564.20]] <greek>ŏruotomeĩn,</greek> atque potest animata corpora <greek>ănatomeĩn</greek>! Tempus omnia docebit. </p>\n<p> [[564.21]] Ne Justellianae Epistolae argumentum Te fugiat, mitto ipsam illam et quidem cum\n[[564.22]] Responso meo inobsignato. Illam peto reddi: hoc autem commoda occasione curari. </p>\n<p> [[564.23]] Artis Medicae non minus atque aliarum pene omnium scientiarum, si solas Mathematicas\n[[564.24]] quas puras vocant excipias, duo sunt pridem observata et constituta quasi principia: Experientia\n[[564.25]] et Apodictica ratiocinatio, vel saltim interdum <greek>dojastikh̀</greek>. Nisi utramque hanc artem quis\n[[564.26]] tenuerit, et secutus fuerit, non poterit non graviter labi. A plurimis autem hac parte peccari\n[[564.27]] certum est. Velim abs te expendi, quae de illustrando Pathologico studio disserui in Epistola\n[[564.28]] praefixa <i>Observationibus</i> Salmuthi, quae Operi quoque Epistolico quod Serenissimi Principis\n[[564.29]] nomini consecravi est inserta. Quod si non graveris quoque cum cura legere quae ultimae\n[[565.1]] editioni meorum <i>Hermeticorum</i> praemisi, possis simul accipere meam de Cartesianis pariter\n[[565.2]] Anglicanisque Philosophiae excolendae conatibus, sententiam a tua non sane multum diversam.\n[[565.3]] Unum hoc peto nunc mihi credi: me hactenus justo studio nostri temporis scripta omnia\n[[565.4]] <greek>ĕmpeirikà</greek> quae nancisci potui trivisse: iis vero confirmatum me potius in amplexanda veteri\n[[565.5]] Aristotelica doctrina quam permotum ab ea deserenda. Caeterum ipsam Experientiae et Apodicticae\n[[565.6]] methodum, existimo nondum esse a quoquam perfecte traditam. De hac quid sentiam,\n[[565.7]] poteris, si libet, capere ex Epistola ad Frolingium in Viotti librum <i>de Demonstratione</i>: quae\n[[565.8]] itidem in Opere Epistolico habetur. Quod si negotia fuissent passa, pridem utrumque argumentum\n[[565.9]] singulari opere illustrassem: Jam enim quae isthuc faciunt haud pauca congessi. Sed ut\n[[565.10]] hactenus pene nunquam fui, ita nec jam sum meus. Isthaec igitur curatio videtur aliis relinquenda. </p>\n<p> [[565.12]] Puteanea non reperiri in Bibliotheca Principis, doleo. Forte tamen possint etiamnum ex\n[[565.13]] Gallia curari, donec tertius liber <i>de Finibus</i> fuerit conficiendus. Quod si alia opera me possis\n[[565.14]] juvare, etiam illud utile fuerit commodo publico. </p>\n<p> [[565.15]] Vale et perge favere Tuo H. Conringio. </p>\n<p> [[565.16]] Helmestadii 8 Septembr. 1677. </p>\n<p> [[565.17]] Nobilissimo et Amplissimo Viro Gotfrido W. Leibnitzio Serenissimo Duci Joanni Friderico\n[[565.18]] a Consiliis et Bibliothecis Amico meo honorando. Hannover. Franco per Brunsvic. </p>\n","number":"157.","title":"HERMANN CONRING AN LEIBNIZ","date":"Helmstedt, 8. (18.) September 1677. [156.162.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

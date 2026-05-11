@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_307","series":"Band VI 4 (1677 - 1690)","seq":307,"text":"[[1354.1]] <b>253.  Existentia.« An ea sit perfectio [1677 (?)]</b>\n [[1354.2]] <tab/>[1677 (?)]\n[[1354.7]] <tit2><b>Existentia </b></tit2> </p>\n<p> [[1354.8]] Valde dubitari potest an existentia sit perfectio, seu gradus realitatis: quoniam\n[[1354.9]] dubitari potest an existentia sit ex eorum numero quae concipi possunt seu ex partibus\n[[1354.10]] essentiae: an vero sit tantum quidam conceptus imaginarius qualis est <i>caloris</i> et <i>frigoris</i>,\n[[1354.11]] qui non est nisi perceptionis nostrae denominatio, non rerum naturae. Si tamen accurate\n[[1354.12]] consideremus nos aliquid amplius concipere cum cogitamus rem <i>A</i> existere, quam cum\n[[1354.13]] cogitamus esse possibile, ideo videtur verum esse, existentiam esse gradum quendam\n[[1354.14]] realitatis; vel certe esse aliquam relationem ad gradus realitatis; non est autem existentia\n[[1354.15]] aliquis realitatis gradus: nam de quolibet realitatis gradu intelligi potest tum possibilitas\n[[1354.16]] tum existentia: erit ergo existentia excessus graduum realitatis rei unius, supra gradus\n[[1354.17]] realitatis rei oppositae, id est id quod est perfectius omnibus inter se incompatibilibus\n[[1354.18]] <b>existit</b> et contra quod existit est caeteris perfectius. Itaque verum quidem est id quod\n[[1354.19]] existit perfectius esse non existente, sed verum non est, ipsam existentiam esse perfectionem,\n[[1354.20]] cum sit tantum quaedam perfectionum inter se comparatio. </p>\n","number":"253.","title":"Existentia.« An ea sit perfectio","date":"[1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

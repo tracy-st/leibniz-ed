@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_168","series":"Band II 2 (1686 - 1694)","seq":168,"text":"<p> [[577.15]] <b>170. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[577.16]] Padua, 18. September [1692]. [169.171.]</b></p>\n<p> [[578.1]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[578.2]] Mi capita la benignissima di V. S. Illu^#'m^#'a con un postscritto da Volfembutel, la quale mi\n[[578.3]] sveglia nel cuore una eccessiva allegrezza per sentire buone nuove della sua salute, a me\n[[578.4]] sommamente cara, e per le cortesi, e generose espressioni, con cui essa mi assicura del suo\n[[578.5]] pretiosissimo amore, ed ottima volontà di stabilire la mia quiete. Erano più di tre mesi, che non\n[[578.6]] ricevevo sue lettere, essendosi smarrite alcune da ella accennatemi. Io per l'avvenire mi servirò\n[[578.7]] qui d'un Mercante mio amico, confidentissimo delli Sig^#'r^#'i Hopfer, e Bacmeister in Venetia, per il\n[[578.8]] di cui mezo spero, che capitaranno sicure, e presto le nostre lettere; Coll'ordinario passato\n[[578.9]] prima di ricevere la sua le scrissi per due strade, havendo consegnata una mia al Sig^#'r^#'e\n[[578.10]] Mendelino, e l'altro agl'accennati Mercanti, l'istesso faccio oggi affine che non si interrompa\n[[578.11]] per l'avenire il nostro comercio. </p>\n<p> [[578.12]] Come l'accennai nelle mie passate, mi ero risoluto partirmi in questo mese, sotto pretesto\n[[578.13]] di portarmi alla villegiatura, non havendo potuto ancora ottenere una piena ed assoluta licenza\n[[578.14]] da questo mio Eccell^#'m^#'o Capitano, però ne sono stato dissuaso da un mio strettissimo Amico,\n[[578.15]] adducendomi, che terminando questo reggimento quando terminarà l'inverno nel vegnente\n[[578.16]] mese di aprile, haverei potuto con comune sodisfattione mettermi in viaggio nel principio della\n[[578.17]] ventura primavera, ed in questa maniera senza immergermi ad un tratto nelli rigori dell'inverno\n[[578.18]] germanico, e pregiudicare il mio onore, potevo sciogliermi da ogni impegno, e mettermi in\n[[578.19]] libertà, senza espormi ed incontrare con la nota d'ingrato, e legiero, qualche gravissimo\n[[578.20]] pericolo, tanto più, che qui non è ben intesa la mia partenza, essendo il disegno di questi\n[[578.21]] Senatori stabilirmi in questa Università. Io mi sono appigliato a questo consiglio perche mi pare\n[[578.22]] prudente, e salutare, e perche mi persuado, che V. S. Illu^#'m^#'a sia per approvarlo; e giacché si è\n[[578.23]] patientato finhora, la priego concedermi questa altra dilatione, ed in questo tempo adoperarò\n[[578.24]] tutte le mie forze affine di persuadere alcuni Cavalieri miei amici in questo stato di mandare i\n[[578.25]] loro figliuoli a studiare in cotesta Illustre Ac[c]ademia, di cui ella me ne fà un sì nobile ritratto,\n[[578.26]] né dubiti in ciò della mia diligenza, molto premendomi di potere fare cosa grata al Sereni^#'m^#'o\n[[578.27]] Sig^#'r^#'e Duca, tanto più che havevo già dato principio ad operare come l'accennai nella mia\n[[578.28]] passata, godendo infinitamente, che il Clima sia così sano, adattato alla complessione di tanti\n[[578.29]] illustri Cavalieri. Procurarò ancora di portare costì qualche bella notitia delle cose naturali, e\n[[578.30]] principalmente per le Vitriere, ed Agricoltura. </p>\n<p> [[578.31]] Hò incominciato a riflettere sopra quello, che essa acutamente mi scrive del calcolo ed\n[[578.32]] equationi analitiche, e se hora havessi tempo le ne direi qualche cosa, però oggi mi trovo così\n[[578.33]] occupato, che sono necessitato terminare la lettera, e mi riserbo di parteciparla delle mie\n[[578.34]] riflessioni così matematiche, come filosofiche con l'Ordinario vegnente. La supplico della\n[[579.1]] continuatione del suo patrocinio, assicurandola che con la più viva e sensibile passione\n[[579.2]] dell'animo sarò </p>\n<p> [[579.3]] Di V. S. Illu^#'m^#'a Oblig^#'m^#'o, Cordia^#'m^#'o, Affett^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[579.4]] Padova 18 Settembre </p>\n<p> [[579.5]] All'Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o il Sig^#'r^#'e Leibniz Consigliere di Sua Altezza\n[[579.6]] Elettorale. Hannover </p>\n","number":"170.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 18. September [1692]. [169.171.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_184","series":"Band II 2 (1686 - 1694)","seq":184,"text":"<p> [[613.1]] <b>186. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[613.2]] Padua, 20. November [1692]. [179.196.]</b></p>\n<p> [[613.7]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[613.8]] In questa settimana ricevo due benignissime di V. S. Illu^#'m^#'a colla data del caduto Settembre,\n[[613.9]] che m' hanno caggionato una somma consolatione, ed han molto contribuito a ripigliare il\n[[613.10]] mio vigore alquanto declinato per due settimane di febre, che snervandomi al magiore segno,\n[[613.11]] mi hà obligato ad abbandonare lo studio, in tempo, che havevo dato principio alla stampa del\n[[613.12]] mio secondo tometto filosofico, che haverà il vantaggio di comparire alla luce coll'immortale\n[[613.13]] nome di V. S. Illu^#'m^#'a, che sì è degnata accoglierlo sotto il suo patrocinio, permettendomi di\n[[613.14]] consecrarlo al suo incomparabile talento, che la rende il più gran letterato del Secolo. In quanto\n[[613.15]] alle sue meditationi metafisiche, condurrò le cose in maniera, che non dispiaceranno a V. S.\n[[613.16]] Illu^#'m^#'a ed a suo tempo la parteciparò di tutto, secondo la sua volontà. Quanto V. S. Illu^#'m^#'a mi\n[[613.17]] scrive intorno alle difficoltà, che le proposi, è molto probabile, e ragionevole, e mi dice più essa\n[[613.18]] in pochi periodi, che altri in una prolissa dissertatione, ci riflettarò seriamente, e doppo le\n[[613.19]] scriverò il mio sentimento. Il Manuscritto dell'Ongarello colla prima occasione lelo mandarò, e\n[[613.20]] non hò già perso di vista il Diploma del Monastero delle Carceri, che spero finalmente cavarne\n[[613.21]] una copia. Coll'Ordinario vegnente le darò parte di qualche cosa litteraria, come anche delle\n[[613.22]] cose principali, che medito per perfettionare la mia operetta filosofica, e lo farei adesso, se\n[[613.23]] ancora la convalescenza non mi obligasse all'otio. Godo, che l'Illustre Accademia di Wolfebutel\n[[613.24]] sia così a proposito per l'istruttione della Nobiltà, e che s'adatti così bene col temperamento\n[[613.25]] italiano, perche in questa maniera non solamente prendo maggiore coraggio io per\n[[613.26]] l'interesse, che ella sà, ma ancora m'animo più a persuadere questi Senatori, a mandarci i loro\n[[613.27]] figliuoli. Terminato questo Reggimento di Padova eseguirò puntualmente quanto hò promesso,\n[[613.28]] e fratanto la priego della continuatione del suo patrocinio in cui stabilisco interamente la\n[[613.29]] speranza della mia quiete e stabilimento\n [[613.30]] / Di V. S. Illu^#'m^#'a Umil^#'m^#'o Oblig^#'m^#'o Cord^#'m^#'o S^#'r^#'e vero M. A. F.\n [[613.31]] / Padova 20 Novembre </p>\n","number":"186.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 20. November [1692]. [179.196.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

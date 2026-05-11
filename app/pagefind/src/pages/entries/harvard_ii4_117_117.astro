@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_117","series":"Band II 4 (1701 - 1707)","seq":117,"text":"<p> [[378.3]] <b>117. HENRI BASNAGE DE BAUVAL AN LEIBNIZ</p>\n<p> [[378.4]] Den Haag, 15. Januar 1706. [124.] </b></p>\n<p> [[379.1]] Monsieur </p>\n<p> [[379.2]] Votre lettre du 30 de Dec. ne me fut rendüe qu'avant hier; Et par consequent je n'ay pu\n[[379.3]] repondre plutôt. J'ay recu le memoire que vous m'avez fait l'honneur de m'envoyer; Il est\n[[379.4]] imprimé dans mon dernier <i>journal</i>; et publié depuis 15 jours. Je crois que M. Bayle et\n[[379.5]] M. le Clerc ont sujet d'être contents de vos manieres honnêtes, parceque ni l'un ni l'autre n'est\n[[379.6]] d'humeur à trouver mauvais que vous ne soyez pas [de] leur sentiment. D'ailleurs je ne sçay si\n[[379.7]] votre systême de l'harmonie satisfera toute le monde. Vous faites à ce qui me semble une\n[[379.8]] supposition gratuite, et l'harmonie que vous etablissez entre le corps et l'esprit est plutôt un\n[[379.9]] effet miraculeux de la toute-puissance de Dieu, qu'un[e] suite de l'ordre et de la liaison des\n[[379.10]] causes secondes. Au reste M. Burnet m'est venu voir 2 ou 3 fois pendant le court sejour qu'il a\n[[379.11]] fait à la Haye. Il m'a montré un autre memoire dont vous l'aviez chargé: Mais comme vous\n[[379.12]] vous en tenez apparemment à celui que j'ay inseré dans le <i>journal</i>, il l'a repris pour vous le\n[[379.13]] renvoyer. Dans une lettre que vous lui avez ecrite j'ay vu que vous avez eu un long commerce\n[[380.1]] de lettres avec M. Pelisson et M. l'Evêque de M. Ce seroit un recueil bien curieux si vous y\n[[380.2]] joigniez les reponses que vous leur avez faites. Je suis surpris que vous songiez à vous engager\n[[380.3]] dans les disputes de la predestination: c'est une question bien epineuse, et peutêtre indissoluble.\n[[380.4]] Les Payens sous le nom du <b>fatum</b> y ont echoüé aussi bien que les chretiens. M. Jaquelot a\n[[380.5]] attaqué M. Bayle sur cet article à propos des <i>Manicheéens</i> et des <i>Pauliciens</i> dont M. Bayle a\n[[380.6]] bien fait valoir les raisons dans son <i>Dictionnaire Critique</i>. M. Bayle vient de repondre à\n[[380.7]] M. Jaquelot par un gros volume. Il presse M. Jaquelot de tous côtez, et lui fait voir que la\n[[380.8]] predestination a eté et sera touiours l'ecueil de la raison. Si vous vous y engagez pour trouver\n[[380.9]] quelque nouveau denoüement, je vous conseille avant toutes choses de lire la replique de\n[[380.10]] M. Bayle à M. Jaquelot. J'admire aprés tout l'universalité de votre esprit. Vous ecrivez sur\n[[380.11]] toutes sortes de matieres comme si vous ne vous etiez appliqué qu'à etudier chacune d'elles en\n[[380.12]] particulier. Conservez moi je vous en supplie touiours quelque part dans votre souvenir, et\n[[380.13]] soyez persuadé qu'il n'y a personne qui soit avec plus d'estime et de respect </p>\n<p> [[380.14]] Monsieur Votre tres humble [et] tres obeyssant servit[eur] Basnage de Bauval </p>\n<p> [[380.15]] De la Haye le 15 de Janv. 1706 </p>\n<p> [[380.16]] A Monsieur Monsieur Leibnits Cons.^#'e^#'r de la Regence de S. A. E. A Hanover </p>\n","number":"117.","title":"HENRI BASNAGE DE BAUVAL AN LEIBNIZ","date":"Den Haag, 15. Januar 1706. [124.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

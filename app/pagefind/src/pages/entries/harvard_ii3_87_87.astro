@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_87","series":"Band II 3 (1695 - 1700)","seq":87,"text":"<p> [[242.7]] /  <b>87. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT</p>\n<p> [[242.8]] [Hannover,] 4./14. Dezember 1696. [81.101.]</b></p>\n\n<p> [[243.1]] Extrait de ma lettre à Monsieur d'Helmont 4/14 Decembr. 1696 </p>\n<p> [[243.2]] Vous voyés, Monsieur, par ce que je viens de vous rapporter de la lettre que Mad.\n[[243.3]] l'Electrice a receue de Bruxelles que Mad. la princesse de Chimay estime infiniment vostre\n[[243.4]] secret. Mad. l'Electrice m'a ordonné de vous écrire ce qui s'en dit; et vous nous en dirés ce que\n[[243.5]] vous jugerés à propos; et ce que vous voudrés que nous disions. Il n'est pas tousjours necessaire\n[[243.6]] de desabuser les gens. Au contraire la bonne opinion qu'ils ont des remedes en augmente\n[[243.7]] l'effect. Outre que je crois aisement que vous avés des choses singulieres, et qui meritent\n[[243.8]] d'estre estimées, tant sur la Medicine que sur d'autres sujets. Mad. la princesse de Chimay\n[[243.9]] souhaiteroit qu'on pût avoir au moins quelque chose de la poudre au defaut du Secret. Elle ne\n[[243.10]] demande pas tant ces choses pour elle même, qu'elle nous conseille nous mêmes de ne pas\n[[243.11]] perdre l'occasion d'obtenir des secrets ou remedes de cette importance. J'estime la curiosité de\n[[243.12]] cette Dame, et je prefere les gens de ce caractère à ceux, qui ont en même temps de l'ignorance\n[[243.13]] et du mépris pour ce qu'ils ne sçavent point. </p>\n","number":"87.","title":"LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT","date":"[Hannover,] 4./14. Dezember 1696. [81.101.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

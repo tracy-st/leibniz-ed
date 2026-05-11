@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_631","series":"Band VI 4 (1677 - 1690)","seq":631,"text":"[[2765.12]] <b>492₆.  De gradibus debitorum et illicitorum\n[[2765.18]] <petit> <p><i>Der in Kleindruck folgende Text wurde von Leibniz wieder gestrichen</i>:\n[[2765.19]] (De his quae per variarum circumstantiarum concursus debita vel illicita sunt.) </p>\n<p> [[2765.20]] Quicquid est majus malum unius quam bonum alterius id illicitum est.\n [[2765.21]] <tab/>Est enim majus malum societatis per def. ... Ergo per prop. ... per se illicitum est. </p>\n<p> [[2765.22]] Quicquid est majus bonum unius quam malum alterius id debitum est.\n [[2765.23]] <tab/>Est enim majus bonum societatis per def. ... Ergo per prop. ... per se debitum est.</petit>\n[[2766.1]] <tit2><b>De Gradibus Debitorum et Illicitorum</b> </tit2> </p>\n<p> [[2766.2]] Debita (illicita) sunt inter se in ratione bonorum (malorum) quae ex ipsis sequuntur:\n[[2766.3]] caeteris paribus. Debita (illicita) sunt inter se in ratione probabilitatis qua bona (malave)\n[[2766.4]] ex ipsis sequi ponuntur; caeteris paribus. Debita (illicita) sunt inter se in composita\n[[2766.5]] ratione magnitudinis et verisimilitudinis bonorum (malorum) quae ex illis sequuntur. </p>\n<p> [[2766.6]] Si sit ut bonum ad bonum vel malum ad malum ita reciproce verisimilitudo ad\n[[2766.7]] verisimilitudinem, facta ex quibus secutura ponuntur, aeque debita vel aeque illicita sunt.\n [[2766.8]] <tab/> Bona malave aestimanda sunt separatim tum ex magnitudine sua; tum ex\n[[2766.9]] probabilitate. Per praeced. Et, si aequalia sint erunt in ratione probabilitatis,\n[[2766.10]] si aeque probabilia, in ratione magnitudinis. Et si inaequalia et inaequaliter\n[[2766.11]] probabilia sint, erunt in\n[[2766.12]] ratione composita magnitudinis\n[[2766.13]] et probabilitatis.\n[[2766.14]] Ratio autem ex rationibus\n[[2766.15]] reciproce aequalibus composita,\n[[2766.16]] est ratio aequalitatis,\n[[2766.17]] sive si sit <i>a</i> ad <i>b</i> ut <i>c</i> ad <i>d</i> erit productum ex <i>a</i> in <i>d</i> aequale producto ex <i>b</i>\n[[2766.18]] in <i>c</i>. Ut si areae prioris longitudo <i>a</i> verbi gratia <i>6</i> pedum sit dupla ipsius <i>b</i>\n[[2766.19]] longitudinis areae posterioris, 3 pedum. Et <i>c</i> latitudo areae posterioris, 4\n[[2766.20]] pedum, sit dupla ipsius <i>d</i> latitudinis areae prioris, 2 pedum, erit tam areae\n[[2766.21]] prioris quam areae posterioris spatium 12 pedum quadratorum. </p>\n","number":"492₆.","title":"De gradibus debitorum et illicitorum","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

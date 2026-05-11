@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_107","series":"Band II 3 (1695 - 1700)","seq":107,"text":"<p> [[284.6]] <b>107. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[284.7]] Hagenburg, 6. (16.) April 1697. [105.120.]</b></p>\n\n<p> [[284.14]] Vir illustris, Patrone summe. </p>\n<p> [[284.15]] Mira Domini mei humanitas et clementia ita me afficit ut facile paratus essem, non solum\n[[284.16]] biennium, quod Dominus Comes postulat, sed quodcunque tempus, ejus me servitiis dicare,\n[[284.17]] praecipue si, non in mei gratiam, sed in studiorum honorem, jam initio statim mihi locus a\n[[284.18]] Consiliariis proximus, vel saltem ante Cancellistas et dioecesium scribas, quos <i>Amtschreiber</i>\n[[284.19]] dicimus, offerretur. Scrupulum quidem etiam manet, frustra illa de salario loquens, <b>ad proportionem</b>,\n[[284.20]] vel <b>pro ratione temporis</b>, num scil. pro ratione temporis, quo adsum, vel quo\n[[284.21]] laboro et aliquid explico; sed quia posteriori casu dum Dominus meus aliis negotiis vacat, anno\n[[284.22]] vix bi- vel trimestre posset studiis impendi, adeoque salarium nimis extenuari, spero et confido\n[[285.1]] priorem sensum, tempusque quo officio fungor, et paratus sum ad musis litandum sive litetur\n[[285.2]] sive non. Haec <greek>v̑w táxista</greek>, tabellario festinante declarare volui, ut quid hic agatur scires.\n[[285.3]] Quibus benivolentiae constanti Tuae me commendo, futurus dum fuero </p>\n<p> [[285.4]] Vir illustris, Tui observantiss.G. Wagner </p>\n<p> [[285.5]] Hagenburgi VI. Cal. April. 97 </p>\n","number":"107.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Hagenburg, 6. (16.) April 1697. [105.120.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

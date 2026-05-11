@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_465","series":"Band VI 4 (1677 - 1690)","seq":465,"text":"[[2065.12]] <b>377₁.  De motu in rigore mathematico accepto </p>\n<p> [[2065.16]] Motu in rigore mathematico accepto demonstravi, nullum dari principium determinandi\n[[2065.17]] quodnam corpus absolute quiescat, aut absolute tali motu moveatur. </p>\n<p> [[2065.18]] Sic fieri potest, ut corpus aliquod percussionem aut aliam vim movendi exerceat et\n[[2065.19]] tamen non moveatur absolute in rigore mathematico sed quiescat ut si globus manu\n[[2065.20]] impulsus in navi currat per lineam rectam horizontalem, a prora versus puppim, et navis\n[[2065.21]] interim aequali celeritate contraria moveatur in directione a puppi ad proram; nullus\n[[2066.1]] absolute erit motus globi, et tamen globus et ictum a manu recepit et in alium globum in\n[[2066.2]] navi quiescentem ictum fecit. </p>\n<p> [[2066.3]] Et speciatim demonstravi eam esse miram naturae Legem, ut omnia phaenomena\n[[2066.4]] non tantum corporum libere motorum, sed et inter se concurrentium eodem modo prodeant,\n[[2066.5]] ubicunque demum quies aut determinatus motus absolutus existat. </p>\n<p> [[2066.6]] Hinc sequitur quoties unum systema alteri praefertur, non posse id aliter accipi,\n[[2066.7]] quam ut unum alio sit intelligibilius et rebus de quibus agitur explicandis accommodatius\n[[2066.8]] et proinde cum una Hypothesis dicitur vera altera falsa, suo intelligendum est certo\n[[2066.9]] respectu. Sic tam sphaerica Ptolemaei doctrina quam Theorica planetaria Copernici\n[[2066.10]] verissima est quia idem hic est verum quod rectum et conveniens optimusque est uterque\n[[2066.11]] explicandi modus; et utrinque peccaretur vel motum terrae in sphaericam inferciendo vel\n[[2066.12]] statione terrae in theoricis utendo. Sic qui in navi est cum nullus fit ad ripam respectus\n[[2066.13]] male negabit globum supradictum moveri; qui vero in ripa stans globum videt non recte\n[[2066.14]] negabit eum quiescere, cum de mutatione intra navim non agitur, absolute autem nil\n[[2066.15]] definiri potest, cum nova redeat quaestio de ipsa ripa. </p>\n<p> [[2066.16]] Itaque Historici et ipsi scriptores sacri statione terrae non tantum uti potuerunt sed et\n[[2066.17]] debuerunt. Quod dicere dignius est Deo autore libri maximos scientiae thesauros continentis,\n[[2066.18]] quam minus accurate aut populariter locutum asserere, aut a litera hic recedere. </p>\n<p> [[2066.19]] Et quia permissum est salva Censura Copernicanum systema prae aliis adhibere\n[[2066.20]] tanquam Hypothesin ad intelligendos planetarum motus aptissimam; defendere autem\n[[2066.21]] ejus veritatem ut explicuimus nihil aliud est revera, quam defendere ejus summam\n[[2066.22]] intelligibilitatem; itaque hoc sensu, salva Censura quilibet in summo gradu Copernicanus\n[[2066.23]] esse potest. </p>\n<p> [[2067.1]] Id vero agnosci tandem aliquando non parum interest et Ecclesiae, et scientiarum, et\n[[2067.2]] honoris Italiae neque erit hoc modo metuendum ne Censores ad retractationem a novis\n[[2067.3]] inventis aliquando cogantur aut se torrenti seculi publicoque eruditorum voci frustra\n[[2067.4]] opponant; et falsis eorum improperationibus occurretur, qui veritatem opprimi dicunt; et\n[[2067.5]] proinde egregia ingenia non in Italia minus quam apud alias gentes frui poterunt luce\n[[2067.6]] seculi, et praeclaris inventis incumbere, quae nunc ab aliis praeripiuntur. Neque aliam\n[[2067.7]] ego esse puto summorum virorum mentem penes quos censurae jus est. </p>\n<p> [[2067.8]] Et vero tanta est Copernicani Systematis praestantia ad explicanda phaenomena\n[[2067.9]] planetarum, ut fatendum sit Astronomum qui id non intelligeret in maximis tenebris\n[[2067.10]] versaturum. Tantaque indies nova inventa ejus harmoniam et simplicitatem confirmant, ut\n[[2067.11]] nolle ipso uti, sit ipsius Dei gloriam obscurare, ademta agnoscendae ejus admirabilis\n[[2067.12]] sapientiae occasione. </p>\n<p> [[2067.13]] Et nos ipsi nunc universalibus planetarii motus legibus a Keplero repertis, in principia\n[[2067.14]] sua, circulationem scilicet harmonicam materiae celestis tanquam orbis fluidi planetarii\n[[2067.15]] deferentis circa solem, et accessionem rectam planetae tanquam gravis et ad solem\n[[2067.16]] tanquam magnetem et geometrice resolutis, ni fallor contulimus aliquid ut optima\n[[2067.17]] phaenomenorum explicatio, id est verissima hypothesis habeatur. </p>\n","number":"377₁.","title":"De motu in rigore mathematico accepto","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

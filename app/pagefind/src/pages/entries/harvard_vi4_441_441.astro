@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_441","series":"Band VI 4 (1677 - 1690)","seq":441,"text":"[[1981.1]] <b>363.  Physica scientia attributorum corporis [Sommer 1678 bis Winter 1680/81 (?)]</b>\n [[1981.2]] <tab/>[Sommer 1678 bis Winter 1680/81 (?)] </p>\n<p> [[1981.8]] <p><k>Physica</k> est scientia attributorum corporis. </p>\n<p> [[1981.9]] <k>Attributa</k> autem quae de corpore cognoscuntur sunt vel <b>Distincta</b> vel <b>Confusa.</b> </p>\n<p> [[1981.11]] <k>Distincta</k> sunt de quibus intelligimus in quae resolvantur. Exempli gratia:\n[[1981.12]] Extensum, id est habens partes, easque inter se situm habentes. Itaque extensi notio\n[[1981.13]] resolvitur in duas alias magnitudinis et situs. Magnitudinis autem consideratio petenda est\n[[1981.14]] ex Algebra vel Arithmetica, situs autem ex Geometria. Mobile, id est quod mutare situm\n[[1981.15]] potest. Itaque notio Motus resolvitur in notionem situs et mutationis. Et situs quidem\n[[1981.16]] consideratio sumitur ex Geometria, mutationis ex metaphysica. </p>\n<p> [[1981.17]] <k>Confusa</k> sunt de quibus non intelligimus in quae resolvantur. Ut rubrum, calidum.\n[[1981.18]] Etsi enim discernamus rubrum a non rubro, non tamen ideo possumus explicare quid sit\n[[1981.19]] rubrum, sive quomodo rubedo producatur. Itaque caeco nullis descriptionibus explicare\n[[1982.1]] possum, quid sit lux vel rubedo. Circulus autem quid sit explicare illi possum, etsi\n[[1982.2]] nunquam vel visu vel tactu circulum percepisset. Itaque notiones distinctae definitione, at\n[[1982.3]] confusae sola ostensione sive sensu aliis traduntur. </p>\n<p> [[1982.4]] Attributa distincta tractantur in Metaphysica et Mathematica, et eatenus Physica his\n[[1982.5]] duabus scientiis subordinata est. Confusa vero physicae propria sunt, et in his consistit\n[[1982.6]] historia naturalis, ad scientiam vero acquirendam non conferunt, nisi quatenus distincta\n[[1982.7]] illis applicantur; nam alioqui nullam intellectualem resolutionem sive analysin instituere\n[[1982.8]] possemus. Exempli causa quia sensu visus deprehendimus angulum incidentiae et reflexionis\n[[1982.9]] radii lucidi esse aequales; ex hac hypothesi in physica ratiocinari possumus\n[[1982.10]] geometrica certitudine. Resolutio autem quae sensu deprehenditur, etsi utilissima sit ad\n[[1982.11]] resolutionem intellectualem reddendam faciliorem, non tamen eam statim exhibet, neque\n[[1982.12]] efficit, ut notio cesset esse confusa. Exempli gratia saepe deprehensum est ex flavo et\n[[1982.13]] caeruleo mixtis existere viride; sed non ideo demonstratum est hoc de omni viridi nam\n[[1982.14]] quoties propositio aliqua sola inductione constituitur, nunquam certi sumus eam esse\n[[1982.15]] plane universalem; et licet verum esse constanter deprehenderetur, non ideo menti\n[[1982.16]] nostrae apparet quomodo ex juncta apparentia caerulei et flavi diversa adeo ab ambabus\n[[1982.17]] existat, nempe apparentia coloris viridis. In his vero quae distincte percipimus longe\n[[1982.18]] secus est, exempli causa quomodo ex duobus motibus oppositis fiat quies; facile enim\n[[1982.19]] patet demonstrarique potest si corpus aliquod in tabula procedat versus orientem, et\n[[1982.20]] tabula corpus secum ferens eadem celeritate contrario plane motu, tendat versus occidentem,\n[[1982.21]] corpus esse quieturum, sive eandem a circumstantibus omnibus quiescentibus\n[[1982.22]] distantiam servaturum. Talia quae distincte cognoscuntur etiam ante experimentum\n[[1982.23]] infallibiliter praedici possunt; priora vero per experientiam discere debemus. </p>\n","number":"363.","title":"Physica scientia attributorum corporis","date":"[Sommer 1678 bis Winter 1680/81 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

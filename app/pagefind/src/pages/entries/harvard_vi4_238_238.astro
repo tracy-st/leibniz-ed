@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_238","series":"Band VI 4 (1677 - 1690)","seq":238,"text":"[[929.1]] <b>195₂.  Zweiter Ansatz ZWEITER ANSATZ\n [[929.2]] <petit> </p>\n<p> [[929.3]] <i>Die folgende Tabelle erscheint aus Platzgründen in Kleindruck</i>.</petit>\n[[929.4]] <petit>^&.bb <Leibniz special character>Praedicatum est <tab/>primarium et est <tab/>pe<tab/>rceptibile <tab/>seu<tab/> <b>manife</b> <tab/>temporis 5) <tab/><tab/>status^&.b</b> <Leibniz special character> </p>\n<p> [[929.5]] <tab/><picture>503</picture><tab/>temporis 5) <tab/><picture>412</picture> <tab/><picture>512</picture> </p>\n<p> [[929.6]] <tab/><picture>504</picture> <tab/><k>positio</k> <tab/>status <Fn> An potius statum etiam mutationis intelligemus. An statum distinguemus ab essentia, tanquam aggregatum mutabilium.</Fn> </p>\n<p> [[929.7]] <tab/><picture>510</picture> <tab/>perceptibile <tab/>loci 4) </p>\n<p> [[929.8]] <tab/>tantum </p>\n<p> [[929.9]] <tab/><k>quantitas</k> 3)\n[[929.10]] <tab/><picture>509</picture> <tab/>primarium et est <tab/><picture>507</picture> <tab/>confusa </p>\n<p> [[929.11]] <tab/>seu <b>occulta</b> 2) </p>\n<p> [[929.12]] <tab/>conceptibile <tab/>sensibilis </p>\n<p> [[929.13]] <tab/><k>qualitas</k>\n [[929.14]] Praedicatum est <tab/>forma <tab/>distincta 1) <tab/>mutatio 6) </p>\n<p> [[929.15]] <tab/><k>species</k> <tab/>seu <b>manifesta</b> </p>\n<p> [[929.16]] <tab/>intelligibilis </p>\n<p> [[929.17]] <tab/>resultans <tab/><b>relatio</b> 7) </petit> </p>\n<p> [[929.18]] An sic: Praedicatum est primarium vel resultans. </p>\n<p> [[929.19]] Primarium: status vel mutatio. </p>\n<p> [[929.20]] Status: conceptibilis, perceptibilis. </p>\n<p> [[929.21]] Conceptibilis: qualitas intelligibilis, sensibilis. </p>\n<p> [[929.22]] Perceptibilis: quantitas, positio. </p>\n<p> [[929.23]] Positio: locus, tempus; </p>\n<p> [[929.24]] Mutatio est actio passio. </p>\n<p> [[929.25]] Secundarium: relatio. </p>\n<p> [[929.26]] Perceptibilia per se memoria retineri non possunt, nec datur eorum idea, nec fieri\n[[929.27]] potest ut substantiae solis perceptibilitatibus distinguantur. </p>\n<p> [[930.1]] Confusorum praedicatorum non datur definitio. </p>\n<p> [[930.2]] <b>Etiam apud Geometras res distinguuntur positione, magnitudine,\n[[930.3]] specie</i>. </p>\n<p> [[930.4]] Relatione res non differunt per se, sed ob differentias primarias. </p>\n<p> [[930.5]] Unde motus vel mutatio non terminatur ad relationes sed ad qualitates. </p>\n","number":"195₂.","title":"Zweiter Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_218","series":"Band II 4 (1701 - 1707)","seq":218,"text":"<p> [[672.1]] <b>218. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[672.2]] Hannover, 11. Oktober 1707. [209.222.] </b></p>\n<p> [[672.17]] Admodum Reverende Pater </p>\n<p> [[672.18]] Quas adjectas vides literas ad R. P. Janningium curari peto, et pro Tua cura gratias repeto.\n[[672.19]] Manuscriptum Gamansianum exscribitur, ut si opus remitti possit. </p>\n<p> [[672.20]] Spero juvenem tuo beneficio comparatum, strenue sese ad descriptionem accincturum;\n[[672.21]] non erit cur prolixa nimis scriptione oneret chartas: nam in minore Codice plagulae non sunt\n[[672.22]] plures quam circiter 75. </p>\n<p> [[672.23]] Famulus meus dixit Te nescio cujus libri transmittendi mentionem fecisse. Is qualis sit non\n[[672.24]] bene memini. </p>\n<p> [[673.1]] Quod superest vale et fave. Dabam Hanoverae 11 Octobr. 1707 </p>\n<p> [[673.2]] deditissimus Godefridus Guilielmus Leibnitius </p>\n<p> [[673.3]] Au Reverend Pere le R. P. des Bosses Theologien de la Compagnie de Jesus à Hildesheim </p>\n","number":"218.","title":"LEIBNIZ AN BARTHÉLEMY DES BOSSES","date":"Hannover, 11. Oktober 1707. [209.222.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

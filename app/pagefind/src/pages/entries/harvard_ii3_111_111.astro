@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_111","series":"Band II 3 (1695 - 1700)","seq":111,"text":"<p> [[293.1]] <b>111. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[293.2]] Hamburg, 14. (24.) April 1697. [106.112.]</b></p>\n\n<p> [[293.9]] I. N. J. C. </p>\n<p> [[293.10]] Nobilissimo et Excellentissimo Dn. G. G. Leibnitio </p>\n<p> [[293.11]] V. Placcius S. P. D. </p>\n<p> [[293.12]] Ante dies hosce 14. scripsi ea quae moram ferre putabam. At nunc secus nunciat Amicus,\n[[293.13]] ob quem Cornelii Duplicii Scepperi <i>defensionem Christierni II. Daniae Regis</i> petii. Nam sua\n[[293.14]] interesse plus quam credideram refert, ut vel quovis pretio redemtum exemplar, vel descriptum\n[[293.15]] ita ut paginae paginis respondeant, accipiat quantocyus. Vide itaque num hoc beneficium nobis\n[[293.16]] dare possis, et rescribe simulac possis. Ego vicissim inserviam commodis tuis et eorum quos\n[[293.17]] mihi commendaveris. Ex quibus nuper Dn. Hinüber meis ante tot menses ad ipsum datis\n[[293.18]] rescripsit, ita ut ipse speciem expostulationis vocet, simulque petit sui rationem haberi si quem\n[[293.19]] in Ephorum commendare possem. Equidem subibat illud Ciceronis <i>ad familiares</i>[,] <i>Officium\n[[293.20]] postulare nec populus solet</i>. Quid ergo expostulando petere? Incidebat nuper auctori veteri\n[[293.21]] restitutum anonymum Carmen incipiens: <i>Parce precor juvenis</i>, etc. Nesciebam me illi tam\n[[293.22]] familiarem adhuc esse. Tamen ubi recte possim commodis ejus non deero, vel Tui respectu.\n[[293.23]] Vale. Dab. Hamb. 1697. d. 14. April. </p>\n","number":"111.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 14. (24.) April 1697. [106.112.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

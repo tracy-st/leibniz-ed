@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_41","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":41,"text":"[[407.16]] <b>41. De arithmetica infinitorum perficienda </b> <span>407.16;0:63:041:73       :L:l^</span>.\n[[408.4]] Ad Arithmeticam infinitorum multa pertinent, hactenus fortasse, ac ne a Wallisio 1\n[[408.5]] quidem satis considerata. Ut quomodo ex complicatione duorum infinitorum\n[[408.6]] fiat finitum. Per exemplum, si eadem res augeatur in infinitum, et minuatur quoque\n[[408.7]] in infinitum, sed alio quodam proportionis genere, quanta futura sit, v.g. si eadem res\n[[408.8]] in infinitum duplicetur, sed productum etiam in infinitum dimidietur, manebit eadem.\n[[408.9]] Si eadem res in infinitum duplicetur, et eadem in infinitum trisecetur, productum\n[[408.10]] erit minus, seu ut 2 ad 3. Et revera tale contingit in Circumferentia Circuli\n[[408.11]] indaganda sine polygonis circumscriptis per sola inscripta vel contra. Exempli gratia,\n[[408.12]] Hexagoni latera sunt 6 postea fiunt 12, postea 24, etc. et sic in infinitum, in fine ergo\n[[408.13]] sunt latera infinita, ac proinde produceretur linea infinita, si lateribus multiplicatis,\n[[408.14]] eorum quantitas non diminueretur, sed diminuitur quoque in infinitum eorum\n[[408.15]] quantitas, uti in infinitum augetur numerus. Et haec proportio quid efficiat determinandum.\n[[408.16]] Nihilominus enim majus semper augmentum diminutione. Progressio\n[[408.17]] augendi numeros est dupla, inde a 6 progressio. Si progressio diminuendi exprimi\n[[408.18]] posset numeris vel surdis, vel fractis, rem determinatam haberemus, sed est replicata\n[[408.19]] in se ipsam. Hic ergo artis, invenire quanto minor diminutio augmento ut determinetur\n[[408.20]] praecise quantitas concursus. Haec methodus si succedet, poterunt quadrari\n[[408.21]] figurae omnes, et secari omnes arcus, ut rectae, et inveniri omnes mediae proportionales,\n[[408.22]] et Geometria perfici. Et tota res a scientia progressionum recte cognita pendet.\n[[408.23]] Et haberetur proba harum ratiocinationum admirabilis, quod diversis calculis produci\n[[408.24]] deberet idem, v.g. per circumscripta, ubi aucto continuo numero laterum minuitur\n[[408.25]] quantitas, sed magis minuitur quantitas quam augetur numerus, et ideo contrarium\n[[408.26]] contingit inscriptorum, id est productum est minus. Hic debet esse usus maximus\n[[408.27]] scientiae progressionum, quia ita invenitur ratio addendi progressiones, demendi\n[[408.28]] sibi progressiones, multiplicandi etc.\n[[408.29]] Si non procedit determinatio ejusmodi Terminationum seu linearum et figurarum\n[[408.30]] per complicatas progressiones, at contra poterit usus esse ipsarum figurarum ad\n[[408.31]] inveniendas tales progressiones earumve terminos aut terminationes. Uti Hyperbolae\n[[408.32]] ope inveniri possunt Logarithmi, et contra Logarithmorum ope Hyperbolae. Ita poterit\n[[409.1]] inveniri figura quaedam pro omni progressionis genere; utrumque maximi est\n[[409.2]] momenti, et nescio an hactenus consideratum.\n[[409.3]] Pour un Contepas potest servire Spira, praesertim cum non nimis diu res duratura\n[[409.4]] est. Ideo id applicandum Horologiis, aliisque id genus rebus, ubi distincte numerandum.\n[[409.6]] Circa vim Elasticam cogitandum, an duorum Elateriorum spatia aequalibus\n[[409.7]] temporibus decursa, vel etiam si placet vires, sint proportionales. Exempli causa, sit\n[[409.8]] Elasticum quod libram summe tensum projicit, et spatium datum describit, videndum,\n[[409.9]] an aliud quod semilibram projicit, spatium dimidium percurrat, supposita scilicet\n[[409.10]] homogeneitate materiae et latitudinis. Imo non videtur, quia idem Elaterium\n[[409.11]] duplo amplius tensum est plus duplo fortius. Sed quid fiet, si ipse tensionis gradus\n[[409.12]] immutetur naturaliter, ut in eandem partem tensum, sit debilius quam ante, videndum\n[[409.13]] an spatia iisdem temporibus decursa, proportionalia.\n[[409.14]] Si conjungantur haec duo: scientia progressionum, et motus seu ea quae alibi\n[[409.15]] dixi de ratione tentandi seu per motum eundi per omnes casus possibiles, donec\n[[409.16]] eveniat datus, hoc, inquam, agendo, perfici potest Geometria.\n","number":"41.","title":"De arithmetica infinitorum perficienda","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

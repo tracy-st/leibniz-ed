@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_136","series":"Band VI 4 (1677 - 1690)","seq":136,"text":"[[444.1]] <b>111.  De elementis veritatis [Frühjahr 1682 (?)]</b>\n [[444.2]] <tab/>[Frühjahr 1682 (?)] </p>\n<p> [[444.7]] Qui ipsa Veritatis Elementa recte tradere poterit, eum non puto opus habiturum ad\n[[444.8]] homines persuadendos praeceptis quibusdam minime ex natura rei sumtis, aut etiam\n[[444.9]] ambiguis, veluti: ut quod debeant omnia semel in dubium vocare, quod debeant ea quae\n[[444.10]] nondum satis percepere ut falsa rejicere; aliaque id genus, quae hominum animos turbant,\n[[444.11]] variisque difficultatibus materiam praebent. Et quae sunt quasi caeremoniae inanes circulatorum.\n[[444.12]] Nec opus est de praejudiciis nostris, et animi passionibus variisque errorum\n[[444.13]] causis prolixe disserere, nam omnia noctis monstra die orta sponte sua evanescunt; et\n[[444.14]] unica revera Errorum causa proxima est, quod homines Elementis Veritatis recte traditis\n[[444.15]] non utuntur. Haec igitur si tradantur modo quodam palpabili, ut non sit difficilius\n[[444.16]] ratiocinari, quam numerare, manifestum est, omnes errores fore instar errorum calculi et\n[[444.17]] mediocri attentione posse caveri, et, si qua controversia oriatur vel disputatio, sumto in\n[[444.18]] manus calamo, calculoque adhibito statim litigantes in veritatem etiam ingratiis suis\n[[444.19]] conspiraturos esse. </p>\n<p> [[444.20]] Palpabilia igitur veritatis criteria postulo, quae non magis dubitationem relinquant\n[[444.21]] quam calculi numerorum, itaque illa negligo criteria, quaecunque vel minimum difficultatis\n[[444.22]] habent; ut cum dicunt verum esse quicquid clare et distincte percipiatur, opus\n[[444.23]] enim est notis palpabilibus clari et distincti, quoniam saepe homines de his dissentiunt;\n[[444.24]] eodem modo non probo ratiocinationes ductas ex ideis, cum quis asseverat, se attributum\n[[444.25]] de quo agitur in idea rei invenire, alio enim contrarium asserente, nulla relicta est\n[[444.26]] terminandae inter eos controversiae via, ut cum alius ait alius negat, ideam corporis\n[[444.27]] consistere in extensione. </p>\n","number":"111.","title":"De elementis veritatis","date":"[Frühjahr 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_4","series":"Band II 1 (1663 - 1685)","seq":4,"text":"<p> [[8.4]] <b>4. LEIBNIZ AN CHRISTIAN DAUM</p>\n<p> [[8.5]] Leipzig, 26. März (5. April) 1666. [5.]</b></p>\n<p> [[8.28]] Nobiliss^#'e et Cl^#'m^#'e Vir. </p>\n<p> [[8.29]] Cum simulac in notitiam Tuam veni, statim beneficium senserim; nolui prius scribere,\n[[8.30]] quam grati animi signum qualecunque dare liceret. Igitur quod plurimum a Te adjutus, ne\n[[8.31]] verbulo quidem, nisi per Cl^#'u^#'m Fellerum, vel gratias egi, aegre minime [Te] laturum, maxime\n[[8.32]] spero. Quamprimum autem exiit e praelo nostra <i>de Arte Combinatoria</i> dissertatiuncula, nihil\n[[8.33]] antiquius habui, quam mittere; partim ne moram excusandi jus, aut gratias agendi occasionem\n[[9.1]] perderem; partim ut recognosceres artes Tuas, et quorum pars magna es, ea ipse haberes. <i>De\n[[9.2]] Arte Combinatoria</i>, inscripsimus, magis ut satisfieret vulgi auribus, in quibus et Lullii artificium,\n[[9.3]] et Ath. Kircheri promissum increbuit, quam quod ita sentiremus. Neque enim variationem\n[[9.4]] conjunctionum tantum, sed et retenta [earundem] rerum complexione artificium situs\n[[9.5]] commutandi sumus executi. Plus tamen in Complexionibus operae posuimus, quod utiliores\n[[9.6]] hae, etsi transpositiones jucundiores. Nam et professi sumus in opusculo, et experturus credet,\n[[9.7]] hanc scientiarum omnium clavem esse, denique hujus praeceptis Universam Logicam inventivam\n[[9.8]] contineri. Dolendum quippe est hodie partem Logicam de Judicio ita prope solam\n[[9.9]] urgeri, ut negligatur inventio, aut, quae traduntur, pontes sint asinorum, distinctionum cruces,\n[[9.10]] canonum pessime intellectorum praecipitia. Sed haec apud peritissimum Virum frustra. Transpositiones\n[[9.11]] addidi, ut superiora severiora, et in fundamenta scientiarum aditum molientia,\n[[9.12]] jucunditate temperarem: Earum spectaculum commodissimum versus sunt Protei: Proteorum\n[[9.13]] Tui: Tuorum vero utinam theatrum satis editum esset hic libellus! qui si artis tuae magnitudinem\n[[9.14]] modo assecutus sit, satis se praestitisse credet. Nam tua recte expressa etiam in humili loco per\n[[9.15]] se lucent. Caeterum in nonnullis aliis haesi. Nam de Goldsteinii Proteo nihil fere compertum\n[[9.16]] habebamus praeter verba. Et Publilius Porphyrius Optatianus, Poeta vetus, aevi Constantinianaei\n[[9.17]] in manus nostras non nisi citatus venit; de quo quantum noveramus, in ipso opusculo\n[[9.18]] disseruimus. Utriusque notitiam pleniorem, si daretur vel nunc demum ex Te discere, Cl^#'m^#'e Vir,\n[[9.19]] quanti aestimaturus sim principia haec favoris in me Tui, ipse facile vides. Denique promtitudini\n[[9.20]] tuae juvandi me ignotum, aut potius per me familiarissimam tibi amicam, Rem Literariam;\n[[9.21]] gratias et nunc ago, et cum occasio erit, habiturus sum majores. Vale. Id precatur </p>\n<p> [[9.22]] Tibi quondam publico nomine, nunc privatim obstrictus </p>\n<p> [[9.23]] Lipsiae, 26. Martii 1666. M. Gottfredus Guilielmus Leibnüzius. </p>\n<p> [[9.24]] Nobiliss^#'o et Cl^#'m^#'o Christiano Daumio, Gymnasiarchae Zviccaviensi, de re Literaria meritissimo\n[[9.25]] Viro, Fautori Suo Honoratissimo. <Fn><i>Unterhalb der Anschrift von Daums Hand das Empfangsdatum</i>: 30 Martii 1666</Fn> </p>\n","number":"4.","title":"LEIBNIZ AN CHRISTIAN DAUM","date":"Leipzig, 26. März (5. April) 1666. [5.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

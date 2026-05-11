@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_142","series":"Band II 3 (1695 - 1700)","seq":142,"text":"<p> [[378.7]] /  <b>142. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[378.8]] Hamburg, 7. (17.) September 1697. [136.144.]</b></p>\n\n<p> [[379.1]] I. N. J. C. </p>\n<p> [[379.2]] Viro Amplissimo, Nobilissimo et Excellentissimo G. G. Leibnitio S. P. D. </p>\n<p> [[379.3]] V. Placcius. </p>\n<p> [[379.4]] Equidem credebam peregre Te, vel quod abhorrebat animus, in morbo esse; quia nil\n[[379.5]] respondebatur. Et ni fallor etiam peregrinaris. Nam Hanoverae antea semper Te puto egisse.\n[[379.6]] Neque scio an Guelpherbytum nunc et imposterum debeam meas destinare. Praesentes sane\n[[379.7]] adhuc Hanoveram misi, sperans etiam inde a[d] te perventuras si absis. Weigelius spem Viros\n[[379.8]] executores suae institutionis dandi plane omnem ademit. Francianae Scholae ad me descriptio\n[[379.9]] etiam pervenit. Sed generalia magis quam specialia delineans. Spenerus edere illam molitur ut\n[[379.10]] audio. Faxit Deus feliciter! De Scepperi altero libro amicus meus spem deponit. Nec ego de\n[[379.11]] Carniolanae linguae Boxhornii libello audivi unquam, aut audire aliunde confido. <Fn><i>Dazu von Leibniz' Hand ergänzt</i>: An me de eo somniasse putat?</Fn> </p>\n<p> [[379.12]] Par illud Anglorum mihi ex suis scriptis, non aliunde notum est, et mirifice commendatum.\n[[379.13]] Nullis lubentius exemplar <i>Accessionum</i> mearum dono mitterem, si scirem occasionem\n[[379.14]] certo ad manus eorum perferendi. Nec enim puto ad eos etiamnum pervenisse; licet jam sesqui\n[[379.15]] anno in bibliopoliis sint. Quaeso si potes hac in re pararium te praestare, id facias; ut eorum\n[[379.16]] mentem de hisce meis accipiam. <i>Pseudonymis</i> jam jam finitis ultra dimidium, et <i>Anonymis</i> fere\n[[379.17]] in totum, quietem ab hoc labore anhelo; ut solis posthac sacris vacem: quorum tamen dum\n[[379.18]] vivam vix aliquid edetur. O si possem eruditam et vere Philosophicam Theologiam eam meae\n[[379.19]] philosophiae superstruere, quae ab imbecillitatibus conceptum de divinis liberet ita; ut intelligant\n[[379.20]] Theologi se hactenus populariter nimis de rebus illis disputasse. Neque ullam nisi\n[[380.1]] vulgarem ideam concepisse, adeoque rejectis omnibus istis hactenus habitis controversiis frustra\n[[380.2]] fuisse. Sane, ni fallor, intelligunt Deum proprie sumtis philosophice vocibus et sensibus, non\n[[380.3]] irasci, non opus habere satisfactione et vindicta. Quid ergo substituent eruditae notioni ut a\n[[380.4]] Socianismo immunes et orthodoxi maneant? Sane aliquid altioris notionis et Deo dignioris in\n[[380.5]] hac sapientia est, quae parvulis ut parvulis non ad disputandum, sed credendum proponitur. In\n[[380.6]] qua quia subsistere nolunt: utinam saltim aliquid Majestate divina dignum substituant notionibus\n[[380.7]] adeo plebejis; ne inter sacrum et saxum positi, nec erudite nec plebeje credant. Sed\n[[380.8]] manum de Tabula. Vale. Hamb. 1697. d. 7. Septembr. </p>\n<p> [[380.9]] Jam nunc Epistolam accipio Helmstadio, in qua haec verba: <i>Placcianam soliditatem (cui\n[[380.10]] Anglorum eruditos, quos et innatum ingenii acumen, et diligens exercitatio idoneos maxime\n[[380.11]] harum rerum aestimatores facit, cum tempore ubique assurgere accepi)</i> etc. </p>\n","number":"142.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 7. (17.) September 1697. [136.144.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

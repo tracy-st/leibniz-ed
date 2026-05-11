@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi2_24","series":"Band VI 2 (1663-1672); durchgesehener Nachdruck 1990","seq":24,"text":"[[477.21]] <b>56. Totos libros explicare una figura </b> <span>477.21;0:62:056:7001-7112:L:l^</span>.\n[[477.22]] Totos libros explicare una figura, et ut omnes autores eadem utantur\n[[477.22]] Magno levamento res mathematicas discentium docentiumque figuris iisdem\n[[477.23]] uterentur omnes. Exempli causa tota doctrina optica posset explicari una figura grandi. Et ut\n[[478.1]] confusio vitaretur, quae eodem tempore consideranda sunt, possent notari colore eodem\n[[478.2]] et quia idem diverso tempore cum variis conferendum est, possent induci ei colores varii\n[[478.3]] se comitantes. Ita quicunque aliquid de re optica commentabitur, iisdem et figuris et\n[[478.4]] numeris utetur, quibus et alii omnes, et alias ipse. Compendio sumtuum incidendis figuris\n[[478.5]] novis, laboris in delineandis, universalitate intellectuum (uti apud Analyticos idem\n[[478.6]] omnibus z vel y ut quaesitum x) harmonia librorum, minore fatigatione imaginationis huc\n[[478.7]] illuc versandae, magna etiam commoditate ad detegenda nova et non considerata, tum\n[[478.8]] omnia simul sunt in conspectu, conferique inter se, et detegi hiatus possunt. His figuris\n[[478.9]] lineisque ut urbibus in chartis geographicis ascribi nomina debent, theoremata non pauca\n[[478.10]] possunt. Incredibile hoc levamentum est molestis illis versationibus foliorum et\n[[478.11]] inquisitionibus, et huc illuc respectationibus carere posse, Rationemque et sensum uno velut\n[[478.12]] momento quasi oculis in rem praesentem ductis expedire. Apparebit quid inventum\n[[478.13]] quousque sciendo profecti simus, patebit omnibus campus adjungendi. Abbreviaturae\n[[478.14]] quoque seu Brachigraphiae faciles possunt adhiberi. Lineae sint ductae iisdem\n[[478.15]] manentibus coloribus duplicitate aut triplicitate seu crassitie, ut fluvii in geographia, modo\n[[478.16]] flexus, punctis adjunctis, seratura, ita carere poterimus illuminatione molesta. Et\n[[478.17]] veteribus notis omnibus facile est adjungere novam, (suppetente quippe spatio, adjectum novi\n[[478.18]] generis priorem comitante serratura, aut variato tantum serraturae angulo, aut appositis\n[[478.19]] quibusdam hamis, punctis etc.) Tota Geometria potest contineri una grandi figura, una\n[[478.20]] cum demonstratione omnium theorematum brachygraphica in margine. Omnes\n[[478.21]] introspicient uno momento in fundum demonstrationum, et rationes rationum ad primas usque.\n[[478.22]] Stereometria potest exhiberi vel pluribus figuris, vel ea ratione, qua Rumelinus usus est\n[[478.23]] in corpore humano. Quanquam pro stereometricis moduli solidi sint vendendi cum libris,\n[[478.24]] similiter in mechanicis quoad eius fieri potest. Adde Speneri meditationes de emendandis\n[[478.25]] chartis geographicis adhibitis pluribus characteribus. Adde quae alibi commentatus sum\n[[478.26]] de tota quadam materia juridica una historia seu facto comprehendenda, ut Italus quidam\n[[478.27]] in Criminibus Judiciisque Ecclesiasticis fecit; Ayrerus quoque in processu Belialis contra\n[[478.28]] Jesum adumbravit.\n","number":"56.","title":"Totos libros explicare una figura","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

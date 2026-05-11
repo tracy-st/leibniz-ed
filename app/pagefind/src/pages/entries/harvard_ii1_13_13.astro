@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_13","series":"Band II 1 (1663 - 1685)","seq":13,"text":"<p> [[41.1]] <b>13. LEIBNIZ AN JAKOB THOMASIUS</p>\n<p> [[41.2]] Frankfurt, September 1669. [12.14.]</b></p>\n<p> [[41.12]] His locis mirifica somnia invalescunt. Becherus Medicus, homo ingeniosus, sed <greek>polyprágmvn</greek>\n[[41.13]] Comiti Hanoviae persuasit, esse in alio terrarum Orbe felices quasdam regiones,\n[[41.14]] atque omnia velut divina quadam virgula fundentes, illuc duci Colonias fundarique grande\n[[41.15]] imperium posse, et inde paulatim in omnem Americanam regionem. Ita inebriato Comiti\n[[41.16]] pecuniolam extorsit, qua profectus ad Batavos a West-Indica societate totam Gujanam, qua\n[[41.17]] mari alluitur, triginta milliarium latitudine, longitudine centum, feudi jure suo Comiti obtinuit.\n[[41.18]] Reversus literas contractus eburneae capsulae inclusas praeferri sibi jussit, et hac ridicula\n[[41.19]] pompa velut ovans Hanoviam ingressus est. Jam parantur omnia itineri Americano. </p>\n<p> [[41.20]] Quod me attinet, statui edere Librum aliquem hactenus obliteratum, ingeniosum tamen, si\n[[41.21]] quid judico, <b>Marii Nizolii</b>, cujus <i>Thesaurum</i> et pueri norunt, <i>et qui nondum aere lavantur</i>,\n[[41.22]] Librum nempe <i>de veris principiis et vera ratione philosophandi</i> Parmae An. 1553. 4^#'o editum,\n[[41.23]] occasione Libri a Majoragio in eum scripti. Nimirum Caelius Calcagninus reprehenderat <i>officia</i>\n[[42.1]] Ciceronis, Majoragius scripsit pro Cicerone, eumque Aristoteli conciliare conatur. Nizolius\n[[42.2]] superveniens scribit contra utrumque, Calcagninum, quod Ciceronem impugnet, Majoragium,\n[[42.3]] quod Aristotelem defendat, et conciliare Ciceroni nitatur. Majoragius Libro Nizoliano respondet.\n[[42.4]] Ita tandem Nizolius hos Libros quatuor <i>de vera ratione philosophandi</i> edidit. Quos solos\n[[42.5]] habeo, priora non vidi. Nizolius his Libris duo inprimis fuse impugnat: 1.) universalia realia, in\n[[42.6]] quo argumento se Nominalem profitetur, 2.) terminos Scholasticorum. Ostendit enim fuse, nec\n[[42.7]] minus eleganter quam subtiliter, scholasticos non tantum barbare, sed et parum accurate locutos\n[[42.8]] fuisse. Nec vero aliorum more nudis invectivis in eorum barbariem detonat, sed et praeterea\n[[42.9]] substituit alias loquendi rationes ex Cicerone et aliis veteribus haustas, imo prorsus non\n[[42.10]] technicas, sed e medio sumptas, quibus ostendit, proprie, pure, atque accurate subtilissima\n[[42.11]] quaeque enuntiari posse. Atque ita universam Logicam percurrit, illud urgens perpetuo, sicubi\n[[42.12]] res terminis popularibus aeque facile exprimi possit, technicis illis fictitiis tantum ad obscurandum\n[[42.13]] factis esse abstinendum. Constitui prolixiusculam praefationem adjungere tum de usu\n[[42.14]] hujus instituti, tum quomodo mitigari debeant, quae acrius justo dicit. Te vero rogo, si quid de\n[[42.15]] Nizolii Philosophia praeterea compertum habes, aut similis instituti scriptores occurrunt, id\n[[42.16]] mihi suggerere ne graveris. </p>\n","number":"13.","title":"LEIBNIZ AN JAKOB THOMASIUS","date":"Frankfurt, September 1669. [12.14.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

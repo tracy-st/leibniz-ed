@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_67","series":"Band VI 4 (1677 - 1690)","seq":67,"text":"[[180.1]] <b>55.  Quid sit natura prius [Frühjahr bis Sommer 1679 (?)]</b>\n [[180.2]] <tab/>[Frühjahr bis Sommer 1679 (?)] </p>\n<p> [[180.12]] Difficultas aliqua est in explicando quid sit <b>natura prius</b>. Nam ut status posterior\n[[180.13]] alicujus substantiae involvit priorem, ita vicissim status prior involvit ­posteriorem,\n[[180.14]] unusquisque enim ex alio potest cognosci. Unde sequi videtur, priorem non esse simpliciorem\n[[180.15]] posteriore sed ambos eadem involvere, et aequationem quandam intercedere.\n[[180.16]] Sed videtur solutio difficultatis exemplo eleganti illustrari posse, constat plures saepe\n[[180.17]] esse proprietates ejusdem subjecti, quarum una altera facilior inventu demonstratuque est,\n[[180.18]] et tamen omnes sunt reciprocae, adeoque eadem omnia involvunt. Sic prior et simplicior\n[[180.19]] est circuli proprietas, [sinum] esse mediam proportionalem inter segmenta\n[[180.20]] diametri, quam rectis se in circulo decussantibus rectangula segmentorum\n[[180.21]] compertinentium utrinque aequalia esse, atque adeo et natura prior, etsi\n[[180.22]] haec ut genus illam comprehendat; nam in analogis species genere prior.\n[[180.23]] Et proprietas segmentorum generalis est ex numero perplexarum seu paradoxarum, quarum\n[[180.24]] possibilitas potest dubitari, itaque si quaeratur linea talis naturae, dubitari potest an\n[[180.25]] possibilis sit ejus solutio. Sic facilius demonstratur circulum in suo segmento eundem\n[[180.26]] angulum ubique capere, quam circulum esse capacissimam figurarum isoperimetrarum.\n[[180.27]] Eodem igitur modo duo status universi, etsi alter alterum involvat non aeque tamen facile\n[[180.28]] intelliguntur, et ex fontibus explicantur. </p>\n<p> [[181.1]] Et proinde <b>Natura prius</b> est, cujus possibilitas facilius demonstratur; seu quod\n[[181.2]] facilius intelligitur. Ex duobus statibus quorum alter alteri contradicit, is est <b>tempore\n[[181.3]] prior</i>, qui est prior natura. Duo existentia incompatibilia seu contradicentia tempore\n[[181.4]] differunt, et illud prius est aut posterius tempore, quod est prius aut posterius natura. </p>\n<p> [[181.5]] In natura, ut in arte tempore priora sunt simpliciora, posteriora sunt perfectiora. Nam\n[[181.6]] natura est ars summa. Haec propositio magni momenti est, et contra regressum in orbem,\n[[181.7]] ubi nullus finis. Ut felicitas in progressu ulteriore sic et rerum perfectio, ut quam\n[[181.8]] directissime in perfectione crescant. Nihil unquam in creaturis perfectissimum. </p>\n","number":"55.","title":"Quid sit natura prius","date":"[Frühjahr bis Sommer 1679 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

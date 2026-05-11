@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_85","series":"Band VI 4 (1677 - 1690)","seq":85,"text":"[[301.1]] <b>73.  De praedicabilibus [Frühjahr bis Sommer 1679 (?)]</b>\n [[301.2]] <tab/>[Frühjahr bis Sommer 1679 (?)] </p>\n<p> [[301.6]] <i>Magna negligentia culpa est</i>, <i>magna culpa dolus est</i>. Paulus <i>l. 226 de V. S.</i> Itaque\n[[301.7]] dolus est negligentia magna major. Vigelius in <i>Dialectica juris</i> praedicabilia ait esse non\n[[301.8]] tantum genus speciem, proprium, etc. sed et totum partem, causam, connexa etc. tanquam\n[[301.9]] loca ex quibus praedicata subjectorum vel rationes propositionum sumantur. Ubi tamen\n[[301.10]] notandum est Totum et causam, et similia esse loca realia; at genus, speciem, etc. esse\n[[301.11]] notionalia, possumus enim de individuo hominis dicere esse totum, esse causam, sed non\n[[301.12]] esse genus esse speciem, quanquam forte nihil prohibeat aliquo sensu ita exaltam notionem,\n[[301.13]] ut etiam in vocabula quadret. Si omne <i>A</i> est <i>B</i> et non omne <i>B</i> est <i>A</i>, dicitur <i>A</i>\n[[301.14]] <b>species</b>, et <i>B</i> <b>genus</b>. Nihil prohibebit igitur si ipsum ita ampli[fi]cemus, ut etiam hoc\n[[301.15]] <i>A</i> species hujus <i>B</i> esse dicatur seu hunc hominem esse speciem hujus animalis. Caeterum\n[[301.16]] non video cur non ut ex praedicatione recta nata sunt communia praedicabilia, ita ex\n[[301.17]] obliqua fieri possint nova, ubi revera prodibunt talia loca, qualia constituit Vigelius. </p>\n","number":"73.","title":"De praedicabilibus","date":"[Frühjahr bis Sommer 1679 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

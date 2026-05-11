@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_79","series":"Band II 4 (1701 - 1707)","seq":79,"text":"<p> [[264.1]] <b>79. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[264.2]] Venedig, 2. August [1704]. [77.81.] </b></p>\n<p> [[264.9]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Venetia 2 Agosto. </p>\n<p> [[264.10]] Nella caduta settimana ritrovandomi in Padova ricevei il foglio di V. S. Ill^#'m^#'a in data 10 di\n[[264.11]] luglio, a cui rispondo ora, essendomi gia portato novamente in Venetia, ove mi fermarò fin alla\n[[264.12]] metà di settembre. Molto mi dispiace la morte del dottissimo Sig^#'r^#'e Marchese [de] l'Hospital che\n[[264.13]] avea con sì bell'ordine reso publico il veramente meraviglioso calcolo di V. S. Ill^#'m^#'a, che hà data\n[[264.14]] si può dire l'ultima mano ed il maggiore suo lustro all'Analise, che qui fra noi pochissimo\n[[264.15]] s'intende, e da pochi si professa con gravissimo detrimento delle buone scienze, che ricevono\n[[264.16]] da quella si può dire la maggiore loro forzà, ed un esquisita netezza e brevità nelle loro\n[[264.17]] dimostrationi. Piacesse percio a Dio che potessimo avere nel nostro Studio di Padova il Sig^#'r^#'e\n[[264.18]] Herman, che per io averne una grandissima opinione mi basta, che V. S. Ill^#'m^#'a lo lodi, e stimi\n[[264.19]] degno della nostra Accademia, ed essendo egli cosi ben informato del Metodo analitico di V. S.\n[[264.20]] Ill^#'m^#'a, come ben si conosce da suoi trattati sopra il calcolo differentiale, potrebbe molto contribuire\n[[264.21]] a promovere in questi paesi le discipline Matematiche, che si possono dire ormai\n[[264.22]] neglette ed abbandonate. Io lo farò presto proporre all'Ecc^#'m^#'i Riformatori dello Studio di Padova\n[[265.1]] che ora vanno in cerca d'un celebre e dotto Matematico, di cui anche se ne vorrebbono servire\n[[265.2]] per quel che riguarda l'uso per l'urgenze della Republica. Da canto mio tenterò tutto per farlo\n[[265.3]] chi[a]mare con utile e decoro. Vorrei sapere se presentemente insegni nell'Università di Basilea,\n[[265.4]] che stipendio ha, e che assegnamento se gli potrebbe fare, per dargli qui un onorato modo di\n[[265.5]] sossistere. Di che età è, e se nella pratica Matematica sia molto versato e principalmente per le\n[[265.6]] cose che appartengono all'acque. Sarebbe anche a proposito avere qualche opera sua stampata\n[[265.7]] per poterlo presentare all'Ecc^#'m^#'o Magistrato. Prego percio V. S. Ill^#'m^#'a degnarsi di darmi subito\n[[265.8]] queste notitie, per prendere bene le nostre misure, ed operare con frutto. In quanto al punto\n[[265.9]] della Religione m'ingegnarò di superarlo. La riverisco ed all'infretta mi resto </p>\n<p> [[265.10]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Obl^#'m^#'o S^#'r^#'e M. A. Fardella </p>\n<p> [[265.11]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. Hannover <Fn>Hannover <i>von fremder Hand gestrichen und ersetzt durch</i>: Berlin</Fn> </p>\n","number":"79.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 2. August [1704]. [77.81.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

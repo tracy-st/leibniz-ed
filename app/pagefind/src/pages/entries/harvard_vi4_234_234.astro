@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_234","series":"Band VI 4 (1677 - 1690)","seq":234,"text":"[[922.9]] <b>193.  De modis combinandi characteres [Sommer 1688 bis Ende 1699 (?)]</b>\n [[922.10]] <tab/>[Sommer 1688 bis Ende 1699 (?)] </p>\n<p> [[922.19]] Omnis Ratiocinatio nostra nihil aliud est quam characterum connexio, et substitutio.\n[[922.20]] Sive illi characteres sint verba, sive notae, sive denique imagines. Omnis autem substitutio\n[[922.21]] nascitur ex aequipollentia quadam. </p>\n<p> [[922.22]] Porro ex his patet, omnem Ratiocinationem esse quandam combinationem Characterum.\n[[922.23]] Est autem combinatio vel ab ordine absoluta, vel ordinem respiciens; est item vel\n[[922.24]] similaris, inter characteres, quorum quisque tractatur eodem modo, vel dissimilaris. Item\n[[923.1]] vel in ea ejusdem characteris repetitio vel variat aliquid vel non variat, quae est specialis\n[[923.2]] combinatio, cum <i>AA</i> ^&.SE <Leibniz special character> <i>A</i>. </p>\n<p> [[923.3]] Praeterea Combinatoria est composita, cum diversi modi connectendi characteres\n[[923.4]] simul conjunguntur, v.g. <i>ab</i> + <i>cd</i> patet <i>a</i> et <i>b</i> inter se alio modo connecti, quam <i>ab</i> et <i>cd</i>;\n[[923.5]] quo pertinent notae ablationum, etiam duplices pro duplici modo ascribendi. Et hae duae\n[[923.6]] rationes connectendi obtinent in calculo algebraico. Et tamen nihil prohibet dari in natura\n[[923.7]] combinationes, ubi adhuc plures modi connectendi simul conjungantur; sunt et modi\n[[923.8]] connectendi alii similares, alii dissimilares; similaris est, ut <i>ab</i>, <i>a</i> + <i>b</i>, dissimilares horum\n[[923.9]] reciproci seu notae auferendi ut <i>ab</i> : <i>b</i>; <i>a</i> + <i>b</i> ─ <i>b</i>. Item si scribas <i>a^#'b</i>. Nota: nihil impedire,\n[[923.10]] quo minus quando duo diversi modi connectendi ambo similares junguntur, alter in\n[[923.11]] alterum permutetur, si scilicet nihil adscriptum est, quo distinguantur, sed hoc tantum\n[[923.12]] esse diversos, sic ex <i>ab</i> + <i>cd</i> posset fieri <i>a</i> + <i>b</i> · <i>c</i> + <i>d</i>, nihil enim prohiberet multiplicationem\n[[923.13]] repraesentari per +, additionem per ascriptionem, et multiplicando <i>ab</i> + <i>cd</i> in\n[[923.14]] <i>ab</i> ─ <i>cd</i> scribi posset: ^#5+<i>a</i> + <i>b</i>^#5-^#4+ · ^#4-^#5+<i>c</i> + <i>d</i>^#5- + ^#5+<i>a</i> + <i>b</i>^#5-^#4+ : ^#4-^#5+<i>c</i> + <i>d</i>^#5-, unde foret:\n [[923.15]] ^#5+<i>a</i> + <i>a</i> + <i>b</i> + <i>b</i>^#5-^#4+ · ^#4-^#5+<i>c</i> + <i>d</i> +<i>a</i> + <i>b</i>^#5- : ^#5+<i>c</i> + <i>d</i> + <i>a</i> + <i>b</i>^#5-^#4+ · ^#4-^#5+<i>c</i> + <i>c</i> + <i>d</i> + <i>d</i>^#5- seu\n [[923.16]] ^#6+<i>a</i> + <i>a</i> + <i>b</i> + <i>b</i>^#6- : ^#6+<i>c</i> + <i>c</i> +<i>d</i> + <i>d</i>^#6-, hoc est communi more <i>aabb</i> ─ <i>ccdd</i>. </p>\n<p> [[923.17]] Ex variis modis combinandi, ubi se termini vel similariter vel [dissimilariter] habent,\n[[923.18]] oriuntur nomina catholica relationes significantia, seu Terminis imponibilia, quibus\n[[923.19]] deinde catholice exprimi possunt, quae per characteres Ecthetice; idque aptum est memoriae,\n[[923.20]] nam Ecthetica expressio scripturae apta est, sermoni vero apta non est. </p>\n","number":"193.","title":"De modis combinandi characteres","date":"[Sommer 1688 bis Ende 1699 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

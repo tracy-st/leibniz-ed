@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_262","series":"Band VI 4 (1677 - 1690)","seq":262,"text":"[[1028.11]] <b>219.  Aus und zu einem Brief von Descartes an Mersenne [1678 bis 1682 (?)]</b>\n [[1028.12]] <tab/>[1678 bis 1682 (?)] </p>\n<p> [[1029.6]] <i>Il y a moyen d'inventer une langue ou écriture au moins, dont les caracteres et mots\n[[1029.7]] primitifs seroient faits</i> en sorte, qu'elle pouroit estre enseignée en fort peu de tems, et ce\n[[1029.8]] par le moyen de l'ordre, c'est a dire, établissant un ordre entre toutes les pensées qui\n[[1029.9]] peuvent entrer en l'Esprit humain, de mesme qu'il y en a un naturellement étably entre les\n[[1029.10]] nombres; Et comme on peut aprendre en un iour à nommer tous les nombres iusques à\n[[1029.11]] l'infini, et à les écrire, en une langue inconnuë, qui sont toutesfois une infinité de mots\n[[1029.12]] differens; qu'on pûst faire le mesme de tous les autres choses qui tombent; en l'Esprit des\n[[1029.13]] hommes; si cela estoit executé, ie ne doute point que cette langue n'eust bien tost cours\n[[1029.14]] parmy le monde, car il y a force gens qui employeroient volontiers cinq ou six jours de\n[[1029.15]] tems pour se pouvoir faire entendre par tous les hommes. L'invention de cette langue\n[[1029.16]] dépend de la vraye Philosophie; car il est impossible autrement de dénombrer toutes les\n[[1029.17]] pensées des hommes, et de les mettre par ordre; ny seulement de les distinguer en sorte\n[[1029.18]] qu'elles soient claires et simples; qui est à mon advis le plus grand secret qu'on puisse\n[[1029.19]] avoir pour acquerir la bonne science; et si quelqu'un avoit bien expliqué quelles sont les\n[[1029.20]] idées simples qui sont en l'imagination des hommes, desquelles se compose tout ce qu'ils\n[[1029.21]] pensent, et que cela fust receu par tout le monde, i'oserois esperer ensuite une langue\n[[1029.22]] universelle fort aisé à aprendre, à prononcer, et à [écrire] et ce qui est le principal, qui\n[[1029.23]] ayderoit au iugement, luy representant si distinctement toutes choses, qu'il luy seroit\n[[1029.24]] presque impossible de se tromper; au lieu que tout au rebours, les mots que nous avons\n[[1029.25]] n'ont quasi que des significations confuses, ausquelles l'Esprit des hommes s'estant\n[[1029.26]] acoutumé de longue main, cela est cause qu'il n'entend presque rien parfaitement. Or ie\n[[1030.1]] tiens que cette langue est possible, et qu'on peut trouver la science de qui elle dépend, par\n[[1030.2]] le moyen de laquelle les Paysans pouroient mieux iuger de la verité des choses, que ne\n[[1030.3]] font maintenant les Philosophes. </p>\n<p> [[1030.4]] <i>Cependant quoyque cette langue dépende de la vraye philosophie, elle ne depend\n[[1030.5]] pas de sa perfection. C'est à dire cette langue peut estre établie, quoyque la philosophie\n[[1030.6]] ne soit pas parfaite: et à mesure que la science des hommes croistra, cette langue\n[[1030.7]] croistra aussi. En attendant elle sera d'un secours merveilleux et pour se servir de ce que\n[[1030.8]] nous sçavons, et pour voir ce qui nous manque, et pour inventer les moyens d'y arriver,\n[[1030.9]] mais sur tout pour exterminer les controverses, dans les matieres qui dependent du\n[[1030.10]] raisonnement. Car alors raisonner et calculer sera la même chose.</i> </p>\n","number":"219.","title":"Aus und zu einem Brief von Descartes an Mersenne","date":"[1678 bis 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_63","series":"Band II 4 (1701 - 1707)","seq":63,"text":"<p> [[204.15]] <b>63. DAMARIS LADY MASHAM AN LEIBNIZ</p>\n<p> [[204.16]] Oates, 29. März (9. April) 1704. [56.67.] </b></p>\n<p> [[205.9]] S^#'r Oates 29 March 1704 </p>\n<p> [[205.10]] Thō I am not in the Number of those who can confirm the advantageous Idea you have of\n[[205.11]] English Ladys yet I have been too much conversant amongst Learned Men not to have\n[[205.12]] contracted (so far as I am capable of it) a Just Value for them or to have been ignorant of the\n[[205.13]] rank you hold in the Commonwealth of Letters. This has dispos'd me long since to entertain\n[[205.14]] with Pleasure any Occasion of testifying a great Respect for you; and has lately suggested to me\n[[205.15]] that my Fathers <k>Intellectual System</k> might, possibly, not be unacceptable to you. The\n[[205.16]] esteem you express for that Work pleases me very much both on this account, and also as it is a\n[[205.17]] new Confirmation to me of the Worth of that Performance. </p>\n<p> [[205.18]] I should be glad to have a farther view into the Intellectual World; and would therefore\n[[205.19]] willingly have right Conceptions of the System you propose. To this Purpose upon the receit of\n[[205.20]] your obliging Letter, I look'd into the Article of <k>Rorarius</k> in the first Edition of M^#'r Bayls\n[[205.21]] Dictionarie (not haveing the 2^#'d by me) and being by his quotation of you there, directed to the\n[[205.22]] <i>Journal des Savans</i> 1695 I read what is there publish'd of it. </p>\n<p> [[205.23]] Perhaps my not being accustom'd to such abstract Speculations made me not well\n[[205.24]] comprehend what you say there of <b><i>Formes</i></b>, upon which I think you build your Hypothesis: for\n[[205.25]] (as it seemes to me) you sometimes call them <b><i>Forces Primitives</b></i>, sometimes <b><i>des Ames</b></i>\n[[205.26]] sometimes <b><i>Formes constitutives des substances</b></i>, and sometimes <b><i>Substances</i></b> themselves;\n[[205.27]] but such yet as are neither Spirit, nor matter whence I confess I have no cleare Idea of what\n[[205.28]] you call <b><i>Formes</i></b>. </p>\n<p> [[205.29]] That a man whose Correspondence is so highly esteem'd as yours by all the Learned men\n[[205.30]] of Europe should employ any of his valuable Moments in the instruction of an Ignorant Woman\n[[205.31]] is what I should not perhaps presume to importune you for, if your character was known to me\n[[206.1]] onely as a Learned Man; for those who are far advanced in Learned Studies, and high\n[[206.2]] Speculations may think themselves excus'd from such a Condescention; but you I am confident\n[[206.3]] would not contemne the most Ignorant Lover of Truth; were I not secur'd by my sex of a\n[[206.4]] favorable distinction from the obligeing Civilitie of a Man Conversant in Courts. </p>\n<p> [[206.5]] I take the libertie therefore to request the favour of you that you will by some explication\n[[206.6]] or definition of them help me to Conceive what your <b><i>Formes</b></i> are; for I cannot but desire to\n[[206.7]] understand a Systeme recommended to me not onely by the eminence of its Author, but\n[[206.8]] particularly also as tending to inlarge our Idea of the Divine Perfections, and the Beautie of his\n[[206.9]] Works. If you please to add in short the Sum of your Answers to M^#'r Bayles objections in his\n[[206.10]] second edition of his Dictionarie it will be an Additional Obligation in giveing me still further\n[[206.11]] Light into this matter. </p>\n<p> [[206.12]] I have order'd my Fathers <i>Discourse concerning the Lords Supper</i> to be sent you together\n[[206.13]] with his <i>Intellectual System</i> in the same vol: the Value you express for the Author makes me\n[[206.14]] think you will not dislike to look into anything of his and thō this Treatise was writ when he\n[[206.15]] was a Young Man, yet it was Highly commended by our Famous Selden. </p>\n<p> [[206.16]] You will much oblige me in accepting of this Book as from one who is with great Esteem\n[[206.17]] and Respect </p>\n<p> [[206.18]] S^#'r Your very Humble Servant Da Masham. </p>\n<p> [[206.19]] M^#'r Locke (whose company I am so Happy as to injoy in my Familie) desires me to present\n[[206.20]] you his Humble Service. </p>\n","number":"63.","title":"DAMARIS LADY MASHAM AN LEIBNIZ","date":"Oates, 29. März (9. April) 1704. [56.67.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

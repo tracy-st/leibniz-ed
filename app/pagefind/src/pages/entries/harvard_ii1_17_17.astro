@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_17","series":"Band II 1 (1663 - 1685)","seq":17,"text":"<p> [[54.20]] <b>16a. LEIBNIZ AN GOTTLIEB SPITZEL</p>\n<p> [[54.21]] 10./20. Februar 1670. [19a.]</b></p>\n<p> [[55.4]] [ ... ] Ad monstrum <b>Atheismi</b> debellandum, utinam quicquid eruditorum est vires\n[[55.5]] conjungeret, nec pateretur serpere latius etiam inter ipsos hoc malum, a quo nihil praeter\n[[55.6]] Anarchiam universalem atque eversionem Societatis humanae expectari potest. Cl^#'m^#'u^#'s <b>Conringius</b>\n[[55.7]] pec. tr. promisit <i>de veritate religionis Christianae</i> solito accuratius stabilienda, emendandisque\n[[55.8]] illis quae in Grotii libello ejusdem argumenti et ipso, et Episcopio dudum monentibus,\n[[55.9]] desiderari possunt. Vidi nuper Gerardi <b>van der Meulen</b> librum <i>de veritate Religionis\n[[55.10]] Christianae Reformatae</i>, cujus priora in Christianismo firmando, reliqua in Religione, quam\n[[55.11]] Reformatam vocant, defendenda consumuntur; sunt tamen, quibus pretium operae magnum\n[[55.12]] fecisse non videtur. In Anglia prodiisse accepi <i>Apologiam generis humani adversus accusationem\n[[55.13]] Atheismi</i>, cujus autor Fabricius, tueri dicitur: nullam unquam uspiam gentem prorsus\n[[55.14]] <greek>^%)/aueon</greek> extitisse, quod et ego verissimum judico. </p>\n<p> [[55.15]] Cum vero operae sit latissime fusae, solide atque accurate elidere, quicquid religioni\n[[55.16]] Christianae objici potest, praesertim cum ea res gravissimos quosque Theologiae Exegeticae,\n[[55.17]] historicae, scholasticae ac polemicae nodos contineat; rationis est compendia sectari, donec sit\n[[55.18]] qui justo opere tantam molem debellet. Id est praedemonstrari accurate debet religionis naturalis\n[[55.19]] veritas, nimirum Existentia Entis Potentissimi et Sapientissimi, id est Dei, animaeque\n[[55.20]] praeterea nostrae inmortalitas. His confectis, cum rationi congruum sit Deum aliquam mortalibus\n[[55.21]] veram religionem aperuisse, nec caeterarum ulla cum Christianae rationalitate comparari\n[[55.22]] possit, compendiosior erit ad victoriam via. Quanquam, ne quid hostium a tergo relinquatur,\n[[55.23]] optem exoriri aliquando, qui omnigenae eruditionis, historiaeque ac linguarum, tum philosophiae\n[[55.24]] quoque subsidiis instructus, illustrata omni Christianae religionis harmonia ac pulchritudine,\n[[55.25]] discussisque objectionum innumerabilium, contra dogmata, textum, historiam, nebulis,\n[[55.26]] plenam sine exceptione victoriam reportet. Cui operi utinam tantum Tibi temporis, quantum\n[[55.27]] virium esset! [ ... ] </p>\n","number":"16a.","title":"LEIBNIZ AN GOTTLIEB SPITZEL","date":"10./20. Februar 1670. [19a.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

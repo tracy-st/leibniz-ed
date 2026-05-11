@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_69","series":"Band II 1 (1663 - 1685)","seq":69,"text":"<p> [[187.14]] <b>60a. LEIBNIZ AUF JOHANN AMOS COMENIUS FÜR MAGNUS HESENTHALER</p>\n<p> [[187.15]] [Mai 1671.] [60b.]</b></p>\n<p> [[188.1]] In Comenii obitum. Versus quos Hesenthalero misi. <Fn><i>Vor dem Gedicht in L^#'3 </i>: Cum olim Dominus Magnus Hesenthalerus ICtus et Consiliarius Wurtenbergicus a me juvene Carmen breve in Comenium tunc haud ita pridem defunctum, cum quo illi notitia fuerat, petiisset; tale Epigramma misi, nescius quid cum illo sit factum. In Johannem Amosum Comenium.</Fn> </p>\n<p> [[188.2]] Fortunate senex, veri novus incola mundi, </p>\n<p> [[188.3]] Quem pictum nobis jam tua cura dedit: </p>\n<p> [[188.4]] Seu res humanas insanaque jurgia, liber </p>\n<p> [[188.5]] Despicis, et nostris usque movere malis; </p>\n<p> [[188.6]] Sive Apicem Rerum et mundi secreta tuenti, </p>\n<p> [[188.7]] Interdicta solo, nunc data Pansophie; </p>\n<p> [[188.8]] Spem ne pone tuam, superant tua carmina mortem </p>\n<p> [[188.9]] Sparsaque non vane semina servat humus. </p>\n<p> [[188.10]] Posteritas non sera metet, jam messis in herba est, </p>\n<p> [[188.11]] Articulos norunt fata tenere suos. <Fn><i>Nach dem Gedicht in L^#'2 </i>: in <b>Comenium</b>; rogatu Hesenthaleri</Fn> </p>\n<p> [[188.12]] Paulatim natura patet, felicibus una, </p>\n<p> [[188.13]] Si modo conatus jungimus, esse licet. </p>\n<p> [[188.14]] Tempus erit quo te, COMENI, turba bonorum, </p>\n<p> [[188.15]] Factaque, spesque tuas, vota quoque ipsa, colet. </p>\n","number":"60a.","title":"LEIBNIZ AUF JOHANN AMOS COMENIUS FÜR MAGNUS HESENTHALER","date":"[Mai 1671.] [60b.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

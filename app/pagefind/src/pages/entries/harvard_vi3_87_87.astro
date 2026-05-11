@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_87","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":87,"text":"[[587.15]] <b>87. De existentia </b> <span>587.15;0:63:087:76?      :L:l^</span>.\n[[587.16]] quam aliter non intelliges. Aggregatum omnium Requisitorum corporis cuiuslibet\n[[587.17]] dati, extra corpora est. Aggregatum omnium requisitorum unius corporis, et aggregatum\n[[587.18]] omnium requisitorum alterius est in uno eodemque. Illud unicum quodcunque\n[[587.19]] sit est ultima ratio rerum. Nam quod de corporibus, idem de aliis quibuscunque\n[[587.20]] verum est, quae non existunt necessario, seu in quibus ipsis non est ratio existendi.\n[[587.21]] Ens necessarium non nisi unicum est. Ens necessarium in se omnium rerum requisita\n[[587.22]] continere. Ens necessarium agere in se ipsum, sive cogitare. Nihil aliud enim cogitare\n[[587.23]] quam se sentire. Ens necessarium agere per simplicissima. Nam ex infinitis possibilibus\n[[587.24]] sunt quaedam simplicissima, sed simplicissima quae plurimum praestant. Cuius\n[[588.1]] rei ratio est, quia nulla est ratio quae caetera determinet. Harmonia hoc ipsum est,\n[[588.2]] simplicitas quaedam in multitudine. Et in eo consistit pulchritudo et voluptas. Itaque\n[[588.3]] res existere idem est, quod a Deo intelligi optimas, sive maxime harmonikas. Existentiae\n[[588.4]] ideam nullam habemus, quam ut res intelligamus sentiri. Nec alia esse potest,\n[[588.5]] quia existentia in ipsa (essentia) nisi necessariorum non includitur. Sine sentientibus\n[[588.6]] nihil existeret. Sine uno primo sentiente, quod idem et causa rerum est nihil sentiretur.\n[[588.7]] Exigit harmonia rerum, ut essent in corporibus quae agerent in se ipsa. De\n[[588.8]] natura entis in se ipsum agentis. Agit per simplicissima; in eo enim est harmonia, ubi\n[[588.9]] semel coepit, aeternum est. Eorum quae sensit egitque in eo ideae sunt, ut in Deo, nisi\n[[588.10]] quod in Deo omnium et simul. Mens nullius unquam rei obliviscitur, quia ideae in\n[[588.11]] ipsa mente sunt indelebiles. Motus semel datus necessario continuatur. Cogitatio seu\n[[588.12]] sensus sui, seu actio in seipsum necessario continuatur sed agentis in seipsum actionem\n[[588.13]] in corpus nondum video necessario continuari; quod autem continuatur, oritur\n[[588.14]] ex harmonia rerum; id est a Dei voluntate. Miracula agi ope Mentium quarundam.\n[[588.15]] Mentes quasdam singulariter uniri posse Deo, quibus scilicet detur actio perfecta\n[[588.16]] secundum rationem: Et corporibus earum tanta motus vis, ut a circumfusis separari\n[[588.17]] non possunt.\n","number":"87.","title":"De existentia","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

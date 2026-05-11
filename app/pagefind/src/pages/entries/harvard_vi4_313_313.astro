@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_313","series":"Band VI 4 (1677 - 1690)","seq":313,"text":"[[1367.1]] <b>257.  Anima quomodo agat in corpus [Anfang 1677 bis Anfang 1678 (?)]</b>\n [[1367.2]] <tab/>[Anfang 1677 bis Anfang 1678 (?)]\n[[1367.8]] <tit2><b>Anima quomodo agat in corpus </b></tit2> </p>\n<p> [[1367.9]] Ut Deus in mundum: id est non per modum miraculi, sed per mechanicas leges.\n[[1367.10]] Itaque si per impossibile tollerentur Mentes, et manerent leges naturae, eadem fierent ac\n[[1367.11]] si essent mentes, et libri etiam scriberentur legerenturque a machinis humanis nihil\n[[1367.12]] intelligentibus. Verum sciendum est hoc esse impossibile, ut tollantur mentes salvis\n[[1367.13]] legibus Mechanicis. Nam leges mechanicae generales sunt voluntatis divinae decreta, et\n[[1367.14]] leges mechanicae speciales in unoquoque corpore (quae ex generalibus sequuntur), sunt\n[[1367.15]] decreta animae sive formae ejus, contendentis ad bonum suum sive ad perfectionem.\n[[1367.16]] Itaque Deus est mens illa quae omnia ducit ad perfectionem generalem. Anima autem est\n[[1367.17]] vis illa sentiens quae in unoquoque tendit ad perfectionem specialem. Ortae autem sunt\n[[1367.18]] animae, dum Deus omnibus conatum ad perfectionem specialem impressit, ut ex eo\n[[1367.19]] conflictu oriretur maxima perfectio possibilis. Omnia in tota natura demonstrari possunt\n[[1367.20]] tum per causas finales, tum per causas efficientes. Natura nihil facit frustra, natura agit\n[[1367.21]] per vias brevissimas modo sint regulares. Hinc viae brevissimae quaerendae non in\n[[1367.22]] superficiebus ipsis refringentibus sed in tangentibus. Sed hoc obiter. Animae non agunt in\n[[1367.23]] corpora extra ordinem. Nec Deus in naturam, etsi appareant res fieri extra ordinem; rebus\n[[1367.24]] ab initio sic constitutis, ut ordo generalis aliquid in speciem extraordinarium involvat. </p>\n","number":"257.","title":"Anima quomodo agat in corpus","date":"[Anfang 1677 bis Anfang 1678 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

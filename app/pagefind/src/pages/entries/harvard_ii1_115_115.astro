@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_115","series":"Band II 1 (1663 - 1685)","seq":115,"text":"<p> [[319.9]] <b>100. LEIBNIZ AN JAKOB THOMASIUS</p>\n<p> [[319.10]] Mainz, 21./31. Januar 1672. [50.]</b></p>\n<p> [[319.22]] Scis, celeberrimum Reinesium, quondam nostrum, MS^#'t^#'u^#'m inscriptionum opus reliquisse.\n[[319.23]] Id ille Regi Christianissimo dedicare constituerat, et Fridericus Brummerus noster ei rei Parisiis\n[[320.1]] institerat, et paullo post defuncto Reinesio illustris Gersdorfius, ni fallor, Serenissimi Saxoniae\n[[320.2]] electoris legatus, secum exemplar ipsum Parisios tulerat. Sed nihil actum est, sive quod alieno\n[[320.3]] tempore, sive quod alieno loco res proposita, aut alioquin difficultatibus, nescio quibus, impedita\n[[320.4]] fuit. Ego, qui cum Domino de Carcavy, Bibliothecario Regis, qui Colberti jussu res\n[[320.5]] literarias curat, commercium colere soleo, inter cetera forte in Reinesianarum inscriptionum\n[[320.6]] mentionem incidi. Ex eo tempore scripsit mihi Dominus de Gravelle, legatus ordinarius, sive, ut\n[[320.7]] vulgo vocant, Residens regius (Plenipotentiarii Ratisbonae agentis frater), commissum sibi, ut\n[[320.8]] inquireret, qui Reinesii heredes, et quo loco MS^#'t^#'u^#'m esset, rogavitque me, ut operam in eo\n[[320.9]] negotio sibi navarem. Addidit, intellexisse sese, gratum Regi munus fore, si offeratur, et certa\n[[320.10]] munificentia recognoscendum, sed et, quod auctor olim quaesiverit, ex typographia regia\n[[320.11]] edendum. Ego inquirere, et nuncium, ut credo, non ingratum perferre, in me recepi, et te, quem\n[[320.12]] et Reinesio olim amicum fuisse, et nunc ejus heredibus (quorum nomina non satis scio, et nosse\n[[320.13]] desidero) esse non dubito, rogare volui, ut mihi opem feras, quod ego, re confecta, honorifica\n[[320.14]] tuae operae mentione, ut alioquin debeo, apud amicos Parisienses agniturus sum. Quaecunque\n[[320.15]] Dnn. heredum sententia desideriumve est, mihi tuto libereque perscribere, aut significare\n[[320.16]] possunt, ego omnia fideliter curabo. De re literaria nihil novi magnopere ad me pervenit. </p>\n<p> [[320.17]] Auctor libri de libertate philosophandi, cujus refutationem brevem, sed elegantem, programmate\n[[320.18]] complexus es, est Benedictus Spinoza, Judaeus <greek>ăposynágvgow,</greek> ob opinionum\n[[320.19]] monstra, ut mihi e Batavis scribitur. Ceterum homo omni literatura excultus, et inprimis\n[[320.20]] insignis Opticus, praeclarorum admodum tuborum elaborator. </p>\n<p> [[320.21]] Abulfedam, Geographum Arabem magni nominis, Schickardus, multis collatis manuscriptis\n[[320.22]] recensuerat, versioneque latina expresserat, et notis illustraverat. Reliquias tanti viri tam\n[[320.23]] praeclaras cum alicubi latere didicissem, Gallis significavi, qui redemere: et ita fore spero, ut\n[[320.24]] opus tam diu in publico desideratum cura clarissimi Ferrandi, Galli orientalia doctissimi,\n[[320.25]] prodeat in lucem. Ex quo multa hactenus ignorata discemus, circa res orientis, quae Abulfeda\n[[320.26]] ille, princeps Hamae, maximis sumtibus indagavit. Europaei hactenus fere non nisi litora Asiae\n[[320.27]] Africaeque legere, at Arabes religionis linguaeque beneficio in intima mediterranearum gentium\n[[320.28]] penetravere. Mogunt. 21/31 Jan. 1672. </p>\n","number":"100.","title":"LEIBNIZ AN JAKOB THOMASIUS","date":"Mainz, 21./31. Januar 1672. [50.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

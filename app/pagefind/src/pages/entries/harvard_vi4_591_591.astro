@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_591","series":"Band VI 4 (1677 - 1690)","seq":591,"text":"[[2706.11]] <b>460.  Reflexions importunes sur la misère humaine [1677 bis 1716 (?)]</b>\n [[2706.12]] <tab/>[1677 bis 1716 (?)] </p>\n<p> [[2706.17]] J'ay reconnu par experience qu'il n'y a rien qui abbatte plus le courage, et qui oste\n[[2706.18]] d'avantage le goust de belles choses, que les reflexions importunes qu'on fait sur la\n[[2707.1]] misere humaine, et sur la vanité de nos entreprises. C'est l'unique écueil des grandes\n[[2707.2]] ames où il est d'autant plus aisé d'échouer, qu'on a le genie plus élevé. Car les esprits\n[[2707.3]] ordinaires ne s'arrestent point à cette grande consideration de l'avenir qui embrasse en\n[[2707.4]] quelque façon l'univers tout entier: mais en recompense ils sont plus contents, car ils\n[[2707.5]] goustent les biens apparens sans s'aviser d'en détruire le plaisir par une discussion trop\n[[2707.6]] exacte. Et comme une folie heureuse vaut mieux qu'une prudence chagrine, je crois\n[[2707.7]] qu'on feroit bien de fermer les oreilles à la raison pour s'abandonner à la coustume ou de\n[[2707.8]] ne raisonner que pour se divertir, s'il n'y avoit pas moyen de concilier la sagesse avec le\n[[2707.9]] contentement. Mais graces à Dieu, nous ne sommes pas si malheureux, et la nature seroit\n[[2707.10]] une marastre, si ce qui fait nostre perfection seroit la cause de nostre misère. </p>\n","number":"460.","title":"Reflexions importunes sur la misère humaine","date":"[1677 bis 1716 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

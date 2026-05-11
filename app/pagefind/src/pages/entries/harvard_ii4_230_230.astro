@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_230","series":"Band II 4 (1701 - 1707)","seq":230,"text":"<p> [[699.6]] <b>230. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[699.7]] 15. Dezember 1707. [224.] </b></p>\n<p> [[700.7]] [<i>L^#'1</i> ] </p>\n<p> [[700.8]] Vir Clarissime et Doctissime Amice Honoratissime </p>\n<p> [[700.9]] Scripseram <Fn><i>Am Kopf von L^#'1 von Leibniz' Hand</i>: Hanoverae 15 Decembr. 1707 A Monsieur Monsieur Hansch à Leipzic</Fn> Berolinum de Keplerianis M[anu]s[cript]is, sed nondum aliquid certi rescriptum\n[[700.10]] est. Plura Kepleri apud Hevelium ni fallor superfuere, atque inter alia ejus <i>Hipparchus</i>. </p>\n<p> [[700.11]] Gratulor Tibi quod Anatomico quoque studio aliquid temporis tribuis. Lacrymales glandulas\n[[700.12]] non ignoras ab Henr. Meibomio primum fuisse detectas. Totam Machinam Corporis\n[[700.13]] nostri ut pyrobolico-pneumatico-hydraulico-mechanicam considerare oportet, sunt in ea explosiones\n[[700.14]] dum humidum calore rarefactum abit in spiritus, qui cum alios musculos tum cor\n[[700.15]] movent, quod antliae est genus. </p>\n<p> [[700.16]] Vellem autem Corpus Humanum describi principio sumto a causa finali seu officio. Et\n[[700.17]] dicere soleo: esse Machinam conservandae Contemplationis gratia inventam. </p>\n<p> [[700.18]] Ex Coenobio Luccensi nihil nisi pro illis impenditur, qui sunt Conventuales et hi ipsi\n[[700.19]] absentes carent. </p>\n<p> [[701.1]] [<i>L^#'2</i> ] </p>\n<p> [[701.2]] Vir Clarissime et Doctissime Amice Honoratissime </p>\n<p> [[701.3]] A septimanis aliquot non optima valetudine sum usus: praeterea nondum Berolino responsum\n[[701.4]] certum de Keplerianis Manuscriptis accepi. Inde factum ut serius respondeam. </p>\n<p> [[701.5]] Intelligo ex Keplerianis superesse ejus <i>Hipparchum</i> insigne opus, quod in Tuo indice non\n[[701.6]] comparet. </p>\n<p> [[701.7]] Gratulor Tibi quod Anatomico etiam studio aliquid temporis tribuis. Lacrymales glandulas\n[[701.8]] non ignoras a Meibomio fuisse detectas. </p>\n<p> [[701.9]] Machinam corporis humani, esse ut ita dicam Pyrobolico-Hydraulico-mechanicam dici\n[[701.10]] potest. Spiritus enim impetum facientes explosione agere credibile est. Febrium causam immediatam\n[[701.11]] magis in spiritibus quam humoribus sitam esse puto. Vellem corpus humanum describi\n[[701.12]] principio sumto a causa finali seu officio, et dicere soleo: Esse machinam conservandae\n[[701.13]] contemplationis gratia inventam. </p>\n<p> [[701.14]] Ex coenobio Luccensi nihil impenditur nisi in Conventuales, et hi ipsi etiam absentes\n[[701.15]] carent. </p>\n<p> [[701.16]] De rebus literariis vix quicquam novi mihi compertum, nisi quod expectatur opus insigne\n[[701.17]] Monfalconii de Scriptura et literis Graecorum, in quo de veterum Manuscriptorum diplomatum\n[[701.18]] Critica agitur. </p>\n<p> [[701.19]] Quod superest vale et me ama. Dabam Hanoverae 15. Decembr. 1707 </p>\n<p> [[701.20]] deditissimus G. G. Leibnitius </p>\n<p> [[701.21]] A Monsieur Monsieur Hansch Maistre ès arts et Collegiat etc. Leipzig </p>\n","number":"230.","title":"LEIBNIZ AN MICHAEL GOTTLIEB HANSCH","date":"15. Dezember 1707. [224.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

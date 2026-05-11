@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_123","series":"Band II 3 (1695 - 1700)","seq":123,"text":"<p> [[324.14]] <b>123. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[324.15]] Hannover, 5./15. Juni 1697. [122.126.]</b></p>\n\n<p> [[325.1]] Ex meis ad Dn. Abb. Fardellam Hanoverae 5/15 Jun. 1697 </p>\n<p> [[325.2]] Multa apud Platonicos Augustinumque praeclara reperiuntur, sed quae arbitror ab ipsismet\n[[325.3]] non satis intellecta, et ex impetu magis et calore quam luce nata. De Natura Monadum et\n[[325.4]] Substantiarum quod porro quaeris, putem facile satisfieri posse, si speciatim indices, quid in ea\n[[325.5]] re explicari velis. De origine earum puto me jam dixisse omnes sine dubito perpetuas esse, nec\n[[325.6]] nisi creatione oriri, ac non nisi annihilatione interire posse, id est naturaliter nec oriri nec\n[[325.7]] occidere quod tantum est aggregatorum. Vellem videre antea liceret, quae de meis sententiis\n[[325.8]] dices in Tuo quod moliris Augustiniano Opere. Ita enim fortasse alter alteri melius lumen\n[[325.9]] foenerabitur. </p>\n<p> [[325.10]] Non video cur non Tibi optima superiorum gratia in Germaniam (ut desideras) aliquando\n[[325.11]] excurrere possis, etiam studiorum Mathematico-philosophicorum causa; multa enim intelliges\n[[325.12]] quae in Italia non aeque occurrent. Et neminem apud vos esse puto qui gustum habeat\n[[325.13]] Analyseos meae novae quam per literas explicare longum foret. </p></p>\n","number":"123.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"Hannover, 5./15. Juni 1697. [122.126.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

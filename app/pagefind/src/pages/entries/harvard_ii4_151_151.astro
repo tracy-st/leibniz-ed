@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_151","series":"Band II 4 (1701 - 1707)","seq":151,"text":"<p> [[485.1]] <b>151. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[485.2]] Hannover, 4. Oktober 1706. [149.157.] </b></p>\n<p> [[485.28]] Admodum Reverende Pater </p>\n<p> [[485.29]] Rogo ne quae a me excitandi animo dicta sunt, in sequiorem partem accipias. </p>\n<p> [[485.30]] Gratias ago pro loco Patris Martini Esparsae exscripto. Ejus quaedam olim legere memini,\n[[485.31]] et visus est peracutus. </p>\n<p> [[486.1]] Sententia de omnimoda sejunctione Angelorum a corporibus, non rationem, non scripturam,\n[[486.2]] sed solam opinionem communem scholarum pro fundamento habet. Concilium Lateranense\n[[486.3]] loqui non definitive sed discursive ex recepto tunc sensu, verba satis ostendunt. Ut\n[[486.4]] aliqui Angeli quos cum Thoma <b>assistentes</b> vocas, a corporibus sejuncti sint prorsus, meae ni\n[[486.5]] fallor demonstrationes non admittunt, et facile id paterer de omnibus, quod de aliquibus ferri\n[[486.6]] posset. </p>\n<p> [[486.7]] Eum tamen corporis usum Angelis tribui posse arbitror, ut non inepte dicantur formae\n[[486.8]] assistentes potius quam inhaerentes, non quod Entelechiarum officium non faciant, sed quod\n[[486.9]] corpori non sint affixae. Arbitror enim (: cum naturaliter possibile sit, et ad perfectionem\n[[486.10]] Universi faciat :) esse Entelechias quae facillime mutent corpus seu de corpore in corpus\n[[486.11]] transeant; non momento quidem (nihil enim sic fit naturaliter), sed brevi tamen tempore, licet\n[[486.12]] per gradus. Ubi pars quam retinent servit mutandae parti quam deponunt, etsi etiam ipsa deinde\n[[486.13]] pro re nata mutetur. Uti nos manus ope possumus pedem mutare, et ligneum carneo substituere:\n[[486.14]] imo ope unius manus possemus mutare alteram manum, et ope novae manus rursus priorem, si\n[[486.15]] novam satis nobis unire liceret. Ita semper aget angelus per corpora, semperque locum habebit\n[[486.16]] harmonia praestabilita, seu ut quae vult angelus fiant ex ipsa corporum lege: fere ut Suaresium\n[[486.17]] vestrum dicere memini, ex quorundam sententia res ita praeordinatas esse, ut voluntatibus\n[[486.18]] precibusque beatorum sponte satisfaciant. </p>\n<p> [[487.1]] Assistentes igitur Formas voco quae pro arbitrio corpus sumunt atque deponunt et quod\n[[487.2]] habent transformant; inhaerentes atque animantes, quae tale arbitrium non habent. Etsi hoc\n[[487.3]] arbitrium suis limitibus coerceatur, ut cuncta naturali ordine procedant, solius enim Dei est\n[[487.4]] quidvis facere ex quovis nuda voluntate. Et priores putem a corpore secretas dici posse,\n[[487.5]] posteriores corpori affixas. Fatendum tamen est ambas corpori unitas esse ut rationem habeant\n[[487.6]] Entelechiae. Et hoc videtur esse ad mentem Augustini lib. 21 <i>de Civitate Dei</i> c. 10 a Thoma\n[[487.7]] citatam qu. 16. <i>de malo</i> artic. 1. <b>posse scilicet Daemones</b> (vel Angelos) <b>dici spiritus\n[[487.8]] quod corpora sibi magis subdita habeant.</b> Itaque neque intelligentiis istis <b>Animarum</b>,\n[[487.9]] neque Angelis ipsis <b>Animalium</b> appellationem tribuemus. </p>\n<p> [[487.10]] Caeterum corporis mutatio nihil habet quod non receptis consentiat, nam et nos corpus\n[[487.11]] mutamus, ut fortasse senes nihil materiae infantis retineamus: tantum hoc interest, quod neque\n[[487.12]] subito neque pro arbitrio corpus exuimus. Quod superest vale et fave. Dabam Hanoverae\n[[487.13]] 4 Octobr. 1706 </p>\n<p> [[487.14]] deditissimus Godefridus Guilielmus Leibnitius </p>\n<p> [[487.15]] P. S. Grata aliquando erit <i>Causa Quenelliana</i>, quaeque alia hujusmodi ad Historiam\n[[487.16]] literariam pertinent. </p>\n<p> [[487.17]] Admodum Reverendo Patri R. P. Bartholomaeo des Bosses Societatis Jesu Theologo.\n[[487.18]] Hildesheim </p>\n","number":"151.","title":"LEIBNIZ AN BARTHÉLEMY DES BOSSES","date":"Hannover, 4. Oktober 1706. [149.157.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

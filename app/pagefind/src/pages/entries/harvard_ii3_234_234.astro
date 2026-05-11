@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_234","series":"Band II 3 (1695 - 1700)","seq":234,"text":"<p> [[635.5]] <b>234. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[635.6]] Helmstedt, 16. April 1700. [233.235.]</b></p>\n\n<p> [[635.11]] Perillustris Domine, </p>\n<p> [[635.12]] Immatura morte oppressus est Caspar Cörberus, V. C. si tamen fas est mortem vocare, qua\n[[635.13]] viri mortalitas magis finita est, quam vita. Obiit enim, ut audio, placide. Ego, ne aut excessisse,\n[[635.14]] aut non implesse officii mei partes videar; constitui ad Perillustrem Potentissimi Electoris\n[[635.15]] Vestri Cancellarium hanc rem ea, qua par est, devotione, nec Te inscio, referre, ut mei aliqua\n[[635.16]] habeatur ratio. In literis enim, quibus quod nunc gero munus demandatum est, diserte legitur:\n[[635.17]] <i>Dagegen wir ihm im Nahmen unsers Chur- und Fürstl. Hauses hiemit die gnädigste Zusage\n[[635.18]] gethan, daß er bey befindenden seinem Fleis und guter unterweisung der jugend, wenn sich\n[[635.19]] über kurtz oder lang eine seinen studiis conforme vacanz bey dem ordinariorum Philosophiae\n[[635.20]] Professorum numero ereugnen wird, zu derselben verstattet, und mit dem salario, so Ihme\n[[635.21]] alsdann gebühren wird, versehen werden soll.</i> </p>\n<p> [[636.1]] Haec ego Tibi indicanda existimavi, Indulgentissime Here, ut aut consilium meum confirmare,\n[[636.2]] aut errorem emendare digneris. Vale. Deus Te salvum florentemque praestet. Scrib. d.\n[[636.3]] XVI. April. MDCC. Helmstadii. </p>\n<p> [[636.4]] Perill. Nom. T. subjectissimus, E. S. Cyprianus, Acad. Jul. Prof. Publ.\n[[636.5]] <yi><i>A Son Excellence Monsieur Leibnitzius, Conseiller privé de S.A.E. de Bronsvic et Lunebourg.\n[[636.6]] Hannover. par couvert.</i> </p>\n","number":"234.","title":"ERNST SALOMON CYPRIAN AN LEIBNIZ","date":"Helmstedt, 16. April 1700. [233.235.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

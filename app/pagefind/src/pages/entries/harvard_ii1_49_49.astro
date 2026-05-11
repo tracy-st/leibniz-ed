@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_49","series":"Band II 1 (1663 - 1685)","seq":49,"text":"<p> [[138.1]] <b>43. FRIEDRICH NITZSCH AN LEIBNIZ</p>\n<p> [[138.2]] Gießen, 8. (18.) Februar 1671. [39.45.]</b></p>\n<p> [[138.8]] Vir Nobilissime et Consultissime Fautor et Amice Honoratissime. </p>\n<p> [[138.9]] Quanquam <Fn><i>Auf Bl. 10 r^#'o eine Bemerkung von Leibniz' Hand</i>: Lana, Du Sonius, Ottius, Titelius, Wrennus dioptricam mechanicam perficere conantur.</Fn> gratissimae fuere literae Tuae, gratiores tamen hoc eas reddidit, quod ab\n[[138.10]] Illustrissimo Boineburgio seculi nostri ornamento mihi sint allatae. Ita enim dedere ansam, ut,\n[[138.11]] quam olim, Te ipso procurante, Illustrissimo Viro declaravi devotionem, mediantibus literis\n[[138.12]] Tuis declarare denuo potuerim. Adeo Tibi soli debeo, quod Tanto Viro non ignorer. Sed porro\n[[138.13]] mirum quantum de me demerereris, si Gallorum Ephemerides Anni 1670. mihi communicares.\n[[138.14]] Memini enim Te mentionem illarum in Epistola quadam facere, et succincta dare Excerpta\n[[138.15]] illorum, quae ibi habentur notatu digna. In eo enim sum, ut proximis Nundinis edatur Versio\n[[138.16]] Anni 69. Quae cum mole sit exigua, igitur commodissime Annus 70. adjungi posset. Est\n[[138.17]] quidem qui Exemplar Gallicum mihi procurabit, sed instantibus demum nundinis. Redderem\n[[138.18]] utique eas non sine magna gratiarum actione. Disputationem Opticam transmitterem hac quidem\n[[138.19]] vice, nisi forte Cursori publico fiat molestia, mittam tamen, quamprimum commoda\n[[138.20]] obtulerit sese occasio. In Mechanicis nunc occupor, quae et forte edentur, siquidem sit, qui\n[[138.21]] impensas ferre velit. Dn. Weigelius in Hydraulico invento laborat, tali quidem, ut Siphones\n[[138.22]] (<i>Ventil</i>) sint extra canalem. Varenii quoque <i>Geographiam</i> integritati suae restituo, suppletis iis\n[[139.1]] quae injuria nescio qua et figurarum absentia et lacunis non unis egregium Autorem mutilum\n[[139.2]] reddidere. Et in hisce aliisque tempus tantum non inutiliter tero. </p>\n<p> [[139.3]] De Optico illo quae\n[[139.4]] scribis inversa credo se\n[[139.5]] ratione habent, ita ut\n[[139.6]] plana polita si faciunt\n[[139.7]] obtusum ^#(kl)^#'l^#'u^#'m, pauciores,\n[[139.8]] sin acutum plures repraesentent\n[[139.9]] imagines, uti et\n[[139.10]] experientia testata est,\n[[139.11]] siquidem recte recordor.\n[[139.12]] Nam et ipse specula illa\n[[139.13]] vidi. Quod si ergo ita est,\n[[139.14]] ratio est in promptu propter\n[[139.15]] reflexionem imaginis,\n[[139.16]] ita ^#(KL)^#'l^#'o talibus planis objecto figura <triangulum>^#'l^#'a^#'r^#'i^#'s apparet, siquidem plana obtuse aperiantur, porro si\n[[139.17]] magis ad se accedunt plana, repraesentatur pentagonum, si adhuc magis, heptagonum etc.\n[[139.18]] praeter imaginem quae in junctura videtur directo radio. Posui vero locum imaginis in ipsam\n[[139.19]] superficiem in figura quod quidem faciendum non esset, siquidem accurate schema depingendum\n[[139.20]] foret, secundum ea quae tradunt Optici de loco imaginis. Nihil vero ad multitudinem\n[[139.21]] imaginum monstrandam id refert. De lentibus Hyperbolicis alio tempore scribam, jam eo\n[[139.22]] intercludor. Interim vale faveque </p>\n<p> [[139.23]] Vir Nobilissime et Consultissime Tuo L. Frid. Nitzschio. </p>\n<p> [[139.24]] Giessae d. 8. Febr. st. v. 1671. </p>\n<p> [[139.25]] P. S. Ergone Geislerus Invitatorias ad nuptias misit? Quid vero Tu et ego facimus? Scilicet\n[[139.26]] philosophamur. Vale. </p>\n<p> [[139.27]] <i>A Monsieur Monsieur Leibnuz Conseiller de Son Altesse Electorale de Mayence. à\n[[139.28]] Mayence.</i> </p>\n","number":"43.","title":"FRIEDRICH NITZSCH AN LEIBNIZ","date":"Gießen, 8. (18.) Februar 1671. [39.45.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_286","series":"Band VI 4 (1677 - 1690)","seq":286,"text":"[[1162.8]] <b>237₁.  Tetractys TETRACTYS </p>\n<p> [[1162.13]] Erhardi Weigelii <i>Tetractys</i>, Jenae sumtibus Meyeri 1673. 4^#'o. </p>\n<p> [[1162.14]] Aliquando prolixiores, ex Tetracti Numerorum nascuntur lineae sed contra notae\n[[1162.15]] tanto expeditiores quia duo et tria mens facile percipit, septem octo novem etiam attenta\n[[1162.16]] Mens non nisi pluribus conceptibus distincte penetrat. Vulgus libenter utitur, nam quatuor\n[[1162.17]] ex granis digitum unum componunt, ex quatuor digitis unum palmum. Ex 4 palmis\n[[1162.18]] pedem, 4 pedibus passum; 4 passibus perticam. Ita ulnam dividunt in 4 quadrantes\n[[1162.19]] adeoque in 16 partes. Diem noctemque in quatuor partes, horam in quadrantes, tactum\n[[1162.20]] Musicum in 4 Commata, pausas per quaternales lineas designant; hisque temporum\n[[1162.21]] extensiones ad mensuram revocant. Qualitates intensivas in 4 gradus; pondera in quaterna\n[[1163.1]] momenta. Pyra, poma, nuces, ova, claviculos, et alia id genus per quindecades, 15 <i>eine\n[[1163.2]] Mandel</i> cum unitate pro cardinis quantitate seorsim posita hoc est per 16. et quadriquindecadem\n[[1163.3]] hoc est <i>ein schock</i> cum 4 unitatibus quindecadum indicatoribus suis annumerant\n[[1163.4]] Emtoribus. Cantharos in popina compotatoribus, modios frumenti bajulis et asportatoribus\n[[1163.5]] etc. per quaternas virgulas, <i>eine Fahne</i> dictas, ob oculos pingunt. In\n[[1163.6]] enuntiandis numeris omnibus quatuor articulos cardinales, unum, decem, centum,\n[[1163.7]] mille. Idem Dalekarli quaternis suis in moneta cuprea numeranda cumulis\n[[1163.8]] quaternorum nummorum, et rustici nostrates passim testantur. Ratio a decem\n[[1163.9]] digitis nulla est, uno pollice separatim spectato sunt in quavis Manu quatuor.\n[[1163.10]] Thraces ita numerabant autore fortasse Zamolxi Pythagorico, et ideo ab ignavis\n[[1163.11]] ludibrio habentur. Abacus (loco Pythagorici vulgo dicti) fit duarum linearum,\n[[1163.12]] bis tria sunt quatuor et duo, ter tria sunt biquatuor et unum. In subtractione ad duas\n[[1163.13]] tantum distantias rarius ad tertiam respicit. In divisione hic nec additur nec subtrahitur, et\n[[1163.14]] ex tribus consuetis, <i>in mahl von</i>, solum remanet, <i>in</i>. (+ Putam dyadicos absolute optimos,\n[[1163.15]] tertiadem in planis, octadem in solidis. +) Decadicus magis sensualis, <i>wenn man mit den\n[[1163.16]] fingern zehlet</i>; nec mentis indolem sed digitos sequitur.\n [[1163.17]] <tab/><i>Ein</i> <tab/><i>Vier</i> <tab/><i>Secht <tab/>Schock</i>.\n [[1163.18]] <tab/><i>1</i><tab/><i>4</i> <tab/><i>16</i> <tab/><i>64</i> </p>\n","number":"237₁.","title":"Tetractys","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi1_14","series":"Band VI 1 (1663-1672); unveränderter Nachdruck der Erstausgabe 1930","seq":14,"text":" [[535.32]] <b>19 De Possibilitate Gratiae Divinae 1669-1671 (?</b> <span>535.32;0:61:019:6901-7112:L:l^</span>.\n [[535.33]] Posset fortasse Definitio Gratiae Sufficientis et Efficacis dari, in qva conveniant omnes,\n [[535.34]] abstrahendo a singulorum sententiis, qvod omnino necesse est, alioqvi res abit in logomachian.\n [[536.1]] Ergo definio: Gratia in genere est concursus DEI extraordinarius ad bonum opus. Gratia\n [[536.2]] efficax qva absolute posita ponitur opus. Gratia sufficiens est qva posita non statim ponitur\n [[536.3]] opus nisi supposita hominis voluntate.\n [[536.4]] Sunto jam propositiones (1.) Datur gratia sufficiens. Scilicet ad agendum, supposita\n [[536.5]] voluntate. Hanc admittunt Thomistae et Molinistae, negant Ianseistae. (2.) Datur gratia\n [[536.6]] sufficiens-sola. Seu datur gratia sufficiens ad agendum, sine praesupposita gratia efficaci\n [[536.7]] ad volendum. Hanc admittunt Thomistae et Iansenistae, negant Molinistae. (3.) Si datur\n [[536.8]] gratia sufficiens, datur gratia sufficiens-sola. Hanc admittunt Molinistae et\n [[536.9]] Iansenistae, negant Thomistae. Hic ut verum fatear, mihi Thomistarum sententia et vera et utilis,\n [[536.10]] Iansenistarum falsa, Molinistarum videtur etiam periculosa.\n [[536.11]] Tabula opinionum\n [[536.12]] Non datur Liberum Arbitrium seu\n [[536.13]] omnis DEI concursus est determinativus, sive\n [[536.14]] ad bonum, sive ad malum concurrat.\n [[536.15]] Ita Stoici et Manichaei.\n [[536.16]] Non datur Gratia Sufficiens seu\n [[536.17]] omnis DEI concursus ad bonum est determinativus,\n [[536.18]] secus de concursu eius ad malum.\n [[536.19]] Ita Dordraceni et Iansenistae.\n [[536.20]] Dantur et debent dari omnia seu\n [[536.21]] quidam DEI concursus ad bonum, nullus ad malum est determinativus.\n [[536.22]] Ita Augustanenses et Thomistae.\n [[536.23]] Potest dari Gratia Efficax seu potest existere actus bonus sine concursu DEI determinativo.\n [[536.24]] Ita Molinistae soli nisi fortasse Semipelagianos velint adsciscere in Societatem.\n [[536.25]] Potest non dari Gratia seu potest existere actus bonus sine concursu DEI extraordinario sive determinativo  sive auxiliativo.\n [[536.26]] Ita Pelagiani.\n [[536.26]] Nota bene: potest statui triplex gratia: Efficax, sufficiens, necessaria. Efficax est qva posita ponitur actus. Necessaria\n [[536.27]] est qva non posita non ponitur actus. Sufficiens est qva posita accedente voluntate ponitur\n [[536.28]] actus. Dabitur igitur sententia anonymos, hactenus defensore carens, nisi aliqvem ei ex\n [[536.29]] veteribus adsciscas, qvae statuat, dari qvaedam auxilia gratiae, qvae tamen non sufficiant, etsi homo\n [[536.30]] vel maxime velit. Et ita putabunt aliqvem actum fieri concurrente gratia neqve efficace,\n [[536.31]] neqve sufficiente. Sed tamen haec in subtilitate consistet, nullo ad praxin usu. Uti et dissensus\n [[536.32]] Iansenisticus.\n","number":"19","title":"De Possibilitate Gratiae Divinae","date":"1669-1671 (?"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

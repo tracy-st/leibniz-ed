@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_43","series":"Band VI 4 (1677 - 1690)","seq":43,"text":"[[106.1]] <b>36₁.  Notae NOTAE </p>\n<p> [[106.2]] <i>A est B.</i> Copula <i>est</i>. </p>\n<p> [[106.3]] <i>Si A est B, tunc C est D. Si. Tunc.</i> </p>\n<p> [[106.4]] <i>A est B. Ergo C est D. Ergo</i>, significat: </p>\n<p> [[106.5]] <i>Si A est B, tunc C est D. Atqui A est B. Ergo C est D.</i> </p>\n<p> [[106.6]] <i>Atqui</i>: id est: <i>sed vera est haec propositio. ...</i> </p>\n<p> [[106.7]] <i>Sed</i>: id est: <i>praeter dictum.</i> </p>\n<p> [[106.8]] Antequam pergere in Logicis contemplationibus liceat, atque inde fabricare aliquid,\n[[106.9]] prius Grammaticis opus, inprimis hic sumendus est in manus Vossii <i>Aristarchus.</i> </p>\n<p> [[106.10]] Nomen substantivum et adjectivum in eo distinguuntur, quod adjectivum habet\n[[106.11]] genus ab alio rectum. Verum quia in lingua rationali careri potest generibus, ideo discrimen\n[[106.12]] etiam inter substantivum et adjectivum negligi potest. </p>\n<p> [[106.13]] Abstracta sunt substantiva ex aliis vel substantivis vel adjectivis facta; ut <i>humanitas,\n[[106.14]] pulcritudo.</i> Et <i>homo</i> est <i>habens humanitatem, pulcher habens pulchritudinem.</i> Sed in\n[[106.15]] lingua rationali videndum an non abstractis abstineri possit, aut saltem quousque possit. </p>\n<p> [[106.16]] <i>Masculus</i> est adjectivum, <i>Vir</i> est substantivum, quia pro <i>Vir</i> substitui potest <i>homo\n[[106.17]] masculus</i>; seu resolvi potest in substantivum cum Epitheto. </p>\n<p> [[106.18]] Epitheton est adjectivum substantivo cum rectione aequali junctum in eundem\n[[106.19]] terminum seu sine copula. </p>\n<p> [[106.20]] <b>Adverbia.</b> <i>Petrus scribit pulchre.</i> Id est <i>Petrus scribit aliquid pulchrum</i> seu\n [[106.21]] <i>Petrus scribit, et quod Petrus scribit est pulchrum.</i> <i>Petrus stat pulchre.</i> Id est <i>Petrus est\n[[106.22]] pulcher quatenus est stans. Petrus scribit pulchre</i>. Id est <i>Petrus est pulcher quatenus est\n[[106.23]] scribens.</i> </p>\n<p> [[107.1]] <b>Pluralis.</b> <i>Homines scribunt</i>, id est <i>Titius est scribens, Cajus est scribens. Titius est\n[[107.2]] homo. Cajus est homo.</i> Vel <i>Homines scribunt</i>, id est <i>unus homo scribit, alius homo\n[[107.3]] scribit.</i> </p>\n<p> [[107.4]] <b>Pronomen</b> est nomen positum in locum alterius nominis, seu designans aliud\n[[107.5]] nomen, non tamen explicando ejus attributum aliquod; sed tantum denominationem\n[[107.6]] extrinsecam ad ipsam orationem relationem. Ut <i>hic</i> id est <i>monstratus, dictus, praesens.\n[[107.7]] Ille</i> et <i>hic</i> differunt ut <i>propius</i> et <i>remotius. Ego</i> id est <i>nunc loquens. Tu</i> id est <i>nunc audiens\n[[107.8]] dictum ut audias.</i> </p>\n<p> [[107.9]] Omnes illationes obliquae explicandae ex Vocum explicationibus. Ex. gr. <i>Petrus est\n[[107.10]] similis Paulo. Ergo Paulus est similis Petro.</i> Videantur talia ex Jungii <i>Logica.</i> Reducitur\n[[107.11]] ad propositiones: <i>Petrus est A nunc</i> et <i>Paulus est A nunc.</i> </p>\n<p> [[107.12]] Explicandae omnes flexiones et particulae; reducendaque omnia ad simplicissimas\n[[107.13]] explicationes, quae semper salvo sensu in locum substitui possunt. </p>\n<p> [[107.14]] <b>Praepositiones</b> jungunt nomina, <b>conjunctiones</b> jungunt integras propositiones.\n [[107.16]] <i>Manus hominis</i>, id est <tab/><i>manus quae est <tab/>pars quatenus homo est <tab/>totum.</i>\n [[107.17]] <i>Manus <tab/>manus <tab/>pars <tab/>totum\n [[107.18]] filius <tab/>filius <tab/>effectus <tab/>causa\n [[107.19]] equus hominis</i> id est <tab/><i>equus <tab/>^&.v9 <Leibniz special character>qui <tab/> <tab/>^&.v- <Leibniz special character>quaeve^&.v. <Leibniz special character> est <tab/>possessio quatenus homo est <tab/>dominus\n [[107.20]] calor <tab/>calor <tab/>accidens <tab/>substantia\n [[107.21]] titulus</i> <tab/>[<i>titulus</i>] <tab/><i>praedicatum <tab/>subjectum</i>\n [[107.22]] <i>Par</i>\n [[107.23]] <i>simile</i> <i>homini</i> id est [<i>bricht ab</i>]\n [[107.24]] <i>datum</i> </p>\n","number":"36₁.","title":"Notae","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

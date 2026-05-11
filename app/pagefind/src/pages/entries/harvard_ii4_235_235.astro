@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_235","series":"Band II 4 (1701 - 1707)","seq":235,"text":"<p> [[710.16]] <b>235. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[710.17]] Padua, 21. Dezember 1707. [221.] </b></p>\n<p> [[711.1]] Padova 21 Xbre 1707.\n [[711.2]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[711.3]] Havendo <Fn><i>Vor dem Brieftext vermerkt Fardella</i>: Il Sig^#'r^#'e Herman umilmente la riverisce.</Fn> fin ora dal mese d'ottobre caduto scritto altre quattro volte a V. S. Ill^#'m^#'a, in una\n[[711.4]] delle quali v'era inclusa una lettera del Sig^#'r^#'e Herman, non hò potuto ancora ricevere il contento\n[[711.5]] di vedere qualche riga di V. S. Ill^#'m^#'a che m'assicurasse del ricapito delle mie, e dell'ottima sua\n[[711.6]] salute. Non posso in verità esprimerle quanto dolore mi cagioni questo suo così lungo silentio,\n[[711.7]] come anche al nostro Sig^#'r^#'e Herman, non sapendo a che cosa pensare, e qual possa esserne il\n[[711.8]] vero motivo. In una delle mie le trasmessi una istruttione del nostro Celebre Sig^#'r^#'e Valsinieri per\n[[711.9]] seminare con felice esito i semi de Celsi mori bianchi, de quali ne transmessi un sacchetto di\n[[711.10]] libre, 3, in circa se non fallo al Sig^#'r^#'e Zanovelli, che mi promesse farlelo avere colla prima\n[[711.11]] occasione. Ora non voglio tralasciare di nuovamente riverirla colla presente e darle parte\n[[711.12]] dell'ingresso solenne già fatto in questa Universita con l'applauso universale dal Dott^#'m^#'o Sig^#'r^#'e\n[[711.13]] Herman. Esso alli 27 del Novembre prossimo caduto recitò la sua Oratione alla presenza di\n[[711.14]] questi Eccell^#'m^#'i Rettori e del fiore di tutti i letterati e Nobili di questa Città; che piacque\n[[711.15]] generalmente a tutti, tanto fù eloquente, dotta ed elegante, in cui veramente mostro il profondo\n[[711.16]] suo giuditio e sapere nelle Discipline Matematiche. Il suo argomento fù <i>de Praestantia et\n[[711.17]] utilitate </i>[<i>Matheseos</i>]<i> ac amplissimis praesertim novae Analyseos usibus</i>. Il che gli diede\n[[711.18]] occasione di formare il dovuto elogio a V. S. Ill^#'m^#'a come al grande e celebre inventore del così\n[[711.19]] fruttuoso e tanto ammirato calcolo differentiale, che io l'hò fatto cavare dall'Oratione medesima,\n[[711.20]] e le ne mando qui inclusa la copia, accio V. S. Ill^#'m^#'a conosca la giustitia che il Sig^#'r^#'e\n[[711.21]] Herman l'hà resa, come anche l'obligata sua gratitudine, pensando esso poi mandarlene la\n[[711.22]] copia intiera di tutta la Prolusione. Incominciò egli poi a spiegare gli <i>Elementi</i> d'Euclide con un\n[[711.23]] suo novo metodo particolare che è così bene riuscito, che incontra la stima ed il gradimento de\n[[711.24]] piu Dotti, e mirabilmente alletta la gioventù che frequenta con molta diligenza la sua scuola, il\n[[711.25]] che non accadde al Sig^#'r^#'e Guglielmini suo Antecessore, benche celebre per le Matematiche. Esso\n[[712.1]] per dirla in poche parole con il suo onestissimo e soavissimo costume, e l'elevato suo talento è\n[[712.2]] amato ed adorato da tutti e vengono fin da Venetia Soggetti cospicui per apprendere da lui il\n[[712.3]] calcolo differentiale, onde si può sperare che possa svegliare nella nostra Italia lo studio della\n[[712.4]] Geometria, e principalmente della nova Analisi con somma gloria di V. S. Ill^#'m^#'a che n'è\n[[712.5]] l'Autore. Ne do parte a V. S. Ill^#'m^#'a acciò abbia motivo di consolarsi nell'avere ricordato un sì\n[[712.6]] erudito e singolare Matematico all'Ecc^#'m^#'o nostro Magistrato. Il che hà parimente d'un eccessivo\n[[712.7]] giubilo riempito il mio cuore in questo felice successo di cose, essendo accaduto tutto con\n[[712.8]] quella maggiore prosperita che si poteva bramare, e che certamente merita il Sig^#'r^#'e Herman che\n[[712.9]] hò l'onore di servire in mia casa, e quanto più lo pratico, tanto sempre più l'amo e stimo per il\n[[712.10]] suo veramente incorrotto costume, e per il suo raro sapere che ora grandemente mi giova per\n[[712.11]] apprendere a mio modo l'uno e l'altro suo calcolo. In gratia mi consoli con quattro sue righe, e\n[[712.12]] si ricordi che con tutto rispetto sono </p>\n<p> [[712.13]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e Fardella </p>\n","number":"235.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 21. Dezember 1707. [221.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

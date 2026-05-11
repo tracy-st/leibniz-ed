@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_75","series":"Band II 1 (1663 - 1685)","seq":75,"text":"<p> [[203.7]] <b>63. HERZOG JOHANN FRIEDRICH VON HANNOVER AN LEIBNIZ</p>\n<p> [[203.8]] Riddagshausen, 6. (16.) Juni 1671. [59.84.]</b></p>\n[[203.17]] Von Gottes gnaden Johann Friedrich Hertzog zue Braunschweig und Lüneburg etc. </p>\n<p> [[203.18]] Unsern gunst und geneigten Willen zuvor, Vester, Hochgelahrter, Lieber Besonder. </p>\n<p> [[203.19]] Es ist Unß deßelben beliebtes Schreiben von 21 Maij nebenst dem Beyschluß zu recht\n[[203.20]] geliefert und deßen allerseits zum öfftern wiederholende verlesung über alle maaße angenehm.\n[[203.21]] Gleich Wir nun darab seinen Unß zuetragenden Wolwillen sattsamlich zu verspüren, Also\n[[203.22]] sagen Wir ihme desfalls geziemenden dank, verlangen sothaner beliebegen correspondence\n[[203.23]] fernerweite continuation und werden nicht ermangelen, bey fürkommender Gelegenheit, solches\n[[203.24]] allemahl dankbahrlich zu erkennen, gestallt Wir demselben mit gunst und geneigtem\n[[203.25]] willen sonders wol beygethan. Gegeben zu Riddagshausen, am 6^#'t^#'eⁿ Junii 1671. </p>\n<p> [[203.26]] Johann Friedrich. </p>\n<p> [[203.27]] Dem Vesten Hochgelahrten, Unserm Lieben Besondern, Gottfried Wilhelm Leibnitzen,\n[[203.28]] der Rechte Doctoren. </p>\n","number":"63.","title":"HERZOG JOHANN FRIEDRICH VON HANNOVER AN LEIBNIZ","date":"Riddagshausen, 6. (16.) Juni 1671. [59.84.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

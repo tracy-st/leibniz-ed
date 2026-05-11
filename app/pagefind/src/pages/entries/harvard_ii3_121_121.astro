@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_121","series":"Band II 3 (1695 - 1700)","seq":121,"text":"<p> [[321.1]] <b>121. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[321.2]] Hannover, 4. (14.) Juni 1697. [117.124.]</b></p>\n\n<p> [[321.11]] In causa haud dubie ipse sum, quod meum in edendis <i>Sinicis</i> consilium non satis percepisti,\n[[321.12]] dum locutus sum paulo obscurius. Ego in praefatione studiose evitavi quae poterant\n[[321.13]] irritare Jesuitas, non quod putem illos nostris in illas regiones accessuris fauturos, cum nec\n[[321.14]] Batavi ipsis euntibus faveant, sed ut ipsorum communicationibus porro utar privatim. Caeterum\n[[321.15]] nostri in eas regiones accessuri ipsorum ope non indigebunt. Nam Monarcha tanti imperii in\n[[321.16]] Jesuitis non nisi scientias Europaeas aestimat, in [quibus] nostri, ut minimum dicam ipsis non\n[[321.17]] concedunt. Quin puto sapientes gentis puriorem religionem vel ipsa natura duce magis probaturos,\n[[321.18]] si vel maxime concertationes evitari non possint. Caeterum ipsis Jesuitis cum Dominicanis\n[[321.19]] et Episcopis a Papa missis, imo Jesuitis ipsis inter se, nempe Lusitanis et Italis cum\n[[321.20]] Gallis certamina fuere, quae prolixe edisserere nolui, ne ipsis aegre facerem. </p>\n<p> [[321.21]] Dissertationes Te subinde editurum gaudeo et nobis gratulor. Pro diss. elegante <i>de Antizelia</i>\n[[321.22]] utili argumento gratias ago. Dn. Weigelium non ita res instituere ut bene procedere\n[[321.23]] possint, doleo. Pene in mentem venit ipsi suadere ut Magnum Moscorum Czarem adeat, de quo\n[[321.24]] nunc peregrinante mira mihi Regiomonte scribuntur, ardenti enim studio fertur ad res suae\n[[321.25]] gentis emendandas. Quid Dn. Weigelius optare magis possit? Quin imo jam nunc decerno, vel\n[[321.26]] si irrideatis litteras ad eum hic occludere. Jenae non est, ubi sit Dn. Bussingius haud dubie\n[[322.1]] novit, cui cum officiosa a me salute has litteras curandas ad ipsum commendari peto. Ajunt\n[[322.2]] Ratisbonam vel Viennam rediisse. Quodsi certam curandi rationem non habetis, fac quaeso ut\n[[322.3]] mature ad me remittantur. </p>\n<p> [[322.4]] Caeterum non curo, si quis pia et recta desideria dicat effectu caritura. Nos nostra agamus,\n[[322.5]] Deus suum aget cum volet. Suadeamus bona, quantum aures hominum ferre possunt; agamus\n[[322.6]] etiam quantum non stat per potentiores. Nam velle ultra ire sine peculiari Dei impulsu auxilioque,\n[[322.7]] est bona inconsulte quaerendo mala pejora reddere, ut solent qui dant turbas emendandi\n[[322.8]] praetextu. Nihil igitur praeter prudentiae leges agamus vel dicamus. Et si spartam nostram qua\n[[322.9]] pote ornaverimus, contenti simus. Quid dicis de indicio autoris libri inscripti: <i>Cautio criminalis</i>,\n[[322.10]] quod tibi feci[?] </p>\n<p> [[322.11]] Hanoverae d. 4. Jun. 1697. </p>\n","number":"121.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"Hannover, 4. (14.) Juni 1697. [117.124.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

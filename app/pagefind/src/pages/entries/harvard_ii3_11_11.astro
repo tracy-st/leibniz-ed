@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_11","series":"Band II 3 (1695 - 1700)","seq":11,"text":"<p> [[28.11]] <b>11. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[28.12]] Hamburg, 3. (13.) April 1695. [13.]</b></p>\n\n[[29.1]] <petit> 1. <i>Accessiones juris naturalis privati et publici, quorum hoc politica doctrina, jus imperiorum, et gentium\n[[29.2]] continentur, nunc primum publicatae, cum indicibus necessariis</i>\n [[29.3]] 2. <i>Consilii de studio philosophiae practicae optime instituendo</i> <i>epitome et praxios rhetoricae lemmatica repraesentatio:\n[[29.4]] destinatae modo editi juris naturalis accessionum appendices geminae, culpa typographi omissae, nunc\n[[29.5]] seorsim editae</i> (Diese 12 Seiten umfassende Schrift hatte der Drucker zunächst vergessen. Sie wurde separat\n[[29.6]] Hamburg 1695 nachgedruckt und teilweise später eingefügt.)\n [[29.7]] 3. <i>Accessiones rhetoricae artis Aristotelicae nunc demum editae una cum promptuario triplici inventionis\n[[29.8]] enthymematicae, affectuosae et moratae</i>\n [[29.9]] 4. <i>Accessiones ethicae sive medicinae moralis, compendio nunc tertium publicatae ex opere systematico majori,\n[[29.10]] cum indicibus necessariis</i>\n [[29.11]] 5. <i>Appendix epistola ad patronos et amicos, quare sibi cum clarissimo Christiano Thomasio (qui libro 2.\n[[29.12]] Jurisprudentiae divinae a p. 372. ad 422. de favorabilibus et odiosis adversus Placcium disputaverat) nihil nunc\n[[29.13]] auctor amplius censeat publice disputandum, indicans</i>. </petit> </p>\n<p> [[29.14]] I. N. J. C. </p>\n<p> [[29.15]] Excellentissimo omnigenae eruditionis soliditate Viro Dⁿ^#'o G. G. Leibnutzio. </p>\n<p> [[29.16]] V. Placcius S. P. D. </p>\n<p> [[29.17]] Diu, fateor tacitus amicitiam nostram continuavi. Non alia de caussa, quam ne intempestive\n[[29.18]] interpellando illam violarem. Nunc ut adjuncta, quae vides, opuscula mea, censurae\n[[29.19]] offeram Tuae intermittere non potui. Quaeso illa digneris quantum occupationes tuae gravissimae\n[[29.20]] concedunt hanc opellam, sin minus statim omnem: at saltem aliquam partem quam\n[[29.21]] volueris. Ut admoneas me de iis, quae tua perspicacitas non poterit non emendanda pluscula\n[[29.22]] depraehendere; quando, et prae me subtilius longe philosophari sueta, fatigato mihi, desertis\n[[29.23]] potius quam ad finem perductis, imo praeruptis superaccedit. Quaeso da hoc, non tam precibus\n[[29.24]] meis, quae tantum non merentur: sed argumenti pretio, et bono publico inde juvando. Certe quo\n[[29.25]] monueris me de pluribus, et gravioribus; eo magis tibi placuisse judicabo scriptionem, quam\n[[29.26]] tanta cura sis dignatus, tot aliis occupatior. Vale. Hamb. 1695. d. 3. Aprilis. </p>\n<p> [[29.27]] P. S. Si forte, ut alias memini factum, detrectante tabellarium fasciculo ut nimis grandi\n[[29.28]] (est autem quinque alphabetorum et tamen adhuc desunt folia 6 vel 7) onerari, hae litterae ad Te\n[[29.29]] veniant sine fasciculo quaeso aliam occasionem transmittendi mihi suppedites quamprimum.\n[[29.30]] Vale iterum. </p>\n","number":"11.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 3. (13.) April 1695. [13.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

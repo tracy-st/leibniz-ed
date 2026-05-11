@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_166","series":"Band II 1 (1663 - 1685)","seq":166,"text":"<p> [[548.8]] <b>150. LEIBNIZ AN HERMANN CONRING</p>\n<p> [[548.9]] Hannover, 19. (29.) Juni 1677. [145.151.]</b></p>\n<p> [[548.16]] Amplissime Domine Hanoverae 19 Jun. 1677. </p>\n<p> [[548.17]] Literas Tuas eo majore gaudii sensu accepi, quo minus sperabam aliquam Tibi restare\n[[548.18]] memoriam mei, quam certe meruisse me, dicere non possum: nam cum temporum locorumque\n[[548.19]] intervalla colere amicitiam illam vetuissent, qua me olim dignari velle visus es, habebam cur\n[[548.20]] vererer ne hominis tui quidem studiosissimi, sed reapse inutilis parum recordareris. Sed hoc\n[[548.21]] metu me literae tuae absolverunt, quas humanitati potius tuae, quam ulli merito meo tribuo.\n[[548.22]] Redditae sunt mihi tardius ob absentiam: postea expectandus fuit reditus Ser^#'m^#'i Principis ex\n[[548.23]] Holsatia ut tibi de nonnullis responderem certius. Gratias ago maximas quod misisti literas\n[[548.24]] Cl^#'m^#'i Justelli. Cui si respondere voles, poteris id tuto facere per me. Ab eo tempore alias accepi\n[[549.1]] ab eodem Justello, quas Glazius quidam Secretarii Consistorialis filius nuper redux attulit. Sed\n[[549.2]] nihil est in illis quod in prioribus non contineretur: nam dubitasse de earum redditione visus est. </p>\n<p> [[549.3]] Diu est quod laborat in Diplomatum vetustorum Critica, quae mihi hodie longe utilior\n[[549.4]] videtur, quam vetus illa quam autores nostri in autores tantum graecos et latinos, quos ipsi\n[[549.5]] vocant classicos, exercebant. Multas in eam rem collegit regulas, quibus vera a supposititiis\n[[549.6]] discerni possint, quas lectissimis exemplis illustravit: non dubito quin hoc suum institutum tibi\n[[549.7]] quoque exposuerit, a quo et juvari potest. Sciunt enim omnes quantum tum in aliis multis rebus,\n[[549.8]] tum maxime in hoc genere possis. </p>\n<p> [[549.9]] Audio resumtum a Te opus <i>de finibus Imperii</i>, quod haud dubie te dignum pariter et\n[[549.10]] praesenti rerum statui congruum est. Si qua alia aut meditaris aut affecta habes, eorum indicem\n[[549.11]] aliquem ex Te discere opto, ut saltem interim nos spe pascamus. Ego certe non dubito quin\n[[549.12]] multa habeas praeclara cogitata, quae nondum comparent in scriptis tuis. Neque de rebus\n[[549.13]] tantum civilibus aut Germanicis loquor, scimus enim ad omnia pene studiorum genera extendi\n[[549.14]] ingenii tui vastitatem, et in religionis quoque negotio et in ipsa scientia medica sive naturali\n[[549.15]] multa minime vulgaria a te dici posse. Nescio an videris libellum quem P. Honoratus Fabry e\n[[549.16]] Societate Jesu, Gallus natione, sed Romae a multis annis agens libro tuo, quem <i>Concussionem\n[[549.17]] Fundamentorum fidei pontificiae</i> appellasti, opposuit. Autor est sine controversia eruditus, et in\n[[549.18]] variis scientiis, etiam mathematicis ac physicis egregie versatus. </p>\n<p> [[549.19]] Cum tot annorum decursu partim experientia quam non negligis, partim meditatione, qua\n[[549.20]] inprimis vales, multa de re medica praeclara observare potueris, quae certe ad hominum\n[[549.21]] multorum salutem conferre possunt, optandum est profecto ut des operam ne quicquam eorum\n[[549.22]] pereat. </p>\n<p> [[549.23]] Pro libello <i>de Pace protestantibus danda</i> gratias ago nomine Serenissimi Principis: eidem\n[[549.24]] non ingratum erit, quicquid ei mittes, etiamsi contra Capucinos dirigatur, tametsi intellexisse se\n[[549.25]] dicat, scribi a te quaedam acrius, quam nonnulli desiderant, aut necessitas postulet. </p>\n<p> [[549.26]] Si quid est in his locis, quo tibi operam meam probare possim, id mihi ut imperes rogo.\n[[549.27]] Vale interea faveque </p>\n<p> [[550.1]] Vir Amplissime Tibi deditissimo Gottfredo Guilielmo Leibnitio. </p>\n","number":"150.","title":"LEIBNIZ AN HERMANN CONRING","date":"Hannover, 19. (29.) Juni 1677. [145.151.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_185","series":"Band II 2 (1686 - 1694)","seq":185,"text":"<p> [[614.1]] <b>187. LEIBNIZ AN PAUL PELLISSON-FONTANIER</p>\n<p> [[614.2]] [Hannover, 2. Hälfte November 1692.] [180.191.]</b></p>\n<p> [[614.14]] Monsieur </p>\n<p> [[614.15]] Puisque vous témoignés que les objections qu'on vous a envoyées contre nostre sentiment\n[[614.16]] viennent de bon lieu, je tacheray d'y repondre. Il est vray qu'il y a des expressions, qui m'ont\n[[614.17]] fait douter si cela pourroit servir. La question est en quoy consiste l'essence du corps. L'auteur\n[[614.18]] de l'objection dit que par le mot d'<i>essence</i> il entend <i>le premier de tous les attributs et dont tous\n[[614.19]] les autres attributs dependent.</i> </p>\n<p> [[614.20]] <petit><i>Der folgende kleingedruckte Text wurde von Leibniz gestrichen und durch den anschließenden ersetzt</i>:\n [[614.21]] Il luy est permis de l'entendre ainsi, pour moy ce n'est pas ainsi que je l'entendois; et les autres peut estre non\n[[614.22]] plus. Tout predicat necessaire est de l'essence du sujet, ainsi on peut dire que l'egalité des angles à deux droits est\n[[614.23]] essentielle au triangle; mais tout predicat reciproque epuise l'essence du sujet; de sorte que tous les predicats\n[[614.24]] essentiels en peuvent estre tirés. Ainsi pour sçavoir <b>en quoy consiste l'essence d'un sujet</b>, il n'est pas\n[[614.25]] necessaire de sçavoir le premier de tous ses attributs (que nous ne connoissons que rarement), mais il suffit d'en\n[[614.26]] sçavoir un qui luy soit reciproque, que les logiciens appellent <b><i>proprium in quarto modo</b>. </petit>\n [[615.1]] Je ne luy veux point contester cette definition du mot, mais je diray seulement, que pour sçavoir\n[[615.2]] en quoy consiste l'essence d'une chose, il n'est pas tousjours necessaire de sçavoir distinctement\n[[615.3]] ce premier attribut; et le plus souvent on se contente de connoistre des proprietés\n[[615.4]] reciproques du sujet, les quelles en contiennent et enveloppent tousjours toute l'essence, en\n[[615.5]] sorte que toutes les affections essentielles en peuvent estre tirées. D'où vient aussi, qu'on peut\n[[615.6]] donner plusieurs bonnes definitions d'un même sujet. Qui est ce qui ne pense sçavoir en quoy\n[[615.7]] consiste l'essence de la ligne droite? Cependant je ne connois encor personne qui en ait donné\n[[615.8]] au public le premier attribut. Et celuy qui me paroist le plus approchant est, que c'est une ligne\n[[615.9]] dont chaque partie est semblable au tout. </p>\n<p> [[615.10]] Pour parler de l'essence du corps, on peut distinguer entre predicats essentiels, reciproques\n[[615.11]] et primitifs. Tout predicat necessaire est de l'essence d'une chose ou essentiel, tout\n[[615.12]] predicat reciproque epuise toute l'essence, et lors qu'on le connoist, on peut dire qu'on connoist\n[[615.13]] en quoy consiste l'essence de la chose; mais lors qu'on en connoist les attributs primitifs on se\n[[615.14]] peut vanter de la connoistre parfaitement. Or il s'en faut tant que l'essence du corps consiste\n[[615.15]] dans l'étendue que ceux qui avouent qu'un corps peut estre en plusieurs [lieux], sont obligés\n[[615.16]] d'avouer que l'etendue n'est pas mêmes de l'essence du corps. </p>\n","number":"187.","title":"LEIBNIZ AN PAUL PELLISSON-FONTANIER","date":"[Hannover, 2. Hälfte November 1692.] [180.191.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

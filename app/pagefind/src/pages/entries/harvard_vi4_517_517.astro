@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_517","series":"Band VI 4 (1677 - 1690)","seq":517,"text":"[[2299.4]] <b>407.  De molienda apologia catholicae veritatis [1685 (?)]</b>\n [[2299.5]] <tab/>[1685 (?)] </p>\n<p> [[2299.13]] Quicunque in religionis negotio non ad veritatem sed victoriam contendunt, conviciisque\n[[2299.14]] et malis artibus certant, mihi veterum gladiatoribus similes videntur, ut enim\n[[2299.15]] inter illos etiam liberi homines vulgi studio et insanientis theatri plausu ducebantur, ut\n[[2299.16]] vitam exponerent, et crudelissimis vulneribus conficerentur. Ita saepe videmus ac dolemus\n[[2299.17]] viros doctrina et eloquentia egregios, sed suae alienaeque salutis prodigos ita agere,\n[[2299.18]] ut applausum magis quam veritatem quaesivisse videantur magno cum detrimento ani\n[[2300.1]] marum. Scio id saepe fieri animo non malo, et plerisque affectum tuendi praejudicii pro\n[[2300.2]] studio veritatis imponere. Vereor tamen ut aliquando excusationem recepturus sit supremus\n[[2300.3]] judex cum ex praepostero illo zelo atque inanis gloriae studio tot animarum Christi\n[[2300.4]] sanguine redemtarum pernicies, tantaque orbis Christiani mala consequantur. </p>\n<p> [[2300.5]] Cum igitur christiana caritas has a me pagellas expressisset, ut scrupulos quosdam\n[[2300.6]] tollerem, qui multos bonos ac prudentes, addo et ingenio ac doctrina praestantes, viros\n[[2300.7]] adhuc a Catholica unitate distinent, primum volui nomen meum latere, ne qua gloriolae\n[[2300.8]] contentiosa cupiditas etiam invito interveniret, deinde ab omnibus criminationibus aut\n[[2300.9]] recriminationibus abstinui, quibus etiam cum verae sunt, tamen nocetur ve<angle bracket>ritati</angle bracket>, ut enim\n[[2300.10]] liquores agitati claritatem, ita mens ira atque odio turbida lucem veritatis non admittit.\n[[2300.11]] Nec rationes attuli, quae mihi parum solidae, aut commodis exceptionibus elidendae\n[[2300.12]] videntur, etiamsi speciem magnam habeant, plurimumque ad persuadendum possint;\n[[2300.13]] quoniam hanc opellam non vulgi, quod specie capitur, sed eorum causa suscepi, qui\n[[2300.14]] altiore studio rerum interiora indagant, quibus eo magis satisfacere studendum, quanto\n[[2300.15]] magis operae pretium est, etiam ad autoritatem propagationemque veritatis, ut insignia\n[[2300.16]] ingenia Ecclesiae Christi lucreamur. </p>\n<p> [[2300.17]] Atque hoc consilium est opellae hujus, causa autem haec fuit. Ex quo sincera ac\n[[2300.18]] lucida fidei catholicae expositione ab ipso sapientissimo ac sanctissimo Pontifice approbata,\n[[2300.19]] Protestantes liquidius agnoscere potuerunt, quam innocua, ac tuta sint Dogmata,\n[[2300.20]] quae Ecclesia pro suis agnoscit, multi sane prudentes ac moderati fatentur, non esse cur\n[[2300.21]] damnentur qui sic doceant, aut cur ab eorum communione secedatur; negabant tamen\n[[2300.22]] sese Ecclesiae posse accedere, quae exigat, ut omnia ista non tantum non damnentur, sed\n[[2301.1]] et vera credantur, sibi autem tum ex sanae rationis demonstrationibus certissimis, tum ex\n[[2301.2]] scriptura sacra et primitivae Ecclesiae autoritate planissime quorundam falsitatem esse\n[[2301.3]] persuasam, non pauci etiam liberis ingeniis servitutem imponi queruntur, ut praeter animi\n[[2301.4]] sensa, historiarum veritatem et <angle bracket>philosophiae</angle bracket> praeclara inventa cogantur. Ut alios scrupulos\n[[2301.5]] nunc taceam, de quibus in progressu dicetur. Quae cum a nonnullis doctis viris\n[[2301.6]] falso quidem sincere tamen dici multumque in animis quorundam posse, compertum\n[[2301.7]] haberem, Apologiam aliquam Catholicae veritatis moliendam putavi, qua ostenderem,\n[[2301.8]] quantum paucis licet, sententias Ecclesiae non tantum tutas, sed etiam mire rationabiles\n[[2301.9]] esse, neque aut fidei historiarum, aut verae philosophiae, multo minus scripturae sacrae,\n[[2301.10]] ac traditioni veterum adversari. Nunquam autem Ecclesiae propositum esse, ut veritatem\n[[2301.11]] ullam autoritate sua opprimat; itaque si quid in his quae salva salute in alterutram partem\n[[2301.12]] statui possunt, ex documentis antiquitatum, aut rationum demonstrationibus compertum\n[[2301.13]] alicui videatur, metuere non debere ut secus aliquid praeter animi sententiam affirmare,\n[[2301.14]] cogatur. Denique eam esse caritatem in proposito Ecclesiae, eam in dogmatis ejus\n[[2301.15]] salutaris fidei veritatem, ut nulla ratio a communione ejus, et professione fidei catholicae\n[[2301.16]] excusare posse videatur. </p>\n","number":"407.","title":"De molienda apologia catholicae veritatis","date":"[1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

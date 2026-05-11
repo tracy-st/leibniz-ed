@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_224","series":"Band II 3 (1695 - 1700)","seq":224,"text":"<p> [[602.7]] <b>224. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[602.8]] Is sur Tille, 24. September 1699. [220.225.]</b></p>\n\n<p> [[602.15]] Is sur Tille le 24. 7^#'b^#'r^#'e <b>1699</b> </p>\n<p> [[602.16]] Vous reconnoistrés monsieur par l'incluse de mons^#'r le president Boisot, qu'il n'est point\n[[602.17]] entré dans ce que je luy ay écrit sur le dernier memoire perdû, ou qu'il n'i a point voulû entrer,\n[[602.18]] ce n'est pas faulte de luy avoir bien faict entendre; quel Remede à cela monsieur, sinon que\n[[602.19]] vous preniés la peine de le luy faire ancore entendre vous même. Il me tarde de scavoir des\n[[602.20]] nouvelles certaines de la santé de nostre cher mons^#'r Morel; j'ay mandé ce que vous nous en\n[[603.1]] avés dit à mons^#'r de Spanheim qui nous va bientost donner une scavante dissertation sur\n[[603.2]] quelques regles de la tragedie ancienne et sur les piêces dramatiques qu'il avoit commencée à\n[[603.3]] Paris à la priere de deffunct mons^#'r Menage, et qu'un de ses amis luy a faict tirer de son cabinet;\n[[603.4]] il y parlera par occasion de plusieurs choses et particulierement de l'année et des mois attiques\n[[603.5]] contre Gaza, Scaliger, le p. Petau et Samuel Petit. Il me mande que mons^#'r Dodwell a faict\n[[603.6]] imprimer à Oxford en 2 vol. 8^#'o les petits Geographes anciens avec des dissertations et des\n[[603.7]] remarques surtout sur le Scylax qui ne sont pas du goust de m^#'r Gronovius qui a faict imprimer\n[[603.8]] le dernier cet ouvrage, et qu'on mande de Hollande faire imprimer un livre contre m^#'r Dodwel,\n[[603.9]] rempli d'Invectives grossieres à son ordinaire. L'on me mande d'aillieurs que mons^#'r Dodwel\n[[603.10]] nous va donner les Antiquités de la Perse; vous ne me mandés point avoir recû <i>monumenta\n[[603.11]] coptica</i> du p. Bonjour que je vous ay envoyé il y a long tems, aussi bien qu'à monseig^#'r\n[[603.12]] d'Avranches dont j'attens les sentimens sur les ouvrages de ce pere et sur la lettre de mons^#'r\n[[603.13]] l'abbé de la Charmoye touchant l'origine des Nations et la Langue Celtique. Un de mes amis à\n[[604.1]] qui j'ay parlé du passage de Servet sur la circulation du sang dont vous m'avés ecrit; m'a\n[[604.2]] repondû en cette maniere: <i>Le passage de Servet touchant la Circulation du sang seroit bien\n[[604.3]] curieux à voir, envoyés le moy si vous l'avés: il fault qu'il soit tiré de quelqu'un de ses livres de\n[[604.4]] medecine, où il n'a mis que son nom de batême, et celluy de son pays Michael Villanovanus; la\n[[604.5]] question est de scavoir si on ne l'aura pas confondû avec le fameux Arnaud de Villeneuve</i> etc.\n[[604.6]] On travaille à la continuation de l'histoire Bizantine; c'est mons^#'r Boyvin nostre amy qui est à la\n[[604.7]] Bibliotheque du Roy, et qui est fort habile dans la langue Grecque. Je ne scay si mons^#'r Pinsson\n[[604.8]] vous aura envoyé l'histoire de <b>Ptolomée Auletes</b> de mons^#'r Baudelôt sur une Amethyst de\n[[604.9]] S.A.R. madame; les conjectures frequentes et agreables de cet Antiquaire vous auront diverti\n[[604.10]] autant que la varieté des flutes dont il parle avec profusion; il n'i en a point qui luy echappe\n[[604.11]] jusqu'aux Gascognes; c'est ainsy qu'il luy plaist d'expliquer ce mot <i>Vascas</i> qui est dans Solin.\n[[604.12]] Il a si peur de paroistre <greek>ămoýsow</greek>, qu'il ne craint pas de paroistre important et ennujeux, et\n[[604.13]] d'enfler son chalumeau quoy qu'<i>ex alieno</i> pour verifier le proverbe <i>Tibicinis vitam vivere</i>. </p>\n<p> [[604.14]] Le neveû du p. Pagi m'ecrit d'Aix en Provence qu'il travaille fort à mettre au nêt les\n[[604.15]] ouvrages de son oncle; je luy ay mandé de faire des reproches à mons^#'r Thomassin sur la\n[[604.16]] longueur à donner les lettres des scavants à mons^#'r de Peiresk qu'il promet il y a si longtems. </p>\n<p> [[604.17]] Nous aurons à la fin la vie de mons^#'r Saumaise par mons^#'r de La Mare; on m'ecrit de Dijon\n[[604.18]] qu'on la doit envoyer incessamment à mons^#'r de Spanheim pour la faire tenir en Hollande à m^#'r\n[[604.19]] Graevius qui la fera imprimer. Je suis mons^#'r tout à vous </p>\n<p> [[604.20]] <b>Nicaise</b>\n[[604.21]] <yi>Pour Monsieur Leibniz. <b>Hanovre</b> </p>\n","number":"224.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Is sur Tille, 24. September 1699. [220.225.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

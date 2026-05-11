@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_3","series":"Band II 2 (1686 - 1694)","seq":3,"text":"<p> [[8.5]] <b>3. ANTOINE ARNAULD AN LANDGRAF ERNST VON HESSEN-RHEINFELS</p>\n<p> [[8.6]] 13. März 1686. [2.4.]</b></p>\n<p> [[8.33]] Extrait d'une lettre de M^#'r. A. A. du 13. Mars 1686. </p>\n<p> [[8.34]] J'ay reçeu, Monseigneur, ce que V.A. m'a envoyée des pensées Metaphisiques de M^#'r.\n[[8.35]] Leibnits comme un temoignage de son affection et de son estime dont je luy suis bien obligé.\n[[9.1]] Mais je me suis trouvé si occupé depuis ce temps là, que je n'ay pû lire son écrit que depuis\n[[9.2]] trois jours. Et je suis presentement si enrhumé, que tout ce que je puis faire, est de dire en deux\n[[9.3]] mots à V.A., que je trouve dans ces pensées tant de choses qui m'effrayent, et que presque tous\n[[9.4]] les hommes, si je ne me trompe, trouveront si choquantes, que je ne vois pas de quelle utilité\n[[9.5]] pourroit estre un escrit qui apparemment sera rejetté de tout le monde. Je n'en donneray par\n[[9.6]] exemple que ce qu'il dit en l'art. 13. <i>Que la notion individuelle de chaque personne enferme\n[[9.7]] une fois pour toutes ce qui luy arrivera à jamais</i> etc. Si cela est, Dieu a [esté] libre de créer [ou\n[[9.8]] de ne pas créer Adam, mais supposant, qu'il l'ait voulu créer,] tout ce qui est depuis arrivé au\n[[9.9]] genre humain, et qui luy arrivera à jamais, a dû et doit arriver par une necessité plus que fatale.\n[[9.10]] Car la Notion individuelle d'Adam a enfermé qu'il auroit tant d'enfans, et la notion individuelle\n[[9.11]] de chacun de ces enfans, tout ce qu'ils feroient et tous les enfans qu'ils auroient: Et ainsi de\n[[9.12]] suite. Il n'y a donc pas plus de liberté en Dieu à l'égard de tout cela, supposé qu'il ait voulu\n[[9.13]] créer Adam, que de pretendre qu'il a esté libre à Dieu en supposant qu'il m'a voulu créer, de ne\n[[9.14]] point créer de nature capable de penser. Je ne suis point en estat d'estendre cela davantage;\n[[9.15]] mais M^#'r. Leibnits m'entendra bien, et peutestre qu'il ne trouve pas d'inconvenient à la consequence\n[[9.16]] que je tire. Mais s'il n'en trouve pas, il a sujet de craindre qu'il ne soit seul de son\n[[9.17]] sentiment. Et si je me trompois en cela, je le plaindrois encore davantage. Mais je ne puis\n[[9.18]] m'empescher de témoigner à V.A. ma douleur, de ce qu'il semble que c'est l'attache qu'il a, à\n[[9.19]] ces opinions là, qu'il a bien crû qu'on auroit peine à souffrir dans l'Eglise catholique, qui\n[[9.20]] l'empêche d'y entrer, quoyque si je m'en souviens bien, V.A. l'eust obligé de reconnoistre,\n[[9.21]] qu'on ne peut douter raisonnablement que ce ne soit la veritable Eglise. <Fn><i>Am Rand schreibt Leibniz</i>: J'ay jamais approuvé ce sentiment.</Fn> Ne vaudroit il pas\n[[9.22]] mieux qu'il laissast là ces speculations metaphisiques qui ne peuvent estre d'aucune utilité ny à\n[[9.23]] luy ny aux autres, pour s'appliquer serieusement à la plus grande affaire qu'il puisse jamais\n[[9.24]] avoir, qui est d'asseurer son salut en rentrant dans l'Eglise dont les nouvelles sectes n'ont pu\n[[9.25]] sortir qu'en se rendant Schismatiques. Je lûs hier par rencontre une lettre de S. Augustin où il\n[[9.26]] resout diverses questions qu'avoit proposé un Payen qui temoignoit se vouloir faire Chrestien,\n[[9.27]] mais qui differoit tousjours de le faire. Et il dit à la fin, ce qu'on pourroit appliquer à notre amy,\n[[9.28]] <i>Sunt innumerabiles quaestiones, quae non sunt finiendae ante fidem, ne finiatur vita sine fide</i>. </p>\n","number":"3.","title":"ANTOINE ARNAULD AN LANDGRAF ERNST VON HESSEN-RHEINFELS","date":"13. März 1686. [2.4.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

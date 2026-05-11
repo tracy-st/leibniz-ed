@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_47","series":"Band VI 4 (1677 - 1690)","seq":47,"text":"[[119.11]] <b>39.  De characteristica logica [November 1678 bis April 1681 (?)]</b>\n [[119.12]] <tab/>[November 1678 bis April 1681 (?)] </p>\n<p> [[120.1]] <p>Propositio <i>a est b</i>. Subjectum <i>a</i>. Praedicatum <i>b</i>. Terminus <i>a</i> vel <i>b</i>. </p>\n<p> [[120.2]] Propositio Vera: <tab/><i>a est a</i> vel <i>de est de</i> </p>\n<p> [[120.3]] item: <tab/><i>ac est a</i> vel <i>def est de</i> vel <i>de,f est d,fe</i> </p>\n<p> [[120.4]] item: <tab/><i>b est a</i> posito <i>b</i> est <i>ac</i> vel <i>b est a</i> posito <i>b</i> esse <i>def</i> et <i>a</i> esse <i>de</i>. </p>\n<p> [[120.5]] <b>Scholium</b>. Nota: propositio <i>a est a</i> continetur in propositione <i>ac est a</i>, posito <i>c</i>\n[[120.6]] haberi pro non adjecto, ut in algebra cum litera aliqua multiplicans significat unitatem. </p>\n<p> [[120.7]] Hypothesis est propositio pro arbitrio assumta, ut <i>b est ac</i> vel <i>de est ac</i>. Quando\n[[120.8]] scilicet praefamur, nos eam non velle probare, sed tantum supponere, et quid ex ea posita\n[[120.9]] sequatur ostendere. Ita enim theoremata sunt conclusiones ex ista hypothesi factae. </p>\n<p> [[120.10]] Propositio reciproca ut: <i>b est a</i>, si etiam <i>a est b</i>. </p>\n<p> [[120.11]] Definitio est hypothesis reciproca, in qua definitum est terminus simplicior, ut\n[[120.12]] definitio est: <i>a est idem quod de</i> vel <i>de est idem quod ghl</i>. Quum dico <i>esse idem</i> intelligo\n[[120.13]] <i>esse reciproca</i> seu unum posse substitui in alterius locum. Nota pro voce <i>est</i> substitui\n[[120.14]] potest vox <i>continet</i>, ut <i>a est a</i> vel <i>ac est a</i>. </p>\n<p> [[120.15]] Ad modum Algebrae res rediret ad divisibilitatem, ut <i>b est a</i>, id est <zl><i>b</i> <ne><i>a</i> <be> est integer, seu\n[[120.16]] <i>b</i> est divisibilis per <i>a</i> seu <i>b</i> est a^#'r^#'i^#'u^#'s, ut si <i>b</i> sit 6 et <i>a</i> sit 3, nam <i>ac est a</i> seu <i>b est a</i> seu 3,2\n[[120.17]] est 3ⁿ^#'a^#'r^#'i^#'u^#'s seu numerus divisibilis per 3. </p>\n<p> [[120.18]] Ut characteristica Logica probe constituatur, ita concipi debet, ut ex calculo etiam\n[[120.19]] ostendi possint subsumtiones, conversionesque, item modi et figurae. Consequentiae\n[[120.20]] quae nullis syllogismis aliisque logicis artibus probari possunt, quas Jungius notavit, eae\n[[120.21]] referendae ad characteristicam Grammaticam. </p>\n<p> [[120.22]] Videtur negatio exprimi posse per [<i>bricht ab</i>] </p>\n","number":"39.","title":"De characteristica logica","date":"[November 1678 bis April 1681 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

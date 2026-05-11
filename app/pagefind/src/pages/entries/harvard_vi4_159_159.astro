@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_159","series":"Band VI 4 (1677 - 1690)","seq":159,"text":"[[547.1]] <b>130₂.  De tractatione rei DE TRACTATIONE REI </p>\n<p> [[547.5]] Absoluta de re tractatio constat ordinata inventione Veritatum seu propositionum\n[[547.6]] quas ipsa ingreditur. Ingreditur autem veritates vel affirmativas vel Negativas, et vel\n[[547.7]] absolutas vel Hypotheticas et absolutas vel puras in quibus praedicatum et subjectum et\n[[547.8]] copula, quantitas et qualitas distinguuntur, vel affectas, in quibus ista sunt involuta.\n[[547.9]] Utrasque vel universales vel particulares; et rursus vel necessaria vel contingens. Similiter\n[[547.10]] et Hypotheticae distingui possunt. </p>\n<p> [[547.11]] Rursus Res de qua agitur ingreditur propositionem vel antecedens vel consequens,\n[[547.12]] vel subjectum vel praedicatum. Et terminum vel ingreditur constituendo totum, vel\n[[547.13]] constituendo partem, et constituendo partem vel in recto, vel in obliquo, et rursus in\n[[547.14]] obliqui recto vel obliquo, et diversi considerandi sunt modi obliquitatis. </p>\n<p> [[547.15]] Ordinata inventio oritur a simplicissimis propositionibus quae de re possunt haberi;\n[[547.16]] et inde per consequentiam deducit alias. Simplicissimae Propositiones de re sunt quae\n[[547.17]] continent rei examen seu notam, quae sufficiunt ad rem ab alia quavis discernendam id\n[[547.18]] est definitionem Nominalem, quod si res eadem plura habeat examina seu plures definitiones\n[[547.19]] nominales, quas tamen in eodem subjecto coincidere experti sumus quemadmodum\n[[547.20]] constat de auro singulae sunt exhibendae. </p>\n<p> [[547.21]] Post notas subjiciatur rei Historia, seu propositiones quae de ea per experientiam\n[[547.22]] sunt repertae, eaeque sunt ordine digerendae. Propositiones experimentales quas res\n[[547.23]] ingreditur v.g. aurum duorum sunt generum, vel enim ut earum veritatem experiamur\n[[548.1]] opus est assumere aurum, vel non opus est aurum assumere, sed alia ex quibus postea\n[[548.2]] prodit aurum. Si opus est assumere aurum, tunc ipsum combinamus vel cum nostris\n[[548.3]] sensibus tantum, vel etiam cum aliis rebus. Si cum nostris sensibus tunc animadvertimus\n[[548.4]] de re, quae pluribus sensibus deprehenduntur vel quae uni propria sunt; pluribus sensibus,\n[[548.5]] sed imprimis tactui et visui communia sunt rei magnitudo, figura, pondus, locus, tempus.\n[[548.6]] Tactui propriae qualitates sunt superficialitas, calor, frigus, nam consistentiam excludo,\n[[548.7]] quae requirit ut alia res sensibilis in rem agat. Visui proprii colores. Auditui soni,\n[[548.8]] praesertim si res spontaneos habet; olfactui odor, gustui sapor. <Fn>Comparationes. Mutationes spontaneae in singulis.</Fn> </p>\n<p> [[548.9]] Sequitur Rei conjunctio cum aliis rebus, et quidem primum cum his quae agunt\n[[548.10]] manifestis qualitatibus, nempe magnitudine figura et motu, quo pertinet corporis consistentia,\n[[548.11]] huc malleabilitas, etc. Deinde cum rebus quae occulta vi agunt maxime simplicibus\n[[548.12]] et vulgaribus, nempe igne aëre aqua et terra; suique ipsius partibus, aut diversis\n[[548.13]] praeparatis, videndum quid in corpore faciat privatio aëris. Deinde cum aliis quibusdam\n[[548.14]] corporibus quae in pleraque alia solent operari, tum sine igne et aqua, tum his additis, ubi\n[[548.15]] menstrua, caementa, salia, fluores seu fluxionis auxilia; et si duo corpora in igne aut aqua\n[[548.16]] simul fusa, reactiones et praecipitationes, et quae his producuntur composita, decomposita. </p>\n<p> [[548.18]] Quod de re quadam faciendum diximus idem dicendum est de omnibus ejus partibus,\n[[548.19]] item de his quae ex re sponte nascuntur; deinde de his quae inde nascuntur aliis\n[[548.20]] additis. Observandae quoque mutationes rei circa omnes hasce qualitates quae in ea\n[[548.21]] sponte contingunt. Denique quoad unasquasque qualitates, res cum aliis rebus similes aut\n[[548.22]] dissimiles qualitates habentibus potest comparari. </p>\n<p> [[549.1]] Sed aliter longe procedendum erit, si velimus uti historia rei ad investigandam ejus\n[[549.2]] intimam naturam, ita enim nonnulla experimenta seligemus quae maxime erunt apta ad\n[[549.3]] partium invisibilium deprehendendam constructionem; eaque deprehensa inde caeterorum\n[[549.4]] experimentorum eo ordine rationem reddemus, quo commodissime ex inventis\n[[549.5]] partibus rei demonstrabuntur. </p>\n","number":"130₂.","title":"De tractatione rei","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

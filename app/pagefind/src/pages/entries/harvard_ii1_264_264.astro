@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_264","series":"Band II 1 (1663 - 1685)","seq":264,"text":"<p> [[814.3]] <b>230. LEIBNIZ AN CHRISTIAN PHILIPP</p>\n<p> [[814.4]] Hannover, 11. (21.) März 1681. [226.]</b></p>\n<p> [[814.17]] à Hanover ce 11 de Mars 1681. </p>\n<p> [[814.18]] [ ... ] Je n'ay pas vû la traduction de la <i>Pseudodoxia Epidemica</i> de Brown, faite par\n[[814.19]] Rautner; et je vous suis obligé de l'indice que vous me faites de l'insertion de mon écrit. Il s'en\n[[814.20]] faut peu que je ne desavoüe cet écrit que j'avois intitulé <i>Hypothese physique</i>, et qui je ne sçay\n[[814.21]] comment, a esté fort bien receu par tout; quoyque je m'imagine que je dirois apresent bien\n[[814.22]] d'autres choses, si j'estois en humeur d'écrire. </p>\n<p> [[814.23]] Pour ce qui est de mon sentiment touchant les ouvrages de Monsieur Stenon, et de Mons.\n[[814.24]] Weigelius; il faut avouer que tout ce que Mons. Stenon a donné en physique est excellent; mais\n[[814.25]] ce qui merite le plus d'estre estimé, c'est le traité qu'il a fait <i>De solido intra solidum</i>: je l'ay\n[[814.26]] souvent exhorté à le pousser plus loin, et à en tirer des consequences pour trouver le commencement\n[[814.27]] du genre humain, l'inondation generale, et quelques autres belles verités, qui\n[[814.28]] confirment ce qui nous en est dit par l'écriture sainte. </p>\n<p> [[815.1]] Mons. Weigelius a beaucoup d'esprit sans doute; mais souvent il est peu intelligible, et il\n[[815.2]] semble qu'il n'a pas tousjours des pensées bien nettes. Je voudrois qu'il s'appliquât plus tost à\n[[815.3]] nous donner quantité de belles observations, qu'il a pû faire en practiquant les mecaniques, que\n[[815.4]] de s'amuser à des raisonnemens generaux, où il me semble qu'il se perd quelques fois. Non\n[[815.5]] obstant tout cela je ne laisse pas de l'estimer beaucoup; et de reconnoistre qu'il se trouve\n[[815.6]] beaucoup de bonnes pensées dans tous ses écrits. [ ... ] </p>\n","number":"230.","title":"LEIBNIZ AN CHRISTIAN PHILIPP","date":"Hannover, 11. (21.) März 1681. [226.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

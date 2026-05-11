@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_320","series":"Band VI 4 (1677 - 1690)","seq":320,"text":"[[1388.9]] <b>264.  Deus nihil vult sine ratione [1678 bis 1681 (?)]</b>\n [[1388.10]] <tab/>[1678 bis 1681 (?)]\n[[1388.15]] <tit2><b>Deus nihil vult sine ratione</b></tit2> </p>\n<p> [[1388.16]] Probatur generaliter ex eo, quod nihil fit sine ratione. Nam nihil existit nisi omnia\n[[1388.17]] existant ad naturam ejus requisita. Omnium autem requisitorum existentiae simul sumtae\n[[1388.18]] sunt ratio rei. Ubi illud obiter notandum est si qua res non nisi unicum habeat requisitum\n[[1388.19]] seu naturae sit plane simplicis, eam rem si quidem existit, per se ipsam existere, id est\n[[1389.1]] esse necessariam, sive essentiam ejus involvere existentiam: sive rem ejusmodi habere\n[[1389.2]] rationem existendi in se ipsa. Nam sit res <i>A</i> cujus omnia requisita sint <i>b</i> et <i>c</i>, patet\n[[1389.3]] rationem existentiae <i>A</i> esse existentiam <i>b</i> + existentiam <i>c.</i> Sed si res <i>A</i> habeat unicum\n[[1389.4]] tantum requisitum <i>b</i>, patet <i>A</i> aequivalere ipsi <i>b</i>, quia in <i>A</i> nihil concipi potest praeter <i>b</i>,\n[[1389.5]] adeoque rationem existentiae ipsius <i>A</i> esse existentiam ipsius <i>b</i>, id est ipsius <i>A</i>; adeoque <i>A</i>\n[[1389.6]] sibi ipsi rationem esse existendi, sive necessario existere. </p>\n<p> [[1389.7]] Porro Dei voluntas non est necessaria, sed libera, id est pendet a consideratione finis\n[[1389.8]] sive boni. Et proinde voluntas habet requisita tum in Deo tum in idea objecti; in Deo\n[[1389.9]] omniscientiam, in idea objecti bonitatem seu aptitudinem ad fines a Deo propositos.\n[[1389.10]] Itaque dicere voluntatem aliquam sive in Deo, sive in aliquo alio, esse sine ratione, idem\n[[1389.11]] est ac dicere voluntatem in genere esse Ens per se, seu Ens carens requisitis. Sive Ens\n[[1389.12]] cujus conceptus sit irresolubilis. Cum tamen manifestum sit conceptum voluntatis esse\n[[1389.13]] resolubilem in alios conceptus. </p>\n<p> [[1389.14]] Non video quid haec opinio habeat duri. Nam utique in confesso est Deum semper\n[[1389.15]] eligere id quod est perfectissimum, quando unum ex eligibilibus est aliis perfectius, idque\n[[1389.16]] eum facere salva sua libertate. Ponamus ergo nunquam duas res aeque caeteris praestantes\n[[1389.17]] reperiri, sed semper unam aliis esse perfectiorem: quae Hypothesis certe nihil habet\n[[1389.18]] impossibile vel absurdum. Imo valde probabilis est, quia Essentiae rerum sunt ut numeri\n[[1389.19]] et non dantur duo Numeri aequales. Hac ergo hypothesi admissa, utique manifestum est\n[[1389.20]] quod diximus Deum nunquam quicquam facere sine ratione. </p>\n<p> [[1389.21]] Cartesius et Spinosa plane dissentiunt. Cartesius ait Deum non velle res quia sunt\n[[1389.22]] bonae, sed res intelligi bonas quia Deus vult. Quae opinio periculosissima est, sequitur\n[[1389.23]] enim nullam esse Dei justitiam sed stare voluntatem pro ratione. Spinosa ait eos longe\n[[1389.24]] minus errare, qui in Deo statuunt libertatem indifferentiae, quam qui putant Deum agere\n[[1389.25]] sub ratione boni. </p>\n","number":"264.","title":"Deus nihil vult sine ratione","date":"[1678 bis 1681 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

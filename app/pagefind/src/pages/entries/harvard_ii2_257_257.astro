@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_257","series":"Band II 2 (1686 - 1694)","seq":257,"text":"<p> [[797.10]] <b>260. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[797.11]] Dijon, 24. März 1694. [238.276.]</b></p>\n<p> [[797.19]] Dijon le 24. mars <b>1694</b> </p>\n<p> [[797.20]] Je vous prie monsieur que j'use du même compliment auprés de vous dont j'use auprés de\n[[797.21]] mons^#'r de Spanheim et de vouloir l'accepter, et de croire que vos lettres me sont egalement\n[[797.22]] agreables et d'un grand secours pour soulager les maux dont je me sents souvent attaqué; je\n[[797.23]] n'ay rien à adjouster à ce que je dis à mons^#'r de Spanheim si non l'histoire du livre de mons^#'r\n[[798.1]] Thiers touchant les guerres du monachisme sur les etudes; vous ne scaurés la mieux apprendre\n[[798.2]] que de mons^#'r l'abbé de la Trappe dont je vous envoye la copie de deux lettres qu'il m'a escript\n[[798.3]] depuis peu et dont je n'ay point parlé dans ma lettre à mons^#'r de Spanheim comme croyant qu'il\n[[798.4]] ne prend pas trop de part à cette guerre; cependant faictes luy en part si vous le jugés à propos.\n[[798.5]] L'aventure de M^#'r Thiers doit surprendre tous les gens de bien. On permet d'imprimer des\n[[798.6]] libelles sanglantes contre la reputation d'un prelat distingué par une vertu eclatante, et il n'est\n[[798.7]] pas permis de les refuter. Cela ne faict aucun tort à ce s^#'r Abbé; mais il est fascheux qu'un\n[[798.8]] homme de bien soit abandonné à la calomnie et qu'on l'outrage impunement. Il fault estre aussi\n[[798.9]] detaché du monde qu'il l'est pour n'estre pas sensiblement touché d'un procedé si extraordinaire.\n[[798.10]] On n'a pas de peine à deviner quels sont ces faulx amis dont il se plainct dans sa lettre; le\n[[798.11]] pauvre dom Michel Germain est mort qui a tant crié contre ce s^#'r abbé; dom Mabillon a esté\n[[798.12]] malade à mourir, et le petit dom Placide qui estoit un si bon homme Bibliothecaire de S^#'t\n[[798.13]] Germain des preys est mort pareillement. On a mis en sa place dom Denis de S^#'t^#'e Marthe. Le p.\n[[798.14]] Tarillon Jesuite a faict un petit poëme <i>de arte confabulandi</i> qui est fort agreable. On a\n[[798.15]] r'imprimé les <i>oeuvres</i> de m^#'r Despreaux avec une augmentation d'une satyre <i>contre les femmes</i>\n[[798.16]] et de notes sur Longin. Je croy que vous aurés vû le nouveau livre de m^#'r Abbadie de <i>l'art de se\n[[798.17]] connoistre</i> soy même qu'on a r'imprimé à Paris avec quelques petites retranchemens ou\n[[798.18]] adoucissemens. Mons^#'r Lantin et mons^#'r l'abbé Boisot vous saluent. Ce dernier me mande que le\n[[798.19]] <i>traité de l'eucharistie</i> de mons^#'r Pelisson est achevé d'imprimer, et que le Pape a trouvé bon\n[[798.20]] qu'on le luy dedie. Je suis mons^#'r avec toute l'estime, la consideration et la sincerité possible v^#'r^#'e\n[[798.21]] treshumble et tresobeis. serv. </p>\n<p> [[798.22]] Nicaise </p>\n<p> [[798.23]] Excusés la mauvaise ortografi de mon valet. </p>\n","number":"260.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 24. März 1694. [238.276.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

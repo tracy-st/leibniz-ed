@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_193","series":"Band II 3 (1695 - 1700)","seq":193,"text":"<p> [[491.9]] <b>193. LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY</p>\n<p> [[491.10]] [Hannover, 25. Dezember 1698.] [60.]</b></p>\n\n<p> [[492.1]] Monsieur </p>\n<p> [[492.2]] Je <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Monsieur Monsieur de Dobrzenski grandMaistre de la maison etc.</Fn> suis faché, qu'il faut que je vous dise que Vous ne serés plus ennuyé par nostre bon\n[[492.3]] homme Monsieur d'Helmont. Malgré toute la consideration que j'ay, Monsieur, pour vos\n[[492.4]] interests, j'eusse souhaitté, qu'il vous eût endormé encor bien des fois. Vous auriés fait\n[[492.5]] volontiers ce petit sacrifice à Mesdames les Electrices, qui avoient de l'amitié et de l'estime\n[[492.6]] pour luy et qui se plaisoient à l'entendre quelques fois. Et en effect Elles avoient raison en cela,\n[[492.7]] comme en toute autre chose c'estoit un homme rare en bien des façon. Il avoit une afinité de\n[[492.8]] bonnes connoissances; et non obstant sa religion fort eloignee de celle qui est receue, il estoit\n[[492.9]] des plus honnestes hommes, et des meilleurs amis que j'aye connu. Et si l'age luy avoit osté\n[[492.10]] l'agrement, le merite y suppleoit abondamment. En fin Mad. de Mozfeld sa parente, m'a notifié\n[[492.11]] sa mort; dont je suis bien faché, et Mad. nostre Electrice aussi, qui en a receu une lettre de la\n[[492.12]] même Dame. Une colique le surprit la nuit, on luy donna un verre de vin sec qu'il demanda, et\n[[492.13]] on se retira en luy laissant de la lumiere parcequ'il le voulut. Mais en revenant on le trouva sans\n[[492.14]] sentiment; il demeura pourtant plusieurs heures en cet estat, et enfin il expira le lendemain.\n[[492.15]] Mad. de Mozfeld me demande une Epitaphe. Voicy ce que j'ay fait.\n [[492.16]] <i>Nil patre inferior jacet hic Helmontius alter</i>\n [[492.17]] <i>Qui junxit varias mentis et artis opes</i>\n [[493.1]] <i>Per quem Pythagoras et Cabbala sacra revixit</i>\n [[493.2]] <angle bracket><i>Quisque</i></angle bracket> <i>Leontinus</i> <i>cuncta sibi ipse dabat</i>\n [[493.3]] <i>Quodsi Graja virum tellus et prisca tulissent</i>\n [[493.4]] <i>secula, nunc inter lumina prima foret.</i> </p>\n<p> [[493.5]] J'apprends que leur Serenités Electorales vont en Prusse, et y pourront rester un temps\n[[493.6]] considerable. Cela m'a donné la pensee de faire auparavant un petit tour à Berlin, pour icy faire\n[[493.7]] ma Cour. Je m'imagine que ce sera la semaine qui vient. Mais comme ce n'est pas encor une\n[[493.8]] chose seure, je n'en ay presque parlé encor icy, qu'à de <angle bracket>Serenité</angle bracket> Monsign l'Electeur et à Mad.\n[[493.9]] l'Electrice. Et je vous supplie Monsieur de temoigner par avance ma devotion à la Serenité\n[[493.10]] Electorale de Madame vostre ou plustost encor nostre incomparable Electrice. Et de me faire la\n[[493.11]] grace de me compter tousjours absolument pour </p>\n<p> [[493.12]] Vostre etc. </p>\n","number":"193.","title":"LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY","date":"[Hannover, 25. Dezember 1698.] [60.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

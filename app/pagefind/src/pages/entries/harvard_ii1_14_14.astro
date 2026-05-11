@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_14","series":"Band II 1 (1663 - 1685)","seq":14,"text":"<p> [[42.17]] <b>14. JAKOB THOMASIUS AN LEIBNIZ</p>\n<p> [[42.18]] Leipzig, 22. November (2. Dezember) 1669. [13.17.]</b></p>\n<p> [[43.11]] ^#.[Quo <Fn><i>In E^#'1, E^#'2 fehlt</i>: Quo ... effundere.</Fn> die haec scribo, reddita mihi est epistola tua, nescio, quam diu latens interim, cum\n[[43.12]] diem illi adscribere fueris oblitus. Ego me statim, quod otium, res mihi alias insolita, faveret,\n[[43.13]] contuli ad rescribendum. Illustrissimo Boineburgio cum praefatione observantiae meae, quaeso\n[[43.14]] Te, a me salutem, ea, qua par est, submissione refer. Non possum non in sinu gaudere, quoties\n[[43.15]] cogito, quanta me comitate per aliquot horas, cum superiori tempore apud nos heros ille fuisset,\n[[43.16]] etiam mensae admotum suae, tractaverit. Caussae Schurzfleischianae tandem exitum exspecto.\n[[43.17]] Dignum habeo, in quem grave exemplum edatur. Becheri nihil vidi hactenus: ubi videro,\n[[43.18]] spatiumque percurrendi habuero, non gravabor qualecunque judicium meum in sinum tuum,\n[[43.19]] hominis amicissimi, effundere.^#.] </p>\n<p> [[43.20]] De Marii Nizolii libro Te amo: fac ut non illum tantum, sed et praefationem Tuam\n[[43.21]] videamus, quae quanto est futura prolixior, tanto plures nobis ab eximio ingenio tuo gazas\n[[43.22]] spondebit. Excussi subito Bibliothecam meam, sed in ea parum deprehendi illorum, quae ad\n[[43.23]] illam super <i>officiis</i> <i>Ciceronianis</i> a Calcagnino motam controversiam <Fn><i>In E^#'1, E^#'2</i> : controversiam ^#.[pertinet.^#.] Habeo</Fn> ^#.[pertinent.^#.] Habeo tamen\n[[43.24]] Majoragii <i>Reprehensionum</i> <i>libros duos contra Nizolium</i> impressos Mediolani 1549. in quarto,\n[[43.25]] illos videlicet, qui Nizolio illos <i>de vera ratione philosophandi</i> expresserunt. Ex his porro\n[[43.26]] Majoragii <i>reprehensionibus</i>, quae mihi quidem, tametsi autor urbanum se potius haberi postulat,\n[[43.27]] quam mordacem, multo felle illitae videntur, intelligo post Majoragium <i>Ciceronis</i> <i>defensionem</i>\n[[43.28]] quoque a Jacobo Grifolo susceptam fuisse, locus est p. 215. 216. Et ecce Grifoli quoque\n[[44.1]] has disputationes invenio. Adjunctae sunt illae Hieronymi Ferrarii <i>Emendationibus</i> <i>in philippicas\n[[44.2]] Ciceronis</i>, editis Lugduni (Gallorum) Anno 1562. in octavo. Ac video, <Fn><i>In E^#'1, E^#'2</i> : video ^#.[illas ipsas^#.] quoque</Fn> ^#.[illis ipsis^#.]\n[[44.3]] quoque Calcagnini <i>disquisitiones</i> <greek>ay̆tolejeì</greek> insertas esse: praefationem Majoragii in <i>Decisiones</i>\n[[44.4]] suas, <i>quibus Tullium a Calcagnini criminationibus liberat</i>, habes ultimo loco inter <i>praefationes</i>\n[[44.5]] Majoragii <i>orationibus</i> ejus adjectas. <i>Decisionum</i> ipsarum mentio in <i>orationibus</i> ejusdem\n[[44.6]] pag. m. 200. et in <i>praefationibus</i> pag. 616. 658. editionis Lipsiensis Anno 1628. Haec ea\n[[44.7]] sunt, quae loculos excutienti meos hac de controversia se obtulerunt. In eadem cum Nizolio\n[[44.8]] sententia Ramum ejusque asseclas fuisse opinor. Certe quantum teneo memoria, malunt illi, <Fn><i>In E^#'1, E^#'2</i> : illi cum</Fn>\n[[44.9]] ^#.[ubi philosophicum expediendum certamen est,^#.] cum Cicerone, quam cum scholis loqui. Ego\n[[44.10]] nec Technica scholarum, nec a vulgi usu repetita Ciceronis asperner, dummodo Lector, quid\n[[44.11]] dicatur, intelligat. Intelligi autem fortasse potest, aeque utrovis modo loquaris, dummodo prius <Fn><i>In E^#'1, E^#'2</i> : prius assueverit</Fn>\n[[44.12]] ^#.[quis^#.] assueverit, si non assueverit, non intelligi. <Fn><i>In E^#'1, E^#'2</i> : intelligi. Sed</Fn> ^#.[Ego quidem scholasticis loquendi formulis,\n[[44.13]] hoc in genere, innutritus fui magis.^#.] Sed nolo tibi praejudicare. Vale. Lips. d. 22 Nov. 1669. </p>\n","number":"14.","title":"JAKOB THOMASIUS AN LEIBNIZ","date":"Leipzig, 22. November (2. Dezember) 1669. [13.17.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

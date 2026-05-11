@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_27","series":"Band II 2 (1686 - 1694)","seq":27,"text":"<p> [[134.1]] <b>28. LEIBNIZ AN JOHANN VAGETIUS</p>\n<p> [[134.2]] Anfang [Januar] 1687. [23.30.]</b></p>\n<p> [[134.13]] Ex meis ad Vagetium 1687. initio </p>\n<p> [[134.14]] Consilium edendi Jungiana omnia uti jacent, non improbandum censeo. Nec hoc sine\n[[134.15]] exemplo est. Ita memini ex Blasii Pascalii schedis posthumis concinnatum fuisse a defuncti\n[[134.16]] amicis libellum, qui licet nexu systematico careret, mire tamen placuit titulo: <i>Pensées de\n[[134.17]] M. Pascal</i>. Utinam hoc fieret saepius, non ita frequenter perirent egregiorum virorum labores,\n[[134.18]] eo praetextu quod imperfecti sint. Cum Parisiis essem vidi integra volumina scripta manu\n[[134.19]] Renati Cartesii, hortatusque sum possessorem, ut omnia sine discrimine curaret edi. Cui rei\n[[134.20]] nescio quid hactenus obstiterit. Haeredes quoque Blasii Pascalii olim schedas quasdam Geometricas\n[[134.21]] ad Conicorum doctrinam illustrandam spectantes fidei meae crediderant, rogantes, ut\n[[134.22]] ordinarem, quemadmodum e re videretur, quod etiam praestiti probavique etsi integrum aliquid\n[[134.23]] quale a superstite potuisset dari, inde exculpi non posset, multas tamen praeclaras propositiones\n[[135.1]] interspergi additis demonstrationibus, quae sane merebantur non perire. Reddens ergo schedas\n[[135.2]] sententiam meam de editione et connexione scripto reliqui, sed ab eo tempore nihil de editione\n[[135.3]] intellexi, vereorque ne culpa tot jacturarum in Bibliopolas et Typogra<greek>f</i>os sit conferenda qui\n[[135.4]] saepe vel non intelligunt quid publicari mereatur, vel non curant, dum lucrosas nugas orbi\n[[135.5]] obtrudere ipsis liceat. </p>\n","number":"28.","title":"LEIBNIZ AN JOHANN VAGETIUS","date":"Anfang [Januar] 1687. [23.30.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

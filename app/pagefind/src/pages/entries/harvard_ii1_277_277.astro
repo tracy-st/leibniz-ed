@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_277","series":"Band II 1 (1663 - 1685)","seq":277,"text":"<p> [[848.13]] <b>242. VEIT LUDWIG VON SECKENDORFF AN LEIBNIZ</p>\n<p> [[848.14]] Meußelwitz, 30. August (9. September) 1683. [240.243.]</b></p>\n<p> [[849.5]] [ ... ] Approbare me saltem scias omnia illa Tua, et imprimis, quae de Pascalio et Huetio\n[[849.6]] scribis, gratiasque habeo, quod multa me docuisti. Incidi nuper, occasione <b>actorum Lipsiensium</b>,\n[[849.7]] in Librum Sorbonici Doctoris, <b>D'Irois</b>, cui titulus est: <i>Preuvez et prejugez pour la\n[[849.8]] religion Chrestienne et Catholique</i> reperiique multa, quae satis faciunt, aliqua etiam, ubi minus\n[[849.9]] accuratus est, et sectae suae servit. Nescio an non magis probem tractatum: <i>Mens immortalis</i>,\n[[849.10]] Joh. Eberh. Suelingii Bremensis, Viri, ut puto, non perfunctorie eruditi. Metaphysicas demonstrationes\n[[849.11]] dubito ut satis capiam: Hospes enim non inquilinus fui, in illa Musarum regione.\n[[849.12]] Itaque hucusque ea me tenuit opinio, plus effici (excepta divini spiritus operatione) argumentis\n[[849.13]] moralibus et exotericis: Metaphysicis autem, nisi a Scholasticis eruta essent, et hodie a novis\n[[849.14]] Philosophis resuscitarentur, careri, sine dispendio rei Christianae, potuisse. Sed ego multum\n[[849.15]] defero judicio Tuo, nec nego, adversus Pyrrhonicos subtiliores magnum eorum usum esse, si\n[[849.16]] non ad convincendum de vero, at saltem ad infirmandos, quos vocant, et retundendos scrupulos.\n[[849.17]] [ ... ] </p>\n<p> [[849.18]] Meußelwitz d. 30. Augusti. 1683. </p>\n<p> [[849.19]] <i>Dem HochEdlen, Vesten, Hochgelahrten, Herrn Gottfried Wilhelm Leibnitzen, J.U.D.,\n[[849.20]] Fürst. Braunschweig. Lüneburg. Hoffrath etc. Meinem Hochgeehrten Herrn. Hannover.</i> </p>\n<p> [[849.21]] <i>Herrn Joachim Gehringen in Leipzig recommendiret.</i> <Fn><i>Von fremder Hand</i>: franco p. Braunschweig.</Fn> </p>\n","number":"242.","title":"VEIT LUDWIG VON SECKENDORFF AN LEIBNIZ","date":"Meußelwitz, 30. August (9. September) 1683. [240.243.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

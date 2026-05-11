@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_3","series":"Band II 1 (1663 - 1685)","seq":3,"text":"<p> [[6.16]] <b>3. LEIBNIZ FÜR JAKOB THOMASIUS</p>\n<p> [[6.17]] 16. (26.) Februar 1666. [1.8.]</b></p>\n<p> [[7.5]] <b>Conjectura,</b> </p>\n<p> [[7.6]] <b>cur Anaxagoras nivem nigram dicere potuisse videatur,</b> </p>\n<p> [[7.7]] <b>petenti Jac. Thomasio in scheda missa,</b> </p>\n<p> [[7.8]] <b>d. 16 Febr. 1666.</b> </p>\n<p> [[7.9]] Hypothesis 1. Omnis color est impressio in sensorium, non qualitas quaedam in rebus, sed\n[[7.10]] extrinseca denominatio, seu ut Th. Hobbes appellat, phantasma. </p>\n<p> [[7.11]] 2. Ergo nobis non sentientibus nullus est color. </p>\n<p> [[7.12]] 3. Nigredo est non tam color, quam coloris privatio, seu nigrum videre nos dicimus, cum\n[[7.13]] nihil videmus. </p>\n<p> [[7.14]] 4. Omnia opaca in se sunt nigra, per hypoth. 2, juncta 3. </p>\n<p> [[7.15]] Ergo etiam nix. Anaxagoras autem, quo mirabilius esset <greek>parádojon</greek> suum, de eo potissimum\n[[7.16]] subsumsit, quod pro albissimo habetur. </p>\n<p> [[7.17]] 5. Color est nihil aliud, quam impressio in oculum, quae fit ab atomis lucidis, a lucido\n[[7.18]] corpore in opacum impingentibus, et inde ad oculum reflexis. </p>\n<p> [[7.19]] 6. Tria sunt principia optica: ignis, cujus atomi pyramidales; aqua, quae dilatata fit aër,\n[[7.20]] cujus sphaericae; terra, cujus cubicae. </p>\n<p> [[7.21]] 7. Ignis est principium lucis, aqua nigredinis, terra coloris. Atomi enim pyramidales, sunt\n[[7.22]] subtilissimae, habent vim fodiendi, etc. quae sunt ignis propria. Ignis autem et lux materialiter\n[[7.23]] sunt idem. Atomi cubicae sibi ita jungi possunt, ne quid intercedat vacui. Sunt igitur caussa, cur\n[[7.24]] reflectantur atomi igneae, id est, per hypoth. 5, coloris. At inter sphaericas plurimum est vacui,\n[[7.25]] sunt igitur caussa non reflexionis (ubi enim nihil obstat, penetrant potius, quam reflectuntur),\n[[7.26]] seu non coloris, id est per hyp. 3, nigredinis. </p>\n<p> [[7.27]] 8. Quicquid rarum tale est, id condensatum magis est tale. Quia vis unita fortior. </p>\n<p> [[7.28]] 9. Nix est aqua condensata. </p>\n<p> [[7.29]] 10. Nix igitur quam maxime nigra etiam apparere debet, per hyp. 7, juncta 9, et 8. Q. E. D. </p>\n<p> [[7.30]] Tale igitur est argumentum hoc, quale Zenonis contra motum; vel ut sophistam gloriosum\n[[7.31]] convinceret Anaxagoras, vel ut ingenium suum quidvis probando et defendendo ostentaret; vel\n[[8.1]] ut scepticis patrocinaretur, divortium sensus et rationis ostendendo, ut alterutrum falli necesse\n[[8.2]] sit. Nigram autem etiam sibi apparere si dixit, joci gratia dixisse videtur, quia sciret, neminem\n[[8.3]] redarguere hoc <greek>parádojon</greek> posse. </p>\n","number":"3.","title":"LEIBNIZ FÜR JAKOB THOMASIUS","date":"16. (26.) Februar 1666. [1.8.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

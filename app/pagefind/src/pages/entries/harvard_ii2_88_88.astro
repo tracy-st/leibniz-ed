@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_88","series":"Band II 2 (1686 - 1694)","seq":88,"text":"<p> [[353.4]] <b>89. LEIBNIZ AN HENRI JUSTEL</p>\n<p> [[353.5]] Hannover, 10./20. Oktober 1690. [162.]</b></p>\n<p> [[354.1]] [ ... ] Mons. Hugens de Zulichem a publié son excellent ouvrage <i>de la lumière</i>, où il a\n[[354.2]] effacé à mon avis ce que des Cartes avoit donné là dessus. Il m'a fait l'honneur dans la préface\n[[354.3]] et dans son ouvrage même de parler de quelques decouvertes Mathematiques que j'avois faites.\n[[354.4]] Vostre Mons. Neuton m'a fait [le] même honneur dans le sien, peutestre en consideration de\n[[354.5]] l'avantage que j'ay depuis long temps d'estre un membre indigne de la Société Royale\n[[354.6]] d'Angleterre. Sans doute ces deux ouvrages de Messieurs Hugens et Neuton sont les plus\n[[354.7]] importans en ce genre que nous ayions depuis des Cartes, dont ils redressent même les erreurs,\n[[354.8]] et (qui plus est) nous font passer plus avant. Les pauvres Cartesiens ne font que copier et\n[[354.9]] paraphraser eternellement les pensées de leur maistre. Mais pour avancer au de là de ce qu'il a\n[[354.10]] dit, point de nouvelles. C'est là le fruit de l'esprit de secte, du quel la Societé Royale s'est\n[[354.11]] affranchie par son: <i>nullius in verba</i>. En France et en Hollande bien des curieux sont trop\n[[354.12]] Cartesiens ordinairement, c'est pourquoy, remplis qu'ils sont de certaines manieres de penser\n[[354.13]] prises de leur grand auteur, ils ne sçauroient elever aisement l'esprit à donner des nouvelles\n[[354.14]] ouvertures. </p>\n<p> [[354.15]] Cependant il me semble qu'on ne doit pas entierement rejetter les Tourbillons (<i>vortices</i>),\n[[354.16]] dont Leucippe, et Jordan le Brun, et Kepler ont parlé long temps avant des Cartes. Et sans eux\n[[354.17]] comment peut on expliquer la pesanteur et le magnetisme, qualités qui se recontrent toutes deux\n[[354.18]] non seulement en terre, mais encor dans le ciel à l'egard de la disposition des planetes envers un\n[[354.19]] certain centre et certaines directions des axes. De sorte que je croy que les Tourbillons ne sont\n[[354.20]] pas si coupables que Mons. Neuton les fait. J'avois déja donné autres fois des demonstrations\n[[354.21]] dans les Actes de Leipzig, qui pourront peut estre servir maintenant à concilier les Tourbillons\n[[354.22]] avec les belles demonstrations de Mons. Neuton. Et j'ay demonstré qu'on peut donner un\n[[354.23]] certain mouvement fort naturel à l'Ether deferant des planetes, qui satisfait aux regles que\n[[355.1]] nostre Kepler a divinement bien inventées sur les observations de Tycho. Et sans un Ether\n[[355.2]] deferant commun, d'où vient que toutes les planetes d'un même systeme vont à peu prés le\n[[355.3]] même chemin, et du même costé? Ce qu'on observe non seulement dans les planetes ou\n[[355.4]] satellites du soleil, mais encor dans ceux de Jupiter et de Saturne. [ ... ] </p>\n","number":"89.","title":"LEIBNIZ AN HENRI JUSTEL","date":"Hannover, 10./20. Oktober 1690. [162.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

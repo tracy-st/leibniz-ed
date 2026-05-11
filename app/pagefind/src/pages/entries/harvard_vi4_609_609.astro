@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_609","series":"Band VI 4 (1677 - 1690)","seq":609,"text":"[[2727.1]] <b>478.  Raison de Balzac sur les personnes qui s'arretent aux plus mauvais [1677 bis 1716 (?)]</b>\n [[2727.3]] <tab/>[1677 bis 1716 (?)] </p>\n<p> [[2727.6]] Il y a des personnes fertiles en expediens, mais de peu de jugement, qui s'arrestent le\n[[2727.7]] plus souvent aux plus mauvais. Mons. de Balsac dans le 4. discours de son <i>Aristippe</i> en\n[[2727.8]] donne une raison qui me paroist belle. <i>C'est</i> (dit il) <i>parceque la plus mauvaise</i> [scil.:\n[[2727.9]] <i>raison</i>] <i>est le dernier effort de leur imagination, déjà</i> [<i>lasse</i>], <i>et l'ayant cherchée hors du\n[[2727.10]] sens commun qui est déjà épuisé, il semble qu'elle soit plus à eux que les autres qui sont\n[[2727.11]] tirées de cette source publique ou qu'ils ont prises de l'experience</i>. </p>\n","number":"478.","title":"Raison de Balzac sur les personnes qui s'arretent aux plus mauvais","date":"[1677 bis 1716 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_290","series":"Band II 2 (1686 - 1694)","seq":290,"text":"<p> [[870.1]] <b>293. LEIBNIZ AN JUSTUS CHRISTOPH BÖHMER</p>\n<p> [[870.2]] Hannover, [2. Hälfte 1694.] [270.]</b></p>\n<p> [[870.11]] Eadem est operatio caeteris paribus pro subtractione et divisione dyadica, quae pro\n[[870.12]] decadica. Factum interest quod in divisione dyadica non est opus tentamento, nec multiplicatione,\n[[870.13]] cum revera nihil aliud sit quam simplex subtractio repetita. </p>\n<p> [[870.14]] 0 <tab/>| <tab/> 0 </p>\n<p> [[870.15]] 1 <tab/>| <tab/> 1 </p>\n<p> [[870.16]] 10 <tab/>| <tab/> 2 Subtractio </p>\n<p> [[870.17]] 11 <tab/>| <tab/> 3 </p>\n<p> [[870.18]] 100 <tab/>| <tab/> 4 + 11 + 1011 </p>\n<p> [[870.19]] 101 <tab/>| <tab/> 5 ^#1+- 5^#1- ^#1+- 101^#1- </p>\n<p> [[870.20]] 110 <tab/>| <tab/> 6 + 6 + 110 </p>\n<p> [[870.21]] 111 <tab/>| <tab/> 7 </p>\n<p> [[870.22]] 1000 <tab/>| <tab/> 8 </p>\n<p> [[870.23]] 1001 <tab/>| <tab/> 9 </p>\n<p> [[870.24]] 1010 <tab/>| <tab/> 10 </p>\n<p> [[870.25]] 1011 <tab/>| <tab/> 11 </p>\n<p> [[870.26]] 1100 <tab/>| <tab/> 12 Divisio </p>\n<p> [[870.27]] 1101 <tab/>| <tab/> 13 0 </p>\n<p> [[870.28]] 1110 <tab/>| <tab/> 14 15 f 3 <tab/><tab/><tab/>^#t:^#(/aul)<tab/><tab/><tab/><tab/>^#t:^#(/aul)<tab/> f 11 </p>\n<p> [[870.29]] 1111 <tab/>| <tab/> 15 5 <tab/><tab/><tab/>^#t:^#(/aul)<tab/><tab/><tab/><tab/>^#t:^#(/aul)<tab/><tab/><tab/><tab/>^#t:^#(/aul)<tab/> </p>\n<p> [[870.30]] 10000 <tab/>| <tab/> 16 10\n","number":"293.","title":"LEIBNIZ AN JUSTUS CHRISTOPH BÖHMER","date":"Hannover, [2. Hälfte 1694.] [270.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_128","series":"Band VI 4 (1677 - 1690)","seq":128,"text":"[[423.7]] <b>105.  De arte combinatoria scribenda [September 1680 (?)]</b>\n [[423.8]] <tab/>[September 1680 (?)]\n [[423.9]] <tab/>\n[[423.10]] <petit> </p>\n<p> [[423.11]] Das Stück gehört zu den frühen Überlegungen, die Bedeutung der <i>ars combinatoria</i> als grundlegende\n[[423.12]] Methode der <i>scientia generalis</i> und als der Mathematik übergeordnete Methode herauszustellen und sie dabei\n[[423.13]] als eher synthetisches dem analytischen Verfahren gegenüberzustellen (z.B. N. 78, 79, 85). Die Wirtshausrechnung\n[[423.14]] vom 25. September 1680, auf der die zweite Aufzeichnung steht, belegt unsere Datierung. Die erste, der\n[[423.15]] zweiten inhaltlich nahe Aufzeichnung dürfte zu derselben Zeit niedergeschrieben worden sein. </petit> </p>\n","number":"105.","title":"De arte combinatoria scribenda","date":"[September 1680 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_67","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":67,"text":"[[490.3]] <b>67. Meditatio de principio individui </b> <span>490.3;0:63:067:76!      :L:l^</span>.\n[[490.14]] Meditatio de principio individui. Dicimus effectum involvere causam\n[[490.15]] suam; id est ita ut qui perfecte intelligat effectum aliquem, etiam ad causae eius\n[[490.16]] cognitionem perveniat. Utique enim necessaria quaedam inter causam integram et\n[[490.17]] effectum connexio est. Sed contra obstat, quod diversae causae producere possunt\n[[490.18]] eundem perfecte effectum, exempli causa, sive duo parallelogramma, sive duo (triangula),\n[[490.19]] uti oportet, et hic apparet, componantur, semper idem plane\n[[490.20]] quadratum prodibit; quorum alterum ab altero nullo poterit discerni\n[[490.21]] modo; ne a sapientissimo quidem; ita ut in nullius ne sapientissimi\n[[490.22]] quidem potestate futurum sit, ex dato quadrato ejusmodi invenire eius\n[[490.23]] causam, quoniam problema non est determinatum. Videtur ergo effectus non involvere\n[[490.24]] suam causam. Quare si aliunde nobis certum sit, effectum involvere suam causam,\n[[490.25]] necesse est in productis quadratis modum productionis semper discerni posse.\n[[490.26]] Adeoque impossibile esse, ut duo quadrata eiusmodi sint perfecte similia, quia ex\n[[491.1]] materia constabunt, ea autem mentem habebit, et mens retinebit effectum status\n[[491.2]] prioris. Et vero nisi fateamur, impossibile esse ut duo sint perfecte similia, sequetur,\n[[491.3]] principium individuationis, esse extra rem in eius causa. Et effectum non involvere\n[[491.4]] causam, secundum suam rationem specificam, sed secundum rationem individualem.\n[[491.5]] Adeoque unum ab alio non differre in se. Sin fatemur semper duas res differentes,\n[[491.6]] etiam in aliquo differre in se; sequitur materiae cuilibet adesse aliquid quod priorum\n[[491.7]] effectum retineat, nempe mentem. Et hinc etiam probatur, effectum involvere causam.\n[[491.8]] Verum enim de eo, eum productum a tali causa. Ergo adhuc impraesentiarum,\n[[491.9]] eiusmodi in eo est qualitas, quae id ferat, quae etsi relativa, habet tamen aliquid a\n[[491.10]] parte rei. Patet ex quantulis, quanta sequantur.\n[[491.11]] Pulcherrima ratiocinatio est, probatque, materiam non esse homogeneam, nec\n[[491.12]] vero cogitari a nobis potest, quo differat, nisi mente. Cum Mens nostra intima adsit,\n[[491.13]] sibi et materiae, sequitur nihil in iis introduci posse, quod non a nobis possit intelligi\n[[491.14]] quodammodo. Principium magni momenti.\n","number":"67.","title":"Meditatio de principio individui","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

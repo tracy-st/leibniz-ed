@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_438","series":"Band VI 4 (1677 - 1690)","seq":438,"text":"[[1970.4]] <b>360.  Quod motus sit ens respectivum Februar 1677</b>\n [[1970.5]] <tab/>Februar 1677 </p>\n<p> [[1970.10]] Febr. 1677 </p>\n<p> [[1970.11]] Mira res: motum esse quiddam respectivum, nec distingui posse quodnam ex corporibus\n[[1970.12]] moveatur. Ideoque si affectio est, subjectum ejus erit non corpus ullum singulare,\n[[1970.13]] sed totus Mundus. Hinc etiam omnes effectus ejus respectivos esse neccesse est. Motus\n[[1970.14]] autem absolutus quem nobis fingimus non nisi animi nostri affectio est, dum nos ipsi vel\n[[1970.15]] alias res velut immobiles spectamus, quando ipsis velut immobilibus spectatis cuncta\n[[1970.16]] facilius intelligere possumus. Ex eo quod motus non unius corporis sed totius Mundi\n[[1970.17]] affectio est, patet causam primam rerum omnium totiusque Mundi unicam esse, nec alias\n[[1970.18]] esse intelligentias astrorum diversorum motrices. </p>\n<p> [[1970.19]] Notandum tamen motum non in se formaliter, sed ratione causae considerando,\n[[1970.20]] posse attribui ejus corpori a cujus contactu provenit mutatio. Si quaerenti cur hic ignis\n[[1970.21]] urit, respondeam quia is ussit a quo accensus est, vel ita de quolibet, vel cur hic canis\n[[1970.22]] latrat, quia ejus pater latravit, nihil explicuere etiamsi enim eam hoc modo in infinitum,\n[[1970.23]] non ideo explicuero cur canes latrent, seu quae sit eorum latratus causa. </p>\n<p> [[1971.1]] Melius exemplum praebet consistentia. Quam aliqui per Tabulas sibi incumbentes\n[[1971.2]] explicant, sed rursus explicare debent unde ipsae tabulae sint consistentes; aut fateri se\n[[1971.3]] nihil perfecte explicuisse, nec rationem firmitatis intelligere, nisi supposita alia firmitate.\n[[1971.4]] Itaque firmitatem absolute non explicuere. Unde sequeretur firmitatem corpori competere\n[[1971.5]] per se, quod absurdum est. </p>\n<p> [[1971.6]] Ex eo quod motus sit Ens respectivum, sequitur non dari vacuum, nam hinc tollitur\n[[1971.7]] motus in vacuo, quia nihil est quo dignosci possit. Quod autem dignosci non potest, ne ab\n[[1971.8]] omniscio quidem, id nihil est. </p>\n","number":"360.","title":"Quod motus sit ens respectivum","date":"Februar 1677"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

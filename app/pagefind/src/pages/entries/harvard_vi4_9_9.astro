@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_9","series":"Band VI 4 (1677 - 1690)","seq":9,"text":"[[25.11]] <b>9.  De iis quae per se concipiuntur September 1677</b>\n [[25.12]] <tab/> September 1677\n[[25.17]] <tit2><b>De iis quae per se concipiuntur</b></tit2>\n [[25.18]] Septembr. 1677 </p>\n<p> [[25.19]] Ipsum <b>esse</b> videtur per se concipi. Ponamus enim concipi per alia, ut <i>a</i> et <i>b</i>, videtur\n[[25.20]] de his ipsum quoque esse posse concipi; quod absurdum est. Existentia ergo est notio\n[[25.21]] incomposita, sive irresolubilis. </p>\n<p> [[26.1]] Quemadmodum existentia per se concipitur, ita videtur etiam per se concipi essentia\n[[26.2]] seu realitas in genere sive possibilitas (vel intelligibilitas). </p>\n<p> [[26.3]] Omnes res habent aliquid commune, ipsam scilicet Essentiam seu realitatem. </p>\n<p> [[26.4]] Omnes res homogeneae sunt quoad essentiam seu realitatem, uti omnia corpora sunt\n[[26.5]] homogenea quoad molem. </p>\n<p> [[26.6]] Discrimen realitatis et essentiae. Eadem est in omnibus realitas, non vero eadem in\n[[26.7]] omnibus rebus essentia. </p>\n<p> [[26.8]] Quoniam realitas in omnibus una, essentia diversa, ideo id in quo distinguuntur non\n[[26.9]] debet continere realitatem, si quidem positivum est. Nam differentia ipsorum <i>A</i> et <i>B</i>\n[[26.10]] contineat, iterum realitatem, ideo non erit differentia mera. Ergo pura seu mera duarum\n[[26.11]] rerum differentia, in qua scilicet nihil sit amplius commune, nullam continebit realitatem\n[[26.12]] absolutam. </p>\n<p> [[26.13]] Brevius et clarius. Sint duae res <i>A, B</i> utique distinctae, assignetur ergo tum quod est\n[[26.14]] in ipsis commune, tum quod est in singulis; seu differentia pura, nihil amplius commune\n[[26.15]] continens. Aio differentiam puram non continere realitatem, quia realitas est aliquid\n[[26.16]] commune quod in differentia pura contineri non debet. Re tamen accurate expensa\n[[26.17]] videtur inesse sophisma ratiocinationi, et postulatum esse impossibile, nam cum omnia\n[[26.18]] quae concipiuntur a nobis sint realia cogitabilia (nihil aliud enim realitas quam cogitabilitas),\n[[26.19]] ideo non debemus postulare ultimam quandam differentiam, in qua nulla insit\n[[26.20]] realitas seu cogitabilitas, nam supposuimus omnibus inesse. Sed hinc porro sequetur nihil\n[[26.21]] a nobis cogitari simplicissimum, saltem enim duo habet, cogitabilitatem, et speciem\n[[26.22]] cogitabilitatis, aliquid scilicet commune et aliquid proprium. Sed in hoc proprio rursus est\n[[26.23]] cogitabilitas. Alioqui non cogitaretur. Ergo hinc sequetur illa duo non esse separanda, nec\n[[26.24]] a nobis cogitari nisi uno actu. </p>\n<p> [[26.25]] Circa subjectum et adjunctum etiam magna est subtilitas. Nos subjectum seu substantiam\n[[26.26]] cogitamus dum dicimus: <i>Ego, ille, hoc</i>, in his enim aliquid commune cogitamus,\n[[26.27]] id est subjectum in corporibus ipsis quoque quasi per prosopopoeiam. Omnis qualitas\n[[26.28]] cogitabilis componitur ex cogitabilitate et subjecto cogitabilitatis. Huic subjecto inest\n[[26.29]] cogitabilitas, sed aliud est cogitabilitas aliud subjectio. Ergo haec subjectio cogitari non\n[[26.30]] potest. </p>\n","number":"9.","title":"De iis quae per se concipiuntur","date":"September 1677"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

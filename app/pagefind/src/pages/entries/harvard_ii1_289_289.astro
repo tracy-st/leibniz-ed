@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_289","series":"Band II 1 (1663 - 1685)","seq":289,"text":"<p> [[874.6]] <b>254. LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS</p>\n<p> [[874.7]] [Hannover, 20. August 1685.] [251.]</b></p>\n<p> [[874.20]] [ ... ] Je ne doute point que V. A. ne parle à Mons. Nicole. Je me suis estonné qu'elle\n[[874.21]] n'a rien dit de M. Arnaud dans la relation de son voyage de Hollande, qu'elle m'a envoyé, et\n[[875.1]] dont je luy dois des grands remercimens, aussi bien que de tant d'autres communications\n[[875.2]] considerables; la lecture de cette relation m'a paru egalement instructive et agreable. Je\n[[875.3]] voudrois que M. Arnaud fut de retour à Paris, mais j'ay de la peine à le croire. Le R.P. de\n[[875.4]] Malebranche y sera apparemment, que j'ay eu l'honneur de connoistre autres fois. Mais comme\n[[875.5]] ses speculations quelques belles qu'elles [soyent], tiennent plus de l'idée, que de la practique, je\n[[875.6]] ne sçay si V. A. les a goutées. Feue Mad. la Princesse Elisabet Abbesse de Hervorde me\n[[875.7]] temoigna autres fois, qu'elle avoit de l'estime pour les <i>conversations chrestiennes</i> de ce Pere,\n[[875.8]] mais c'estoit dans un temps qu'elle commençoit de ne pas mepriser les ecrits de Jacob Böhme;\n[[875.9]] cela soit pourtant dit sans faire aucune comparaison de ce Pere là avec ce Cordonnier. [ ... ] </p>\n","number":"254.","title":"LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS","date":"[Hannover, 20. August 1685.] [251.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

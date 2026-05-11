@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_592","series":"Band VI 4 (1677 - 1690)","seq":592,"text":"[[2707.11]] <b>461.  De excusatione et accusatione [1677 bis 1716 (?)]</b>\n [[2707.12]] <tab/>[1677 bis 1716 (?)] </p>\n<p> [[2707.17]] Accurate considerari meretur quaedam excusatio, et quaedam accusatio quibus passim\n[[2707.18]] homines utuntur. Saepe enim ita sese <b>excusant</b>: <i>Si ego non</i> <i>fecissem, fecisset alius</i>.\n[[2708.1]] Et rursus saepe sic alios <b>accusant</b>: <i>Si quod</i> <i>tu facis, facerent alii complures</i>, <i>male rebus\n[[2708.2]] consultum esset</i>. Et tamen certum est aliquando haec non valere, ut si miles virginem\n[[2708.3]] violet, quod sciat, socios suos homines petulantissimos ei non parsuros; aut si quis\n[[2708.4]] coelibem accuset, quia non expediret, multos coelibes esse. </p>\n","number":"461.","title":"De excusatione et accusatione","date":"[1677 bis 1716 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

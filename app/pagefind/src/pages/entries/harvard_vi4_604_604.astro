@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_604","series":"Band VI 4 (1677 - 1690)","seq":604,"text":"[[2716.1]] <b>473.  Sensus vitae a rebus [Oktober 1677 bis September 1680 (?)]</b>\n [[2716.2]] <tab/>[Oktober 1677 bis September 1680 (?)] </p>\n<p> [[2716.7]] Ut in populosis urbibus pretiosissimus est fundus seu locus; ita in vita tempus. Recte\n[[2716.8]] Cardanus, si quae per alios commode facere possumus, ac si locupletes scilicet simus,\n[[2716.9]] quovis pretio potius redimendam alienam operam, quam impendendam nostram, quia\n[[2716.10]] tempus pretio alioqui non emitur. Hic verus est usus divitiarum. Divites possunt videri\n[[2716.11]] aliis longius vivere, si sciant uti divitiis. Nam tempus aestimatur a rebus. Et maxime a\n[[2716.12]] rerum quae contigerunt varietate. Itaque qui uno anno tantum varietatis gratae expertus\n[[2716.13]] est, quantum alius decennio, is annum pro decennio habere potest. Sensus enim vitae a\n[[2716.14]] rebus, potius quae nobis ipsis obtingunt quam externis observationibus, motu scilicet\n[[2716.15]] coeli, annorum epocha et calendario sumi debet. Huc certe res redit, ut homo varia\n[[2716.16]] expertus solo calendario longius se quam alium vixisse, credere prohibeatur. Quid autem\n[[2716.17]] calendarii testimonium contra sensum nostrum possit. Certe nihil si sapimus minuit\n[[2716.18]] felicitatem. Itaque qui exiguo licet tempore praeclare vixere longissime vixisse videri\n[[2716.19]] possunt. </p>\n","number":"473.","title":"Sensus vitae a rebus","date":"[Oktober 1677 bis September 1680 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

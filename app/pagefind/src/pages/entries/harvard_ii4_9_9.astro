@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_9","series":"Band II 4 (1701 - 1707)","seq":9,"text":"<p> [[34.13]] <b>9. JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ</p>\n<p> [[34.14]] Wildeshausen, 26. August 1701. [1.] </b></p>\n<p> [[35.1]] Vir Illustris Maecenas Optime </p>\n<p> [[35.2]] Vix vester esse cepi, cum ecce me jam alio, Quackenbrüggam nempe, Deus vocet; Non\n[[35.3]] tamen penitus ob Alternationis jura Vester esse desii, adeoque nec Tuus esse desinam, si qua\n[[35.4]] saltem inserviendi Tibi mihi suppeditaretur occasio. Antiquitatum Wildeshusanarum neque in\n[[35.5]] cippis neque in fenestris neque in chartis vel volam vel vestigium hactenus reperire potui,\n[[35.6]] rogatus id etiam olim a Dn. <b>Lunebergio Mushardo</b> Athenaei, quod <b>Bremae</b> est, Regii\n[[35.7]] <b>Carolini Conrectore</b>, in eruendis historiis ac Antiquitatibus ruminandis, credas, diligente.\n[[35.8]] Solum Alexandri Patroni, ac Walberti, quantum lego, comitis picturam rudem valde, vetustam\n[[35.9]] ac prorsus attritam in parietibus chori inferioris deprehendere adhuc datur. Faxit Deus ut\n[[35.10]] futurum Munus Ecclesiasticum plus mihi succisivi temporis, quam praesens, quod ipsum\n[[35.11]] praegnans inter alias mutandi hanc stationem causa fuit, largiri queat, quo vel tantilla mea opera\n[[35.12]] et Deo et proximo inservire, atque Tibi quoque, Vir Illustris quaedam praestare possim officia.\n[[35.13]] Sic vale Maecenas ac divinis Excubiis transcriptus age prosperrime favens constanter </p>\n<p> [[35.14]] Nominis Tui Celeberrimi Admiratori perpetuo Schulenburgio </p>\n<p> [[35.15]] Wildeshus. den 26. Aug. 1. </p>\n<p> [[35.16]] Ante Ferias Michaelis hinc non discedam si Deus voluerit ac vixerimus. Vale iterum ac me\n[[35.17]] ama! </p>\n","number":"9.","title":"JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ","date":"Wildeshausen, 26. August 1701. [1.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

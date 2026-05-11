@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_41","series":"Band II 3 (1695 - 1700)","seq":41,"text":"<p> [[113.1]] <b>41. GERHARD MEIER (HAMBURG) AN LEIBNIZ</p>\n<p> [[113.2]] Hamburg, 28. Dezember 1695 (7. Januar 1696). [47.]</b></p>\n\n<p> [[114.1]] Illustris Excellentissimeque Vir,\n [[114.2]] Patrone ac Promotor plurimum colende\n [[114.3]] Suspiciende </p>\n<p> [[114.4]] Incomptis occupationes magis arduas interpellare neutiquam fuissem ausus, nisi ad Vagetium\n[[114.5]] datae luculenti fuissent Tuae erga me benevolentiae interpretes. Incredibile memoratu est,\n[[114.6]] quantopere in mea fuerim sinu gavisus, meas qualescunque dissertationes quendam a viro\n[[114.7]] laudato calculum impetrasse. Nolui eorum imitari consuetudinem, qui nulla locorum habita\n[[114.8]] ratione quaedam protrudunt abstrusiora, in emporiis adeo non vendibilia, ut nauseam prius\n[[114.9]] excitent, quam introspiciantur, et nondum lecta condemnentur. Seculi vivendum est moribus,\n[[114.10]] ne ad pauciores recidant studia favore omnium dignissima. Parum aberat, quin <i><greek>parádojon</greek> de\n[[114.11]] Archangelis enthymema</i> multum mihi creasset molestiae, quandoquidem tantum solet praejudicata\n[[114.12]] posse opinio, ut etiam sine ratione valeat auctoritas. Verum fato nescio quo causam\n[[114.13]] omnem sub dissertationis finem peroraram, ne ultra limites protrahi posset sententia. Quod si\n[[114.14]] per collegia et respondentem licuerit, carnis resurrectionem, quoad licuerit, ex naturae libro\n[[114.15]] illustrandam mihi sumam. Dein logicam analysin illi sum scripto applicaturus, quod foeminas\n[[114.16]] esse homines negat. Videtur auctor illius a D. Sim. Gedicco aliisque minus comiter esse\n[[114.17]] habitus, eo quod meris per comparationem responsionibus argumentationes Anabaptistarum\n[[114.18]] Deitatem Christi labefactaturas elidere allaborat. Quod institutum adeo gravem promeritum\n[[114.19]] esse censuram nullus arbitror. </p>\n<p> [[114.20]] Nunc quidem accuratior <i>Epistolae ad Romanos</i> analysis me tenet sollicitum. Fateor, ea\n[[114.21]] nonnunquam suboriri dubia, ex quibus ne per <i>Hamburgensem</i> quidem <i>Logicam</i> licet eluctari.\n[[114.22]] <i>Noëmaticas</i> B. Jungii <i>Disputationes</i> Vagetio tradidi juxta cum hisce literulis transmittendas. Si\n[[114.23]] quid praeterea officii a me vel proficisci potest vel expectari, id omne libens Vestris dicabo\n[[115.1]] usibus. Deus immortalis annum, qui illucescit, ex voto transigere jubeat, ut identidem, de\n[[115.2]] fortuna optatis majori possim </p>\n<p> [[115.3]] illustri T. Excellentiae gratulari deditissimus Gerhardus Mejer </p>\n<p> [[115.4]] Hamb. A. XCV. XXVIII. Dec. L. et PP.\n[[115.5]] <yi>Illustri Excellentissimoque Viro Dn. Godefrido Guilielmo Leibnitio Potentissimo Electori\n[[115.6]] a consiliis aulicis <angle bracket>etc.</angle bracket> Domino, Promotori ac Patrono plurimum colendo suspiciendo <angle bracket>etc.</angle bracket> <i>par\n[[115.7]] Couvert.</i> </p></p>\n","number":"41.","title":"GERHARD MEIER (HAMBURG) AN LEIBNIZ","date":"Hamburg, 28. Dezember 1695 (7. Januar 1696). [47.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_239","series":"Band II 1 (1663 - 1685)","seq":239,"text":"<p> [[744.1]] <b>211. JOHANN VAGETIUS AN LEIBNIZ</p>\n<p> [[744.2]] Hamburg, 14. (24.) August 1679. [200.218.]</b></p>\n<p> [[744.10]] Hamb. 14 Aug. 1679. </p>\n<p> [[744.11]] Cum sciam, primis tuis literis e vestigio fuisse a me responsum, quid responsoriis istis\n[[744.12]] actum sit, assequi divinando hactenus non possum. Vidit quidem illas tunc sola inscriptione\n[[744.13]] adhuc destitutas Dn. Lic. Placcius. Ad posteriores hactenus ut differretur responsio, effecit\n[[744.14]] consilium meum de visenda coram Hannovera, quod cum suis quibusdam impedimentis hactenus\n[[744.15]] redditum fuerit irritum, committendum nullo modo mihi fuit, ut diuturniore silentio\n[[744.16]] culpam ipsam contraherem, cujus nescio quis casus justam propemodum parere potuerat suspicionem.\n[[744.17]] Rudimentum simul prioris meae epistolae, quale forte fortuna inter schedas rejectaneas\n[[744.18]] adhuc reperio, visum fuit adjungere. Cui quod addendum sit, non puto esse aliud, quam\n[[744.19]] Typothetae tergiversationem, in lucrosiore opera occupati editionis hactenus dilatae causam\n[[744.20]] esse. Delibero ergo de alio alibi quaerendo, quod novae descriptionis et recensionis multis in\n[[744.21]] partibus requiret molestiam. Interim tamen in describendis schedis et recensendis nulla interponitur\n[[744.22]] mora, nisi quod morbus Bibliothecarii nostri cessationem duorum propemodum hebdomadum\n[[744.23]] amanuensi attulit. Videbunt, <i>si vita suppetet</i>, tandem, quae describi possunt, lucem,\n[[744.24]] si non possunt alio, saltem illo quo relicta sunt ab auctore, habitu. </p>\n<p> [[745.1]] Scientiarum compendia confecit etiam alia Jungius, quarum fragmenta apographa vidi,\n[[745.2]] autographas integras nondum sum nactus, est inter eas optica, et Trigonometria. </p>\n<p> [[745.3]] Demonstrationes Harmonicas parit sua sponte ipse libelli exemplis illustrati ordo. Extant\n[[745.4]] paucae in numeris a Jungio exhibitae. Addere omnes etiam alias mihi erat constitutum, si\n[[745.5]] obsequentem in editione nactus essem typothetam. Accedent si opus erit, et alia aliquando\n[[745.6]] parabitur editio. </p>\n","number":"211.","title":"JOHANN VAGETIUS AN LEIBNIZ","date":"Hamburg, 14. (24.) August 1679. [200.218.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

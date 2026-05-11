@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_224","series":"Band II 2 (1686 - 1694)","seq":224,"text":"<p> [[715.11]] <b>227. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[715.12]] [Wolfenbüttel, Ende Juni 1693.] [217.254.]</b></p>\n<p> [[715.22]] [ ... ] Alleine zu rechteren gebrauch der Cabbalae würde gehöhren eine Societät recht\n[[715.23]] gelehrter und wohlgesinter Leute. Ich verstehe aber eine societat nicht, wie sie ins gemein seyn,\n[[715.24]] auch wie die Englische und Naturae Curiosorum ist, so kein festes band, auch keinen\n[[715.25]] Nachdruck noch Daure haben; noch die von großer Herrn besoldungen unterhalten werden, wie\n[[716.1]] die Universitaten, Collegia und die Academie Royale zu Paris, denn da werden gemeiniglich\n[[716.2]] durch die hofleute allerhand Personen hinein geschoben, die nicht auß guthen eifer und\n[[716.3]] lobesbegierde sondern umbs geld arbeiten, ja hernach aus faulheit und neid das guthe verhindern,\n[[716.4]] sondern eine solche societät die ihren eignen fundum hätte, wie die Clöster und Orden der\n[[716.5]] Romischen Religion. Nun ist zwar bey den Evangelischen nichts dergleichen. Doch wäre es\n[[716.6]] nicht ohnmuglich wenn einige Reiche nur lachende Erben habende sonst verstandige wohlgesinte\n[[716.7]] Ehrliebende Personen beredet werden köndten, das ihrige zum theil, oder gänzlich zu\n[[716.8]] einen so wichtigen werck zu wiedmen, vermittelst deßen ich versichert bin, daß zum besten des\n[[716.9]] Menschlichen geschlechts in 10 jahren mehr außzurichten, als sonst in hunderten nicht geschehen\n[[716.10]] wird. Ich bin vor vielen jahren mit diesem Einfall schwanger gangen und sehe fast allein\n[[716.11]] diesen weg übrig etwas rechtes auszurichten, nachdem der andere an sich selbsten leichtere,\n[[716.12]] nehmlich einen großen fürsten, der dem werck allein gewachsen, dazu zu vermögen bey\n[[716.13]] gegenwartigen elenden Zeiten, da sie fast selbsten alle mit einander in weitlaufftigkeiten\n[[716.14]] vertieffet, nicht zu hoffen. Dieser vorschlag aber ist so bewand daß er mit einem geringen den\n[[716.15]] anfang nehmen, und bald zu etwas ansehnliches erwachsen köndte, denn etlicher Exempel\n[[716.16]] andere aufmuntern würden. In Holland glaub ich solten sich dergleichen leute finden, wiewohl\n[[716.17]] auch Teutschland einige an hand geben mochte. Ich weiß wie sehr mein hochwehrtigster H. sich\n[[716.18]] alle gemein-nüzige Dinge angelegen seyn laßen und wie leicht er alles begreiffe, habe also\n[[716.19]] dieses doch in vertrauen dero erwegung und urtheil unterwerffen wollen; bitte die gedancken\n[[716.20]] darauff gehen zu laßen, und mich einsmahls mit wiederantwort zu erfreuen; der ich dero\n[[716.21]] liebwertheste Person und trefliche gaben hochlich verehre, und lebenszeit verbleiben werde </p>\n<p> [[716.22]] Meines hochwehrtesten Herrn verbundenster gehorsamster Diener. </p>\n","number":"227.","title":"LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS","date":"[Wolfenbüttel, Ende Juni 1693.] [217.254.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

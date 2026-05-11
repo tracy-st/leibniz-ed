@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_663","series":"Band VI 4 (1677 - 1690)","seq":663,"text":"[[2856.1]] <b>505₃.  Dritter Ansatz DRITTER ANSATZ\n[[2856.7]] <b>De justitia et jure</b> </p>\n<p> [[2856.8]] Omnis de jure tractatio versatur circa bona et mala quibus alter alterum afficere\n[[2856.9]] potest, quae si prudenter et cum ratione dispensata sint, juste id factum dicetur, sin minus\n[[2856.10]] querelae nascentur. Unde manifestum est <b>justitiam</b> esse caritatem sapientis. </p>\n<p> [[2856.11]] Quae ab hominibus fiunt, ea justa aut injusta haberi constat, dum ad bona malaque\n[[2856.12]] referuntur. Et <b>Vir bonus</b> censetur, qui hoc agit ut prosit omnibus noceat nulli. Sed cum\n[[2856.13]] non omnibus aeque prodesse possimus, et quod mea interest, saepe cum aliorum utilitate\n[[2856.14]] pugnet, affectum hominis erga hominem ratione moderandum esse constat, ideo <b>justitiam</b>\n[[2856.15]] definiemus caritatem sapientis, nam vir bonus etsi non esset sapiens, neque enim\n[[2856.16]] omnes per se sapere possunt sapientis tamen praescripta sequitur in agendo; quae si vis\n[[2856.17]] cogendi addita sit, <b>leges</b> dicuntur. Porro <b>justa</b> <b>illicita, debita</b>, appellamus, quaecunque\n[[2856.18]] viro bono possibilia aut impossibilia aut necessaria sunt factu. Nam quae facta\n[[2856.19]] contra bonos mores sunt ea nec facere nos posse credendum est. Itaque <b>jus</b> quod\n[[2856.20]] habemus agendi aliquid aut omittendi est facultas sive potentia quaedam moralis; et\n[[2857.1]] <b>obligatio</b> necessitas est moralis, quae scilicet viro bono imposita est, si nomen suum\n[[2857.2]] tueri velit. </p>\n<p> [[2857.3]] Regularum autem quibus caritas sapientis gubernatur haec summa est; ut dirigantur\n[[2857.4]] omnia ad majus bonum generale, quod obtineri potest. </p>\n","number":"505₃.","title":"Dritter Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

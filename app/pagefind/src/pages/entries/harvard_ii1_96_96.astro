@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_96","series":"Band II 1 (1663 - 1685)","seq":96,"text":"<p> [[257.16]] <b>82. OTTO VON GUERICKE AN LEIBNIZ</p>\n<p> [[257.17]] Magdeburg, 13. Oktober 1671. [77.83.]</b></p>\n<p> [[258.1]] Wohl Edler Vest: und hochgelerter etc. </p>\n<p> [[258.2]] Insonders großg: hochge. Herr etc. </p>\n<p> [[258.3]] Desselben vom 5 Octob. habe den 12 <i>ejusd. styl. nov.</i> zu rächt empfangen, bedancke mich\n[[258.4]] gehabter mühewaltung und geneigter willfahrung, werde nicht unterlassen der beyden desiderirten\n[[258.5]] Exemplar halber, beym Buchführer, wan gelibets Gott daß werck zu seiner perfectikeitt\n[[258.6]] kommen, schuldige beforderung zu thuende. Die begehrte kugel ist <b>hirbey</b>, auch von denen\n[[258.7]] <b>Pflaumfederlein</b> ein stücke oder 3, darauß zu sehen wie sie sein müssen, dan keile müssen\n[[258.8]] sie nicht haben. <i>Notandum</i>: Die Fädern ie freier sie von einander gespärrt bleiben, und ie\n[[258.9]] weniger sie zusammen gedrucktt werden, ie besser es ist. So ist auch <b>hirbey</b> auß meinem\n[[258.10]] buche geschriben <b>der gebrauch</b>, wan künfftig daß buch herauß kommen, so wird auch daß\n[[258.11]] außgeschriben <i>Caput</i> ein bessern verstand erlangen, <i>Interim</i> kan sich mein hochg. Herr der\n[[258.12]] kugel gebrauchen. </p>\n<p> [[258.13]] Dabey dan zu wissen daß sie nicht alle zeitt gleich starck auch nicht allen leütten gleich\n[[258.14]] operiret, dan denen die weiche und feüchte hende haben (gleich wie mein Sohn ChurBr.\n[[258.15]] Resident im NiederSachs. kreisse) operiret sie wenig, hergegen mihr, der ich in mechanischen\n[[258.16]] vorfallenden sachen bißweilen selbst waß angreyffe und daher härter hende habe, wohl. Sie\n[[258.17]] thutt nichts, muß zuvor mitt der hand an einen orth (als etwa im <i>aequatore</i>) wohl begriffen und\n[[258.18]] dan mitt ein par schlagen perstringiret werden, wan sie dan uber leichte sachen alß etwa hoppen\n[[258.19]] blätter oder waß es ist gehalten wird, so zeügtt sies an sich; Dann kan man auch die Operation\n[[258.20]] mitt der fäder vornehmmen und den 3 articulen des <i>Capitis</i> nachgehen. </p>\n<p> [[258.21]] Wen man nicht rächtt weiß wie sie zu atteriren und zu perstringiren, so nehmme man sie\n[[258.22]] bey abends inß finstere vor, da wird man sehen uff welche art sie am besten schein von sich\n[[258.23]] gibtt, also will sie auch tractiret sein; allein an keinen feüchten orth, noch auch nicht mitt\n[[258.24]] feüchten und feisten henden. Wie die kugel zu praepariren, ist zward mitt wenigen in dem\n[[258.25]] <b>beygelegten</b> Cap. XV. zu befinden, weil es aber mein hg. Herr umbständlicher begehrett,\n[[258.26]] will ihm mitt nächsten, gerne damitt willfahren, ietzo hatts nicht sein können, weniger uff daß\n[[258.27]] andere zu antworten, weil die Post uff Leiptzigk zu mittage wegk gehett, und solte ich nuhn biß\n[[258.28]] uber 8 tage warten, so möchten die Franckfurter kauffleütte so die kugel mitt nehmmen sollen,\n[[258.29]] hinwegk sein. Und wolle also vor daß mahl mein h. ge. Herr mich entschuldigett halten,\n[[258.30]] denselben inzwischen der göttl. obhutt treülichst ergebe und allezeit verbleibe </p>\n<p> [[258.31]] Meines hochgeerten Herrns bereitwilligster Diener </p>\n<p> [[258.32]] Magdeburgk den 13 Octob. sty. no. A^#'o 1671. Otto von Guericke </p>\n<p> [[259.1]] P. S. Von neüen fellett hier nichts vor, als daß wegen Collen die sachen ietzo waß besser\n[[259.2]] lauffen, darin ich dan sehe daß auch Ihr Churf. Gn. zu Mayntz hochst rühmligst beflissen seind.\n[[259.3]] Franckreich dürffte wohl gegen den winter wieder die Hollender waß vornehmmen. </p>\n","number":"82.","title":"OTTO VON GUERICKE AN LEIBNIZ","date":"Magdeburg, 13. Oktober 1671. [77.83.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

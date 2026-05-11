@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_68","series":"Band II 2 (1686 - 1694)","seq":68,"text":"<p> [[295.13]] <b>69. ─ (?) AN LEIBNIZ</p>\n<p> [[295.14]] [Rom, Sommer 1689.] [68.70.]</b></p>\n<p> [[295.22]] Quand je verai le P. Baldigiani je prouverai s'il me poura convaincre ou si je le detromperai.\n[[295.23]] Je suis bien eloigné de croire que le centre de Gravité de 2 cors pesans puisse monter,\n[[295.24]] mais je ne comprens pas pourquoi vous voulés atacher ensemble 2 cors qui pour fere leur efet\n[[295.25]] doivent etre detachés et se remuer en tans diferens, car je n'ai encore pu trouver que dans des\n[[296.1]] mouvemens où la nature emploie des tans diferans pour comuniquer la velocité, on puisse fere\n[[296.2]] abstraction du tans e suposer qu'il ne sert de rien. Au lieu que le cors <i>B</i> remonte si avec les\n[[296.3]] 4 degrés que je supose qui luy sont donés vous le fetes mouvoir d'un mouvement egal suivant\n[[296.4]] Galilee et que vous lui doniés un an de tans il fera cent mile fois plus de chemin que n'a fait le\n[[296.5]] cors <i>A.</i> Apliqués cela s'il vous plait. </p>\n","number":"69.","title":"─ (?) AN LEIBNIZ","date":"[Rom, Sommer 1689.] [68.70.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_221","series":"Band VI 4 (1677 - 1690)","seq":221,"text":"[[862.1]] <b>182₁.  Erster Entwurf ERSTER ENTWURF </p>\n<p> [[862.6]] <i>A</i> <b>infert</b> <i>B</i>, vel <i>B</i> <b>sequitur</b> ex <i>A</i>; si ponendo <i>A</i>, et substituendo coincidentia oritur\n[[862.7]] <i>B</i>. Non tamen requiritur ut nihil aliud oriatur quam <i>B</i>. </p>\n<p> [[862.8]] <b>Eadem</b> vel <b>Coincidentia</b> sibi mutuo substitui possunt ita ut non oriatur contradictio. </p>\n<p> [[862.10]] <b>Contradictio</b> est <i>A non-A.</i> </p>\n<p> [[862.11]] Illatio est duplex, explicabilis cum substitutionis series est finita, et inferens dicetur\n[[862.12]] <b>implicare</b>, vel illatio est inexplicabilis cum series substitutionis est infinita et inferens\n[[862.13]] dicetur <b>involvere</b>. Cum plicae sunt flexiones finitae sunt, cum volutio est sunt infinitae,\n[[862.14]] itaque apta sunt nomina. </p>\n<p> [[862.15]] <b>Impossibile</b> est quod implicat contradictionem. </p>\n<p> [[862.16]] <b>Possibile</b> est quod non implicat contradictionem. </p>\n<p> [[862.17]] <b>Vera propositio</b> est <i>A continet B</i>, si <i>A non-B</i> infert contradictionem. Comprehenduntur\n[[862.18]] et categoricae et Hypotheticae propositiones, v.g. <i>si A continet B, C continet D</i>,\n[[862.19]] potest sic formari <i>A continere B continet C continere D.</i> Itaque <i>A continere B</i>, et simul <i>C\n[[862.20]] non continere D</i> infert contradictionem. Uti status quo idem est <i>A</i> et <i>non B</i> (seu quo simul\n[[862.21]] <i>L</i> continet <i>A</i>, et <i>L</i> continet <i>non B</i>) implicat contradictionem; ita status quo simul <i>A</i>\n[[862.22]] continet [<i>B</i>] et non simul <i>C</i> continet <i>D</i>, implicat contradictionem. </p>\n<p> [[863.1]] <b>Vera propositio categorica affirmativa universalis</b> est; <i>A est B</i>, si <i>A</i> et\n[[863.2]] <i>AB</i> coincidat et <i>A</i> sit possibile, et <i>B</i> sit possibile. Hinc sequitur si <i>A est B</i>, vera propositio\n[[863.3]] est, <i>A non-B</i> implicare contradictionem, nam pro <i>A</i> substituendo aequivalens <i>AB</i> fit\n[[863.4]] <i>AB non-B</i> quod manifeste est contradictorium. <Fn><i>Am Rande</i>: Verum est vel necessarium vel contingens, Verum necessarium sciri potest per finitam seriem substitutionum seu per coincidentia commensurabilia, Verum contingens per infinitam seu per coincidentia incommensurabilia. Explicabile conferemus commensurabili, inexplicabile incommensurabili. Verum necessarium est cujus veritas est explicabilis, contingens cujus veritas est [in]explicabilis. Probatio a priori seu <b>Apodixis</b> est explicatio veritatis.</Fn> </p>\n<p> [[863.5]] <b>Vera propositio Hypothetica</b> primi gradus est si <i>A est B</i>, et inde sequitur <i>C\n[[863.6]] est D</i>, nempe substitutione coincidentium. Status quo <i>A</i> est <i>B</i> vocetur <i>L</i> et status quo <i>C</i> est\n[[863.7]] <i>D</i> vocetur <i>M</i>, erit <i>L</i> ^&.SE <Leibniz special character> <i>LM.</i> Ita reducitur hypothetica ad categoricam v.g. status quo aër est\n[[863.8]] clarus dicatur <i>serenum</i>, et status quo aër est sine nubibus dicatur <i>sudum</i>; dici potest,\n[[863.9]] <i>serenum est sudum</i>, seu <i>serenum et serenum sudum coincidunt.</i> <Fn><i>Am Rande</i>: NB.</Fn> Et similia vocabula fieri\n[[863.10]] possunt pro aliis propositionibus, significantia statum vel tempus. <i>Serenat</i> idem quod <i>est\n[[863.11]] serenum</i>, hoc modo similia impersonalia, <i>tonat, pluit, piget, agitur, ridetur</i>, id est vera est\n[[863.12]] propositio <i>pluvia cadit</i> (<i>aliquando pluit</i>) <i>et sudum est, aliquod serenum est pluvium</i> seu\n[[863.13]] <i>serenum pluvium</i> non implicat contradictionem. Ex Hypotheticis primi gradus eodem\n[[863.14]] modo transiri poterit ad hypotheticas secundi. </p>\n<p> [[863.15]] Veritas adeoque et illatio seu veritas hypothetica duplex est, contingens, si in\n[[863.16]] probando seu in substitutione aequipollentium opus est progressu in infinitum, necessaria,\n[[863.17]] si absolvi potest probatio. Ergo diversa invenienda essent vocabula, quo distinguantur\n[[863.18]] inferens contingenter et inferens necessario. <Fn><i>Am Rande</i>: NB.</Fn> Habent haec duo sese invicem, ut\n[[863.19]] commensurabile et incommensurabile, necessaria consequentia est ut resolutio in communem\n[[863.20]] mensuram, contingens nunquam absolvit resolutionem. </p>\n","number":"182₁.","title":"Erster Entwurf","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

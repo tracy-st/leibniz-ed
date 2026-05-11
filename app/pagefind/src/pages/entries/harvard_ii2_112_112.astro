@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_112","series":"Band II 2 (1686 - 1694)","seq":112,"text":"<p> [[421.1]] <b>113. LEIBNIZ AN MARIE DE BRINON</p>\n<p> [[421.2]] [Wolfenbüttel,] 9. (19.) Mai 1691. [172.]</b></p>\n<p> [[421.25]] [ ...] Je me souviens, que lors que je m'estois attaché autres fois à establir des notions\n[[421.26]] claires et expressives dans la morale, j'examinois une question assés difficile, comment il est\n[[421.27]] possible que l'amitié ou la bienveillance puisse être detachée de tout interest, puisqu'il est\n[[421.28]] manifeste d'ailleurs que nostre propre bien veritable ou imaginaire est le but de toutes nos\n[[421.29]] actions volontaires, et que c'est en cela que consiste la nature indispensable de la volonté. Mais\n[[421.30]] lors que j'eus reconnu qu'aimer n'est autre chose que trouver son propre plaisir ou satisfaction\n[[421.31]] dans la felicité ou dans la perfection d'autruy, la difficulté se dissipa d'abord, et il me fut aisé\n[[422.1]] de comprendre, comment le bien d'autruy est le nostre, sans que nous aimions par interest. Car\n[[422.2]] tout ce que nous voulons par la seule satisfaction, que nous en reçevons, sans avoir en vue\n[[422.3]] aucune utilité qui nous en puisse naistre; nous le voulons par soy même et sans interest. Nous\n[[422.4]] aimons Dieu sur toutes choses, lors que nous mettons tout nostre bonheur dans la connoissance\n[[422.5]] que nous pouvons avoir de ses perfections et de sa souveraine felicité; de même lors que nous\n[[422.6]] aimons quelque Creature raisonnable, ou bien lors que nous avons pour elle une veritable\n[[422.7]] bienveillance, c'est parce que nous trouvons que l'estat avantageux et la felicité de l'objet cheri,\n[[422.8]] fait un surcroist de nostre propre felicité; et que nous y prenons part, à cause de la satisfaction\n[[422.9]] que nous y trouvons. Aussi la charité n'est autre chose qu'une amitié generale, qui s'etend à\n[[422.10]] tous mais avec distinction, car elle doit estre reglée par la justice selon les degrés de perfection\n[[422.11]] qui se peuvent trouver ou introduire dans les objets. Plus on est porté par le bon naturel ou par\n[[422.12]] habitude, à se faire un plaisir du bonheur d'autruy, plus on a de la disposition à cette vertu\n[[422.13]] sublime, qu'on apelle la justice, puisqu'elle n'est autre chose, qu'une charité conforme à la\n[[422.14]] sagesse, et que la veritable sagesse est en effect la science de la felicité ou de la perfection. Et\n[[422.15]] comme Dieu est la source eternelle et immuable de toute perfection et de tout bonheur\n[[422.16]] veritable, il s'en suit, qu'il n'y a point d'affection plus noble, plus solide et plus durable, que\n[[422.17]] celle qui s'attache à Dieu, ou qui se repand sur le prochain en consideration de Dieu. C'est aussi\n[[422.18]] celle qui nous oblige d'avantage. Et c'est ce qui augmente ma reconnoissance, que je dois,\n[[422.19]] Madame, au zele, que Vous témoignés pour nostre bien. [ ...] </p>\n","number":"113.","title":"LEIBNIZ AN MARIE DE BRINON","date":"[Wolfenbüttel,] 9. (19.) Mai 1691. [172.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

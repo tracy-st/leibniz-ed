@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_284","series":"Band II 2 (1686 - 1694)","seq":284,"text":"<p> [[852.11]] <b>287. LEIBNIZ AN CHRISTIAAN HUYGENS</p>\n<p> [[852.12]] Hannover, 4./14. September 1694. [282.]</b></p>\n[[853.1]] <petit> </p>\n<p> [[853.10]] [ ... ] Comme je vous disois un jour à Paris qu'on avoit de la peine à connoistre le\n[[853.11]] veritable sujet du Mouvement, vous me répondîtes, que cela se pouvoit par le moyen du\n[[853.12]] mouvement circulaire, cela m'arresta; et je m'en souvins en lisant à peu près la même chose\n[[853.13]] dans le livre de Mons. Newton; mais ce fut lorsque je croyois déja voir que le mouvement\n[[853.14]] circulaire n'a point de privilege en cela. Et je voy que vous estes dans le meme sentiment. Je\n[[853.15]] tiens donc que toutes les hypotheses sont equivalentes, et lors que j'assigne certains mouvemens\n[[853.16]] à certains corps, je n'en ay ny puis avoir d'autre raison, que la simplicité de l'Hypothese\n[[853.17]] croyant qu'on peut tenir la plus simple (tout consideré) pour la veritable. Ainsi n'en ayant point\n[[853.18]] d'autre marque, je crois que la difference entre nous, n'est que dans la maniere de parler; que je\n[[853.19]] tache d'accommoder à l'usage commun, autant que je puis <i>salva veritate</i>. Je ne suis pas meme\n[[853.20]] fort eloigné de la vostre, et dans un petit papier que je communiquay à M. Viviani, et qui me\n[[853.21]] paroissoit propre à persuader Messieurs de Rome à permettre l'opinion de Copernic, je m'en\n[[853.22]] accommodois. Cependant si vous estes dans ces sentimens sur la realité du mouvement, je\n[[853.23]] m'imagine que vous deuvriés en avoir sur la nature du corps de differens de ceux qu'on a\n[[853.24]] coustume d'avoir. J'en ay d'assez singuliers et qui me paroissent demonstrés. Je souhaiterois\n[[853.25]] d'apprendre un jour vos reflexions que vous m'aviés fait esperer tant sur mes <i>animadversions\n[[853.26]] in Cartesium</i>, que sur ce que je vous avois écrit contre le vuide et les Atomes. [ ... ] </p>\n<p> [[854.1]] Quelques uns ayant vû des definitions que j'ay données dans la preface de mon <i>Code\n[[854.2]] Diplomatique</i> (dont pour le dire en passant je vous feray remettre un exemplaire) m'ont exhorté\n[[854.3]] de mettre en ordre un amas d'autres que j'ay fabriquées autres fois. Voicy celles de la preface\n[[854.4]] que je soûmets à vostre jugement. Je dis que la justice est une charité conforme à la sagesse. La\n[[854.5]] sagesse est la science de la felicité. La charité est une bienveuillance generale. La bienveuillance\n[[854.6]] est <i>habitus diligendi</i>. <i>Diligere</i>, <tab/>^#T: <i>Aimer</i> <tab/>^#H: <i>Cherir</i> (en nostre sens) est se faire un plaisir de la felicité\n[[854.7]] d'autruy. [ ... ] </p>\n","number":"287.","title":"LEIBNIZ AN CHRISTIAAN HUYGENS","date":"Hannover, 4./14. September 1694. [282.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

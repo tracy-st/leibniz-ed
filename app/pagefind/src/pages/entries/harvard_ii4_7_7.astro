@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_7","series":"Band II 4 (1701 - 1707)","seq":7,"text":"<p> [[29.11]] <b>7. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[29.12]] Dijon, 11. Juli 1701. [5.8.] </b></p>\n<p> [[30.1]] Dijon le XI. Jüillet <b>1701</b> </p>\n<p> [[30.2]] J'oubliay <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: Mons. l'Abbé Nicaise</Fn> monsieur de vous dire dans la derniere que j'ay eû l'honneur de vous écrire une\n[[30.3]] nouvelle qui ne sera pas tout à faict desagreable à m^#'r Ludolfe. C'est touchant le p. Bonjour,\n[[30.4]] dont les lettres luy paroissoient un peu trop seches et trop steriles: ce pere me mande qu'il a\n[[30.5]] abandonné les Antiquités d'Egypte[;] ses superieurs luy ayant ordonné une autre étude plus\n[[30.6]] conforme à son étât de Religieux, il a cependant faict une Grammaire en langue Copte, ainsy\n[[30.7]] mons^#'r voilà le champ des Antiquités d'Egypte abandonné à mons^#'r l'abbé de la Charmoye\n[[30.8]] autrement le Rev. p. Pezron de l'ordre de Cisteaux qui nous promet bientost son <i>Antiquité des\n[[30.9]] Nations</i>, après nous avoir donné celles <i>des tems</i>; il m'a écrit qu'il y fournie beaucoup de\n[[30.10]] Recherches sur la Langue Celtique, pourveû qu'il ne donne pas dans le Goust de Goropius\n[[30.11]] Becanus et de Schrickius qui nous ont donné de grandes Recueils sur cette Langue et sur la\n[[30.12]] Belgique à la bonne heure; ce que je ne croy pas de ce judicieux ecrivain qui nous decouvrira\n[[30.13]] asseurement de belles et agreables choses à sa maniere. Je croy que m^#'r Pinsson vous aura\n[[30.14]] envoyé le journal de Trevoux du mois de may et de Juin dernier où vous aurés veu ce qu'il y est\n[[30.15]] dit d'une nouvelle edition du Suidas par m^#'r Neocorus qui profitera du travail du scavant m^#'r\n[[30.16]] Pearson sur ce beau Lexicon. Il y a long tems que je n'ay recû des nouvelles de Rome; j'en\n[[30.17]] attends incessamment avec les Antiquités de Neffane de l'abbé della Torre, où il a renfermé\n[[30.18]] quantité de choses qui regardent la belle Antiquité, je ne scay aucunes nouvelles de nostre cher\n[[31.1]] et important amy mons^#'r de Spanheim; voilà un petit mot que je prends la liberté de vous\n[[31.2]] adresser pour luy aussi bien que pour m^#'r Morel: mons^#'r d'Avranches faict imprimer à Roüen <i>les\n[[31.3]] Antiquités de la ville de Caën</i>; pour toujours monsieur à vostre chere et pretieuse amitié. Tout a\n[[31.4]] vous </p>\n<p> [[31.5]] Nicaise </p>\n","number":"7.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 11. Juli 1701. [5.8.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

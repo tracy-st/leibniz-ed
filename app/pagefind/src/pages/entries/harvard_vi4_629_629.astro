@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_629","series":"Band VI 4 (1677 - 1690)","seq":629,"text":"[[2763.1]] <b>492₄.  De absolute licitis aut illicitis, debitis aut indebitis\n[[2763.7]] <tit2><b>De absolute licitis aut illicitis, debitis aut indebitis</b> </tit2> </p>\n<p> [[2763.8]] Nullum impossibile, seu ut vulgo enuntiant impossibilium nulla obligatio est.\n [[2763.9]] <tab/>Nam impossibile nec a prudente fieri, et nullis poenis vel praemiis procurari\n[[2763.10]] potest, adeoque (per defin.) nec debitum est. </p>\n<p> [[2763.11]] Omne necessarium est licitum, seu ut vulgo enuntiant, necessitas non habet legem.\n [[2763.12]] <tab/>Nam necessarium a nemine adeoque nec a prudente omitti potest, sive\n[[2763.13]] necessarium nullo modo, ac proinde nec praemiis et poenis impediri potest,\n[[2763.14]] ergo (per defin.) nec illicitum est. </p>\n<p> [[2763.15]] Nullum ex quo miseria agentis necessario sequitur, debitum est, seu nemo miser esse\n[[2763.16]] obligatur. </p>\n<p> [[2763.17]] Omne ex quo felicitas agentis necessario sequitur licitum est, seu nemo felix esse\n[[2763.18]] prohibetur.\n [[2763.19]] <tab/>Hae duae propositiones eodem modo demonstrantur. Debita enim aut illicita\n[[2763.20]] praemiis poenisque procurari aut impediri possunt scilicet in recte ratiocinante,\n[[2763.21]] ergo minora bona malave sunt quam ipsa praemia aut ponae. Sed\n[[2763.22]] felicitas et miseria bonorum et malorum maxima sunt (ut constat ex definitionibus),\n[[2763.23]] ergo nec miseria est debita, nec felicitas est illicita. </p>\n<p> [[2763.24]] Ex quo sequitur felicitas communis, id debitum est. </p>\n<p> [[2764.1]] Ex quo sequitur miseria communis id illicitum est.\n [[2764.2]] <tab/>Felicitas enim et miseria communis sunt maximum bonum et malum Societatis\n[[2764.3]] et continent felicitatem et miseriam singulorum. Concurrunt ergo\n[[2764.4]] bonum societatis et prudentia agentis. Hinc etiam singuli recte ratiocinantes\n[[2764.5]] ad felicitatem ferri possunt aut a miseria prohiberi praemiis poenisque neque\n[[2764.6]] enim fieri potest, ut alterius majoris boni malive spe aut metu teneantur. </p>\n","number":"492₄.","title":"De absolute licitis aut illicitis, debitis aut indebitis","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

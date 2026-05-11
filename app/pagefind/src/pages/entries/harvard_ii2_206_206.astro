@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_206","series":"Band II 2 (1686 - 1694)","seq":206,"text":"<p> [[664.1]] <b>208. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[664.2]] Padua, 4. Februar 1693. [196.233.]</b></p>\n<p> [[664.7]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[664.8]] È molto tempo, che non ricevo lettere di V. S. Illu^#'m^#'a, benché l' habbia scritto più volte,\n[[664.9]] pregandola rispondermi per rasserenarmi l'animo, che vive molto turbato, quando non viene\n[[664.10]] assicurato del suo ottimo stato, e della continuatione del di lei patrocinio con suoi pretiosissimi\n[[664.11]] caratteri; mi consola però la viva speranza di ricevere quanto prima sue risposte, non dubitando\n[[664.12]] punto del suo generoso amore, e stimatissima gratia. Questo Eccell^#'m^#'o Capitano fra tre mesi\n[[664.13]] termina il suo reggimento, onde s'avvicina il tempo della mia partenza da me con impatienza\n[[664.14]] per molti motivi sospirata, e quando sarà tutto ben disposto subito ne darò parte a V. S. Illu^#'m^#'a,\n[[664.15]] acciò possa con ogni cautela, e prudenza eseguire quanto hò promesso e risolto per restituirmi\n[[664.16]] una volta a quella quiete, che tanto bramo. Spero che alcuni Cavalieri si risolveranno di\n[[664.17]] mandare i loro figliuoli in Germania per erudirsi nell'Illustre Accademia di Volfembutel,\n[[664.18]] sospesi d'animo fin hora, ed irresoluti, per la naturale antipatia, che hanno gl'Italiani di\n[[664.19]] viaggiare, e collocare i loro figliuoli in Accademie lontane e principalmente in paesi protestanti,\n[[664.20]] creduti ingiustamente da essi Asili dell'impietà, e libertinaggio. Nondimeno io farò quanto\n[[664.21]] potrò per disingannarli, e torli da questo pernicioso, e mostruoso pregiuditio. Procurarò ancora\n[[664.22]] in questo tempo mettere insieme tutto quel che potrò havere della Casa Estense, e tentarò ogni\n[[664.23]] strada per cavare una copia del Diploma del Monastero delle Carceri, memore de' suoi pregiatissimi\n[[664.24]] comandi, e bramosissimo di darle qualche saggio della mia riverente gratitudine. Con\n[[664.25]] l'occasione delle feste baccanali celebrate con infinita pompa in questa Corte, hò contratta\n[[664.26]] stretta amicitia con il Sig^#'r^#'e Carlo della Musa, gentilhuomo nativo di Leone di Francia, uscito da\n[[664.27]] quel regno per materia di Religione, il quale è stato sopraintendente, e capo in tutti li concerti\n[[665.1]] musicali, che si sono qui fatti, con somma sodisfattione di questo Eccell^#'m^#'o Capitano. Egli\n[[665.2]] possiede molti talenti, sona per eccellenza il Violino, il Flauto, ed il Flagioletto, sona e canta\n[[665.3]] all'italiana, ed alla francese con la Violetta di gamba, o vero basso di Viola. È stato Maestro di\n[[665.4]] dansa e lingua francese nel famoso Colleggio di Brescia per lo spatio di anni sei, con la quale\n[[665.5]] occasione hà servito alla più cospicua Nobiltà di Venetia, e Lombardia che concorre a quell'Accademia\n[[665.6]] regolata di Gesuiti molto sodisfatti del buon costume e nobile talento del Sig^#'r^#'e Carlo\n[[665.7]] peritissimo negl'istromenti ed arte di dansare, da esso qui esercitata nel nobile Colleggio de\n[[665.8]] Padri Sommaschi, e chiamato in tutte le funtioni musicali con molto gradimento di questa\n[[665.9]] Nobiltà. Porgo questa notitia a V. S. Illu^#'m^#'a acciò se ve ne fosse bisogno, possa proporre questo\n[[665.10]] degno Soggetto a Sua Altezza, parendomi molto a proposito per la cognitione che hà dello stile\n[[665.11]] così italiano come francese nella dansa, suono, e canto per cotesta Corte ed Accademia di\n[[665.12]] Volfembutel, ed essendo confidentissimo di questa Nobiltà, potrebbe facilitare i miei trattati per\n[[665.13]] indurre a portarsi costì qualche Giovane Nobile italiano. Nel caso, che Sua Altezza inclinasse,\n[[665.14]] sarebbe pensiero il mio persuaderlo ad abbandonare l'Italia, per la Germania, con cui hà molto\n[[665.15]] genio per amore della Religione e della sincerità alemana, non ostante che in questa Paese viva\n[[665.16]] con molta commodità, e guadagni soldi in abbondanza come V. S. Illu^#'m^#'a si potrà da altra banda\n[[665.17]] informare, essendo esso conosciuto abastanza in questo Stato, e da me finhora sperimentato per\n[[665.18]] un Sig^#'r^#'e d'onore che possiede il buono della Natione francese, ed italiana senza molto peccare\n[[665.19]] d'incostanza, e simulatione. La priego consolarmi di qualche suo stimatissimo comando,\n[[665.20]] protestandomi d'inalterabilmente essere </p>\n<p> [[665.21]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o, Oblig^#'m^#'o, Divot^#'m^#'o S^#'r^#'e vero M. A. F. </p>\n<p> [[665.22]] Padova in Corte dell'Ecce^#'m^#'o Capitano 4 Febraio 1693 </p>\n","number":"208.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 4. Februar 1693. [196.233.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

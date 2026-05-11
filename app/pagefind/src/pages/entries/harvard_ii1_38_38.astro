@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_38","series":"Band II 1 (1663 - 1685)","seq":38,"text":"<p> [[115.9]] <b>33a. LEIBNIZ AN PHILIPP JAKOB SPENER</p>\n<p> [[115.10]] Mainz, 11./21. Dezember 1670. [16b.]</b></p>\n<p> [[115.20]] [ ... ] Quod me speciminis hujus juris naturalis participem reddidisti, gratias ago ingentes.\n[[115.21]] Valde delector auctoris non bona tantum voluntate, sed et intelligentia argumenti, quod sumsit\n[[115.22]] in manus. Grotium certe diligenter legit et cum fructu. Video dictionem etiam esse non paulo\n[[115.23]] puriorem, quam qua vulgo uti solent, quod apud me eruditionis semper indicium est. Methodi\n[[115.24]] duo semper genera agnovi, alteram <b>divisivam</b>, alteram <b>scientificam</b> atque, ut sic dicam\n[[115.25]] <b>demonstrativam</b>; illa Rami est, haec Euclidis, utraque suo loco utilis. Ac <b>demonstrativam</b>\n[[115.26]] quidem hactenus in moralibus praeter Thomam Hobbium, sed qui in multis ingenio suo\n[[115.27]] abusus est, adhibuit nemo. <b>Divisiva</b> in hoc specimine non ineleganter expressa est. <b>Divisiva</b>\n[[115.28]] connectit <b>terminos</b> per divisiones, <b>demonstrativa</b> connectit <b>propositiones</b> per\n[[116.1]] demonstrationes. Ceterum an auctor specimen hoc uberiore aliquando tractatione vestire velit,\n[[116.2]] discere ex ipso specimine non possum. Si hoc ei consilium est; potero fortasse, si tanti putat,\n[[116.3]] communicare meum ei in nonnullis, non quidem consilium, hoc enim parum decet non rogatum,\n[[116.4]] sed saltem hortamentum praebere. </p>\n<p> [[116.5]] Celeberrimi Puffendorffii Corpus juris naturalis sub praelo sudare dudum mihi perscriptum\n[[116.6]] est. Vidi et schedam, qua methodus ejus adumbrabatur. Musaei Chiloniensis <i>liber de\n[[116.7]] syncretismo fugiendo</i> prodiit, et audio Wittebergenses jam ad refutationem accinctos. [ ... ] </p>\n","number":"33a.","title":"LEIBNIZ AN PHILIPP JAKOB SPENER","date":"Mainz, 11./21. Dezember 1670. [16b.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

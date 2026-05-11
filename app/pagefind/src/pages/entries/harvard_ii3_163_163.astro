@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_163","series":"Band II 3 (1695 - 1700)","seq":163,"text":"<p> [[423.1]] <b>163. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[423.2]] [Hannover, 1. Hälfte April 1698.] [159.164.]</b></p>\n\n<p> [[423.8]] Gaudeo te benevalere et praeclara agere. Grata erunt quae pro Cartesiana philosophia\n[[423.9]] scripsisti. Ego Atrium, vel si placet Anticameram philosophiae verae vocare soleo; etsi enim\n[[423.10]] erroribus magnis non careat, tamen praeparat animum ad altiora. Rogare memini, ut quae de\n[[423.11]] mea sententia dicturus mihi communicare ante editionem velis, ne forte aliquid irrepserit, quod\n[[423.12]] meis non consentiat, quemadmodum facile fieri potest, cum ex colloquiis hausta scripto consignantur.\n[[423.13]] Hoc tamen ita velim si Tibi non sit molestum, alioqui et ingenio Tuo et erga me\n[[423.14]] benevolentiae plurimum fido. </p>\n<p> [[423.15]] Nondum quidem vacuus factus est locus quem amico congruere puto, spes tamen non\n[[423.16]] modica est, rem eo deventuram. </p>\n<p> [[424.1]] Liber Domini Guglielmini de fluminibus italice scriptus mihi visus est peregregius. An\n[[424.2]] absoluta est <i>physica</i> quam Dominus Renaldinus pollicetur. Vereor ne praeclaris ejus laboribus\n[[424.3]] aetas intercedat, nisi jam affectos habet. R.P. Stephanus de Angelis nihilne posthumum reliquit.\n[[424.4]] An absoluta est editio Alcorani quam dudum promisit P. Maraccius Patavii, ni fallor favente\n[[424.5]] Em^#'o Card. Barbadico. Petri Pauli Vergerii Ms. dignum est, quod non negligatur. Laudo quod\n[[424.6]] Augustinum ex meliore philosophia illustras. Nam etsi omnia non sciverit quae sub umbra ejus\n[[424.7]] poterunt produci, eo tamen ingenio fuit, ut etiam quae ignoravit, scivisse credi mereatur. </p>\n<p> [[424.8]] An lecta Tibi est <i>philosophia mentis et cordis</i> R.P. Ptolemaei Societatis Jesu; virum olim\n[[424.9]] Romae novi et visus est ingenio ac doctrina valere. Librum nondum vidi. Judicium ergo Tuum\n[[424.10]] pergratum erit etc. </p>\n","number":"163.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"[Hannover, 1. Hälfte April 1698.] [159.164.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_260","series":"Band II 1 (1663 - 1685)","seq":260,"text":"<p> [[804.17]] <b>227d. LEIBNIZ AN DETLEV CLÜVER</p>\n<p> [[804.18]] Hannover, 31. August (10. September) 1680. [227c.]</b></p>\n<p> [[804.31]] [ ... ] Quod ad methodum attinet discernendi numerum primitivum a composito distinguendum\n[[804.32]] arbitror. Habetur aliqua utique sed non optima. Quemadmodum enim duplex methodus\n[[805.1]] est addendi (exempli gratia) summam numerorum progressionis Arithmeticae una vulgaris\n[[805.2]] secundum communem addendi rationem, altera per compendium. Ita quoque duae sunt methodi\n[[805.3]] examinandi numeros primitivos, una vulgaris, altera compendiosa. Itaque etsi nulla daretur\n[[805.4]] methodus compendiosa, non ideo problema hoc esset <greek>^%)/aporon</greek>. Dari tamen aliquam non dubito,\n[[805.5]] nec pauca habeo observata non contemnenda sed quae absolvere nondum vacavit. Sed rerum\n[[805.6]] ipsarum prima stamina, idque ut ego Interpretor notiones simplices investigare alterius plane\n[[805.7]] naturae ar<angle bracket>can</angle bracket>um est, et si quid judico cum divisionibus numerorum nihil commune habet,\n[[805.8]] numerorum enim, etiam primitivorum, notio simplex non est. </p>\n<p> [[805.9]] Si Algebra tibi idem est quod Ars inveniendi in mathematicis, fatebor tibi omne problema\n[[805.10]] mathematicum solvi posse per algebram, id est per aliquam Inveniendi artem sed Ego algebram\n[[805.11]] ita sumo, ut vulgo, pro arte extrahendi Radices ex aequationibus simplicibus, planis, solidis,\n[[805.12]] sursolidis, alteriusve gradus. Transcendentia autem voco problemata, quae neque plana sunt\n[[805.13]] neque solida neque sursolida, neque ullius omnino gradus. Exempli causa, Angulum secare in\n[[805.14]] data ratione rectae ad Rectam. Quae problemata etiam per geometriam Cartesii, sive per eas\n[[805.15]] Lineas quas Cartesius solas in Geometriam recipit solvi non possunt. Caeterum Transcendentia\n[[805.16]] commode tractantur per series infinitas, quibus tamen Ego alias adhuc methodos adjiciendas\n[[805.17]] censeo. Non intelligo quid tibi velis cum loqueris de methodo meristica sive distributiva, de\n[[805.18]] insufficientia datorum in incommensurabilibus, de methodo intellectuali, quo gradu suggerat\n[[805.19]] Scientiam, de scientia illa plastica quae omnium rerum varietatem denumerat, ac Leges compositionis\n[[805.20]] sive congressus cum terminis figurarum designat; multo minus quam tu Cabalam\n[[805.21]] figurativam tibi fingas; Pansophiam ab ulla characteristica expectare ridiculum est utique fuerit,\n[[805.22]] quemadmodum et ab analysi ulla, nam multa experimentis tantum cognoscuntur. Sed\n[[805.23]] qua[e]cunque sola ratione, etiam Angelica, investigari possunt, ea proprie per characteristicam\n[[805.24]] et investigata esse hactenus, et imposterum [investigatum] iri et eo longius nos prodituros quo\n[[805.25]] characteristicam magis perfecerimus, iterum tibi affirmo. [ ... ] </p>\n","number":"227d.","title":"LEIBNIZ AN DETLEV CLÜVER","date":"Hannover, 31. August (10. September) 1680. [227c.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

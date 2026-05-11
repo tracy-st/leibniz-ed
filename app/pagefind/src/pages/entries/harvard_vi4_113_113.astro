@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_113","series":"Band VI 4 (1677 - 1690)","seq":113,"text":"[[382.9]] <b>93.  Synthesis, Analysis. Combinatoria, Algebra [1680 bis 1682 (?)]</b>\n [[382.10]] <tab/>[1680 bis 1682 (?)]\n[[383.1]] <b>Synthesis, Analysis</b>\n [[383.2]] <b>Combinatoria, Algebra</b> </p>\n<p> [[383.3]] Pleraque difficiliora non per Algebram sed per Combinatoriam inventa sunt, imo\n[[383.4]] ipsa fundamenta Algebrae per Combinatoriam sunt constituta, nam (exempli causa) quis\n[[383.5]] invenisset summam radicum esse terminum secundum, summam binionum sub radicibus\n[[383.6]] tertium, summam ternionum quartum, etc. nisi quis plura binomia eundem terminum\n[[383.7]] communem habentia, ut <i>x + a, x + b, x + c</i>, etc. id a posteriori agnovisset, et aequationes\n[[383.8]] radicales datam dividentes pro binomio hujusmodi haberi posse cogitasset. Idem tamen\n[[383.9]] potuisset inveniri a priori vel saltem ut inveniretur occasio sumi per analysin, considerando\n[[383.10]] quod ob legem homogeneorum Terminus secundus necessario sit aequalis quantitati\n[[383.11]] ex radicibus simpliciter compositae, et quidem ex omnibus eodem modo, id est\n[[383.12]] summae. Dubium an per aliquem numerum multiplicatae; sed nullum numerum prodire\n[[383.13]] considerando multiplicationem patet. Eodem modo terminus tertius componitur ex binionibus,\n[[383.14]] nam quadrata licet binionibus homogenea in calculum intrare non possunt, quia\n[[383.15]] multiplicatio semper est inter diversas radices. </p>\n","number":"93.","title":"Synthesis, Analysis. Combinatoria, Algebra","date":"[1680 bis 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

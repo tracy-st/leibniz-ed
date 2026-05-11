@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_22","series":"Band II 2 (1686 - 1694)","seq":22,"text":"<p> [[109.14]] <b>23. JOHANN VAGETIUS AN LEIBNIZ</p>\n<p> [[109.15]] Hamburg, 27. November (7. Dezember) 1686. [22.28.]</b></p>\n<p> [[110.1]] Clarissime Vir, Fautor plurimi faciende </p>\n<p> [[110.2]] Ad desiderata abs te consignata quae temporis ratio tulit, Dn. Lic. Placcio misi, is ultima\n[[110.3]] schedae meae verba cum legisset, monuit me, ferri tibi sine impensis, quae velis. Quare mitto\n[[110.4]] quae vides. Nam <i>Harmonicam</i> et <i>Isagogen Phytoscopicam</i>, credo tuis in manibus jampridem\n[[110.5]] esse. D. Capelli <b>amicitae</b> <Fn><i>Am Rande von Leibniz' Hand</i>: Pietatem laudo in Capellum.</Fn> datum est eorum quae mitto alterum. <i>Rariora</i> ejusdem <i>Becceleriana</i>\n[[110.6]] edita eodem nolente a me sunt, si non habes, dabo operam ut exemplar mittendum a\n[[110.7]] possessoribus nanciscar, vendere volunt, et 5000 imperialibus aestimare, comperi. Si quis\n[[110.8]] emptorem conciliet, credo, honorarium illi non defore. Jungianum hoc ita crudum ideo edidi, ut\n[[110.9]] patesceret desiderantibus scriptorum ejus copiam, non esse illa opera, sed variorum operum\n[[110.10]] materiam valde partialem, sed meo judicio, in minimis maximis, utilem alicubi. <i>Mineralia</i> enim\n[[110.11]] quae sub praelo jam pridem sunt, nescio quibus modis ita impediuntur, ut per triennium jam\n[[110.12]] singulis annis non nisi singuli quaterniones potuerint a typotheta obtineri, licet persoluto ante\n[[110.13]] operas pretio. Dupla misi, ut aliis ostendi possent, et si cui placent, illi alterum exemplar cedere,\n[[110.14]] significato tantum ejus mihi nomine, ne forte ei mittam quod jam habet, explebo statim locum,\n[[110.15]] et si expedire judicas, plus quam simplo. Si erunt, quibus, ut jacent, placere possunt (ego\n[[110.16]] quidem optime sic primam editionem curari magis indies magisque persuadeor), quantum per\n[[110.17]] typos hic loci fieri poterit, continuata opera lucem spectabit. </p>\n<p> [[110.18]] Deus te servet, et omnibus hic et aeternum profuturis quam prolixissime beet, ego, cum\n[[110.19]] occasio feret, faciam ut facto ipso deprehendar. </p>\n<p> [[110.20]] Tui cupientissimus cultor Joh. Vagetius </p>\n<p> [[110.21]] Hamb. 27 Nov. 1686.\n [[110.22]] <i>wohnhafft aufm Kattrepel</i>\n [[110.23]] /  Quae adjunxi ea rogo, ut Dn. Lic. <i>von Sode</i> tradantur, gratificaturus vicissim quac[unque]\n[[110.24]] re potero. </p>\n","number":"23.","title":"JOHANN VAGETIUS AN LEIBNIZ","date":"Hamburg, 27. November (7. Dezember) 1686. [22.28.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

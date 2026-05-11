@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_28","series":"Band II 2 (1686 - 1694)","seq":28,"text":"<p> [[135.6]] <b>29. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[135.7]] Hamburg, 4. (14.) Januar 1687. [21.33.]</b></p>\n<p> [[135.17]] I. N. J. C. </p>\n<p> [[135.18]] S. P. Vir Nobilissime et Amplissime </p>\n<p> [[135.19]] Dⁿ^#'e Fautor et Amice honoratissime. </p>\n<p> [[135.20]] Reciprocato prius ex animo anni novi voto, mitto Jungiana nuper a me per <greek>parórama</i>\n[[135.21]] retenta, dum Tabellionum praefectus remittit fasciculum, et de crassitie illius et hic conqueritur.\n[[135.22]] Unde sicuti jussisti haec in majoris epistolae formam complicavi. </p>\n<p> [[135.23]] Accedit Vagetiana deductio desiderata. Ego compositam illam dianoeam facile crediderim\n[[135.24]] ab ignaris hujus consequentiae, per aequipollentiam redigi posse ad simplicem. V. gr. <i>Quiddam\n[[136.1]] quo vescitur simia, est nux. Ergo Quiddam quo vescitur simia est pomum.</i> Similiter consequentiam\n[[136.2]] a rectis ad obliqua seorsim positam omnino per aequipollentias ad aliquam aliam simplicem\n[[136.3]] consequentiam reduci posse plus una ratione puto. Neque id negasse credam Vagetium\n[[136.4]] sed non intellexisse potius mentem tuam, ac forte putasse hanc consequentiam illi quae ab\n[[136.5]] aequipollentiis ducitur tibi dici aequalem, id quod accessio novorum terminorum haud permitteret.\n[[136.6]] Ubi responderes illi, quaeso id facias, si lubet sub sigillo uti vocant volante, ut et ipse\n[[136.7]] haec ad litteras pertinentia sine duplicato tuo labore cognoscam. Vale. </p>\n<p> [[136.8]] T. Ampl. observantiss. V. Placcius. </p>\n<p> [[136.9]] Hamb. 1687. d. 4. Jan. </p>\n<p> [[136.10]] P. S. An reductio a me in Exemplo Jungiano facta sit in omnibus processura multum\n[[136.11]] dubito, quia non est mutua haec consequentia, quod alioqui videretur ex tali deductione fore\n[[136.12]] praesumendum si perpetuo liceat ita supplere. V. gr. <i>Ego suscipio Christi Apostolum vel\n[[136.13]] infantem in ejus nomine. Ergo Ego suscipio Christum ipsum.</i> Non succedet. <i>Quoddam a me\n[[136.14]] susceptum est Apostolus vel infans in ejus nomine. Ergo Quoddam a me susceptum est Christus\n[[136.15]] ipse.</i> Unde major fieret <i>Apostolus vel infans in nomine Christi susceptus est Christus ipse</i>. </p>\n","number":"29.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 4. (14.) Januar 1687. [21.33.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_523","series":"Band VI 4 (1677 - 1690)","seq":523,"text":"[[2327.16]] <b>411.  De salute animae curanda [Februar bis Oktober 1685 (?)]</b>\n [[2327.17]] <tab/>[Februar bis Oktober 1685 (?)] </p>\n<p> [[2328.1]] Cum adeo brevis ac misera haec vita sit, anima autem immortalis, monstri simile est\n[[2328.2]] perinde homines vivere, ac si vita in terris aeterna, futura autem nulla esset. Scimus esse\n[[2328.3]] omnipotentem omniaque cognoscentem Deum, apud quem etiam de verbo otioso reddenda\n[[2328.4]] ratio erit, et tamen ita rem gerimus ac si effugere eum aut circumvenire possemus.\n[[2328.5]] Et cum scena sit terra, in qua quisque personam sibi impositam agit, alibi vero majora sint\n[[2328.6]] quibus destinamur, nos tamen verso studio inania tanquam maxime seria tractamus,\n[[2328.7]] cogitatio autem de bonis illis malisque aeternis pene ad scenicam repraesentationem\n[[2328.8]] rediit, nec animos tangit, aut in vitae ratione instituenda vel commutanda quicquam\n[[2328.9]] potest. Quemadmodum enim homines a comoedia aut fabula audita lectave venientes\n[[2328.10]] statim quicquid hoc est, animo ejiciunt, nec magis ejus in re domestica rationem habent,\n[[2328.11]] quam si audivissent nunquam; ita plerique mortales, et maxime illi, qui sibi prae caeteris\n[[2328.12]] sapere videntur atque eminere, lectis Dei gravissimis admonitionibus, audita concione\n[[2328.13]] vehementi ac fulminea peractis Ecclesiae solennibus, aut recitatis domi precum formulis,\n[[2328.14]] mox statim horum omnium obliti pristinum vitae tenorem servant, veluti si a ludicro\n[[2328.15]] aliquo spectaculo ad vera negotia rediissent. </p>\n<p> [[2328.16]] Quam ego caecitatem hominum nostri seculi in cultissimis Europae regionibus\n[[2328.17]] admirans, multo majorem profecto prudentiam in illis seculis ac gentibus agnosco, quibus\n[[2328.18]] barbariem imputamus. Legimus excessu quodam pietatis olim principes de throno descendisse,\n[[2328.19]] aulicos atque in deliciis nutritos in deserta abiisse aut sese in carceres voluntarios\n[[2328.20]] abdidisse, ut unam salutis curam haberent, et Japonenses scimus, perinde ac veteres\n[[2328.21]] martyres, cum hausta semel Christi fide, intelligerent aeternos tandem cruciatus vel\n[[2328.22]] aeterna gaudia quemque manere, gessisse sese, non tanquam haec lecta aut narrata essent,\n[[2328.23]] quae parum afficere solent, sed tanquam hinc coelum apertum illinc horrenda inferni\n[[2328.24]] praecipitia his oculis viderent. Quod profecto sapere est; nos vero aut occulte infideles\n[[2328.25]] sumus, aut si credimus stultissimi, qui tantas spes tanta pericula quae certissima esse\n[[2328.26]] scimus, tam parvi facimus, tantum quia nihil habent, quod sensus corporeos afficiat,\n[[2328.27]] imaginationemque nostram percellat. Cum tamen hoc ipsum sapientis sit ratione potius\n[[2329.1]] quam sensu duci. Scilicet quia nondum audimus mugientem sub pedibus terram, nec\n[[2329.2]] coelestia illa signa videmus, quae rerum commutationem praecedent, securi in diem\n[[2329.3]] vivimus: at barbari quorum fides efficax fuit, surgent contra nos in illa suprema die,\n[[2329.4]] nostramque nobis pudendam ac pene incredibilem negligentiam exprobrabunt. </p>\n<p> [[2329.5]] Porro prima nobis esse debet salutis nostrae cura, proxima alienae, nam quisquis\n[[2329.6]] Christianus est, imo quisquis immortalem in nobis Spiritum Rectoremque universi Deum\n[[2329.7]] credit, eum sibi persuadere oportet, unam animam, etiam quae praepostere judicantibus\n[[2329.8]] vilissima videtur, omnibus mundi bonis pretiosiorem esse. Itaque magni apud Deum fiunt\n[[2329.9]] eorum labores, qui pietatem solidam, qui veram fidem, qui caritatem catholicae unitatis,\n[[2329.10]] quam latissime diffundere suum esse studium volunt. His quanquam ipsa tam praeclari\n[[2329.11]] conatus conscientia magnum satis operae pretium est, immensa tamen praemia statuit\n[[2329.12]] justissimus remunerator, nam qui haustum frigidae aestuanti datum in rationes retulit,\n[[2329.13]] quid illum huic ut ita dicam spirituali Eleemosynae destinasse censemus, ubi sitientes ex\n[[2329.14]] fonte vivo potantur, ubi nudi veste nuptiali induuntur. Neque dubium est beatas illas\n[[2329.15]] animas, quae in hac mundi faece, ubi usque adeo refrixit caritas, nascentis Ecclesiae\n[[2329.16]] ardorem resuscitarunt, et apud gentes feras ac remotas sese martyrio exposuerunt, ut illos\n[[2329.17]] ipsos servarent, a quibus tam crudeliter laniabantur, dulcissimis cogitationibus dolorem\n[[2329.18]] delevisse. </p>\n","number":"411.","title":"De salute animae curanda","date":"[Februar bis Oktober 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

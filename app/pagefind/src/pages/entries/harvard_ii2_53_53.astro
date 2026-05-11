@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_53","series":"Band II 2 (1686 - 1694)","seq":53,"text":"<p> [[227.14]] <b>54. LANDGRAF ERNST VON HESSEN-RHEINFELS AN LEIBNIZ</p>\n<p> [[227.15]] [Rheinfels, 11. September 1687.] [53.56.]</b></p>\n<p> [[228.6]] Mon cher Mons. Leibnitz </p>\n<p> [[228.7]] Il a bien raison de dire cela car si mesmes il y avoit des milliers entre les Protestants qui ne\n[[228.8]] sçavent ce qu'est droict ou gauche et qui ne peuvent estre reputez en comparaison de scavants\n[[228.9]] que pour des bestes et qui n'adherent que materiellement à l'heresie, certes que cela on ne peust\n[[228.10]] dire de vous, qui avez tant de lumieres et auquel s'il n'y avoit jamais eu aultre que moy seul, on\n[[228.11]] a faict tout ce qu'on a peu, pour vous faire sortir du schisme et vous representer ce qu'il y a en\n[[228.12]] fin à representer. Croyez vous bien (pour de mille ne vous dire qu'un seul article) que Christ\n[[228.13]] aye ainsi constitué son Eglise, que ce qu'un croit blanc l'aultre le croye noir et que pour le\n[[228.14]] Ministere Ecclesiastique il l'aye d'une telle et si faicte façon contradictoire constitué, comme\n[[228.15]] nous et les Protestants sont en cela en debat et comme nous croions et vous croyez? Par\n[[228.16]] exemple nous tenons touts vos Ministres pour laicques et usurpateurs du Ministere et je ne sçais\n[[228.17]] ce que vous pouvez croire des nostres aux vostres ainsi en cet article si opposez. </p>\n<p> [[228.18]] Oh mon cher Mons. Leibniz ne perdez pas ainsi le temps de grace et <i>hodie si vocem\n[[228.19]] Domini audieritis nolite obdurare corda vestra</i>. Christ et Belial ne conviennent ensemble, non\n[[228.20]] plus les Catholiques et les Protestants, et je ne me sçaurois rien promettre de vostre salut, si\n[[228.21]] vous ne vous faittes catholique. </p>\n","number":"54.","title":"LANDGRAF ERNST VON HESSEN-RHEINFELS AN LEIBNIZ","date":"[Rheinfels, 11. September 1687.] [53.56.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_225","series":"Band II 2 (1686 - 1694)","seq":225,"text":"<p> [[717.1]] <b>228. JACQUES-BENIGNE BOSSUET FÜR LEIBNIZ</p>\n<p> [[717.2]] [Meaux, Ende Juni bis Mitte August 1693.] [222.242.]</b></p>\n[[717.24]] <b>Sur l'essence des Corps</b> <Fn><i>In A von Ledieus Hand am Ende des Textes</i>: Copie tirée de l'original même écrit de la main de M. l'Ev. de Meaux <i>und am Rand</i>: 1693.</Fn> </p>\n<p> [[717.25]] Toutes les fois que M. Leibniz entreprendra de prouver que l'essence du Corps n'est pas\n[[717.26]] dans l'etendüe actuelle non plus que celle de l'ame dans la pensée actuelle, je me declare\n[[717.27]] hautement pour luy. J'ay mesme travaillé sur cela et je pretends pouvoir demonstrer par\n[[717.28]] M. Descartes qu'il n'a point un autre sentiment que celuy de l'ecole. En cela donc comme en\n[[717.29]] beaucoup d'autres choses ses Disciples ont fort embroüillé les idées de leur maistre. Les\n[[717.30]] siennes mesme n'ont pas esté fort nettes lors qu'il a conclu l'infinité de l'etendüe par l'infinité\n[[718.1]] de ce vuide qu'on imagine hors du monde. En quoy il s'est fort trompé et je croy que de son\n[[718.2]] erreur on pour[r]oit induire par consequences legitimes l'impossibilité de la creation et de la\n[[718.3]] destruction des substances quoi que rien au monde ne soit plus contraire à l'idée de l'estre\n[[718.4]] parfait que ce Philosophe prend pour principal moyen de l'existence de Dieu. </p>\n<p> [[718.5]] Quant au surplus de la Dynamique je m'en instruirai avec plaisir. Car autant que je suis\n[[718.6]] ennemi des nouveautez qui ont rapport avec la foy autant suis-je favorable s'il est permis de\n[[718.7]] l'avouer à celles qui sont de pure Philosophie par ce qu'en cela on doit et on peut profiter tous\n[[718.8]] les jours tant par le raisonnement que par l'experience. </p>\n","number":"228.","title":"JACQUES-BENIGNE BOSSUET FÜR LEIBNIZ","date":"[Meaux, Ende Juni bis Mitte August 1693.] [222.242.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

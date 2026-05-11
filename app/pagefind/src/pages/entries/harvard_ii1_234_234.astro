@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_234","series":"Band II 1 (1663 - 1685)","seq":234,"text":"<p> [[732.4]] <b>207c. LEIBNIZ AN JEAN GALLOIS</p>\n<p> [[732.5]] [Hannover, 21. Juli 1679.] [189.238.]</b></p>\n<p> [[732.16]] [ ... ] Je ne vous parleray pas icy de belles lettres, MS. et autres curiosités, où ma\n[[732.17]] correspondance pourroit quelques fois estre utile, car cela ne touche pas l'Academie Royale. Je\n[[732.18]] diray seulement un mot de mon grand dessein (s'il m'est permis d'hyperboliser) mais cela n'est\n[[732.19]] qu'à vous, le reste se peut dire aussi à d'autres. Je pretends de donner une langue ou écriture\n[[732.20]] nouvelle et universelle qui fasse en toutes les matieres qui dependent ou autant qu'elles\n[[732.21]] dependent du raisonnement, ce que les caracteres de nombres et d'algebre font en geometrie.\n[[732.22]] Cela est possible et j'en ay demonstration: j'ay un secret asseuré et surprenant pour y arriver et\n[[732.23]] pour obtenir les definitions des principaux termes ordinaires ce qui suffit pour le fondement de\n[[733.1]] cette caracteristique. Car pour ce qui est des extraordinaires il faut consulter les connoisseurs de\n[[733.2]] chaque mestier et je souhaiterois de voir un jour un dictionnaire accomply de quelque langue\n[[733.3]] vivante. Je desirerois aussi un jour les definitions du dictionnaire de l'illustre Academie\n[[733.4]] Françoise. Mais pour ce qui est de mon dessein en luy même, je le tiens tellement au dessus de\n[[733.5]] tous les autres, que toutes les fois que j'y pense bien, cela me donne une vanité ridicule, qui est\n[[733.6]] bien tost rabat[t]ue, quand je considere que je ne l'ay que conceu, et que <i>multa cadunt intra\n[[733.7]] calicem supremaque labra</i>. Car il me faudroit bien du secours pour en venir à bout. Cependant\n[[733.8]] il est seur que les microscopes et les telescopes n'ont pas tant fait pour la veue, que cet organe\n[[733.9]] nouveau feroit pour l'esprit. Jugés Monsieur si j'ay tort de chercher des assistances, et puisque\n[[733.10]] je n'en ay pas besoin pour moy depuis ce que la generosité de mon Prince a fait à mon égard, et\n[[733.11]] que je n'en veux qu'afin de mieux executer les desseins considerables que j'ay pour l'avancement\n[[733.12]] des sciences. </p>\n","number":"207c.","title":"LEIBNIZ AN JEAN GALLOIS","date":"[Hannover, 21. Juli 1679.] [189.238.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

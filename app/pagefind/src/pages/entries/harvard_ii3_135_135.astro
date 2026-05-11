@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_135","series":"Band II 3 (1695 - 1700)","seq":135,"text":"<p> [[359.1]] <b>135. MICHEL ANGELO FARDELLA AN LEIBNIZ </p>\n<p> [[359.2]] Venedig, 2. August [1697]. [131.139.]</b></p>\n\n<p> [[359.7]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[359.8]] Oggi il Sig^#'r^#'e Mendelino m' hà consegnato la lettera di V. S. Ill^#'m^#'a insieme col suo dottissimo\n[[359.9]] Opuscolo. Col'occasione che si parte per costà il Sig^#'r^#'e Mocenigo le trasmetto l'incluse\n[[359.10]] scritture cavate da manuscritti gotici ed antichi, colla speranza che le possano dare qualche\n[[359.11]] lume per l'istoria di cotesta Serenissima Casa. Mi creda che hò fatto quel che si poteva fare in\n[[359.12]] questo Paese. L'altro giorno trovassimo un indice ove si faceva mentione dell'Alfabeto persico\n[[359.13]] cumano, e perciò insieme col Sig^#'r^#'e Conte Bertolli ci portassimo nella pubblica libreria, e\n[[359.14]] facessimo tutte le diligenze per trovarlo, ma in vano. Domani tornaremo a rivedere i manuscritti\n[[359.15]] del Petrarca, e tentaremo tutti i mezi per trovare questo Dittionariolo che c' hà svegliato la\n[[359.16]] curiosità. Coll'ordinario seguente le scriverò più diffusamente, e pregandola dell'onore de' suoi\n[[359.17]] stimatissimi comandi, inalterabilmente mi protesto </p>\n<p> [[359.18]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Oblg^#'m^#'o e Cord^#'m^#'o S^#'r^#'e ed Amico Michel Angelo Fardella </p>\n<p> [[359.19]] Venetia 2 Agosto </p>\n","number":"135.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 2. August [1697]. [131.139.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

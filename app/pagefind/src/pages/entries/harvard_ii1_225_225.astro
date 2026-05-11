@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_225","series":"Band II 1 (1663 - 1685)","seq":225,"text":"<p> [[699.7]] <b>204. NICOLAS MALEBRANCHE AN LEIBNIZ</p>\n<p> [[699.8]] [März 1679.] [197.207.]</b></p>\n<p> [[699.25]] Monsieur </p>\n<p> [[699.26]] Je vous suis tres obligé de l'honneur de vôtre souvenir et de la connoissance du Gentilhomme\n[[699.27]] Allemand que vous m'avez addressé. Il a bien du merite et je voudrois bien qu'il sçust\n[[700.1]] que je l'honore extremement. On donne ici à M. l'Abbé Catelan le livre des <i>conversations\n[[700.2]] Chrêtiennes</i> que vous m'attribuez. Quoique je l'aye lû plus d'une fois je n'y ai point remarqué\n[[700.3]] qu'il avouast qu'il ne fust fait que pour les Cartesiens comme vous le dites. Du reste Monsieur\n[[700.4]] je ne croi pas bien des choses que vous dites de M. Descartes. Quoique je puisse demontrer\n[[700.5]] qu'il s'est trompé en plusieurs endroits je vois clairement ou je suis le plus stupide des hommes\n[[700.6]] qu'il a eu raison dans certaines choses que vous reprenez en lui. Votre lettre me donne la liberté\n[[700.7]] de parler comme je fais. Et si je ne craignois point d'abuser de votre loisir et que je crusse\n[[700.8]] devoir m'appliquer à des choses que j'ai quittées pour m'appliquer à d'autres qui sont plus\n[[700.9]] essentielles je vous prierois de me dire les raisons que vous avez pour deffendre vos sentimens. </p>\n<p> [[700.10]] Le pauvre Monsieur de Galinée est mort en Italie il y a environ un an. Son dessein etoit de\n[[700.11]] voyager quelques années dans l'orient mais il a fini tristement pour nous son voyage environ\n[[700.12]] un mois après etre sorti de Paris. Il y a 6 mois que M. des Billettes a la fievre. Il en est presque\n[[700.13]] revenu. M. Arnaud a aussi été Malade mais il se porte parfaitement bien. L'Auteur des <i>Elemens</i>\n[[700.14]] est maintenant pretre de l'oratoire, il y a environ 2 ou 3 ans que je l'ai mis dans l'oratoire et\n[[700.15]] depuis ce tems il n'a point pensé à l'Algebre. Il va neanmoins revoir son livre pour l'Edition\n[[700.16]] nouvelle quand elle se fera. Le public vous seroit Monsieur tres obligé si vous vouliez donner\n[[700.17]] au jour la Methode que vous avez pour pousser ces sciences comme vous me le faites esperer.\n[[700.18]] On imprime ou l'on a même achevé d'imprimer les <i>lieux Geometriques</i> et <i>la construction des\n[[700.19]] équations</i> de M. de la Hire. Je vous prie Monsieur d'avoir toujours quelque amitié pour </p>\n<p> [[700.20]] Votre tres humble et tres obeissant serviteur Malebranche P. d. L'O. </p>\n<p> [[700.21]] A Monsieur Monsieur Leibnitz Conseiller. </p>\n","number":"204.","title":"NICOLAS MALEBRANCHE AN LEIBNIZ","date":"[März 1679.] [197.207.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

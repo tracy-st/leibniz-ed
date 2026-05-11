@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_33","series":"Band II 1 (1663 - 1685)","seq":33,"text":"<p> [[105.14]] <b>29. LEIBNIZ AN JAKOB THOMASIUS</p>\n<p> [[105.15]] Frankfurt, [3. Oktober] 1670. [17.30.]</b></p>\n<p> [[106.4]] Physica neque elegantius, neque amoenius, quam dialogo explicari possunt. Memini\n[[106.5]] idem facere Bodinum, idem Gualterum Rivium, <i>de vera ratione librae et staterae</i>, sed et in\n[[106.6]] <i>itinere Ecstatico</i> Kircherum, et passim illustrem Boylium, atque inprimis eleganter nuperrime\n[[106.7]] Georgium Sinclarum, in <i>arte nova gravitatis et levitatis</i>: ut tot alios veteres mediosve, ac mediis\n[[106.8]] propiores taceam. Ceterum doctissimum virum Abdiam Treu non ignoras, libros Aristotelis\n[[106.9]] <greek>perì fysikh̃w ăkroásevw</greek> in scientiae formam elementaque, Euclidis exemplo reducere\n[[106.10]] voluisse, ne soli Cartesiani de mathematica methodo gloriarentur. </p>\n<p> [[106.11]] Vidi nuper programma Lipsiense, haud dubie tuum, quo libellum intolerabiliter licentiosum,\n[[106.12]] de libertate philosophandi, pro eo ac merebatur, tractasti. Videtur auctor non tantum\n[[106.13]] politicam, sed et religionem Hobbianam sectari, quam is in <i>Leviathane</i> suo, monstroso, vel\n[[106.14]] tituli indicio, opere sic satis delineavit. Nam et Criticae illius bellissimae, quam in scripturam\n[[106.15]] sacram homo audax exercet, semina integro <i>Leviathanis</i> capite Hobbius jecit. Hobbium ipsum\n[[106.16]] octuagenario majorem repuerascere nuper ex literis responsoriis Henrici Oldenburgii, societatis\n[[106.17]] regiae Anglicanae secretarii, didici. </p>\n<p> [[106.18]] Idem haec recentissima Boylii opera memorat: 1) <i>de formarum et qualitatum origine,</i>\n[[106.19]] 2) <i>de argumento illo, num detur absoluta, seu perfecta quies in corporibus etiam solidissimis,</i>\n[[107.1]] 3) <i>de qualitatibus systematicis, sive Cosmicis,</i> 4) <i>de suspicionibus Cosmicis,</i> 5) <i>de regionum\n[[107.2]] subterranearum iuxta ac submarinarum temperie, deque maris fundo. Quibus accessit ejusdem\n[[107.3]] introductio ad historiam de qualitatibus particularibus.</i> Francof. d. 23 Dec. 1670. </p>\n","number":"29.","title":"LEIBNIZ AN JAKOB THOMASIUS","date":"Frankfurt, [3. Oktober] 1670. [17.30.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

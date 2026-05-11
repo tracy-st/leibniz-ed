@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_219","series":"Band II 2 (1686 - 1694)","seq":219,"text":"<p> [[705.1]] <b>222. JACQUES-BENIGNE BOSSUET FÜR LEIBNIZ</p>\n<p> [[705.2]] [Meaux, 25. Juni 1693.] [214.228.]</b></p>\n<p> [[705.31]] [ ... ] Le <Fn><i>Am Kopf des Konzepts K von fremder Hand</i>: Lettre de M^#'r de Meaux à M^#'d^#'e de Brinon du 25 Juin 1693 <i>und am Kopf der Abschrift A von Ledieus Hand</i>: Entre juin et octobre 1693.</Fn> second doute regarde l'erreur des Monothelites. Avec la permission de M.\n[[705.32]] Leibniz, je m'etonne qu'il regarde cette question comme dependante d'une haute ­Metaphysique.\n[[706.1]] Il ne faut que sçavoir <Fn><i>Leibniz unterstreicht</i> que sçavoir <i>und merkt an</i>: Les Monothelites ne le sçavoient ils pas?</Fn> qu'il y a une ame humaine en J. C. pour sçavoir en meme temps qu'il y a\n[[706.2]] une volonté non seulement en prenant la volonté pour la faculté et le principe, mais encore en la\n[[706.3]] prenant pour l'acte, <Fn><i>Leibniz unterstreicht</i> pour l'acte <i>und merkt an</i>: Ouy. Mais la question est si alors l'acte du verbe et de l'ame, ne font qu'un seul acte. N'y a t-il pas des philosophes, qui croyent, que nous n'agissons qu'<i>actione Dei</i>?</Fn> les facult<angle bracket>ez</angle bracket> n'estant données que pour cela. </p>\n<p> [[706.4]] Ce qu'il dit que les actions sont des supposts selon l'axiome de l'ecole, ne signifie autre\n[[706.5]] chose sinon qu'elles luy sont attribuées <i><b>in concreto</b>: mais non pas que chaque partie n'exerce\n[[706.6]] pas son action propre comme en nous le corps et l'ame le font. Ainsi dans la personne de J. C.\n[[706.7]] le Verbe qui ne change point exerce toujours la mesme action: <Fn><i>Leibniz merkt am Rande an</i>: Tout cela est vray, mais la question est, s'il est tout à fait manifeste et indisputable, on trouvera bien des difficultés là dessus chez les Scholastiques mêmes.</Fn> l'Ame humaine exerce la sienne\n[[706.8]] sous la direction du verbe et cette action est attribuée au mesme verbe comme au suppost. Mais\n[[706.9]] que l'Ame demeure sans son action naturelle, c'est une chose si absurde en elle mesme qu'on\n[[706.10]] ne la comprend pas. <Fn><i>Leibniz merkt am Rande an</i>: Mais un monothelite dira que l'action de l'ame de J.C. et celle du verbe est une meme action. Si on ne le comprend pas, c'e[s]t une autre question.</Fn> Aussi paroist il clairement par les temoignages rapportez dans le concile\n[[706.11]] VI. et par une infinité d'autres qu'on a toujours cru deux volontez mesme quant à l'acte en J. C.\n[[706.12]] et si quelques uns ont cru le contraire c'est une preuve que les hommes sont capables de toute\n[[706.13]] absurdité quand ils ne prennent pas soin de demesler leurs idées: ce qui paroist à la verité dans\n[[706.14]] toutes les heresies: mais plus que dans toutes les autres dans celle des Eutyquiens dont celle des\n[[706.15]] Monothelites est une annexe. [ ... ] </p>\n","number":"222.","title":"JACQUES-BENIGNE BOSSUET FÜR LEIBNIZ","date":"[Meaux, 25. Juni 1693.] [214.228.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_84","series":"Band II 4 (1701 - 1707)","seq":84,"text":"<p> [[274.18]] <b>84. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[274.19]] Venedig, 6. September [1704]. [82.92.] </b></p>\n<p> [[275.4]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Venetia 6. Settembre </p>\n<p> [[275.5]] Nella <Fn><i>Am Kopf der Seite von Leibniz' Hand, mit Verweis auf N. 81</i>: prior 22 Aug.</Fn> settimana passata l'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Marcello, come capo de gli Ecc^#'m^#'i Riformatori\n[[275.6]] dello Studio di Padova, parlò lungamente in Magistrato del Sig^#'r^#'e Herman, in virtù di quel\n[[275.7]] che mi scrisse V. S. Ill^#'m^#'a, e si risolse di doverne subito scrivere in Hannover, ed in Basilea per\n[[275.8]] mezo del loro Residente in Milano, e fù ordinato a me che con l'istesso Ordinario passato ne\n[[275.9]] dovessi scrivere a V. S. Ill^#'m^#'a per sentire lo stipendio che pretende il Sig^#'r^#'e Herman, ogni\n[[275.10]] qualvolta si risolvesse stabilirsi in Padova, il che fù da me subito eseguito; ma per mia disgratia\n[[275.11]] chi avea la cura di consegnare il mio foglio al Sig^#'r^#'e Gianovelli per Sabato caduto, non sò per\n[[275.12]] quale negligenza [lo] consegnò solamente domenica quando era gia partito il Corriere. Il che\n[[275.13]] m'è molto dispiaciuto per non arrivare costì la mia lettera, insieme con quella de Riformatori.\n[[275.14]] Replico per ciò quest'altra che V. S. Ill^#'m^#'a riceverà con il mio foglio della settimana caduta,\n[[275.15]] acciò le sia nota la cagione di questo sconcerto, e si degni solecitare la risposta per non perdere\n[[275.16]] l'occasione, ora che l'Ecc^#'m^#'o Magistrato mostra tanto genio per il soggetto proposto da lei e\n[[275.17]] divotamente riverendola mi resto </p>\n<p> [[275.18]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n","number":"84.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 6. September [1704]. [82.92.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_622","series":"Band VI 4 (1677 - 1690)","seq":622,"text":"[[2755.5]] <b>489.  Methodus jurisconsultorum exemplar methodi medicinae [Herbst 1677 bis Sommer 1678 (?)]</b>\n [[2755.6]] <tab/>[Herbst 1677 bis Sommer 1678 (?)] </p>\n<p> [[2755.10]] Cum Medicina plurimum adhuc Empirica sit et magis quam ulla alia scientia, hinc\n[[2755.11]] plurimus in ea debet esse usus testimoniorum quando unus omnia experiri non potest. Ita\n[[2755.12]] velim quod jurisconsulti fecere praeter necessitatem, id potius facere medicos, et si ulla in\n[[2755.13]] re certe in speciali physica, maxime autem in Medicina Bibliothecam et repertoria, et\n[[2755.14]] excerpta prodesse posse arbitror. Vellem igitur viri diligentes collatis operis innumerabilia\n[[2755.15]] observata, quandoque et judicia medicorum redigerent in Enuntiationes, subjectis\n[[2755.16]] cuique autoritatibus, et aliquando verbis, utentes Methodis Jurisconsultorum qui Regulas,\n[[2755.17]] ampliationes, limitationes, replicationes, duplicationes etc. dederunt, quae res valde facit\n[[2755.18]] ad contrahendam prolixitatem; quali Vigelius usus est, et Rulandus in opere <i>Commissarii.</i> </p>\n<p> [[2755.19]] Exempli causa: Esto <k>Regula</k>: </p>\n<p> [[2756.1]] <b>Frigida actualia, topice adhibita dolores minuunt.</b> </p>\n<p> [[2756.2]] Subjiciantur autores insignes approbantes hanc propositionem generaliter. Item\n[[2756.3]] improbantes ejus generalitatem. Item contrariam tuentes. Subjiciantur et exempla in\n[[2756.4]] utramque partem, quae neque ampliationem neque limitationem continent. His absolutis\n[[2756.5]] ponantur Ampliationes seu exceptiones reprobatae, ubi scil. dubitari poterat an locum\n[[2756.6]] haberet regula. Ratione dolorum <k>ampliatur</k> <b>primo</b> in <b>colica.</b> Hipp. 6 <i>Epid.</i> sect. 8.\n[[2756.7]] ubi notanda verba; <b>secundo</b> in <b>calculo vesicae</b>, vid. Sanctor. in <i>1. Fen.</i> p. 668;\n[[2756.8]] tertio in <b>podagra.</b> Hipp. sect. 5. <i>aph.</i> 25. etc. <k>Exceptio</k> si biliosa non sit podagra.\n[[2756.9]] Ratione frigidorum, excipitur aqua frigida, hanc exceptionem reprobat Hippocr. d.\n[[2756.10]] <i>aph.</i> 25, approbant plerique hodierni, partim in theoria, partim in praxi. Replicatur: si\n[[2756.11]] aqua frigida guttatim instilletur. Hanc replicationem seu defensionem regulae, proponit et\n[[2756.12]] probat Mercurialis. </p>\n","number":"489.","title":"Methodus jurisconsultorum exemplar methodi medicinae","date":"[Herbst 1677 bis Sommer 1678 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

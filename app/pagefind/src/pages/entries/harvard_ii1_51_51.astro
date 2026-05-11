@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_51","series":"Band II 1 (1663 - 1685)","seq":51,"text":"<p> [[142.6]] <b>44a. LEIBNIZ AN JOHANN GEORG GRAEVIUS</p>\n<p> [[142.7]] Mainz, 18./28. Februar 1671. [18.61a.]</b></p>\n<p> [[142.16]] [ ... ] Occasionem ad Te scribendi ex Cl^#'m^#'i Horbii literis sumseram, quibus significavit\n[[142.17]] benevolentiam illam, qua superiores Germanos, cives tuos, omnes, tum eos ex iis potissimum\n[[142.18]] prosequaris, quos verus meliorum literarum amor captos tenet, effecisse, ut nec cogitata mea\n[[142.19]] qualiacunque, quae ille quidem tunc comperta habebat, de emendanda quousque privato fas est,\n[[142.20]] Jurisprudentia, de reducenda ad positiones non multas, quodam velut Edicti perpetui novi\n[[142.21]] specimine, Jurisprudentiae Romanae vastitate, de caeteris omnibus, quae quidem non omnino\n[[142.22]] cum materia subjecta ex rerum natura abiisse constat, ex paucis quibusdam fundamentis\n[[142.23]] ratiocinatione derivandis; de condendis vocabulorum JC^#'t^#'i^#'s peculiarium definitionibus, quales\n[[142.24]] fieri posse illustri specimine docuit Cujacius; de annotandis denique iis quae scientiae civilis\n[[142.25]] ratio Legibus Romanis aut addi, aut adimi postulat, Tibi omnino displicerent. Nam quae\n[[142.26]] alioquin <i>de Arte Combinatoria</i>, seu parte Logicae inventoria, de constituenda <i>Hypothesi Physica\n[[142.27]] nova</i>, singulari quadam simplicitate claritateque phaenomenis satisfactura (quae nunc\n[[143.1]] tribus plagulis comprehensa atque Illustri Societati Regiae Britannicae, cujus Secretarii hortatu\n[[143.2]] et prodiit, inscripta, sub praelo calet), de machinamentis quibusdam fortasse publice profuturis\n[[143.3]] parata sunt, apud Te memorasse, aut nunc etiam memorare prolixius, jactantiae poterat imputari.\n[[143.4]] Nunc quando de redditione priorum literarum dubito, breviter haec repetenda duxi. [ ... ] </p>\n","number":"44a.","title":"LEIBNIZ AN JOHANN GEORG GRAEVIUS","date":"Mainz, 18./28. Februar 1671. [18.61a.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

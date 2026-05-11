@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_112","series":"Band II 3 (1695 - 1700)","seq":112,"text":"<p> [[294.1]] <b>112. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[294.2]] [Hannover,] 26. April (6. Mai) 1697. [111.113.]</b></p>\n\n<p> [[294.10]] Quis autor fuerit libri, suo merito celebris, qui inscribitur <i>Cautio Criminalis in processu\n[[294.11]] contra Sagas</i>, didici ex ore Eminentissimi Electoris Moguntini <b>Johannis Philippi.</b> Nempe\n[[294.12]] is fuit Fridericus <b>Spee,</b> Societatis Jesu Presbyter, ex nobili Westphaliae familia editus, pietate\n[[294.13]] et doctrina praestans: cujus extant libri <greek>ăskhtikoì</greek> plane in genere suo excellentes, et mihi ex\n[[294.14]] commendatione tanti Principis primum noti deinde semper familiares, et per me multis amicis\n[[294.15]] et ipsius et nostrae religionis commendati. Usque adeo, ut me etiam suggerente a nonnullis in\n[[294.16]] praxin traductum fuerit elegans, quod proponit, et Mathematica ratione demonstrat, <b>artificium\n[[294.17]] indesinenter laudandi Deum.</b> Hic tantus vir in Franconia Confessoris munere\n[[294.18]] fungebatur tunc, cum multi in <b>Herbipolitano et Bambergensi</b> tractu sceleratae magiae\n[[294.19]] infamia oppressi comburerentur. <b>Johannes Philippus Schoenbornius,</b> postea Episcopus\n[[294.20]] Herbipolitanus, et postremo Moguntinus Elector Herbipolitanae Ecclesiae Canonicus, in\n[[294.21]] juventute agens cum eo familiaritatem forte contraxit, et cum quaereret juvenis; <b>unde optimo\n[[294.22]] patri plus canitiei, quam pro aetate;</b> ille hoc sibi a sagis venisse, quas ad ignem\n[[294.23]] duxisset. Mirante Schoenbornio, aenigma explicuit <b>Spejus.</b> Nempe se multo studio inquirentem,\n[[294.24]] et jure etiam atque auctoritate confessionis usum, in nemine eorum quos ad ignem\n[[294.25]] comitatus sit, deprehendisse aliquid unde persuasus sit, vere illis magiae crimen improperatum.\n[[294.26]] Simpliciores ubi in confusione quaesisset, ne in nova tormenta proderentur veritos primum se\n[[294.27]] magos dixisse; post hausta fiducia, ubi intellexissent, nil tale a Confessario metuendum, in alia\n[[294.28]] omnia ivisse. Omnes ejulatibus miris, vel inscitiam, vel malitiam judicum, suamque miseriam\n[[294.29]] deplorasse; et ad Deum innocentiae testem in extremis provocasse. Tam miserabili totiesque\n[[294.30]] repetito spectaculo, ita se commotum, ut senuerit ante annos. Cumque processu temporis\n[[294.31]] <b>Schoenbornio</b> factus est familiarior, <b>libri illius auctorem se esse non dissimulavit.</b>\n[[294.32]] <b>Schoenbornius</b> postea ad Episcopatus Principatusque gradum evectus, memorque\n[[295.1]] eorum, quae vir tam gravis narraverat; quoties aliquis, aliquave, hujus sceleris insimulabatur,\n[[295.2]] rem omnem ad suam cognitionem evocavit, et quod ille monuerat, nimis verum deprehendit. Ita\n[[295.3]] hominum combustiones in illo tractu cessavere. </p></p>\n","number":"112.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"[Hannover,] 26. April (6. Mai) 1697. [111.113.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_139","series":"Band VI 4 (1677 - 1690)","seq":139,"text":"[[448.3]] <b>114.  Ad constitutionem scientiae generalis [Frühjahr 1682 (?)]</b>\n [[448.4]] <tab/>[Frühjahr 1682 (?)]\n[[448.5]] <petit> </p>\n<p> [[448.6]] Die Stückgruppe N. 109 bis 115 dürfte in enger zeitlicher Nachbarschaft entstanden sein. Es handelt sich\n[[448.7]] um Bemerkungen und Schriften einerseits zur allgemeinen, für das Projekt der <i>scientia generalis</i> werbenden\n[[448.8]] und sich an eine breite Öffentlichkeit richtenden Vorrede oder Einleitung, andererseits zur speziellen Einleitung\n[[448.9]] zwecks Vorstellung der Methode selber, d.h. im Hinblick auf den methodologisch-wissenschaftstheoretischen\n[[448.10]] Aspekt der <i>scientia generalis</i>. N. 109, unser Stück und N. 115 stellen bereits ausformulierte, mehr oder weniger\n[[448.11]] fragmentarische Versuche solcher Einleitungen dar. N. 111, 112, 113 sind von Leibniz für sich selbst gemachte\n[[448.12]] Notizen, die bei der endgültigen Formulierung Berücksichtigung finden sollten. N. 110 enthält eine Synopsis\n[[448.13]] zum Werk über die <i>scientia generalis</i>, die wohl erstmals diese beiden Aspekte unter dem Titel <i>De statu\n[[448.14]] praesenti eruditionis</i> und <i>elementa veritatis aeternae</i> (letzterer allein wird schon in N. 86 benutzt) einander\n[[448.15]] gegenüberstellt. Während N. 109 den Versuch zu einer Einleitung macht, die diese beiden Perspektiven noch\n[[448.16]] nicht deutlich trennt (ebensowenig wie zuvor in N. 88, zu dem auch vom Duktus her noch nähere Verwandtschaft\n[[448.17]] zu bestehen scheint) und daher vermutlich vor der <i>Synopsis</i> (N. 110) liegt, stellen unser Stück und N. 115\n[[448.18]] separate Ausführungen beider Perspektiven im Sinne von N. 110 dar und liegen deshalb wohl etwas später.\n[[448.19]] Dieses Stück bietet die umfangreichste dieser Einleitungen (nach N. 107 von Mai 1681 und vor N. 161 vom\n[[448.20]] Frühjahr 1686), die Leibniz in seiner späteren Disposition zum Gesamtwerk (N. 158) zu den zwei Titeln\n[[448.21]] <i>Historia literaria</i> und <i>De statu praesenti eruditionis seu Reipublicae literariae</i> erweitert. N. 115 ist der Versuch\n[[448.22]] einer Einleitung, die das wissenschaftliche Desiderat seiner Methode aufzeigen soll, d.h. ist die Einleitung zu\n[[448.23]] den <i>elementa veritatis aeternae</i> seiner <i>scientia generalis</i> im Sinne von N. 110, zu dem auch die gleichlautende\n[[448.24]] Überschrift die Verwandtschaft aufzeigt. </p>\n<p> [[448.25]] Unsere Datierung stützt sich auf das für N. 109, unser Stück und N. 115 gleiche, im Zeitraum von April\n[[448.26]] und Mai 1682 gut belegte Wasserzeichen. N. 110 hat ein zwischen Mai 1682 und Februar 1685 allerdings selten\n[[448.27]] belegtes Wasserzeichen. Aufgrund des dispositionellen Charakters von N. 110, als deren partielle Ausführung\n[[448.28]] man unser Stück und N. 115 ansehen kann, geht aber N. 110 wohl diesen beiden Stücken voran und ist daher in\n[[448.29]] dieselbe Periode zu setzen. Andere äußere Kriterien bestätigen dies für unser Stück, als terminus post quem die\n[[448.30]] von Leibniz erwähnte Wallis-Edition von 1682, als terminus ante quem der zeitpolitische Hintergrund, der\n[[448.31]] Leibniz zu der Frage veranlaßt, ob den Türken ihr Schicksalstag nahe sei, eine Frage, die wohl zumindest nicht\n[[448.32]] mehr nach der entscheidenden Schlacht am Kahlenberg im September 1683 (durch die Wien von der Tür-\n[[449.1]] ­kenbelagerung entsetzt wurde und der Angriffskrieg gegen die Türken begann) so formuliert worden wäre. Für\n[[449.2]] N. 115 kommt hinzu, daß der biographische Exkurs, mit dem das Stück abbricht, in N. 129 von Sommer 1683\n[[449.3]] bis Winter 1684/85 sowie N. 162 von 1686 wiederaufgenommen und zu Ende geführt wird, so daß es jedenfalls\n[[449.4]] vor diesen beiden Aufzeichnungen liegen dürfte. Das Stück N. 111, dessen Wasserzeichen einen breiteren\n[[449.5]] Zeitraum von Sommer 1680 bis Sommer 1684 umfaßt, sowie N. 112 (eine kleine zu N. 113 inhaltlich gehörige\n[[449.6]] Notiz) und N. 113 - beide ohne Wasserzeichen - dürften die Ausarbeitung der <i>elementa veritatis aeternae</i> bzw.\n[[449.7]] die Einleitung dazu vorbereiten und damit vor N. 115 und wohl auch vor unserem Stück verfaßt worden sein,\n[[449.8]] N. 113 möglicherweise allerdings auch später, da die die demonstrative Methode anwendenden Autoren in\n[[449.9]] derselben Ausführlichkeit erst in der Einleitung N. 161 aus dem Jahre 1686 erwähnt werden. </petit> </p>\n","number":"114.","title":"Ad constitutionem scientiae generalis","date":"[Frühjahr 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

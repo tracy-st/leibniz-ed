@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_151","series":"Band II 1 (1663 - 1685)","seq":151,"text":"<p> [[474.10]] <b>135. GEORG HERMANN SCHULLER AN LEIBNIZ</p>\n<p> [[474.11]] Amsterdam, 6. Februar 1677. [136.]</b></p>\n<p> [[474.26]] [ ... ] D. B. de S. vereor, ut brevi nos derelicturus sit, cum phthisis (morbus ipsi\n[[474.27]] haereditarius) indies ingravescere videatur. Demonstrationem, quam petis, circa propositionem,\n[[474.28]] <b>quod in rerum Natura non possunt dari duae aut plures substantiae ejusdem\n[[474.29]] Naturae sive attributi</b> hic addo: <i>Si darentur plures distinctae, deberent inter se distingui,\n[[475.1]] vel ex diversitate attributorum, vel ex diversitate affectionum (per prop. 4.); Si tantum ex\n[[475.2]] diversitate attributorum, concedetur ergo non dari nisi una ejusdem attributi. At si ex diversitate\n[[475.3]] affectionum, cum substantia sit prior Natura suis affectionibus (per prop. 1.) depositis\n[[475.4]] ergo affectionibus, et in se considerata, h.e. (per def. 3. et [axiom.] 6.) vere considerata, non\n[[475.5]] poterit concipi ab alia distingui, h.e. (per prop. 4.) non poterunt dari plures, sed tantum una,\n[[475.6]] Q.E.D.</i> </p>\n<p> [[475.7]] Objectiones tuas si reddere proximis dignaberis, sedulo curabo, ut clarius atque distinctius\n[[475.8]] solvantur, dummodo possibile. [ ... ] </p>\n<p> [[475.9]] Dabam Amstelodami 6 Februar. 1677. </p>\n<p> [[475.10]] <i>A Monsieur Monsieur Leibniz Conseiller de S.A.S. de Hannover. Hannover.</i> </p>\n","number":"135.","title":"GEORG HERMANN SCHULLER AN LEIBNIZ","date":"Amsterdam, 6. Februar 1677. [136.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

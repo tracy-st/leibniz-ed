@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_138","series":"Band II 4 (1701 - 1707)","seq":138,"text":"<p> [[457.1]] <b>138. LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE</p>\n<p> [[457.2]] [Hannover, 19. August] 1706. [131.] </b></p>\n<p> [[457.18]] Monsieur </p>\n<p> [[457.19]] Je n'ay point appris si l'Analogie de mon Arithmetique Binaire avec les anciennes figures\n[[457.20]] chinoises de Fohi a esté inserée dans vos <i>memoires</i>, car ils me viennent fort tard. </p>\n<p> [[457.21]] Quelcun m'a expliqué comment vous l'entendiés en disant qu'on n'insere rien de polemique\n[[457.22]] dans le present <i>journal des savans</i>, c'est à dire qu'on n'y met aucunes contestations; s'il\n[[457.23]] y a une telle loy je n'ay rien à dire, quoyque je n'en conçoive point la raison lors que ces\n[[457.24]] contestations sont sans aigreur; les journaux estant un moyen de communication publique entre\n[[457.25]] les gens de lettres; sans qu'ils soyent obligés pour cela a faire des livres. Cependant j'eusse\n[[458.1]] souhaité que mon papier eut esté rendu, parceque mes brouillons différent souvent de ce que\n[[458.2]] j'envoye. Vous recevres presentement, Monsieur, un Essay Physique que j'ay adressé à\n[[458.3]] Mons. l'Abbé Bignon avec cette lettre. Cet Essay pourra estre mis dans vos <i>Memoires</i> de\n[[458.4]] l'Academie si on le juge à propos. Et je suis tousjours parfaitement Monsieur etc. </p>\n<p> [[458.5]] A Monsieur des Fontenelles Secretaire de l'Academie Royale des Sciences </p>\n","number":"138.","title":"LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE","date":"[Hannover, 19. August] 1706. [131.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

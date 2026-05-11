@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_233","series":"Band II 4 (1701 - 1707)","seq":233,"text":"<p> [[708.1]] <b>233. LEIBNIZ AN DEMOISELLE LETI</p>\n<p> [[708.2]] Hannover, 19. Dezember 1707. [234.] </b></p>\n<p> [[708.13]] Hanover ce 19 Xbr. 1707\n [[708.14]] Mademoiselle </p>\n<p> [[708.15]] Vous <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A M^#'l^#'l^#'e Leti</Fn> estes peutestre curieuse de savoir ce que vous m'avés envoyé, et quand vous ne le\n[[708.16]] seriés pas, c'est assés que vous pourriés l'estre. Ainsi je vous le dois communiquer, Mademoiselle,\n[[708.17]] en vous en remerciant. </p>\n<p> [[708.18]] J'y joins ma reponse à Monsieur Coste, quoyque je m'imagine bien qu'elle ne sera point\n[[708.19]] un objet de vostre curiosité. Mais je le fais pour vous supplier de l'envoyer à Monsieur vostre\n[[708.20]] beaufrere, qui vous aura envoyé apparement la lettre de M. Coste pour moy, et je laisse la\n[[708.21]] mienne ouverte, à fin qu'il la puisse lire, et que je puisse profiter de son jugement, autant qu'il\n[[708.22]] le trouvera à propos. Cependant je le remercie tres humblement de ses soins. </p>\n<p> [[708.23]] La lettre de M. Coste estant écrite au mois d'Aoust, sur le bruit qui couroit des merveilles\n[[708.24]] prophetiques des Sevennois refugiés à [Londres], je m'imagine qu'il saura mieux apresent ce\n[[708.25]] qu'il en faut juger, et qu'il nous en pourra donner plus d'éclaircissement. Le tribunal où ils ont\n[[708.26]] esté appellés ne leur a point esté favorable à ce que la gazette nous apprend. Je ne m'en étonne\n[[709.1]] pas, et je suis seulement en peine de M. Fatio, gentilhomme Suisse tres habile, qu'on dit avoir\n[[709.2]] esté mêlé dans cette affaire, abusé sans doute par des belles apparences. </p>\n<p> [[709.3]] J'aurois l'honneur de vous venir faire la reverence, quand je sortiray, et de reprendre la\n[[709.4]] lettre de M. Coste, cependant je suis avec respect </p>\n<p> [[709.5]] Mademoiselle vostre tres humble et tres obeissant serviteur Leibniz </p>\n","number":"233.","title":"LEIBNIZ AN DEMOISELLE LETI","date":"Hannover, 19. Dezember 1707. [234.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

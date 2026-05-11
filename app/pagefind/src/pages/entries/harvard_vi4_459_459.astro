@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_459","series":"Band VI 4 (1677 - 1690)","seq":459,"text":"[[2040.1]] <b>372.  Tentamen de Physicis motuum coelestium Rationibus [Frühjahr 1689 bis Herbst 1689 (?)]</b>\n [[2040.2]] <tab/>[Frühjahr 1689 bis Herbst 1689 (?)]\n[[2040.14]] <tit2><b>Tentamen de Physicis motuum coelestium Rationibus</b></tit2> </p>\n<p> [[2040.15]] Astronomi superiorum temporum, ut Machinam Mundi explicarent, orbes solidos\n[[2040.16]] commenti sunt, aliis rursum exiguis orbibus mobilibus insertis excavatos, quibus infixi\n[[2040.17]] planetae compositis pro Astronomi libitu motibus, circumagi possent. Nec contemnenda\n[[2040.18]] illa meditatio fuit, in ea infantia philosophiae, saltem enim imaginationi regendae inservire\n[[2040.19]] poterat, sed a veritate naturae longissime dissidebat. </p>\n<p> [[2040.20]] Primus Tycho apparatum ex coelo sustulit, orbesque fluidos et phaenomenis et\n[[2040.21]] rationibus consentire ostendit, quem posteriores magno applausu sunt secuti. Sed inde\n[[2040.22]] visa est augeri difficultas, neque enim apparebat, quid in libero aethere regeret planetas,\n[[2040.23]] intelligentias enim gubernatrices affingere, perabsurdum, et divino artificio indignum\n[[2040.24]] merito videbatur. Sympathiae autem et Magnetismi, etsi quadam Analogia juvarent,\n[[2040.25]] menti tamen non satisfaciebant, cum explicatione nova indigere judicarentur. </p>\n<p> [[2041.1]] Non ita pridem Galilaeo, Torricellio, Cartesio, aliisque Philosophiae restauratoribus\n[[2041.2]] in mentem venit, Materiam aetheream ad Oceani cujusdam morem constanti motu actam,\n[[2041.3]] secum rapere planetas. Res ergo eo rediit, ut <b>Orbes</b> quidem <b>deferentes</b>, sed <b>fluidi</b>\n[[2041.4]] ad motus coelestes explicandos requirantur. Sed quomodo ex certa regula motuum aetheris\n[[2041.5]] liquidi, orirentur motus planetarii Leges, nemo quod sciam explicare aggressus est, et\n[[2041.6]] ipse Cartesius velut desperatum, silentio transmisit. </p>\n<p> [[2041.7]] Keplerus, vir maximi sane ingenii, Tychonicis observationibus adjutus, cum multa\n[[2041.8]] tentasset, varieque phaenomena numeris explicata improbo labore comparasset, tandem\n[[2041.9]] duas invenit regulas Generales nempe <b>primo</b> Motum Planetarium esse in Ellipsi, in\n[[2041.10]] cujus foco sit sol, <b>secundo</b> tempora esse ut sectores Ellipticos ex sole tanquam foco\n[[2041.11]] abscissos. Verum cum arearum proportio vera licet et succedens minus simplex videretur,\n[[2041.12]] omnesque ad lineas et angulos potius inclinarent, rem per varias motuum compositiones\n[[2041.13]] ex circulis determinatis derivatas, explicare sunt conati Ismael Bullialdus, Sethus Wardus,\n[[2041.14]] aliique viri insignes, qui Kepleri coepta sunt prosecuti. </p>\n<p> [[2041.15]] Tandem mihi haec ante annos aliquot profundius meditanti incidit ratio mire simplex,\n[[2041.16]] motuum Planetariorum causas Physicas explicandi unde apparet, tantum abesse ut\n[[2041.17]] arearum proportio difficilis habenda sit, ut potius ex simplicissimis materiae aethereae\n[[2041.18]] motibus statim nascatur, quod hoc loco paucis explicare operae pretium erit. </p>\n<p> [[2042.1]] Nimirum videmus baculum vel axem erectum ad perpendiculum in vase aqua pleno\n[[2042.2]] circa se rotatum, omnem aquam et innatantes festucas circumagere, sic tamen ut vicina\n[[2042.3]] centro velocius, remotiora tardius circulentur, quod jam et ab aliis est annotatum. Pono\n[[2042.4]] igitur quod est simplicissimum, velocitates materiae aethereae deferentis in orbe cujusque\n[[2042.5]] planetae decrescere in proportione distantiarum a sole, seu Geometrica phrasi, velocitates\n[[2042.6]] esse distantiis a sole reciproce proportionales, eamque <b>circulationem</b> voco <b>harmonicam</b>,\n[[2042.7]] ostendo enim si distantiae sint progressionis Arithmeticae, circulandi velocitates\n[[2042.8]] hoc modo fore progressionis Harmonicae. </p>\n<p> [[2042.9]] Hinc jam Geometrica demonstratione conficio in omni mobili, quod Harmonica\n[[2042.10]] circulatione circa aliquod centrum agitur, vel a materia aetherea harmonice circulante\n[[2042.11]] defertur, quemcunque mobile demum habeat motum proprium accedendi ad centrum vel\n[[2042.12]] a centro recedendi, tempora arcubus orbitae describendis impensa, fore ut areas, radiis ex\n[[2042.13]] centro circulationis ad arcus terminos ductis abscissas. </p>\n<p> [[2042.14]] Caeteras horum motuum, abditas sane ac mirificas, sed simplices non minus, ac\n[[2042.15]] naturae consentaneas rationes, quibus demonstratis spes est, faciliorem nobis paulatim\n[[2042.16]] aditum in rerum interiora factum iri, alias uberius exponemus. <Fn><i>In L^#'1 befinden sich am Kopf des Blattes folgende Figuren, die ersten beiden gestrichen</i>:  <picture>104</picture> </Fn> </p>\n","number":"372.","title":"Tentamen de Physicis motuum coelestium Rationibus","date":"[Frühjahr 1689 bis Herbst 1689 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

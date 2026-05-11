@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_379","series":"Band VI 4 (1677 - 1690)","seq":379,"text":"[[1642.1]] <b>322.  De mundi perfectione continuo augente [März 1689 bis März 1690 (?)]</b>\n [[1642.2]] <tab/>[März 1689 bis März 1690 (?)] </p>\n<p> [[1642.7]] Expensis omnibus credo Mundum continuo perfectione augeri, neque in circulum\n[[1642.8]] redire velut per revolutionem. Ita enim causa finalis abesset. Et licet in Deo non sit\n[[1642.9]] voluptas, est tamen hoc voluptati analogum, ut perpetuo consiliorum successu gaudeat.\n[[1642.10]] Nulla autem voluptas foret, sed stupor, si persisterem in eodem statu, utcunque egregio.\n[[1642.11]] Felicitas postulat perpetuum ad novas voluptates perfectionesque progressum. Equidem\n[[1642.12]] Deo omnia quasi praesentia sunt, cunctaque in se ipse complectitur, executio tamen\n[[1642.13]] tempore indiget; nec debuit vel summa statim efficere, alioqui nulla amplius mutatio\n[[1642.14]] esset, nec transire ab aequali ad aequale, alioqui nullus in agendo scopus esset. Universum\n[[1642.15]] est ad instar plantae aut animalis hactenus ut ad maturitatem tendat. Sed hoc interest,\n[[1642.16]] quod nunquam ad summum pervenit maturitatis gradum, nunquam etiam regreditur aut\n[[1642.17]] senescit. </p>\n","number":"322.","title":"De mundi perfectione continuo augente","date":"[März 1689 bis März 1690 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

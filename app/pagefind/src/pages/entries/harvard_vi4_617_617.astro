@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_617","series":"Band VI 4 (1677 - 1690)","seq":617,"text":"[[2736.14]] <b>485₁.  Index partium et capitum\n[[2736.15]] <tab/>Typus Medicinae Moralis\n [[2736.16]] I. <tab/><b>Physiologia moralis</b> de Hominis natura et bonis. <tab/>pag. 5.\n [[2736.17]] II. <tab/><b>Hygieine moralis</b> de summo Bono et virtutibus moralibus. <tab/>p. 124.\n [[2736.18]] III.<tab/><b>Nosologia moralis</b> de summo malo et vitiis moralibus. <tab/>p. 148.\n [[2736.19]] IIII.<tab/><b>Semeiotica moralis</b> de signis malorum et bonorum morum. <tab/>p. 175.\n [[2736.20]] V.<tab/><b>Therapeutica moralis</b> de remediis et emendatione morum. <tab/>p. 209.\n [[2736.21]] <b>Diaet<angle bracket>a - </angle bracket></b> libello <angle bracket> - </angle bracket> explicatur; <angle bracket>diaetetica</angle bracket> moralis partiti<angle bracket>oni</angle bracket>bus delineatur partis\n[[2736.22]] ultimae c<angle bracket>ap.</angle bracket> ulti<angle bracket>mo.</angle bracket>\n [[2737.1]] <k>Phy<tab/>siologia</k> <tab/>cap. <tab/> 1. <tab/>de Bonis, malis, et operationibus humanis in genere\n [[2737.2]] <tab/>cap. <tab/> 2. <tab/>de Homine ejusque anima in genere\n [[2737.3]] <tab/>c. <tab/> 3. <tab/>de Mente\n [[2737.4]] <tab/>c. <tab/> 4. <tab/>de voluntate\n [[2737.5]] <tab/>interna <tab/>c. <tab/> 5. <tab/>de corpore ejusque bonis et malis\n [[2737.6]] <tab/>c. <tab/> 6. <tab/>de unione animae et corporis,\n [[2737.7]] <tab/>eaque naturali seu involuntaria\n [[2737.8]] <tab/>c. <tab/> 7. <tab/>de adscititia seu de moribus\n [[2737.9]] <tab/>c. <tab/> 8. <tab/>De mundo et speciatim de aspectabili corporeo\n [[2737.10]] <tab/>externa <tab/>c. <tab/> 9. <tab/>de Mundo Humano, seu genere humano\n [[2737.11]] <tab/>c. <tab/>0. <tab/>De Mundo spiritali, et speciatim de Deo\n [[2737.12]] <k>Hygieine</k> <tab/>cap.<tab/> 1. <tab/>de Pietate\n [[2737.13]] <tab/>c. <tab/> 2. <tab/>de Temperantia\n [[2737.14]] <tab/>c. <tab/> 3. <tab/>de Fortitudine\n [[2737.15]] <tab/>c. <tab/> 4. <tab/>de Charitate sive justitia\n [[2737.16]] <tab/>c. <tab/> 5. <tab/>de communibus virtutum et spe futurae vitae\n [[2737.17]] <k>Nosologia</k> <tab/>c. <tab/> 1. <tab/>de impietate\n [[2737.18]] <tab/>c. <tab/> 2. <tab/>de intemperantia\n [[2737.19]] <tab/>c. <tab/> 3. <tab/>de impotentia\n [[2737.20]] <tab/>c. <tab/> 4. <tab/>de injustitia et inimicitia\n [[2737.21]] <tab/>c. <tab/> 5. <tab/>communia vitiorum et de futurae poenae metu\n [[2737.22]] <k>Semeiotica</k> <tab/>c. <tab/> 1. <tab/>de Examine Morali in genere et signis\n [[2737.23]] <tab/>c. <tab/> 2. <tab/>de triplici examine quo cognoscimus\n [[2737.24]] <tab/>) vel statum bonitatis aut malitiae moralis,\n [[2737.25]] <tab/>) vel certam virtutem certumve vitium, vel\n [[2737.26]] <tab/>) circumstantias singulares\n [[2737.27]] <tab/>c. <tab/> 3. <tab/>de examine nostri, et conscientia\n [[2737.28]] <tab/>c. <tab/> 4. <tab/>de examine morum alienorum\n [[2737.29]] <k>Therapeutica</k> <tab/>c. <tab/> 1. <tab/>de remediis in genere et generalibus\n [[2737.30]] <tab/>c. <tab/> 2. <tab/>de Methodo medendi generali\n [[2737.31]] <tab/>c. <tab/> 3. <tab/>de remediis praeparantibus,\n [[2737.32]] <tab/>inprimis evitationis exercitio\n [[2738.1]] <tab/>c. <tab/> 4. <tab/>de remediis praeservatoriis seu purgatoribus,\n [[2738.2]] <tab/>et exercitio imminuendi actus vitiosos\n [[2738.3]] <tab/>c. <tab/> 5. <tab/>de remediis curatoriis seu exercitio virtutum\n [[2738.4]] <tab/>c. <tab/> 6. <tab/>de remediis minus aptis,\n [[2738.5]] <tab/>et postremo <b>de diaetetica morali</b> </p>\n","number":"485₁.","title":"Index partium et capitum","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

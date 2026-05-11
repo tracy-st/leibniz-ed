@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_396","series":"Band VI 4 (1677 - 1690)","seq":396,"text":"[[1680.11]] <b>332₁.  Confessiones Augustini. Metaphysica Augustini CONFESSIONES AUGUSTINI. METAPHYSICA AUGUSTINI\n[[1680.13]] <b>Confessiones Augustini</b>\n [[1680.14]] <b>Metaphysica Augustini</b> </p>\n<p> [[1680.15]] De natura animae, de memoria, de tempore, de incorporeis, deque aliis rebus\n[[1680.16]] metaphysicis praeclarae meditationes apud Augustinum habentur, in libris <i>Confessionum</i>\n[[1680.17]] inprimis libro 10 et 11. </p>\n<p> [[1680.18]] Dialecticus Augustinus lib. 7 <i>Confess.</i> cap. 12. </p>\n<p> [[1680.19]] Photini sententiam de Christo primum habuit, lib. 7, cap. 19. </p>\n<p> [[1681.1]] Hebraeae linguae imperitus lib. XI, cap. 3. </p>\n<p> [[1681.2]] Orat pro matre defuncta lib. 9, cap. 13. </p>\n<p> [[1681.3]] <i>Quisquis autem tibi enumerat vera merita sua, quid tibi enumerat nisi munera tua.\n[[1681.4]] O si cognoscant se homines et si gloriantur in Domino glorientur</i> lib. IX, cap. 13. </p>\n<p> [[1681.5]] Orat pro matre defuncta IX, 13. </p>\n<p> [[1681.6]] <i>Hortensii</i> Ciceronis lectio, quae est exhortatio ad philosophiam sive studium sapientiae,\n[[1681.7]] primum mentem ejus tetigit, animumque ad Deum direxit; nam ait: <i>Hortensius</i>\n[[1681.8]] Ciceronis ad te ipsum Domine, <i>mutavit preces meas</i> etc. [lib. 3, cap. 4]. </p>\n<p> [[1681.9]] Loquens de peccatis pueritiae suae, inquit: <i>Et tamen peccabam Domine Deus,\n[[1681.10]] ordinator et creator omnium rerum naturalium, peccatorum autem tantum non ordinator.\n[[1681.11]] Confession.</i> lib. 1, c. [10]. </p>\n<p> [[1681.12]] Opus Augustini <i>de Civitate Dei</i> doctissimae est varietatis, sed libri <i>Confessionum</i>\n[[1681.13]] profundissimae sunt veritatis. </p>\n","number":"332₁.","title":"Confessiones Augustini. Metaphysica Augustini","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

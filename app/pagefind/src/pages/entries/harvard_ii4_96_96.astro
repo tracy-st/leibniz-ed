@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_96","series":"Band II 4 (1701 - 1707)","seq":96,"text":"<p> [[305.1]] <b>96. DAMARIS LADY MASHAM AN LEIBNIZ</p>\n<p> [[305.2]] Oates, 24. November (5. Dezember) 1704. [91.105.] </b></p>\n<p> [[305.13]] S^#'r Oates 24 Novbr. 1704. </p>\n<p> [[305.14]] It being a long while since the date of your First Letter to me, thō not very long since I\n[[305.15]] receiv'd it; the High value that I have for the Honour of your Correspondence makes me fear\n[[305.16]] incuring the suspicion of a neglect I can never be Guiltie of in your regard; and induces me now\n[[305.17]] to write, thō the loss I have but lately had; and since That the solicitous Care which attends the\n[[305.18]] first sending an onely Child into the world under his own Conduct, dos at present much\n[[305.19]] indispose me. </p>\n<p> [[305.20]] Yours of the 16^#'t^#'h of Sept^#'b^#'r came not to my Hands till our 31 of October: the day wherin\n[[305.21]] was Perform'd the last office to one that had been my Freind above half my life time. M^#'r Locke\n[[305.22]] I meane. A Freind who thō very Accidentally an Acquaintance and Perfectly unknown to my\n[[305.23]] Familie, has supplyd to me the Plan of a Father, and Brother: and to whose Direction, next to\n[[305.24]] the Favour of God, I cheifly ascribe it if my Son (as I have reason to Hope) be Bless'd with a\n[[305.25]] <k>Sound Mind</k> in a <k>Sound Body</k>. But This has been but the Best Effect of M^#'r Locks Freindship,\n[[305.26]] not the onely one: for he has in his last Will left to my Son (or in case of his Death to myself) a\n[[305.27]] legacie in money of a value seldom givn by Any to such as are no way related: with other Gifts\n[[305.28]] to him amongs which is the division of his Librarie betwixt him, and his Kinsman and Executor\n[[305.29]] M^#'r Peter King; a man of great Worth on many Accounts; and Particularly as a member of\n[[305.30]] Parliament (wherin no one is Beleev'd more immoveably True to the Protestant Interest). </p>\n<p> [[306.1]] In telling you thise Obligations which I have had to M^#'r Locke, I shall, I hope, make my\n[[306.2]] excuse, if the Tribute which I pay of a well Merited Affection to the Memorie of this\n[[306.3]] Extraordinarie Freind, as well as Extraordinarie Man, unfits me yet for other Thought than such\n[[306.4]] as the Heart Dictates. </p>\n<p> [[306.5]] Your 2^#'d Letter came to my Hands but two days since. I have no remembrance of it at\n[[306.6]] present if M^#'r Locke has ever explain'd to me his Thoughts concerning the Production of Matter.\n[[306.7]] That This is less Inconceivable than the Creation of an Immaterial Substance was what I\n[[306.8]] imagin'd before I knew M^#'r Locke, which has made me, perhaps, more inadvertant than I should\n[[306.9]] else have been to what he intimates in the Chapter you cite. </p>\n<p> [[306.10]] Not long since, the Library Keeper of the Universitie of Oxford desir'd of M^#'r Locke, for\n[[306.11]] the Bodleian Library, the Books of which he was the Author. </p>\n<p> [[306.12]] M^#'r Locke in return to this request, Presented to the said Library All the Books Publish'd\n[[306.13]] under his Name. </p>\n<p> [[306.14]] But in a Codicil to his Will he takes Notice That he had not been herein understood fully\n[[306.15]] to have answer'd the request made him; it being suppos'd he was the Author of other Treatises\n[[306.16]] to which his Name was not prefix'd. <b>In Complyance therefore,</b> he says, <b>with what was\n[[306.17]] desir'd, in the utmost extent of it, and in acknowledgment of the Honour done\n[[306.18]] him in thinking his Writings Worthy to be plac'd amongst the Works of the\n[[306.19]] Learned, in that August Repositorie; he dos further give to the Publick Library\n[[306.20]] of the Universitie of Oxford these following Books</b>, which are; </p>\n<p> [[306.21]] <i>Three letters Concerning Tolleration.</i> </p>\n<p> [[306.22]] <i>Two Treatises of Goverment.</i> </p>\n<p> [[306.23]] <i>The Reasonableness of Christianitie as deliver'd in the Scriptures.</i> </p>\n<p> [[307.1]] <i>A Vindication of the Reasonableness etc. from M^#'r Edwards Reflections.</i> </p>\n<p> [[307.2]] <i>A 2d Vindication of the Reasonableness of Christianitie.</i> </p>\n<p> [[307.3]] <b>These</b> he says <b>are All the Books whereof he was the Author, Publish'd\n[[307.4]] without his Name.</b> and many other Anonymous Books besides These, haveing been Attribut'd\n[[307.5]] to M^#'r Locke. I thought you Might not be Unwilling to know what he truely did Write, and\n[[307.6]] what was not His; which has made me Transcribe this so <k>Solemn a Declaration.</k> If you have\n[[307.7]] read the <i>Reasonableness of Christianitie as deliverd in the Scriptures.</i> I should be very glad to\n[[307.8]] know your Thoughts of it. If you have not seen this Book, I desire to Present you with it. It was\n[[307.9]] long ago Translated into French by a Person whom I have been Happy in haveing for\n[[307.10]] Praeceptor to my Son. <b>Mons^#'r Coste,</b> the Translator of M^#'r Lockes <i>Essay</i>. </p>\n<p> [[307.11]] I am much oblig'd to you S^#'r for your good Wishes. They will always be a Pleasure to, and\n[[307.12]] always return'd by </p>\n<p> [[307.13]] Your Most Humble Servant Da Masham. </p>\n","number":"96.","title":"DAMARIS LADY MASHAM AN LEIBNIZ","date":"Oates, 24. November (5. Dezember) 1704. [91.105.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

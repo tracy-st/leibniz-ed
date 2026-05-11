@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_29","series":"Band II 2 (1686 - 1694)","seq":29,"text":"<p> [[136.16]] <b>30. JOHANN VAGETIUS FÜR LEIBNIZ</p>\n<p> [[136.17]] Hamburg, 4. (14.) Januar 1687. [28.34.]</b></p>\n<p> [[137.1]] <i>Log. Hamb.</i> III. XXXIII. <i>Leibniz exemplifiziert am Rand</i>:\n [[137.2]] ^&!(^#g511)<i>O. A est B</i>. <i>Gra</i><greek><i>f</i></greek><i>ice est ars</i>,\n [[137.3]] <i>E. O. C ad aliquod A,</i> <i>Ergo omne Discens aliquam</i>\n [[137.4]] <i>est C ad aliquod B.</i> <i>Graphicen est discens aliquam artem</i>\n [[137.5]] Si non, utique Si non, utique\n [[137.6]] § 2. 3. 4 <i>Q. C ad aliquod A,</i> <i>Qu. Discens aliquam Gra</i><greek><i>f</i></greek><i>icen</i>\n [[137.7]] <i>non erit C ad aliquod B.</i> <i>non erit discens aliquam artem</i>\n [[137.8]] Esto, si potest, Esto si potest\n [[137.9]] <i>D</i>, illud <i>C ad aliquod A</i>, <i>Titius discens aliquam gra</i><greek><i>f</i></greek><i>icen</i>\n [[137.10]] <i>quod non sit, C ad aliquod B.</i> <i>qui non sit discens aliquam artem</i>\n [[137.11]] Jam, quia Jam quia\n [[137.12]] ^&!(^#g523) <i>D est C ad aliquod A</i>, <i>Titius est discens aliquam gra</i><greek><i>f</i></greek><i>icen</i>\n [[137.13]] utique, per Inversionem utique per ...\n [[137.14]] relationis, (rejectu impossibilem\n [[137.15]] omni illi, qui novit et fatetur,\n [[137.16]] correlata se mutuo ponere,\n [[137.17]] quod faciunt, qui ratione utuntur,\n [[137.18]] omnes)\n [[137.19]] <i>Q. A, erit, ad quod C,</i> <i>quaedam graphice erit id quod</i>\n [[137.20]] <i>est D</i>. <i>discens est Titius</i>\n [[137.21]] § 5. 6 Sed <i>O. A est B</i>, Sed <i>omnis Gra</i><greek><i>f</i></greek><i>ice est Ars</i>\n [[137.22]] Ergo per Disamis aut Darapti Ergo\n [[137.23]] <i>Q. B, est ad quod C,</i> <i>quaedam ars est id quod discens</i>\n [[137.24]] <i>est, D.</i> <i>est Titius</i>\n [[137.25]] Ergo per inversionem iterum, Ergo\n [[137.26]] <i>D, est, C ad aliquod B,</i> <i>Titius est discens quandam artem</i>\n [[137.27]] nec potest fieri, ut,\n [[137.28]] Si <i>A est B</i>, tamen detur <i>D</i>,\n [[137.29]] i.e. <i>aliquod C ad A, quod</i>\n [[137.30]] <i>non sit C ad aliquod B</i> </p>\n<p> [[137.31]] q. e. d.\n [[138.1]] Brevius. </p>\n<p> [[138.2]] Infert consequentia a rectis universalem, Sub ea comprehensam in 1^#'m^#'a figura semper\n[[138.3]] inferre licet sec. §. 2-4. In ista dianoea composita primae sumtiones erunt, 1) quae casus rectos\n[[138.4]] habet et 2) propositio minor. Ex his iisdem per concessas omnibus dianoeas, syllogismum\n[[138.5]] nimirum 3^#'t^#'i^#'a^#'e figurae et duas inversiones relationis. Semper poterit sec. § 5. 6 eadem conclusio\n[[138.6]] inferri. Si a[utem]: fallere posset consequentia a rectis, fieri non posset quin ex consequente\n[[138.7]] ejus universali, deduci posset comprehensa aliqua falsa. Neque enim falsa esse potest universalis,\n[[138.8]] sub qua comprehensa nulla falsa est. </p>\n<p> [[138.9]] Ita haec videram hactenus in quibus demonstratam h. e. ad concessas dianoeas mihi\n[[138.10]] quando vellem revocabilem, certus eram contineri consequentiam a rectis. </p>\n<p> [[138.11]] <greek>Metabásevw</i> vitia averruncant cautelae inductionis IV, IX perlustravi de ea Jungiana\n[[138.12]] omnia et satis intelligo. </p>\n<p> [[138.13]] Haec clariss. Leibnizio cum officiorum pollicitatione et voto omnigenae prosperitatis per\n[[138.14]] annum hunc et sequentes omnes quos Deus jubeat esse quamplurimos. </p>\n<p> [[138.15]] Hamb. 1687. 4 Jan. Joh. Vagetius manu propria </p>\n","number":"30.","title":"JOHANN VAGETIUS FÜR LEIBNIZ","date":"Hamburg, 4. (14.) Januar 1687. [28.34.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

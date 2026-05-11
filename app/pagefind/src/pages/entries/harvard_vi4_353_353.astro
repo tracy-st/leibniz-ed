@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_353","series":"Band VI 4 (1677 - 1690)","seq":353,"text":"[[1496.1]] <b>297.  De animarum creatione atque mentium origine [Sommer 1683 bis Winter 1684/85 (?)]</b>\n [[1496.2]] <tab/>[Sommer 1683 bis Winter 1684/85 (?)] </p>\n<p> [[1496.7]] Animas dicendum est aut quotidie a Deo creari, aut inde ab initio mundi semel\n[[1496.8]] creatas prae-extitisse atque in seminibus latuisse donec formatis organis exerendi se\n[[1496.9]] potestas daretur. Prius de animabus brutorum posterius de anima humana dicere, rationi\n[[1496.10]] non satis consentaneum videtur. Nam si animae brutorum a Deo creantur, atque\n[[1496.11]] infunduntur, erunt omnia plena miraculorum, sive operationum extraordinariarum, quod\n[[1496.12]] non satis verisimile arbitror. Quodsi animas quoque humanas a Deo initio creatas in\n[[1496.13]] seminibus latere, atque conceptionem expectare statuamus, in aliud paradoxum incidimus,\n[[1496.14]] quod scilicet innumerae animae humanae inutiles maneant in seminibus, nec\n[[1496.15]] unquam perveniant ad rationis usum; quod si quis dicat animam quae in seminibus etiam\n[[1496.16]] humanis latet, brutam esse, demumque rationalem organis formatis fieri, is dicere cogetur\n[[1496.17]] animam brutam et rationalem non specie, sed organis differre, quod adhuc intolerabilius\n[[1496.18]] est. Quod si quis dicat solas humanas animas creari tempore conceptionis, is semina\n[[1496.19]] humana seminibus brutorum deteriora facit, quis enim credat omnium animalium seminibus\n[[1496.20]] sive ovariis potius inesse animas, humanis solis inesse nullas. An ergo dicemus\n[[1496.21]] esse in homine quandam animam brutam sive sensitivam, quae sit in semine, sed rationalem\n[[1496.22]] in conceptione a Deo infundi. Verum hoc definitioni cujusdam Concilii censetur\n[[1497.1]] adversum, et revera non nisi una est unius corporis forma. Quodsi igitur non admittendum\n[[1497.2]] est, duas esse animas unam quae sit mens, alteram quae sit sensitiva, quoniam\n[[1497.3]] concilium definivit animam rationalem esse formam corporis; relinquitur ut dicamus ex\n[[1497.4]] anima sensitiva in momento infusionis a Deo novae perfectionis accreatione, sive transmutatione\n[[1497.5]] supernaturali fieri Mentem sive animam rationalem. </p>\n","number":"297.","title":"De animarum creatione atque mentium origine","date":"[Sommer 1683 bis Winter 1684/85 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

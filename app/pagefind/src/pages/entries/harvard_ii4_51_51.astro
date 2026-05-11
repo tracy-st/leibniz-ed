@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_51","series":"Band II 4 (1701 - 1707)","seq":51,"text":"<p> [[170.9]] <b>51. BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ</p>\n<p> [[170.10]] Paris, 6. Juli 1703. [49.87.] </b></p>\n<p> [[170.29]] Monsieur </p>\n<p> [[170.30]] Je vous dirois, si j'osois, que je suis offensé des excuses que vous me faites sur vos\n[[170.31]] Commissions litteraires. Je me tiendrois trés honoré d'en être chargé, je vous le dis sans aucun\n[[171.1]] compliment, et avec une sincere envie d'être pris au mot. Qui est ce qui ne se feroit pas un\n[[171.2]] honneur d'être le Correspondant de M. Leibnits? Mais la vanité a part, je m'en ferois aussi un\n[[171.3]] sensible plaisir. Seulement je crains que les occasions d'avoir et cet honneur et ce plaisir là ne\n[[171.4]] fussent un peu rares. Pourveu qu'on vous envoye l'<i>Histoire de l'Academie des Sciences</i> de\n[[171.5]] chaque année, les Livres qui viendront des particuliers de la Compagnie, et les Journaux de\n[[171.6]] France et de Trevoux pour les petites piéces, vous aurés tout ce qui regarde les Mathematiques\n[[171.7]] et la Phisique, et du moins il ne s'echapera guere de chose d'ailleurs. </p>\n<p> [[171.8]] J'ai lu à l'Academie votre explication des lignes misterieuses de Fohi par le Calcul binaire,\n[[171.9]] et elle a paru trés ingenieuse, et trés heureuse. Elle sera imprimée dans l'<i>Histoire</i> de cette année,\n[[171.10]] qui le sera surement l'année qui vient, car on travaille tant qu'on peut a regagner le courant, et\n[[171.11]] on le regagne. </p>\n<p> [[171.12]] J'ai dit à M. Cassini l'offre de vôtre Astronome de Berlin, et la condition raisonnable qu'il\n[[171.13]] y met. Je ne doute pas que M. Cassini n'en ait déja profité, curieux comme il est de sa Science. </p>\n<p> [[171.14]] Votre Remarque sur l'Algebre de M. Ozanam a été imprimée dans un Journal de France.\n[[171.15]] Je la donnai pour cela a un de nos Mathematiciens. </p>\n<p> [[171.16]] M. le Marquis de l'Hopital, dont vous me demandés des nouvelles, a entrepris, comme\n[[171.17]] vous savés assurément, un <i>Traité des Coniques</i>, mais il me semble que l'ouvrage va lentement.\n[[171.18]] Il m'a dit que des affaires domestiques l'avoient fort interrompu. Aprés cela, il ne se donne pas\n[[171.19]] tant à la Geometrie qu'il neglige de suivre, et je ne puis croire qu'il ait grand tort. Un\n[[172.1]] Philosophe ou un Geometre est premierement un Homme. Pour le P. Mallebranche, il n'a pas\n[[172.2]] une santé bien robuste, il en prend soin comme de raison, et il n'y a guere lieu d'esperer que\n[[172.3]] desormais il se casse la teste à des recherches philosophiques. Il vient même assés peu à\n[[172.4]] l'Academie en Eté, par ce qu'il prend l'air à la campagne. </p>\n<p> [[172.5]] Quant à la Metaphisique que vous avés bien voulu m'exposer sur les Loix du mouvement,\n[[172.6]] j'en suis charmé. La sublimité de vos pensées m'a elevé, et j'aimerois fort a avoir un guide tel\n[[172.7]] que vous qui me menast dans cette haute region, car sans cela on court grand risque de s'y\n[[172.8]] égarer. J'ai pourtant encore quelque scrupule. Peutêtre la difformité des Loix contraires aux\n[[172.9]] nostres ne seroit elle que pour nous, mais je ne m'arresterai point à vous developer ce que je\n[[172.10]] veux dire, c'est bien assés pour moi d'avoir osé vous parler quelque autre fois sur de pareilles\n[[172.11]] matieres. Je vous supplie de me mander des nouvelles de cette indisposition que vous avés eüe,\n[[172.12]] et de me croire </p>\n<p> [[172.13]] Monsieur Votre trés humble et trés obeïssant serviteur Fontenelle </p>\n<p> [[172.14]] de Paris ce 6 Juil. 1703.\n[[172.15]] A Monsieur Monsieur Leibnits </p>\n","number":"51.","title":"BERNARD LE BOVIER DE FONTENELLE AN LEIBNIZ","date":"Paris, 6. Juli 1703. [49.87.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_7","series":"Band VI 4 (1677 - 1690)","seq":7,"text":"[[18.1]] <b>7.  De veritatis realitate [August 1677]</b>\n [[18.2]] <tab/>[August 1677] </p>\n<p> [[18.6]] Verum, imo necessarium est, circulum esse capacissimum figurarum isoperimetrarum. </p>\n<p> [[18.8]] Etiamsi nullus existat reapse circulus. </p>\n<p> [[18.9]] Item etiamsi neque ego neque tu, neque alius quisquam nostrum existat. </p>\n<p> [[18.10]] Imo etiamsi nihil earum rerum existat, quae contingentes sunt, seu in quibus nulla\n[[18.11]] intelligitur necessitas, qualis est mundus aspectabilis aliaque similia. </p>\n<p> [[18.12]] Quoniam ergo haec veritas non dependet a nostra cogitatione, necesse est aliquid\n[[18.13]] reale in ea esse. </p>\n<p> [[18.14]] Et quia veritas illa aeterna seu necessaria est, etiam haec quae in ipsa est realitas\n[[18.15]] independens a nostra cogitatione, erit ab aeterno. </p>\n<p> [[18.16]] Haec realitas est quiddam actu existens. Semper enim actu a parte rei haec veritas\n[[18.17]] subsistit. </p>\n<p> [[18.18]] Ergo datur Ens necessarium, seu de cujus essentia est existentia. </p>\n<p> [[18.19]] Brevius: Propositionum necessariarum Veritas est aeterna. Veritas est quaedam\n[[18.20]] realitas independens a nostra cogitatione. Realitas quaedam aeterna utique semper existit.\n[[18.21]] Seu Veritas propositionum necessariarum semper existit. Ergo Quoddam Ens necessarium\n[[18.22]] existit. </p>\n<p> [[18.23]] Quicquid existit, est possibile. Quoddam Ens necessarium existit. Ergo quoddam\n[[18.24]] Ens necessarium est possibile. </p>\n<p> [[18.25]] Probatur minor: quicquid actu, a parte rei est, illud existit. Quoddam necessarium\n[[18.26]] actu a parte rei est. Ergo quoddam necessarium existit. </p>\n<p> [[18.27]] Probatur rursus minor: Veritas propositionum necessariarum, actu a parte rei est.\n[[18.28]] Veritas propositionum necessariarum necessaria est. Ergo quoddam necessarium actu a\n[[18.29]] parte rei est. </p>\n<p> [[19.1]] Ex his patet tot esse necessaria, quot sunt veritates necessariae. Haec necessaria\n[[19.2]] cooperari possunt, quodlibet cuilibet quia duae quaevis propositiones conjungi possunt ad\n[[19.3]] novam probandam, additis mediis eas jungentibus. </p>\n<p> [[19.4]] (Difficultas quod eadem propositio pluribus modis demonstrari potest. Ejusdem\n[[19.5]] tamen rei non sunt plures causae.) </p>\n<p> [[19.6]] Ergo omnes realitates in Veritatibus aeternis nemine cogitante existentes, quandam\n[[19.7]] inter se realem connexionem habebunt. </p>\n<p> [[19.8]] Veritates oriuntur ex naturis seu essentiis. Ergo et essentiae seu naturae sunt quaedam\n[[19.9]] realitates semper existentes. </p>\n<p> [[19.10]] Eadem natura ad innumeras alias constituendas concurrit: et cum qualibet alia\n[[19.11]] concurrere potest. </p>\n<p> [[19.12]] Realitates istae quae sunt in naturis a parte rei seu ut vocant objectivae nec tempore\n[[19.13]] et loco distinguuntur. Quia cooperantur. </p>\n<p> [[19.14]] Realitates objectivae naturarum cogitabilium ac veritatum eaedem simul sunt in\n[[19.15]] pluribus aliis. </p>\n<p> [[19.16]] Realitates istae non sunt substantiae. </p>\n<p> [[19.17]] Substantia necessario existens illimitata est; seu omnes in se continet realitates. </p>\n<p> [[19.18]] Plato dial. 10 <i>de Legibus</i>, animam esse quae se movet. </p>\n","number":"7.","title":"De veritatis realitate","date":"[August 1677]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_158","series":"Band II 2 (1686 - 1694)","seq":158,"text":"<p> [[555.1]] <b>160. LEIBNIZ AN ADAM ADAMANDUS KOCHAŃSKI</p>\n<p> [[555.2]] [Hannover, Juli 1692.] [152.]</b></p>\n<p> [[555.9]] [ ... ] De lingua vel saltem scriptura nova condenda (cujus mentionem faciunt literae\n[[555.10]] Tuae) cogitari cum fructu posset, non tantum tachygraphiae, et commercii inter populos causa,\n[[555.11]] sed multo maxime ad perfectionem humanae cogitationis. Ita enim sentio si condita esset\n[[555.12]] lingua, vel saltem scriptura, qualem opto, habituros nos organon cogitandi novum, majoris\n[[555.13]] momenti ad augendam mentis aciem, quam perspicilia fuere ad intendendam videndi facultatem.\n[[555.14]] Multa eam in rem meditata habeo jam a multis annis, animadvertique hoc impetrato\n[[555.15]] futurum, ut aliquid algebrae simile in omni ratiocinandi genere praestetur. Sed distractiones\n[[555.16]] multiplices fecere, ut quod ego post salutis ac valetudinis curam omnium maximum judicarem,\n[[555.17]] prosequi tamen satis nondum liceret. Quae Wilkinsius, Dalgarnius, aliique in eam rem jam\n[[555.18]] dedere, commercio populorum fateor sufficerent, etsi ita perplexa sint, ut facilius esse putem\n[[555.19]] linguam jam receptam ubique introducere; sed ad majorem illum scopum, ne collimarunt\n[[555.20]] quidem, tantum abest ut attigerint. [ ... ] </p>\n","number":"160.","title":"LEIBNIZ AN ADAM ADAMANDUS KOCHAŃSKI","date":"[Hannover, Juli 1692.] [152.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

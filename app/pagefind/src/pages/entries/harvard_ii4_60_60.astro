@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_60","series":"Band II 4 (1701 - 1707)","seq":60,"text":"<p> [[198.3]] <b>60. ISAAC JAQUELOT AN LEIBNIZ</p>\n<p> [[198.4]] [Berlin,] 10. März 1704. [59.61.] </b></p>\n<p> [[198.13]] Vous m'avez donné occasion, Monsieur, de comparer votre opinion avec celle des causes\n[[198.14]] occasionnelles, et si je l'ai bien comprises, je n'y trouve qu'une tres petite differrence. Pour\n[[198.15]] m'éxpliquer plus clairement, je tracerai ici deux lignes paralleles qu'on veut joindre, la ligne <i>A</i>\n[[198.16]] sera l'Ame et la ligne <i>C</i> le Corps[.] </p>\n<p> [[198.17]] Dieu a imprimé dès le commencement les <b>idées</b> marquées <i>b, d, e, f</i> etc. dans l'Ame <i>A</i> et il\n[[198.18]] a imprimé aussi de <b>traces</b> corporelles dans le corps <i>C</i> suivant le même ordre <i>b, d, e, f</i> etc. traces\n[[198.19]] qui ont du rapport aux objets de l'Univers savoir <i>b</i> à l'objet 1. <i>d</i> à l'objet, 2, et <i>e</i> à l'objet. 3.\n[[198.20]] Dans l'union du corps avec l'ame qui commence et finit au meme instant, il arrive comme à ces\n[[198.21]] deux lignes paralleles, si on les joignoit également. Alors <i>b</i> de la ligne <i>A</i> repond au <i>b</i> de la ligne\n[[198.22]] <i>C</i>. Dans le corps il y a la <b>trace</b> corporelle du cercle 1. et dans l'ame l' <b>idée</b> de ce cercle, et ainsi\n[[199.1]] des autres. Cela posé il me semble qu'il s'ensuit\n[[199.2]] necessairement, que Dieu, pour joindre l' <b>idée</b> du\n[[199.3]] cercle qui est dans l'ame, à la <b>trace</b> corporelle du\n[[199.4]] même cercle qui est dans le corps, a voulu que l' <b>idée</b>\n[[199.5]] du cercle qui est dans l'Ame repondit parfaitement à\n[[199.6]] la <b>trace</b> du même cercle qui est dans le corps, de\n[[199.7]] telle sorte qu'elles commençassent et finissent en\n[[199.8]] même tems. Et comme les objets corporels ne sont\n[[199.9]] pas capables d'agir immédiatement sur l'esprit il faut\n[[199.10]] que Dieu y mette <b>les idées</b>, mais toujours dans un tel ordre qu'elles repondent parfaitement\n[[199.11]] aux <b>traces</b> corporelles. N'est ce pas Monsieur, établir les causes occasionnelles? Je n'y vois\n[[199.12]] aucune differrence, si ce n'est que vous placez d'avance toutes les idées dans l'ame, au lieu que\n[[199.13]] dans le systême des causes occasionnelles les idées ne sont produites qu'à mesure que les traces\n[[199.14]] corporelles en font naitre l'occasion. Pour moi, la plus grande difficulté que je trouve dans cette\n[[199.15]] philosophie, c'est qu'elle me paroit détruire entiérement le franc arbitre, et que je suis autant\n[[199.16]] persuadé de ma liberté que je le suis de mon existence. </p>\n<p> [[199.17]] Je ne croiois pas, Monsieur, vous écrire sur ce sujet et j'attendois que vous nous fissiez\n[[199.18]] l'honneur de venir ici pour vous en entretenir. Mais comme je fus hier obligé de parler au Roy\n[[199.19]] de quelques affaires, je lui dis en passant ce que vous m'écrivez de ces Théologiens hargneux,\n[[199.20]] toujours prets de baisser la lance pour un mot, et qui <b>paululum</b> <b>intermissa, rursus bella\n[[199.21]] movent</b>, Sa Majesté m'a ordonné de vous demander, si vous les connoissez dans le dessein où\n[[199.22]] elle est de leur imposer silence. Je vous supplie de me faire réponse, et d'estre persuadé que je\n[[199.23]] serai toute ma vie, </p>\n<p> [[199.24]] Monsieur Votre tres humble et tres obeissant serviteur. Jaquelot </p>\n<p> [[199.25]] Du 10 Mars 1704. </p>\n<p> [[199.26]] Pardonnez moi, Monsieur, si je vous écris un peu en hâte. </p>\n","number":"60.","title":"ISAAC JAQUELOT AN LEIBNIZ","date":"[Berlin,] 10. März 1704. [59.61.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

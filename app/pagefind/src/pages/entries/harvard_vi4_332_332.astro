@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_332","series":"Band VI 4 (1677 - 1690)","seq":332,"text":"[[1462.1]] <b>276.  Erinnerung und Einheit der Person. Eine Beobachtung 1683</b>\n [[1462.2]] <tab/>683\n[[1462.4]] 1683 Zellerfeld </p>\n<p> [[1462.5]] Der junge Schwalenberg erzehlte, daß er einsmahls von einer Winde auffen boden\n[[1462.6]] an den Kopf geschlagen wurde, also daß er nicht gewust wie ihm geschehen were auch\n[[1462.7]] vor todt herunter gebracht worden, als er nun wieder zu sich gekommen, habe ihm\n[[1462.8]] gedeucht, als erwache er aus einem tiefen schlaff, und were ihm gar wohl gewesen, ich\n[[1462.9]] fragte ihn, ob ihm nicht etwas gleichsam getraumet, antwort nein; ob er solch Zeit über\n[[1462.10]] einige empfindligkeit gehabt, antwort im geringsten nicht, alleine ich habe ihm gleichwohl\n[[1462.11]] erwiesen, daß er die Zeit über nicht gar ohne Gedancken gewesen seyn müße, dann\n[[1462.12]] wofern daß gewesen, so würde er nicht gespuhret haben, daß einige Zeit oder <i>intervallum</i>\n[[1462.13]] gleichwohl verfloßen gewesen, zwischen dem moment da er zulezt von der Winde\n[[1462.14]] gewußt, und den moment, da er wieder erwachet, wie er mir gleichwohl gestehen müßen.\n[[1462.15]] Und sonst hatte er sich ja nothwendig müßen einbilden (in dem moment da er aufgewachet),\n[[1462.16]] er stünde noch vor der Winde, und fände die sachen in dem stande da er sie\n[[1462.17]] gelassen, würde sich auch nach der Winde und den dabey gestandenen leuten umbgesehen\n[[1462.18]] haben. Doch kondte man repliciren durch den schlag were ihm deren erinnerung\n[[1462.19]] vergangen. Ist also die sach ferner zu untersuchen. <i>Vereor ne sit parallelismus, nam\n[[1462.20]] species immutata, ne amplius ita vivida esset, et ex eo de intervallo temporis judicatum</i>. </p>\n","number":"276.","title":"Erinnerung und Einheit der Person. Eine Beobachtung","date":"1683"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

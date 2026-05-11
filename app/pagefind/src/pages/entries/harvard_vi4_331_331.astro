@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_331","series":"Band VI 4 (1677 - 1690)","seq":331,"text":"[[1460.11]] <b>275.  Origo Animarum et Mentium [März bis Juni 1681 (?)]</b>\n [[1460.12]] <tab/>[März bis Juni 1681 (?)]\n[[1460.16]] <tit2><b>Origo Animarum et Mentium</b></tit2> </p>\n<p> [[1460.17]] Quatenus Deus universum refert ad certum quoddam corpus, ipsumque totum velut\n[[1460.18]] ex hoc corpore spectat sive quod idem est omnes apparentias seu rerum relationes ad hoc\n[[1460.19]] corpus velut immobile consideratum cogitat, eo ipso corporis hujus forma substantialis\n[[1460.20]] sive anima inde resultat quae sensu quodam atque appetitu absolvitur. Inest enim rebus\n[[1460.21]] omnibus quidam sensus atque appetitus naturalis qui legibus Mechanismi nihil derogat;\n[[1460.22]] neque enim ille tam causa quam occasio agendi est Deo. </p>\n<p> [[1461.1]] Mentes autem oriuntur, cum Deus totum universum considerat non tantum, ut\n[[1461.2]] Systema rerum sed et ut Civitatem cujus ipse Rex est. Itaque Mentes non tantum\n[[1461.3]] perfectione differunt ab Animabus aliis, sed et toto genere sive natura. Dedit enim Deus\n[[1461.4]] mentibus, ut cogitent de seipsis, unde oritur reminiscentia quae facit ut mens semper\n[[1461.5]] meminerit se eandem illam esse quae prius. Hinc sequitur etiam immortalitas, neque enim\n[[1461.6]] vel incipere potest sui oblivisci, semperque cogitatio alia aliam trahit. At in animabus\n[[1461.7]] nulla est causa cur easdem manere dicamus, tametsi a corpore sint distinctae. Vera enim\n[[1461.8]] conservatio, consistit in conservationis suae sensu, qui si absit perinde est ac si extinctus\n[[1461.9]] sim, et alius creatus loco mei; neque enim unum ab altero discerni potest; adeoque pro\n[[1461.10]] eodem habendum est. </p>\n<p> [[1461.11]] Brutis est sensus, decretumque, sed non animadversio. In Deo solo est intelligere\n[[1461.12]] velle posse. In nobis est intellectus et voluntas, sed potentia nulla. </p>\n<p> [[1461.13]] Realitatem differre ab existentia rei in certo aliquo momento vel ex eo intelligi\n[[1461.14]] potest, quod tempus ipsum quandam realitatem habet, neque tamen unquam dici potest,\n[[1461.15]] ipsum nunc existere, persona intelligens et intellecta certo quodam modo duae sunt, etsi\n[[1461.16]] alio quodam modo sint una eademque. Sunt enim una eademque ex Hypothesi. Ponitur\n[[1461.17]] enim Mens seipsam intelligere. Duae sunt tamen, eo ipso quod duo sunt quodammodo\n[[1461.18]] diversa inter quae relatio est quaedam. Est itaque in Mente Binitas quaedam, sed cum in\n[[1461.19]] Deo ipsa intellectio sit perpetuum quiddam et subsistens, ideo veram Trinitatis ideam\n[[1461.20]] habere non possumus; possumus tamen non minus accurate demonstrare Trinitatem in\n[[1461.21]] Deo sed binitatem in nobis. Contradictio in his nulla, quia non satis considerant homines\n[[1461.22]] quid sit idem et diversum. </p>\n","number":"275.","title":"Origo Animarum et Mentium","date":"[März bis Juni 1681 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

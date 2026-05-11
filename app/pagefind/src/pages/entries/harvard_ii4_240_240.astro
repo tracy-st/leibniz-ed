@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_240","series":"Band II 4 (1701 - 1707)","seq":240,"text":"<p> [[735.1]] <b>240. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[735.2]] [Berlin, 6. Februar 1707 (?)]. [241.] </b></p>\n<p> [[735.18]] <petit> <k>Theorema VI.</k>\n [[735.19]] <i>Elementa rerum non sunt nisi Monades</i>.\n [[735.20]] Demonstratio\n[[735.21]] Ex Elementis, quae in partes compositi actu ingrediuntur, intelligi potest, cur partes in composito ita potius, quam\n[[735.22]] aliter existant [ ... ]. In existentia igitur Elementorum datur ratio ultima existentiae partium in compositis [ ... ].\n[[735.23]] Sed in existentia Monadum datur ratio ultima existentiae partium in compositis, [ ... ] consequenter et Mundi,\n[[735.24]] qui non est, nisi aggregatum omnium simplicium et compositorum, secundum locum et tempus inter se connexorum\n[[735.25]] [ ... ]. Ergo Elementa etiam rerum non sunt nisi Monades. [ ... ]\n[[735.26]] Scholion II. [ ... ] in Epistola, Berolino VI. Febr. MDCCVII. ad me data: </petit>\n [[735.27]] \" <b>Cartesii</b> <i>Materia triplicis elementi</i> est contra principium rationis sufficientis. Neque enim\n[[735.28]] datur ratio sufficiens materiam continuam dividendi in partes hujus potius quam alterius\n[[735.29]] magnitudinis.\" </p>\n","number":"240.","title":"LEIBNIZ AN MICHAEL GOTTLIEB HANSCH","date":"[Berlin, 6. Februar 1707 (?)]. [241.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

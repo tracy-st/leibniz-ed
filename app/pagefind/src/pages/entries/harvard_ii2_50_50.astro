@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_50","series":"Band II 2 (1686 - 1694)","seq":50,"text":"<p> [[218.11]] <b>51. LEIBNIZ AN ANTOINE ARNAULD</p>\n<p> [[218.12]] Hannover, 22. Juli / 1. August 1687. [42.52.]</b></p>\n<p> [[219.11]] J'ai <Fn><i>Am Rand in A</i>: d'Hanovre le 1 Aout / 22 Juillet 1687.</Fn> appris avec beaucoup de joye que S.A.S. M^#'g^#'r le Landgrave Erneste vous a vu jouir de\n[[219.12]] bonne santé. Je souhaite de tout mon coeur d'avoir encore souvent de semblables nouvelles, et\n[[219.13]] que le corps se ressente aussi peu de votre age que l'esprit, dont les forces se font encore assez\n[[219.14]] connoitre. C'est de quoy je me suis bien apperçu, et j'avoue de ne connoitre personne à present\n[[219.15]] dont je me promette un jugement sur mes meditations, plus solide et plus penetrant, mais aussi\n[[219.16]] plus sincere que le votre. </p>\n<p> [[219.17]] Je ne voudrois plus vous donner de la peine; mais la matiere des dernieres lettres etant une\n[[219.18]] des plus importantes, après celles de la religion, et y ayant même grand rapport, j'avoue que je\n[[219.19]] souhaiterois de pouvoir encore jouir de vos lumieres, et d'apprendre au moins vos sentimens\n[[219.20]] sur mes derniers eclaircissemens. Car si vous y trouvez de l'apparence, cela me confirmera;\n[[219.21]] mais si vous y trouvés encore à redire, cela me fera aller bride en main, et m'obligera\n[[219.22]] d'examiner un jour la matiere tout de nouveau. </p>\n<p> [[219.23]] Au lieu de M. de Catelan, c'est le R.P. Malebranche qui a repliqué depuis peu, dans les\n[[219.24]] <i>Nouvelles de la Republique des Lettres</i>, à l'objection que j'avois faite. Il semble reconnoitre\n[[219.25]] que quelques unes des loix de nature, ou regles du mouvement qu'il avoit avancées, pourront\n[[219.26]] difficillement estre soutenues. Mais il croit que c'est parce qu'il les avoit fondées sur la dureté\n[[219.27]] infinie, qui n'est pas dans la nature. Au lieu que je crois que quand elle y seroit, ces regles ne\n[[219.28]] seroient pas soutenables non plus; et c'est un defaut des raisonnemens de M. Descartes, et des\n[[219.29]] siens, de n'avoir pas consideré que tout ce qu'on dit du mouvement, de l'inegalité et du ressort,\n[[220.1]] se doit verifier aussi, quand on suppose ces choses infiniment petites ou infinies. En quel cas le\n[[220.2]] mouvement (infiniment petit) devient repos; l'inegalité (infiniment petite) devient egalité, et le\n[[220.3]] ressort (infiniment prompt) n'est autre chose qu'une dureté extreme. A peu prés comme tout ce\n[[220.4]] que les Geometres demontrent de l'Ellypse se verifie d'une parabole, quand on la conçoit\n[[220.5]] comme une Ellypse dont l'autre foyer est infiniment eloigné. Et c'est une chose etrange de voir\n[[220.6]] que presque toutes les regles du mouvement de M. Descartes choquent ce principe que je tiens\n[[220.7]] aussi infaillible en Physique qu'il l'est en Geometrie, parce que l'auteur des choses agit en\n[[220.8]] parfait geometre. Si je replique au R.P. Malebranche, ce sera principalement pour faire connoitre\n[[220.9]] le dit principe, qui est d'une tres grande utilité, et qui n'a guere encore eté consideré en\n[[220.10]] general, que je sache. </p>\n<p> [[220.11]] Mais je vous arreste trop, et cette matiere n'est pas assez digne de votre attention. Je suis\n[[220.12]] avec beaucoup de zele et de passion Monsieur votre tres humble et tres obeïssant serviteur </p>\n<p> [[220.13]] Leibniz </p>\n","number":"51.","title":"LEIBNIZ AN ANTOINE ARNAULD","date":"Hannover, 22. Juli / 1. August 1687. [42.52.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

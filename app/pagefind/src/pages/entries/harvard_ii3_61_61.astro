@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_61","series":"Band II 3 (1695 - 1700)","seq":61,"text":"<p> [[168.1]] <b>61. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[168.2]] Padua, 8. Juni 1696. [59.64.]</b></p>\n\n<p> [[168.8]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o </p>\n<p> [[168.9]] Coll'Ordinario passato scrissi una lunghissima lettera a V. S. Ill^#'m^#'a, con una inclusa diretta\n[[168.10]] ad un Conte Canonico in Salisburgo per ricuperare alcuni rari manoscritti intorno alla Cronologia\n[[168.11]] delle famiglie nobili di Padova, che l' havevo mandati sono quasi mesi otto. Con questa\n[[168.12]] torno a riverirla, e darle parte come è quasi perfettionata la copia dell'Ongarello, havendolo\n[[168.13]] diviso in sei parti, e datolo a diversi Scrittori, però con gran secretezza per la gelosia, che il\n[[168.14]] Padrone tiene di questo raro, e stimato manoscritto, onde aspetto gl'ordini di V. S. Ill^#'m^#'a per\n[[168.15]] trasmetterglielo subito. Con l'occasione che in Roma si è fatto il processo per la Beatificatione\n[[168.16]] di certa Monaca detta Elena Enselmini, che mori l'anno 1245 se non fallo, si sono ricercati i più\n[[168.17]] antichi archivii della Citta, e svegliate le memorie di molti Antichi Cronologisti di questo\n[[168.18]] Paese, le di cui opere non sono state mai stampate, e per mia fortuna hò contratta Amicitia con\n[[168.19]] certo Abbate Zacco eruditissimo, ed informatissimo dell'Antichità di questo Paese, che hà\n[[168.20]] veduto e letto quanto qui si trova di più raro, e richiedendolo de' principali Cronologisti che\n[[168.21]] han fatto mentione della Casa Estense m' hà soggerito trovarsi qui un vecchio opuscolo\n[[168.22]] stampato in foglio, intitolato <i>Monachi Paduani Chronicon, seu Gualbertini Musati Historia</i>, ed\n[[168.23]] incomincia dalla Era d'Este. Vi sono due manoscritti più antichi dell'Ongarello cioe a dire di\n[[169.1]] Giovanni di Nono, e di Fava Foschi, che scrivono delle famiglie nobili di Padova oltre il\n[[169.2]] manoscritto del Vergerio. Se V. S. Ill^#'m^#'a vorrà questi manoscritti, io farò tutto per haverli, e le\n[[169.3]] saranno senza dimora inviati. Mi dispiace che m'arrivano tardi queste notitie, non havendola\n[[169.4]] potuto servire prima, come bramavo, e dovevo. Io godo, gratie a Dio, buona salute, medito\n[[169.5]] incessantemente sopra la natura dell'Anima secondo la dottrina d'Agostino, e con questa\n[[169.6]] occasione illustro con note, e dissertationi il suo sottilissimo Trattato <i>De Animae Quantitate</i>. Il\n[[169.7]] libro sarà presto publicato. Piacesse a Dio che havessi V. S. Ill^#'m^#'a da vicino per riceverne quei\n[[169.8]] gran lumi, che dimorano nella sua vastissima Mente. M'ami, mi comandi con libertà, e mi resto </p>\n<p> [[169.9]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o, Aff^#'m^#'o Co^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[169.10]] Padova 8 Giugno <b>1696</b>\n[[169.11]] <yi>All'Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di S.A.E. <b>Hannover</b> </p>\n","number":"61.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 8. Juni 1696. [59.64.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

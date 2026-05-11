@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_228","series":"Band II 1 (1663 - 1685)","seq":228,"text":"<p> [[705.22]] <b>205a. LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER</p>\n<p> [[705.23]] [April 1679.] [204a.213.]</b></p>\n<p> [[706.9]] Monseigneur </p>\n<p> [[706.10]] Si V.A.S. a quelque moment de loisir je la supplie de souffrir que je luy monstre quelque\n[[706.11]] chose des essais, que je touchay hier. Il sera aisé de juger que, si la seule fiction ou supposition\n[[706.12]] de ces Nombres Characteristiques contient toutes les loix du raisonnement humain, et la forme\n[[706.13]] des consequences, il faudra que les nombres mêmes, quand ils seront prests, en contiendront la\n[[706.14]] matiere et nous donneront moyen et d'inventer aisement, et de juger seurement autant qu'il se\n[[706.15]] peut sur les faits donnés. Et c'est tout ce que l'homme peut faire par la force de l'esprit, car la\n[[706.16]] découverte des faits ou experiences par le hazard est une espece de fatalité qui ne depend pas de\n[[706.17]] nostre industrie. Cependant il y aura tousjours encor beaucoup de difference entre les esprits, et\n[[706.18]] ceux par exemple qui peuvent faire des grands calculs par la seule force de l'imagination sans\n[[706.19]] plume, auront des grands avantages sur les autres pour la promtitude. </p>\n<p> [[706.20]] La <i>polygraphie</i> du P. Kircher que V.A.S. a veu est si peu de chose, et si éloignée de mon\n[[706.21]] dessein, qu'il n'y a pas la moindre apparence que j'en puisse avoir profité. Aussi la pluspart des\n[[706.22]] inventions de ce pere ne sont que des petits jeux d'esprit plus tost jolis qu'utiles. </p>\n<p> [[706.23]] Si nous sçavions les caracteres des Chinois, je crois que nous trouverions un peu plus de\n[[706.24]] rapport, mais dans le fonds [ils] sont sans doute bien éloignés de cette analyse des pensées, qui\n[[707.1]] fait l'essence de mon dessein, et ils se contentent apparemment de quelques rapports qui sont\n[[707.2]] entre les choses, comme les hieroglyphes des Egyptiens. </p>\n<p> [[707.3]] <i>Ars magna</i> de Raymond Lulle a encor quelque relation à ce que je propose. Car il se sert\n[[707.4]] de quelques termes generaux, comme <i>Magnitudo</i>, <i>Potentia</i>, <i>Duratio</i>, <i>Virtus</i>, qui se peuvent\n[[707.5]] appliquer à toutes sortes des choses, et cela luy donne moyen par leur combinaison de discourir\n[[707.6]] amplement sur quelque chose que ce soit. Mais c'est l'ombre seulement de la veritable\n[[707.7]] Combinatoire, qui n'a pas laissé de trouver des admirateurs, quoyqu'elle ne fasse qu'effleurer\n[[707.8]] les choses, et est aussi éloignée de la veritable qu'un hableur est au dessous d'un homme en\n[[707.9]] même temps eloquent et solide. Cependant l'Art de Lulle subsiste et fait une espece de secte, et\n[[707.10]] s'enseigne mêmes encor publiquement dans l'isle de Majorque, patrie de cet auteur. [ ... ] </p>\n","number":"205a.","title":"LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER","date":"[April 1679.] [204a.213.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

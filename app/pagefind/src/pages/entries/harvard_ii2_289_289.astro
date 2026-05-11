@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_289","series":"Band II 2 (1686 - 1694)","seq":289,"text":"<p> [[869.1]] <b>292. FRIEDRICH SIMON LÖFFLER AN LEIBNIZ</p>\n<p> [[869.2]] Leipzig, 12. (22.) Dezember 1694. [241.]</b></p>\n<p> [[869.10]] [ ... ] Animo meo nunc observatur disputatio de Christi et Spiritus S. Deitate, in qua\n[[869.11]] conscribenda, ordo, quem com[m]ode observem, mihi maximum negotium facessat. Si enim\n[[869.12]] eum teneam, qui autori scripti Anglici placuit, verendum mihi, ne lectori minime sese approbet.\n[[869.13]] Cogitavi proinde eam mathematica conscribere methodo et aliquo modo praeivit Fabricius\n[[869.14]] amicissimus, cum quo hac de re communicavi, sed cum mathematicam recte non cognoverim,\n[[869.15]] ac Fabricii non plane intelligam, nec eam exprimere videtur, quam Huet in <i>Demonstrationibus\n[[869.16]] Evangelicis</i> adhibuit, nondum hic quidquam certi mecum constituere potui. Fabricius enim\n[[869.17]] 1. definitiones 2. propositiones 3. axiomata et postea novam demonstrationem sive conclusionem\n[[869.18]] ponit, cum tale quid in Huetio non occurrat et in prioribus tribus non in nova conclusione\n[[869.19]] omnia in Huetio comprehendantur. Inter definitiones definit Spiritum, quod sit substantia\n[[869.20]] immaterialis; sed hic simul mihi occurrit disputatio privata Lipsiae; hic enim quidam sunt, ut\n[[869.21]] Petermannus et alii, qui Animam nostram non immaterialem sed materialem igitur ex materia\n[[869.22]] subtili constare dicunt. Permittas Vir Amplissime ut quaeram ex Te quae sententia sit optima et\n[[869.23]] quis autor hanc rem optime exposuerit. [ ... ] </p>\n","number":"292.","title":"FRIEDRICH SIMON LÖFFLER AN LEIBNIZ","date":"Leipzig, 12. (22.) Dezember 1694. [241.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

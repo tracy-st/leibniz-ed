@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_227","series":"Band II 4 (1701 - 1707)","seq":227,"text":"<p> [[689.5]] <b>227. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[689.6]] Hannover, 29. November 1707. [223.232.] </b></p>\n<p> [[689.19]] Admodum Reverende Pater </p>\n<p> [[689.20]] Inveni Thomae Bonartis Nordtani Angli (ut se vocat) <i>concordiam Scientiae cum Fide</i>,\n[[689.21]] eamque mox transmittam; volo tamen ipse prius percurrere obiter, ut sententias ejus nonnihil\n[[689.22]] recolam animo. Ingeniosus est, et in dicendo non inelegans, sed paradoxologus, et habet non\n[[689.23]] pauca quae ferri nullo modo possunt; ex quibus illud est, quod futurorum contingentium\n[[689.24]] conditionalium Cognitionem ipsi Deo adimit. In Scholasticos perpetuo nec sine acerbitate\n[[690.1]] declamat. Itaque non miror si male acceptus est ubi hoc Theologiae genus dominatur. Quod\n[[690.2]] superest vale et fave. Dabam Hanoverae 29 Novembr. 1707 </p>\n<p> [[690.3]] deditissimus G. G. Leibnitius </p>\n<p> [[690.4]] Au tres Reverend Pere le R. P. des Bosses, Theologien de la Compagnie de Jesus.\n[[690.5]] Hildesheim </p>\n","number":"227.","title":"LEIBNIZ AN BARTHÉLEMY DES BOSSES","date":"Hannover, 29. November 1707. [223.232.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

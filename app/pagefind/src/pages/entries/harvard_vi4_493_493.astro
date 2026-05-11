@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_493","series":"Band VI 4 (1677 - 1690)","seq":493,"text":"[[2160.13]] <b>388₅.  De utilissimo controversiarum genere\n[[2161.1]] <tit2><b>De Utilissimo Controversiarum Genere</b></tit2> </p>\n<p> [[2161.2]] In tanto controversiarum numero minime necessarias maxime agitari semper sum\n[[2161.3]] miratus. Communis opinio est non errorem sed improbitatem pertinacem facere haereticum.\n[[2161.4]] Schisma quoque non alia magis in re quam caritatis laesione constare. Ante omnia\n[[2161.5]] ergo de vera probitatis atque caritatis natura disputandum esset nobis, si solida magis\n[[2161.6]] quam speciosa amaremus. Quoniam valde verisimile est non nocere errorem sine impietate,\n[[2161.7]] et plane certum est non prodesse fidem sine caritate. </p>\n<p> [[2161.8]] Neque vero putandum est exploratam satis omnibus verae Caritatis naturam esse,\n[[2161.9]] alioqui omnes divino quodam ardore succensos videremus; cum cognita bona non possint\n[[2161.10]] non desiderari. Neque vero dubitassent aliqui an nullo actu amoris Dei super omnia\n[[2161.11]] exercito salvari quisquam possit; neque contritionem minime in potestate esse arbitrarentur,\n[[2161.12]] neque ineptas saepe et a vera caritate alienas praescriberent formulas, neque\n[[2161.13]] amorem Deo debitum in creaturas transferrent, si satis scirent quid sit Deum super omnia\n[[2161.14]] amare. </p>\n<p> [[2161.15]] Amplius dico nemo gloriari potest se Deum amare ut oportet, nisi paratus sit non\n[[2161.16]] opum tantum, et voluptatum, sed et famae vitaeque jactura redimere gloriam Dei, et\n[[2161.17]] publicum bonum. </p>\n<p> [[2161.18]] Quisquis Deum vere amat, quisquis bonum publicum sincero affectu quaerit, is vere\n[[2161.19]] in Ecclesia Catholica est, reliqui omnes schismatici sunt. Nam schisma est quod laedit\n[[2161.20]] illud caritatis vinculum generale. </p>\n<p> [[2161.21]] Fateor maximi ad bonum publicum momenti fore, Christianorum reunionem sub\n[[2161.22]] capite communi: ideo non abnuo [<i>bricht ab</i>] </p>\n","number":"388₅.","title":"De utilissimo controversiarum genere","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

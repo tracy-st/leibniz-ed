@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_512","series":"Band VI 4 (1677 - 1690)","seq":512,"text":"[[2285.1]] <b>402.  Circumcisionis origo physica [1679 bis 1685 (?)]</b>\n [[2285.2]] <tab/>[1679 bis 1685 (?)]\n[[2285.7]] <tit2><b>Circumcisionis origo physica</b> </tit2> </p>\n<p> [[2285.8]] Sacramenta fundamentum habent in natura et divinam quandam allegoriam continent,\n[[2285.9]] ut simul et signa sint, et res signata. Sic Baptismus natura sua significat mundationem\n[[2285.10]] a sordibus, Coena Eucharistica communionem inter amicos plenam caritatis. Christi\n[[2285.11]] autem instituto baptismus est lavacrum, quo anima munda fit. Et sacra coena est communio\n[[2285.12]] quo ejusdem corporis Christi participes fimus, atque ut rami ejusdem arboris in\n[[2285.13]] trunco unimur, cujus viva membra influente gratiae succo in caritatem animantur. Sed\n[[2285.14]] quid dicemus de Sacramento Antiquae Legis, Circumcisione, quae occasio ritus, quod\n[[2285.15]] fundamentum significationis? Hoc incompertum Theologis itinera in orientem docuerunt\n[[2285.16]] Circumcisionem scilicet in illis populis non arbitrio divino humanove sed naturae jussu\n[[2285.17]] ortam, ob molestam apud Arabes, Aegyptios, Aethiopas praeputii excrescentiam. Ipse\n[[2285.18]] vidit Joh. Veslingius <i>ita in puerulis frequenter excrescere, ut caudae in modum acuminetur</i>;\n[[2285.19]] ita Bartholinus ex ore Veslingii (<i>Anatomiae Reformatae</i> pag. m. 239.) in descriptione\n[[2285.20]] glandis. Inde quod suadebat ratio id consecravit divina autoritas, et morem pro\n[[2286.1]] batum ad electi populi foedus signandum transtulit, ut praeputii circumcisio libidinum\n[[2286.2]] refraenationem ac mores ad sanctitatem compositos significaret. </p>\n","number":"402.","title":"Circumcisionis origo physica","date":"[1679 bis 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_135","series":"Band II 4 (1701 - 1707)","seq":135,"text":"<p> [[451.9]] <b>135. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[451.10]] Hannover, 11. Juli 1706. [132.140.] </b></p>\n<p> [[452.1]] Admodum Reverende Pater </p>\n<p> [[452.2]] Libros <Fn><i>Am Kopf des Konzepts von Leibniz' Hand</i>: R. ­P. Bartholomaeo des Bosses soc. Jes. Theologo Hildesiam</Fn> quos remiseras recte accepi. Utinam esset in quo Tibi utilior esse possem. Hactenus\n[[452.3]] distractissimus, nunc primum respondendi officio satisfacio, et morae veniam peto. </p>\n<p> [[452.4]] Credo si superfuisset diutius Pelissonius, utile aliquid praestari potuisse; sed Meldensis\n[[452.5]] Episcopus (qui cum continuatum est aliquandiu commercium), quanquam superior illo Scientia\n[[452.6]] Theologica, tamen si dicere fas est, inferior visus est humanitate. </p>\n<p> [[452.7]] Fateor demonstratione certa nobis data non esse necesse nostri gratia (sed tantum propter\n[[452.8]] alios) ut objectionibus respondeamus: sed hoc tamen nobis semper prodesse puto, cum difficilis\n[[452.9]] objectio est, neque unquam esse defugiendum a peritis. Sublata enim speciosa difficultate nova\n[[452.10]] lux affulget. Itaque ego, etsi passim certus sententiarum, tamen objectiones amo plausibiles, et\n[[452.11]] puto semper satisfieri posse: nam si qua esset invicta, ea demonstrationem in contrarium\n[[452.12]] faceret. Nec video cur argumentum magis sit demonstratio affirmationis, quam objectio negationis.\n[[452.13]] Itaque non largior Baylio aut alteri cuiquam posse rationem fidei argumenta insolubilia\n[[452.14]] opponere; neque cum Huetio et Jaquelotio (etsi viris insignibus et mihi amicis) tantum adversariis\n[[452.15]] concedere velim. </p>\n<p> [[452.16]] Do operam, ut quamprimum licebit, Deo volente campo Historico excedam, opere affecto. </p>\n<p> [[452.17]] Ad binas dubitationes Tuas venio: Cum perceptio nihil aliud sit, quam multorum in uno\n[[452.18]] expressio, necesse est omnes Entelechias seu Monades perceptione praeditas esse. Neque ulla\n[[452.19]] naturae Machina sua Entelechia propria caret. Meae Enuntiationes Universales esse solent, et\n[[452.20]] servare Analogiam. </p>\n<p> [[452.21]] Peccatum originale nec Entelechia nec substantia esse potest: cum non sit aliquod animal\n[[452.22]] vel quasi-Animal, nec Anima ejus; sed imperfectio quaedam nostrae Animae, cui et imperfectio\n[[452.23]] in corpore nostro respondet. Quemadmodum Horologii vel alterius Machinae imperfectio orta,\n[[452.24]] si placet, ex Elasmate debilitato, Machina utique non est. <Fn><i>Die folgende Passage im Konzept L^#'1 hat Leibniz in eckige Klammern gesetzt, um sie von der Abfertigung auszuschließen</i>: Puto non tantum motui corporis a nobis apperceptibili, sed et alteri cuicunque perceptionem in nobis respondere, sed quam non animadvertimus, ob talium perceptionum multitudinem, exiguitatem et confusionem. Uti assueti strepitus (qualis molendini vicini nostris aedibus) apperceptione carere solemus. Primus homo utique alius condi poterat, et posteri ejus[,] sed Deus eam seriem possibilium elegit, in qua peccatum praevidebat, quod ea aliunde praestaret. Nam etsi quidam vestrorum dubitent, ego pro certo habendum censeo, Deum fecisse quod optimum erat factu. Nunc autem electa serie, in uno quoque individuo omnia alia sed salva libertate involvuntur.</Fn> </p>\n<p> [[453.1]] Quoniam ita permittis, literas Antverpiam destinatas hic adjungo. Vale et me ama. Dabam\n[[453.2]] Hanoverae 11 Julii 1706 </p>\n<p> [[453.3]] deditissimus Godefridus Guilielmus Leibnitius </p>\n<p> [[453.4]] P. S. Contra quendam Ptolemaei nostri viri summi librum novum Censores (qui persaepe\n[[453.5]] morosi, et in invidiam proni sunt) nescio quid movisse intellexi. Literas mihi Hildesia semper\n[[453.6]] per Luneburgicam non per Caesaream postam mitti peto. </p>\n","number":"135.","title":"LEIBNIZ AN BARTHÉLEMY DES BOSSES","date":"Hannover, 11. Juli 1706. [132.140.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

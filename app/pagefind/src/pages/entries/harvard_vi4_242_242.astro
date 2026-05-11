@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_242","series":"Band VI 4 (1677 - 1690)","seq":242,"text":"[[938.1]] <b>199.  Definitiones: Aliquid, nihil, possibile, positivum [August 1688 bis Januar 1689 (?)]</b>\n [[938.2]] <tab/>[August 1688 bis Januar 1689 (?)] </p>\n<p> [[938.5]] <b>Aliquid</b> est quicquid cogitari potest, ut <i>A</i>, vel <i>B</i> vel <i>C</i>, vel alius terminus quicunque.\n[[938.6]] Generalissima haec notio est, complectiturque etiam impossibilia ea quae confuse\n[[938.7]] tantum cogitari possunt, distincte autem explicari nequeunt. Ut <i>triangulum quadrilaterum</i>,\n[[938.8]] <i>corpus indivisibile</i>. </p>\n<p> [[938.9]] <b>Nihil</b> est a quo removetur quicquid cogitari potest, ut <i>non A, neque B, neque C\n[[938.10]] neque D, neque etc.</i> </p>\n<p> [[938.11]] Atque hoc est quod vulgo ajunt <i>Nihili nulla esse attributa</i>. </p>\n<p> [[938.12]] <b>Possibile</b> est quicquid distincte cogitari potest, seu cujus notio non involvit\n[[938.13]] contradictionem. Hoc est si sit <i>A</i> ^&.SE <Leibniz special character> ^#6+<i>B</i>, <i>C</i>, etc.^#6- et sit <i>B</i> ^&.SE <Leibniz special character> ^#6+<i>D</i>, <i>E</i>, etc.^#6- et <i>C</i> ^&.SE <Leibniz special character> ^#6+<i>F</i>, <i>G</i>, etc.^#6- et ita\n[[938.14]] porro, nec unquam prodeat <i>L non L</i>, erit <i>A</i> <b>Ens</b> vel <b>possibile.</b> </p>\n<p> [[938.15]] <b>Positivum</b> est quod sine negatione distincte cogitari potest. Hoc est si sit\n[[938.16]] <i>A</i> ^&.SE <Leibniz special character> ^#6+<i>B</i>, <i>C</i>, etc.^#6- et ita porro, ut paulo ante, nec unquam prodeat terminus negativus ut\n[[938.17]] <i>non L</i>, nisi is sit negativus negativi, erit <i>A</i> <b>positivum.</b> </p>\n","number":"199.","title":"Definitiones: Aliquid, nihil, possibile, positivum","date":"[August 1688 bis Januar 1689 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

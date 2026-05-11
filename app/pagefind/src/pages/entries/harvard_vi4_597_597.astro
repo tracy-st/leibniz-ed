@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_597","series":"Band VI 4 (1677 - 1690)","seq":597,"text":"[[2710.11]] <b>466.  Praemium. Honor. Laus [1677 bis 1716 (?)]</b>\n [[2710.12]] <tab/>[1677 bis 1716 (?)]\n[[2710.15]] <tit2><b>Praemium. Honor. Laus.</b> </tit2> </p>\n<p> [[2710.16]] Quaeri potest an ea sola quae recto voluntatis nostrae usu quaesivimus laudem\n[[2710.17]] mereantur: an potius naturae quoque et fortunae dona honorem et praemia mereantur.\n[[2710.18]] Mihi videtur laudem mereri etiam pulchritudinem, et memoriae capacitatem, et divitias et\n[[2710.19]] generis nobilitatem, et alia id genus, quia laus nihil aliud quam praestantiae cujusdam\n[[2711.1]] praedicatio. Non itaque omnis laus praemium est virtutis. Idem de honore dici potest.\n[[2711.2]] Praemia tamen fateor constitui solent non nisi cuidam virtuti, tametsi fortuna admixta sit;\n[[2711.3]] ut in lucta. At pulchritudinis praemium nullum est; quia nihil hic voluntas facit. Praemium\n[[2711.4]] igitur constitui et persolvi potest his tantum ad quae melius agenda excitari\n[[2711.5]] homines possunt. </p>\n","number":"466.","title":"Praemium. Honor. Laus","date":"[1677 bis 1716 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

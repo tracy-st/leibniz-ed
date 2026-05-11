@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_15","series":"Band II 3 (1695 - 1700)","seq":15,"text":"<p> [[36.4]] <b>15. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[36.5]] Hamburg, 15. (25.) April [1695]. [13.19.]</b></p>\n\n<p> [[36.13]] I. N. J. C. </p>\n<p> [[36.14]] Nobilissimo et Excellentissimo Dn. G. G. Leibnutzio </p>\n<p> [[36.15]] S. P. D. V. Placcius </p>\n<p> [[36.16]] Ne quod existimabam tibi deberi privilegium vulnerarem improvidus, missionem distuli\n[[36.17]] eorum quae nunc accipies, uti benigne promisisti, perlegenda monitisque tuis exquisitissimi\n[[36.18]] judicii honoranda simul ac vacaverit. Non potes mihi dare beneficium majus. Eritque illud suo\n[[36.19]] tempore publicum D[eo] V[olente]. </p>\n<p> [[36.20]] Jungianae schedae in miserrimo sunt statu. Ex 400 pene, vix 100 restant fasciculi, et hi\n[[36.21]] nullius fere pretii. Optima quaeque perierunt omnia, cum exemplis autographa. Etiam Aristoteles\n[[36.22]] illius ob loca parallela, et notas, non nisi tota sua vita ex professo Philosophum tanto ac\n[[36.23]] ipse cum judicio tractanti scribendas inaestimabilis. V. gr. haec vox (<greek>^%)/orejiw</greek>) nusquam definitur:\n[[36.24]] sumiturque tot modis etc. </p>\n<p> [[36.25]] Valetudo mea per Dei gratiam cum senectute incipiente incipit meliorari. Lactea diaeta\n[[36.26]] quidem continuanda, sed cum libertate jungendi propemodum quae velim modicis dosibus\n[[37.1]] vicibusque. Abhinc mense proximo jusculo etiam bubulo reficior mirum in modum. Hoc si\n[[37.2]] porro succedit, spero alvi siccitatem et virium a laboribus defectum omnem posse corrigi. Quae\n[[37.3]] duo sola me adhuc infestant. Vale. Hamb. [1695.] d. 15. Aprilis </p>\n","number":"15.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 15. (25.) April [1695]. [13.19.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

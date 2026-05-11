@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_227","series":"Band II 1 (1663 - 1685)","seq":227,"text":"<p> [[704.1]] <b>205. SIMON FOUCHER AN LEIBNIZ</p>\n<p> [[704.2]] Paris, 16. April 1679. [183.248.]</b></p>\n<p> [[704.13]] A Paris du 16 Avril 1679. </p>\n<p> [[704.14]] Nous attendons M^#'r Lantin et moy la lettre que vous avez écrite à la princesse Elisabet.\n[[704.15]] Vous m'en avez promis une copie et j'en ay écrit à M^#'r Lantin qui s'en felicite desja. Il attend\n[[704.16]] cette lettre avec impatience et vous prie cependant, Monsieur, de luy conserver vostre amitié et\n[[704.17]] vostre estime. Je vous assure, Monsieur, que luy et moy nous sommes tellement remplis de\n[[704.18]] l'idée de vostre merite que nous en sommes presques enchantez. Puisque nous sommes asses\n[[704.19]] malheureux que de vous avoir perdu, faites jouir du moins de quelques unes de vos productions.\n[[704.20]] Pour moy j'attends sur vostre parolle la lettre que vous m'avez promise. J'avois prié M^#'r\n[[704.21]] Hense de vous le temoigner par ses lettres, je panse qu'il m'aura fait la faveur de le faire. Je\n[[704.22]] vous remercie, Monsieur, de ce que vous m'avez donné sa connoissance, il est tres honeste et\n[[704.23]] tres obligeant, et cela me persuade d'avantage que ce que vous estimez merite d'estre estimé. Je\n[[704.24]] panse que si vous avez vu le 3. volume <i>de la Recherche</i>, vous avez reconnu que le R. Pere\n[[704.25]] Malbranche y parle d'une maniere un peu differente des autres volumes, il y paroit estre un peu\n[[704.26]] Academicien surtout lorsqu'il dit que nous n'avons point d'idée de la nature de nostre ame. On\n[[704.27]] va imprimer ma <i>reponse</i> à Don Robert. Pour ce qui est de ce que vous me conseilliez de\n[[704.28]] traduire Platon, cela se pourra faire avec de tems, mais pour mettre mes propositions en forme\n[[705.1]] de theoremes de geometrie, je ne le sçaurois encore et j'ay la même raison pour ne le pas faire\n[[705.2]] que M^#'r Descartes avoit, et qu'il donne au P. Mercenne qui luy demendoit la même chose. Vous\n[[705.3]] la devinerez assez, Monsieur, et je panse vous en avoir dit quelque chose lors que vous m'avez\n[[705.4]] fait l'honneur de me faire cette proposition. On m'a donné un livret d'un nommé Leroyer\n[[705.5]] d'Avranche qui croit proposer le mouvement perpetuel. Il dedie cette piece au Roy. Mais il n'y\n[[705.6]] a rien de si faux que ce qu'il dit lors qu'il assure qu'il a experimanté ce mouvement par les\n[[705.7]] machines dont il donne la figure, cet homme n'entend pas seulement le moindre principe de\n[[705.8]] l'equilibre des liqueurs. La 1. figure est un syphon dont la branche descendente ne va pas plus\n[[705.9]] bas que la source. Et qui ne doit pas agir par consequant. La 2. figure est un plan incliné sur\n[[705.10]] lequel de l'eau coulant doit faire jouër des pompes qui esleve[nt] l'eau plus haut que le somet\n[[705.11]] du plan ce qui est impossible. La 3. est un gros entonnoir à queuë recourbée comme cecy. Il\n[[705.12]] pretend que l'eau pesant d'avantage dans le cone de l'entonnoir doit\n[[705.13]] eslever la petite colonne de la queuë et la rejetter sur la surface de cet\n[[705.14]] entonnoir ce qui est pueril et du tout impossible. La 4. est un tournebroche\n[[705.15]] qui est desja en usage en des hostelleries de campagne et qui n'a rien de\n[[705.16]] miraculeux. On dispute icy la chere de Ramus dans le colege royal. Mais\n[[705.17]] ceux qui la demendent sont bien esloignez de la science qu'avoit feu M^#'r de\n[[705.18]] Roberval. M^#'e de Longueville patrone de M^#'r^#'s de port royal vient d'expirer. </p>\n<p> [[705.19]] Je suis, Monsieur, votre tres humble et tres obeissant serviteur Foucher </p>\n<p> [[705.20]] A Monsieur Monsieur de Libnyz, Conseilleur et Bibliothecaire du Duc d'Annovre. A\n[[705.21]] Annovre </p>\n","number":"205.","title":"SIMON FOUCHER AN LEIBNIZ","date":"Paris, 16. April 1679. [183.248.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

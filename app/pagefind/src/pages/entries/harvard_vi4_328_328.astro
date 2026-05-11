@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_328","series":"Band VI 4 (1677 - 1690)","seq":328,"text":"[[1449.3]] <b>272.  De necessitate et contingentia [Sommer 1680 bis Sommer 1684 (?)]</b>\n [[1449.4]] <tab/>[Sommer 1680 bis Sommer 1684 (?)] </p>\n<p> [[1449.9]] Si omnes propositiones etiam contingentes resolvuntur in propositiones identicas, an\n[[1449.10]] non omnes necessariae sunt. Respondeo non sane nam etsi certum sit extiturum esse quod\n[[1449.11]] est perfectius, tamen, minus perfectum nihilominus possibile est. In propositionibus facti,\n[[1449.12]] involvitur existentia. Existentiae autem notio est talis, ut existens sit talis status universi,\n[[1449.13]] qui Deo placet. Deo autem libere placet quod perfectius est. Itaque involvitur demum\n[[1449.14]] actio libera. At nonne ipsius actionis liberae reddi ratio potest. Utique si actionem Dei\n[[1449.15]] liberam sumamus ut in tempore, erit ejus ratio alia actio Dei praecedens aeque libera, et\n[[1449.16]] sic porro. Si sumamus actionem liberam aeternam, quaenam ratio cur Deus potius talem\n[[1449.17]] semper formaverit. Est utique ipsa natura seu perfectio divina, dicendum est in contingentibus\n[[1449.18]] non quidem demonstrari praedicatum ex notione subjecti sed tantum ejus rationem\n[[1449.19]] reddi, quae non necessitet, sed inclinet. </p>\n<p> [[1449.20]] Homo operatur libere, ubicunque ad ejus electionem aliquid sequitur, id autem quod\n[[1449.21]] in homine fit libere, in corpore fit necessitate physica ex hypothesi decreti divini. </p>\n<p> [[1450.1]] Inania sunt quae Cartesius ait quasi mens possit determinare cursum spirituum\n[[1450.2]] animalium, necesse est enim alicujus corporis determinationem mutari alio motu. Et\n[[1450.3]] sciendum est non tantum eandem quantitatem motus, sed et eandem determinationem in\n[[1450.4]] summa servari in mundo. </p>\n","number":"272.","title":"De necessitate et contingentia","date":"[Sommer 1680 bis Sommer 1684 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

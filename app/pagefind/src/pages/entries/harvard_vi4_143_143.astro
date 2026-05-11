@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_143","series":"Band VI 4 (1677 - 1690)","seq":143,"text":"[[494.13]] <b>116.  De modis syllogisticis primariis atque secundariis [Mai 1682 bis Dezember 1684 (?)]</b>\n [[494.14]] <tab/>[Mai 1682 bis Dezember 1684 (?)] </p>\n<p> [[494.20]] Modi ejusdem figurae distingui possunt in primarios et secundarios. Primarii sunt,\n[[494.21]] qui ex aliis suae figurae modis non consequuntur; secundarii qui omnino. Et secundarii\n[[494.22]] rursus ex primariis consequuntur duobus, uno ex praemissa ad praemissam, altero ex\n[[495.1]] conclusione ad conclusionem. Modus ex praemissa ad praemissam est a particulari ad\n[[495.2]] universale, nam quod ex particulari sequitur praemissa multo magis sequetur ex universali.\n[[495.3]] Modus a conclusione ad conclusionem, est ab universali ad particulare, nam ex quo\n[[495.4]] sequitur conclusio universalis, ex eo multo magis seu facilius sequetur conclusio particularis. </p>\n<p> [[495.6]] Secundarii priore modo sic colliguntur: <b>Primo</b> ex <i>AII</i> infertur <i>AAI</i>. Hinc in prima\n[[495.7]] ex <i>Darii</i> fit <i>Barbari</i>, in tertia ex <i>Datisi</i> fit <i>Darapti</i>. <b>Secundo</b> ex <i>IAI</i> infertur <i>AAI</i>, hinc in\n[[495.8]] tertia ex <i>Disamis</i> fit iterum <i>Darapti</i>, et in quarta ex <i>Digami</i> fit <i>Balani</i>. <b>Tertio</b> ex <i>AOO</i>\n[[495.9]] infertur <i>AEO</i>. Ita in secunda ex <i>Baroco</i> fit <i>Camestros</i>. <b>Quarto</b> ex <i>OAO</i> infertur <i>EAO</i>, ita\n[[495.10]] in tertia ex <i>Bocardo</i> fit <i>Felapton</i>. <b>Quinto</b> ex <i>EIO</i> fit <i>EAO.</i> Hinc in prima ex <i>Ferio</i> fit\n[[495.11]] <i>Celaro</i>, in secunda ex <i>Festino</i> fit <i>Cesaro</i>, in tertia ex <i>Ferison</i> fit iterum <i>Felapton</i>, in\n[[495.12]] quarta ex <i>Fedilom</i> fit <i>Fegano.</i> Sed <i>IEO</i> in nulla datur figura unde nihil inde duci potest.\n[[495.13]] Patet hinc <i>Darapti</i> et <i>Felapton</i> bis esse secundarios modos primae speciei. Et primam\n[[495.14]] speciem secundariorum dare modos novos aliquot, nempe <i>Barbari</i>, <i>Camestros</i>, <i>Cesaro</i>,\n[[495.15]] <i>Celaro</i>. </p>\n<p> [[495.16]] Secundarii posteriore ratione sic colliguntur: <b>Primo</b> ex <i>AAA</i> fit <i>AAI</i>, ita in prima ex\n[[495.17]] <i>Barbara</i> fit <i>Barbari</i>. <b>Secundo</b> ex <i>EAE</i> fit <i>EAO</i>, ita in prima ex <i>Celarent</i> fit <i>Celaro</i>, in\n[[495.18]] secunda ex <i>Cesare</i> fit <i>Cesaro</i>. <b>Tertio</b> ex <i>AEE</i> fit <i>AEO</i>; ita in secunda ex <i>Camestres</i> fit\n[[495.19]] <i>Camestros</i>, in quarta ex <i>Cadere</i> fit <i>Cadero</i>. </p>\n<p> [[495.20]] Omnes Modi secundarii ratione posteriore collecti colliguntur et priore excepto uno\n[[495.21]] modo quartae <i>Cadero</i>.\n[[495.22]] <tab/>ADC <tab/>EBC <tab/>OBD\n [[495.23]] <tab/>ABD\n [[495.24]] <tab/><i>Celarent</i> <tab/>ECB <tab/>ADC <tab/>EDB\n [[495.25]] <tab/><i>Calmentes</i> <tab/>ADC <tab/>ECB <tab/>EBD\n [[495.26]] <tab/><i>Camestres</i> <tab/>ADC <tab/>EBC <tab/>EBD </p>\n","number":"116.","title":"De modis syllogisticis primariis atque secundariis","date":"[Mai 1682 bis Dezember 1684 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

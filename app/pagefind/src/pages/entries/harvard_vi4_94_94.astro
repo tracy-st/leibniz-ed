@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_94","series":"Band VI 4 (1677 - 1690)","seq":94,"text":"[[316.3]] <b>78₂.  Zweiter Ansatz ZWEITER ANSATZ </p>\n<p> [[316.4]] In Generali Mathematica, sive de Numeris ac Figuris, sive de Motibus, aliisque\n[[316.5]] rebus mensurabilibus agatur, omnia problemata huc redeunt, ut cujusdam magnitudinis\n[[316.6]] determinatio per alias datas reperiatur talis, quae sufficiat ad quaesitae ipsius productionem.\n[[316.7]] <b>Determinatio</b> est enumeratio conditionum quae sufficiant ad rem unam ab aliis\n[[316.8]] omnibus distinguendam. <b>Productio</b> est operatio quaedam exacta cujus requisita in\n[[316.9]] potestate sunt, et qua certum aliquid efficitur. </p>\n<p> [[316.10]] An autem problema ex propositis initio conditionibus satis determinatum sit, quanquam\n[[316.11]] multis modis, praevideri possit, nullum tamen generalius indicium est, quam ipse\n[[316.12]] eventus, si quaedam productio procedens inveniri potest; facile enim apparebit inter\n[[316.13]] operandum, an id quod producitur sit unicum, an vero plura prodeant, quorum unum non\n[[316.14]] minus quam alterum quaesito satisfaciat. </p>\n<p> [[316.15]] Itaque in hoc unum tantummodo incumbere debemus, ut ex conditionibus initio\n[[316.16]] propositis inveniamus determinatam quaesiti productionem.\n </p>\n<p> [[316.18]] <i>Die beiden folgenden Absätze in Kleindruck sind Vorstufen, die Leibniz durch den nachfolgenden Absatz\n[[316.19]] ersetzt hat</i>: </p>\n<p> [[316.20]] Omnis magnitudo a nobis exprimetur vel litera quadam, ut <i>a, b</i>, aliove symbolo simplici qualicunque, vel\n[[316.21]] formula ex literis composita, quales mox explicabimus. Si plures designandae sint magnitudines quas aequales\n </p>\n<p> [[317.2]] Quaecunque magnitudinem habent, etiam partibus constant, quae si assignentur\n[[317.3]] aequales inter se, magnitudo totius solo partium aequalium numero determinatur, et\n[[317.4]] unaquaeque pars totum metiri dicetur, sed etsi partium inter se aequalium [<i>bricht ab</i>] </p>\n","number":"78₂.","title":"Zweiter Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

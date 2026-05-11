@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_48","series":"Band II 1 (1663 - 1685)","seq":48,"text":"<p> [[135.21]] <b>42. LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER</p>\n<p> [[135.22]] [Mainz, 13. Februar 1671.] [58.]</b></p>\n<p> [[136.13]] Durchleuchtigster Herzog, Gnädigster Fürst und Herr. </p>\n<p> [[136.14]] Als ich unlängst meine wenige meditation, vom freien willen des menschen, göttlicher\n[[136.15]] Vorsehung, glück und unglück und versehen oder schickung, Gnadenwahl, mitwirkung mit dem\n[[136.16]] Thun und Lassen der creaturen, gerechtigkeit [in] verlassung des einen, und annehmung des\n[[136.17]] andern und von recht oder unrecht, so den Verdammten geschieht, zu papier gebracht und aus\n[[136.18]] meinem ersten concept um bessern gebrauchs willen, copiren lassen, auch dem Herrn Baron\n[[136.19]] von Boineburg zu lesen geben, hat wohlgedachter Herr von Boineburg Ew. Hochfürstliche\n[[136.20]] Durchlaucht solches gleich zugeschickt, um der zeitgewinnung; wiewohl ich es nicht gewußt\n[[136.21]] und willens war, solche erste copie, als die voll lituren, vor mich zu behalten und eine andere\n[[136.22]] verfertigen zu lassen und alsdann unterthänigst zu schicken. Daß nun solches nicht geschehen,\n[[136.23]] wollen Eure Hochfürstliche Durchlaucht nicht mir, noch einigem manquement höchst schuldigsten\n[[136.24]] respects, sondern erwähnter ursache zuzuschreiben gnädigst geruhen. </p>\n<p> [[136.25]] Die sache selbst belangend, so hoffe, eines und das andere beygebracht zu haben, so\n[[136.26]] bisher wenig oder gar nicht in acht genommen, gleichwohl aber ein gewicht dem ganzen werck\n[[136.27]] zu geben scheint. Mein Zweck aber ist, wie sonst, also auch hier gewesen, nicht etwa mit\n[[136.28]] leeren, in die luft geschriebenen büchern die läden zu füllen, sondern wo müglich damit einen\n[[136.29]] nuzen zu schaffen; und habe daher gegenwärtige arbeit vorgenommen, um mit diesem\n[[136.30]] specimine zu beweisen, wie so oft wichtige dinge leicht und durch wunderliche terminos\n[[136.31]] verdunckelt werden, wenn man diese nebelkappe abziehe und alles mit solchen worten gebe, so\n[[137.1]] jedermann in seiner sprache braucht. Was ist wohl jemals mit mehrer Hize verfochten worden\n[[137.2]] von allen seiten der philosophen und religionen der Völcker, als die materie von der praedestination\n[[137.3]] und was ihr anhängig? und gleichwohl hat ein großer Politiker recht gesehen, nemblich\n[[137.4]] daß einer den andern nicht verstehe, daß aller dieser zanck von mißbrauch der worte komme,\n[[137.5]] daß (kürtzlich zu sagen) in der that der unterschied gering und zum wenigsten nicht capital,\n[[137.6]] oder wie man heutzutage redet, fundamental sey. Ich getraue mir, wenns der mühe werth wäre,\n[[137.7]] über hundert unterschiedene secten und meinungen (dem ansehen nach), in der that widereinander\n[[137.8]] laufende arten zu reden, in dieser materie zusammen zu bringen, so ihre autores nicht\n[[137.9]] anders, als wenn der menschliche wohlstand daran hinge, verfolgt, und diesen artikel zu einem\n[[137.10]] solchen labyrint gemacht haben, daß dergleichen keiner in der welt zu finden und daß der\n[[137.11]] längstlebende mensch nicht zeit genug haben würde, nur die und dergleichen distinctionen und\n[[137.12]] verdrehungen der worte zusammen zu bringen und aus einander zu sezen. </p>\n<p> [[137.13]] Weil aber ein einiges, clares, von jedermann erkannt[es,] aus gemeinem leben genommen[es,]\n[[137.14]] mit einer gewissen definition umbschränktes wort, mehr krafft hat, die gemüther zu\n[[137.15]] erleuchten, als tausend termini scholastici und distinctiones, so habe ich das wiewohl unzählbare\n[[137.16]] spinngewebe abgekehrt und mit natürlichen redearten, deren sich auch ein lateinischer\n[[137.17]] Bauer (wenn einer in der welt wäre) gebrauchen würde, alles geben. Ich hätte es lieber teutsch\n[[137.18]] geschrieben, sonderlich weil die teutsche sprache keine terminaisonen leidet, man wolte dann\n[[137.19]] fremde worte ungescheut hineinflicken; allein es hätte dergestalt dem ausländer nicht communicirt\n[[137.20]] werden können. Meine intention nun damit ist gewesen, zu versuchen, ob etwa mit\n[[137.21]] guter manier, verständiger sanftmuth, von theologen von allen seiten, von catholischen, evangelischen,\n[[137.22]] reformirten, remonstranten und sogenannten jansenisten, practicirte judicia, und\n[[137.23]] dieses zum wenigsten erhalten werden könte, daß, wo sie nicht alles billigten, dennoch bekenneten,\n[[137.24]] nichts darin, so verdammlich oder dem also lebenden und sterbenden an seiner seeligkeit\n[[137.25]] schädlich, zu finden. Welches gewißlich ein schöner grad zu einer mehreren näherung und\n[[137.26]] einigkeit wäre, wenn in einer so wichtigen und schweren sache dergleichen specimen zu\n[[137.27]] bewircken wäre. Es müsten aber die, so judiciren sollen, weder den autorem und dessen\n[[137.28]] religion, noch die intention der mitcensores wissen, und jeder der meinung seyn, daß es von\n[[137.29]] einem seiner parthey komme. </p>\n<p> [[137.30]] Wie solches vielleicht am füglichsten zu thun, habe dem Herrn Baron von Boyneburg\n[[137.31]] ausführlicher zugeschrieben. Bitte, Eure Hochfürstliche Durchlaucht wollen solches alles gnädigst\n[[137.32]] vermercken und ich verbleibe [dero] Hochfürstlichen Durchlaucht unterthänigster ── </p>\n","number":"42.","title":"LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER","date":"[Mainz, 13. Februar 1671.] [58.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

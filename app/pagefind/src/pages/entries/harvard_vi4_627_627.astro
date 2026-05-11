@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_627","series":"Band VI 4 (1677 - 1690)","seq":627,"text":"[[2760.5]] <b>492₂.  Definitiones DEFINITIONES </p>\n<p> [[2760.11]] <b>Bonum</b> est quicquid ad voluptatem confert. </p>\n<p> [[2760.12]] <b>Malum</b> est quicquid ad dolorem confert. </p>\n<p> [[2760.13]] <b>Voluptas</b> (<b>Dolor</b>) est sensus crescentis (imminutae) perfectionis, seu <b>Voluptas</b>\n[[2760.14]] est sensus actionis, <b>dolor</b> passionis. </p>\n<p> [[2760.15]] <b>Laetitia</b> est excessus voluptatum praesentium supra dolores. </p>\n<p> [[2760.16]] <b>Tristitia</b> est excessus dolorum praesentium supra voluptates. </p>\n<p> [[2760.17]] Unde sequitur posse aliquem simul voluptatem et dolorem sentire sed non posse\n[[2760.18]] simul laetum et tristem esse. </p>\n<p> [[2760.19]] Patet etiam Laetitiam esse voluptatem totius hominis publicam sive universalem ex\n[[2760.20]] totius constitutione resultantem. </p>\n<p> [[2761.1]] Itaque et in mediis doloribus laeti, et in mediis voluptatibus tristes esse possumus. </p>\n<p> [[2761.2]] <b>Felicitas</b> est laetitia durabilis. </p>\n<p> [[2761.3]] <b>Miseria</b> est tristitia durabilis. </p>\n","number":"492₂.","title":"Definitiones","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

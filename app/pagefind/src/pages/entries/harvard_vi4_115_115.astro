@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_115","series":"Band VI 4 (1677 - 1690)","seq":115,"text":"[[384.8]] <b>95.  Linguae philosophicae Specimen in Geometria edendum Januar 1680</b>\n [[384.9]] <tab/> Januar 1680\n[[385.1]] <tit2><b>Linguae philosophicae Specimen in Geometria edendum</b> </tit2>\n [[385.2]] Januar. 1680. </p>\n<p> [[385.3]] Ut aliquod linguae philosophicae specimen edam, ac ne videar incredibilia promittere,\n[[385.4]] incipiam ab illis in quibus id et facilius et securius, et mirabili magis effectu\n[[385.5]] praestatur; nimirum in Geometria. Revocabo omnia ad rectarum ductus, et facilitatis nunc\n[[385.6]] quidem causa, non omnia resolvam; sed conabor caetera resolvere in triangula similia. Ut\n[[385.7]] autem omnia procedant facilius, et quia nondum metaphysicam ipsam resolvere satis\n[[385.8]] licuit, utar flexionibus, particulis ac constructionibus linguae latinae. Sed vocabula nova\n[[385.9]] effingam, sumta ex natura ejus, quod fit cum lineae ducuntur. </p>\n<p> [[385.10]] Hac ratione ubi primum Elementa explicuero, gradus ad caetera omnia non difficilis\n[[385.11]] erit. Nihil autem calculi hic miscebo, imo nec de magnitudinibus, summis, differentiis,\n[[385.12]] rationibus rationumque compositionibus, aut potentiis aut summis, caeterisque quae\n[[385.13]] communia sunt Arithmeticae et Geometriae, sed solis punctis, rectis, angulis, intersectionibus,\n[[385.14]] contactibus, motibus sum locuturus, ostendamque quomodo expressiones calculares\n[[385.15]] vel mixtae ad lineares revocentur. Fructus autem erit maximus, quoniam hac\n[[385.16]] ratione licebit Geometricas ratiocinationes maxime subtiles sine charta, sine pulvere, sine\n[[385.17]] calculo, sola imaginationis et memoriae vi peragere. </p>\n<p> [[385.18]] Aequalitatem ad congruentiam revocabimus, rationem ad similitudinem. Aequalia\n[[385.19]] quorum unum in alterum transformari potest. </p>\n","number":"95.","title":"Linguae philosophicae Specimen in Geometria edendum","date":"Januar 1680"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

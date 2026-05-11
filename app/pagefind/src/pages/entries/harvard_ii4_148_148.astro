@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_148","series":"Band II 4 (1701 - 1707)","seq":148,"text":"<p> [[479.1]] <b>148. BARTHÉLEMY DES BOSSES AN LEIBNIZ</p>\n<p> [[479.2]] Hildesheim, 29. September 1706. [146.149.] </b></p>\n<p> [[479.16]] Illustrissime Domine P[ax] C[hristi] </p>\n<p> [[479.17]] Plurimum <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> semper ex litteris tuis proficio, sive me doces, sive amanter objurgas. Quod in\n[[479.18]] dubitationibus alioqui facilibus haeream, noli mirari: nosti quam vim habeant hausta ex scholis\n[[479.19]] praejudicia, quibus fit ut ea quae scimus vel scire saltem possemus, saepe nesciamus. </p>\n<p> [[479.20]] Universale cum multorum in uno expressione confundendi ansam mihi dedit familiaris\n[[479.21]] scholis nostris partitio qua universale in objectivum et formale seu mentale dividimus quod\n[[479.22]] postremum in ipsa perceptione confusa multorum similium a plurimis constitui solet. Hujusmodi\n[[479.23]] perceptionem Entelechiis a te tribui non sane rebar, sed solum acutissimam tuam definitionem\n[[479.24]] ad captum meum elucidari cupiebam, ut discrimen animam rationalem inter et caeteras\n[[479.25]] Entelechias appareret. </p>\n<p> [[479.26]] Utrum Angelos esse incorporeos definitum apud nos habeatur, malo ex Patre Martino de\n[[479.27]] Esparsa magni nominis Theologo Romano, quam ex me intelligas. Ex eo, si forte ad manum\n[[479.28]] autor ille non esset, ea quae in adjecta schedula invenies ad verbum descripsi. Rationes\n[[479.29]] philosophicas quas pro sententia affirmativa affert perlustravi, quae, meo judicio, si quid\n[[480.1]] evincunt, hoc duntaxat probant, esse angelos quosdam incorporeos; non vero, omnes, videnturque\n[[480.2]] posse omnes eae rationes cum doctrina tua conciliari, si modo in subsidium vocare\n[[480.3]] libuerit S. Thomam ejusque sequaces qui Angelos <b>ministrantes</b> distinguunt ab <b>assistentibus</b>,\n[[480.4]] atque ministrantibus quidam actionem physicam in corpora tribuunt; assistentibus vero negant.\n[[480.5]] De quo videri potest S. Thomas prima parte qu[.] 112 articulis 2, 3 et 4. </p>\n<p> [[480.6]] Breviarium Philosophicum, cujus conficiendi jam dudum autor hortatorque es, lente\n[[480.7]] procedit quidem, ob temporis penuriam: procedit tamen, et quantum quotidianae lectiones\n[[480.8]] sinunt, quidquid occurrit quod ad scopum illum faciat colligo digeroque indies, atque verissime\n[[480.9]] dictum experior nebulas, quae restant, mutua rerum collustratione dissipari; sed multo magis\n[[480.10]] colloquio tuo, si eo frui interdum liceret dissipatum iri confiderem, nam fatale tibi est novam\n[[480.11]] rebus istis lucem afferre. </p>\n<p> [[480.12]] De Quesnelli et scriptorum ejus sorte audieram jam ante, an vero scripta ista in nostrorum\n[[480.13]] sint potestate, non intellexi. Missus est nobis abhinc semestri liber sat magnus jussu Archiepiscopi\n[[480.14]] Mechliniensis in lucem editus cum titulo: <i>Causa Quesnelliana</i> in quo passim extant\n[[480.15]] fragmenta ex interceptis Quesnelli scriptis excerpta, sed quia totus ad demonstrandam Archiepiscopalis\n[[480.16]] in Quesnellum actionis aequitatem conscriptus est, dubito, num ejusmodi sit qualem\n[[480.17]] optares. Si tamen illius videndi cupidus es, faxo ut accipias, quamprimum R[everen]dissimus\n[[480.18]] Suffraganeus noster, cui mutuum dedi, ab Ubiis ubi nunc est, fuerit reversus. Quod superest Vale\n[[480.19]] Illustrissime Domine, meque solita benevolentia prosequere. Dabam Hildesiae 29 Septembris\n[[480.20]] 1706. </p>\n<p> [[480.21]] Illustrissimae Dominationis tuae Humillimus et obedientissimus Servus in Christo </p>\n<p> [[480.22]] Bartholomaeus Des Bosses S J </p>\n","number":"148.","title":"BARTHÉLEMY DES BOSSES AN LEIBNIZ","date":"Hildesheim, 29. September 1706. [146.149.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

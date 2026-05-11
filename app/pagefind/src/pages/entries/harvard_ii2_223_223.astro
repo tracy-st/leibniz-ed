@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_223","series":"Band II 2 (1686 - 1694)","seq":223,"text":"<p> [[713.14]] <b>226. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[713.15]] [Wolfenbüttel, Ende Juni 1693.] [225.230.]</b></p>\n<p> [[714.6]] On doit estre bien aise, Monsieur, que vous donnés un sens raisonnable aux doutes des\n[[714.7]] <b>Academiciens</b>. C'est la meilleure Apologie, que vous pouviez faire pour eux. Je seray ravi\n[[714.8]] de voir un jour leur sentimens digerés et éclaircis par vos soins. Mais vous serés obligé de\n[[714.9]] temps en temps de leur prester quelque rayon de vos lumieres, comme vous avés commencé. </p>\n<p> [[714.10]] Il est vray que j'avois fait deux petits discours, il y a vingt ans, l'un de la <i>Theorie du\n[[714.11]] mouvement abstrait</i>, où je l'avois consideré hors du systeme comme si c'estoit une chose\n[[714.12]] purement mathematique; l'autre de <i>l'Hypothese du mouvement concret et systematique</i>, tel\n[[714.13]] qu'il se rencontre effectivement dans la nature. Ils peuvent avoir quelque chose de bon, puisque\n[[714.14]] vous le jugés ainsi, Monsieur, avec d'autres. Cependant il y a plusieurs endroits sur les quels je\n[[714.15]] crois d'estre mieux instruit presentement; et entre autres, je m'explique tout autrement aujourdhuy\n[[714.16]] sur les indivisibles. C'estoit l'essay d'un jeune homme, qui n'avoit pas encor approfondi\n[[714.17]] les mathematiques. Les loix du mouvement abstrait, que j'avois données alors, deuvroient avoir\n[[714.18]] lieu effectivement, si dans le corps il n'y avoit autre chose, que ce qu'on y conçoit selon des\n[[714.19]] Cartes, et même selon Gassendi. Mais comme j'ay trouvé que la nature en use tout autrement à\n[[714.20]] l'egard du mouvement, c'est un de mes argumens contre la notion receue de la nature du corps.\n[[714.21]] Comme j'ay indiqué dans le journal. <Fn><i>In E^#'1</i> : Journal des Sçavants du second Juin 1692.</Fn> </p>\n<p> [[714.22]] Quant aux <b>indivisibles</b>, lorsqu'on entend par là les simples extremités du temps ou de\n[[714.23]] la ligne, on n'y sçauroit concevoir [de] nouvelles extremités, ny des parties, actuelles ny\n[[714.24]] potentielles. Ainsi les points sont ny gros ny petits, et il ne faut point de saut pour les passer.\n[[714.25]] Cependant le continu, quoyqu'il ait partout [de] tels indivisibles, n'en est point composé,\n[[715.1]] comme il semble que les objections des Sceptiques le supposent, qui, à mon avis, n'ont rien\n[[715.2]] d'insurmontable, comme on trouvera en les redigeant en forme. Le P. Gregoire de S. Vincent a\n[[715.3]] fort bien monstré par le calcul même de la divisibilité à l'infini, l'endroit où Achille doit\n[[715.4]] [attraper] la tortue, qui le devance, selon la proportion des vistesses. Ainsi la Geometrie sert à\n[[715.5]] dissiper ces difficultés apparentes. </p>\n<p> [[715.6]] Je suis tellement pour <b>l'infini actuel</b>, qu'au lieu d'admettre que la nature l'abhorre,\n[[715.7]] comme l'on dit vulgairement, je tiens qu'elle l'affecte partout, pour mieux marquer les perfections\n[[715.8]] de son auteur. Ainsi je crois qu'il n'y a aucune partie de la matiere, qui ne soit, je ne dis\n[[715.9]] pas divisible mais actuellement divisée, et par consequent la moindre particelle doit estre\n[[715.10]] considerée comme un monde plein d'une infinité de creatures differentes. </p>\n","number":"226.","title":"LEIBNIZ AN SIMON FOUCHER","date":"[Wolfenbüttel, Ende Juni 1693.] [225.230.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

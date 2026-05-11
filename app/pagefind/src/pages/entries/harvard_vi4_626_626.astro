@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_626","series":"Band VI 4 (1677 - 1690)","seq":626,"text":"[[2758.12]] <b>492₁.  Modalia et elementa juris naturalis. Erste Fassung </p>\n<p> [[2758.18]] <b>Justitia</b> est charitas recte ordinata seu virtus servans rationem in affectu erga alios\n[[2758.19]] ratione praeditos. </p>\n<p> [[2758.20]] <b>Vir bonus</b> est qui justitia praeditus est. Omnis prudens est vir bonus. </p>\n<p> [[2758.21]] ^&.bb <Leibniz special character><b>Indebitum</b> <tab/>est, quod viro bono qua tali <tab/>^&.b</b> <Leibniz special character> </p>\n<p> [[2758.22]] <b>Debitum</b> <tab/><picture>204</picture> <tab/><picture>304</picture> <tab/>necessarium </p>\n<p> [[2758.23]] <b>Indebitum</b> <tab/>contingens </p>\n<p> [[2758.24]] <tab/>est, quod viro bono qua tali </p>\n<p> [[2758.25]] <b>Licitum</b> <tab/>possibile </p>\n<p> [[2758.26]] <b>Illicitum</b> <tab/>impossibile. </p>\n<p> [[2758.27]] Hinc omnes propositiones Logicae circa Modales huc transferri possunt: ex. grat.\n[[2759.1]] <petit> </p>\n<p> [[2759.2]] <i>Der in Kleindruck folgende Text wurde von Leibniz später ersetzt</i>: </p>\n<p> [[2759.3]] ^&.bb <Leibniz special character><tab/>Quod viro prudenti <tab/>necessarium <tab/>etiam viro bono <tab/>necessarium <tab/>est^&.b</i> <Leibniz special character>\n [[2759.4]] <tab/><picture>504</picture> <tab/>necessarium <tab/><picture>404</picture> <tab/><picture>504</picture> <tab/>necessarium <tab/><picture>404</picture> </p>\n<p> [[2759.5]] <tab/>contingens <tab/>contingens </p>\n<p> [[2759.6]] <tab/>Quod viro prudenti <tab/>etiam viro bono <tab/>est licet non contra. </p>\n<p> [[2759.7]] <tab/>possibile <tab/>possibile </p>\n<p> [[2759.8]] <tab/>impossibile <tab/>impossibile\n [[2759.9]] <tab/>Hinc omnes propositiones [<i>bricht ab</i>] </p>\n<p> [[2759.10]] ^&.bb <Leibniz special character><tab/>Quae viro bono <tab/>necessarium <tab/>etiam prudenti <tab/>necessarium^&.b</i> <Leibniz special character>\n [[2759.11]] <tab/><picture>503</picture> <tab/>necessarium <tab/><picture>403</picture> <tab/><picture>503</picture> <tab/>necessarium\n [[2759.12]] <tab/>Quae viro bono <tab/>possibile <tab/>etiam prudenti <tab/>possibile\n [[2759.13]] <tab/>impossibile <tab/>impossibile [<i>bricht ab</i>]\n[[2759.14]] <tab/>Vir bonus enim, etsi forte prudens non sit, agit tamen ut prudens in his quae ad bona malaque\n[[2759.15]] aliena pertinent. Sed prudentis officium latius patet. </p>\n<p> [[2759.16]] Nullum impossibile est debitum; seu impossibilium nulla est obligatio.\n [[2759.17]] <tab/>Nam omne impossibile est impossibile viro bono. Nullum impossibile viro bono utcunque est\n[[2759.18]] necessarium viro bono qua tali, jam necessarium viro bono qua tali idem est quod debitum. Ergo\n[[2759.19]] nullum impossibile est debitum. </p>\n<p> [[2759.20]] Omne necessarium est licitum; seu necessitas non habet legem.\n [[2759.21]] <tab/>Nam omne necessarium est necessarium viro bono. Omne necessarium viro bono utcunque est\n[[2759.22]] possibile viro bono qua tali; hoc est licitum. </petit> </p>\n<p> [[2759.23]] Omne debitum est licitum. </p>\n<p> [[2759.24]] Omne illicitum est indebitum. </p>\n<p> [[2759.25]] Nullum illicitum est debitum. </p>\n<p> [[2759.26]] Nullum debitum est illicitum.\n [[2759.27]] <tab/>Quia omne necessarium est possibile, omne impossibile est contingens seu\n[[2759.28]] potest non fieri. Nullum impossibile est necessarium. Nullum necessarium\n[[2759.29]] est impossibile. Ergo omne necessarium viro bono qua tali est possibile viro\n[[2759.30]] bono qua tali; et ita porro. </p>\n<p> [[2759.31]] Nullum impossibile est debitum, seu impossibilium nulla est obligatio.\n [[2759.32]] <tab/>Nam omne impossibile est impossibile viro bono. Nullum impossibile viro\n[[2759.33]] bono utcunque est possibile viro bono qua tali. Quod non est possibile viro\n[[2759.34]] bono qua tali non est necessarium viro bono qua tali, seu non est debitum. </p>\n<p> [[2759.35]] Omne necessarium est licitum, seu necessitas non habet legem.\n [[2759.36]] <tab/>Nam omne necessarium est necessarium viro bono. Quod est necessarium\n[[2760.1]] viro bono, ejus oppositum est impossibile viro bono. Quod impossibile viro\n[[2760.2]] bono utcunque non est possibile viro bono qua tali seu licitum. Ergo necessarii\n[[2760.3]] oppositum non est licitum. Cujus autem oppositum non est licitum, id\n[[2760.4]] ipsum est licitum. </p>\n","number":"492₁.","title":"Modalia et elementa juris naturalis. Erste Fassung","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_10","series":"Band II 3 (1695 - 1700)","seq":10,"text":"<p> [[27.5]] <b>10. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[27.6]] [Hannover, Ende März bis Anfang April 1695.] [8.59.]</b></p>\n\n<p> [[27.19]] Semper gratissimus erit nuntius, qui me docebit, florere te et valere; et mei tam amanter\n[[27.20]] meminisse, et praeclaros labores urgere. Spero quae coeperas edere opuscula a Te continuari. </p>\n<p> [[27.21]] Vellem satisfacere posse ex asse gravissimis quaestionibus tuis. Quae circa Cometas\n[[27.22]] moves, de eo vix aliud hactenus quam conjecturas habemus. Vera corpora esse puto, de caudis\n[[27.23]] tamen dubito, quas mallem emphaticas dicere. An vero durabiles sint cometae ad instar\n[[27.24]] Planetarum, et fortasse in Parabolis aut Hyperbolis ferantur ut isti in Ellipsibus; an corpora sint\n[[27.25]] nuper nata et evanida non satis definire ausim. </p>\n<p> [[28.1]] De Terra nostra verisimile mihi videtur olim arsisse cum separaretur lux a tenebris, an\n[[28.2]] nunc intus sit ignis medius difficilius dictu est. Sum tamen propior concedenti. Corpus omne\n[[28.3]] divisibile, imo actu divisum esse puto, nec aliud caementum agnosco, quam ipsum motum\n[[28.4]] conspirantem. Spatium non magis rem esse judico, quam tempus. Vis plastica seminis nihil\n[[28.5]] aliud est quam ipsa dudum facta praeformatio plantae vel animalis latentis, seu paulatim\n[[28.6]] evolvendi. </p>\n<p> [[28.7]] Rogare audeo, ut aliquando nonnihil Historicorum meorum desideriorum meminisse velis.\n[[28.8]] Nec repeto, puto enim meas ad Te pristinas superesse. </p>\n<p> [[28.9]] Et erant amici docti Patavini, qui favorem erant polliciti inprimis D. Papafava et D. de\n[[28.10]] Puteo. Ongarelli procurandi occasio per Bouquetium offertur. </p>\n","number":"10.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"[Hannover, Ende März bis Anfang April 1695.] [8.59.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

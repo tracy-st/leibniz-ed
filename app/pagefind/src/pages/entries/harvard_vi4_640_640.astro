@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_640","series":"Band VI 4 (1677 - 1690)","seq":640,"text":"[[2781.10]] <b>495₁.  Vorarbeit VORARBEIT </p>\n<p> [[2781.15]] <b>Jus Civile</b> est Systema Legum Civitatis. </p>\n<p> [[2781.16]] <b>Civitas</b> est societas inita felicitatis causa. </p>\n<p> [[2781.17]] <b>Lex</b> est enuntiatio circa agenda aut omittenda vim cogendi habens. </p>\n<p> [[2781.18]] <b>Systema</b> est collectio enuntiationum apta ad docendum. </p>\n<p> [[2781.19]] Circa Enuntiationes singulas versari possumus, vel interpretando, vel argumentando. </p>\n<p> [[2781.20]] Interpres alius est enuntiationis, alius enuntiantis. Nam saepe fit, ut aliquis non satis\n[[2781.21]] dicat, quae dicere voluit, aut dicturus fuisset, si dicenda ei venissent in mentem: tunc\n[[2781.22]] interpres aliquis esse potest, non tantum dicti, sed et dicentis; et hinc nascitur discrimen\n[[2781.23]] inter <greek>ȓhtòn kaí diánoian</greek>, dictum et sententiam. Atque hoc est quod dicitur non verba\n[[2781.24]] tantum legum tenenda esse <i>sed vim et potestatem</i> l. 17. <i>de Legibus</i>. Sententia autem\n[[2781.25]] investiganda est, ex rationibus quae movere Legislatorem. </p>\n","number":"495₁.","title":"Vorarbeit","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

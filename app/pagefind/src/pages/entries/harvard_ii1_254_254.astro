@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_254","series":"Band II 1 (1663 - 1685)","seq":254,"text":"<p> [[794.3]] <b>225. LEIBNIZ AN CHRISTIAN PHILIPP</p>\n<p> [[794.4]] [8. März 1680.] [224.226.]</b></p>\n<p> [[794.15]] [ ... ] Il paroist bien que les excuses que M. Rabel donne pour sauver M. des Cartes ne\n[[794.16]] l'ont pas satisfait luy même, aussi sont elles incompatibles avec le sens et avec les paroles de\n[[794.17]] l'auteur. </p>\n<p> [[794.18]] Monsieur des Cartes donnant certaines figures et certains mouvemens aux parties de la\n[[794.19]] matiere, s'objecte luy même que cette hypothese pourroit estre fausse: mais il repond que cela\n[[794.20]] ne sçauroit nuire, et que nostre monde ne laisseroit [pas] d'en suivre à la fin, par ce que la\n[[794.21]] matiere reçoit successivement toutes les formes dont elle est capable. Et il ne s'agit pas icy de la\n[[794.22]] volonté de Dieu, mais de la suite naturelle des formes. Et de dire que la matiere n'est capable\n[[794.23]] que de bonnes formes, cela est inutile, puisque selon M. de Cartes rien est bon ou mauvais que\n[[794.24]] par là même que Dieu l'a fait, ainsi rien n'empeche que Dieu ne fasse des formes aussi bizarres\n[[794.25]] qu'on voudra feindre. Ce ne sera pas la nature de ces formes, car elles ne sont pas bonnes ou\n[[794.26]] mauvaises que par la volonté de Dieu, et ce ne sera pas la volonté de Dieu, car pour quoy Dieu\n[[794.27]] ne les voudroit il pas aussi bien que les autres. </p>\n","number":"225.","title":"LEIBNIZ AN CHRISTIAN PHILIPP","date":"[8. März 1680.] [224.226.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

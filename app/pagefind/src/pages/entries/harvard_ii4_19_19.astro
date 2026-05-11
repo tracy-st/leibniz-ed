@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_19","series":"Band II 4 (1701 - 1707)","seq":19,"text":"<p> [[59.1]] <b>19. LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE</p>\n<p> [[59.2]] Hannover, 8. Mai 1702. [18.21.] </b></p>\n<p> [[59.20]] Monsieur Hanover 8 May 1702. </p>\n<p> [[59.21]] Vous <Fn><i>In L^#'1 am Kopf der Seite von Leibniz' Hand</i>: A Monsieur de Fontenelle</Fn> aurés receu ma derniere que j'ay adressée à M. l'Abbé Bignon, en luy envoyant les\n[[59.22]] observations de Berlin sur une nouvelle Comete. Maintenant je luy en communique la continuation,\n[[59.23]] et y joins encor ce mot pour Vous, Monsieur; avec une remarque sur l'Algèbre de\n[[60.1]] M. Ozanam qui vient de paroistre. Je m'imagine que cette Remarque seroit propre à estre\n[[60.2]] inserée dans le <i>journal des savans</i>, si on le trouve à propos, parcequ'on y donne le moyen\n[[60.3]] d'aller plus loin sur un certain sujet, que M. Ozanam n'a crû qu'on pouvoit aller. Lors qu'un\n[[60.4]] habile homme, tel que M. Ozanam, donne des bornes à la science, cela decourage et fait du tort\n[[60.5]] à ceux qui s'y arrestent; c'est pourquoy il est utile de les franchir. Je me contente de le faire\n[[60.6]] dans un exemple qui monstre le chemin à ceux qui ont plus le loisir, et plus de vigueur que moy\n[[60.7]] pour le poursuivre. </p>\n<p> [[60.8]] J'ay oublié dans la ma derniere de vous demander des nouvelles de ce que M. Tschirnhaus\n[[60.9]] a communiqué à l'Academie, autant qu'il est permis de le savoir. Je me contenteray en matiere\n[[60.10]] de Geometrie ou de ce qui en depend d'apprendre les propositions ou theoremes sans en\n[[60.11]] demander les demonstrations. Mais en ce qui est physique on a sujet de souhaiter plus\n[[60.12]] d'éclaircissement. En voicy un exemple. On parle fort des coussins ou sacs faits de cuir,\n[[60.13]] preparé en sorte qu'il puisse tenir l'air enfermé, et soutenir le poids d'un homme, au moins\n[[60.14]] 24 heures durant; car on dit que des peuples du levant en font des lits, et qu'il y a eu des gens en\n[[60.15]] Europe, qui l'ont imité. Cela estant, je souhaiterois d'apprendre s'il y a des gens connus en\n[[60.16]] France qui en font ou qui savent le moyen d'en faire. S'il y en a, on le saura dans l'Academie,\n[[60.17]] autrement il y a de l'apparence que c'est une chose qu'il faudra encor chercher. </p>\n<p> [[60.18]] Je vous demande pardon, Monsieur, de la liberté que je prends de faire de telles demandes.\n[[60.19]] Si je croyois qu'elle vous pouvoient causer de la peine je ne les hazarderois pas. Au reste je suis\n[[60.20]] avec zele </p>\n<p> [[60.21]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[60.22]] P. S. Je demande pardon de n'avoir pas fait copier la remarque cyjointe, faute de temps. Je\n[[60.23]] crois pourtant qu'elle sera assez lisible. </p>\n","number":"19.","title":"LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE","date":"Hannover, 8. Mai 1702. [18.21.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

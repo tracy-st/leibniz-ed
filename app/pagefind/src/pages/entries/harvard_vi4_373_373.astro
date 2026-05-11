@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_373","series":"Band VI 4 (1677 - 1690)","seq":373,"text":"[[1636.14]] <b>316.  Corpus non est Substantia sed modus tantum Entis sive apparentia cohaerens [März 1689 bis März 1690 (?)]</b>\n [[1636.15]] <tab/>[März 1689 bis März 1690 (?)]\n[[1636.19]] </petit>\n[[1637.1]] <b>Corpus non est Substantia</b>\n [[1637.2]] <b>sed modus tantum Entis sive apparentia cohaerens</b> </p>\n<p> [[1637.3]] Intelligo autem per corpus non id quod Scholastici ex materia et forma quadam\n[[1637.4]] intelligibili componunt sed quod molem alias Democritici vocant. Hoc ajo non esse\n[[1637.5]] substantiam. Demonstrabo enim si molem consideramus ut substantiam incidere nos in\n[[1637.6]] implicantia contradictionem, ex ipso continui labyrintho: ubi illud inprimis considerandum\n[[1637.7]] est, primum Atomos esse non posse, nam cum divina sapientia pugnant. Deinde\n[[1637.8]] corpora reipsa divisa esse in partes infinitas, nec tamen in puncta, ideoque non posse ullo\n[[1637.9]] modo assignari corpus unum sed materiae portionem quamlibet esse ens per accidens,\n[[1637.10]] imo et in perpetuo fluxu: Si vero hoc tantum dicamus: corpora esse apparentias cohaerentes,\n[[1637.11]] cessat omnis inquisitio de infinite parvis, quae percipi non possunt. Sed et hic locum\n[[1637.12]] habet, Herculeum illud argumentum, meum, quod ea omnia quae sintne an non sint a\n[[1637.13]] nemine percipi potest, nihil sunt. Jam ea est corporum natura, nam si Deus ipse vellet\n[[1637.14]] creare substantias corporeas quales fingunt homines, nihil ageret, neque ipse percipere\n[[1637.15]] posset, se aliquid egisse, quoniam nihil denique quam apparentiae percipiuntur. Signum\n[[1637.16]] veritatis itaque cohaerentia est, causa autem est voluntas Dei, formalis ratio est quod\n[[1637.17]] Deus percipit aliquid optimum esse seu harmonic<greek>v</greek>taton, sive quod aliquid Deo placet.\n[[1637.18]] Itaque ipsa ut ita dicam voluptas divina est rerum existentia. </p>\n","number":"316.","title":"Corpus non est Substantia sed modus tantum Entis sive apparentia cohaerens","date":"[März 1689 bis März 1690 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

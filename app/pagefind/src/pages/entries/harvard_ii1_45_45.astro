@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_45","series":"Band II 1 (1663 - 1685)","seq":45,"text":"<p> [[128.10]] <b>39. FRIEDRICH NITZSCH AN LEIBNIZ</p>\n<p> [[128.11]] Gießen, 15. (25.) Januar 1671. [34.43.]</b></p>\n<p> [[128.20]] Vir Nobilissime atque Amplissime Fautor et Amice Honoratissime. </p>\n<p> [[128.21]] Ultimas meas, in quibus ad utrasque Tuas, quas ad me simul fere dare, dignatus eras,\n[[128.22]] accepisti credo. Jam cum nova sese offerat occasio scribendi, has quoque superaddere debeo.\n[[128.23]] Scilicet Academiae nostrae a multis jam annis debet 1400. fl. Rhen. civitas Erphordiensis,\n[[128.24]] debitumque illud liquidum omnino est, et annua pensione soluta agnitum semper, nisi quod\n[[128.25]] temporibus turbulentis pensionis solutio per aliquot annos interrupta fuit, quae tamen et ipsa\n[[128.26]] iterum fuit repetita et inchoata quieto subsecuto statu et quidem ad usque illa tempora, ubi\n[[128.27]] Sereniss. Elector Moguntinus urbem occupavit. Ab illo tempore usurarum solutio non tantum\n[[128.28]] cessavit, sed etiam, cum petuntur, annorum saltem 69. et 70. restantes offerunt. Cum vero\n[[129.1]] Academia nostra oblationem illam respuat, neque annos retro multos negligere omnino possit,\n[[129.2]] Te, Vir Nobilissime, per me decenter petit, velit ipsi salubri quodam Consilio succurrere,\n[[129.3]] quomodo urbs ad solutionem debiti usurarumque possit adigi. Consilio enim Te juvare nunc\n[[129.4]] posse, bene novit, cum Consiliarii munere ap. Seren. El. Te fungi bene sciat. Non tantum valde\n[[129.5]] obligabis Academiam nostram, sed et prioribus amicitiae testimoniis adhuc et hoc addes,\n[[129.6]] siquidem per meam suggestionem debito suo potiri possit. Vale de caetero et fave ulterius Vir\n[[129.7]] Nobilissime </p>\n<p> [[129.8]] Tibi devinctissime </p>\n<p> [[129.9]] Giessae d. 15. Jan. 1671. L. F. Nitzschio P.P. </p>\n<p> [[129.10]] <i>A Monsieur Monsieur Leibnuz Docteur ès Droits et Conseiller de Son Altesse de Mayence.\n[[129.11]] à Mayence</i>. </p>\n","number":"39.","title":"FRIEDRICH NITZSCH AN LEIBNIZ","date":"Gießen, 15. (25.) Januar 1671. [34.43.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

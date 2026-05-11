@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_25","series":"Band II 4 (1701 - 1707)","seq":25,"text":"<p> [[73.22]] <b>25. LEIBNIZ AN PIERRE BAYLE</p>\n<p> [[73.23]] Berlin, 19. August 1702. [13.27.] </b></p>\n<p> [[74.17]] Monsieur </p>\n<p> [[74.18]] J'ay <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Mons Bayle Berlin 19 Aoust 1702 </Fn> appris de M. Toland que vous vous portés bien et que vous vous souvenes favorablement\n[[74.19]] de moy. Et j'en suis ravi. Il m'a meme salué de vostre part, et je vous en remercie non\n[[74.20]] seulement par cette lettre, mais encor par ce que j'y joins. J'ay vû la nouvelle edition de vostre\n[[74.21]] excellent <i>Dictionnaire</i>, où il y a tant d'erudition, d'esprit, et d'agrément, que j'ay eu besoin\n[[74.22]] d'un grand effort sur moy meme pour m'en arracher, quand il le falloit. Mon sejour à\n[[74.23]] Luzembourg, maison de plaisance de la Reine de prusse, où je me trouve maintenant avec Mad.\n[[74.24]] l'Electrice, me donne un loisir que je n'ay point ailleurs. J'ay lû d'abord l'article de <i>Rorarius</i>, et\n[[75.1]] me voyant invité si obligeamment, j'ay fait une replique que je vous envoye. Elle sera\n[[75.2]] maintenant pour vous Monsieur, et pour quelques amis choisis, plustost que pour le public.\n[[75.3]] Mais je souhaitte que vostre loisir vous puisse permettre de l'examiner, afin que je puisse avoir\n[[75.4]] l'honneur [d']apprendre vostre sentiment par la voye de M. de Volder, dont vous connoissés,\n[[75.5]] Monsieur, les grandes lumieres, et qui sera bien aise aussi de voir vos reflexions comme je\n[[75.6]] seray ravi d'apprendre encor les siennes. Si je ne savois que les plus profondes ne vous coustent\n[[75.7]] gueres je n'oserois point vous en demander, de peur de vous derober au temps qui vous doit\n[[75.8]] estre pretieux aussi bien qu'au public. </p>\n<p> [[75.9]] C'est encor pour cette raison que je finis maintenant, quoyque je pourrois encor dire bien\n[[75.10]] des choses à l'occasion de vostre ouvrage; et je suis avec zele </p>\n<p> [[75.11]] Monsieur etc. </p>\n","number":"25.","title":"LEIBNIZ AN PIERRE BAYLE","date":"Berlin, 19. August 1702. [13.27.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

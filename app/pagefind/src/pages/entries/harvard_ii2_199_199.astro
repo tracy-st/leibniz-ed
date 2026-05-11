@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_199","series":"Band II 2 (1686 - 1694)","seq":199,"text":"<p> [[648.11]] <b>201. CHRISTIAAN HUYGENS AN LEIBNIZ</p>\n<p> [[648.12]] Den Haag, 12. Januar 1693. [174.213.]</b></p>\n<p> [[649.1]] [ ... ] Croiez je vous prie Monsieur que je ne me pique nullement de soutenir les opinions\n[[649.2]] que j'ay une fois embrassées, mais que je ne cherche uniquement que quelques raions de verité,\n[[649.3]] si nos disputes en pourroient mettre en evidence. J'ay fort consideré ce que vous dites au sujet\n[[649.4]] de mes atomes de dureté infinie, sçavoir que vous avouez bien, qu'il y auroit de l'absurdité à\n[[649.5]] donner à tous les corps primitifs un certain degré de fermeté ou resistence à estre rompus, mais\n[[649.6]] qu'il n'y a point d'absurdité de supposer de differents degrez dans plusieurs corps; s'entend\n[[649.7]] primitifs, car c'est de quoy il s'agit. Il me semble pourtant qu'il est plus aisé d'accorder la\n[[649.8]] dureté parfaite et infinie pour tous, que cette varieté de forces pour differents corps. Car il est\n[[649.9]] plus difficile de concevoir les raisons de ces differentes duretez, que d'en admettre une seule\n[[649.10]] infinie. Ce seroit imaginer plusieurs especes de matiere premiere, au lieu que je n'en ay besoin\n[[649.11]] que d'une. </p>\n<p> [[649.12]] Vous alleguez après cela comme une difficulté contre les atomes, l'adhesion qui se feroit\n[[649.13]] par leurs surfaces plattes. Je repons qu'elles devroient avoir estez faites expres ces surfaces, ce\n[[649.14]] que je ne vois pas pourquoy il auroit plustost lieu là, que dans le sable de la mer, où l'on n'en\n[[649.15]] trouve point. Et il ne me semble point du tout que ce soit un grand <i>Postulatum</i> de vouloir qu'il\n[[649.16]] n'y ait point d'atomes avec des surfaces plattes, mais qu'il le seroit d'avantage d'en supposer,\n[[649.17]] puisqu'il faut une direction et intention expresse pour former une surface platte avec la derniere\n[[649.18]] exactitude. Mais quand la dixieme partie des atomes seroient des cubes parfaits, l'application\n[[649.19]] juste de leurs surfaces consistant <i>in indivisibili</i>, et ces corps estant en grand mouvement, je\n[[649.20]] n'apprehenderois pas encore qu'ils s'allassent joindre à composer des masses. </p>\n<p> [[649.21]] Vous trouvez encore un inconvenient en ce que les atomes ne seroient pas susceptibles des\n[[649.22]] loix du mouvement, parce que deux egaux, concourant directement avec forces égales, devroient\n[[649.23]] perdre leur mouvement, puisqu'il n'y a que le ressort, dites vous, qui fasse rejaillir les\n[[649.24]] corps. Mais c'est ce que je ne crois nullement pour des raisons que je publieray un jour; et\n[[649.25]] quelque explication que vous vouliez donner de la cause du ressort, vous seriez bien embarassé,\n[[649.26]] en posant que les derniers petits corps (car ceux qui font ressort sont composez) ne rejalissent\n[[649.27]] point en se rencontrant, mais qu'ils demeurent joints; car de là s'en suivroit la perte de tout\n[[649.28]] mouvement relatif dans la Matiere de l'univers. </p>\n<p> [[650.1]] <petit><i>Den folgenden kleingedruckten Text aus dem Konzept K^#'1 hat Huygens nicht in die Abfertigung übernommen</i>: <+6> </p>\n<p> [[650.2]] Ce qui me fait à moy le plus de peine dans la supposition des atomes, c'est que je suis obligé de leur\n[[650.3]] attribuer à chacun quelque figure. Et quelle sera la cause de la varieté infinie de ces figures? Mais quelle est la\n[[650.4]] cause des differentes figures du sable de la mer, lequel j'admire toutes les fois que je le regarde avec le\n[[650.5]] microscope, chaque grain estant un caillou de cristal, qui ne croit ni ne diminue et a esté tel qui sçait par combien\n[[650.6]] de siecles? C'est que le Createur les a fait une fois naitre telles, et de mesmes pour les atomes. </petit> </p>\n<p> [[650.7]] Au reste vous ne deviez pas m'attribuer que je conçois que le seul attouchement fait\n[[650.8]] l'office d'un <b>gluten</b>, à rendre les corps composez fermes et durs, puis que j'avois ecrit dans\n[[650.9]] ma lettre precedente, que j'expliquois la cohesion des corps par une pression de dehors, et par\n[[650.10]] quelqu'autre chose. Laquelle pression je vois que vous emploiez de mesme. Ce que vous\n[[650.11]] adjoutez du mouvement conspirant m'est tout à fait inintelligible. </p>\n<p> [[650.12]] J'ay <Fn><i>Am Kopf der ersten Seite von K^#'1 die durchgestrichene Notiz</i>: Je rendray ses remarques sur des Cartes. Et marqueray en quoy je ne suis pas de vostre avis, après avoir cherché mes annotations.</Fn> rendu à M^#'r de Beauval vos notes sur des Cartes. Je pourray une autre fois vous parler\n[[650.13]] des endroits où je ne suis pas d'accord avec vous. [ ... ] </p>\n","number":"201.","title":"CHRISTIAAN HUYGENS AN LEIBNIZ","date":"Den Haag, 12. Januar 1693. [174.213.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

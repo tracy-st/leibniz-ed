@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_593","series":"Band VI 4 (1677 - 1690)","seq":593,"text":"[[2708.5]] <b>462.  De vitiis in comoedia non exhibendis [1677 bis 1716 (?)]</b>\n [[2708.6]] <tab/>[1677 bis 1716 (?)] </p>\n<p> [[2708.10]] Ajunt in Comoediis vitia ridicula exhiberi ad animos hominum ab iis deterrendos.\n[[2708.11]] Sed sciendum est quae risum excitant vitia ea semper exigua censeri. Itaque probari hoc\n[[2708.12]] institutum potest in erroribus levioribus, at scelera non ut ridicula sed ut horribilia et\n[[2708.13]] tragica ostendi debent. Et perniciosum est adulteria in comoediis conspici, etiamsi risui\n[[2708.14]] adulter exponatur. Haec enim spectacula libidinosum magis irritant quam emendant, et\n[[2708.15]] videmus improbos sese irridere mutuo ac de suis nequitiis jocari, quae bonos ad fletum et\n[[2708.16]] gemitus moverent. </p>\n","number":"462.","title":"De vitiis in comoedia non exhibendis","date":"[1677 bis 1716 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

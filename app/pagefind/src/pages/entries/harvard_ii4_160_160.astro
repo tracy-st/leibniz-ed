@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_160","series":"Band II 4 (1701 - 1707)","seq":160,"text":"<p> [[511.3]] <b>160. BARTHÉLEMY DES BOSSES AN LEIBNIZ</p>\n<p> [[511.4]] Hildesheim, 22. Oktober 1706. [158.163.] </b></p>\n<p> [[511.13]] Illustrissime Domine </p>\n<p> [[511.14]] Litteras <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> tuas 16 mensis labentis datas, distributorum nostratium, uti plerumque fit, culpa,\n[[511.15]] primum die Martis, post meridiem, hoc est aliquanto serius accepi, quam ut respondere quamprimum\n[[511.16]] possem, uti optaveras. </p>\n<p> [[511.17]] Non possum non maximas tibi gratias agere de amantissima tua Guelfebytum invitatione,\n[[511.18]] nec enim jucundius quidquam accidere mihi possit occasione ista quam suggeris videndi tui, et\n[[511.19]] quod caput, innotescendi Serenissimo duci: sed, Illustrissime Domine, ut, quod res est, candide\n[[511.20]] dicam, Ego cum libris fere solis commercium habere solitus, et consuetudinis aulicae non\n[[511.21]] admodum gnarus tanto Principi me sistere vereor. Accedit quod Provinciae nostrae Praesidem\n[[511.22]] Collegium hoc de more visitaturum, propediem praestolemur, quo tempore abesse me domo\n[[511.23]] non expedit. Utut haec se habeant, si nihilominus e re fore judicas excursionem istam; id cum\n[[511.24]] Guelfebytum veneris, verbo mihi significa: Promptissime advolabo. Malim enim minus urbanus\n[[511.25]] inveniri quam parum obsequens, et Superior noster, qui nihil potius ambit quam tuis ac\n[[512.1]] serenissimi maxime ducis nutibus, quos pro imperio habet, obedire, facultatem hanc mihi\n[[512.2]] concedet perquam lubenter. Caetera ad commercium Philosophicum nostrum pertinentia, in\n[[512.3]] reditum tuum reservo. Accludo litteras P. Janningi. </p>\n<p> [[512.4]] Quod superest vale, Illustrissime Domine, et solita me benevolentia prosequere. Dabam\n[[512.5]] Hildesii 22 Octobris 1706 </p>\n<p> [[512.6]] Illustrissimae Dominationis tuae Humillimus et obedientissimus servus </p>\n<p> [[512.7]] Bartholomaeus Des Bosses S J </p>\n<p> [[512.8]] Monsieur Monsieur De Leibnitz Conseiller d'Etat de S. A. E. de Brunswick-Lunebourg\n[[512.9]] etc. etc. à Hannover </p>\n","number":"160.","title":"BARTHÉLEMY DES BOSSES AN LEIBNIZ","date":"Hildesheim, 22. Oktober 1706. [158.163.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

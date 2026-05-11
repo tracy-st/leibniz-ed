@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_83","series":"Band II 1 (1663 - 1685)","seq":83,"text":"<p> [[229.7]] <b>70. PIERRE DE CARCAVY AN LEIBNIZ</p>\n<p> [[229.8]] Paris, 10. Juli 1671. [67.74.]</b></p>\n<p> [[229.17]] Monsieur de Paris le 10^#'e Juillet 1671. </p>\n<p> [[229.18]] ne pouvant me donner l'honneur de vous escrire que peu de chose à cause des affaires\n[[229.19]] dont je suis accablé, je le faiss en nostre langue vous suppliant d'agreer que j'en use de la sorte,\n[[229.20]] et que je vous dise en ce qui regarde M^#'r Kraf, et le secret dont il a parlé à M^#'r Colbert qu'il n'a\n[[229.21]] qu'à executer ce dont il est demeuré d'accord avec M^#'r du Fresne, et qu'on luy tiendra\n[[229.22]] absolument tout ce qu'on luy a promis. </p>\n<p> [[229.23]] Pour ce qui est de vos petits livres j'ay donné à quelques uns de nos M^#'r^#'s ce qu'il vous a plu\n[[229.24]] en envoyer, Eux et moy vous en rendons tres humbles graces, ils m'ont prié de vous dire qu'ils\n[[229.25]] eussent souheté que vous vous fussiez davantage estendu en certains endroits, où ils ont trouvé\n[[229.26]] quelque difficulté et obscurité, ce qui est arrivé sans doute par le desir que vous avez eu de\n[[229.27]] comprendre beaucoup en peu de mots, la plus part des hommes sont ennemys de la peyne, et\n[[229.28]] comme chacun a ses occupations et mesmes ses preventions il faut pour entrer en commerce\n[[229.29]] s'accommoder les uns avec les autres. Si vous me jugez capable de vous servir en quelque\n[[229.30]] chose je le feray tres volontiers estant avec verité </p>\n<p> [[230.1]] Monsieur vostre tres humble et obeissant serviteur de Carcavy. </p>\n<p> [[230.2]] A Monsieur Monsieur Libniktz Docteur ez droits et con^#'e^#'r de Son Altesse Electoralle de\n[[230.3]] Mayence. </p>\n","number":"70.","title":"PIERRE DE CARCAVY AN LEIBNIZ","date":"Paris, 10. Juli 1671. [67.74.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

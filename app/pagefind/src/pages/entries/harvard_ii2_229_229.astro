@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_229","series":"Band II 2 (1686 - 1694)","seq":229,"text":"<p> [[725.20]] <b>232. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[725.21]] Dijon, 1. August 1693. [218.238.]</b></p>\n<p> [[726.1]] Dijon le 1^#'e^#'r aoüst <b>1693</b> </p>\n<p> [[726.2]] Je n'ay point voulu monsieur vous ecrire que je ne scûsse prealablement que mons^#'r le\n[[726.3]] president Cousin eût executé ce que je luy avois mandé à vostre egard. Il a esté plus exact à le\n[[726.4]] faire ce coup icy que du passé comme vous le verrés par la copie de la lettre de mons^#'r Bourdelot\n[[726.5]] que j'envoye à mons^#'r de Spanheim. Vostre <i>Codex juris gentium diplomaticus</i> a esté admiré de\n[[726.6]] mons^#'r le chancelier et de tous mess^#'r^#'s les conseillers d'etat ausquels il a esté monstré; je ne vous\n[[726.7]] repete pas ce que cet amy m'escript et dont je faicts part à mons^#'r de Spanheim parceque je\n[[726.8]] laisse sa lettre ouverte pourque vous l'y voyiés. J'ay donné une copie du project de vostre\n[[726.9]] <i>Codex</i> à nostre amy l'abbé Boisot qui a esté icy pendant six semaines à la sollicitation d'un\n[[726.10]] procés; il m'a promis qu'il jetteroit les yeux sur ses 80 vol. in fol. de receüils mss. et qu'il vous\n[[726.11]] envoyeroit ce qu'il y trouveroit de propre à estre mis dans ce livre; je croy que mons^#'r Bouhier et\n[[726.12]] mons^#'r de la Mare pourront y fournir quelques choses, je leur en ay parlé et leur ay faict voir\n[[726.13]] vostre project; nostre chambre des comptes pourra bien aussi y contribuer. Mons^#'r Baillet m'a\n[[726.14]] envoyé sa <i>devotion à la s^#'t^#'e vierge</i> que j'ay mise entre les mains de quelques mess^#'r^#'s de Geneve\n[[726.15]] qui sont en cette ville aussi bien que de quelques de nos religieux qui en sont egalement edifiés,\n[[726.16]] les uns avoüants qu'ils sont trop avares à l'egard de ce culte et les autres trop prodigues, et qu'il\n[[726.17]] peut y avoir un milieu. La rumeur a esté grande sur ce livre à Paris; mais tout commence à\n[[726.18]] s'appaiser à ce que m^#'r Baillet m'escript; mons^#'r Bayle va mettre sous la presse son <i>dictionnaire\n[[726.19]] critique et historique</i>. Mons^#'r Baudelot de Paris et mons^#'r Graverol de Nismes veullent (à ce\n[[726.20]] qu'on me mande de Paris) arracher les aisles à nos <i>sirenes</i> (comme firent autrefois les muses) et\n[[726.21]] leur donner des aislerons pour les faire arriver plutost en Hollande. Car elles volent si lentement\n[[726.22]] que depuis deux ans et demy que je les y ay envoyé elles n'i sont pas ancore arrivées; c'est ce\n[[726.23]] qui m'a obligé d'ecrire à nos amis en leur mandant cette nouvelle que <i>citius adnatabunt ad vos\n[[726.24]] Sirenes cum pinnis, quam cum pennis advolabunt</i>. </p>\n<p> [[727.1]] Je suis monsieur avec tout le respect et la sincerité possible v^#'r^#'e tres humble et tres\n[[727.2]] obeissant serviteur </p>\n<p> [[727.3]] Nicaise </p>\n<p> [[727.4]] Je tacheray à deterrer icy un traité mss. <i>de fide veterum instrumentorum</i>. </p>\n","number":"232.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 1. August 1693. [218.238.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

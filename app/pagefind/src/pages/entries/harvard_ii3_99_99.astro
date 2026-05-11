@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_99","series":"Band II 3 (1695 - 1700)","seq":99,"text":"<p> [[269.14]] <b>99. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[269.15]] Hamburg, 7. (17.) Februar 1697. [96.103.]</b></p>\n\n<p> [[270.2]] Hamburg, 7. Februar 97 </p>\n<p> [[270.3]] HochEdler, Vest= u. Hochgelehrter Herr, Hochgeneigter Hr. HofRaht </p>\n<p> [[270.4]] Ihren brief vom 19. Jan. habe gestern erst bekommen von Doct. Christiani alhir, welcher\n[[270.5]] damit so saümselig gewesen: ich bin hoch verpflichtet vor di gute Vorsorge vor mich; hätte ich\n[[270.6]] eher das glük gehabt, mit einem wahren Philosopho bekant zu werden, deßen eigenschaft nicht\n[[270.7]] nur weisheit, sondern auch gütigk. ist, vileicht wäre ich längst nicht mehr so in der irre\n[[270.8]] herumgezogen. Und weil großen Hrn. vor 200. dinen, vileicht eher zur beföderung hilft, als\n[[270.9]] bürgersleüten vor 300., wil ichs ohn bedenken annehmen, wünsche nur, tüchtig gnung zusein,\n[[270.10]] des Hrn. Grafen curiosität zustillen, welches ich doch hoffen wil, wenn er nicht zuviel practica,\n[[270.11]] architectur u. ingenieurswesen wird verlangen, welches denn bei denen, di mathesin nur zur\n[[270.12]] lust studiren, gemeinigl. zugeschehen pflegt, ich aber mit meinem großen leidwesen, ein\n[[270.13]] lauterer theoreticus bin, fast keines geschäfts, als des stetigen denkens u. grillisirens fähig; doch\n[[270.14]] weil Bükenburg in der landkarte etwa 6. 7. meile von Hannover scheint, wird meiner künheit,\n[[270.15]] im fal einiger unwißenheit, verhoffentlich di Zuflucht nicht versagt werden. Ich wundere mich,\n[[270.16]] daß bei einem solchen Hrn. lust u. gedult zu finden, zu den mühseligen demonstrationen der\n[[270.17]] lezten 6. bücher, welche auch bei dem Tacquet schon ekel gnung sind, geschweige im Euclide\n[[270.18]] u. Clavio. Honoratus Fabry ist vileicht leichter, wi ich aus dem Sturm merke. Doch hab ich ihn\n[[270.19]] noch nie gesehen: am liebsten aber wäre mir Sturm, wenn ich nur hinten den algebris Anhang\n[[270.20]] verstünde; ich verstünde auch vileicht, wenn ich meine tage 14 tage hätte unterricht darin\n[[270.21]] gehabt; aber wenn ich ein 6 wöchentlich collegium geom. ausnehme, so ist meine ganze übrige\n[[270.22]] mathesis, wie auch di meisten übrigen studia, eine autodidaxie. Ob sonst Renaldinus oder\n[[270.23]] Wallis, welche ich in Sturms <i>math. enucl.</i> oft finde, vor mich beßer sei, bitte gehors. zuberichten.\n[[270.24]] Dis eine könnte noch bedenken machen, wo man in <zl>^#h(+5)1<ne>2<be> oder etl. vierthel jahren, weil doch\n[[270.25]] der Graf nur eine kurze Zeit jemand verlangt, hin solte; doch weil ich hoffe, man werde so\n[[270.26]] schleünig, gegen den Winter, ohne 2, 3 monatliche ankündigung, bis sich sonst wo was\n[[271.1]] ereignete, nicht verstoßen werden: Wil also in wenig tagen, wenn ich werde bei meinen itzigen\n[[271.2]] <i>auditt.</i> einen schlus gemacht haben, hir abreisen; vileicht habe das glük innerhalb 14 tagen dem\n[[271.3]] Hrn. HofR. erfreüligst aufzuwarten, weils doch über 4, 5 meilen nicht scheint aus dem Wege\n[[271.4]] <angle bracket>zu</angle bracket> sein. Die neülig ausgeblibene einlage verhoffe künftig, <angle bracket>der ich verbl.</angle bracket> </p>\n<p> [[271.5]] HochEdler Hr. HofRaht, dero verbundnester Gabriel Wagner\n[[271.6]] <yi>Dem HochEdlen, Vest= und Hochgelehrten Herrn, Hrn. Gotfried Wilhelm Leibniz,\n[[271.7]] S. Churfürstl. Durchl. zu Braunschweig Hochbestalten Hof Raht u. a. m. Hannover. Franco. </p>\n","number":"99.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Hamburg, 7. (17.) Februar 1697. [96.103.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

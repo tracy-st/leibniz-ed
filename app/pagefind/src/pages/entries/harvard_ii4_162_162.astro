@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_162","series":"Band II 4 (1701 - 1707)","seq":162,"text":"<p> [[513.11]] <b>162. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[513.12]] Leipzig, 31. Oktober 1706. [171] </b></p>\n<p> [[514.21]] Vir Illustris atque Excellentissime, Domine ac Patrone gratiosissime! </p>\n<p> [[514.22]] Beneficia olim in se collata oblivioni devovere ingrati animi crimen est. Quod ne incurram\n[[514.23]] ego, literis hisce observantissimis recentem adhuc benefactorum memoriam Tibi, Illustris\n[[514.24]] Domine, approbare volui. Diu jam est, quod TE inter praecipua Saeculi ornamenta numerari,\n[[514.25]] studia colere, studiosos amare, fovere, provehere, multorumque qui aliqua componunt, portum\n[[514.26]] sinum praemium, omnium exemplum, ipsarum denique literarum praesidium esse optime novi,\n[[514.27]] Tuasque coram admirari virtutes vehementer optavi; sed defuit occasio hactenus, quam nuperrimo\n[[514.28]] hostium in Saxoniam adventu me Lipsiae aliquantisper arcente, divino quodam fato non\n[[514.29]] sine ingenti animi mei laetitia consecutus sum. Quantum vero Tibi, Patrone gratiosissime,\n[[514.30]] debeam, mente quidem teneo, et quoad vita suppetet, tenebo, at nullis verbis exprimere valeo.\n[[514.31]] Neque enim tantum ignotum me hominem serena fronte excepisti, verum et necessario orbatum\n[[514.32]] subsidio (o magnum beneficium!) num erata sublevare pecunia haud dedignatus es. Fateor\n[[514.33]] quam lubentissime me nullam unquam rationem inventurum esse, qua ulla ex parte obsequiis\n[[514.34]] ex servitiis meis tantam gratiam assequi, nedum superare possim. Quare devotis aeternum\n[[514.35]] Numen suspiris veneror, ut longum TE servet sospitem atque incolumem, salutaria consilia\n[[514.36]] regat et fortunet ad salutem et utilitatem communis Patriae, ejusque civium commoda et\n[[515.1]] emolumenta, ut hoc modo gloriam, bonis omnibus adplaudentibus, Tua Virtute Tuaque integritate\n[[515.2]] partam ad posteros sartam tectam transmittas, mihi vero illam concedat felicitatem, ut Tua,\n[[515.3]] Patrone Maxime fretus providentia apud exteras rationes studia mea perficiendi occasionem\n[[515.4]] nanciscar exoptatissimam. Vale, Vir Illustris, meque inter Clientes Tuos infimo loco saltem\n[[515.5]] numerari patiaris, qui permaneo </p>\n<p> [[515.6]] Illustris atque Excellentissimi Nominis Tui Cultor devotissimus </p>\n<p> [[515.7]] M. Michael Gottlieb Hansch </p>\n<p> [[515.8]] Lipsiae A. O. R. MDCCVI. Prid. Calend. Novembr. </p>\n<p> [[515.9]] Monsieur Monsieur de Leibnitz Conseiller de S. A. E. de Brounsvic et Lunebourg etc. à\n[[515.10]] Hannover </p>\n","number":"162.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 31. Oktober 1706. [171]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

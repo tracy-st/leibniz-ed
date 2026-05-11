@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_213","series":"Band II 4 (1701 - 1707)","seq":213,"text":"<p> [[658.1]] <b>213. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[658.2]] Leipzig, 27. August 1707. [210.216.] </b></p>\n<p> [[658.22]] Vir Illustris et Excellentissime, Patrone et Fautor aetatem devenerande! </p>\n<p> [[658.23]] Binas tuas per Dn. Clausnizerum recte quidem, sed priores justo serius accepi, Halae tum\n[[658.24]] temporis agens cum illae deferrentur. Gratias autem Excellentiae Tuae maximas debeo, quod\n[[658.25]] desideriis meis tam benevole annuere haud fuerit dedignata. </p>\n<p> [[658.26]] Nulla se hactenus obtulit occasio Libros Brunsvigam tuto satis mittendi. Quare nundinas\n[[658.27]] nostras expectare Librosque Dn. Forstero tradere commodissimum mihi videtur, nullam interea\n[[658.28]] aliam, si forte dabitur occasionem neglecturo. Alcmanis monumentum cum Marsigliano opere\n[[659.1]] nondum accipere potui a Dn. Menckenio, sed tamen me accepturum esse spero, unaque cum\n[[659.2]] reliquis per Forsterum mittam. Dn. Mencke nuper in praesentia Illustrissimorum Dominorum\n[[659.3]] Legatorum ex utriusque Resp. Procerum ipso Annae die Serenissimae Annae de Unione\n[[659.4]] Angliae atque Scotiae nomine Academiae nostrae magna cum solemnitate gratulatus est. </p>\n<p> [[659.5]] Caeterum non possum quin Tecum, Vir Excellentissime, thesaurum quendam communicem\n[[659.6]] Mss^#'t^#'o^#'r^#'u^#'m Kepleraniorum, quorum cum essemus invicem in Bibliotheca Paulina mentio a me\n[[659.7]] injiciebatur, a Curiosis harum literarum aestimationibus adhuc comparabilem. Continetur ille\n[[659.8]] aliquot fasciculis, quorum primus complectitur Kepleri Genethliaca, item Tychonis Brahe,\n[[659.9]] Bartschii etc., secundus Genealogica et Geographica Sacra, tertius Epistolas Davidis Fabricii ad\n[[659.10]] Joh. Keplerum cum responsionibus ejusdem ab anno 1601 ad annum usque 1609, una cum\n[[659.11]] Epistolis Joh. Georg. Herward von Hohenburg etc.[,] quartus Ptolemaei Pelusiensis <i>Harmonicorum</i>\n[[659.12]] Libros interprete Antonio [Gogavino Graviensi]: item Aristoxeni Musici antiquissimi\n[[659.13]] <i>Harmonicorum Elementorum Libros 3</i>. et aliquid ejusd. argumenti ex Dialogis Galilaei; quintus\n[[659.14]] Kepleri Fragmenta varii argumenti; sextus Kepleri annotata <i>de stella nova</i>, aliorumque Epistolas,\n[[659.15]] item Tychonis Scriptum: septimus Lunaria Tychonis et alia quaedam Kepleri: octavus de\n[[659.16]] ratione anni rudimentum Calendarii: nonus Tabularum Rudolphi Partem illam, quae generaliter\n[[659.17]] servit, cuicunque restitutioni, et alia quaedam: decimus Kepleri Appendicem ad Harmonices\n[[659.18]] Mundi Librum quintum continentem Ptolemaei Lib. 3. a c. 3. usque ad fin.[,] item Commentaria\n[[659.19]] Porphyrii in Ptolemaei <i>Harmonica</i>, item de aetate Mundi; undecimus Epistolas varias ad\n[[659.20]] Keplerum: duodecimus Canonem rectanguli Sphaerici, item doctrinam Triangulorum etc.[,]\n[[659.21]] decimustertius Genethliaca; item de Interitu Regni Turcici, it[em] de quantitate in genere et\n[[659.22]] plurima alia: decimus quartus Tabulas complectitur Rudolphinas. </p>\n<p> [[660.1]] Catalogum hunc nuper per Amicum consecutus sum, et Excellentiae Tuae hac occasione\n[[660.2]] mitto. Quod superest vale, meisque studiis, ut coepisti, patrocinio Tuo adesse perge qui sum\n[[660.3]] maneoque </p>\n<p> [[660.4]] Excellentiae Tuae observantissimus M. G. Hansch. </p>\n<p> [[660.5]] Dab. Lipsiae 1707. 27. August. </p>\n<p> [[660.6]] P. S. Nolim semper litteras ad Clausnizerum dirigi, ne ipsius humanitate abuti videar.\n[[660.7]] Iterum Vale! </p>\n<p> [[660.8]] NB A Son Excellence Monseigneur de Leibnitz Conseiller privé de Son Altesse Electorale\n[[660.9]] de Brounsvic et Lunebourg presentement à Hannover </p>\n","number":"213.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 27. August 1707. [210.216.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

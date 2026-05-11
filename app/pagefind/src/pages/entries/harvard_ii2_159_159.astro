@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_159","series":"Band II 2 (1686 - 1694)","seq":159,"text":"<p> [[556.1]] <b>161. LEIBNIZ AN PAUL PELLISSON-FONTANIER</p>\n<p> [[556.2]] [Hannover, 6. August 1692.] [143.167.]</b></p>\n<p> [[556.15]] [ ... ] Je m'etonne qu'on ne peut pas assoupir cette querelle entre les Jesuites et les\n[[556.16]] pretendus Jansenistes. L'animosité est fort grande de part [et] d'autre, et j'ay vû des lettres des\n[[556.17]] Jesuites de Paris, qui pretendent tousjours que Mons. Arnaud est un heretique declaré. C'est ce\n[[556.18]] qui me surprend, depuis que les papes mêmes ont témoigné d'estre dans un autre sentiment.\n[[556.19]] Cependant j'avoue qu'il y a certaines choses dans la Theologie de Mons. Arnaud que je ne\n[[556.20]] sçaurois gouster. Il est vray que je suis du sentiment de S. Augustin, de S. Thomas, et de leur\n[[556.21]] sectateurs à l'egard de la predetermination sauf la liberté et la contingence, sur quoy j'ay des\n[[556.22]] pensées qui nous semblent mener à la source de ces choses. J'ay esté long temps en doute s'il y\n[[556.23]] avoit moyen de sauver la contingence, et d'eviter la necessité des evenemens; puisque en effect\n[[556.24]] tout evenement est determiné par des raisons à priori. Mais enfin je m'ay satisfait un peu et j'ay\n[[556.25]] vû comment ces raisons inclinent sans necessiter et que la contingence est quelque chose en\n[[556.26]] metaphysique qui répond aux incommensurables en Geometrie. Car ceux qui ne sont point\n[[556.27]] Geometres ont sujet de douter s'il y en peut avoir. Mais à l'egard de la grace, et de quelques\n[[556.28]] autres matieres Mons. Arnaud et ses amis ont quelques sentimens un peu durs, dont je ne voy\n[[556.29]] pas assez de preuves, et les opinions des Jesuites ne sont pas tousjours aussi blamables que ces\n[[556.30]] Messieurs le disent. [ ... ] </p>\n","number":"161.","title":"LEIBNIZ AN PAUL PELLISSON-FONTANIER","date":"[Hannover, 6. August 1692.] [143.167.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

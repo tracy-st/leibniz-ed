@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_477","series":"Band VI 4 (1677 - 1690)","seq":477,"text":"[[2117.15]] <b>384₁.  Aus dem Journal des Sçavans 1689, XX und XXI\n [[2117.18]] <i>Censura Philosophiae Cartesianae Petri Danielis Huetii Episcopi Suessionensis destinati</i>.\n[[2117.19]] 12^#'o. Paris chez Dan. Horthemels 1689. </p>\n<p> [[2117.20]] <i>Je pense</i>, c'est à dire <i>je suis pensant</i>. Il suppose donc qu'il est. De plus il faut que\n[[2117.21]] cette pensée ait un objet, qui est une pensée precedente. Je ne pense pas à la pensée\n[[2117.22]] presente, mais à la precedente, <i>je pense que j'ay pensé</i>. Il faut inferer, <i>j'ay pensé, donc je\n[[2117.23]] suis</i>, ce qui n'est pas certain. M. de Soissons remarque que de faire <i>consister la nature de\n[[2117.24]] l'homme en ce qu'il pense, est une des heresies des 3 premiers siecles</i>. </p>\n<p> [[2117.25]] <i>Resolutions de plusieurs cas de conscience touchant la morale et la discipline de\n[[2117.26]] l'Eglise par feu M. de Saintebeuve docteur de la maison et societé de Sorbonne, professeur\n[[2117.27]] du Roy en Theologie</i>. In 4^#'o. <i>Tom. 1. Guill. Des Prez rue S. Jaques 1689</i>. Il n'est\n[[2117.28]] pas pour la frequente exposition du S. sacrement à l'autel ou dans les processions. </p>\n","number":"384₁.","title":"Aus dem Journal des Sçavans 1689, XX und XXI","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

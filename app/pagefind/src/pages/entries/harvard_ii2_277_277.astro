@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_277","series":"Band II 2 (1686 - 1694)","seq":277,"text":"<p> [[839.1]] <b>280. LEIBNIZ AN GUILLAUME DE L'HOSPITAL</p>\n<p> [[839.2]] [Hannover,] 6./16. August 1694. [231.]</b></p>\n<p> [[839.11]] Extrait de ma lettre à M. le Marquis de l'Hospital 6/16 Aoust 1694 </p>\n<p> [[839.12]] Je croy que le R.P. Malebranche a raison de dire que nostre ame ne sçauroit avoir d'autre\n[[839.13]] objet immediat externe que Dieu seul. Cependant je ne voudrois pas dire pour cela que nous\n[[839.14]] voyons tout en Dieu. C'est comme si on disoit, que les yeux voyent les objets dans les rayons\n[[839.15]] du soleil. Mais comme ce n'est qu'une dispute sur la phrase, on peut permettre à chacun de\n[[839.16]] s'expliquer comme il le trouve le plus à propos. </p>\n","number":"280.","title":"LEIBNIZ AN GUILLAUME DE L'HOSPITAL","date":"[Hannover,] 6./16. August 1694. [231.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

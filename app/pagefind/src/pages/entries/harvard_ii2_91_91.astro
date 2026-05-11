@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_91","series":"Band II 2 (1686 - 1694)","seq":91,"text":"<p> [[359.5]] <b>92. LEIBNIZ AN JOHANN HEINRICH PAPE</p>\n<p> [[359.6]] Hannover, 7. (17.) November 1690. [93.]</b></p>\n<p> [[359.15]] Clarissime et Consultissime Domine. </p>\n<p> [[359.16]] Cum non ita pridem colloquio tuo fruerer, injecisti mentionem libelli cujusdam a me editi,\n[[359.17]] sed mihi ipsi (quod satis paradoxum est) nunquam visi, quo nonnulla mea juridica in\n[[359.18]] fasciculum collecta continentur. Hunc si beneficio tuo inspicere possim, non mediocriter me\n[[359.19]] Tibi obstringes. Ego sane adeo non vidi, ut dubitaverim an prodierit unquam. Nam cum\n[[359.20]] Noriberga anno 1667 discederem, reliqui libellum publicandum Miltenbergero cuidam Bibliopolae\n[[359.21]] vel potius Typogra<greek>f</greek>o, qui cum non multo post obiisset, rebus ejus distractis, ne per\n[[359.22]] amicos quidem resciscere potui, quid de libello meo esset actum. Itaque oportet pauca ­exemplaria\n[[360.1]] esse divendita, reliqua casu nescio quo intercidisse. Tibi igitur Soteria. Mitti tuto poterit\n[[360.2]] fasciculus per Dn. Secretarium Waltherum virum ut intelligo in patria Historia praeclare\n[[360.3]] versatum, qui ad nos excurret, et quem a me quantumvis ignoto salutari peto. Gratum etiam erit\n[[360.4]] intelligere interim, quid ornandae jurisprudentiae moliaris, nam ex tuis sermonibus spem\n[[360.5]] concepi non vulgarem. Prodeunt subinde libri quidam novi, quorum autores juris quaedam\n[[360.6]] rationalia Elementa promittunt, sed mihi legere non satis nunc vacat. Nuper cujusdam Eliae\n[[360.7]] Schnegassii mihi ignoti, qui se vocat <i>I. U. Pr.</i> (Practicum nescio an Professorem), <i>compendium\n[[360.8]] juris</i> vidi quo non parva promittit. An praestiterit tu rectius dixeris, gratumque erit tuo judicio\n[[360.9]] talia cognoscere, cui si possim referre gratiam aliquando, faxo ut optimam in me voluntatem\n[[360.10]] desiderare non possis. Vale. Dabam Hanoverae 7. Novembr. 1690 </p>\n<p> [[360.11]] ad officia paratissimus G. G. L. </p>\n<p> [[360.12]] Dem WohlEdlen H. Papen, furnehmen Candidato Juris in Luneburg. </p>\n","number":"92.","title":"LEIBNIZ AN JOHANN HEINRICH PAPE","date":"Hannover, 7. (17.) November 1690. [93.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

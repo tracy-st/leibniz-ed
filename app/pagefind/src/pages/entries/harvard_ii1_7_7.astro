@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_7","series":"Band II 1 (1663 - 1685)","seq":7,"text":"<p> [[15.1]] <b>7. LEIBNIZ AN CHRISTIAN DAUM</p>\n<p> [[15.2]] Leipzig, 17. (27.) Mai 1666. [6.]</b></p>\n<p> [[15.15]] Nobiliss^#'e et Cl^#'m^#'e Vir </p>\n<p> [[15.16]] Libenter fusius scriberem, nisi solennes nundinarum apud nos operae, id est amicis\n[[15.17]] peregre venientibus aut abeuntibus debita officia, perpetuo interturbarent. Quae tantum temporis\n[[15.18]] vix reliquerunt mihi, ut liceret satisfacere non dico debito meo, sed saltem juri Tuo. Nam,\n[[15.19]] ut a Grotio quoque disputatum est, alia debentur quidem, sed exigi ab invito non possunt, ut\n[[15.20]] gratitudo caeteraeque a justitia separatae virtutes; alia quae ex ipsa justitia speciali descendunt,\n[[15.21]] et necessario dantur, et valide petuntur, qualis est commodati restitutio. Quare hoc temperamentum\n[[15.22]] officii mei inveni, ut haec statim praestarem, illa paululum differrem, sed ea lege, ut\n[[15.23]] imposterum etiam exigendi Tibi jus sit, et hoc velut foenore mora compensaretur. Vides igitur\n[[15.24]] accipisque reduces, Nobiliss^#'e Vir, libros tuos tam privatim tuae diligentiae, quam promtitudinis\n[[15.25]] erga alios testes. Sed ne incomitati redirent, tria dissertationis meae exempla, aut, ut loquuntur,\n[[15.26]] exemplaria, adjeci. Superest, ut declarem gratitudinem meam paulo expressius; sed hoc alii\n[[15.27]] tempori et magis vacuo debetur. Interim Vale, Nobiliss^#'e Vir, faveque </p>\n<p> [[15.28]] Tibi obstrictissimo </p>\n<p> [[15.29]] Dabam Lipsiae 17 Maji A^#'o 1666. M. Gottfredo Guilielmo Leibnüzio. </p>\n<p> [[16.1]] P. S. Vellem discipulo Tuo plus, quam nunc licet, usui esse possem. Interim ei, quod\n[[16.2]] frequentissimum apud nos est, describenda quaedam locavi. </p>\n<p> [[16.3]] Viro Nobiliss^#'o atque Cl^#'m^#'o, Dⁿ^#'o Christiano Daumio, Gymnasiarchae Zwiccaviensi. Fautori\n[[16.4]] suo inprimis honorando. Zwickau. Franco. Nebenst zwey Paqueten. <Fn><i>Von Daums Hand, Empfangsdatum</i>: 20 Maii 1666.</Fn> </p>\n","number":"7.","title":"LEIBNIZ AN CHRISTIAN DAUM","date":"Leipzig, 17. (27.) Mai 1666. [6.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

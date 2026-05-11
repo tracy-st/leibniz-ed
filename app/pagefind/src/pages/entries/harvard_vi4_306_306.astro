@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_306","series":"Band VI 4 (1677 - 1690)","seq":306,"text":"[[1353.5]] <b>252.  Demonstratio quod Deus omnia possibilia intelligit [1677 (?)]</b>\n [[1353.6]] <tab/>[1677 (?)] </p>\n<p> [[1353.12]] Deum intelligere non solum omnia quae sunt eruntque, sed et omnia possibilia sic\n[[1353.13]] egregie ostendi potest. </p>\n<p> [[1353.14]] Sit liquor aliquis pressus et qui exire conatur. Manifestum est tentari semper ab eo\n[[1353.15]] vias possibiles omnes, successum autem haberi tantum secundum viam omnium possibilium\n[[1353.16]] facillimam. Tentari autem omnes ex eo patet, quia ut quaeque oblata est commodior\n[[1353.17]] eam statim arripit: nec vero eligere posset commodissimam nisi eodem momento\n[[1353.18]] omnes tentarentur, neque enim determinatur commodissima nisi comparatione omnium.\n[[1353.19]] Constat autem naturam esse opus Dei, et quod natura tentat aliquid, id non nisi a\n[[1353.20]] voluntate Dei oriri, nam ipsa per se corpora actionum suarum causa non sunt, cum ne sint\n[[1353.21]] quidem eadem ultra momentum. </p>\n","number":"252.","title":"Demonstratio quod Deus omnia possibilia intelligit","date":"[1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

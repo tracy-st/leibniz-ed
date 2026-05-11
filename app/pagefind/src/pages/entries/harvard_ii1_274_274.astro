@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_274","series":"Band II 1 (1663 - 1685)","seq":274,"text":"<p> [[838.1]] <b>239. LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS</p>\n<p> [[838.2]] [Hannover, 3. November 1682.] [228.241.]</b></p>\n<p> [[838.13]] [ ... ] A l'egard des dogmes la principale difficulté à mon avis, consiste dans la\n[[838.14]] Transsubstantiation. Et cette transsubstantiation implique contradiction, si la philosophie des\n[[838.15]] Modernes est veritable, qui soûtient que l'essence du corps est d'estre estendu et de remplir un\n[[838.16]] certain espace. Je voy que la philosophie des Gassendistes et Cartesiens prend le dessus même\n[[838.17]] en France, et je ne comprends pas comment ceux qui la croyent puissent estre catholiques de\n[[838.18]] bonne foy. </p>\n<p> [[838.19]] Comme cette même philosophie ne detruit pas moins la presence reelle, je m'y suis\n[[838.20]] appliqué quelques fois, et j'ay trouvé certaines demonstrations, dependantes des mathematiques\n[[838.21]] et de la nature du mouvement, qui me donnent une grande satisfaction sur ces matieres, et\n[[838.22]] même je croy qu'on pourroit en deduire la possibilité de la Transsubstantiation, ce qui est un\n[[838.23]] grand point, car comme elle semble d'ailleurs assez conforme aux sentimens de l'ancienne\n[[838.24]] Eglise, il n'y a que son impossibilité apparente, qui empeche les personnes meditatives, d'y\n[[838.25]] adjouter foy. Je voudrois pourtant sçavoir, si la maniere dont je l'explique, pourroit estre receue\n[[838.26]] dans l'Eglise romaine, quoyqu'il me semble qu'elle convient assez avec les principes de la\n[[838.27]] Theologie scholastique ce que l'explication des Cartesiens ne fait pas. Après le redressement et\n[[838.28]] desaveu des mauvaises practiques je ne voy rien qui soit si important pour la reunion que de\n[[838.29]] pouvoir satisfaire aux absurdités apparentes de la Transsubstantiation. Car tous les autres\n[[838.30]] dogmes sont bien plus conformes à la raison. Et de vouloir renoncer à la raison en matiere de\n[[838.31]] religion, est aupres de moy une marque presque certaine ou d'un entestement approchant de\n[[838.32]] l'enthousiasme, ou qui pis est d'une hypocrisie. On ne croit rien ny en religion ny ailleurs, que\n[[839.1]] par des raisons vrayes ou fausses qui nous y portent; <i>necessaria sunt motiva credibilitatis</i>; les\n[[839.2]] quels n'estant que probables, comme on peut juger par <i>l'analyse de la foy</i> de Greg. de\n[[839.3]] Valencia et autres, peuvent estre detruits ou contrepesés par des raisons d'impossibilité. (Car je\n[[839.4]] ne parle point de la foy divine, qui survient aux motifs humains.) [ ... ] </p>\n","number":"239.","title":"LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS","date":"[Hannover, 3. November 1682.] [228.241.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_241","series":"Band II 1 (1663 - 1685)","seq":241,"text":"<p> [[748.7]] <b>212a. JOHANN SIGISMUND ELSHOLZ AN LEIBNIZ</p>\n<p> [[748.8]] [Herbst 1679.] [210a.]</b></p>\n<p> [[748.14]] Ex literis Elsholsii 1679 </p>\n<p> [[748.15]] H. Probst Muller edidit\n [[748.16]] 1. M. Polum Venetum, <i>Haithoni Armeni Historiam orientalem et de Cataja disquisitionem</i>\n[[748.17]] zusam. in einem vol. in 4^#'o.\n [[748.18]] 2. <i>Hebdomada</i> <i>observationum de rebus Sinicis</i> auch in 4^#'o.\n [[748.19]] 3. <i>Symbolas Syriacas</i> gleichfalls in 4^#'o.\n [[748.20]] 4. <i>Inventum Brandeburgicum</i>, ist nur ein programma von einem <i>clave</i> welchen er verfertigen\n[[748.21]] will dadurch man alle chinesische bücher wird interpretiren können, davor haben S^#'e Churf. Dt.\n[[748.22]] ihn 1000 thl. versprochen und ist er damit in werck begriffen daß er hoffet gegen johannis den\n[[748.23]] <i>clavem</i> fertig zu haben.\n [[748.24]] 5. Auch laßet er gegenwärtig drucken <i>Abdallae Historiam</i> <i>Sinensem ex Persico versam</i> davon\n[[748.25]] ich den titel hiebey sende. </p>\n<p> [[749.1]] Schicke auch deßen <i>Oeconomiam Bibliothecae Sinicae</i>. </p>\n<p> [[749.2]] Er hat mit P. Kirchero einen jesuit in Mähren Adamantio genant und H. Ludolpho furstl.\n[[749.3]] rath zu Gotha viel Briefe gewechselt. </p>\n<p> [[749.4]] Die titel der bucher findet sich in plicis gemeiniglich an 3 orthen etwas mit grobern\n[[749.5]] characteren geschrieben, nehmlich oben, in der mitten und unten. Wenn man ihm einen aus den\n[[749.6]] plicis ihres buchs die characteres abschreiben laßen, so kan er sagen ob es verticierens werth. </p>\n<p> [[749.7]] id. ihr buch hat H. Müller schohn, und ist schohn von einem Sicilianer Intercetta genant\n[[749.8]] vertiert worden. </p>\n<p> [[749.9]] Ipse Mullerus scribit es werden ietzt ediret <i>Historia Sinensis</i> item <i>Nomenclator</i> <i>Geographicus</i>\n[[749.10]] zum Reisen in China, <i>oratio</i> <i>dominica sinice</i>, <i>Epistolas</i> <i>de invento Sinico</i> etc. </p>\n","number":"212a.","title":"JOHANN SIGISMUND ELSHOLZ AN LEIBNIZ","date":"[Herbst 1679.] [210a.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

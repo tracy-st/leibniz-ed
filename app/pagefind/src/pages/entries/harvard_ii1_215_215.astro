@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_215","series":"Band II 1 (1663 - 1685)","seq":215,"text":"<p> [[675.5]] <b>195. LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER</p>\n<p> [[675.6]] [1678.] [187a.197a.]</b></p>\n<p> [[675.17]] Monseigneur </p>\n<p> [[675.18]] J'ay leu le <i>traité de religion contre les Athées</i>. Il dit fort bien des choses ordinaires, et il\n[[675.19]] peut toucher des libertins tels qu'on rencontre ordinairement, qui le sont plus tost par inclination\n[[675.20]] que par raisonnement. Mais il n'est pas propre à persuader des gens qui raisonnent avec\n[[675.21]] application; qui aimeront mieux une pensée toute nüe comme elle est proposée par M. Pascal\n[[675.22]] que revestue de tant de paroles inutiles. Car voulant mettre la main à la plume, pour en faire des\n[[675.23]] extraits, je n'y ay pas trouvé de quoy. Ce qui est une marque asseurée qu'un livre manque de\n[[675.24]] realités. </p>\n<p> [[675.25]] La pensée fondamentale de cet ouvrage est déja en effect dans Ciceron, qui parlant de\n[[675.26]] l'immortalité de l'ame dit qu'il ne veut pas qu'on luy oste de l'esprit cette erreur si c'en est\n[[676.1]] un[e]. Car dit il si c'est une verité j'en puis esperer des biens immenses; et si je me trompe, je\n[[676.2]] ne dois pas craindre que les morts se mocquent un jour de moy. Au lieu que ceux qui sont dans\n[[676.3]] des sentimens contraires pour obtenir icy quelques petits avantages, hazardent ce qui est bien\n[[676.4]] plus considerable infiniment. L'auteur de <i>l'art de bien penser</i> (qui est Mons. Arnaud) a fait un\n[[676.5]] chapitre exprés, qui contient la même chose, en substance. </p>\n<p> [[676.6]] Mais pour dire ce qui en est, ce raisonnement ne conclut rien de ce qu'on doit croire, mais\n[[676.7]] seulement de ce qu'on doit faire. C'est à dire il prouve seulement, que ceux même qui ne\n[[676.8]] croyent ny Dieu ny ame immortelle, doiuvent agir, comme s'il y en avoit, tandis qu'il[s] ne\n[[676.9]] peuvent demonstrer qu'il n'y en a point. Car [ce] sont deux questions tout à fait separées:\n[[676.10]] sçavoir ce qui est le plus seur dans la practique, et sçavoir ce qui est le plus probable dans la\n[[676.11]] creance. Ce que les Casuistes mêmes ont fort bien distingué. Car souvent on est obligé de\n[[676.12]] suivre le plus seur, lors même qu'il n'est pas le plus probable. Ainsi il faut de tout autres raisons\n[[676.13]] pour convertir les athées, celles-cy sont propres à les persuader seulement de vivre comme les\n[[676.14]] autres et non pas à les faire croire. Aussi la creance n'est pas une chose volontaire, et toutes les\n[[676.15]] exhortations n'y servent de rien. Il y faut des raisons et il n'est pas possible que l'ame se puisse\n[[676.16]] rendre à d'autres armes. En effect nous ne manquons pas de veritables raisons pour maintenir la\n[[676.17]] religion, et je suis marry qu'il y a si peu de gens qui s'en servent comme il faut. </p>\n","number":"195.","title":"LEIBNIZ AN HERZOG JOHANN FRIEDRICH VON HANNOVER","date":"[1678.] [187a.197a.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_1","series":"Band II 1 (1663 - 1685)","seq":1,"text":"<p> [[3.1]] <b>1. LEIBNIZ AN JAKOB THOMASIUS </p>\n<p> [[3.2]] Jena, 2. (12.) September 1663. [3.]</b></p>\n<p> [[4.3]] Unica, quam tibi transmitto, disputatio sua novitate id meruisse visa est. <Fn><i>Anmerkung von Kortholt unter dem Text in E^#'2</i> nach <i>visa est</i>: Titulus ejus: Q. D. B. V. Dissertatio academica, cujus prima pars de ratione status: altera de nobilitate: tertia de ministrissimo: quam pro more consueto, praeside Dn. Severo Christophoro Olpio, Prof. publ. et h. t. academiae rectore magnifico, publicae eruditorum disquisitioni exponet auctor Wilhelm Schröter, illustriss. regiae societatis Britann. assessor. d. 25 Jul. Jenae, literis Sengenwaldianis, anno 1663, in fol.</Fn> Respondens\n[[4.4]] filius est D. Wilhelmi Schroeteri, Cancellarii Gothani, qui celeberrimo illi Franskio successit. Is\n[[4.5]] Jenae prius studiosus, mox peregrinandi amore in Bataviam, inde [in] Angliam delatus est,\n[[4.6]] inde, si ipsi credimus, in parlamentum irrepsit. Nuper, cum patriam suam reviseret, noluit\n[[4.7]] inglorius tacitusque abire, sed monimentum sui hanc disputationem relinquere constituit. Sed\n[[4.8]] eo eventu, ut multo fuerit consultius, siluisse. Nam et in conflictu vox, et in conversatione\n[[4.9]] morum elegantia defuit, sic, ut pro gloria, quam sibi promiserat, cumulatam ex hac urbe\n[[4.10]] infamiam asportaret. Quin et princeps Gothanus, re comperta, ac cognito, quam in hac disputatione\n[[4.11]] periculosa spargerentur, primus ursit, effecitque, ut publice confiscaretur. Ipsam sane\n[[4.12]] disputationem judicio peritiorum accepi ingeniosam esse: sed sic, ut tanto minus hic auctor\n[[4.13]] videatur. Immo non defuere, qui dudum cusam, et inde usque ab Anglia allatam suspicarentur,\n[[4.14]] quod disputatione [de] Ministrissimo, thesi una, Don Louis de Haro, tamquam adhuc florentis\n[[4.15]] viventisque mentio fieret, qui tamen et obiit dudum, et familia, postquam filii insidiae in Regem\n[[4.16]] detectae sunt, jacet proculcata. Sane corollaria novam quandam sapiunt philosophiam, qualibus\n[[4.17]] plena Anglia est, et ipse, ni fallor, Kenelmus Digbaeus, cui ille hanc disputationem dicavit, <Fn><i>Anmerkung von Kortholt unter dem Text in E^#'2</i> : Dedicavit 1) Friderico, Saxoniae Duci, 2) Digbaeo. Digbaeo hunc titulum tribuit: Illustrissimo heroi, Britanniae comiti ac domino, <k>Dn. Kenelmo Digby</k>, equiti Britanno exlegato, et summo rei navalis expraefecto, ac sacrae regiae majestatis reginae matris in Anglia cancellario magnifico, et illustrissimae regiae societatis ibidem assessori excellentissimo, domino, Maecenati atque amico meo sincero et pie colendo.</Fn>\n[[5.1]] ingenti opere <i>de immortalitate animae</i> simile quid delineavit. Reliqua disputatio Machiavellismum\n[[5.2]] spirat, et videbatur in hoc uno eam respondens intellexisse. Nam quoties jus naturae\n[[5.3]] divinaeque leges objiciebantur, eas ad privatorum pacta limitandas contendebat, totum jus\n[[5.4]] gentium, bellique ac pacis immani hac audacia subversurus. </p>\n<p> [[5.5]] Demum vivus undique aut Hobbes aut Hobbesianus elucet. Cum enim utilitatem aequi\n[[5.6]] matrem habeat, igitur prout illi velificabitur jus omne, stabit cadetque: cum cuilibet principum\n[[5.7]] absolutum det imperium, sola suspicio principi ad supplicia jus dabit: demum quia a civili lege\n[[5.8]] omnis justitia propullulat, necessario obligatio omnis ac foederum servandorum necessitas ruet\n[[5.9]] inter civitates. Haec in Hobbesio saepe reprehendentem V.E. audivi. Quare cepit me quaedam\n[[5.10]] de Hobbesio a V.E. quod ejus pace fiat, sciscitandi cupiditas, quis ille, an adhuc superstes, an\n[[5.11]] Antagonistam na[c]tus, an habuerit, qui in jure naturae illustrando paria fecerint, meliora aut\n[[5.12]] aequalia, si subtilitatem spectes. Unus mihi Dominus Pufendorfius notus est, qui tamen sua\n[[5.13]] <i>elementa jurisprudentia</i>[<i>e</i>] ex Weigelii nostri Ethica Euclidea manuscripta dicitur fere tota\n[[5.14]] efformasse. Jenae 2 Septemb. 1663. </p>\n","number":"1.","title":"LEIBNIZ AN JAKOB THOMASIUS","date":"Jena, 2. (12.) September 1663. [3.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

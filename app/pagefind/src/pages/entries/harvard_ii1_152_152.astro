@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_152","series":"Band II 1 (1663 - 1685)","seq":152,"text":"<p> [[475.11]] <b>136. GEORG HERMANN SCHULLER AN LEIBNIZ</p>\n<p> [[475.12]] Amsterdam, 16./26. Februar 1677. [135.137.]</b></p>\n<p> [[475.28]] Amstelodami 26/16 Febr. 1677. </p>\n<p> [[475.29]] [ ... ] Caeterum te minime celare debui Clariss^#'m et acutiss^#'m Virum Spinozam maxima\n[[475.30]] atrophia conflictatum 21/11 Februar. vitam suam cum morte commutasse; Videtur autem quod\n[[475.31]] inexpectata mortis debilitate praeventus sit, quoniam sine testamento, ultimae voluntatis indice,\n[[476.1]] a nobis discessit; <i>Ethica</i>, quam penes ipsum vidisti, in autographo penes amicum asservatur,\n[[476.2]] venalisque habetur, si pretio (credo 150 florenor.) opere tanto condigno persolvatur, id quod\n[[476.3]] nulli melius, quam Tibi significandum censui, utpote qui operis conscius principis animum\n[[476.4]] dirigere poteris, ut suis sumtibus coematur. [ ... ] </p>\n<p> [[476.5]] <i>A Monsieur Monsieur G. G^#'e Leibnitz Conseiller de S.A.S. d'Hannover à Hannover.</i> </p>\n","number":"136.","title":"GEORG HERMANN SCHULLER AN LEIBNIZ","date":"Amsterdam, 16./26. Februar 1677. [135.137.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

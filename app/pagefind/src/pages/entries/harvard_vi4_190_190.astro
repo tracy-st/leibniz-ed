@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_190","series":"Band VI 4 (1677 - 1690)","seq":190,"text":"[[669.1]] <b>156₂.  Zweite Fassung ZWEITE FASSUNG </p>\n<p> [[669.5]] <b>Extensum</b> est continuum cujus partes sunt coexistentes. </p>\n<p> [[669.6]] Axioma 1. Omne extensum <i>A</i> est in alio extenso <i>B</i>, in quo est adhuc aliud (extensum)\n[[669.7]] <i>C</i>, quod non est in ipso <i>A.</i> Seu omne Extensum est in ampliore extenso. </p>\n<p> [[669.8]] Axioma 2. Duo quaelibet extensa sunt in eodem extenso. </p>\n<p> [[669.9]] Axioma 3. Si <i>A</i> sit in <i>B</i>, et <i>B</i> in <i>C</i> erit <i>A</i> in <i>C.</i> </p>\n<p> [[669.10]] Axioma 4. Si omne quod est in <i>A</i> sit in <i>B</i> ipsum <i>A</i> est in <i>B</i>, et contra. </p>\n<p> [[669.11]] <b>Punctum</b> est in quo nihil est praeter ipsummet, ipsum autem est in extenso. </p>\n<p> [[669.12]] Ergo per axiom. 2. et 4. duo quaelibet puncta sunt in eodem extenso. </p>\n<p> [[669.13]] <b>Recta</b> est via simplicissima transiens per duo puncta. Unde ex duobus punctis\n[[669.14]] determinata, itemque pars rectae hujus, cujus termini sunt duo puncta, est via inter duo\n[[669.15]] puncta, omnium brevissima. Sufficere nobis potest quod extensum est continuum habens\n[[669.16]] partes coexistentes, nam Ax. 1. ex eo demonstrari potest, quod nulla est ratio finiendi, et\n[[669.17]] cum enim in ipso <i>B</i> simile possit assumi <i>A</i>, illa est ratio cur non detur tertium <i>C</i>, quod sit\n[[669.18]] ad <i>B</i> ut <i>B</i> ad <i>A</i>, et quaecunque coexistentia extensa esse partem ejusdem extensi, ex eo\n[[669.19]] demonstratur quod omnia sympathetica sunt, ergo per media omnia item comperceptibilia. <Fn><i>Am\n[[669.20]] Rande</i>: ^&.!! <Leibniz special character: distilletur></Fn> </p>\n","number":"156₂.","title":"Zweite Fassung","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

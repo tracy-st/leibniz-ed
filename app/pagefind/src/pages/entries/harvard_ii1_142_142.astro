@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_142","series":"Band II 1 (1663 - 1685)","seq":142,"text":"<p> [[408.12]] <b>127. LEIBNIZ AN HENRY BOND</p>\n<p> [[408.13]] Paris, 13. Mai 1676.</b></p>\n<p> [[409.1]] Epistola quam scripsi Henrico Bondio Anglo. </p>\n<p> [[409.2]] Vidi nuper librum Anglicum, <i>Seamans-Kalender</i> ab Henrico Philippo editum. In eo fit\n[[409.3]] mentio inventi tui circa variationem acus magneticae; et dicitur Tabulas quasdam a te fuisse\n[[409.4]] calculatas ex certa quadam hypothesi, quarum ope inveniri possit, quaenam olim fuerit, aut\n[[409.5]] postea futura sit variatio, dato tempore in dato loco. Spes etiam facta est, te observationes in\n[[409.6]] hoc genere continuaturum ut tandem res ad perfectionem deduci possit. Audio praeterea\n[[409.7]] praedictiones a te fuisse publicatas, de variationibus quibusdam futuris, ad Londinum directas.\n[[409.8]] Quae cum ita sint, et cum res tanti momenti perfici mereatur, fiduciam sumsi, scribendi ad Te,\n[[409.9]] Vir Clarissime, teque hortandi magnopere, ut in coepto tam praeclaro pergas. Quodsi praeterea\n[[409.10]] respondere ad has literas, meque uberius docere volueris, quisnam sit status aut scopus inventi\n[[409.11]] tui, magnam a me gratiam inibis. Et quoniam praedictiones tuas ad Londinum accommodasti,\n[[409.12]] ideo rogo ut etiam Parisiis accommodes, et dicas nobis, quae ab anno 1670 fuerit Parisiis\n[[409.13]] variatio, secundum tuam Hypothesin, et quaenam imposterum per annos aliquot esse debeat.\n[[409.14]] Velim idem etiam nobis dicas de nova Francia sive Canada, et de Francia Aequinoctiali, quam\n[[409.15]] vocant <i>Cayenne</i>. Hoc enim si experimentis praeteritis consentiet, magna spes erit de futuris; et\n[[409.16]] Magnates rei nauticae studiosissimi excitabuntur, ad contribuenda omnia, quae ad perfectionem\n[[409.17]] rei necessaria erunt. Ego certe Tibi operam meam polliceor, si forte commendari viris egregiis\n[[409.18]] inventum tuum cupis. Sunt etiam mihi amici qui et ipsi plurima itinera fecere, et magna apud\n[[409.19]] nautas pollent autoritate, qui observationes, quas forte adhuc desideras, fieri curabunt. Denique\n[[409.20]] alios novi viros in Mathematicis et nauticis versatissimos, qui alia quaedam praeclara habent\n[[409.21]] inventa, quae tuis juncta, ad perfectionem rei nauticae plurimum contribuere possint. Ego\n[[409.22]] peculiari affectu eos omnes prosequor, qui suis meditationibus publicam utilitatem promovere\n[[409.23]] student. </p>\n<p> [[409.24]] Ipsa Hypothesis tua haud dubie ex Astronomicis quibusdam principiis pendet, et velim\n[[409.25]] nosse, an motum terrae supponat, an vero tam Tychonicae quam Copernicanae Hypothesi possit\n[[409.26]] accommodari. Item an ad ejus perfectionem opus sit cognita exacta regula motus Lunae quae\n[[409.27]] hactenus nondum habetur; item an hypothesis tua contribuat ad causam magneticae directionis\n[[409.28]] inveniendam, et an cum Cartesiana possit conciliari, item an non aliquam affinitatem et\n[[410.1]] connexionem habeat cum causa fluxus et refluxus maris, de qua etiam judicium tuum nosse\n[[410.2]] valde velim. Item an ope tuarum Tabularum ex data variatione acus praesenti inveniri possit\n[[410.3]] tam longitudo quam latitudo loci ubi fit observatio, et an non praeterea necessaria sit exacta\n[[410.4]] cognitio ad minutum usque temporis quo fit observatio, hoc enim posito adhuc horologiis\n[[410.5]] valde exactis opus foret. Praeterea scire velim quemnam errorem efficere possit defectus unius\n[[410.6]] minuti in observanda variatione, item nosse velim quaenam sit sententia tua de inclinatione ut\n[[410.7]] vocant magnetica, secundum quam acus rite suspensa non horizontaliter sed verticaliter movetur,\n[[410.8]] quidam enim contendunt ejus ope inveniri posse latitudinem sine ulla observatione coelesti.\n[[410.9]] Denique Tibi indico amicum quendam meum egregium habere inventum circa magnetem ad\n[[410.10]] perficiendas observationes magneticas perutile, adeoque, tuo etiam invento utilissime conjungendum.\n[[410.11]] Si mihi ad omnia distincte lucideque responderis, non tantum rem gratissimam feceris,\n[[410.12]] sed et ad omnia officia vicissim excitabis. </p>\n<p> [[410.13]] Dabam Parisiis 13 Maji 1676. </p>\n","number":"127.","title":"LEIBNIZ AN HENRY BOND","date":"Paris, 13. Mai 1676."}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

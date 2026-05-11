@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_258","series":"Band II 2 (1686 - 1694)","seq":258,"text":"<p> [[799.1]] <b>261. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[799.2]] Hannover, 21. (31.) März 1694. [257.]</b></p>\n<p> [[799.12]] [ ... ] Betreffend das Letzte und wichtigste de comparandis auxiliis, so war Cartesii\n[[799.13]] modus nicht guth, er wolte nur mercenarios operarios, und geld dazu haben, aber darin stack\n[[799.14]] eine heimliche ambition, daß er alles allein wolte gethan haben. Man siehet es aus seinen\n[[799.15]] Episteln. Leüte so alle qualitaten hätten so M.h.H. meldet, sind hienieden nicht zu finden. Muß\n[[799.16]] man also mit einen theil zufrieden seyn. Und ist das Vohrnehmste ardor aliquid egregii\n[[799.17]] praestandi conjunctus cum animo erga alios aequo und muß man ihnen den stimulum gloriae\n[[799.18]] dabey laßen, qui etiam sapientissimis novissimus exuitur. Wenn bey denen (so nicht ad summum\n[[799.19]] sapientiae gradum kommen) gloriae amor nicht ist so sinds mercenarii oder carnales.\n[[799.20]] Wolte Gott ich wüste deren viele bey den[en] amor gloriae in laudabilibus quaerendae. Cicero\n[[799.21]] sagt, daß die philosophi so contra gloriam geschrieben ungern gesehen haben würden, wen man\n[[799.22]] ihre Nahmen nicht gewust hätte; war also bey ihnen protestatio factis contraria. Mit Societäten\n[[799.23]] ist es freylich auch schwehr, nehmlich wie wir es wündschen, es fehlet meist am anfang. Diese\n[[799.24]] zeiten laßen wenig von großen Herrn hoffen, so sonst wohl intentioniret seyn möchten. M.h.H.\n[[799.25]] methodus mit den Brenngläsern ist sehr guth pro initio fundi. Steckte etwas bey dem: <i>hic Plato\n[[799.26]] quiescere jubet</i>, so sie bey der mentione des diamanten angehänget, wäre es noch beßer pro\n[[799.27]] hominum captu, ich dencke auff ein novum et mirificum commercii genus, dadurch ein großes\n[[799.28]] zu thun, wenn man sich nur verduppeln köndte, daß ist, wenn man nur iemand an hand hätte\n[[799.29]] deßen man sich in so wichtigen dingen bedienen köndte vel hoc solum toti negotio sufficeret,\n[[799.30]] ist ganz leicht und absolute in potestate, tantum opus amico fido et intelligente, denn wan man\n[[799.31]] gebunden, so will [weder] die prudenz noch wohlstand dergleichen entreprisen leiden, so prima\n[[799.32]] fronte wunderlich scheinen. [ ... ] </p>\n","number":"261.","title":"LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS","date":"Hannover, 21. (31.) März 1694. [257.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

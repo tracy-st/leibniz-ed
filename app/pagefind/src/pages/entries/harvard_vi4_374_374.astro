@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_374","series":"Band VI 4 (1677 - 1690)","seq":374,"text":"[[1638.1]] <b>317.  Motum non esse absolutum quiddam [März 1689 bis März 1690 (?)]</b>\n [[1638.2]] <tab/>[März 1689 bis März 1690 (?)] </p>\n<p> [[1638.8]] Motum non esse absolutum quiddam, sed relativum Aristoteles et Cartesius consentiunt,\n[[1638.9]] ille dum locum definivit a superficie ambientis, hic dum motum a mutatione\n[[1638.10]] vicinitatis. Spatium absolutum non magis res est quam tempus, etsi imaginationi blandiatur;\n[[1638.11]] imo demonstrari potest talia non esse res, sed tantum relationes mentis omnia ad\n[[1638.12]] hypotheses intelligibiles, hoc est motus uniformes et loca immota revocare conantis;\n[[1638.13]] atque inde deductas aestimationes. </p>\n<p> [[1638.14]] Porro nec influxus substantiae in substantiam ullus est in Metaphysico rigore,\n[[1638.15]] (praeterquam quod in dependentia creaturarum, quae continua productio est) nec revera a\n[[1638.16]] corpore in corpus ullus transfertur impetus sed ut phaenomena quoque confirmant, omne\n[[1638.17]] corpus vi proprii Elastri ab alio recedit quod est a motu partium ipsi inexistentium. Et\n[[1638.18]] vero unaquaeque substantia est vis quaedam agendi, seu conatus mutandi sese respectu\n[[1638.19]] caeterorum omnium secundum certas suae naturae leges. Unde quaelibet substantia totum\n[[1638.20]] exprimit universum, secundum aspectum suum. Et in phaenomenis motuum res egregie\n[[1638.21]] apparet, unumquodque enim corpus ibi supponi debet habere motum communem cum\n[[1638.22]] altero quovis, quasi in eadem navi et proprium praeterea moli reciprocum; quale quid\n[[1638.23]] fingi non posset, si motus essent absoluti, nec corpus unumquodque omnia alia exprimeret. </p>\n","number":"317.","title":"Motum non esse absolutum quiddam","date":"[März 1689 bis März 1690 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_125","series":"Band VI 4 (1677 - 1690)","seq":125,"text":"[[413.15]] <b>102.  Ratio [Sommer 1680 bis Sommer 1684 (?)]</b>\n [[413.16]] <tab/>[Sommer 1680 bis Sommer 1684 (?)]\n[[414.1]] <tit2><b>Ratio</b> </tit2> </p>\n<p> [[414.2]] Ratio eadem ex sola similitudine sumi non potest, exempli causa consideratio\n[[414.3]] diametri <i>AB</i> respectu circuli <i>ACDB</i>, eadem est quae diametri\n[[414.4]] <i>EF</i> respectu circuli <i>EGFH</i>, et tamen dici non potest\n[[414.5]] rationem circulorum ad suas diametros esse eandem,\n[[414.6]] alioqui si foret <i>AB</i> ad circulum <i>ACBD</i>, ut <i>EF</i> ad circulum\n[[414.7]] <i>EGFH</i>[,] foret permutando <i>AB</i> ad <i>EF</i>, ut circulus <i>ACBD</i>\n[[414.8]] ad circulum <i>EGFH</i>, seu circuli forent ut diametri, quod\n[[414.9]] falsum est. Sunt enim ut diametrorum quadrata. Itaque ut similitudo indicet rationem\n[[414.10]] eandem, opus est, ut ea quorum ratio esse dicitur, sint homogenea. </p>\n<p> [[414.11]] Sed adhuc nova occurrit difficultas: est <i>AB</i> ad <i>BC</i>, ut\n[[414.12]] <i>AE</i> ad <i>BF</i>, nec tamen recta <i>ABC</i> similis est spatio <i>AEC</i>. </p>\n<p> [[414.13]] Dicendum ergo generalius Rationem eandem dici,\n[[414.14]] cum duae quantitates homogenae una ex alia sine tertiae\n[[414.15]] ipsis homogeneae interventu eodem modo determinantur.\n[[414.16]] Hinc ratio est numerus quo exprimitur una quantitas\n[[414.17]] posito alteram esse unitatem. Seu rationes sunt directe ut antecedentes eodem posito\n[[414.18]] consequente vel reciproce ut consequentes eodem posito antecedente. Sit ratio <zl><i>a</i> <ne><i>b</i> <be> et alia\n[[414.19]] ratio <zl><i>c</i> <ne><i>b</i> <be> , erit <zl><i>a</i> <ne><i>b</i> <be> ad <zl><i>c</i> <ne><i>b</i> <be> ut <i>a</i> ad <i>c</i>. Sit ratio <zl><i>b</i> <ne><i>a</i> <be> et alia <zl><i>b</i> <ne><i>c</i> <be> , erit <zl><i>b <ne>a</i> <be> ad <zl><i>b</i> <ne><i>c</i> <be> ut <i>c</i> ad <i>a</i>. </p>\n","number":"102.","title":"Ratio","date":"[Sommer 1680 bis Sommer 1684 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

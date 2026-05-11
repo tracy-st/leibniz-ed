@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_76","series":"Band II 3 (1695 - 1700)","seq":76,"text":"<p> [[200.13]] <b>76. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[200.14]] Hamburg, 14. (24.) September 1696. [82.]</b></p>\n\n<p> [[201.4]] HochEdler, Vest und Hochgelehrter Herr, Hochgeneigter Herr </p>\n<p> [[201.5]] Daß Sie mich eines grußes gewürdigt, u. mir di freiheit gegönnt an Sie zu schreiben, hat\n[[201.6]] mich eüserst erfreüet: dis glük hab ich lange gewünscht, aber es selbst zuergreifen, mich nie\n[[201.7]] erkühnen mögen; nun, da es sich selbst anträgt, u. mir meine feigheit gleichsam aufrükt, wil ich\n[[201.8]] mich deßen desto kühner bedinen; denn ich fange schon an, mir mit doppelten Vorthel\n[[201.9]] zuschmeicheln: Vileicht findet sowol die begierde große dinge zulernen, als das verlangen\n[[201.10]] kleine dinge dem Pöbel der Gelehrten wieder zulehren, gelegenheit; wozu mir Mons. Uberhin\n[[201.11]] hofnung gemacht, theils durch vorstellung der leütseligk. Meines Hochgeneig. Patrons, theils\n[[201.12]] durch bericht von einer condition, deren ümstände er nicht recht erklärt, ich aber wol wißen\n[[201.13]] möchte. Die <i>Vernunft Ubungen</i>, die Sie verlangt, meine deütsche schreibart zu sehen, überschikke\n[[201.14]] gehorsamst, u. emfehle Ihrer Hochgeneigten gewogenheit damit </p>\n<p> [[201.15]] Hochedler Herr, Ihren gehorsamsten Diner Gabriel Wagner </p>\n<p> [[201.16]] Hamburg 14. Sept. 96 </p>\n","number":"76.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Hamburg, 14. (24.) September 1696. [82.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

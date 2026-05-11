@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_205","series":"Band II 1 (1663 - 1685)","seq":205,"text":"<p> [[643.1]] <b>186. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[643.2]] Hamburg, 26. Oktober (5. November) 1678. [185.187.]</b></p>\n[[644.5]] Annotationes ad Placcium <i>de Actionibus</i> </p>\n<p> [[644.6]] ex Epistola mea ad ipsum 12 Novemb. 1678. </p>\n<p> [[644.7]] <b>Primum</b> quod ubique laesiones dividis in non injustas, et injustas, valde quidem laudo,\n[[644.8]] opus tamen arbitror esse subdistinctione. Possunt enim laesiones fieri casu aut culpa, aut dolo:\n[[644.9]] quae casu fiunt tantum, obligant solummodo ad restituendum id quo laedens factus est locupletior.\n[[644.10]] Quod si ergo sub nomine injustarum comprehendis ut suspicor tam eas quae fiunt culpa,\n[[644.11]] quam quae dolo, distinguendum erat circa id quod petitur: magis enim obligari videtur, qui in\n[[644.12]] dolo est. Nec abhorrere a ratione naturali arbitror sententiam JC^#'t^#'o^#'r^#'u^#'m Romanorum, qui eum qui\n[[644.13]] in culpa est, fere tantum ad restituendam rei aestimationem condemnant, quanti scilicet vendi\n[[644.14]] potest. At contra eum qui in dolo est rationem habent ejus omnis quod actoris interest; etiamsi\n[[644.15]] res tanti vendi non possit. Nam saepe et pretium affectionis, et privatae quaedam commoditates\n[[644.16]] nostrae faciunt, ut res nobis pluris sit quam cuivis e populo futura esset. </p>\n<p> [[644.17]] <b>Alterum</b> quod annoto est, non me intelligere liquido quid sibi velit apud Te facultas\n[[644.18]] generalis et specialis. <b>Generalis</b> apud Te exempla sunt: dominium, possessio, actio; specialis[:]\n[[644.19]] haereditas, servitus, dos, pignus. Nisi hoc fortasse tibi vis: Generales applicari posse ad\n[[644.20]] quasvis speciales, et dominium verbi gratia aut possessionem, aut actionem dari haereditatis,\n[[644.21]] servitutis, dotis, pignoris, aut alterius juris nomine. </p>\n<p> [[644.22]] <b>Tertio</b> tuam ipse divisionem alicubi evertere videris, cum laesionem ais esse vel <b>facultatis</b>,\n[[644.23]] seu agendi potestatis vel libertatis, seu potestatis omittendi. Laesionem autem libertatis\n[[644.24]] seu potestatis omittendi mox ita subdividis, ut eam laedat, qui dandi, faciendi, omittendi\n[[644.25]] necessitatem imponit. Cum tamen qui omittendi necessitatem imponit, non impediat potestatem\n[[644.26]] omittendi, sed potestatem faciendi. </p>\n<p> [[644.27]] <b>Quarto</b> divisiones nonnullae videntur superfluae, verbi gratia qui obligationem alienam\n[[644.28]] erga me, vel meam erga alios impedit is etiam impedit suam erga me obligationem nempe\n[[644.29]] meam aut facultatem aut libertatem non laedendi. Poterant ergo duae illae novissimae in Tabula\n[[644.30]] juris naturalis species <b>verb. alienam erga me</b>, et <b>verb. meam erga alios</b>, omitti,\n[[644.31]] praesertim cum nihil in illis annotandum occurrat quod non ex prioribus pateat. Dices superflua\n[[644.32]] non nocere, et minutias esse, quae hic animadverto. Idem tecum sentio, et haec annoto, magis\n[[644.33]] obsequendi causa et ut intelligeres me tua diligenter legere, quam ut magni haec momenti\n[[644.34]] putarem. Primae tamen animadversionis aliquam rationem habendam puto. </p>\n<p> [[645.1]] Vellem Exceptiones simili a te studio digeri, et mox ordinem judiciorum subjici secundum\n[[645.2]] jus naturae civili collatum. Denique quia magni ad rempublicam momenti sunt Ordinationes\n[[645.3]] Politicae quas vocant, has quoque ex regulis juris naturalis legibusque optimae reipublicae et\n[[645.4]] recta ratione constitui optarem. Quae omnia a te cum publico fructu praestari posse certus sum. </p>\n","number":"186.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 26. Oktober (5. November) 1678. [185.187.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

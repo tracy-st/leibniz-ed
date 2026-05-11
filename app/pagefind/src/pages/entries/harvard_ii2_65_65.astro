@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_65","series":"Band II 2 (1686 - 1694)","seq":65,"text":"<p> [[289.18]] <b>66. LEIBNIZ AN LUDOVICO CASATI</p>\n<p> [[289.19]] [Rom, 14. April bis 21. November 1689.]</b></p>\n<p> [[290.4]] Ad R.P. [Casati] Lectorem Theologiae in Collegio Clementino urbis Romae. </p>\n<p> [[290.5]] Quemadmodum optime ostensum est, <b>nullam esse determinationem pure\n[[290.6]] extrinsecam</i>, hoc est nullam rem ad novam aliquam actionem determinari nisi excitetur nova\n[[290.7]] aliqua ad agendum dispositio in ipsa; ita semper arbitratus sum <b>nullam dari differentiam</b>\n[[290.8]] <b>pure extrinsecam</b>, hoc est (ne quis in verbis cavilletur) nunquam duas res inter se differre,\n[[290.9]] quin discerni possint non tantum per extrinseca, sed etiam per ea quae sunt in ipsis. Res\n[[290.10]] exemplo intelligetur clarius. Si duo dentur ova <i>A</i> et <i>B</i> posita in cista\n[[290.11]] <i>CD</i>, sitque <i>A</i> ovum gallinae albae et <i>B</i> nigrae, eaque Ova sint admodum\n[[290.12]] similia inter se et aequalia, tunc utique licet per se discerni\n[[290.13]] facile et primo aspectu non possint, poterunt discerni facillime ipso\n[[290.14]] situ in cista, ut si unum <i>A</i> ponatur in loculamento cistae medio,\n[[290.15]] alterum <i>B</i> in loculamento quod sit angulo vicinum; tunc optime poterunt discerni per differentiam\n[[290.16]] hanc extrinsecam; dico tamen hanc differentiam extrinsecam duorum ovorum etsi\n[[290.17]] nobis serviat, nihilominus in re non sufficere, sed supponere differentiam aliquam intrinsecam\n[[290.18]] seu in ipsis ovis, adeoque non posse dari duo ova tam perfecte similia, ut nullum in iis\n[[290.19]] discrimen notari possit, si attente considerentur aut perfecte perspicerentur. </p>\n<p> [[290.20]] Nimirum si diversa sunt <i>A</i> et <i>B</i> utique habebunt in se diversitatem, seu principium\n[[290.21]] discernendi, in se inquam, abstrahendo animum ab externis. Nam fingamus externa omnia\n[[290.22]] annihilari et duos globos materiales (quos nunc ovis substituam) solos superesse in spatio\n[[290.23]] imaginario, tunc dico a nemine quanticunque sit intellectus, nec ab angelo imo ne a Deo\n[[291.1]] quidem istos duos globos perfecte aequales et similes posse discerni. Cum principium discernendi\n[[291.2]] non sit in ipsis (ex hypothesi adversariorum), nec in externis ex hypothesi sublatorum\n[[291.3]] externorum, nec partes spatii imaginarii quibus circumdantur globi queant discerni inter se.\n[[291.4]] Absurdum autem est dari duo diversa, quae ne ab infinito quidem intellectu discerni possint. </p>\n<p> [[291.5]] Atque haec per experientiam confirmantur, nunquam enim ovum ovo, lac lacti, folium\n[[291.6]] folio, animal animali, et generaliter res rei ita similis reperietur, quin accurata inspectione facta\n[[291.7]] discrimen aliquod notari possit; quod in foliis arborum et graminibus hortorum aliquando inter\n[[291.8]] deambulandum a foemina principe magni ingenii jucunde observatum memini. </p>\n<p> [[291.9]] Et sane ut a corporibus ad intelligentias transeamus, D. Thomas praeclare notavit, non\n[[291.10]] posse dari duas intelligentias separatas perfecte inter se similes, et licet perfectam similitudinem\n[[291.11]] in corporibus dari posse putarit, hoc tamen ex natura materiae non satis ejus temporibus\n[[291.12]] perspecta natum est. Et fortasse tantum voluit dari corpora quae specie non differant, etsi aliter\n[[291.13]] dissimilia sint. </p>\n<p> [[291.14]] Quod vero ad animas attinet, equidem verum est Humanas Mentes inter se non differre in\n[[291.15]] specie, non tamen hinc inferri debet, eas perfecte similes esse, multa enim quae in specie non\n[[291.16]] differunt, nihilo minus discerni per se posse constat, magnitudine, gradu, variisque proportionibus\n[[291.17]] ut duo homines lineamentis vultus dignoscuntur. Et licet plurimum discriminis in\n[[291.18]] mentibus oriatur ex iis quae corporibus quibus uniuntur accidunt, attamen dicendum est, primo\n[[291.19]] statim infusionis instanti differre animas, nec adeo ullum momentum dari, quo sint perfecte\n[[291.20]] similes. Et certe inter Christi et Judae animas per se spectatas nullum aliquando fuisse discrimen\n[[291.21]] non sine absurditate dici posse videtur. Adeoque tuto sine ullo censurae metu defendere\n[[291.22]] poterimus duas animas perfecte inter se similes nunquam dari, idemque in universum in rebus\n[[291.23]] verum esse. Ex qua jam veritate multa alia momenti maximi, de quibus alias, consequuntur. </p>\n","number":"66.","title":"LEIBNIZ AN LUDOVICO CASATI","date":"[Rom, 14. April bis 21. November 1689.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

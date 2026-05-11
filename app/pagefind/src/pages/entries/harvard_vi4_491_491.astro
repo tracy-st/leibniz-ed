@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_491","series":"Band VI 4 (1677 - 1690)","seq":491,"text":"[[2159.9]] <b>388₃.  Richelieu et De Groot en controverses </p>\n<p> [[2159.11]] Le Cardinal de Richelieu entendoit les controverses à fonds, comme chacun sçait, et\n[[2159.12]] prenoit plaisir d'en parler avec les habiles gens. Un jour il fit venir Monsieur de Groot\n[[2159.13]] pour conferer avec luy. Mais il faut sçavoir que Mons. de Groot alors etoit tout autre qu'il\n[[2159.14]] n'avoit esté dans sa jeunesse: car ayant jetté ce feu de dispute, qui échauffe plus qu'il\n[[2159.15]] n'éclaire; et estant revenu à cette simplicité obeissante qui seule est agreable à Dieu, il\n[[2159.16]] envisageoit les controverses tout autrement qu'il n'avoit fait. </p>\n<p> [[2159.17]] Le Cardinal l'ayant veu luy dit, je seray bien aise Monsieur d'entendre vostre\n[[2159.18]] sentiment sur le moyen de reconcilier les controverses, car je sçay que vous avez fort\n[[2159.19]] medité là dessus. </p>\n<p> [[2159.20]] G. Il est vray que cette étude m'a occupé assez long temps; mais V. E. me permettra\n[[2159.21]] de luy dire, que j'en suis revenu. </p>\n<p> [[2160.1]] R. Comment vous ne trouvez donc plus digne de Vous, ce qui exerce tant de\n[[2160.2]] personnes. </p>\n<p> [[2160.3]] G. Il est vray qu'il n'y a point de chemin si aisé à la reputation que la voye des\n[[2160.4]] controverses. Un homme qui est versé un peu dans l'antiquité, et qui avec cela sçait l'art\n[[2160.5]] de raisonner n'a point de peine d'y reussir. </p>\n","number":"388₃.","title":"Richelieu et De Groot en controverses","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_54","series":"Band II 3 (1695 - 1700)","seq":54,"text":"<p> [[154.16]] <b>54. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[154.17]] [Hannover, 13. April 1696.] [53.65.]</b></p>\n\n<p> [[155.7]] Monsieur </p>\n<p> [[155.8]] Je vous suis obligé de la bonté que vous avés de penser encor à mes interests. Je ne me\n[[155.9]] suis jamais promis grand chose des defenses qu'on pourroit obtenir par l'autorité superieure;\n[[155.10]] cependant je n'ay point voulu refuser le secours que des princes m'ont offert et qu'on ne\n[[155.11]] méprise pas tousjours impunement. Mais comme le dommage d'autruy n'est pas mon avantage,\n[[155.12]] j'aimerois tousjours mieux que tout se puisse faire de bonne grace. Or sans entrer dans la\n[[155.13]] discussion de droit, ny dans les maximes d'honneur, qui ne sont pas tousjours considerées, j'ay\n[[155.14]] crû qu'en ne demandant rien à Messieurs vos libraires, qui fut contraire, ou plustost qui ne fut\n[[155.15]] conforme à leur interests, je pourrois obtenir une chose qui leur fut indifferente. Vous m'attaqués,\n[[155.16]] Monsieur, par mon foible, en me proposant de faire ce qui seroit le plus conforme à\n[[155.17]] l'utilité publique, car j'y suis le plus porté du monde. Je vous avoue aussi, qu'il seroit peutestre\n[[155.18]] un peu mieux pour le public que leur collection et la mienne composassent un seul ouvrage.\n[[155.19]] Mais je ne crois pas qu'il importe beaucoup pour ces sortes de collections, que le tout soit rangé\n[[155.20]] parfaitement selon l'ordre chronologique, au quel un index general supplée; ainsi on auroit pû\n[[155.21]] conserver mon dessein; dont il y a deux raisons: l'une que sans cela je ne voy pas comment on\n[[155.22]] puisse debiter mon premier Tome; l'autre que je passeray pour un homme qui aura abandonné\n[[155.23]] son projet après avoir employé le secours de tant de Ministres qui m'ont communiqué un si\n[[156.1]] grand nombre de pieces pour mon <i>Codex Diplomaticus</i>. Et comme j'ay plus d'egard à l'honneur\n[[156.2]] qu'à l'interest, je ne dois point mepriser cette raison. J'adjoute encor une troisiême, c'est\n[[156.3]] que M. Moetjens me mande, qu'ils veulent seulement employer les traités, et non pas les autres\n[[156.4]] pieces, ce qui fait que leur ouvrage ne satisfera pas à tout ce que j'ay promis. En tout cas si ces\n[[156.5]] Messieurs m'avoient offert quelque temperament honnorable, j'aurois pû penser à ce qu'il y\n[[156.6]] auroit à faire, mais comme ils n'ont pas voulu faire la moindre demarche, et sont demeurés dans\n[[156.7]] un refus entier, ils m'ont osté tout moyen de faire quelque chose avec eux. Ainsi il depend de\n[[156.8]] leur resolution de donner quelque éclaircissement, qui puisse servir à renouer le traité. Car j'ay\n[[156.9]] déja dit, que l'interest est ce qui m'adresse le moins, et vous aurés la bonté de m'apprendre si je\n[[156.10]] dois encor attendre quelque chose. Il seroit peutestre bon aussi que je fusse un peu mieux\n[[156.11]] informé du titre et de l'oeconomie de l'ouvrage, pour mieux prendre mes mesures. </p>\n","number":"54.","title":"LEIBNIZ AN HENRI BASNAGE DE BAUVAL","date":"[Hannover, 13. April 1696.] [53.65.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

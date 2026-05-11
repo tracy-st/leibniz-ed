@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_11","series":"Band VI 4 (1677 - 1690)","seq":11,"text":"[[27.18]] <b>10₁.  Definitiones notionum ex Wilkinsio. Genera et species, Causae et effectus </p>\n<p> [[27.23]] [p. 26] <b>Genera et Species</b> </p>\n<p> [[27.24]] <b>Aliquid</b> est quicquid cogitari potest. </p>\n<p> [[27.25]] <b>Nihil</b> est quicquid cogitari non potest. </p>\n<p> [[27.26]] <b>Res</b> est quae distincte cogitari potest. </p>\n<p> [[28.1]] <b>Existit</b> quicquid distincte percipi potest, alioqui erit <b>apparens</b> tantum. </p>\n<p> [[28.2]] (<b>Essentia</b>) est quod in re distincte cogitari potest. <Fn><i>Am Rande Ansätze zu einer Charakteristik</i>: Aliquid <tab/>A <tab/> Nihil <tab/>... <tab/> <tab/>qne2 quod <tab/> <tab/>q non <tab/> <tab/>n est <tab/>e Definitio debet substitui posse in locum definiti: Res <tab/>A aequ. <tab/>BC ^&.SE <Leibniz special character> D Essentia <tab/>bc</Fn> </p>\n<p> [[28.3]] (<b>Existentia</b>) est distincta rei perceptibilitas seu sensibilitas distincta. </p>\n<p> [[28.4]] <b>Notio</b> est conceptus distinctus, aliquando dicitur verus. </p>\n<p> [[28.5]] <b>Fictio</b> conceptus indistinctus, aliquando dicitur falsus. </p>\n<p> [[28.6]] <b>Substantia</b> cujus individuum de alio dici non potest. </p>\n<p> [[28.7]] <b>Accidens</b> cujus individuum de alio praedicari potest. </p>\n<p> [[28.8]] <b>Quantitas</b> est discrimen quod per se memoria retineri non potest, sed solo sensu\n[[28.9]] distinguitur. Seu discrimen in perceptione. </p>\n<p> [[28.10]] <b>Qualitas</b> est discrimen in conceptione. </p>\n<p> [[28.11]] <b>Actio</b> est status rei ex qua sequitur mutatio alterius rei. </p>\n<p> [[28.12]] <b>Passio</b> est mutatio quae ex alterius rei statu sequitur. </p>\n<p> [[28.13]] <b>Relatio</b> est secundum quod duae res simul cogitantur.\n [[28.14]] Uti relatio dicit res simul cogitari, ita actio et passio res simul existere. Hoc tamen et\n[[28.15]] quaedam faciunt relationes, nempe commercii. </p>\n<p> [[28.16]] <b>Absolutum</b> est quod non dicit relationem. </p>\n<p> [[29.1]] [p. 27] <b>Causae, effectus</b> </p>\n<p> [[29.2]] <b>Causa</b> est praerequisitum existentiae alterius quod dicitur Effectus. </p>\n<p> [[29.3]] <b>Efficiens</b> est quod actione sua praerequisitum est. </p>\n<p> [[29.4]] <b>Instrumentum</b> est causa efficiens ab alia inter agendum acta, seu cujus tota actio\n[[29.5]] simul passio est. </p>\n<p> [[29.6]] <b>Impulsivum</b> causa ut actio incipiat seu cum agens impellentis instrumentum est\n [[29.7]] in initio actionis, etsi non sit in progressu. Proprie locum habent talia in mentibus tantum.\n[[29.8]] Imo videamus, si quis saxum in alium injiciat, dicaturne causa impulsiva caedis. </p>\n<p> [[29.9]] <b>Cohibitivum</b> est causa ut actio desinat vel minuatur. </p>\n<p> [[29.10]] <b>Exemplar</b>, Typus: est res cui quis aliam similem facere voluit, seu simile destinato.\n[[29.11]] Seu cui aliud destinatur simile. <b>Destinatum</b> est volitum cum opinione potestatis\n[[29.12]] efficiendi. </p>\n<p> [[29.13]] <b>Ectypus</b>, Antitypus seu exemplum est simile destinatum. </p>\n<p> [[29.14]] <b>Conditio</b> est quo posito aliud ponitur. </p>\n<p> [[29.15]] <b>Requisitum</b> quo non posito tollitur. </p>\n<p> [[29.16]] <b>Occasio</b> est status rerum casu congruus. </p>\n<p> [[29.17]] <b>Adjuvare</b> est opus alicui facilius facere. </p>\n<p> [[29.18]] <b>Impedire</b> est facere difficilius. </p>\n<p> [[29.19]] <b>Facile</b> est cujus pauca sunt praerequisita sufficientia. </p>\n<p> [[29.20]] <b>Finis</b> est cujus appetitus est causa efficiens appetitus rei alterius quae dicitur\n[[29.21]] <b>medium</b>. </p>\n<p> [[29.22]] <b>Materia</b> est <i>A</i> cujus manentis mutatione aliquid producitur <i>B</i> ita ut <i>A</i> pertineat ad\n[[29.23]] essentiam ipsius <i>B</i>. </p>\n<p> [[29.24]] <b>Forma</b> est principium internum qualitatum primariarum rem ab alia omni discernentium. </p>\n","number":"10₁.","title":"Definitiones notionum ex Wilkinsio. Genera et species, Causae et effectus","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_238","series":"Band II 2 (1686 - 1694)","seq":238,"text":"<p> [[745.11]] <b>241. LEIBNIZ AN FRIEDRICH SIMON LÖFFLER</p>\n<p> [[745.12]] [Hannover, Mitte Oktober 1693.] [236.292.]</b></p>\n<p> [[745.18]] Mihi non videtur Thomasius de substantiae natura male aut inutiliter quaesisse, neque ideo\n[[745.19]] esse irridendus, ut quidam facere videntur, et plerumque qui aliorum studia irrident, non\n[[745.20]] intelligunt. Vix ulla veritas recondita usu suo caret; solent philologi irridere philosophos ut\n[[745.21]] inutiles subtilitates tractantes, et vicissim philosophi philologos, ut pro rebus verba captantes.\n[[745.22]] Malebranchius salse ridet Hebraistas et Rabbinistas. Sed male, utraque pars. Vir prudens non\n[[746.1]] facile aliquod studium contemnit. Si Tibi occasio sit, velim intelligat celeberrimus Thomasius,\n[[746.2]] mihi valde probari quod in notionem substantiae inquirendum putat; et ob ignoratam substantiae\n[[746.3]] notionem, etiam ignoratam fuisse veram corporis naturam, quam ego demonstravi non\n[[746.4]] consistere in sola extensione. </p>\n","number":"241.","title":"LEIBNIZ AN FRIEDRICH SIMON LÖFFLER","date":"[Hannover, Mitte Oktober 1693.] [236.292.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

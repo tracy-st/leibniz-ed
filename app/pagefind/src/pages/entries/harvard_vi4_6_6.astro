@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_6","series":"Band VI 4 (1677 - 1690)","seq":6,"text":"[[17.1]] <b>6.  De veritatibus necessariis seu aeternis August 1677</b>\n [[17.2]] <tab/> August 1677 </p>\n<p> [[17.4]] Aliis sublatis quia maneret veritas seu possibilitas propositionum (quas sine existentia\n[[17.5]] subjectorum existere manifestum est et in singulis doceri potest), hinc impossibile\n[[17.6]] est nihil existere. Idque aliunde nunc patet, ex eo quod existit aliquid. Ergo necessario\n[[17.7]] causa adest. Possibilitates seu veritates tot quot propositiones. Sed videntur omnes existere\n[[17.8]] in uno Ente, quod continet ideas. Haec est non contemnenda probatio Entis necessarii\n[[17.9]] et idealis. <Fn><i>Am Rande</i>: Augusti 1677</Fn> </p>\n<p> [[17.10]] Quod diversis linguis plures eadem concludunt non nomina sunt in causa sed natura\n[[17.11]] ipsarum rerum. Si nemo cogitaret existit tamen impossibilitas quadrati circulo isoperimetro\n[[17.12]] capacioris. Cumque sit modus tantum aliquod ejus subjectum esse necesse est.\n[[17.13]] Veritates necessariae consequuntur ex naturis. Ergo et naturae sunt aeternae, non tantum\n[[17.14]] Veritates. Plures veritates inter se junctae producunt novas. Nec ulla est veritas quae non\n[[17.15]] alteri cuilibet veritati unita producat novam. Ergo quicquid in veritate aliqua ab aeterno\n[[17.16]] existit a parte rei, alteri cuilibet veritati unitum est. Idque multo magis ex eo manifestum\n[[17.17]] est, quod una natura ad aliam naturam constituendam concurrit. Naturae et veritates sunt\n[[17.18]] modi. Causa cur vera sit propositio necessaria nemine cogitante in aliquo subjecto a parte\n[[17.19]] rei esse debet. Causa cur vera sit propositio dicta de circulo et quadrato non est in natura\n[[17.20]] circuli tantum nec in natura quadrati tantum, sed in aliis naturis quoque ingredientibus, ut\n[[17.21]] aequalis, perimetri etc. Unius rei causa proxima unica est. Et ejus causa debet esse in\n[[17.22]] aliquo. Ergo in eo in quo est natura circuli, quadrati, et aliorum id est in subjecto idearum\n[[17.23]] seu Deo. </p>\n","number":"6.","title":"De veritatibus necessariis seu aeternis","date":"August 1677"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

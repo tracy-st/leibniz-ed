@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_219","series":"Band VI 4 (1677 - 1690)","seq":219,"text":"[[860.12]] <b>181.  Qui sunt milites et subditi simul [März bis April 1687 (?)]</b>\n [[860.13]] <tab/>[März bis April 1687 (?)] </p>\n<p> [[860.20]] Princeps habet 1000 subditos, et 200 milites, quorum aliqui sunt simul subditi, alii\n[[860.21]] vero extranei: quaeruntur illi qui sunt milites et subditi simul. Colligantur in unum et\n[[860.22]] milites [et subditi]. </p>\n<p> [[861.1]] Collectis in unum militibus dicatur <i>exite subditi</i>, vel collectis in unum subditis\n[[861.2]] dicatur <i>exite milites</i>. </p>\n<p> [[861.3]] Sed si hoc solo postulato uti permissum sit ex <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> detrahere <i>A</i>, sic erit procedendum.\n[[861.4]] Colligantur in unum milites <i>A</i> et subditi <i>L</i>, et a toto detrahantur <i>A</i> milites <i>per</i>\n[[861.5]] <i>postulatum</i>, restabunt meri subditi, qui cum insint omnibus subditis et sint dati, dabuntur\n[[861.6]] et reliqui <i>per</i> <i>idem postulatum</i>. Seu datur quaesitum. Scilicet postulatum tale est, a dato\n[[861.7]] detrahere datum quod ei inest. </p>\n<p> [[861.8]] Vel aliter, ut utrumque <i>A</i> et <i>L</i> eodem modo tractetur. Ab <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> detrahatur <i>A</i> restet <i>B</i>,\n[[861.9]] ab eodem detrahatur <i>L</i> restat <i>M</i>. Jam datum <i>B</i> ^&.Sg <Leibniz special character> <i>M</i> detrahatur ab <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> restat commune\n[[861.10]] <i>H</i>. </p>\n<p> [[861.11]] Via electitia videtur brevior, sed revera non est, nempe <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> ^&.sv <Leibniz special character> <i>A</i> ^&.SE <Leibniz special character> <i>B</i>, <i>L</i> ^&.sv <Leibniz special character> <i>B</i> ^&.SE <Leibniz special character> <i>H</i>\n[[861.12]] seu <i>L</i> ^&.sv <Leibniz special character> <i>A</i> ^&.sv <Leibniz special character> <i>L</i> ^&.Sg <Leibniz special character> <i>A</i> ^&.SE <Leibniz special character> <i>H</i>, quae via est brevissima, seu <i>A</i> ^&.Sg <Leibniz special character> <i>L</i> ^&.sv <Leibniz special character> <i>A</i> ^&.sv <Leibniz special character> <i>L</i> ^&.SE <Leibniz special character> ─ <i>H</i>, nam hic non\n[[861.13]] licet compensare. </p>\n<p> [[861.14]] Aliud est hic summam duorum, aliud singula seorsim detrahere. </p>\n","number":"181.","title":"Qui sunt milites et subditi simul","date":"[März bis April 1687 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

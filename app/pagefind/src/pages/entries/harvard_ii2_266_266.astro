@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_266","series":"Band II 2 (1686 - 1694)","seq":266,"text":"<p> [[813.1]] <b>269. LEIBNIZ AN GIOVANNI BATTISTA TOLOMEI</p>\n<p> [[813.2]] [Hannover, 22. Juni 1694.] [250.283.]</b></p>\n<p> [[813.9]] R^#'m^#'o Patri Ptolemaeo S.J. Theologo insigni G.G. Leibnitius S.P.D. </p>\n<p> [[813.10]] Valere Te et meis non indelectatum nuntiavit mihi R.P. Isensehe, nec potuit scribere quod\n[[813.11]] esset gratius. Ei respondens, has ad Te lineas adjungo, etsi sciam quam sis occupatus. Sunt enim\n[[813.12]] de quibus non alius Te rectius me docuerit; nec satis scio an jam tum attigerim. Primo cum\n[[813.13]] insignibus in Gallia viris Ill^#'m^#'o Episcopo Meldensi, et qui nuper extinctus est Pelissonio aliquoties\n[[813.14]] literas commutavi, de vera constituenda corporis notione, quod illi meditationes meas\n[[813.15]] ad vindicandam corporis Christi realem praesentiam in Eucharistiae sacramento valde utiles\n[[813.16]] judicarant. Cum enim nunc magna philosophorum acutissimorum cohors in Cartesiana dogmata\n[[813.17]] unice inclinet, quibus corporis natura in extensione collocatur, quasi nihil aliud a nobis liquido\n[[813.18]] intelligatur in materia, quod avide arripiunt qui Reformati appellantur; mihi potius visum est\n[[813.19]] praeter Geometricas notiones (id est praeter extensionem cum suis variationibus) in natura esse\n[[813.20]] aliquid altius, quod imaginatio quidem non attingat, sed mens tamen clare intelligat, scilicet vis\n[[813.21]] actricis notionem ex metaphysicis petitam, qua substantiae omnis, et speciatim, ubi resistendi\n[[813.22]] vis accesserit, corporeae intima essentia continetur. Vim autem sive virtutem intelligo non\n[[813.23]] facultatem scholarum, quae nihil est quam quaedam propinqua possibilitas agendi, per se tamen\n[[814.1]] mortua ut sic dicam et effectu caritura nisi quid excitet, sed quae <greek>ĕnteléxeian</i> contineat, ita ut\n[[814.2]] conatum involvat, et per se prorumpat in actum, nisi quid obstet, ut grave suspensum aut arcus\n[[814.3]] tensus. Etsi enim gravitatem et vim Elasticam, et caetera omnia naturae phaenomena a motu\n[[814.4]] petam et mechanice explicem, tamen ultima causa motuum corporibus ad vim actricem inditam\n[[814.5]] reducitur et ipsae leges mechanicae ex alterioribus id est metaphysicis principiis pendent. Id\n[[814.6]] ipsum ergo est quod Aristoteles Animam definiens entelecheiam primam dixit, Scholastici\n[[814.7]] formam substantialem dixere, nobis non tollentibus sed illustrantibus majorum placita fortasse\n[[814.8]] intelligibilius audiet, vis primitiva. Quae prout limites exercitii sui ex variis corporum conflictibus\n[[814.9]] accepit secundariam parit accidentariam et in Mechanicis notam, cognatam illi qualitati\n[[814.10]] quam nonnulli impetum impressum vocant sed tamen diversam, cum vis in pari corporum\n[[814.11]] magnitudine non debeat velocitatis sed effectus possibilis proportione aestimari in quo plerosque\n[[814.12]] scriptores a veritate abscessisse demonstro, et Cartesianos imprimis, cum eandem quantitatem\n[[814.13]] motus in corporum conflictu conservari putant pro quo dicere debebant eandem quantitatem\n[[814.14]] virium seu effectus possibilis conservari, quae in libro de Dynamicis explicare constitui\n[[814.15]] hortantibus saepe summis viris. Sed ego sententiam Tuam discere pervelim, nam (si licet)\n[[814.16]] optem mea haec et vobis probari. </p>\n<p> [[814.17]] Sed et alterum est de quo consulere Te velim: rumor ad nos superiore anno dilatus est,\n[[814.18]] nescio quam verus, esse apud vos, qui Pontifici maximo suadeant emendationem quandam vel\n[[814.19]] interpretationem eorum quae Lilius et Clavius in Gregoriana temporum correctione praestiterunt.\n[[814.20]] Et memini olim cujusdam Francisci Leverae librum me videre in ipsa Roma editum, qui\n[[814.21]] Clavium negabat per omnia ex praescripto Pontificis, aut Lilii sententia egisse. Mihi videtur, si\n[[814.22]] Pontifici placeret titulo atque animo interpretandi pristina decreta hoc resumere negotium, forte\n[[815.1]] effici posse Caesaris interventu, et magnorum quorundam inter Protestantes principum Germaniae\n[[815.2]] laudatissima moderatione, ut hoc saltem calendarium Schisma tollatur, velut in praeludium\n[[815.3]] et omen majoris aliquando fructus ad reddendam Ecclesiae pacem. Itaque fac quaeso ut\n[[815.4]] discam quid Tibi videatur et praesertim si commodum putas Praeposito Generali vestro, summo\n[[815.5]] viro, cui etiam me commendari peto, nam illi innotuisse nomen meum, Te opinor interprete,\n[[815.6]] Fantonius vester olim significavit. Quod superest vale et fave. Dabam Hanoverae </p>\n","number":"269.","title":"LEIBNIZ AN GIOVANNI BATTISTA TOLOMEI","date":"[Hannover, 22. Juni 1694.] [250.283.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

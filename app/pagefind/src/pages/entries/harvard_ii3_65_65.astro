@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_65","series":"Band II 3 (1695 - 1700)","seq":65,"text":"<p> [[175.9]] <b>65. HENRI BASNAGE DE BAUVAL AN LEIBNIZ</p>\n<p> [[175.10]] Den Haag, 21. Juni 1696. [54.67.]</b></p>\n\n<p> [[175.17]] Je ne me suis point haté de vous repondre Monsieur sur ce que vous proposiez à l'egard du\n[[175.18]] <i>receuil</i> que les Libraires de Hollande ont entrepris; car comme vous persistez à ne point\n[[175.19]] consentir que vôtre <i>Codex Diplomaticus</i> soit demembré; et que de l'autre côté les Libraires\n[[175.20]] s'obstinent à vouloir disposer et arranger leur receuil selon l'ordre chronologique, je ne voi nul\n[[175.21]] expedient d'accommodement. Aussi sont ils resolus à se passer de ce que vous auriez pû leur\n[[175.22]] fournir, et à continuer leur projet. Il y manquera bien des choses que vous auriez supplé[é]es;\n[[176.1]] mais ils aiment mieux y renoncer, que de deranger leur dessein, et de donner comme ils le\n[[176.2]] disent un receuil confus et sans ordre. J'avois si bien compris l'utilité de ce que vous pouviez\n[[176.3]] leur communiquer, que je suis bien fâché d'avoir si mal reussi dans le dessein que j'avois d'être\n[[176.4]] le mediateur d'un accommodement. Il me semble que vous vous fussiez bien epargné de la\n[[176.5]] peine, si vous leur aviez abandonné le soin de dechifrer toutes les pieces que vous vous chargez\n[[176.6]] de donner au Public. Si vous changez de sentiment, advertissez m'en je vous prie. Je n'ai pû\n[[176.7]] m'acquitter de vôtre commission, ni rendre votre lettre à M. Morel. Je ne l'ai point vû. Je sçai\n[[176.8]] par M. Cuper qu'il est retourné en Allemagne. Je garderai la lettre jusqu'à ce que vous\n[[176.9]] m'appreniez si je la brulerai, ou si je vous la renvoyerai. Je vous renvoyerai vos remarques sur\n[[176.10]] les principes de Descartes par la I^#'e occasion qui se presentera. Je ne sçai si vous avez vû les\n[[176.11]] <i>Principes</i> <i>de Physique</i> que M. Hartsoeker a publiez depuis quelques mois. Il est tout à fait\n[[176.12]] Cartesien. Cela est un peu superficiel. La physique de M. le Clerc est plus etendue, et vaut\n[[176.13]] d'autant mieux qu'il ne s'est assujetti à aucun systême particulier. Le mesme M. le Clerc vient\n[[176.14]] de donner un Traité sur les lotteries qui sont si frequentes en Hollande. Il discute ce qu'on\n[[176.15]] entend par le <b>Hazard</b>, et par les termes d'heureux et de malheureux: Il soutient qu'il est faux\n[[176.16]] que le bonheur soit particulierement attaché à certaines personnes: Et que les bons ou mauvais\n[[176.17]] billets echéant à chacun selon la rencontre fortuite des billets, Dieu n'y preside point par aucune\n[[176.18]] direction particuliere. Je croi que je vous ai parlé de son autre livre qui a precedé celui-cy\n[[176.19]] touchant <i>les causes de l'incredulité</i>. On a imprimé icy la traduction du livre de M. Locke <i>The\n[[176.20]] Reasonnableness of Christianity</i>. Pour prouver que le christianisme est raisonnable, il le\n[[176.21]] depouille de tout ce qu'il y a de mysterieux, et d'incomprehensible, et reduit la foi à croire\n[[176.22]] simplement que J. C. est le Messie, sans penetrer plus avant. Il soutient que les Apotres ne nous\n[[176.23]] ont proposé que cela à croire, et que cela suffit pour le salut. Les oeuvres du P. Sirmond en\n[[176.24]] 5 vol. <i>in folio</i> sont achevées au Louvre. Le 2. tome de S. Jerôme est aussi achevé. M. de\n[[177.1]] Cordemoi a fait un traité contre les Sociniens. M^#'l^#'e Bernard a produit un nouveau Roman: <i>Inés\n[[177.2]] de Cordoüe</i>. Les dames le trouvent tres joli. On va bientost debiter icy les <i>Miscellanea</i> de\n[[177.3]] M. Chevreau, qui a fait autresfois une <i>histoire du monde</i>, que l'on reimprime icy fort augmentée.\n[[177.4]] Vous sçavez que M. Cassini est allé en Italie par l'ordre du Roi de Fr. pour y faire\n[[177.5]] quelques observations astronomiques. On commence à voir icy la Relation du dernier siege de\n[[177.6]] Namur ecrite par l'ordre du Roi d'Angl. <i>in folio</i>. Il y a à la fin un parallèle des 2 sieges. Je croi\n[[177.7]] qu'on verra bientost le Callimaque où il y aura des notes fort amples de M. Spanheim, et de\n[[177.8]] M. Graevius. Il est mort depuis un mois 3 auteurs assez connus. M. Tollius à Utrech, et M^#'r^#'s\n[[177.9]] Varillas, et de la Bruyere à Paris. Le dernier etoit l'auteur des <i>Caracteres</i> <i>de ce siecle</i>. Si je vous\n[[177.10]] puis être utile à quelque chose, ne doutez pas que je ne sois Monsieur </p>\n<p> [[177.11]] avec beaucoup de zêle et de respect vôtre tres humble et tres obeyssant serviteur </p>\n<p> [[177.12]] De la Haye le 21 de Juin 1696. Basnage de Bauval\n[[177.13]] <yi>A Monsieur Monsieur de Leibnits Con^#'e^#'r de Son A. Electorale. A Hanover. </p>\n","number":"65.","title":"HENRI BASNAGE DE BAUVAL AN LEIBNIZ","date":"Den Haag, 21. Juni 1696. [54.67.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

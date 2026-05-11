@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_184","series":"Band II 4 (1701 - 1707)","seq":184,"text":"<p> [[571.1]] <b>184. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[571.2]] Leipzig, 26. Februar 1707. [181.197.] </b></p>\n<p> [[571.7]] Vir Illustris et Excellentissime, Patrone longe gratiosissime. </p>\n<p> [[571.8]] Executus sum mandata Tua, et quod Bernardi MStum attinet Fritschium illud possidere\n[[571.9]] jam per literas d. 19. Febr. datas indicavi; ipsas vero Excellentiae Tuae Excellentissimi Baronis\n[[571.10]] de Schulenburg Secretario tradendas curavi, qui in eo jam erat ut se Dresdam conferret, ibique\n[[571.11]] Dnum Generalem expectaret, quem Dresdae per aliquod tempus moraturum esse putabat. Rex\n[[571.12]] etiam noster Serenissimus mutavit sedem, nec tam facile huc redibit. Causam ignoramus,\n[[571.13]] multique pacem haud diuturnam futuram esse augurantur. Alii tamen nihil inde mali verentur. </p>\n<p> [[571.14]] Academia nostra omni fere Studiosorum coetu orbata est, et si unquam, nunc certe feriae\n[[571.15]] nobis concessae sunt, sed haud gratae et proficuae, mihique tempus excursioni faciendae aptius\n[[571.16]] non posset contingere, si quidem commoda se offeret occasio, quam Tua me aliquando providentia\n[[571.17]] consecuturum esse confido. Caeterum quaecunque in posterum Excellentiae Tuae\n[[571.18]] gratia agam et non laboriosa mihi et jucunda videbuntur, qui me et mea studia cum omnibus\n[[571.19]] officiis atque obsequiis meis ex fide et formula antiqua lubens Excellentiae Tuae consecro et\n[[571.20]] dedico </p>\n<p> [[571.21]] Illustris atque Excellentissimi Nominis Tui Cultor perpetuus </p>\n<p> [[571.22]] M. G. Hanschius. </p>\n<p> [[571.23]] Dabam Lipsiae MDCCVII. IV. Calend. Martii. </p>\n<p> [[571.24]] A Son Excellence Monsieur de Leibniz Conseiller de sa Majesté le Roy de Prusse etc. à\n[[571.25]] Berlin </p>\n","number":"184.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 26. Februar 1707. [181.197.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

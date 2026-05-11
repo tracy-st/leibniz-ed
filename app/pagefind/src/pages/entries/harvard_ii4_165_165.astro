@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_165","series":"Band II 4 (1701 - 1707)","seq":165,"text":"<p> [[517.14]] <b>165. NICOLAS HARTSOEKER AN LEIBNIZ</p>\n<p> [[517.15]] Düsseldorf, 25. November 1706. [152.167.] </b></p>\n<p> [[517.19]] Monsieur </p>\n<p> [[517.20]] Je vous remercie tres humblement de la bonté que vous avez euë de me faire tenir par\n[[517.21]] Monsieur le Baron de Krosik quelques reflexions sur mes <i>conjectures physiques</i>; et comme rien\n[[517.22]] ne contribuë plus à decouvrir les secrets de la nature, ce qui doit être l'unique but d'un\n[[518.1]] physicien, je vous prie inflamment de vouloir y continuer. Il m'est deja arrivé Monsieur qu'en\n[[518.2]] meditant sur les difficultez que vous m'avez faites, j'ai trouvé à ce faire à moi même, du sorte\n[[518.3]] que s'il fit falloit venir à une seconde impression de mon ouvrage, je serois obligé d'y faire\n[[518.4]] assez de changements. Je vous prie Monsieur d'examiner principalement les discours de\n[[518.5]] l'aiman[t], des principes du corps naturel, du mouvement, du feu, et de l'arc en Ciel, et de me\n[[518.6]] faire sçavoir quel est vôtre sentiment là dessus, après quoi je me donnerai l'honneur de vous\n[[518.7]] envoyer mes réponses et reflexions sur vos objections. Je ne doute pas que vous ne trouviez de\n[[518.8]] tres grandes difficultez à me faire sur ces matieres qui sont d'une difficulté infinie, sur tout à\n[[518.9]] cause que je me suis le plus souvent écarté du grand chemin pour en frayer un autre tout\n[[518.10]] nouveau, et aller par des routes inconnuës. Vôtre profond sçavoir est si connu de tous les\n[[518.11]] sçavans de l'Europe que je dois toujours tenir à grand honneur d'être attaqué par un ennemi tel\n[[518.12]] que vous; et j'aurai moins de honte d'un être terrassé que par un ennemi moins redoutable que\n[[518.13]] vous. </p>\n<p> [[518.14]] Je ne sçai si vous avez quelque relation à la cour de Berlin, mais si cela étoit j'aurois bien\n[[518.15]] une priere à vous faire Monsieur touchant le pretendu Comte Rogieri que j'ai appris avec la\n[[518.16]] plus grande joye du monde avoir été arreté par les ordres de la Majesté le Roy de Prusse. Je ne\n[[518.17]] demande pas qu'on lui fasse aucun bien ou mal, mais puisque la Majesté temoigne tant de zele\n[[518.18]] pour l'avancement des arts et des sciences, par l'avancement de plusieurs Academies, et par sa\n[[518.19]] liberalité envers les sçavans; je souhaiterois pour l'amour de la verité, qu'on obligeast ce\n[[518.20]] pretendu Comte d'avoir que tout son sçavoir faire n'a consisté qu'en quelques tours de passe\n[[518.21]] passe, et qu'on rendit cela public, afin de detromper par là une infinité de gens qui se laissent\n[[518.22]] duper encore tous les jours par des fripons comme lui. Vous avez pû voir ce que j'en ai écrit\n[[518.23]] dans mes <i>Conjectures Physiques.</i> Je suis avec tout le zele et toute la veneration imaginable pour\n[[518.24]] vôtre merite extraordinaire et distingué plus que personne du monde </p>\n<p> [[518.25]] Monsieur Vôtre tres humble et tres obeïssant serviteur Nicolas Hartsoeker </p>\n<p> [[518.26]] Dusseldorp ce 25 de Nov: 1706 </p>\n","number":"165.","title":"NICOLAS HARTSOEKER AN LEIBNIZ","date":"Düsseldorf, 25. November 1706. [152.167.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

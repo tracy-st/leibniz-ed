@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_197","series":"Band II 4 (1701 - 1707)","seq":197,"text":"<p> [[614.1]] <b>197. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[614.2]] Hannover, 23. Juni 1707. [184.199.] </b></p>\n<p> [[614.28]] Vir clarissime, Amice honoratissime </p>\n<p> [[614.29]] Gratias Tibi debeo quod praesenti tanta humanitate affuisti. </p>\n<p> [[614.30]] Opusculum Tuum eruditum et elegans remittam per vecturam ordinariam, si ita jubebis,\n[[614.31]] addamque Epistolium quale desiderare visus es. </p>\n<p> [[615.1]] Cum olim Serenissima Prussorum Regina Baylii libros doctrinae et elegantiae plenos\n[[615.2]] libenter legeret, et in iis crebras objectiones, circa justitiam divinam, libertatem arbitrii, originem\n[[615.3]] mali, causam peccati, animadverteret, sententiam meam non raro rogabat. Ego vero\n[[615.4]] ostendebam, non tantas esse difficultates quantae viderentur, et rem omnem (ni fallor) recte et\n[[615.5]] lucide expediri posse. Et sane quae afferebam, non displicebant. Itaque plus semel instabat\n[[615.6]] inclyta Regina, ut meditationes meas eo de argumento in chartam conjicerem, et Gallica\n[[615.7]] quidem lingua, quo ab ipsa et aliis etiam extra Germaniam latinae minus assuetis legi posset.\n[[615.8]] Coeperam opus, sed morte Reginae filum abruperam. Sed cum hac hyeme Berolini agerem,\n[[615.9]] amici quibus voluntas Reginae nota fuerat, ut ejus mandatis ex asse satisfacerem, urgere non\n[[615.10]] destitere. Ita nata est mihi scriptio quae si praelo committeretur octava forma justae magnitudinis\n[[615.11]] libellum daret. Vellem autem Typis Batavis edi Gallicum hoc scriptum: ita enim facilius\n[[615.12]] per varias Europae partes ubi linguae ejus usus est, dispergeretur. Praesertim cum ipsa Baylii et\n[[615.13]] Antagonistarum ejus scripta itidem in Batavis Gallice sint edita. Venit autem in mentem\n[[615.14]] Fritschium nostrum in Batavis jam officinam habere, ibique editionem commode curare posse. </p>\n<p> [[615.15]] Nomen quidem meum non esset praefigendum libello (neque is adeo mos est scribentibus\n[[615.16]] Gallice) sed tamen neminem facile lectorum peritorum latere posset, ob doctrinas passim\n[[615.17]] inspersas, quas alibi jam tum exposui. Vellem autem rem omnem studioso silentio tegi, donec\n[[615.18]] absoluta sit scripti impressio. Quod si consilium Fritschio non placet, attamen silebit ut spero,\n[[615.19]] bona fide. </p>\n<p> [[616.1]] Sed quod vicissim peto, numerus est exemplarium insignis. Calculo enim inito comperi\n[[616.2]] minimum 120 esse amicos, quibus singulis unum exemplum mittere velim. Et cum aliquid\n[[616.3]] desiderem ultra necessitatem opus erit circiter exemplaribus 150. Is numerus venditioni caeterorum,\n[[616.4]] tantum abest, ut sit nociturus, ut potius sparsis ea ratione per varias regiones exemplis\n[[616.5]] notius opus sit redditurus atque expetibilius. </p>\n<p> [[616.6]] Quodsi itaque cum Fritschio hac de re secreto colloqui voles, et sententiam ejus ad me\n[[616.7]] perscribere, me plurimum Tibi obstringes. Charta erit qualem libri apud Batavos habere solent,\n[[616.8]] ipsique in primis Bayliani novissimi in octava forma editi veluti responsio ad provincialem.\n[[616.9]] Vale. </p>\n<p> [[616.10]] Dabam Hanoverae 23. Junii 1707 </p>\n<p> [[616.11]] deditissimus Godefridus Guilielmus Leibnitius </p>\n<p> [[616.12]] A Monsieur Monsieur Hansch Maistre ès arts, et Collegiat à Leipzic </p>\n","number":"197.","title":"LEIBNIZ AN MICHAEL GOTTLIEB HANSCH","date":"Hannover, 23. Juni 1707. [184.199.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

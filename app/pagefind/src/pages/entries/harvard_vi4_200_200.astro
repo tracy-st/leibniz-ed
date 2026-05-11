@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_200","series":"Band VI 4 (1677 - 1690)","seq":200,"text":"[[736.1]] <b>164.  De Vero et Falso, Affirmatione et Negatione, et de Contradictoriis [April bis Oktober 1686 (?)]</b>\n [[736.3]] <tab/>[April bis Oktober 1686 (?)]\n[[736.21]] <b>De Vero et Falso, Affirmatione et\n [[736.22]] Negatione, et de Contradictoriis</i> </p>\n<p> [[736.23]] 1) <b>Vera</b> Enuntiatio est, quae vel percipi vel intelligi potest, vel partim percipi\n[[736.24]] partim intelligi; prout est facti vel rationis, vel partim facti partim rationis. </p>\n<p> [[736.25]] 2) Enuntiatio <b>falsa</b> est quae non est vera. </p>\n<p> [[737.1]] 3) Aequipollent (seu se mutuo inferunt): Enuntiatio est vera, et Enuntiatio potest\n[[737.2]] poni, poni autem intelligo absolute, alioqui possum referre, quod non probo. </p>\n<p> [[737.3]] 4) <b>Affirmatio</b> est enuntiatio de enuntiatione, dicens eam esse veram. </p>\n<p> [[737.4]] 5) <b>Negatio</b> est enuntiatio de enuntiatione dicens eam non esse veram. </p>\n<p> [[737.5]] 6) Enuntiatio et affirmatio enuntiationis aequipollent seu ipsa per se enuntiatio jubet\n[[737.6]] affirmari sui veritatem. </p>\n<p> [[737.7]] 7) Aequivalet enuntiatio vera, et enuntiatio quae potest affirmari. Nam aequivalet\n[[737.8]] vera, ei quae potest poni <i>per 3.</i> Et haec ei quae potest affirmari <i>per 6.</i> </p>\n<p> [[737.9]] 8) Aequivalet enuntiatio falsa et enuntiatio quae potest negari. Nam si <greek>e</greek> est falsa,\n[[737.10]] Ergo <i>per 3.</i> <greek>e</greek> esse falsam est verum. Ergo (<i>per 7</i>) <greek>e</greek> esse falsam potest dici seu (<i>per 5</i>) <greek>e</greek>\n[[737.11]] potest negari. Vicissim si <greek>e</greek> potest negari, ergo (<i>per 5</i>) <greek>e</greek> esse falsam potest dici. Ergo (<i>per\n[[737.12]] 7</i>) <greek>e</greek> esse falsam est verum. Ergo <i>per 3</i> <greek>e</greek> est falsa. Itaque se mutuo inferunt <greek>e</greek> esse falsam,\n[[737.13]] et <greek>e</greek> posse negari, id est haec aequipollent. </p>\n<p> [[738.1]] 9) Affirmatio et negatio negationis aequipollent. Est <b>axioma</b> fluens ex ipso significatu\n[[738.2]] <greek>toỹ</greek> non, seu particulae negativae, cujus hic est usus, ut geminatione semet ipsam\n[[738.3]] tollat. </p>\n<p> [[738.4]] 10) Si affirmatio est vera, negatio non est vera. Nam si affirmatio vera est seu (<i>per 9</i>)\n[[738.5]] negatio negationis, potest (<i>per 3</i>) negatio negari seu (<i>per 5</i>) dici non vera. Ergo (<i>per 8</i>)\n[[738.6]] non est vera. </p>\n<p> [[738.7]] 11) Si affirmatio non est vera negatio est vera. Nam si affirmatio non est vera, etiam\n[[738.8]] (<i>per 6</i>) enuntiatio non est vera. Ergo (<i>per 3</i>) potest poni enuntiationem non esse veram.\n[[738.9]] Quod est (<i>per 5</i>) posse poni ejus negationem, id est (<i>per 3</i>) negationem esse veram.\n[[738.10]] Aliter: si affirmatio propositi non est vera etiam (<i>per 7</i>) negationis propositi negatio non\n[[738.11]] est vera seu (<i>per 8</i>) potest negari, sed negationis propositi ipsam negationem posse negari\n[[738.12]] est negationem propositi posse affirmari (<i>per 9</i>). Id est (<i>per 6</i>) propositum posse negari. </p>\n<p> [[738.13]] 12) Si positis enuntiationibus sequatur nova et haec sit falsa, etiam aliqua ex illis erit\n[[738.14]] falsa. Hoc est axioma. <Fn><i>Am Rande</i>: NB.</Fn> </p>\n<p> [[738.15]] 13) Si negatio est vera, affirmatio non est vera. </p>\n<p> [[738.16]] 14) Si negatio non est vera, affirmatio est vera. Hae duae propositiones sequuntur 13\n[[738.17]] ex 10, et 14 ex 11 ope 12. </p>\n<p> [[738.18]] 15) <b>Contradictoriae</b> sunt quarum una affirmat, quod alia negat. </p>\n<p> [[738.19]] 16) Contradictoriae non possunt simul esse verae et falsae, sequitur ex 15 per\n[[738.20]] num. 10, 11, 13, 14. </p>\n","number":"164.","title":"De Vero et Falso, Affirmatione et Negatione, et de Contradictoriis","date":"[April bis Oktober 1686 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_88","series":"Band II 1 (1663 - 1685)","seq":88,"text":"<p> [[236.8]] <b>74. LEIBNIZ AN PIERRE DE CARCAVY</p>\n<p> [[236.9]] 17. August 1671. [70.88.]</b></p>\n<p> [[236.19]] In <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: Ad Carcavium 17. Aug. 1671</Fn> Hypothesi mea haec potissimum me praestitisse spero: </p>\n<p> [[236.20]] In <k>theoria motus abstracti</i>, evolutum compositionis continui labyrinthum, <b>fund.\n[[236.21]] praedemonst. 1.-5.</i> fund. 18.; demonstrationem veritatis <i>Geometricae indivisibilium</i> Cavalerii,\n[[236.22]] <b>fund. 5.</b>, quae hactenus ideo tantum probata est ad Hypotheseos cujusdam instar, quod\n[[236.23]] multa vera, nihil absurdi, ex ea recte usurpata, deduci possit; veram naturam conatus, <b>fund.\n[[236.24]] 6.-15.</i>; primam et intimam rationem cohaesionis seu firmitatis geometrica certitudine confectam,\n[[236.25]] <b>fund. 15. 16</b>. theor. 17.; verum discrimen mentis a corpore hactenus intactum, <b>fund.\n[[236.26]] 17.</i>; examen aequalitatis jactatae inter angulum incidentiae et reflexionis, <b>th. 7.</b>; constructionem\n[[237.1]] physicam id est exactam simul et realem rerum geometricarum, in problem.; ex meris\n[[237.2]] motibus rectis efficere curvum et contra, probl. 6. 7.; ex meris corporibus rectilineis efficere\n[[237.3]] cylindrum, conum, sphaeram, <b>probl. 17. 18. 19.</b>; corpora sectionum conicarum efficere,\n[[237.4]] <b>probl. 20.</b>; datum motum continue accelerare ac retardare, <b>probl. 24. 25.</b> </p>\n<p> [[237.5]] <k>In Theoria motus concreti</i>, demonstrationem motus terrae, hactenus a nullo datam,\n[[237.6]] nullo effugio evitabilem, <b>§. 2.</b>; rationem ex qua videtur sequi solem non luxisse ab aeterno,\n[[237.7]] <b>§. 5. 12.</b>; originem bullarum seu globorum particulari gyratione firmatorum, omnis consistentiae\n[[237.8]] et specierum fundamentum, <b>§. 7.</b>; originem perpetuae mutationis: generationis, corruptionis,\n[[237.9]] incrementi et decrementi alterationisque in rebus, a bullitione seu fluxu quodam\n[[237.10]] insensibili ab aetheris motu oriundo, nascentium, coalescentium, dissilientium, evanescentium\n[[237.11]] continuo bullarum repetitam, <b>§. 11.</b>; causam motuum maris statorum universalium, <b>§. 13.</b>;\n[[237.12]] vitri, §. 14.; gravitatis et incrementi motus gravium, <b>§ 16. 17. 18.</b>; reflexionis angulus cur in\n[[237.13]] motibus sensibilibus angulo incidentiae aequalis, <b>§. 22.</b>; reflexionis et refractionis regulas esse\n[[237.14]] ab Elaterio, <b>ibid.</b>; ab eodem vibrationem penduli et chordae, et vibrationum isochronismos,\n[[237.15]] <b>§. 23.</b>; cur motus violentus ad vestigium quoddam crescat, inde rursus decrescat, <b>ibid.</b>;\n[[237.16]] Experimenti Magdeburgici rationem a gravitate simul et elaterio aëris, §. 26.; sclopeti ventanei\n[[237.17]] ab Elaterio; gravitatis simul et Elaterii ab aetheris circulatione, <b>§. 27.</b>; Hypothesin de\n[[237.18]] differentiis colorum, <b>§. 31.</b>; Vaporum seu exhalationum ex terra sursum, indeque fontium,\n[[237.19]] mineralium, plantarum, meteororum rationem, <b>§. 28. 29.</b>; causam frigoris ex angiportuum\n[[237.20]] analogia, <b>§. 34.</b>; causam potissimorum phaenomenorum <k>magnetis</i> a duplici atmosphaerae\n[[237.21]] motu, uno in aequatore et parallelis, altero in meridianis, <b>§. 34.</b>; causam attractionis magneticae\n[[237.22]] et electricae, §. 35.; principia chemica activa seu utilia esse tantum duo, <b>37. 38.</b> gradu\n[[237.23]] rursus variantia; nihil repugnare mundos in mundis in infinitum, <b>43.</b>; veras acidi et alcali\n[[237.24]] definitiones effectusque ad mechanica principia revocatos, <b>45.</b>; de gradibus acidi et alcali, <b>50.\n[[237.25]] 52.</i>; de certo quodam eoque compendiosissimo fundamento methodi medendi, <b>53.</b>; de motu\n[[237.26]] musculorum, <b>57. fin.</b>; explicationem glomerabilitatis per annulos, tensionis per embolos,\n[[237.27]] lacrymarum vitri, ventorum, <b>§. 59.</b>; Spiritus mundi, liquoris alcahest, veneni et tincturae,\n[[237.28]] <b>§. 60.</b> </p>\n","number":"74.","title":"LEIBNIZ AN PIERRE DE CARCAVY","date":"17. August 1671. [70.88.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

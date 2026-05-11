@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_44","series":"Band VI 4 (1677 - 1690)","seq":44,"text":"[[108.1]] <b>36₂.  Tabula autorum TABULA AUTORUM\n [[108.2]] Ex quibus condendae definitiones omnium.\n [[108.3]] Vossii <tab/><picture>207</picture> <tab/>Cartesii <tab/><picture>205</picture>\n [[108.4]] Port Royal <tab/> <tab/>Fabri <tab/>\n [[108.5]] Sciopp[ii] <tab/> <tab/>Hobbii <tab/> <tab/> <tab/>Physica\n [[108.6]] Scalig[eri] <tab/> <tab/>Gram[matica] <tab/>Rohault <tab/>\n [[108.7]] Frischlin[i] <tab/> <tab/>Le Grand <tab/>\n [[108.8]] Neand[ri] <tab/>\n [[108.9]] Keiman[ni] <tab/>\n [[108.10]] Jungii <tab/><picture>202</picture> <tab/> Logica <tab/>Cartesii <tab/><picture>204</picture>\n [[108.11]] Fabri <tab/>Fabri <tab/> Metaphysica\n [[108.12]] <tab/>Spinosae </p>\n<p> [[108.13]] <tab/>Hobbii\n [[109.1]] Euclidis <tab/><picture>205</picture> <tab/>Kepler <tab/><picture>205</picture>\n [[109.2]] Stofleri puto. <tab/>Taquet\n [[109.3]] Barrovii <tab/>Geometria <tab/>Ubaldi problem[ata] <tab/>Astron[omia]\n [[109.4]] Greg[orii] a S. Vinc. <tab/>Ricciol[i]\n [[109.5]] Arnaldi <tab/>Mercat[or]\n [[109.6]] Elemens du plein chant <tab/><picture>205</picture> <tab/>Viet[ae] <tab/><picture>203</picture>\n [[109.7]] Birchensha quando prodibit <tab/>Diophant[i] <tab/>[Arithmetica]\n [[109.8]] Mercat[oris] quando prodibit <tab/>Musica <tab/>Collins.\n [[109.9]] Cartes[ii]\n [[109.10]] Glareani <tab/>Vitruvii <tab/><picture>202</picture> <tab/> Architecton[ice] </p>\n<p> [[109.11]] <tab/>Perralti\n [[110.1]] Mariotti quando prodibit <tab/><picture>205</picture> <tab/>Stevini <tab/><picture>206</picture>\n [[110.2]] Fabri <tab/>Pascal[ii]\n [[110.3]] Kohlhans <tab/>Optica <tab/>Boyl[ii] <tab/> Mechanica\n [[110.4]] Kepleri <tab/>Hugen[ii]\n [[110.5]] Cherubin <tab/>Wallis[ii] </p>\n<p> [[110.6]] <tab/>Mariott[i]\n [[110.7]] Septalii <tab/><picture>208</picture> <tab/>Aristot[elis] <tab/><picture>207</picture>\n [[110.8]] Coleri. Serres <tab/>Claramontii\n [[110.9]] <i>Hausbücher</i> <tab/>Spinos[ae] </p>\n<p> [[110.10]] ex variis linguis <tab/> Oeconom[ia] <tab/>Hobb[ii] <tab/>Ethica\n [[110.11]] Architecton. <tab/>Cardani\n [[110.12]] <i>Financen, Commercien</i>, <tab/>Campanell[ae]\n [[110.13]] Bech[er] etc. <tab/>Felden[ii]\n [[110.14]] <i>Bergsachen</i>,\n [[111.1]] Cardan[i] <tab/><picture>208</picture> <tab/>Histor[ia]\n [[111.2]] Conring[i] <tab/>Antiquitates\n [[111.3]] Hobb[ii]\n [[111.4]] Grot[ii] <tab/> Polit[ica] <tab/>Ius civil[e]\n [[111.5]] Limn<angle bracket>aei</angle bracket> <tab/> canon[icum]\n [[111.6]] Les Estats de France <tab/>Theol[ogia] moral[is] </p>\n<p> [[111.7]] Angleterre etc. <tab/> Scholast[ica]\n [[111.8]] S. Marthe <tab/> Controvers. </p>\n","number":"36₂.","title":"Tabula autorum","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

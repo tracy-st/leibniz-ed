@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_184","series":"Band II 1 (1663 - 1685)","seq":184,"text":"<p> [[593.1]] <b>166. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[593.2]] [14. Februar 1678.] [153.169.]</b></p>\n<p> [[593.16]] Ex Epistola mea ad Placcium. </p>\n<p> [[593.17]] Quanquam Spinosa pulchra passim habeat cogitata, et a me demonstratis non abhorrentia,\n[[593.18]] in summa tamen sententiae ejus capitales probari minime possunt, ac demonstratae non sunt,\n[[593.19]] quicquid etiam promittat. Substantia illi non nisi unica est Deus. Creaturas putat esse modos seu\n[[593.20]] affectiones Dei. Deum intellectu ac voluntate carere, nec propter finem agere sed quadam suae\n[[593.21]] naturae necessitate, quemadmodum ex Circuli essentia sequuntur ejus proprietates. Mens nostra\n[[593.22]] post mortem supererit quidem, sed non amplius percipiet praesentia aut volet futura, aut\n[[593.23]] reminiscetur praeteritorum. Felicitas omnis secundum ipsum, exuta incrustamentis speciosis,\n[[593.24]] huc redit, ut inevitabilem rerum necessitatem cogitantes, contenti simus illis quae eveniunt.\n[[593.25]] Quanto meliora ac veriora Christiani? De affectibus equidem multa dicit egregia. Sed cum\n[[593.26]] verbo relinquat, re tollat providentiam et futuram vitam, nescio an ulla vitae officia hominibus\n[[593.27]] persuadere possit. Tametsi non negem his etiam opinione sublatis quosdam virtutem coluisse, ut\n[[593.28]] Stoicos nonnullos quorum vel eo magis laudanda probitas est, quod non aliis praemiis poenisque\n[[593.29]] quam quae secum fert honesta aut prava vita, excitarentur. Sed de his omnibus ac de toto\n[[593.30]] opere judicium tuum expectare malo. </p>\n","number":"166.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"[14. Februar 1678.] [153.169.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

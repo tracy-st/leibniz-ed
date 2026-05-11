@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_174","series":"Band II 4 (1701 - 1707)","seq":174,"text":"<p> [[538.15]] <b>174. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[538.16]] Berlin, 6. Februar 1707. [172.176.] </b></p>\n<p> [[539.2]] Vir Clarissime Fautor et Amice Honoratissime </p>\n<p> [[539.3]] Quod quaedam a R. P. Longo quaesita doces gratias ago. Dn. D. Maierus ut video alibi\n[[539.4]] quaerendus est. Recuperato Scripto Longi ex ipsius manibus tentabo frui aliorum doctissimorum\n[[539.5]] virorum, sed inprimis venerandi Ittigii beneficio. </p>\n<p> [[539.6]] Ex definitione <b>Rectae</b> quod inter duo puncta sit brevissima, id ipsum quod assumis\n[[539.7]] demonstrari petitur, brevissimam hanc esse unicam. Hoc enim habito utique per se patet duas\n[[539.8]] rectas spatium non comprehendere. Porro quo magis videas demonstratione opus esse considerandum\n[[539.9]] est, aeque brevissimas plures, imo infinitas aliquando dari; veluti <Fn><i>Leibniz verdeutlicht nur in L^#'1 seine Ausführungen durch zwei Zeichnungen</i>:    </Fn> in superficie\n[[539.10]] sphaerica; ubi inter duo quaedam puncta nempe polos, infinitae [lineae] tales duci possunt; tot\n[[539.11]] scilicet quot sunt semicircumferentiae circulorum magnorum per hos polos transeuntium, seu\n[[539.12]] meridianorum; quarum quaelibet est via a polo ad polum qua brevior non datur. Ostendendum\n[[539.13]] ergo erat, quod in superficie sphaerica possibile est inter duo puncta, id absolute inter duo\n[[539.14]] puncta fieri non posse. <Fn><i>Auf der sonst leeren Rückseite von L^#'2 (Bl. 5 v^#'o) findet sich die folgende gestrichene Bemerkung von Leibniz' Hand</i>: In superficie sphaerica non datur brevissima, ea generari concipitur ex superficie curva at haec genesis flexu lineae circulari.</Fn> Praeterea ex definitione Rectae non tantum ostendendum est duas\n[[539.15]] rectas non comprehendere spatium, sed etiam duas rectas non posse habere partem communem,\n[[540.1]] seu ut Euclides loquitur, segmentum commune. Atque adeo generaliter ostendendum est duas\n[[540.2]] rectas (quae continuatione utrinque facta non coincidant) <k>per</k> duo puncta duci non posse. </p>\n<p> [[540.3]] In optimo et doctissimo Viro Dn. Ottone Menkenio amicum insignem perdidi ego, perdidit\n[[540.4]] respublica literaria columen non vulgare. Spero tamen eximium ejus filium laudes paternas\n[[540.5]] nobis ut coepit repraesentaturum. Eum rogo ut data occasione a me salutes, condolendi\n[[540.6]] officium meo nomine peragas, et studia ei mea deferas. Spero <i>Actorum</i> laborem utilissimum\n[[540.7]] ipsius opera porro processurum. </p>\n<p> [[540.8]] Rogo etiam ut inquiras, utrum Dn. de Schulenburg Generalis rei pedestris vestrae praefectus,\n[[540.9]] (neque enim de fratre ejus Generali Majore quaero) sit Lipsiae aut in Saxonia, et si adest\n[[540.10]] ex ipso (obsequiosissima salute a me nuntiata) sin abest ex Dn. Wunderling Bancario seu\n[[540.11]] Trapezita quaeras, an per aliquot septimanas in Saxonia Dn. Generalis moraturus credatur et\n[[540.12]] mox doce. </p>\n<p> [[540.13]] Vellem mereri hunc Tuum favorem aliquo officio posse. Interea vale, et me ama. </p>\n<p> [[540.14]] Dabam Berolini 6 Febr. 1707 </p>\n<p> [[540.15]] deditissimus G. G. Leibnitius </p>\n<p> [[540.16]] P. S. Rogo etiam ut ei qua erit res literaria docere velis. </p>\n","number":"174.","title":"LEIBNIZ AN MICHAEL GOTTLIEB HANSCH","date":"Berlin, 6. Februar 1707. [172.176.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

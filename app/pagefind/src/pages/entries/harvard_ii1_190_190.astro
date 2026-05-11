@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_190","series":"Band II 1 (1663 - 1685)","seq":190,"text":"<p> [[613.1]] <b>172. EHRENFRIED WALTHER VON TSCHIRNHAUS AN LEIBNIZ</p>\n<p> [[613.2]] Rom, 10. April 1678. [141.177.]</b></p>\n<p> [[613.15]] Romae d. 10 Aprilis Anno 1678. </p>\n<p> [[613.16]] [ ... ] Tandem ut ad ea revertar quae loqueris de lingua Philosophica, ac aliis similibus\n[[613.17]] non utique haec percipio; nec quoque quod dicis de lingua quadam Geometrica, qua Dom.\n[[613.18]] Desargues subtilissimas ratiocinationes instituit sine figuris et calculo, nunquam sane haec vidi,\n[[613.19]] nisi quae de Sectionibus habet conicis perpulchra, sed quae aliquo modo imaginationem\n[[613.20]] fatigant; Hoc quidem Mihi persuasi et certus sum Nos posse in rebus philosophicis ad veritates\n[[613.21]] incognitas indagandas, eadem ratione calculo uti simili Algebraico; sed hic primo definitiones\n[[613.22]] rerum tradendae, quae satis perspicax ingenium desiderant, nec ad eas formandas praestantiora\n[[613.23]] praecepta unquam vidi quam quae habet Dn. Spinoza <i>de Emendatione intellectus</i>; quod manuscriptum\n[[613.24]] a Dn. Schüllero Mihi transmissum penes Me habeo, utinam omnia reliqua ejus opera;\n[[614.1]] Et in eo totus ero postquam Mihi in Mathematicis satisfecerim, si quidem fata concedant. Sed\n[[614.2]] quod non adeo facile sit definitiones rerum tradere accuratas id vel ex hoc solo constat; quod et\n[[614.3]] in Mathematicis non semper tales traditae; sic ne unicum vidi qui veram definitionem\n[[614.4]] tradiderit proportionis, imo quod magis mirandum rei simplicissimae hoc est lineae rectae\n[[614.5]] nullam accuratam definitionem, nisi per solas proprietates; quod nimirum sit brevissima eosdem\n[[614.6]] terminos habentium; quod extrema obumbrent omnia media etc. [ ... ] </p>\n<p> [[614.7]] <i>A Monsieur Monsieur Gottfredo Guillielmo Leübnützio, Conseilleur de S.A.S. de Hannover;\n[[614.8]] Mon tres honoré Amy. Treshumbl. â Hannover.</i> </p>\n","number":"172.","title":"EHRENFRIED WALTHER VON TSCHIRNHAUS AN LEIBNIZ","date":"Rom, 10. April 1678. [141.177.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

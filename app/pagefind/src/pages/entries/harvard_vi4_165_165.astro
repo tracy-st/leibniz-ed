@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_165","series":"Band VI 4 (1677 - 1690)","seq":165,"text":"[[570.1]] <b>134₁.  De ente, existente, aliquo, nihilo et similibus DE ENTE, EXISTENTE, ALIQUO, NIHILO ET SIMILIBUS </p>\n<p> [[570.2]] <b>Ens</b> est positivum quod distincte concipi potest. </p>\n<p> [[570.3]] <b>Existens</b> est quod distincte percipi potest. </p>\n<p> [[570.4]] <b>Aliquid</b> est <i>A</i>, si constet <i>A</i> esse vel <i>B</i> vel <i>C</i> vel <i>D</i> et ita porro. Intelligo autem <i>B</i>, <i>C</i>,\n[[570.5]] <i>D</i> esse positiva. </p>\n<p> [[570.6]] <b>Nihil</b> est <i>N</i>, si dici non potest <i>N est B</i>, aut <i>N est C</i>, aut <i>N est D</i>, et ita porro, et hoc\n[[570.7]] est quod vulgo ajunt nihili nulla esse attributa. </p>\n<p> [[570.8]] <b>Res</b> est phaenomenon congruum. </p>\n<p> [[570.9]] <b>Phantasma</b> seu Apparens est phaenomenon incongruum. </p>\n<p> [[570.10]] <b>Notio</b>, <b>conceptus</b> est qui contradictionem non implicat; seu nihil involvit impossibile. </p>\n<p> [[570.12]] <b>Fictio</b> est cogitatio rei impossibilis ut motus celerrimi, interdum et sumitur pro\n[[570.13]] conceptu rei nunquam existentis, ut <i>Argenis</i>. </p>\n","number":"134₁.","title":"De ente, existente, aliquo, nihilo et similibus","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_125","series":"Band II 1 (1663 - 1685)","seq":125,"text":"<p> [[357.5]] <b>111. LEIBNIZ AN PIERRE DANIEL HUET</p>\n<p> [[357.6]] Paris, 20. März 1673. [110.114.]</b></p>\n<p> [[357.15]] Amplissime Domine </p>\n<p> [[357.16]] Puduit, quanquam reversum, ad Te adire, sine ullis diligentiae meae documentis; quae\n[[357.17]] nactus tandem, Tibi statim mitto, ut intelligas quanti mihi sit, probare Tibi studia mea, utque,\n[[357.18]] ubi primum Tibi visum fuerit, discamus voluntatem Tuam: in qua exequenda, quantum erit in\n[[357.19]] mea potestate, nolim quenquam me promtiorem credas. </p>\n<p> [[357.20]] Quomodo usus sim mense illo, quem in Anglia consumsi, dicam fusius, ubi primum copia\n[[357.21]] dabitur, faciendi coram officii mei: illud tantum anticipabo, gavisos esse Clarissimos ex Regia\n[[357.22]] Societate Philosophos, ubi intellexere, esse qui scripta veterum eruat restituatque, eas ipsas\n[[357.23]] scientias tractantia, quas ipsi nunc tantopere versant: et esse Virum, non amoenioribus tantum\n[[357.24]] literis illis, quas vos pulcras vocatis, tinctum, sed et severiore eruditione penitus imbutum,\n[[357.25]] absoluto omnis doctrinae praestantioris circulo: quod praeter Huetium a paucissimis expectes.\n[[357.26]] Ego particulatim nosse optem, quae alia in eo genere verses, habes enim ni fallor, praeter\n[[357.27]] Vectium Valentem, quaedam Heronis Poliorcetica item et Musica. Scis enim nihil gratius a me\n[[357.28]] doctissimis illis viris perscribi posse. </p>\n<p> [[358.1]] Quod superest ego nova a Te mandata circa Vectium Valentem, expecto. Vale interea\n[[358.2]] faveque </p>\n<p> [[358.3]] Vir Amplissime Cultori devoto </p>\n<p> [[358.4]] Paris 20 Martii 1673. Gottfredo Guilielmo Leibnitio. </p>\n<p> [[358.5]] <i>A Monsieur Monsieur Huet. en Cour.</i> </p>\n","number":"111.","title":"LEIBNIZ AN PIERRE DANIEL HUET","date":"Paris, 20. März 1673. [110.114.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

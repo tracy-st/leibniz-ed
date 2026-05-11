@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_27","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":27,"text":"[[375.27]] <b>27. Mechanica in politicis </b> <span>375.0;0:63:027:72       :L:l^</span>.\n[[375.5]] Mechanica in Politicis.\n[[375.6]] Quanti Momenti sint in politicis considerationes Mechanicae vulgus politicorum\n[[375.7]] ignorat; nam minora ista tanquam artificibus ex infima plebe propria, ipsi infra se\n[[375.8]] seducunt; et assueti extemporaneis meditationibus Mathematicae inquisitiones profundiores\n[[375.9]] pro difficilibus magis habent, nesciunt scilicet imperiti, Militaria et oeconomica\n[[375.10]] esse nervos et venas corporis civilis, ea autem mechanicis physicis et mathematicis\n[[375.11]] principiis nituntur. At non ignoravit Macchiavellus, qui libro ultimo artis\n[[375.12]] militaris non dedignatur inquirere, cur radii rotarum tormenta majora sustinentium\n[[375.13]] fiant obliqui.\n","number":"27.","title":"Mechanica in politicis","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

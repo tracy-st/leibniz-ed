@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_48","series":"Band II 2 (1686 - 1694)","seq":48,"text":"<p> [[215.1]] <b>49. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[215.2]] [Ende Juli 1687.] [46.80.]</b></p>\n<p> [[215.13]] Non <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: Ad Vinc. Placcium.</Fn> dubito quin miratus sis, quid mihi in mentem venerit ut hominem pecuniolae\n[[215.14]] cujusdam accipiendae causa ad Te ablegarim, sed <Fn>sed ... discederet: <i>schräge doppelte Anstreichung mit Blei wohl von fremder Hand.</i></Fn> hoc ita accidit. Festinabat is cum a me\n[[215.15]] discederet, nec statim alius Hamburgi mihi succurrebat. Ego vero interim illic me futurum\n[[215.16]] sciebam credebamque aut eodem venturum illum me adhuc praesente, aut si serius accederet\n[[215.17]] posse me pecuniam illam tibi relinquere, vel tecum constituere, ut homo veniens ablegaretur ad\n[[215.18]] alium, qui meo nomine summam daret. Sed nescio quo casu negotii plane oblitus sum. Pro\n[[215.19]] certo enim habueram me adhuc praesente venturum. Rogo igitur ut hanc libertatem in optimam\n[[216.1]] partem accipias. Ego vero ex eo tempore jussi, ut per alium (Lazarum Daniel <i>Juden beym\n[[216.2]] altenauer thor</i>) ei pecunia solvatur. Spero tamen nondum a Te accepisse. Atque ideo scribi\n[[216.3]] curavi, ut ne ei detur quicquam nisi ostensa et tradita illa a me scheda, quae ad Te destinabatur,\n[[216.4]] ne scilicet forte bis capiat. </p>\n<p> [[216.5]] Valetudinem tuam puto meliore loco fore post aërem mutatum. Sed quia mali fomes non\n[[216.6]] nisi lentis remediis et vivendi genere expugnari potest, nosse velim, an vel Teophilum bibaculum,\n[[216.7]] vel Hydrochalybopotam agere constitueris. Quicquid elegeris (tute enim optime judicabis),\n[[216.8]] id faustum ac felix precor, ut laudabilissimas meditationes prosequi possis animo libero\n[[216.9]] nec corporeis malis interpellato. Ego nunc quibusdam juris publici, et Historiarum nostrarum\n[[216.10]] meditationibus (ex mandato partim) occupor, eamque [in] rem Archiva subinde inspicio. Incidi\n[[216.11]] nuper in Auream Bullam omnium quas vidi antiquissimam Imperatoris Henrici IV. Quod\n[[216.12]] superest temporis Analysi perficiendae impendo, cujus apud me fastigium est, efficere, ut\n[[216.13]] omnia characteribus et calculo confici possint in omni genere controversiarum quemadmodum\n[[216.14]] in Algebra et Numeris, saltem ex certis quibusdam positis, sive ab experientia, sive ab autoritate,\n[[216.15]] vel undecunque. Idque puto esse in nostra potestate, ita ut disputantes finire possint\n[[216.16]] controversiam, si tantum ad calculos sedere velint. Sed opus est praeparationibus quibusdam ad\n[[216.17]] rem tantam, quibus nondum absolutis nolim promiscua apud quosvis mentione cogitata ignaris\n[[216.18]] ridenda prostituere. </p>\n","number":"49.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"[Ende Juli 1687.] [46.80.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

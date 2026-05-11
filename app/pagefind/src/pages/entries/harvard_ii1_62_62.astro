@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_62","series":"Band II 1 (1663 - 1685)","seq":62,"text":"<p> [[160.1]] <b>55. LEIBNIZ AN OTTO TACHENIUS</p>\n<p> [[160.2]] Frankfurt, 4. Mai 1671.</b></p>\n<p> [[160.14]] Vir Experientissime et Celeberrime </p>\n<p> [[160.15]] Nolui praetermittere occasionem gratulandi Tibi patriaeque nostr<angle bracket>ae</angle bracket> de fama quam egregiis\n[[160.16]] inventis scriptisque es consecutus. Mirifice placent omn<angle bracket>ia</angle bracket> quae de primis illis pugilibus\n[[160.17]] acido et alcali disseris: ego in his quae mitto Schediasmatibus non probavi tantum, sed et\n[[160.18]] provexi, et hoc occultum naturae mysterium ad causas manifestas reduxi. Miraberis congruentiam\n[[160.19]] diversarum, et ex diversis principiis petitarum speculationum, insigni veritatis argumento.\n[[160.20]] Videbis ex unico motu aetheris cum luce circa terram non tantum reactionem inter\n[[160.21]] acidum et alcali, sed et pene omnia naturae phaenomena, et quod mirabilissimum est, ipsam\n[[160.22]] <b>naturam</b> et directionem <b>magnetis</b> derivatam. Et ex occultis qualitatibus factas manifestas.\n[[160.23]] Spero aliquando frui me posse colloquio Tuo, distinctiusque et discere Tua et explicare mea.\n[[160.24]] Nunc quaeso judicium mihi Tuum, et si ita videtur, amicorum ne denega. Ecce praeterea quid\n[[160.25]] quaerere in mentem venerit, <b>nonne putas rationem iniri posse capiendi subtilissimum\n[[160.26]] illud quod in reactionibus acidi et alcali fermentationibusque exhalat</b>.\n[[160.27]] Scis Basilium Valentinum commendare spiritum album Vitrioli, ut vocat, qui inter\n[[160.28]] reagendum cum Tartaro, exhalat: nec commendare tantum, sed et capi posse supponere. Idem\n[[161.1]] Basilius putavit, aut certe tradidit, spiritum album sola lenta digestione a rubro separari posse.\n[[161.2]] Tu in hoc negotio exercitatissimus unus omnium optime judicare potes quid de his rebus sit\n[[161.3]] sperandum. Quid sentis de <i>Physica subterranea</i> ingeniosi certe Viri Joh. Joach. Becheri? quid\n[[161.4]] de novo ejus experimento ex solo limo communi, et oleo lini faciendi ferrum. Quo experimento\n[[161.5]] illi refutantur, qui negant naturam perinde ut artem transitus facere posse de regno in regnum.\n[[161.6]] Quod superest vale faveque </p>\n<p> [[161.7]] Vir Nobiliss^#'e Cultori Tuo Gottfredo Guilielmo Leibnitio J.U.D. </p>\n<p> [[161.8]] Francofurti 4 Maii styl. novi 1671 et Consil. Mog. </p>\n<p> [[161.9]] P. S. Si rescribis, literis ad me directis aliud circumda operculum, ita inscriptum: <i>à\n[[161.10]] Monsieur Monsieur Lasser Conseiller de Son Altesse Electorale de Mayence, à Mayence.</i> </p>\n<p> [[161.11]] Nobilissimo Viro Dⁿ^#'o Ottoni Tachenio Medico Celeberrimo. Venetiis. </p>\n","number":"55.","title":"LEIBNIZ AN OTTO TACHENIUS","date":"Frankfurt, 4. Mai 1671."}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

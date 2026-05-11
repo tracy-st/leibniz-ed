@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_17","series":"Band II 3 (1695 - 1700)","seq":17,"text":"<p> [[39.10]] <b>17. LEIBNIZ AN PIERRE-DANIEL HUET</p>\n<p> [[39.11]] [Ende April /­ Anfang Mai 1695.]</b></p>\n\n<p> [[40.21]] R^#'m^#'o et Ill^#'m^#'o Viro, Petro Danieli Huetio Episcopo Abrincensi\n [[40.22]] Godefridus Guil. Leibnitius S. P. D. </p>\n<p> [[40.23]] Interpellandi <Fn><i>Am Rande von L^#'1</i> : <i>Kondte ihm zugleich schicken mein Specimen dynamicum</i>. - <i>Darüber am Kopf der Seite</i>: <i>nicht abgangen</i>  <i>Am Kopf von L^#'2</i> : non transmissa</Fn> novitas post tot annorum cultum silentio vel amicorum interventu testatum,\n[[40.24]] veniam ut spero, reperiet a causa. Forte nuper amicus ad me attulit quae Burcherus de Volder\n[[40.25]] clarissimus apud Leidenses professor pro Cartesio in tuam <i>censuram</i> novissime scripsit, publice\n[[40.26]] edita. Viri fama, ipsiusque amici desiderium fecere, ut perlegerem solito attentius; visusque\n[[41.1]] mihi est non raro deserere Cartesium cum defendere videtur, passim etiam causam instruendo\n[[41.2]] pronuntiandae in Cartesianos sententiae viam planiorem reddidisse. Quae dum annoto in ipsa\n[[41.3]] lectione, subiit mox animum cogitatio addi his notatis posse tum <i>animadversiones</i> meas <i>in\n[[41.4]] partem generalem philosophiae Cartesianae</i>, ante annos nonnullos in chartam conjectas, tum in\n[[41.5]] auctarii vicem, nonnulla a me ad amicos subinde perscripta de causa Cartesiana, et sectariae in\n[[41.6]] universum philosophiae incommodis. Sed cum omnia libri mensuram fortasse non satis implerent,\n[[41.7]] cogitavi an possent aliquando <i>censurae</i> Tuae assui ubi rursus ederetur: purpurae fateor\n[[41.8]] vilis pannus; sed habent tamen et mediocria usum aliquando, pro captu scilicet vario ingeniorum.\n[[41.9]] Quod si Tibi consilium non malum videtur, mittam mea qualiacunque, et judicio tuo\n[[41.10]] subjiciam. Coepisti restituere veteribus decora sua, et libertatem philosophandi nostris, et\n[[41.11]] praeclare ostendisti, quam fallantur, qui ignaviae suae litantes compendiosam in uno quamvis\n[[41.12]] magno scriptore sapientiam, vel potius sapiendi jactantiam quaerunt, non exiguo rei literariae\n[[41.13]] damno, cui obviam iri publice interest. Sane ostendi reapse in ipsa Geometria ubi regnare\n[[41.14]] videbatur Cartesius, methodum ejus tantum ad faciliora porrigi, problemata autem majoris\n[[41.15]] momenti aliis fere artibus indigere; quarum et specimina a me sunt prolata; quae notari operae\n[[41.16]] pretium fuit, non ut sperneretur is qui nimia pollicitus est, sed ne deciperentur lectores, et quasi\n[[41.17]] praeoccupata inveniendi palma a vero studiorum labore averterentur. </p>\n","number":"17.","title":"LEIBNIZ AN PIERRE-DANIEL HUET","date":"[Ende April /­ Anfang Mai 1695.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

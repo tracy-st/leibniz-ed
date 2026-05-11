@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_170","series":"Band II 3 (1695 - 1700)","seq":170,"text":"<p> [[436.20]] <b>170. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[436.21]] [Ende April bis Ende Mai 1698.] [164.171.]</b></p>\n\n<p> [[437.5]] Non literas tantum Tuas gratissimus sed et munus elegans literarium accepi, quo Cartesium\n[[437.6]] contra Dn. D. Matthaeum Georgium tueris, quod facis sane acute et ingeniose. Tametsi ut\n[[437.7]] verum fatear mihi ipsimet falsissima videatur illa thesis, quam oppugnat Dn. Matthaeus\n[[437.8]] Georgius. Interim vacuum non admitto, et spatium non concipio ut substantiam immobilem,\n[[437.9]] quod plerosque facere video, sed ut tempus; ita ut nihil aliud sit quam ordo quidam coexistendi.\n[[437.10]] Et sane tute ipse magis videris id agere, ut Georgii objectionibus respondeas, quam ut stabilias\n[[437.11]] Cartesianam thesin, quin etiam non animadverto Te facere. Theses Dn. Georgii quas refers\n[[437.12]] pag. 6. puto recte oppugnari, et recte etiam defendi prout rem accipias. Circa ea quae pag. 20. in\n[[437.13]] philosophia Cartesiana commendas habeo ego monita quaedam Animadversionibus meis in\n[[437.14]] Cartesium aliquando explicata. Nam non videtur mihi satis bene ordinasse dubitationes ad\n[[437.15]] eruendum verum, tum abutendo fictione dubiorum pro falsis, tum saltum faciendo a dubitationibus\n[[437.16]] ad asseverationes tum negligendo Analysin notionum veritatumque simpliciorum.\n[[437.17]] Character etiam quo discriminat verum a falso per clarum et distinctum mihi nullius aut exigui\n[[437.18]] usus videtur, cum non det notas clari et distincti, et dum ad ideas provocat, magnum fingendi\n[[437.19]] campum [aperuit.] Alius longe adhibendus est character et criterion veri. Et cum Dei veracitatem\n[[437.20]] ex machina advocat mihi prorsus praeter ratiocinandi ordinem facere videtur et in\n[[437.21]] existentia ejus demonstranda non absolvisse quod promiserat, plurimumque a Geometrica\n[[437.22]] accuratione abesse. Horum nonnulla jam sunt a me in <i>actis eruditorum</i> exposita, alia alibi\n[[437.23]] indicata, quae optarem a Tuo acutissimo ingenio examinari ut veritas in luce collocetur.\n[[437.24]] Gratissimum erit videre aliquando quae de novis quibusdam meditationibus meis Tibi non\n[[437.25]] improbatis disserere constituisti; et cum aliquid mihi inscribere Te velle ais, facis quidem pro\n[[437.26]] benevolentia erga me Tua, sed nescio an satis ad publicos applausus dum homini apud vestros\n[[437.27]] minus noto, eum honorem habes. </p>\n<p> [[438.1]] Id agit professor Academiae Mathematicus ut praefecturam rei Architectonicae consequatur,\n[[438.2]] successum curabo significari amico Tuo, ne locus si quando vacaverit ei elabatur. Res in\n[[438.3]] fermento adhuc est sed nondum confecta. </p>\n<p> [[438.4]] Celeberrimum Guglielminum ad vos venire gaudeo. </p>\n","number":"170.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"[Ende April bis Ende Mai 1698.] [164.171.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

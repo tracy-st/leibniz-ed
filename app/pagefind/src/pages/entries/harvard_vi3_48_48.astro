@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_48","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":48,"text":"[[427.7]] <b>48. Tria axiomata primaria </b> <span>427.7;0:63:048:74       :L:l^</span>.\n[[427.12]] Tria axiomata primaria: Mathematicae, totum esse aequale omnibus partibus.\n[[427.13]] Physicae, effectum integrum aequipollere suae causae. Scientiae Civilis,\n[[427.14]] Mundum esse optimam Rempublicam, sive omnia in mundo fieri optimo modo.\n[[427.15]] Nota certa hominis duplicis et mali: si tibi soli blandiatur, coram aliis te frigide\n[[427.16]] tractet.\n[[427.17]] In praxi id observandum est, ut dum difficilia aut multiplicia agenda habemus,\n[[427.18]] tentemus ita agere, ut aliquid semper ad rem pertinens agamus seu, ut certi simus\n[[427.19]] portionem quandam difficultatis superatam. Hoc si constanter observabimus, omnia\n[[427.20]] superabimus, quoniam semper aliquid agendo paulatim magna agemus. Exempli causa\n[[427.21]] multa folia in ordinem digerenda sunt, si percurrimus nec quicquam agimus saepe\n[[427.22]] inspiciendo parum proficiemus; at si dum legimus, iam nonnihil digeramus quovis\n[[427.23]] momento, aliquid agemus, paulatimque omnia habebimus. Assuefacere nos debemus,\n[[427.24]] ut omnia quae facimus singula per se subsistere possint bonaque sint; etiamsi ea ad\n[[427.25]] quae ordinantur, non succedant.\n[[428.1]] y<b>2  cyx  bx<b>2  ey = 0 solvendum in numeris sive rationaliter ex hac\n[[428.2]] aequatione faciendae duae, vel quod idem est supponenda adhuc alia quaelibet formula;\n[[428.3]] itaque scribatur generalis: aequationum ex y, x, quantum videbitur producta,\n[[428.4]] et necesse est has duas aequationes in unam reducendo prodire rationalem, si quidem\n[[428.5]] id possibile est, et haec est methodus generalis certa et infallibilis pro Diophanto,\n[[428.6]] tametsi saepe compendia sint. Sed examinandus ipse modus quo aequationes unae ad\n[[428.7]] alias reducuntur; quae res ita instituatur, ut si modo possibile est quod quaeritur,\n[[428.8]] aequationes collatitiae omnes sint aut rationales aut certe si rursus superfluae in ipsis\n[[428.9]] reducibiles explicando per aequationes proposita inferiores. Sed ut determinate agatur,\n[[428.10]] crediderim rem ita institui posse, ut si modo resolubilis quaestio prodeant omnes\n[[428.11]] collatitiae rationales. Videndum an non necesse sit ipsam assumtitiam esse rationalem,\n[[428.12]] imo res non videtur hoc modo succedere, sed tertia litera z esse forinsecus\n[[428.13]] assumenda, vel plures, ad quam referuntur tam x quam y singulatim vel simul. Tota\n[[428.14]] res reducitur ad totalem illam summam.\n","number":"48.","title":"Tria axiomata primaria","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

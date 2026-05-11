@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_120","series":"Band II 3 (1695 - 1700)","seq":120,"text":"<p> [[320.1]] <b>120. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[320.2]] Eger, 30. Mai (9. Juni) 1697. [107.150.]</b></p>\n\n<p> [[320.10]] Wolgebohrner Herr, Hoher Patron. </p>\n<p> [[320.11]] Ich kann nicht unterlaßen zuberichten, wi es mir dise reise ergangen: Mein Hr. war hir im\n[[320.12]] anfange, seiner gewonh. nach gegen mich sehr leütselig, wolte auch, ich solte mich anständiger\n[[320.13]] geselsch. zugenießen, auf seine unkosten in einen gasthof legen: ich weigerte mich lange, Ihm\n[[320.14]] solche unkosten zu verursachen, da er aber drauf drang, muste ich. Hernach lies er mir eine\n[[320.15]] halbjähr. besoldung zahlen, damit solte ich sehen wo ich bliebe, u. di gasthofs unkosten selbst\n[[320.16]] tragen. </p>\n<p> [[320.17]] So ersuche nun Eür. Excell gehorsamst, bei gelegenheit dem Hrn. vorzustellen, daß er\n[[320.18]] kraft seines antrags, den er mir nach Hamburg tuhn laßen, u. kraft seines in Hannover u. Eger\n[[320.19]] gegebenen worts, mir den Tisch <zl>^#h(+5)1<ne>2<be> jahr, es sei in Eger, oder wo er mich mit hinnimt, schuldig\n[[320.20]] sei, ja wenn ich auch auf Michaelis fort sol, kann er mich doch nicht, wi einen Verbrecher, leer\n[[320.21]] fortschikken, weil er nichts über mich zu klagen u. mich aus meinem glük gesezt hat. Doch weil\n[[320.22]] der Herr jederzeit gnädig u. freündl. gegen mich gewesen, zweifle ich nicht, er werde mir di\n[[320.23]] Egris. unkosten gern wieder geben, u. sich in allen der gewöhnl. gütigk. nach erweisen. Dises\n[[320.24]] nun bei gelegenh. vorzustellen, habe bei Zeiten, ehe ich wieder komme, gehors. bitten wollen. </p>\n<p> [[320.25]] Ich verbl. dagegen Eur. Excell. Verbundenster G. Wagner </p>\n<p> [[320.26]] Eger 30. May st. vet. 97.\n[[320.27]] <yi>Dem Wolgebohrnen Herrn, Hrn. Gotfried Wilhelm Leibniz, Ihr. Churf. Durchl. zu\n[[320.28]] Brunsw. Hochbestelten Geheimen Justiz-Raht, u.a. m. etc. Hannover. Franco </p>\n","number":"120.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Eger, 30. Mai (9. Juni) 1697. [107.150.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

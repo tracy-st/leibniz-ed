@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_9","series":"Band II 3 (1695 - 1700)","seq":9,"text":"<p> [[25.1]] <b>9. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[25.2]] Dijon, 8. März 1695. [23.]</b></p>\n\n<p> [[25.8]] Dijon le 8 mars <b>1695</b> </p>\n<p> [[25.9]] Il y a longtems monsieur que je n'ay recû de vos cheres nouvelles, ni que je n'ay eu le bien\n[[25.10]] de vous ecrire à cause de mes indispositions continuelles. J'avois chargé mons^#'r Toinard de le faire\n[[25.11]] et de vous faire scavoir ce qui avoit esté dict dans une assemblée de Paris de vostre Conjecture sur\n[[25.12]] l'origine du mot de Germains; Je croy aussi que nostre amy monsieur de Larroque dont vous\n[[25.13]] scavés la disgrace, et qui doibt bientost estre purgé de ce dont on l'a accusé injustement, Je croy\n[[25.14]] dis je qu'il vous aura faict part d'une lettre de deffunct nostre cher amy l'abbé Boisot, qui à la\n[[25.15]] veille de vous envoyer ce qu'il vous promettoit par la voye de Basle que vous nous indiquiés\n[[25.16]] tomba malade de la maladie dont il est mort. Peutestre n'aurés vous pas recû ce que j'avois\n[[25.17]] mandé sur ce chapitre à m^#'r de Larroque; il fault vous en faire mention en cette lettre. </p>\n<p> [[25.18]] <i>Le <b>codex Gentium Diplomaticus</b> devra estre le plus recherché de tout. Mons^#'r de\n[[25.19]] Leibniz qui a tant d'esprit n'i mettoit rien que d'excellent. Outre ce que Je vous ay dit Je puis\n[[26.1]] luy fournir plusieurs traictés de paix qu'on ne trouve point; mais il fault scavoir auparavant\n[[26.2]] s'il ne les a pas desia. Je pourray quelque jour vous en envoyer un petit memoire; Lorsque\n[[26.3]] Leonard imprima les derniers traictés de paix Je luy fis offrir ceux que J'ay dans la simple veüe\n[[26.4]] de luy faire plaisir; mais son impression estoit trop avancée, ou il ne comprit pas que ce que Je\n[[26.5]] luy offrois estoit ce qu'il y auroit de plus curieux dans son receüil, et il se contenta de me\n[[26.6]] remercier; je seray ravi que mons^#'r de Leibniz profite de ce refûs et qu'il soit le 1^#'e^#'r à faire\n[[26.7]] imprimer ces anciens traictés</i> etc. </p>\n<p> [[26.8]] On a faict en cette ville un petit eloge de ce cher deffunct et qui y a esté imprimé. Il y est\n[[26.9]] parlé de vous mons^#'r[;] j'en ay envoyé deux exemplaires à mons^#'r de Brosseau l'un pour vous et\n[[26.10]] l'autre pour mons^#'r Morel qui estoit son bon amy; et auquel je vous prie de faire tenir l'incluse,\n[[26.11]] aussi bien que celle de mons^#'r de Spanheim; qui sera bien affligé de la mort de mons^#'r Lantin que\n[[26.12]] je luy mande; il a suyvi de prés son bon amy et le nostre mons^#'r de Court; voilà l'histoire des\n[[26.13]] plaisirs perdûe; Je souhaitte que celle de la musique n'aye pas le mesme sort, quoy[que] nostre\n[[26.14]] bon amy mons^#'r Ouvrard qui y avoit travaillé pendant plus de trante années ayt subi celluy de la\n[[26.15]] mort aussi bien que mons^#'r Lantin; on m'a dict qu'il avoit laissé au chapitre de Tours dont il\n[[26.16]] estoit chanoine tous ses ecripts; ils ne sont pas en trop bonnes mains; on croit que les cent\n[[26.17]] volumes de receüils mss. tant du Cardinal de Granvelle que d'autres qui estoient dans la\n[[26.18]] Bibliotheque de mons^#'r l'abbé Boisot et qu'il avoit donné aux moines de son abbaye tomberont\n[[26.19]] dans la Bibliotheque du Roy. Mons^#'r le president Boisot son frere qui me vint voir Il y a cinq ou\n[[26.20]] six jours allant à Paris, me dict qu'il en parleroit à mons^#'r de Pontchartrin pour cela, et me\n[[26.21]] promit qu'il feroit en sorte de me donner les 3 premieres pièces qu'il vous avoit promis; Je\n[[27.1]] voudrois mons^#'r pouvoir contribuer en cela et en toutes autres choses à vostre satisfaction et à\n[[27.2]] celle du public, pour lequel vous travaillés si utilement. Aymés moy toujours mons^#'r et croyés\n[[27.3]] moy tout à vous </p>\n<p> [[27.4]] Nicaise </p>\n","number":"9.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 8. März 1695. [23.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_107","series":"Band VI 4 (1677 - 1690)","seq":107,"text":"[[362.1]] <b>87.  Initia scientiae generalis. Conspectus speciminum [Sommer bis Herbst 1679 (?)]</b>\n [[362.2]] <tab/>[Sommer bis Herbst 1679 (?)] </p>\n<p> [[362.7]] <p>Initia <b>Scientiae Generalis</b>, ubi de Instauratione et Augmento Scientiarum, quae\n[[362.8]] continentur, palpabilibus notis dijudicandae veritatis, et filo certo artis inveniendi, quibus\n[[362.9]] si uti velint homines, demonstratur ad humanam felicitatem plus intra paucos annos\n[[362.10]] profici quam ut nunc fit multorum seculorum labore, et posse nosmet ipsos si velimus\n[[362.11]] gustare laborum nostrorum fructus, cum hactenus soli posteritati laboraverimus. Accessere\n[[362.12]] Specimina Scientiae Generalis specialibus applicatae, quae asserta autoris etiam\n[[362.13]] apud illos qui de rebus nonnisi ab eventu judicant credibiliora reddant, ea sunt </p>\n<p> [[362.14]] I. <b>Mathematica</b> <b>Generalis</b>, de Magnitudine sive Quantitate, et Similitudine\n [[362.15]] sive qualitate, determinandis, qua Numerorum tam certorum quos Arithmetica tradit,\n[[362.16]] quam incertorum quibus Algebra occupatur, calculus omnis novis artibus perficitur,\n[[362.17]] absolvunturque quae hactenus visa non sunt in potestate. </p>\n<p> [[362.18]] II. <b>Geometria</b>, in qua Magnitudo et Similitudo situi applicantur, ostenditur autem\n[[362.19]] hactenus exiguam tantum hujus scientiae partem esse absolutam, qua problemata modo\n[[362.20]] illa solvuntur, quae possunt revocari ad Aequationes Algebraicas; in quibus nempe\n[[362.21]] rectarum tantum magnitudo datur aut quaeritur. Cum tamen pulcherrima pleraque problemata\n[[362.22]] quae maximi sunt usus in re Mechanica, Aequationes Algebraicas transcendant;\n[[363.1]] itaque incognita hactenus Geometriae Transcendentis Elementa hic traduntur; ut nunc\n[[363.2]] primum asseri possit omne problema Geometricum esse in potestate. Modum tamen\n[[363.3]] optimas semper constructiones inveniendi, autor hic non promittit. Postulat enim ea res\n[[363.4]] novum quendam calculum Geometricum ab hactenus recepto penitus differentem, cui\n[[363.5]] constituendo aliud tempus destinatur. </p>\n<p> [[363.6]] III. <b>Mechanica</b> praeter magnitudinem et situm considerat vim seu causam mutationis,\n[[363.7]] hujus Scientiae Elementa vera quae satis late pateant hactenus nuspiam extantia ex\n[[363.8]] unico principio verae Metaphysicae ita demonstrantur, ut imposterum problemata ejus\n[[363.9]] omnia quae hactenus physica sunt habita, revocari possint ad puram Geometriam.\n[[363.10]] Explicatur hic Motus projectorum considerata simul medii resistentia, corporum concursus,\n[[363.11]] refractiones et reflexiones, item vis Elastica, multaque alia in quibus hactenus\n[[363.12]] multipliciter erratum est. Addita sunt Memorabilia quaedam Inventa Mechanica. </p>\n<p> [[363.13]] IV. Tentamen Physicum in quo exhibetur primum qualitatum inquisitio, quibus\n[[363.14]] exacte intellectis et ad mechanica principia revocatis, etiam specierum, quippe quae\n[[363.15]] qualitatibus dignoscuntur, interior natura cognosci potest. Deinde exponuntur ea quae de\n[[363.16]] systemate nostro, et his quae in ipso percipiuntur certo asserere licet. Denique subjiciuntur\n[[363.17]] initia physicae conjecturalis, seu Hypothesis, qua interea uti possumus dum alia\n[[363.18]] melior inveniatur, vel haec ipsa corrigatur. </p>\n","number":"87.","title":"Initia scientiae generalis. Conspectus speciminum","date":"[Sommer bis Herbst 1679 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

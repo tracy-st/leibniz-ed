@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_69","series":"Band II 2 (1686 - 1694)","seq":69,"text":"<p> [[296.6]] <b>70. LEIBNIZ AN ─ (?)</p>\n<p> [[296.7]] [Rom, Sommer 1689.] [69.]</b></p>\n<p> [[296.12]] <i>Non intelligo</i>, inquis, <i>cur connectantur duo corpora, quae ut effectum suum faciant\n[[296.13]] sejuncta esse debent, et moveri in temporibus diversis</i>. </p>\n<p> [[296.14]] Respondeo: atqui ego ea non connecto cum de centri gravitatis calculo ago. </p>\n<p> [[296.15]] Saltem ibi ergo cessat haec exceptio. </p>\n<p> [[296.16]] Deinde quando semel <i>B</i> perfecit suum ascensum, quid ni connectere <i>A</i> et <i>B</i> liceat per\n[[296.17]] stateram durante descensu ipsius <i>B</i> <angle bracket>ex</angle bracket> 16 pedibus ad probandam inde secuturam levationem\n[[296.18]] ipsius <i>A</i> altius quam ante seu motum perpetuum id est absurdum. Et in universum connexio aut\n[[296.19]] sejunctio augere vel minuere vires et centrum gravitatis plus minusve attollere non debet. </p>\n<p> [[296.20]] <i>Negas a te admitti elevationem centri gravitatis</i>. Protestatio facto contraria est. An enim\n[[296.21]] negas in primo statu esse elevatum ad <zl>4<ne>5<be> pedis (cum <i>A4</i> est elevatum ad pedem 1 et <i>B1.</i> in\n[[297.1]] horizonte) in sequente vero esse elevatum ad <zl>16<ne>5<be>  (cum <i>A4</i> est in horizonte, et <i>B.1.</i> elevatum ad\n[[297.2]] 16 pedes).\n [[297.3]] Tempus non video quid ad rem faciat, quia quantocunque tempore concesso effici non\n[[297.4]] potest motus perpetuus, seu elevatio centri gravitatis sine extrinseco auxilio. </p>\n","number":"70.","title":"LEIBNIZ AN ─ (?)","date":"[Rom, Sommer 1689.] [69.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

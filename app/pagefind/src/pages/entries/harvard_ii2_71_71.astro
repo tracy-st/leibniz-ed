@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_71","series":"Band II 2 (1686 - 1694)","seq":71,"text":"<p> [[298.5]] <b>72. VITALE GIORDANI AN LEIBNIZ</p>\n<p> [[298.6]] Rom, 11. November 1689. [71.73.]</b></p>\n<p> [[298.14]] [ ... ] Jam ad rectae lineae definitionem accedo. Ipse equidem optimam puto Euclideam -\n[[298.15]] <i>recta linea est, quae ex aequo sua interjacet puncta</i>; cujus sensus mihi videtur esse, quod recta\n[[298.16]] linea sit illa, quae aequaliter inter sua extrema extenditur. At Heronis definitione sum usus, non\n[[298.17]] alia de causa, nisi quia visa mihi est accommodatior Tyronum intellectui; et ab aliis lineis tunc\n[[298.18]] optime distincta est, cum dixi; lineam, quae non brevissima est inter duo puncta, vocavi\n[[298.19]] curvam. Certe quaecunque linea sumatur pro linea recta proposita, aut erit brevissimum intervallum\n[[298.20]] inter extrema rectae propositae, aut non erit: si erit brevissimum intervallum, ea erit\n[[298.21]] recta linea; si non erit brevissimum intervallum, ea erit curva. </p>\n<p> [[298.22]] Duplex tua definitio, satis ea quidem ingeniosa est, sed suis etiam exceptionibus obnoxia:\n[[298.23]] quarum maxima videtur esse, quod supponit cognitum, tum corpus, tum planum; quod est\n[[298.24]] ponere (ut ajunt) currum ante boves. Idem peccavit D. Borellius in suo <i>Euclide restituto</i>, qui\n[[298.25]] supponens cognitum corpus, ex ea cognitione deduxit notitiam superficiei, lineae, et puncti;\n[[298.26]] deinde in 6. libro ei definiendum fuit, quid esset corpus. Hoc sane alienum est a persona\n[[299.1]] Geometrae. Alia exceptio est, quod linea, secans planum in duas partes congruas, esse potest\n[[299.2]] curva, imo etiam tortuosa. Utraque tandem definitio tam obscura videtur, ut vix concipi possit a\n[[299.3]] peritioribus, nedum a Candidatis Geometriae. In meo <i>Archimede</i> sic rectam lineam definivi - <i>la\n[[299.4]] linea revoluta intorno a suoi estremi immoti, le di cui parti ritengono sempre il medesimo sito\n[[299.5]] di prima, la chiamo recta linea</i> - sed fateor: ea in definitione non acquiesco: expungam ipsam,\n[[299.6]] et Euclideam, quam optimam duco (atquae rectitudinem explicat) reponam. [ ... ] </p>\n","number":"72.","title":"VITALE GIORDANI AN LEIBNIZ","date":"Rom, 11. November 1689. [71.73.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_545","series":"Band VI 4 (1677 - 1690)","seq":545,"text":" [[2514.27]] <b>430₁.  Auszug Mai 1677 AUSZUG </p>\n<p> [[2515.1]] Maji 1677 </p>\n<p> [[2515.2]] P. Fridericus Spee e Soc. Jesu pauca sed praeclara ingenii sui monumenta reliquit.\n[[2515.3]] Scripsit <i>Cautionem Criminalem de Processu contra Sagas</i>, cui nomen suum praefigere\n[[2515.4]] ausus non est; ubi candide admodum ostendit quam stulta ac malitiose multa in hoc\n[[2515.5]] negotio gerantur. Sed divinus mihi plane visus est libellus ejus lingua Germanica scriptus,\n[[2515.6]] cui titulus est: <i>Gülden-tugend-Kleinod</i>, quem vellem in omnium Christianorum esse\n[[2515.7]] manibus. Multi habentur autores mysticae theologiae, sed an unquam quisquam tanta\n[[2515.8]] solidae pietatis specimina scripto dederit, nescio. Florida hic eloquentia et coeleste\n[[2515.9]] quiddam spirans, sententiae pulcherrimae, expressiones lucidae et naturales, inventiones\n[[2515.10]] ingeniosae et jucundae. Quod si delicatas poëseos Germanicae leges scivisset, quae tum\n[[2515.11]] primum natae sunt, et quidem inter Protestantes, ad Catholicos autem sero ac ne nunc\n[[2515.12]] quidem plane pervenere; posset libellus autoris nostri quem vocat <i>Truz-Nachtigall</i>, inter\n[[2515.13]] linguae nostrae ornamenta censeri. Sed ut ad solida revertar, mirifice affectus sum,\n[[2515.14]] quoties ea legi quae de natura et efficacia amoris Dei super omnia disseruit. Nescio enim\n[[2515.15]] an quisquam unquam autorum qui in populi usum scripsere rem tantam uno nostro autore\n[[2515.16]] excepto pro dignitate attigerit. Ostendit enim in quo vera consistat natura contritionis et\n[[2515.17]] Amoris Deo debiti, idque familiari sermone et ad commovendos homines apto. Viam\n[[2515.18]] quin etiam subindicat, per quam unusquisque ad contritionem pervenire possit, ne sibi\n[[2515.19]] imaginentur homines veram contritionem et actum amoris Dei super omnia esse rem ad\n[[2515.20]] quam post omnem conatum adhibitum non semper liceat pervenire. Quin imo clare\n[[2515.21]] edisserit, qui hunc amorem non habeat eum esse in statu mortalis peccati, ut scilicet tacite\n[[2515.22]] innueret (: nam totidem verbis efferre credo ausus non est :), attritionem solam etiam cum\n[[2515.23]] poenitentiae sacramento non sufficere ad remissionem peccati et justificationem: contra\n[[2515.24]] vulgarem Scholasticorum opinionem, nuper in Gallia recte impugnatam. Ut vero vis\n[[2515.25]] divini amoris magis elucesceret, haec sane praeclara habet: Si quis omnibus omnium\n[[2516.1]] peccatis oneratus esset, si omnes damnatorum atque daemonum in eum nequitiae confluxissent;\n[[2516.2]] jamque veniret super eum spiritus domini, et amorem Dei super omnia accenderet,\n[[2516.3]] dubium nullum est, quin ab illo ipso momento omnia ei peccata remitterentur,\n[[2516.4]] etiam antequam ea ulli sacerdoti fuisset confessus. Autores citat Gabrielem, Vegam,\n[[2516.5]] Navarrum. Addit hoc amplius, si ne cogitaret quidem de peccatis suis, atque ita neque\n[[2516.6]] veniam peteret, neque de commissis doleret tamen remitterentur. Quoniam vera poenitentia\n[[2516.7]] in actu supremi amoris potentia continetur. </p>\n<p> [[2516.8]] Hoc est verum theologiae arcanae mysterium, quod nescio an quisquam (in Germania\n[[2516.9]] certe) praeter P. Spee populo propalare ausus sit, cum tamen nihil sit utilius, nihil\n[[2516.10]] efficacius, nihil necessarium magis. </p>\n<p> [[2516.11]] Ait quidem etiam fidem et spem, esse ad salutem necessarias, sed satis ostendit eam\n[[2516.12]] se intelligere fidem, sine qua ea quam requirit Caritas amorque Dei subsistere non potest.\n[[2516.13]] Nimirum ait necesse esse, ut credat aliquis et esse Deum, et summe potentem, sapientem,\n[[2516.14]] bonum, perfectum, amore summo dignum esse. Alia omnia speciatim ne attingit quidem:\n[[2516.15]] ut innueret in his totam fidei salutiferae vim contineri. Equidem addit, peccata postea\n[[2516.16]] confitenda esse sacerdoti, quando primum id fieri potest, obedientiae causa: Item credenda\n[[2516.17]] esse quaecunque proponit Ecclesia Catholica. Sed hoc intelligendum est haud\n[[2516.18]] dubie de homine per quem non stat, quo minus id facere possit. Idque praeclare innuit\n[[2516.19]] autor noster, cum ait amorem Dei super omnia sine vera fide esse non posse. Cum\n[[2516.20]] manifestum sit posse aliquem amare Deum animitus velut summum Bonum, eique\n[[2516.21]] quantum ejus mens assequi potest, pronissima voluntate obsequi, etiamsi ne verbulum\n[[2516.22]] quidem audierit de Ecclesiae dogmatis, modo pertinacia et inobedientia absit, quae sane\n[[2516.23]] cum caritate stare non potest. </p>\n","number":"430₁.","title":"Auszug Mai 1677","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

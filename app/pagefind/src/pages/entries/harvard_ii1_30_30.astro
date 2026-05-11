@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_30","series":"Band II 1 (1663 - 1685)","seq":30,"text":"<p> [[94.17]] <b>26. LEIBNIZ AN HEINRICH OLDENBURG</p>\n<p> [[94.18]] Mainz, 23. [Juli] 1670. [27.]</b></p>\n<p> [[95.9]] Vir Ampliss^#'e, </p>\n<p> [[95.10]] Ignosce quod ignotus scribo ad non ignotum; cui enim Reg. Societatem non ignoranti\n[[95.11]] ignotus esse possis? Et quem Societas latere possit, qui aliqua verae Eruditionis cura ducitur,\n[[95.12]] verae inquam, quae paulatim vestris potissimum auspiciis a Criticorum ambulacris in arcem\n[[95.13]] naturae se recipit. Est, fateor, gens gente in accipiendis his igniculis languidior; sed scis, alium\n[[95.14]] aliis constantius semel haustos tenere. Nostris certe non desunt experimenta praeclara, sed,\n[[95.15]] prout nunc est Reip. Status, pro cujusque promptitudine aut invidia recondita vel aperta, quod\n[[95.16]] in Societates coitum non est, nec ita facile inter tot in una Resp. Respublicas coiri potest. </p>\n<p> [[95.17]] Me quidem, cujus alioquin potissima opera, instituto vitae meae congrua in jurisprudentia\n[[95.18]] ad eas rationes prope demonstratorias revocanda, quae Philosopho utcunque severo satisfacere\n[[95.19]] possint, consumitur; a natura exactius pervestiganda non pauca alia prohibuerunt: videor tamen\n[[95.20]] mihi nonnulla observasse, quae fortasse conferre poterunt aliquid ad accensum a vobis verae\n[[95.21]] Philosophiae lumen. Nam de veris Motus rationibus Elementa quaedam condidi, ex solis\n[[95.22]] terminorum definitionibus Geometrica methodo demonstrata, in quibus causam connexionis,\n[[95.23]] flexionis, duritiaeve in corporibus, hactenus, quod sciam, a nullo explicatam aperuisse mihi\n[[95.24]] videor, atque illud etiam ostendisse, Regulas illas, quas de motu incomparabiles viri Hugenius\n[[95.25]] Wrennusque constituerunt, non primas, non absolutas, non liquidas esse, sed per accidens, ob\n[[95.26]] certum globi Terr-aq-aërei statum, evenire (non minus quam gravitatem), non axiomata, non\n[[95.27]] theoremata demonstrabilia, sed experientias, phaenomena, observationes, at felices, at praeclaras\n[[95.28]] (ultra quas hactenus nemo processerit) esse; in medio tamen quiescente, vel aliter moto,\n[[95.29]] alia omnia eventura. Nam et separatas meditationes habeo, quibus ex unica quadam hypothesi\n[[96.1]] certi motus universalis in globo nostro Terr-aqu-aëreo (quem et Copernicus, et Tycho admittere\n[[96.2]] possit) omnium motuum, quos in corporibus miramur, insueta hactenus claritate reddi ratio\n[[96.3]] potest, Gravitatis, Levitatis, Paradoxorum omnium hydrostaticorum, Mechanicorum, motus\n[[96.4]] projectorum, Reflexionum, Refractionum; sed et, quod mireris, trium Chymicorum, quae\n[[96.5]] vocant, principiorum, a confusione vulgari ad accuratas definitiones reductorum, omniumque\n[[96.6]] solutionum, reactionum, praecipitationum, idque non atomis quibusdam, non ramentis, non\n[[96.7]] abstractis, sed familiari quadam, et pene mechanica ratione. Edidi etiam ante quadriennium\n[[96.8]] dissertatiunculam <i>de Arte Combinatoria</i>, in qua nova non pauca, quaedam etiam forte profutura,\n[[96.9]] observata sunt, sed quod per aetatem, adolescentiam vix ingressam, tunc illaboratior fuerit\n[[96.10]] edita, resumere aliquando cogito. Caeteroquin apud nos avide expectatur, quid Eruditi, et Vos\n[[96.11]] inprimis, de Hugeniano Longitudinum, ope penduli, Invento sentiant, cujus mentio in <i>Ephemeridibus\n[[96.12]] Gallicanis</i>; satisne vobis perfectum videatur; tum quae fuerit ratio quive exitus\n[[96.13]] tentaminis Gallici de dulcescentia aquae marinae procuranda. A Cl^#'m^#'o Hezenthalero habeo, quae\n[[96.14]] de perfecta quadam ad usum Philosophiae lingua condenda celeberrimus vester Wilkinsius\n[[96.15]] deliberet. Idem significavit, Jungii <i>Phoranomica</i> lucem, quam merentur, vobis obstetricantibus,\n[[96.16]] visura. Quod linguam Universalem attinet, scio, Virum aliquem Illustrem sumptuosis itineribus\n[[96.17]] plerarumque orbis linguarum radices collegisse et comparasse, condendae linguae matricis\n[[96.18]] causa. Sed et Athanasius Kircherus mihi scripsit, Ferdinandi III. Caesaris auspiciis multum ea\n[[97.1]] in re a se, sed nondum pleno successu, laboratum compluraque eo in negotio observata a se in\n[[97.2]] <i>turrim Babel</i>, mox edendam, translata esse. Sed nolo Te a negotiis immortalis vestrae Societatis,\n[[97.3]] cui nihil decedere generis humani interest, diutius avocare. Vale, faveque Vir Amplissime,\n [[97.4]] Nominis Tui Cultori </p>\n<p> [[97.5]] Moguntiae [Jul.] 23. 1670. Gottfredo Guilielmo Leibnitio J.U.D^#'r^#'i\n [[97.6]] et Consil. Moguntino. </p>\n","number":"26.","title":"LEIBNIZ AN HEINRICH OLDENBURG","date":"Mainz, 23. [Juli] 1670. [27.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_167","series":"Band II 1 (1663 - 1685)","seq":167,"text":"<p> [[550.2]] <b>151. LEIBNIZ AN HERMANN CONRING</p>\n<p> [[550.3]] Hannover, 29. Juni (9. Juli) 1677. [150.152.]</b></p>\n<p> [[550.12]] Nobilissime et Amplissime Domine Hanoverae 29. Junii 1677. </p>\n<p> [[550.13]] Duae propemodum septimanae sunt quod ad Te literas dedi operculo inclusas, quod Cl^#'m^#'o\n[[550.14]] Eisenharto inscripseram. Eas non perlatas doleo satis ac miror. Scripseram in illis et accepisse\n[[550.15]] me Tuas, et mirifice gavisum quod Te mei adhuc meminisse intelligerem. Sed et gratias agebam\n[[550.16]] de transmissis literis Cl^#'m^#'i Justelli et obsequia mea studiaque, qualiacunque effectu, certe\n[[550.17]] voluntate amplissima, Tibi deferebam. Significavi etiam me libellum Tuum, <i>de pace Religionis</i>\n[[550.18]] obtentu non violanda, obtulisse Ser^#'m^#'o Principi nostro, cui ille gratus fuit: eademque occasione\n[[550.19]] intellexisse me non illubenter accepturum Principem, quicquid ei contra Capucinos mittes.\n[[550.20]] Haec erat literarum mearum summa, quas non ante scribere potueram quam ubi Principi ex\n[[550.21]] Holsatia reduci loqui licuit. Adjeceram nonnulla ex quibus intelligere posses virtutem tuam\n[[550.22]] atque consummatam eruditionem a me coli. Hortabar etiam, ut quicquid in schedis tuis elaboratum\n[[550.23]] superest, publico bono quamprimum producere ne gravareris. Neque enim dubito quin\n[[550.24]] multas praeclaras meditationes in omni eruditionis genere habeas, quas nondum nobiscum\n[[550.25]] communicasti. Ea occasione rogavi, ut frui nos patiare etiam illis tuis lucubrationibus, quae ad\n[[550.26]] naturalem scientiam et sanitatem tuendam atque restituendam pertinent. Neque enim fieri\n[[550.27]] potest, quin Tu, qua es ingenii vi, multa in eo genere praeclara excogitaveris, et longo annorum\n[[550.28]] spatio observaveris, quae non perire interest Reipublicae. </p>\n<p> [[551.1]] Haec erant quae fere ad Te tunc scripseram, quibus nunc quae adjiciam vix habeo.\n[[551.2]] Intellexi tantum Lugduni Gallorum prodiisse libellum Jacobi Spondii Medici, cui titulus est\n[[551.3]] <i>ignotorum atque obscurorum Deorum arae.</i> Multae in eo inscriptiones veteres apud alios non\n[[551.4]] extantes. Autor in itineribus suis per Italiam et Graeciam ad tria millia Latinarum, et sexcentas\n[[551.5]] graecas a se collectas ait, quas suo tempore producet. </p>\n<p> [[551.6]] De Republica quae scribi possint vix habemus, in tanta rerum omnium perturbatione,\n[[551.7]] necdum enim apparet quis futurus sit exitus. Progressus hinc Gallorum, illinc Danorum pacem\n[[551.8]] magis magisque difficilem reddunt. Batavis voluntas optima sed quae ad extremum sufficere tot\n[[551.9]] oneribus non possit. Itaque si ut quidam ajunt, ego vero vix credo, Gallus Burgundiae Comitatum\n[[551.10]] reddere et in Belgio iis tantum quae finibus suis imminent contentus esse vult (nam\n[[551.11]] Lotharingiam et Siciliam ne retinere quidem velle professus est), putem ambabus manibus\n[[551.12]] arripiendam pacem; praesertim cum metuendum sit ne Hungarici motus Caesareum militem a\n[[551.13]] Rheno avocent. Noviomagi adhuc litigatur, et credo litigabitur de Jure Principum mittendi\n[[551.14]] legatos, qui ab Electoralibus non distinguantur, qua de re Tuam sententiam audire optarem.\n[[551.15]] Vale faveque </p>\n<p> [[551.16]] Vir Nobil^#'m^#'e et Ampl^#'m^#'e tui nominis cultori Gottfredo Guilielmo Leibnitio. </p>\n","number":"151.","title":"LEIBNIZ AN HERMANN CONRING","date":"Hannover, 29. Juni (9. Juli) 1677. [150.152.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

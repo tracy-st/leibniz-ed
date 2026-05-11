@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_352","series":"Band VI 4 (1677 - 1690)","seq":352,"text":"[[1494.13]] <b>296.  Difficultates circa naturam et originem animarum [Sommer 1683 bis Winter 1684/85 (?)]</b>\n [[1494.14]] <tab/>[Sommer 1683 bis Winter 1684/85 (?)] </p>\n<p> [[1495.1]] Circa naturam et originem animarum multae sunt difficultates, quascunque demum\n[[1495.2]] sententias eligamus. Si dicimus solas creaturas rationales, non vero bestias aut alia\n[[1495.3]] corpora habere animas aut formas substantiales, praeterquam quod id parum credibile est,\n[[1495.4]] sequitur hinc corpora non esse substantias, sed phaenomena tantum, quod videtur cum\n[[1495.5]] Ecclesiae dogmatibus pugnare. Sin bestiis etiam animas tribuimus, quaeritur quae sit\n[[1495.6]] earum origo vel natura. Et quidem omnis forma substantialis vel anima necessario est\n[[1495.7]] indivisibilis, nec nisi creatione oriri, aut nisi annihilatione interire potest, itaque vel\n[[1495.8]] dicendum est animas bestiarum coepisse cum mundo, vel continuo a Deo creari. Si ab\n[[1495.9]] initio statim creatae sunt et coepere cum mundo, dicendum est etiam animam ejus\n[[1495.10]] animalis quod homo vocatur ab initio extitisse et omnes animas rationales jam in Adamo\n[[1495.11]] seu cum Adamo actu praeextitisse, neque enim ea in re erit deterior animabus bestiarum.\n[[1495.12]] Sed hinc sequitur multas esse animas humanas quae nunquam eo perveniant ut corpus\n[[1495.13]] humanum informent, quod videtur perabsurdum; nec rationi consentaneum admodum\n[[1495.14]] videtur dicere, eos parentes qui perpetuam castitatem servant vera humanae naturae\n[[1495.15]] semina in se non habuisse. Quod si dicas animam quidem animalem ab initio jam\n[[1495.16]] extitisse, eamque multas subiisse transformationes, ut solent animalia, tandem vero\n[[1495.17]] accreatam illi fuisse Mentem, videtur sequi in homine duas esse formas substantiales sive\n[[1495.18]] animas, unam animalem, alteram rationalem, quod itidem difficile approbatu. Nam dicere\n[[1495.19]] ex anima bestiali factam humanam absurdum est, imo nihil est dicere, neque enim animae\n[[1495.20]] aliae fiant, etsi varie mutentur. Satius erit dicere formam substantialem creaturae rationalis\n[[1495.21]] creari, brutam tamen quandam cuique homini inesse, quae non magis sit forma\n[[1495.22]] hominis, quam forma manus est hominis forma. Si dicas animas quoque bestiarum,\n[[1495.23]] quotidie a Deo creari verendum est, ne quis inferat aeque igitur probabile esse, ut etiam\n[[1495.24]] quotidie a Deo rursus annihilentur moriente animali. Quae annihilatio si tam ordinaria est\n[[1495.25]] et frequens, perit etiam omnis ratiocinatio pro immortalitate animae humanae, ex eo\n[[1495.26]] sumta, quod nisi annihilatione perire non potest. </p>\n","number":"296.","title":"Difficultates circa naturam et originem animarum","date":"[Sommer 1683 bis Winter 1684/85 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

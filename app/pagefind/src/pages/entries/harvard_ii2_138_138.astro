@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_138","series":"Band II 2 (1686 - 1694)","seq":138,"text":"<p> [[505.6]] <b>140. EDME PIROT AN LEIBNIZ</p>\n<p> [[505.7]] [Paris,] 23. Februar 1692. [130.148.]</b></p>\n[[505.11]] <petit> <p> Der Brief, Beischluß zu dem Brief gleichen Datums von Pirot an Pellisson (I, 7 N. 140) und dann zu dem\n[[505.12]] Brief von Pellisson an Leibniz vom 24. Februar 1692 (I, 7 N. 142), antwortet auf N. 130 und wird beantwortet\n[[505.13]] durch N. 148. Ihm lag das folgende Schreiben von Mallement bei (N. 141). </petit> </p>\n<p> [[505.14]] [ ... ] Mais, Monsieur, il faut vous parler de vous mesme, et j'aurois de commencer par là\n[[505.15]] pour m'excuser d'avoir esté si long temps sans respondr[e] une lettre aussy obligeante que la\n[[505.16]] vostre, comme vous m'ordonniés de fa[ire] voir un papier à quelque physicien, je priay\n[[505.17]] M. Pelisson de m'en fair[e] faire une copie que je communiquay à un de mes amys en mesme\n[[505.18]] temps qu'il se faisoit fort de sa part de faire voir vostre original à MM. de l'academie royalle\n[[505.19]] des sciences et d'en tirer leurs sentiments. L'amy à qui je le fis voir c'est M. Mallement regent\n[[505.20]] de philosophie au college du Plessis habille en physique et de doctrine assés libre sur la\n[[505.21]] philosophie qui est presentement recteur de l'université, je l'ay prié de mettre un mot sur vostre\n[[505.22]] principe pour marquer son advis, ses affaires luy ont fait tenir long temps ce papier et il ne fait\n[[505.23]] que de me le rendre, c'est Monsieur la seule rayson qui m'a empesché de vous remercier\n[[505.24]] plustost. Vous verrés qu'il n'est pas de vostre sentiment par son billet que je vous envoye, mais\n[[505.25]] cela ne doit pas vous rebuter, je ne sçays ce qu'en penseront les autres, pour moy je ne me\n[[505.26]] connois pas assés en ces sortes de raysonnements pour y prononcer. </p>\n<p> [[505.27]] MM. de l'academie royalle des sciences ont commencé au moys de Janvier à donner\n[[505.28]] quelques extraits de leurs registres sur leurs observations et en promettent tous les moys, mais à\n[[505.29]] juger par l'eschantillon, ce sera peu de chose, ce pays icy n'est ny heureux ny fecond en ces\n[[506.1]] sortes de journaux, ceux d'Hollande en françoys et les vostres latins dont j'ay veu quelques\n[[506.2]] foys des fragments sont d'une autre beauté. Il y a de petits livres sur M. des Cartes pour et\n[[506.3]] contre. M. Regis avoit respondu à M. Huet, M. du Hamel luy replique, il y a un petit livret de\n[[506.4]] 2 feuilles que j'ay leu pour le sceau qui pourra avoir de la suitte, c'est pour tourner en ridicule\n[[506.5]] M. des Cartes sur des faits mesme tirés de la vie qu'en a fait depuis peu imprimer M. Baillet.\n[[506.6]] [ ... ] </p>\n","number":"140.","title":"EDME PIROT AN LEIBNIZ","date":"[Paris,] 23. Februar 1692. [130.148.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

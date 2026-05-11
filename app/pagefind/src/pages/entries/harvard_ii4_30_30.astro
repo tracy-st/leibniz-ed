@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_30","series":"Band II 4 (1701 - 1707)","seq":30,"text":"<p> [[84.1]] <b>30. FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ</p>\n<p> [[84.2]] [Ruhleben,] 6. [November 1702]. [29.36.] </b></p>\n<p> [[84.8]] Monsieur </p>\n<p> [[84.9]] Dans ce moment, c'est à dire ce 6^#'m^#'e d'Octob^#'r^#'e à midi on vient me rendre la lettre que vous\n[[84.10]] m'avez fait l'honneur de m'escrire du 4^#'m^#'e et je donne à la porteuse de la vostre celleci pour vous\n[[84.11]] la remettre. Je ne doute pas Monsieur que vous ne me fassiez la justice de croire que je\n[[84.12]] m'emploierai avec un vrai plaisir à vous rendre le petit service que vous me demandez, mais je\n[[84.13]] crois que la meilleure[,] la plus prompte et la plus sure voie pour reussir est de s'adresser\n[[84.14]] d'abord à M^#'r de Belau Commendant de Spandau, pour scavoir s'il veut bien se defaire du\n[[84.15]] Soldat en question. Il n'est pas parent de M^#'r de Bulau[,] mais il est de mes amis et je suis\n[[84.16]] persuadé qu'il m'accordera cette demande s'il le peut faire sans son prejudice. J'apprehende\n[[84.17]] qu'il ne se fache si l'on parle au Soldat avant que de lui en parler et que cela n'apporte ensuite\n[[84.18]] de l'obstacle car vous scavez Monsieur qu'un Officier n'est pas bien aise de se defaire d'un\n[[84.19]] Soldat bienfait et qui a de la capacité. J'attends là desus vos ordres, que j'executerai avec\n[[84.20]] plaisir. J'espere que vous ne partirez point sans que j'aie l'honneur de vous dire de bouche que\n[[84.21]] je suis tresparfaitement </p>\n<p> [[84.22]] Monsieur Vostre treshumble tresobeisant serviteur F. B. Dobrzensky </p>\n<p> [[84.23]] Monsieur Lenfant et ma femme vous font leurs compliments treshumbles. </p>\n","number":"30.","title":"FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ","date":"[Ruhleben,] 6. [November 1702]. [29.36.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

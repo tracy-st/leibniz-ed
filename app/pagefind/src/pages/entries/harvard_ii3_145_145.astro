@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_145","series":"Band II 3 (1695 - 1700)","seq":145,"text":"<p> [[384.1]] <b>145. JOHANN CHRISTOPH STURM AN LEONHARD CHRISTOPH STURM</p>\n<p> [[384.2]] <tab/>FÜR ­LEIBNIZ </p>\n<p> [[384.3]] [10.-15. Oktober 1697.] [127.146.]</b></p>\n\n<p> [[384.11]] Joh. Christophorus Sturmius P.P. ad Filium </p>\n<p> [[384.12]] Matheseos Professorem Guelferbytanum. </p>\n<p> [[384.13]] Ex Venerandi Leibnützii continuatione Dynamices, quam, ipso quidem volente, ad me\n[[384.14]] curasti mense Julio praesentis anni, hoc praeprimis evidenter perspexi, et hic ingenue nunc\n[[384.15]] agnosco, nos equidem ad eandem ambos collimare metam (quod ipse dicit esse verissimum) in\n[[384.16]] ipsa via vero et ratione istam attingendi valde adhuc differre; contra ac antehac, procliviore in\n[[384.17]] conciliationem animo, credideram, cum eas suae hypotheseos partes nondum ita clare proposuisset\n[[384.18]] in prioribus, quas ad me dederat literis, ac in hac Dynamices suae continuatione nunc\n[[384.19]] facere dignatus est: Ex quo illud concludere pronum fuit, consultius fore, si in ulteriorem cum\n[[384.20]] ipso disputationem prius haut descendam, quam is et haec et alia, quae hactenus vulgare forte\n[[384.21]] distulit, supposita, per hasce continuationes ad <i>Acta Eruditorum</i> communicandas, plenius\n[[384.22]] exposuerit. Quamobrem non est, cur praesens hoc Schediasma, quod pro <i>Actis Eruditorum</i> se\n[[384.23]] concepisse scribit, ulterius distineat ac publico communicare tardet; gratum tamen mihi facturus,\n[[384.24]] si hoc breve monitum meum laudatissimo suo Schediasmati subjungere non dedignetur.\n[[384.25]] De caetero, quantum nunc video, in sequentibus maxime differimus: 1.) Agnoscimus utrique,\n[[384.26]] Corpora non nisi acta agere, et hoc ipso ne ego quidem statuo ea nullo modo agere, cum actum\n[[384.27]] agere sit utique aliquo modo agere; sed hic agendi modus respectivus tantum est, et si scapham\n[[385.1]] appellare scapham velimus, est mera passio, qua mediante vis agentis redundat in aliud una\n[[385.2]] patiens: prout e. g. dum lapidem moveo mediante baculo (quo exemplo jam olim usus est\n[[385.3]] Aristoteles) baculus respectu lapidis moti concipitur ut movens, tametsi revera non ipse moveat\n[[385.4]] lapidem, sed moveatur tantum, et mediante ipso etiam lapis, ab una quidem eademque virtute\n[[385.5]] manus meae, quam interim ut originaliter moventem concipio. Agnoscimus 2.) utrique, materiam\n[[385.6]] et materialia non nisi divina virtute moveri posse, sed differimus in hoc, quod Vir\n[[385.7]] celeberrimus existimet, eo ipso dum moventur aliquam ea vim accipere; ego vero putem,\n[[385.8]] siquidem, uti videtur, per hanc vim acceptam intelligat vim vere activam, qua, sibi jam propria\n[[385.9]] et a Divina virtute motrice distincta, deinceps alia moveant, id penitus esse impossibile: quia\n[[385.10]] demonstrasse me credo in <i>Physica electiva</i>, materiam et materialia non esse capacia virtutis\n[[385.11]] activae vere talis et a divina virtute distinctae, sed unica solaque divina virtute motrice, et\n[[385.12]] primum v.g. materiale, et per primum mere passive se habens, etiam secundum ipsi contiguum\n[[385.13]] aut connexum etc. moveri, ita ut primum illud improprio, tametsi recepto, loquendi modo\n[[385.14]] movisse secundum dicatur, verum non nisi patiendo et motum movisse, h. e. absolute proprieque\n[[385.15]] loquendo non movisse, aut nulla sua virtute, quam a Deo movente accepisset ab illius\n[[385.16]] virtute jam diversam, movisse; sed motricem Dei virtutem in se agentem, per se in aliud una\n[[385.17]] movendum transmisisse: non aliter ac ponderis in horologio vis gravitans unica et sola (quam\n[[385.18]] interim ut mere-activam considero) non solum primae rotae, sed per hanc etiam secundae cum\n[[385.19]] illa connexae et implicitae, similiterque tertiae etc. movendae sufficit, ut opus nequaquam sit,\n[[385.20]] vel in secunda vel in prima rota novam active movendi virtutem a pondere movente acceptam\n[[385.21]] supponere, ab ipsa ponderis virtute movente distinctam, maxime cum illa acceptio ejusque\n[[385.22]] modus sit penitus inexplicabilis. Differimus 3.) in eo, quod Vir Ingeniosissimus Substantiam\n[[385.23]] mere-passivam concipi posse neget, ego vero cum plerisque tam antiquis quam modernis\n[[385.24]] demonstrasse me, imo per se clarum, arbitrer, materiam esse vere substantiam, h. e. rem nulli\n[[385.25]] alii tanquam subjecto inhaerentem (qui receptus hactenus fuit substantiae conceptus) si maxime\n[[385.26]] omni potentia activa destituatur. Differimus consequenter 4.) in eo, quod ipse in substantia\n[[385.27]] corporea vim agendi supponat a certa quadam forma, sive etiam anima, dependentem, imo cum\n[[385.28]] aliquo perceptionis ac vitae analogo conjunctam; id quod, tanquam meis hypothesibus e\n[[385.29]] diametro adversum, quia suo loco demum ostendendum dicit, consultius esse hinc etiam\n[[385.30]] apparet, ut responsiones meas ad caetera differam, dum, quo pacto hoc ostendi possit, appareat. </p>\n","number":"145.","title":"JOHANN CHRISTOPH STURM AN LEONHARD CHRISTOPH STURM","date":"[10.-15. Oktober 1697.] [127.146.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

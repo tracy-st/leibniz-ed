@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_53","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":53,"text":"[[435.3]] <b>53. Sur les premières propositions et les premiers termes </b> <span>435.3;0:63:053:76       :L:f^</span>.\n[[435.15]] Il est très important de conceuvoir, que le nombre des premieres propositions est\n[[435.16]] infini, car elles sont ou definitions, ou Axiomes. Le Nombre des definitions aussi bien\n[[435.17]] que des termes est infini. Le nombre des Axiomes l'est aussi. J'appelle Axiome\n[[435.18]] proposition necessaire, indemonstrable. Necessaire c'est à dire dont le contraire\n[[435.19]] implique contradiction. Or la seule proposition dont le contraire implique contradiction,\n[[435.20]] sans qu'on le puisse demonstrer, est l'identique formelle. Cela se dit expressement\n[[435.21]] là dedans, donc cela ne s'y peut pas demonstrer; demonstrer: c'est à dire faire\n[[435.22]] voir par la raison et par consequences. Cela s'y peut montrer, à l'oeil, donc cela ne s'y\n[[435.23]] peut pas demonstrer. Les sens font voir que A est A est une proposition dont l'opposée,\n[[435.24]] A n'est pas A, implique contradiction formellement. Or ce que les sens font\n[[435.25]] voir est indemonstrable. Donc les Axiomes veritables, et indemonstrables sont les\n[[435.26]] propositions identiques. Or leur nombre est infini. Car le nombre des termes estant\n[[436.1]] infini, le nombre de telles propositions est aussi, car il en peut avoir autant que des\n[[436.2]] termes. Cependant cela est merveilleux, et il paroistroit étrange à un homme, à qui on\n[[436.3]] ne l'expliqueroit pas; de dire que le nombre des propositions premieres incontestables,\n[[436.4]] est infini. Si les principes sont infinis; les conclusions le seront encor bien\n[[436.5]] d'avantage. Telles propositions identiques sont: unumquodque tantum est quantum\n[[436.6]] est, sive quodlibet sibi ipsi aequale est. Item unumquodque tale est quale est, sive\n[[436.7]] quodlibet sibi ipsi simile est.\n[[436.8]] Les premiers Termes indefinibles ne se peuvent, aisement reconnoistre de nous,\n[[436.9]] que comme les nombres premiers: qu'on ne sçauroit discerner jusqu'icy, qu'en essayant\n[[436.10]] la division. De méme les Termes irresolubles ne se sçauroient bien reconnoistre\n[[436.11]] que negativement et comme par provision. Car j'ay une marque par la quelle on\n[[436.12]] peut reconnoistre la resolubilité. La voicy: Lors que nous rencontrons une proposition\n[[436.13]] qui nous paroist necessaire, et qui n'est pas demonstrée; il s'en suit infalliblement\n[[436.14]] qu'il se trouve dans cette proposition un terme definible, pourveu qu'elle soit necessaire.\n[[436.15]] Ainsi il faut tacher de donner cette demonstration; et nous ne la sçaurions\n[[436.16]] donner, sans trouver cette resolution. Par cette methode, en ne laissant passer aucun\n[[436.17]] axiome sans preuve, excepté les definitions, et les identiques, nous viendrons à la\n[[436.18]] resolution des Termes, et aux plus simples idees. Vous direz que cela pourroit aller à\n[[436.19]] l'infini, et qu'il se pourroit tousjours prouver de nouvelles propositions, qui nous\n[[436.20]] obligeroient à chercher des nouvelles resolutions. Je ne le croy pas. Mais si cela estoit\n[[436.21]] cela ne nous nuiroit, car par ce moyen nous ne laisserions pas d'avoir demonstré\n[[436.22]] parfaitement tous nos theoremes; et les resolutions que nous aurions faites, nous\n[[436.23]] suffiroient à une infinité de belles consequences et practiques; de méme que dans la\n[[436.24]] nature, il ne faut pas abandonner la recherche des experiences à cause de leur infinité:\n[[436.25]] puisque nous pouvons déja parfaitement bien employer celles qui nous sont\n[[436.26]] données.\n","number":"53.","title":"Sur les premières propositions et les premiers termes","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

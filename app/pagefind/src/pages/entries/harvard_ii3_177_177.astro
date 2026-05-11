@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_177","series":"Band II 3 (1695 - 1700)","seq":177,"text":"<p> [[455.6]] <b>177. LEIBNIZ AN CLAUDE NICAISE</p>\n<p> [[455.7]] Hannover, 24. Juni (4. Juli) 1698. [172.180.]</b></p>\n\n<p> [[456.1]] Hanover ce 24 juin 1698 </p>\n<p> [[456.2]] Monsieur </p>\n<p> [[456.3]] Vous <Fn><i>Am Kopf der Seite</i>: Mons. l'Abbé Nicaise</Fn> aurés receu ma derniere à la quelle je me rapporte et vous diray cependant que j'ay\n[[456.4]] publié ce printemps la Chronique d'<i>Albericus Monachus Trium Fontium</i>, citée si souvent par\n[[456.5]] Messieurs Du Chêne, Le Mire, Blondel, Chiflet, et qui contient tant de belles notices Genealogiques.\n[[456.6]] Comme j'en ay eu un vieux exemplaire Manuscrit, en parchemin, assez bon, et un\n[[456.7]] autre moderne de la Bibliotheque de Wolfenbutel quoyque imparfait; j'en ay pû donner une\n[[456.8]] edition passable; et j'espere que les curieux m'en sçauront quelque gré, parce qu'autrement cet\n[[456.9]] ouvrage seroit peutestre encor demeuré enseveli assez long temps. Il y en avoit un exemplaire\n[[456.10]] dans la Bibliotheque des jesuites du College de Clermont; mais il estoit aussi imparfait que\n[[456.11]] celuy de Wolfenbutel, à ce que le R.P. Hardouin me fit dire. </p>\n<p> [[456.12]] Ce qui m'engage, Monsieur, à vous écrire presentement, est la lettre de Monsieur Ludolphi\n[[456.13]] par laquelle il repond à celle du R.P. Bonjour, que je vous envoye icy jointe vous suppliant\n[[456.14]] de [la luy] faire tenir. </p>\n<p> [[456.15]] On feroit fort bien de faire envoyer à Mons. Ludolphi l'exemplaire Aethiopique qu'il\n[[456.16]] demande, car il n'y a personne qui en puisse faire un meilleur usage que luy; et j'ose joindre\n[[456.17]] mes prieres aux siennes; ayant eu autrefois l'honneur de faire la reverence à l'Eminentissime\n[[456.18]] Cardinal Casanata; et l'ayant trouvé extremement porté à favoriser les connoissances utiles. </p>\n<p> [[456.19]] Nostre sçavant ami, Monsieur Morel a fait une cheute en revenant de la foire de Leipzig,\n[[456.20]] qui l'empeche de se servir de sa main, pour écrire. On espere pourtant à ce qu'il m'a fait écrire,\n[[456.21]] que ce sera sans suite. Je suis avec zele </p>\n<p> [[456.22]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n","number":"177.","title":"LEIBNIZ AN CLAUDE NICAISE","date":"Hannover, 24. Juni (4. Juli) 1698. [172.180.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

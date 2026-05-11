@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_62","series":"Band II 4 (1701 - 1707)","seq":62,"text":"<p> [[203.5]] <b>62. GEORGE CHEYNE AN LEIBNIZ</p>\n<p> [[203.6]] 20. (31.) März 1704</b></p>\n<p> [[204.3]] Sir </p>\n<p> [[204.4]] I did Receive a very large pacquett from M^#'r Bernoulli at Groninghen about 6 weeks ago,\n[[204.5]] but a long time after the date of his letters, for they came from thence by a privat hand, who was\n[[204.6]] hindred in his passage, If you have any correspondence with him (as I imagin you may have)\n[[204.7]] pray Give my most hearty service to him and acquaint him that the reason why I have delay'd\n[[204.8]] to answer his Last; was waiting till I shou'd have an opportunity of sending him M^#'r Newton and\n[[204.9]] [de] Moivre's books, Besides his letters require my time and Consideration, I have not had four\n[[204.10]] hours peacable leisure since I receiv'd 'em, the Necessities of Life and my Employment having\n[[204.11]] taken up all my hours. But I shall delay no longer writing to him. Pray you Sir be so kind as to\n[[204.12]] tell him this how soon you write to him I am </p>\n<p> [[204.13]] Sir Your most humble Servant Geo. Cheyne </p>\n<p> [[204.14]] March 20^#'t^#'h 1703/4 </p>\n","number":"62.","title":"GEORGE CHEYNE AN LEIBNIZ","date":"20. (31.) März 1704"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_32","series":"Band II 2 (1686 - 1694)","seq":32,"text":"<p> [[144.12]] <b>33. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[144.13]] [Hannover, 20. Januar 1687.] [29.39.]</b></p>\n<p> [[145.1]] Ex mea responsione. </p>\n<p> [[145.2]] Perplacent quae Logicam et Analyticam artem non tantum in se reductam sed et usibus\n[[145.3]] publicis adhibitam tractant, quod revera faciunt JC^#'t^#'i cum de probationibus praesumtionibus\n[[145.4]] interpretationibus, indiciis, Medicique cum de signis [indicantibus] et contra indicantibus\n[[145.5]] agunt. Habebam olim in animo componere aliquid de gradibus probabilitatis aestimandis quam\n[[145.6]] logicae partem maxime practicam et in usu versantem mirabar negligi. Omnes in ore habent,\n[[145.7]] argumenta non numero sed pondere esse aestimanda. Sed quis stateram dedit qua argumenta\n[[145.8]] atque indicia inter se mutuo pugnantia, ponderentur, ut eligamus quod ex datis maxime\n[[145.9]] probabile est[?] Considero autem (Mathematicorum imitatione) certitudinem seu veritatem ut\n[[145.10]] totum, et probabilitates ut partes, ita ut sese habeant probabilitates ad veritatem, quemadmodum\n[[145.11]] anguli acuti ad rectum. Sint duo <i>A</i> et <i>B</i> sitque <i>B</i> duplo probabilius quam <i>A</i> ponamus jam\n[[145.12]] alterutrum eorum esse verum. Hoc posito dico probabilitatem ipsius <i>A</i> esse considerandam, ut\n[[145.13]] tertiam partem veritatis, probabilitatem vero ipsius <i>B</i>, ut veritatis duas tertias. Ambae autem\n[[145.14]] simul alternative componunt totam veritatem. Hoc autem intelligendum est quoad effectum,\n[[145.15]] non quasi veritas ipsa in se partes habeat [falsitatis]. Exempli causa si homines <i>L</i> et <i>M</i> ad\n[[145.16]] summam 30 ex eodem capite jus sibi tribuant, neuterque prae altero sit in possessione, aut ex\n[[145.17]] alio capite praeferendus, et duplo probabilius sit ipsum [<i>M</i> quam <i>L</i>] revera hoc jure frui;\n[[145.18]] aequitatis naturalis foret divisionem in ea quam dixi proportione fieri. Ubi tamen praesumtiones\n[[145.19]] a probabilitatibus caute sunt distinguendae. Sed licet judicibus talis divisio rerum incertarum\n[[145.20]] non sit in usu, idque merito, attamen haec consideratio saltem prodesse potest ad aestimanda\n[[145.21]] indicia et probabilitatum gradus, ut sciamus quorsum potius sit inclinandum. </p>\n<p> [[145.22]] Marq. Gud. saluto missurum me illi quasdam inscriptiones ab Abbate quodam Italo. </p>\n<p> [[145.23]] P. S. Hamburgi urbe [populosissima] (quam Ser^#'m^#'u^#'s Rudolphus Augustus Lutetiam nostram\n[[145.24]] appellat) multi haud dubie agunt omnis generis eruditi, curiosi, artifices in variis excellentes.\n[[145.25]] Horum quasi Catalogum aliquem per otium fieri perutile, nec opinor, injucundum foret. </p>\n<p> [[145.26]] Indicem fasciculorum Jungianorum a Vagetio desideravi. </p>\n","number":"33.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"[Hannover, 20. Januar 1687.] [29.39.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

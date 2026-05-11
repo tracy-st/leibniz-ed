@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_173","series":"Band II 2 (1686 - 1694)","seq":173,"text":"<p> [[586.1]] <b>175. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[586.2]] Hannover, 16. (26.) September 1692. [111.190.]</b></p>\n<p> [[586.17]] [ ... ] De Gentilium oraculis quid olim scripserim non satis memini, futura contingentia a\n[[586.18]] Satana praevideri nunquam putavi, meaque est constans sententia ad singularia rerum post\n[[586.19]] annos aliquot gerendarum noscenda infinitae mentis capacitatem necessariam esse quoniam\n[[586.20]] mirabilis est connexio rerum universi, et musca aliquando importunitate sua turbare magni\n[[586.21]] Principis somnum potest, inde pervigilem noctem ducenti possunt aliqua consilia venire in\n[[586.22]] mentem, quibus tota rerum facies mutatur. Nec dubium est, Turenio in superiore bello globi ictu\n[[586.23]] prostrato mutatam fuisse seriem belli. Porro ut globus certum iter teneat a minimis pendere\n[[586.24]] constat. Deum autem potuisse daemone ipso uti ad futura quaedam significanda non dubito. An\n[[586.25]] fecerit dispiciendum fuerit, res enim facti est. Itaque si certum sit fuisse ab Idolorum Sacerdotibus\n[[586.26]] oracula edita futurorum eventuum praenuntia, et crebriora et astrictiora, quam ut felici\n[[586.27]] casui cum ratione imputentur, plane tecum affirmabo non minus fati dicam anum apud Delphos,\n[[586.28]] quam Balaamum inter Madianitas divinae revelationis instrumenta fuisse. Certe inter\n[[586.29]] oracula Veteris Testamenti post 70 Septimanas nescio an illustrius extet quam quod Balaamus\n[[586.30]] facit de navibus ex Chitim venturis ad subjugandam Orientem quanquam imperio brevi. [ ... ] </p>\n","number":"175.","title":"LEIBNIZ AN GERHARD MEIER (BREMEN)","date":"Hannover, 16. (26.) September 1692. [111.190.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_223","series":"Band II 4 (1701 - 1707)","seq":223,"text":"<p> [[680.10]] <b>223. BARTHÉLEMY DES BOSSES AN LEIBNIZ</p>\n<p> [[680.11]] Hildesheim, 4. November 1707. [222.227.] </b></p>\n<p> [[680.16]] Illustrissime Domine, Patrone Colendissime </p>\n<p> [[680.17]] Accepi humanissimam tuam epistolam utramque inclusas ad Janningum nuper, ad Orbanum\n[[680.18]] heri destinavi. </p>\n<p> [[680.19]] Librarius noster opus mandatum strenue persequitur. Spero circa festa natalitia absolvendum,\n[[680.20]] ut si Hannoveram tunc venero, mecum deferre possim. Pater ille qui suum tibi libellum\n[[681.1]] obtulit, salutat<angle bracket>or</angle bracket>em demisse resalutat et quando opellam suam non prorsus improbas, alterum\n[[681.2]] eadem de materia opusculum quod nunc sub praelo est, expectare te jubet. De styli acerbitate\n[[681.3]] tecum fere sentio, et si unquam hujusmodi aliquid in lucem dare me contigerit aut necesse\n[[681.4]] fuerit, consilium tuum exemplumque secutus hanc, quam ais moderationis laudem affectabo.\n[[681.5]] Dudum id mihi persuasit lectio Tractatus de Satyra Gallice conscripti, ni fallor, ab Abbate\n[[681.6]] Villerio. Liceat Clazomeniis effrontes esse, uti bene Pelissonius tuus; nobis caritatis et humanitatis\n[[681.7]] leges esse sacras oportet. Quanquam acerbitatem inter et acrimoniam discrimen statuendum\n[[681.8]] arbitror. Nam Pelissonius ipse moderationem licet exactam professus, ob eamque a\n[[681.9]] multis laudatus, Juriaeum tamen acriter excepit certe; acerbe non item, aut si acerbitas haec\n[[681.10]] fuit[,] acerbis adversariis quo pacto sine acerbitate possit occurri vix video. Imo nec ab urbanis\n[[681.11]] quidem jocis abstinere semper posse videtur scriptor alioqui modestus, nam ridiculum acri\n[[681.12]] fortius ac melius magnas plerumque secat res. Adde quod si jocanti scriptori serio responderis,\n[[681.13]] nihil aegrius, uti nos responsorum Paschalis litteris provincialibus datorum sors edocuit. </p>\n<p> [[681.14]] Caeterum gaudemus et gratulamur nobis quod Beata Virgo apud vos Apologia opus non\n[[681.15]] habeat, quod de honestioribus dictum interpretor et verissimum esse scio. At apud alios certe\n[[681.16]] indigere videbitur, maxime post insertam nuper scripto publico propositionem sequentem:\n[[681.17]] <b>Scriptura sacra revelavit plurima Mariae peccata, enormia, grandia</b> quam qualicumque\n[[681.18]] explicatione temperatam protestantium omnium honestiorum auribus duram semper\n[[681.19]] visum iri nullus dubito. </p>\n<p> [[681.20]] Cum nuper Heiningam et ad vicina loca excurrissem, exhibitus est mihi vetus Codex\n[[681.21]] manuscriptus parthenonis illius privilegia complectens, ex quo raptim ea quae in adjecta carta\n[[681.22]] reperies excerpsi. Quae si alicujus usus esse tibi possint, integram plurium diplomatum descriptionem\n[[681.23]] confido impetrari posse saltem ex codice vetusto quem dixi, nam archivium ipsum ubi\n[[681.24]] Archetypa asservantur non facile recludent. Quod tamen operae pretium esset, cum plures in iis\n[[681.25]] diplomatis Anachronismos notare videar qui descriptoris imperitiae tribuendi utique sunt, cum\n[[682.1]] archetyporum caracter tam vetustus sit tamque ab hodierna scribendi ratione alienus ut\n[[682.2]] <angle bracket>aspi</angle bracket>tare necesse sit eum qui illis in rebus non sit versatus. </p>\n<p> [[682.3]] Liber quem famulo mittendum nominaveram est <i>Opus Thomae Nordtani Angli</i> de quo\n[[682.4]] saepius inter nos. </p>\n<p> [[682.5]] Recentissime ad nos perlatus est <i>Cursus Theologicus</i> Joannis Baptistae Gormaz Societatis\n[[682.6]] Jesu SS. Theologiae in pluribus Hispaniae Academiis, et in Gregoriana Collegii Romani\n[[682.7]] Professore Emerito. Tomi duo Augustae Vindelicorum Sumptibus Georgii Schluter Anno 1707. </p>\n<p> [[682.8]] Locum Perezii quem nuper inspexeras mittam proxime. Si quid ultra curatum voles, jube\n[[682.9]] et vale. Dabam Hildesiae 4 9^#'b^#'r^#'i^#'s 1707. </p>\n<p> [[682.10]] Illustrissimae dominationis tuae Humillimus et obedientissimus servus in Christo </p>\n<p> [[682.11]] Bartholomaeus des Bosses S J </p>\n","number":"223.","title":"BARTHÉLEMY DES BOSSES AN LEIBNIZ","date":"Hildesheim, 4. November 1707. [222.227.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

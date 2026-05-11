@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_31","series":"Band II 2 (1686 - 1694)","seq":31,"text":"<p> [[142.1]] <b>32. LEIBNIZ AN PIERRE BAYLE</p>\n<p> [[142.2]] [Hannover, 19. Januar 1687.] [31.]</b></p>\n<p> [[142.19]] Monsieur </p>\n<p> [[142.20]] Ce <Fn><i>Am Kopf des Briefes</i>: À Monsieur Bayle (auteur des <i>nouvelles de la republique des lettres</i>.)</Fn> qui me plait le plus dans la reponse de M. l'Abbé C. que vous avés inserée dans vos\n[[142.21]] <i>nouvelles</i> instructives du septembre passé, c'est qu'elle me donne l'occasion de faire quelque\n[[142.22]] connoissance avec une personne de vostre merite. Je vous envoye ma replique cy-jointe, et en\n[[143.1]] cas que vous la voulés employer je vous supplie de ne mettre en cette rencontre que <i>M. L.</i> au\n[[143.2]] lieu de marquer mon nom tout entier. Messieurs de Leipzig en usent de même. Car quoyque\n[[143.3]] j'aye fait imprimer quelques essais touchant le droit, la physique, les mathematiques et même\n[[143.4]] touchant les affaires qu'un grand prince m'avoit ordonné à éclaircir, j'ay abstenu le plus\n[[143.5]] souvent de mettre mon nom. </p>\n<p> [[143.6]] On a publié icy un ouvrage in grand folio dont vous pourriés peutestre faire mention dans\n[[143.7]] l'article des livres, si vous le trouvés apropos. Le titre est: <i>Justa funebria Serenissimo Principi\n[[143.8]] Johanni Friderico Brunsvicensium et Luneburgensium Duci à R^#'m^#'o et S^#'m^#'o Fratre Ernesto\n[[143.9]] Augusto Episcopo Osnabrugensi Duce Brunsv. et Luneb. persoluta</i>. Plusieurs empechemens\n[[143.10]] n'ont pas permis que cet ouvrage fait à l'honneur de feu Monseigneur le Duc d'Hanover ait pû\n[[143.11]] paroistre plus tost. Il y a des panegyriques, vers, devises, pourtraits, medailles, armoiries,\n[[143.12]] descriptions et representations des ceremonies, suivant ce qui se practique chez les princes\n[[143.13]] d'Allemagne. On voit d'autres livres de cette nature qu'on a publiés à l'honneur de quelque\n[[143.14]] grand prince; mais il y en a peu en Allemagne qui passeront cet ouvrage en egard aux belles\n[[143.15]] planches et autres particularités, le S^#'m^#'e Successeur n'ayant rien epargné qui pourroit marquer\n[[143.16]] l'amour qu'il portoit à feu son frere. Tout le monde sçait combien un Duc d'Hanovre comme un\n[[143.17]] des princes Regens de la maison de Bronsvic a de part aux affaires generales. C'est pourquoy\n[[143.18]] les <i>personalia</i>, ou ce qu'il y a de sa vie inseré dans cet ouvrage servira à l'histoire du temps.\n[[143.19]] Comme ce prince avoit pour moy une bonté particuliere, j'ay marqué ma gratitude par les vers\n[[143.20]] que je vous envoye, qu'on a aussi inserés dans cet ouvrage, mais que j'ay fait imprimer à part\n[[144.1]] pour les pouvoir communiquer moy même. Vous y pourrés remarquer Monsieur que ce grand\n[[144.2]] prince se plaisoit merveilleusement à toute sorte de belles connoissances; et comme le vray\n[[144.3]] phosphore, ou ce feu maniable qui a esté trouvé depuis quelques années, fut travaillé et\n[[144.4]] demonstré icy par l'inventeur, et même perfectionné en quelque façon en ma presence, le tout\n[[144.5]] suivant les ordres de feu S.A.S., j'en ay inseré une description dans ces vers, pour diversifier un\n[[144.6]] peu la matiere. Les sciences ont tousjours beaucoup d'obligation aux Princes qui les aiment,\n[[144.7]] c'est pourquoy il est juste d'en conserver la memoire pour servir d'exemple. L'Eloge de celuy\n[[144.8]] cy que feu Monseigneur l'Evesque de Padeborne et Munster (qui estoit luy même si digne de\n[[144.9]] louanges) a fait, que j'ay adjouté à cet <i>Epicede</i>, est bien expressif, et ne sçauroit passer pour\n[[144.10]] suspect. Cependant je n'ay rien à vous prescrire, et je suis avec passion </p>\n<p> [[144.11]] Monsieur </p>\n","number":"32.","title":"LEIBNIZ AN PIERRE BAYLE","date":"[Hannover, 19. Januar 1687.] [31.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

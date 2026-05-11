@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_74","series":"Band II 4 (1701 - 1707)","seq":74,"text":"<p> [[245.15]] <b>74. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[245.16]] Venedig, 21. Juni 1704. [73.77.] </b></p>\n<p> [[245.23]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[245.24]] Nel <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> tempo delle publiche lettioni in Padova ricevei una lettera di V. S. Ill^#'m^#'a che mi fù\n[[245.25]] consegnata dal Sig^#'r^#'e Guglielmini, alla quale subito risposi, e poi ne replicai un'altra, ma non\n[[246.1]] avendone ancora ricevuta risposta, temo che le mie si sieno smarrite percio le trasmetto ora\n[[246.2]] quest'altro foglio che io oggi per maggiore sicurezza consegnarò a mani proprie del Sig^#'r^#'e\n[[246.3]] Zanovelli, trovandomi ora in Venetia, ove mi tratterrò per qualche mese. L'altro giorno le\n[[246.4]] scrissi un altro foglio che le sarà consegnato dal Sig^#'r^#'e Gio. Filippo Brienio di Dansica Giovane\n[[246.5]] non meno erudito, che ben costumato, avidissimo di sapere, e molto bramoso di conoscerla, s'è\n[[246.6]] partito mercordi per Vienna per poi portarsi in Olanda. Io fin ora non hò potuto publicare cosa\n[[246.7]] niuna di tante che hò meditate e già preparate per l'uso delle publiche lettioni di molto\n[[246.8]] accresciute che quasi ci rubano tutto il tempo, e v'aggiongo la mia debole e malsana complessione\n[[246.9]] che non può molto resistere allo studio. Ora che è tempo di vacanze, e che godo una\n[[246.10]] somma calma in casa dell'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Foscarini m'apparecchio a perfettionare qualche\n[[246.11]] cosa, e spero dare alla luce un'operetta che non sarà inutile alla Gioventù studiosa e nella quale\n[[246.12]] mi prenderò la libertà di riferire l'inventioni piu alte e sublimi insieme coll'elogio di V. S.\n[[246.13]] Ill^#'m^#'a, il di cui celebre ed immortale nome darà gran lustro, ed ornamento al mio libro. Hò letto\n[[246.14]] nell'opera del Sig^#'r^#'e Marchese dell'Opital il veramente divino calcolo differentiale trovato\n[[246.15]] dalla felicissima e profonda mente di V. S. Ill^#'m^#'a, e molto ora per comprendere tutto il\n[[246.16]] maraviglioso artificio della sua Analisi bramarei vedere l'altro suo calcolo detto integrale\n[[246.17]] percio prego l'incomparabile bonta di V. S. Ill^#'m^#'a avvisarmi, se è stato publicato, e soggerirmi\n[[246.18]] la maniera d'averlo. Qui in Italia pochissimi travagliano intorno all'Analisi, e solamente\n[[246.19]] n'anno scritto qualche cosa i dottissimi Napolitani Antonio Gianforte, e Giacinto di Cristoforo.\n[[246.20]] Il Sig^#'r^#'e Guglielmini pensa di publicare presto la nuova sua idea della febre, come anche un\n[[246.21]] altro suo pensiero il Sig^#'r^#'e Ramazzini, ed il Sig^#'r^#'e Valsinieri nostro Professore di Medicina\n[[246.22]] s'apparecchia a dare alla luce le sue nuove osservationi sopra gl'Insetti. Essendo il Sig^#'r^#'e\n[[247.1]] Guglielmini passato alla prima catedra di Medicina teorica, vaca ora quella della Matematica,\n[[247.2]] prego percio V. S. Ill^#'m^#'a ricordarmi qualche dotto Matematico di coteste parti che potesse, e\n[[247.3]] volesse applicare a questo posto per io poi poterlo proponere agli Ecc^#'m^#'i Riformatori dello\n[[247.4]] Studio di Padova. Supplico in fine V. S. Ill^#'m^#'a onorarmi con questo suo stimatissimo comandamento,\n[[247.5]] consolarmi con suoi caratteri, e persuadersi, che mentre viverò mai mi scordarò di\n[[247.6]] tante sue gratie che hò ricevute. Prego Dio la conservi lungamente a beneficio delle buone\n[[247.7]] lettere, e divotamente riverendola mi rassegno </p>\n<p> [[247.8]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e Michel Angelo Fardella </p>\n<p> [[247.9]] Venetia 21 Giugno 1704 </p>\n<p> [[247.10]] Se V. S. Ill^#'m^#'a si degnarà scrivermi potrà indirizzare la sua al Sig^#'r^#'e Zanovelli in Venetia, che\n[[247.11]] mi farà subito avere la lettera. </p>\n","number":"74.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 21. Juni 1704. [73.77.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

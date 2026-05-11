@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_466","series":"Band VI 4 (1677 - 1690)","seq":466,"text":"[[2068.1]] <b>377₂.  De praestantia systematis Copernicani. Erste Fassung </p>\n<p> [[2068.3]] Praeclare a Cicerone dictum est: <i>opinionum</i> <i>commenta delet dies, naturae judicia\n[[2068.4]] confirmat</i>. Id circa verum Mundi Systema experimur. Novis enim quotidie inventis\n[[2068.5]] Pythagoraea Hypothesis ad summam verisimilitudinem accedit. Ut jam vix quisquam sit\n[[2068.6]] intelligentiorum Mathematicarum qui non praeferendam fateatur, si modo per superiorum\n[[2068.7]] decreta liceret. </p>\n<p> [[2068.8]] Mihi vero videtur censuram in Galilaeum non ita accipi debere quasi eos in universum\n[[2068.9]] damnet, qui Hypothesin Copernici veriorem credunt, sed hos tantum qui temere\n[[2068.10]] eam propugnant, et Scripturam Sacram minus proprie locutam audacius censent. </p>\n<p> [[2068.11]] Hodie autem omnes intelligentes fatentur tantis nove repertis argumentis adjuvari\n[[2068.12]] Copernicanos, ut temeritas illis imputari amplius non possit, et prudentiores ex ipsis\n[[2068.13]] fatentur ac defendunt Scripturam Sacram proprie et apte fuisse locutam, imo aliter non\n[[2068.14]] debuisse nec potuisse etiamsi ipsi scriptores ex schola Copernici prodiisse fingerentur. </p>\n<p> [[2068.15]] Itaque interesse et Reipublicae literariae, et ipsius Ecclesiae videtur, ut ne amplius\n[[2068.16]] obex ingeniis in hoc argumento ponatur, neve adversariis calumniandi ansa detur, quasi\n[[2068.17]] veritas in Italia intolerabili quadam servitute opprimatur. </p>\n<p> [[2068.18]] Quod ut admoneam studiosius ansam mihi dedere cogitationes quaedam, quae nobis\n[[2068.19]] arcana systematis et physicas motuum coelestium causas pro bona parte aperire videntur,\n[[2068.20]] quae nunc paucis attingam. </p>\n<p> [[2069.1]] Cum nempe viderem Keplerum ex Tychonicis observationibus et meditationibus\n[[2069.2]] propriis leges quasdam generales pulcherrimas Motuum Coelestium invenisse, phaenomenis\n[[2069.3]] valde satisfacientes, unde facile apparebat physicas quasdam rationes subesse\n[[2069.4]] debere; ego diu in causarum investigationem incubui, tandemque subita quadam luce\n[[2069.5]] hausta prope supra ipsam spem mihi visus sum magna voti parte positus. </p>\n<p> [[2069.6]] Leges planetariae hae sunt 1) Planetam (primarium) ferri in Ellipsi in cujus foco sol,\n[[2069.7]] 2) tempora ejusdem planetae esse Sectoribus Ellipticis ex sole abscissis proportionalia, 3)\n[[2069.8]] quadrata a temporibus periodicis diversorum planetarum esse ut cubos mediarum a sole\n[[2069.9]] distantiarum. </p>\n<p> [[2069.10]] Ex lege 2^#'d^#'a demonstravi planetam atque adeo aethera ejus deferentem circulari\n[[2069.11]] harmonice, id est sic ut distantiis a sole existentibus progressionis Arithmeticae, sint\n[[2069.12]] velocitates circulationis progressionis Harmonicae; et contra. Generale enim theorema\n[[2069.13]] inveni, si mobile moveatur motu composito ex circulatione harmonica circa aliquod\n[[2069.14]] centrum, et motu quocunque paracentrico respectu ejusdem centri describere areas temporibus\n[[2069.15]] proportionales; et contra. Et vicissim si has describat, motum ejus in dictam\n[[2069.16]] circulationem resolvi posse. </p>\n<p> [[2069.17]] Deinde investigavi, quaenam debeat esse lex motus paracentrici seu attractionis ad\n[[2069.18]] solem. </p>\n","number":"377₂.","title":"De praestantia systematis Copernicani. Erste Fassung","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

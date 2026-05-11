@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_180","series":"Band II 2 (1686 - 1694)","seq":180,"text":"<p> [[605.12]] <b>182. CLAUDE NICAISE FÜR LEIBNIZ</p>\n<p> [[605.13]] [Dijon, 25. Oktober 1692.] [181.204.]</b></p>\n [[605.14]] <p><tab/>Pierre Daniel Huet an Claude Nicaise (Paris, 12. September 1692) </p>\n<p> [[606.1]] Monsieur </p>\n<p> [[606.2]] Vous <Fn><i>Leibniz hat am Kopf des Briefes bemerkt</i>: C'est la main de Mons. Huetius connu par ses ouvrages, maintenant Evéque d'Avranches.</Fn> m'avez sensiblement obligé en m'envoyant un extrait de la lettre de M^#'r Leibnitz sur\n[[606.3]] le sujet de la Philosophie Cartesienne. J'avois déja leu quelques unes des choses qu'il vous a\n[[606.4]] ecrites, dans les lettres qu'il a ecrites à M^#'r de Pellisson. Ce ne m'est pas un petit sujet de joye et\n[[606.5]] de gloire, de voir le jugement que j'ay fait de M^#'r des Cartes et de sa doctrine, confirmé par\n[[606.6]] celuy d'un aussi excellent homme que M^#'r Leibnitz. Car je ne l'ay pas moins loüé, et je ne\n[[606.7]] l'estime pas moins, que M^#'r Leibnitz le loüe et l'estime. Mais toute cette estime ne m'a pas si\n[[606.8]] fort aveuglé que je n'aye reconnu plusieurs defauts de sa Methode et de sa Philosophie. Si des\n[[606.9]] employs plus importants ne me detournoient pas de ces estudes, je prendrois plaisir à faire voir\n[[606.10]] la pauvreté et la foiblesse des reponses que l'on a opposées à ma <i>Censure</i>. M^#'r Leibnitz le fera\n[[606.11]] mieux que moy, et vous rendrez un grand service à la Rep. des lettres, si vous pouvez l'y\n[[606.12]] engager. Je vous supplie, Monsieur, de le saluer de ma part, et de l'assurer que ny l'eloignement\n[[606.13]] ny le tems ne changent rien aux sentimens d'estime, n'y au desir d'avoir part à sa\n[[606.14]] bienveillance, que je luy ay fait paroistre autrefois. Je crois enfin que les exemplaires de mon\n[[606.15]] livre <i>du Paradis terrestre</i> sont arrivez en Hollande. Une des personnes qui avoit part à la\n[[606.16]] distribution m'a mandé qu'elle a receu le sien. Je vous demande en grace de savoir de M^#'r\n[[606.17]] Leibnitz s'il a receu l'exemplaire qui luy estoit destiné. Je vous felicite sur l'agrement de vostre\n[[606.18]] demeure, et de vos estudes. Je suis sur mon depart pour aller en un pays, où je trouveray des\n[[606.19]] occupations bien differentes des vostres, et qui me rendent le secours de vos prieres bien\n[[606.20]] necessaire. Ne me les refusez pas, ny la grace de me croire </p>\n<p> [[606.21]] Monsieur Vostre très humble et très obeissant serviteur </p>\n<p> [[606.22]] P. Daniel Ev. d'Avranches </p>\n<p> [[606.23]] A Paris le 12. 7^#'b^#'r^#'e 1692 </p>\n","number":"182.","title":"CLAUDE NICAISE FÜR LEIBNIZ","date":"[Dijon, 25. Oktober 1692.] [181.204.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

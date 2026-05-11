@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_237","series":"Band II 2 (1686 - 1694)","seq":237,"text":"<p> [[744.1]] <b>240. LEIBNIZ AN CHRISTIAAN HUYGENS</p>\n<p> [[744.2]] Hannover, 1./11. Oktober 1693. [213.264.]</b></p>\n<p> [[744.19]] Hanover ce 1/11 d'octobre 1693 <Fn><i>Die verbesserte Reinschrift l^#'1 trägt am Kopf der Seite von Leibniz' Hand das Datum</i>: 29. september / 9. october 1693</Fn> </p>\n<p> [[744.20]] [ ... ] Je seray ravi de voir un jour vos repliques sur nostre question physique. Car comme\n[[744.21]] vous approfondissés merveilleusement les choses, et comme il semble que nous avons pris un\n[[744.22]] nouveau tour pour éclaircir la question des Atomes et du Vuide, j'espere que nous la pourrons\n[[744.23]] enfin terminer. Je souhaiterois de voir ce que vous avés remarqué sur mes animadversions\n[[744.24]] anticartesiennes, que vous n'aviés pas trouvées tout à fait mauvaises. [ ... ] </p>\n<p> [[744.25]] Au reste comme vous avés de la peine à souffrir, Monsieur, que je pense souvent à\n[[744.26]] l'Histoire au droit et à la Politique, il y a bien des gens qui me font la guerre icy, et ailleurs de\n[[745.1]] ce que je me mêle des matieres où vous regnés. En verité je m'accommoderois d'avantage de ce\n[[745.2]] qui est de vôtre goust, si j'en avois absolument le choix. Et j'estime plus les verités eternelles\n[[745.3]] qui éclairent l'esprit que les faits ou les verités temporelles. Il faut cependant avouer, qu'encor\n[[745.4]] en matiere de droit, de morale et de Politique on pourroit faire des decouvertes et des\n[[745.5]] raisonnemens exacts. Et souvent on y manque en practique, parce qu'on a coustume de les\n[[745.6]] traitter superficiellement. Je seray bien aise de voir un jour vôtre jugement sur la preface de\n[[745.7]] mon <i>Code diplomatique</i>. Je Vous avois communiqué mon project parce que j'ay crû que peut\n[[745.8]] estre quelqu'un de vos amis en Hollande me pourroit fournir quelque piece curieuse, dont il y\n[[745.9]] en auroit sans doute qui seroient honorables à vôtre Republique. Je n'employe que des pieces\n[[745.10]] choisies. C'est pourquoy mon dessein n'est pas des plus vastes. [ ... ] </p>\n","number":"240.","title":"LEIBNIZ AN CHRISTIAAN HUYGENS","date":"Hannover, 1./11. Oktober 1693. [213.264.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

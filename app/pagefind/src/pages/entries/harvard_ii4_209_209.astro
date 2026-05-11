@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_209","series":"Band II 4 (1701 - 1707)","seq":209,"text":"<p> [[653.1]] <b>209. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[653.2]] Hannover, 18. August 1707. [203.218.] </b></p>\n<p> [[653.14]] Plurimum Reverende Pater, Fautor Honoratissime </p>\n<p> [[653.15]] Nuperas meas Tibi recte redditas puto. Nunc in mentem venit quaerere, num sint apud vos\n[[653.16]] juvenes quibus aliquid describendum commode committi possit lingua Latina Gallicave. Apud\n[[653.17]] nos sunt quidem non pauci etiam Gallicae linguae periti, sed ad scribendi laborem parum\n[[653.18]] propensi. Habeo autem Codices Manuscriptos latinos Gallicosque, quos impetravi cum exscribendi\n[[653.19]] facultate: et si quis librarius ex sententia sese offerret, ante omnia ei commissurus essem\n[[653.20]] Hodoeporicon opus quo omnia Caroli V. Imp. itinera ad vitae usque exitum a perpetuo ejus\n[[653.21]] Comite Gallica lingua descripta continentur. Codex est scriptus elegantissime et distinctissime,\n[[653.22]] ut qui modo linguae peritus est difficultatem in exscribendo invenire nullam possit. Itaque rogo\n[[653.23]] ut facias mihi hanc gratiam, inquirasque an sit quo uti tolerabili conditione liceat. Interea vale et\n[[653.24]] fave. Dabam Hanoverae 18 Augusti 1707 </p>\n<p> [[653.25]] deditissimus G. G. Leibnitius\n[[653.26]] Au Reverend Pere le R. P. des Bosses Theologien celebre de la Compagnie de Jesus\n[[653.27]] Hildesheim </p>\n","number":"209.","title":"LEIBNIZ AN BARTHÉLEMY DES BOSSES","date":"Hannover, 18. August 1707. [203.218.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

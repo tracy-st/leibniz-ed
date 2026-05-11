@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_51","series":"Band II 3 (1695 - 1700)","seq":51,"text":"<p> [[146.17]] <b>51. LEIBNIZ AN MENTET KETTWIG</p>\n<p> [[146.18]] [Hannover, 5. April] 1696. [44.62.]</b></p>\n\n<p> [[147.1]] Vir Nobilissime et Consultissime, Fautor Honoratissime </p>\n<p> [[147.2]] Gratissimae <Fn><i>Am Kopf der Seite</i>: Martino Kettwigio IC^#'t^#'o Cl^#'m^#'o Embdam</Fn> semper erunt Tuae, praesertim, si quid meditando addas ad scientiae profectum:\n[[147.3]] Diu enim est quod quaero qui aliquid conferre possint, quando mihi multis modis\n[[147.4]] distracto non omnia destinata exequi licet. Quod morem laudandi vituperandique inter eruditos\n[[147.5]] attinet, si in alterutram partem excedendum sit, malim elogiis peccari; quibus nemo facile\n[[147.6]] decipitur, quam vituperiis, quibus plerumque inest aliquid noxii et iniqui. Huberi fateor scripta,\n[[147.7]] excepta <i>Historia</i>, mihi parum lecta et vix vacat. Si Grotium passim secutus est non reprehenderim,\n[[147.8]] in id enim scribunt insignes viri, ut alii utantur, et jactis fundamentis aliquid superstruant,\n[[147.9]] si non laudavit, eo facilius condonaverim, quod per se patere videtur quid a scriptore\n[[147.10]] notissimo sit sumtum. </p>\n<p> [[147.11]] Non dubito quin Grotius quaedam contra Hobbii sententias fuerit dicturus si in tempore\n[[147.12]] vidisset, sed nec dubito tamen quin aliqua inde in usus suos fuerit versurus. Grotiana et\n[[147.13]] Hobbiana conciliari posse facile assentior. Quin video plerorumque dogmata rectam interpretationem\n[[147.14]] capere, ut adeo eruditos magis in struendo quam destruendo occupatos esse debere\n[[147.15]] arbitrer. Vellem scilicet non iri in circulum et velut dolium volvi, sed prioribus demonstratione\n[[147.16]] constitutis longius procedi. Quae in libro <i>de jure suprematus</i> et praefatione <i>Codicis diplomatici</i>\n[[147.17]] de Hobbianis et juris naturalis principiis dicta sunt, an Tibi expensa, nosse velim. </p>\n<p> [[147.18]] Vincentius Placcius vir doctrina et meditatione, et zelo praestans <i>Accessionibus</i> nuper\n[[147.19]] editis Moralem Scientiam, et jus naturae delineavit. Haec a Te legi attente, et adnotari optem\n[[147.20]] quae in rem videantur. Nam illis lineis ductis occasio aliis datur sua conferendi. Itaque\n[[147.21]] gratum sibi fore vir doctissimus mihi significavit. Jura summae potestatis non ultra locum\n[[147.22]] habere censeo, quam patitur Reipublicae salus, et veram juris philosophiam constat huc\n[[148.1]] referri. Itaque non video quomodo haec separes nisi forte eo modo, quomodo agnoscunt IC^#'t^#'i\n[[148.2]] quae ipso jure valent aliquando exceptione infirmari. Nec Galliae Regi jus mutandae successionis\n[[148.3]] conceditur. Scis Carolum VI. exhaeredato velut ob crimen filio, regnum in filiam\n[[148.4]] contulisse, quae Anglorum Regi nupserat, et magna pars procerum assensit. Ipse ego in <i>Codice\n[[148.5]] diplomatico</i> formulam edidi, sed quae non tenuit, et contrarium receptum habetur. Rex Galliae\n[[148.6]] domi suae multis juris vinculis ligatus est, praesertim in iis provinciis ubi antiquis ducibus\n[[148.7]] comitibusve successit. Hispanica quoque Regna suas succedendi Leges habent, a Carolo V. et\n[[148.8]] Philippo II. agnitas. Legi Commissoriae nec passim locus est, nec nunquam. Limites vel\n[[148.9]] recepto jure gentis vel necessitate definiuntur. Itaque temperare stylum tutius veriusque est et\n[[148.10]] quae a foederatis provinciis olim acta sunt ego nec damnare ausim, nec absolvere: Longa est\n[[148.11]] historia longae ambages factorum, quae oporteat examinari majore difficultate quam fructu. Et\n[[148.12]] plerumque utrinque injusta sunt bella. Praesens tamen nostrum et quae similia sunt, excipere\n[[148.13]] oportet. Quod superest, si qua speciatim occasione Placciani operis notare placeat, curabo\n[[148.14]] perferri, ne inutile hoc commercium sit. Censeo enim nos omnia ad fructum dirigere debere, qui\n[[148.15]] maximus est, si nos primum, deinde et alii meliores reddantur. Vale etc. <Fn><i>Am Rande von Bl. 7 v^#'o quer eine nicht zum Brief gehörende Notiz von Leibniz</i>: Es ist nur der Tomus I. und scheinet also daß der Tom. II. fehle, es wäre dann daß er nie herauskommen.</Fn> </p>\n","number":"51.","title":"LEIBNIZ AN MENTET KETTWIG","date":"[Hannover, 5. April] 1696. [44.62.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_186","series":"Band VI 4 (1677 - 1690)","seq":186,"text":"[[644.16]] <b>154.  Omnes praepositiones proprie significant relationem loci [Herbst 1685 (?)]</b>\n [[644.17]] <tab/>[Herbst 1685 (?)] </p>\n<p> [[645.1]] Omnes praepositiones proprie significant relationem Loci, translate aliam relationem\n[[645.2]] quamcunque. Relatio Loci vel simplex est, vel motum continet; Motum scilicet vel\n[[645.3]] rei quam afficit praepositio, vel aliarum. </p>\n<p> [[645.4]] Simplex relatio est in praepositionibus: Cum, Sine, Apud, In. Circa. Inter. Intra.\n[[645.5]] Extra. Ex quibus simplicissimum est, <i>A</i> esse <i>cum</i> <i>B</i> vel <i>sine</i> <i>B</i>, seu <i>A</i> et <i>B</i> esse vel non\n[[645.6]] esse in eodem loco communi. Proximum est <i>A</i> esse <i>apud</i> <i>B</i>, quod significat loca ipsorum\n[[645.7]] <i>A</i> et <i>B</i> esse contigua. <i>A</i> est <i>in</i> <i>B</i>, si locus ipsius <i>A</i>, sit pars loci ipsius <i>B</i>; et quidem si\n[[645.8]] reliqua pars loci ipsius <i>B</i>, demto loco ipsius <i>A</i>, vocetur <i>C</i>, dicitur <i>C</i> esse <i>circa</i> <i>A</i> et <i>A</i> <i>intra</i>\n[[645.9]] <i>C.</i> Unde patet differentia inter <i>in</i> et <i>intra.</i> Dicimus enim Iliacos intra muros, non in muris,\n[[645.10]] quod neque in muris, neque intra muros est, dicitur esse <i>extra.</i> Si <i>D</i> et <i>E</i> possint intelligi\n[[645.11]] partes ipsius <i>C</i>, dicetur <i>A</i> esse <i>inter</i> <i>D</i> et <i>E.</i> Et hae definitiones satis\n[[645.12]] sunt exactae. Nam locum ipsius <i>A</i> intelligo non minimum, sed\n[[645.13]] quemcunque etiam ipso <i>A</i> majorem, alioqui locus minimus puncti <i>A</i>\n[[645.14]] existentis in linea <i>B</i>, non foret pars ipsius <i>B.</i> Praeterea si <i>A</i> est inter\n[[645.15]] <i>D</i> et <i>E</i> semper intelligi potest locus aliquis communis ipsorum <i>A, D,\n[[645.16]] E</i>, qui sit <i>B</i>, a quo si adimas locum aliquem (satis magnum) ipsius <i>A</i>, restet <i>C</i>, qui nihil\n[[645.17]] aliud contineat quam locum ipsorum <i>D</i> et <i>E.</i> </p>\n<p> [[645.18]] Relatio loci cum respectu ad Motum est in praepositionibus: Ab, Per, Ad; Ex, In,\n[[645.19]] Ante, post, prae, pro, secundum, juxta; supra, super, infra, sub, praeter; trans, ultra, citra,\n[[645.20]] tenus. </p>\n<p> [[645.21]] Movetur <i>a C</i>, <i>per C</i>, <i>ad C</i>, cujus locus initio, medio, fine motus est <i>C</i> utcunque haec\n[[645.22]] moventur. Si <i>A</i> videt ad <i>B</i>, <angle bracket>tunc</angle bracket> <i>B</i> est <i>ante</i> <i>A.</i> Si per <i>A</i> ad <i>B</i>; <i>A</i> est <i>ante</i> <i>B</i> et <i>B</i> <i>post</i> <i>A.</i> </p>\n","number":"154.","title":"Omnes praepositiones proprie significant relationem loci","date":"[Herbst 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

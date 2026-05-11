@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_572","series":"Band VI 4 (1677 - 1690)","seq":572,"text":"[[2659.9]] <b>449.  De gratia sententiae ex Jurieu excerptae [Frühjahr bis Sommer 1686 (?)]</b>\n [[2659.10]] <tab/>[Frühjahr bis Sommer 1686 (?)] </p>\n<p> [[2659.23]] Selon Jurieu <i>apologie de la reforme</i> <i>contre</i> <i>M. Maimbourg</i>, ch. 17, les Jesuites\n[[2659.24]] disent que l'homme peut faire sans la grace les memes bons actes selon leur substance et\n[[2660.1]] degrés, qu'avec la grace, mais qu'estans sans la grace ils ne sont point salutaires. Mais\n[[2660.2]] c'est rendre Dieu injuste qui traite inegalement ceux qui font la meme chose et damnant\n[[2660.3]] ceux qui font bien par leurs forces, et ne sauvant que ceux qui font les memes choses avec\n[[2660.4]] son aide. Ils sont obligés de parler ainsi pour n'estre point pelagiens. </p>\n<p> [[2660.5]] Les Thomistes <i>appellent grace suffisante, avec laquelle seule on ne sçauroit estre\n[[2660.6]] sauvé</i>, les Semipelagiens disent <i>que la grace peut estre aneantie par la malice de\n[[2660.7]] l'homme</i>. Les Thomistes et Jansenistes avouent <i>que la grace efficace a son effect infalliblement.\n[[2660.8]] Dieu predetermine la volonté d'une maniere physique du costé du bien</i>,\n[[2660.9]] autrement <i>l'homme ne sçauroit faire aucune bonne oeuvre</i>. Les <i>Messieurs du Port Royal\n[[2660.10]] au lieu de la liberté mettent l'indifference</i>. </p>\n<p> [[2660.11]] Scot. <i>in sent.</i> lib. 1. dist. 41. primo instanti vult Petrum et Judam fuisse in eodem\n[[2660.12]] statu, et Deum ante praevisa opera decrevisse dare gloriam Petro, et respectu Judae se\n[[2660.13]] habuit negative. In secundo instanti Deus decernit gratiam Petro, et rursus erga Judam se\n[[2660.14]] habet negative. In tertio instanti, Deus permittit culpam Petri et Judae. Circa Thomae\n[[2660.15]] sententiam Thomistae dissentiunt: Didacus Alvares hominem sub peccato originali jacentem\n[[2660.16]] facit objectum praedestinationis in Epit. libri <i>de Auxiliis</i> lib. 4. c. 7, quae est commune\n[[2660.17]] et Protestantium. At Ledesma, Rispolis, Dom. Bannes tenent secundum Thomam,\n[[2660.18]] Deum eligere et reprobare hominem, quem considerat adhuc innocentem. Disputatio quae\n[[2660.19]] est inter Protestantes de objecto praedestinationis, est inter Romanenses de causis et\n[[2660.20]] effectibus ejusdem. </p>\n<p> [[2660.21]] Novi Thomistae creationem faciunt effectum reprobationis, seu Deus reprobavit\n[[2660.22]] hominem, antequam creare decrevit. Ita Estius <i>in sent.</i> lib. 1, dist. 40, sect. 10 (+ hoc non\n[[2660.23]] aliter explicari potest, quam quod reprobatio in notione hominis tanquam possibilis\n[[2660.24]] continetur +), idem ait Estius de Angelis et donis excellentibus quae his data esse scilicet\n[[2660.25]] effectu reprobationis. Rispolis in <i>statu controversiae de praefinitionibus</i> statuit posse dici\n[[2661.1]] odium aliquod negativum, et quando Deus non amat satis hominem ut velit ei salutem\n[[2661.2]] dare, et tamen actu positivo permittit ut peccet dici posse habere odium negativum\n[[2661.3]] eorum, etiam ante peccati praevisionem. </p>\n<p> [[2661.4]] Et Pet. Ledesma <i>de grat. divin. auxil.</i> quaest. un. art. 17. Deum quosdam coelo\n[[2661.5]] excludere praedeterminantem eorum damnationem ante omnem praevisionem actus.\n[[2661.6]] Dominicus Bannes haec prolixe tuetur ex Thoma, Bannes <i>in 1 Thom.</i> quaest. 25, art. 5. </p>\n<p> [[2661.7]] Non posset Deus permissive se habere ad peccatum nisi [<i>bricht ab</i>] </p>\n","number":"449.","title":"De gratia sententiae ex Jurieu excerptae","date":"[Frühjahr bis Sommer 1686 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

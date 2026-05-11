@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_140","series":"Band II 3 (1695 - 1700)","seq":140,"text":"<p> [[373.1]] <b>140. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[373.2]] Dijon, 29. August 1697. [138.147.]</b></p>\n\n<p> [[373.23]] Dijon le 29. Aoust <b>1697</b> </p>\n<p> [[373.24]] Il y a long tems monsieur que je n'ay recû de vos nouvelles, et que je n'ay eu l'honneur de\n[[373.25]] vous ecrire; Je me suis contenté de prier mons^#'r Pinsson de le faire et de vous envoyer les\n[[373.26]] ouvrages qui faisoient du bruit sur le Quietisme et surtout le livre de m^#'r de Meaux. Celluy de m^#'r\n[[373.27]] de Cambray ne se trouvant plus, il y en a adjousté quelques autres: ce demeslé entre ces deux\n[[373.28]] prelats faict toujours beaucoup de bruit. On me mande de Rome qu'on les amusera et qu'on ne\n[[373.29]] decidera Rien sur ce faict non plus que sur le livre du card^#'a^#'l Sfondrati; mons^#'r le card^#'a^#'l Noris\n[[374.1]] m'en parle ainsy dans sa lettre. <i>Antistites Cameracensis ac Meldensis suos Romam libros\n[[374.2]] miserunt, ac doctorum hominum judicia expetunt et expectant, privatas etiam ad me litteras\n[[374.3]] destinarunt, qui tamen nondum in partes abii, sed judicium sustineo. Haec nova concertatio\n[[374.4]] Rumores ex lectione libri Card^#'l^#'i^#'s Sfondrati exortos supressisse videtur in Galliis, uti etiam\n[[374.5]] Romae deferbuere, ubi nova subinde ingruentia negotia priora statim antiquant</i> etc. </p>\n<p> [[374.6]] On est dechaisné à Paris contre m^#'r de Cambray qui est relegué dans son archevesché;\n[[374.7]] beaucoup de dames de la cour ont eû ordre de se retirer pour le faict du Quietisme; Je croy\n[[374.8]] surtout que mons^#'r Pinsson vous aura envoyé les <i>journaux des scavants</i> qui vous regardent\n[[374.9]] comme je luy ay mandé et que je n'ay point ancor vû; le 1^#'e^#'r concerne l'extraict de la lettre que\n[[374.10]] vous m'aviés ecripte sur le systeme de mons^#'r des Cartes contraire à la Religion, et l'autre qui\n[[374.11]] vient de paroistre qui sont des reflexions sur cet extraict, qu'il presume estre de mons^#'r Regis.\n[[374.12]] Mons^#'r d'Avranches est de retour de Bourbon, où il n'a pas trouvé dans les eaux le meme\n[[374.13]] secours qu'il y a trouvé autrefois. Il en a rapporté le meme Rhumatisme qui l'y avoit mené, et\n[[374.14]] meme un peu plus violent, ce qu'il n'attendoit pas. Il est maintenant à Avranches, où il scaura\n[[374.15]] ce que l'on peut esperer de Coutances, pour ces actes du concile de Basle, et il le scaura avec\n[[374.16]] certitude. Il espere aussi d'achever là l'ouvrage, où il a eû occasion de parler des mots\n[[374.17]] saxoniques de Normandie; <i>Je vous supplie</i> me dit il entr'autres choses <i>de m'entretenir toujours\n[[374.18]] dans les bonnes graces de m^#'r Leibniz, pour le merite duquel je ne cede en estime à personne du\n[[374.19]] monde</i>; Il m'a écrit touchant mons^#'r Foucher (dont il ne scavoit pas la mort) dans les memes\n[[374.20]] sentimens que vous en aviés aussi bien que moy. Je ne scay mons^#'r si vous avés vû l'extraict que\n[[374.21]] m^#'r de Bauval a faict du livre de mons^#'r de Cambray dans son journal. M^#'r Bayle a mandé à un de\n[[374.22]] mes amis de Paris qu'on l'admiroit. Le fameux poete m^#'r Santeul de S^#'t Victor est venû mourir en\n[[374.23]] Bourgogne dans nostre ville de Dijon, on a faict mille epitaphes à son subjet et icy et à Paris. Je\n[[375.1]] l'ay faict comme les autres et son Cenotaphe aussi, car mess^#'r^#'s de S^#'t Victor nous l'enlevoient et\n[[375.2]] nous envient ce depost aussi bien que Paris. Il m'avoit promis des hymnes pour le S^#'t de nostre\n[[375.3]] village S^#'t Hermes martyr et prestre de Rome dont nous faisions hier la feste avec celle de\n[[375.4]] S^#'t Augustin. On ne me mande rien de Paris pour ce qui regarde les livres nouveaux si non une\n[[375.5]] edition nouvelle de Rabelais avec des notes et des observations de M^#'r Bernier de Blois auteur\n[[375.6]] de l'<i>Antimenagiana</i>. Mettés mons^#'r une enveloppe à ma lettre pour m^#'r de Spanheim. </p>\n<p> [[375.7]] Tout à vous Nicaise\n[[375.8]] <yi>Pour Vous Monsieur </p></p>\n","number":"140.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 29. August 1697. [138.147.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

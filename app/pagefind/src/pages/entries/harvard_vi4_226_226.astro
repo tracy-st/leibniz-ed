@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_226","series":"Band VI 4 (1677 - 1690)","seq":226,"text":"[[879.11]] <b>185.  Grammatica [Ende 1687 bis Ende 1688 (?)]</b>\n [[879.12]] <tab/>[Ende 1687 bis Ende 1688 (?)]\n[[880.1]] <tit2><b>Grammatica</b></tit2> </p>\n<p> [[880.2]] Videtur <b>pluralis</b> inutilis in Lingua rationali. </p>\n<p> [[880.3]] <b>Persona</b> accidit etiam nominibus ex sententia Vossii. Nam <i>Titius</i> significat vel <i>ego\n[[880.4]] Titius</i> vel <i>ille Titius.</i> Vocativi semper personae secundae. </p>\n<p> [[880.5]] Variae <b>declinationes</b> inutiles. </p>\n<p> [[880.6]] <b>Comparatio</b> etiam pronominis, ut: <i>ipsissimus.</i> Posset et verbis tribui, ut <i>summe\n[[880.7]] currere, currissimare</i>; si jocari libet. </p>\n<p> [[880.8]] <b>Verbum</b> <i>nota rei sub tempore</i>. Revera: verbum est quod involvit affirmationem aut\n[[880.9]] negationem. Omnia verba activa vel passiva, quae involvunt mutationem, at quae statum\n[[880.10]] significant neutra. Ad activa vel passiva videntur et referri posse, quae negant actionem\n[[880.11]] vel passionem, ut <i>abstineo.</i> </p>\n<p> [[880.12]] Gerundium, <i>studio adeundi patrem</i>, id est <greek>toỹ</greek>: <i>adire patrem.</i> Virgil: <i>pacem Trojano\n[[880.13]] a rege petendum.</i> Patet <i>petendum</i> esse neutrum quasi substantivum, alioqui diceretur\n[[880.14]] <i>petendam.</i> Est ergo participium sua natura adjectivum, sed neutre sumtum. <i>Pacem petendum\n[[880.15]] est</i>, id est <i>pacem petere conveniens vel necessarium est.</i> </p>\n<p> [[880.16]] Supina in eo similia: <i>spectatum ludos</i>, id est ad <greek>tò</greek> <i>spectare ludos.</i> </p>\n<p> [[880.17]] Tempora in verbis accurate explicanda. Casus in nominibus. </p>\n<p> [[880.18]] <i>Facio</i> praesens. <i>Faciebam, cum hoc faciebam, Titius venit.</i> <i>Cum hoc facerem Titius\n[[880.19]] veniebat, cum hoc feceram Titius venit. Cum hoc fecissem Titius veniebat. Feceram</i>\n[[880.20]] activo respondet <i>factum erat</i> passivum. </p>\n<p> [[880.21]] <i>Feci. Facio. Faciam.</i> Praeteritum imperfectum est proprie praesens in tempore\n[[880.22]] aliquo praeterito, <i>faciebam</i>, id est <i>tunc dicere potui: facio.</i> Res omnis reducatur ad\n[[880.23]] Nomina sic: <i>loquens, locutus, locuturus: loquens sum, locutus sum, locuturus sum.\n[[880.24]] Loquens sim, locutus sim, locuturus sim</i>: pro <i>loquor</i>, <i>dixi, loquar. Dicam, faxim, fecero;\n[[880.25]] faxim</i>, id est <greek>péprajaw</greek> <i>sim, fecero</i> id est <i>facturus sim. Loquebar</i>, id est <i>loquens fui;\n[[880.26]] loquerer</i>, id est <i>locutus fuerim. Feceram</i>, <greek>péprajaw</greek> <i>eram</i> seu imperfectum in praeterito\n[[880.27]] vel saltem praeteritum in praeterito: <i>locutus</i> <i>fui</i>, <i>fecissem</i>, id est <greek>péprajaw</greek> <i>essem vel\n[[881.1]] fuerim</i>, saltem. Eodem modo in futuro rursus praesens praeteritum et futurum intelligi\n[[881.2]] potest. Imo et imperfectum aliaque multa comminisci licet, ut peculiare tempus pro\n[[881.3]] <i>locuturus fui</i> seu <i>dicturiebam. Fui</i> et <i>eram</i> nonnihil exactius distinguenda <i>fui</i> <i>Romae</i>, et\n[[881.4]] <i>eram Romae cum hoc fieret</i>. Quantum differunt <i>locutus sum</i>, et <i>locutus fui</i>, tantum\n[[881.5]] differunt: <i>locutum esse</i> et <i>locutum fore.</i> Nota <i>in principio creavit Deus</i>, etc. germanice <i>im\n[[881.6]] anfang schuf.</i> </p>\n<p> [[881.7]] <i>Pater</i> <i>et Chremes reversi</i>, <i>pater et Chremes reversus</i>, utrumque recte Vossius lib. <i>de\n[[881.8]] construct.</i> c. 3. Differentia apud Gallos inter haec duo: <i>il a fait cela</i>, et, <i>il fit cela.</i> </p>\n","number":"185.","title":"Grammatica","date":"[Ende 1687 bis Ende 1688 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

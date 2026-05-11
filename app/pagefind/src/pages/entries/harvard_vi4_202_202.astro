@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_202","series":"Band VI 4 (1677 - 1690)","seq":202,"text":"[[788.5]] <b>166.  Methodus synthetica seu ars ordinandi theoremata et problemata [April bis Oktober 1686 (?)]</b>\n [[788.7]] <tab/>[April bis Oktober 1686 (?)] </p>\n<p> [[788.14]] Methodus synthetica, seu ars ordinandi Theoremata et problemata in aliqua scientia\n[[788.15]] inde a primis Elementis constituenda nondum adhuc constituta est. Nam ante omnia\n[[788.16]] quaeritur utrum sequendus ordo demonstrandi, seu connexionis propositionum, an vero\n[[788.17]] ordo Terminorum ingredientium combinatorius; et hoc admisso, rursus quaeri potest\n[[788.18]] utrum praeferendus ordo subjectorum ut in unum conjungantur quantum commode licet,\n[[788.19]] propositiones ejusdem subjecti; an vero propositiones ejusdem praedicati. Et in ipso\n[[788.20]] ordine demonstrandi quoque, si eum sequamur, magna potest esse varietas, idem enim\n[[788.21]] variis modis demonstrationem recipit. Si propositioni alicui semper subjiceretur sua\n[[788.22]] conversa, licet (forte demonstranda ex propositionibus posterioribus) servaretur ordo\n[[789.1]] mixtus ex ordine terminorum secundum subjectum et secundum praedicatum. Interdum\n[[789.2]] etiam utilius est praeferre demonstrationem casus simplicioris ante generalem. Interdum\n[[789.3]] utilius est praeferre generalem. Sunt et quaedam demonstrationes verae quidem et\n[[789.4]] demonstrabiles, sed parum dignae poni et demonstrari, quarum determinanda est natura.\n[[789.5]] Et cum demonstratio aliqua longior offertur, ea plerumque in breviorem contrahi potest,\n[[789.6]] adhibitis quasi lemmatibus seu propositionibus quae partem demonstrationis in se\n[[789.7]] absorbeant quaeritur quando et quousque eae sint utiles. Ita et dispiciendum, quandonam\n[[789.8]] propositiones debeant potius proponi ut corollaria, quam ut separatae propositiones. Item\n[[789.9]] quando ex ipsa demonstratione, non vero ex ejus conclusione fieri potest aliquod porisma\n[[789.10]] quandonam id facere conveniat, quod tamen non admodum placet. </p>\n<p> [[789.11]] Optimum esse videtur, artem combinatoriam ita sequi. Primum sumantur pauci\n[[789.12]] aliquot characteres et notae. Et ponantur propositiones quae ex ipsis solis resultant; et\n[[789.13]] vero si res recte instituitur, videntur semper ex ipsis solis, nempe ex ipsis et iis quae\n[[789.14]] earum definitionem ingrediuntur posse demonstrari. Sed ut optime progrediamur in\n[[789.15]] combinando pro Terminis jam definitis adhibeamus eorum definitiones, et definitionum\n[[789.16]] definitiones quousque licet. Quod ab initio cum paucas adhuc definitiones fecimus, statim\n[[789.17]] sistetur variationesque omnes faciamus possibiles quae ex ultimis terminis irresolutis fieri\n[[789.18]] possunt eos semel vel saepius sumendo, et deinde combinando, et in quavis combinatione\n[[789.19]] rursus ordinem variando et quavis tali Hypothesi facta contrahendo terminos indefinibiles\n[[789.20]] ope definibilium et quia ope repetitionum iri potest in infinitum, alicubi sistendum est,\n[[789.21]] cum scil. quasi ad seriem perventum est, ex qua judicari potest, quid sit futurum, etsi in\n[[789.22]] infinitum continuetur quam in rem excogitandum singulare genus notarum, ut pro serie\n[[789.23]] utcunque continuata generalis sit demonstratio. </p>\n<p> [[789.24]] Verum Theorematum scopus est maxime duplex, unus in ratiocinando, alter in\n[[789.25]] efficiendo. In ratiocinando opus est ut proposito aliquo inspiciamus, quid ex ipso sequatur,\n[[789.26]] vel cum ipso sit compatibile; ubi inprimis ea annotanda, ubi dissita satis sunt inter\n[[789.27]] quae collectio est, item ubi ex multis antecedentibus contractione quadam fiunt pauca vel\n[[789.28]] certe non multo plura consequentia. In efficiendo vero potissimus et ultimus est usus\n[[789.29]] theorematum. Problemata possent plane omitti e scientia, aut tantum postea poni instar\n[[789.30]] indicum, nam semper ex problemate cum solutione fit [theorema]. Magis tamen ad\n[[789.31]] auditorum vel lectorum taedium minuendum videntur inspergi. Certe problemata de\n[[790.1]] efficiendo nihil aliud sunt, quam theoremata de modo aliquid generandi. Et quidem si\n[[790.2]] problemata inspergere volumus quod non dissuadeo, utile erit inprimis adhibere generationes\n[[790.3]] Entium tum efficacium ad alia Entia producenda, tum et proprietates pulchras\n[[790.4]] habentium; tum denique Entium paradoxorum, quae habent proprietates, de quibus dubitare\n[[790.5]] possis an sint possibiles aut compatibiles. Sunt et problemata de cognoscendo, ut\n[[790.6]] notas assignare, ex quibus cognoscatur utrum aliquid sit tale, etc. Et hujusmodi et in\n[[790.7]] Euclide reperiuntur. </p>\n<p> [[790.8]] Res interim in summa eo redit, ut ex terminis simplicibus, utcunque repetitis,\n[[790.9]] combinatis et variatis, condamus Hypotheses, et ex quavis Hypothesi per varias ejus\n[[790.10]] contractiones faciamus plures propositiones demonstrabiles. Ubi possumus tunc contractioni\n[[790.11]] jam factae addere novam contractionem (quo facto utimur praecedentis jam propositionis\n[[790.12]] demonstratione) tum vero etiam progredi ad novas contractiones; et quidem ab\n[[790.13]] una ad unam, rursus enim in terminis contractis (ex definibilibus) omnis possibilis\n[[790.14]] variatio institui potest. Adde meam artem combinatoriam. </p>\n","number":"166.","title":"Methodus synthetica seu ars ordinandi theoremata et problemata","date":"[April bis Oktober 1686 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

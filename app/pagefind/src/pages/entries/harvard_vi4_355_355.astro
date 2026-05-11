@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_355","series":"Band VI 4 (1677 - 1690)","seq":355,"text":"[[1498.1]] <b>299.  De modo distinguendi phaenomena realia ab imaginariis [Sommer 1683 bis Winter 1685/86 (?)]</b>\n [[1498.2]] <tab/>[Sommer 1683 bis Winter 1685/86 (?)]\n [[1498.3]] <petit> </p>\n<p> [[1498.4]] Diese kleine Schrift über die Kriterien, die wir haben, reale von bloß eingebildeten Phänomenen wie z.B.\n[[1498.5]] Träumen zu unterscheiden (z.B. Kohärenz, Voraussagbarkeit), können wir aufgrund des Wasserzeichens in den\n[[1498.6]] angegebenen Zeitraum einordnen. Die inhaltliche Nähe (etwa bei der Behandlung der Frage nach der Realität\n[[1498.7]] der Körper) zu vor allem zwischen 1683 und 1686 diskutierten Themen stützt dieses Datierung. Die kleine\n[[1498.8]] Bemerkung N. 298 über das Kohärenzkriterium zur Unterscheidung zwischen Wachen und Träumen dürfte eine\n[[1498.9]] vorab geschriebene Notiz zu derselben Problematik sein, weshalb wir sie diesem Stück unmittelbar voranstellen.\n[[1498.10]] </petit> </p>\n","number":"299.","title":"De modo distinguendi phaenomena realia ab imaginariis","date":"[Sommer 1683 bis Winter 1685/86 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

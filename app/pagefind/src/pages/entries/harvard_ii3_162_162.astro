@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_162","series":"Band II 3 (1695 - 1700)","seq":162,"text":"<p> [[422.6]] <b>162. LEIBNIZ AN GABRIEL WAGNER</p>\n<p> [[422.7]] Hannover, 22. März (1. April) 1698. [160.166.]</b></p>\n\n<p> [[422.15]] Vir Celeberrime </p>\n<p> [[422.16]] Doleo <Fn><i>Am Kopf der Seite in L^#'2 von Leibniz' Hand</i>: A Mons. Gabriel Wagner Wolfenbutel</Fn> molestias Tibi creari, et laborem susceptum non bene procedere. Antequam apud\n[[422.17]] S^#'m^#'u^#'m Ducem queraris consultius judico remedium a Domino de Steinberg supremo Aulae\n[[422.18]] mareschallo peti, quem aestimare viros doctos, et omnia magna ratione agere confirmare Tibi\n[[422.19]] possum. Itaque hodie ad ipsum scribo in gratiam Tui, et puto efficaciam non defore, ut juvenes\n[[422.20]] illi de quibus quereris a Te male habendo desistant. Quodsi hac via res non procedit, alia rem\n[[422.21]] aggrediamur, cum apud vos ero, quod mature fiet etc. </p>\n<p> [[422.22]] Hanover 22 Mars 1698 <Fn><i>Auf der Rückseite in L^#'1 von Leibniz' Hand, gestrichen</i>: Cum morte hominis mens non pereat, nullaque omnino Monas interire possit, hinc mors non destruit perfectiones. Officium est ostendere quid <angle bracket>e</angle bracket>am impediat </Fn> </p>\n","number":"162.","title":"LEIBNIZ AN GABRIEL WAGNER","date":"Hannover, 22. März (1. April) 1698. [160.166.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_173","series":"Band II 4 (1701 - 1707)","seq":173,"text":"<p> [[535.8]] <b>173. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[535.9]] Berlin, 5. Februar 1707. [166.196.] </b></p>\n<p> [[536.1]] Plurimum Reverende Pater, Fautor et Amice honoratissime </p>\n<p> [[536.2]] Paulo serius gratissimae Tuae ad me sunt perlatae. Discussio <i>Historiae</i> <i>de auxiliis</i> non\n[[536.3]] spernenda erit, modo abstineatur utrinque odiosis, quae non aedificant sed destruunt. </p>\n<p> [[536.4]] De Infallibilitate Ecclesiae in rebus facti, doce me quaeso aliquando. Ego enim fateor me\n[[536.5]] semper Bellarmini et aliorum sententiam magis probasse, qui ipsa Generalia Concilia in eo\n[[536.6]] genere labi posse putant. Et nollem commodis praesentibus affectibusque doctrinas imposterum\n[[536.7]] poenitendas dari. Imponere omnibus, ut in rebus hujusmodi de interiore assensu jurare debeant,\n[[536.8]] iniquum arbitror, cum ille hic non sit in potestate, nec adsint quae sufficiant ad persuadendum.\n[[536.9]] Ecclesiae autoritas (quam ego si justis limitibus contineatur, venerandam arbitror), perinde ac\n[[536.10]] principum, non augetur abusu et prolatationibus nimiis, sed tandem etiam intra aequum periclitatur,\n[[536.11]] quod experientia plus semel docuit. Utinam praeclari homines et in vestro ordine, et\n[[536.12]] alibi passim, vel ponerent vel coërcerent hos affectus, quibus non raro boni viri gravantur. Ego\n[[536.13]] nec Sorbonicorum in vestros acta nupera, nec vestrorum in Jansenii memoriam laudare possum;\n[[536.14]] et damnatas propositiones nasi cerei similes puto, cum nemo nesciat, quam varie possibilitatis\n[[536.15]] necessitatisque nomina accipiantur. </p>\n<p> [[536.16]] Quae inter nos acta sunt per literas de philosophicis rebus, non puto communicationi in\n[[536.17]] publicum qualicunque apta esse, divulsa scilicet, nec in systema collecta, quale a Te sperabam.\n[[537.1]] Tibi ea, sapienti scilicet, non quibusvis scripsi, itaque minime conveniunt Novis Trivultianis ad\n[[537.2]] popularia magis destinatis. Et spero Te pro Tua erga me benevolentia, non permissurum, ut tam\n[[537.3]] alieno loco prodeant. </p>\n<p> [[537.4]] Ipsos Trivultianos collectores, viros quidem eleganter doctos, rogandos putem, ut inter\n[[537.5]] recensendum malint indicare quae eximia aut profutura extent in libris, quam quae vana aut\n[[537.6]] spernenda: Humana mens in Satyram et contemtum aliorum prona est: huic lectorum vitio\n[[537.7]] nolim indulgeri, praesertim a viris religiosis. Vir aliquis bonus et doctus magno studio opus\n[[537.8]] elaboravit, et in bonum publicum, horas suas impendit: praemium inde nullum expectat aliud,\n[[537.9]] quam laudem. Cur nos bene animato malum reddemus pro bono, et contemtu ac risu (si qua\n[[537.10]] forte lapsus est) hominem ad poenitentiam laudabilis facti adigemus. Quod si quae moneri\n[[537.11]] operae pretium sit, hoc velim ita fieri, ut autor sibi de nostra censura gratuletur. </p>\n<p> [[537.12]] Non multa in literis nova habeo: Nuper ad me relatum inscriptionem Romanam in Silesia\n[[537.13]] repertam, quod opido rarum est, nam Romani nunquam in Quadis aut Lygiis aut Marcomannis\n[[537.14]] sedes habuere. Potuit captivo posita esse ab amico similiter capto, uti memini Turcam Hanoverae\n[[537.15]] Epitaphium Turcicum socio captivitatis erigere. </p>\n<p> [[537.16]] Suasi ut observationes nonnullae Berolinenses edantur, praesertim cum sint aliquae eorundem\n[[537.17]] phaenomenorum, quae in observatorio Regio Parisino notata ex Commentariis Academicis\n[[537.18]] anni 1704 didici. </p>\n<p> [[538.1]] In Anglia prodiit deperditus hactenus Apollonii Pergaei labor <i>de sectione Rationis</i>, in\n[[538.2]] Arabico Mso a celeberrimo quondam Viro Eduardo Bernardo observatus, nunc ab alio praestantissimo\n[[538.3]] Geometra Edmundo Hallejo erutus. </p>\n<p> [[538.4]] Cl. Hartsoekerus Batavus Conjecturas suas physicas nuper editas ad me misit, quibus\n[[538.5]] novum systema tentat, vel potius ante paucos annos publicatum prosequitur. Multa habet\n[[538.6]] ingeniosa, sed profundius adhuc latent interiora naturae, quam ut certas rationes effectuum\n[[538.7]] compositorum in hac philosophiae infantia sperare fas sit. </p>\n<p> [[538.8]] Ptolemaeo gratulor quietem: si munus suscepisset, non tam ipsi quam ordini vestro\n[[538.9]] gratulandum fuisset. Nunc magnum opus Bellarmini renovati et aucti ab ejus doctrina et\n[[538.10]] ingenio spero. Nec dubito acerbiora Bellarminiana, bella, arma, minas, temperaturum, daturumque\n[[538.11]] operam, ut veritatis et fructus potissimum rationem habuisse judicetur. </p>\n<p> [[538.12]] Ubi Hanoveram reversus fuero, quod mox fiet, facilius ad commercia literaria aliquid\n[[538.13]] conferre potero. Interea vale et fave. Dabam Berolini 5. Feb. 1707 </p>\n<p> [[538.14]] deditissimus G. G. Leibnitius </p>\n","number":"173.","title":"LEIBNIZ AN BARTHÉLEMY DES BOSSES","date":"Berlin, 5. Februar 1707. [166.196.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

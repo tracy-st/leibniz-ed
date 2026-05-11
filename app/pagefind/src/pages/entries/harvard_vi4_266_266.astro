@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_266","series":"Band VI 4 (1677 - 1690)","seq":266,"text":"[[1037.26]] <b>222₁.  Auszug AUSZUG </p>\n<p> [[1038.1]] [ad p. 11] Possible intellectuel, polygone de 100 000 costés. </p>\n<p> [[1038.2]] [ad p. 11 sq.] Possible naturel dont les causes sont dans la nature. </p>\n<p> [[1038.3]] [ad p. 13 sq.] Possible selon l'ordre de la nature, ce qui arrive effectivement dans la\n[[1038.4]] suite des causes. </p>\n<p> [[1038.5]] [ad p. 12] Possible naturel est celuy dont un semblable a esté fait. <Fn><i>Daneben</i>: Mariotte.</Fn> </p>\n<p> [[1038.6]] [ad p. 59 sq.] Le Houx est un arbrisseau qui a les feuilles larges piquantes et vertes\n[[1038.7]] en tout temps et le fruit petit et rouge; si une autre plante se trouvoit un jour avec les\n[[1038.8]] memes proprietés, il faudroit adjouter encor quelque autre difference. </p>\n<p> [[1038.9]] [ad p. 65] Definition obscure est un Enigme comme celle de l'ame d'Aristote. </p>\n<p> [[1038.10]] [ad p. 77] Euclide ne devoit pas dire que les cercles ne se coupent en deux points,\n[[1038.11]] mais leur [circonferences]. </p>\n<p> [[1038.12]] [ad p. 155] Un homme qui a 20 000 ecus de bien, ne doit pas le hazarder en un seul\n[[1038.13]] coup contre 100 000 écus, car ces 100 000 gagnés n'augmenteront pas beaucoup son\n[[1038.14]] bonheur, et les 20 000 perdus le rendront miserable. </p>\n<p> [[1038.15]] [ad p. 240] <i>Le sucre est blanc, ce que je vois est blanc, donc c'est du sucre.</i> Ce\n[[1038.16]] sophisme (+ qui trompe les enfans <i>in rebus talibus</i> +) nous fait souvent tomber dans\n[[1038.17]] l'erreur lorsqu'on voit plusieurs signes semblables (+ <i>argumentum in secunda figura\n[[1038.18]] affirmativum</i>. On peche plus souvent contre les regles de la logique qu'on ne croit +). </p>\n","number":"222₁.","title":"Auszug","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

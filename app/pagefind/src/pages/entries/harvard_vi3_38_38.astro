@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_38","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":38,"text":"[[398.6]] <b>38. Geplante fingierte Dialoge </b> <span>398.6;0:63:038:76!      :L:f^</span>.\n[[398.7]] :l^</span>.\n[[398.14]] Dialogus inter Reginam Mariam Medicaeam et P. Berullum, postea Cardinalem.\n[[398.15]] La Reine luy conte qu'elle n'a pas dormi cette nuit à cause d'un mal de dent, et qu'elle\n[[398.16]] a esté travaillée d'étranges pensées, qu'il luy est venu dans l'esprit ce qu'elle avoit veu\n[[398.17]] quelques jours auparavent en passant de son appartement par un escalier derobé,\n[[398.18]] qu'une grosse vilaine araignee attrapoit une mouche, la tiroit dans son trou, et l'achevoit\n[[398.19]] miserablement que là dessus il luy est venu la pensée, que le Diable traitoit de\n[[398.20]] méme les ames de ceux qui meurent dans le peché, et que Dieu a voulu representer\n[[398.21]] cela par la. Elle fait une preface que cette idee est triste; le pere Berulle apres luy avoit\n[[398.22]] donné à connoistre, que le Diable est plus mechant et plus terrible infiniment, vient\n[[398.23]] peu à peu à ce point important, qu'il ne faut pas que la crainte des enfans soit le motif\n[[398.24]] principal de nostre pieté.\n[[399.1]] Dialogue entre le Pape Alex. VII. et le Card. Pallavicini de la reforme de l'Eglise.\n[[399.2]] Le Cardinal tache de faire comprendre au pape par certains points de la Scholastique,\n[[399.3]] que Dieu méme ne fait pas les choses optimo modo. Le pape est d'un sentiment\n[[399.4]] contraire. Le Cardinal se rend. Mais il tache de faire comprendre au pape qu'il se faut\n[[399.5]] garder des réformes ideelles, et que la vertu et la volupté ne sont pas incompatibles.\n[[399.6]] Autre dialogue entre le Pape Innocent XI et le Cardinal Cibo son premier ministre.\n[[399.7]] Dialogue entre le Cardinal de Richelieu et Mons. de Groot touchant la reconciliation\n[[399.8]] des religions.\n[[399.9]] Dialogue entre Mons. le Prince de Conti, et Mons. l'Evesque d'Alet de la Restitution.\n[[399.11]] Dialogue entre la Reine Christine et Mons. des Cartes de l'ame du monde.\n[[399.12]] Dialogue entre le Roy Jacques et le Chancelier Bacon de l'importance de la\n[[399.13]] Philosophie naturelle.\n[[399.14]] Dialogue entre le Roy Jacques et Mons. Casaubon de l'importance de l'étude des\n[[399.15]] belles lettres.\n","number":"38.","title":"Geplante fingierte Dialoge","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

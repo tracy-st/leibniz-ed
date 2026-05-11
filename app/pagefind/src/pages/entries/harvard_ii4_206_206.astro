@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_206","series":"Band II 4 (1701 - 1707)","seq":206,"text":"<p> [[649.1]] <b>206. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[649.2]] Venedig, 29. Juli [1707]. [204.208.] </b></p>\n<p> [[649.8]] Venetia 29 Luglio\n [[649.9]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[649.10]] Nell'Ordinario caduto trasmessi una lunghissima lettera a V. S. Ill^#'m^#'a prendendomi la\n[[649.11]] libertà di palesarle con tutta confidenza il mio desiderio, con implorare le stimati^#'m^#'e sue gratie e\n[[649.12]] benefico patrocinio, sicuro che V. S. Ill^#'m^#'a che m'hà con tanta bontà senza mio merito alcuno\n[[649.13]] beneficato e favorito in tante occasioni, voglia ora in una tanta congiuntura fare conoscere\n[[649.14]] all'Italia tutta gli effetti della sua protetione e somma beneficenza verso di me, tanto piu che\n[[649.15]] coll'ultime lettere di Roma viene scritto essere arrivata cola staffetta di Napoli coll'avviso che\n[[649.16]] le Città della Sicilia non avessero voluto ricevere il Duca di Sesto, che n'era stato eletto Vicerè\n[[649.17]] da Carlo d'Angiu, avendo gia il Regno acclamato Carlo Terzo, mandati Ambasciatori a Napoli\n[[649.18]] per rendere omaggio d'obbedienza a Carlo Terzo. Il che anche se non fosse accaduto, certamente\n[[649.19]] che succederà attesa la dispositione de Siciliani giurati Inimici de francesi, ed in\n[[649.20]] necessita di dimorare uni<angle bracket>t</angle bracket>i con il Regno di Napoli, gia quasi ora tutto con una insolita felicità\n[[649.21]] di Carlo Terzo che qui non si dubita sia finalmente per avere tutta la Monarchia di Spagna, il\n[[649.22]] che poi sarebbe fuori d'ogni dubio, quando Dio favorisse la presente impresa del Duca di\n[[649.23]] Savoia che forte di 50 000 bravi Combattenti sostenuto dalla poderosa e terribile flotta de gli\n[[649.24]] Angliolandi, avendo gia penetrata la Provenza si crede gia ora sotto Tolone, che doveva essere\n[[649.25]] attaccato alli 22 del corrente per mare e per terra. Sono percio le cose dell'una e l'altra Sicilia\n[[649.26]] disposte a nostro favore in maniera, che V. S. Ill^#'m^#'a con guadagnarmi l'alta protettione della\n[[649.27]] nuova Regina potrebbe restituire l'onore alla mia sventurata casa, e rendere consolata dopo\n[[649.28]] tante disgratie la mia vecchiaia, con beneficare una sua Creatura, che le vive tanto obligata e le\n[[650.1]] darebbe in tutte l'occasioni certissimi contrasegni dell'inalterabile sua gratitudine. L'amico da\n[[650.2]] Vicenza m'hà scritto d'avere già raccolto una gran cesta di mori, che adesso si seccano per poi\n[[650.3]] cavarne i semi, che m'avviserà della loro quantità, attendendone però d'altre parti, con speranza\n[[650.4]] che non saremo lontani da quella quantità che si desidera. A Dio piacendo nella ventura\n[[650.5]] settimana spero consegnare ben custoditi in una scatola questi semi al Sig^#'r^#'e Zanovelli accio con\n[[650.6]] tutta diligenza li le faccia quanto prima capitare. Hò attentamente lette le sue dottissime\n[[650.7]] riflessioni di cui ella mi favorì nel suo foglio passato, che m'han dato un grand^#'m^#'o lume per\n[[650.8]] regolare meglio le mie meditationi[,] qui però ora il caldo è cosi eccessivo che mi pare essere\n[[650.9]] nell'Africa, e non sono capace di niuna applicatione, e divotamente riverendola mi rassegno </p>\n<p> [[650.10]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o <angle bracket>Div^#'m^#'o</angle bracket> S^#'r^#'e vero M. A. Fardella </p>\n<p> [[650.11]] [<i>Die Ausführungen auf Bl. 136b sind wohl ein Nachtrag zu unserem Brief.</i>] </p>\n<p> [[650.12]] La carica di Giudice della Monarchia in Sicilia non è di sua natura perpetua, ma amovibile,\n[[650.13]] non si suole però giamai torre, senza prima allocare il Soggetto che la possiede in\n[[650.14]] qualche altro insigne e nobile nicchio. Presentemente il Prelato che hà esercitato questa\n[[650.15]] Giudicatura per molti anni questa carica in Sicilia n'è stato gia rimosso, essendosi portato dalle\n[[650.16]] Spagne in Palermo un altro Soggetto per esercitarla, ma non ne hà ancora preso il possesso, per\n[[650.17]] non essere ancora vacato posto [proprio] da potervi collocare il primo: Ne uno ne l'altro poi\n[[650.18]] credo che sia per conservarsi nella sudetta carica nel caso che la Sicilia all'esempio di Napoli si\n[[650.19]] sottometta all'Austriaco Dominio, come ben presto accaderà, onde con il prevenire ogn'altro\n[[650.20]] nuovo impegno si potrebbe facilmente colpire al segno[.] </p>\n","number":"206.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 29. Juli [1707]. [204.208.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

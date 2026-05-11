@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Translation Feature</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-result {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        .success { border-color: #10b981; background: #d1fae5; }
+        .error { border-color: #ef4444; background: #fef2f2; }
+        .info { border-color: #3b82f6; background: #dbeafe; }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Translation Feature Test</h1>
+
+    <div class="test-result info">
+        <h3>Testing Entry Page Translation Feature</h3>
+        <p>Loading the Harvard II 1 212 entry page to test if text displays correctly...</p>
+    </div>
+
+    <div id="test-results"></div>
+
+    <h2>Live Preview:</h2>
+    <iframe src="http://localhost:4321/entries/harvard_ii1_212_212/" id="test-frame"></iframe>
+
+    <div class="test-result info">
+        <h3>Expected Results:</h3>
+        <ul>
+            <li>✅ Two view toggle buttons: "Translation View" and "Scholarly View"</li>
+            <li>✅ Translation view shows continuous German text without [[x.x]] line numbers</li>
+            <li>✅ Scholarly view shows original formatting with line numbers</li>
+            <li>✅ Line numbers reference appears below translation text</li>
+            <li>✅ Both views can be switched using the buttons</li>
+        </ul>
+
+        <h3>To Test Translation:</h3>
+        <ol>
+            <li>Navigate to the entry page in the iframe above</li>
+            <li>Ensure "Translation View" is selected (should be default)</li>
+            <li>Right-click on the continuous text</li>
+            <li>Select "Translate to English" (Chrome) or your browser's translate option</li>
+            <li>The text should translate smoothly as one continuous passage</li>
+        </ol>
+    </div>
+
+    <script>
+        // Test the iframe content after it loads
+        const iframe = document.getElementById('test-frame');
+        const resultsDiv = document.getElementById('test-results');
+
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = `<h4>${message}</h4>`;
+            resultsDiv.appendChild(div);
+        }
+
+        iframe.onload = function() {
+            setTimeout(() => {
+                try {
+                    // Note: Due to CORS, we can't directly access iframe content from file://
+                    // But we can test if the iframe loaded successfully
+                    addResult('✅ Entry page loaded successfully', 'success');
+                    addResult('Check the iframe above to verify the translation and scholarly views are working', 'info');
+                } catch (error) {
+                    addResult(`❌ Error testing iframe: ${error.message}`, 'error');
+                }
+            }, 1000);
+        };
+
+        iframe.onerror = function() {
+            addResult('❌ Failed to load entry page - make sure preview server is running', 'error');
+        };
+    </script>
+</body>
+</html>

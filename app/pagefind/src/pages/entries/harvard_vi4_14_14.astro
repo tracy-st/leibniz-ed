@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_14","series":"Band VI 4 (1677 - 1690)","seq":14,"text":"[[40.1]] <b>10₄.  Notae criticae circa omittenda in lingua rationali </p>\n<p> [[40.5]] <p>Wilkinsius recte notat part. 3, cap. I. pag. 303 verbum in naturali grammatica omitti\n[[40.6]] posse, esse enim nihil aliud quam adjectivum cum copula, <i>caleo</i>, id est <i>sum calidus</i>. Sed\n[[40.7]] eodem jure et adverbia tollere poterat nominibus solis retentis, nam adverbium se habet\n[[40.8]] ad verbum, ut adjectivum ad nomen substantivum. Ita haec duo: <i>valde potito</i>, et <i>sum\n[[40.9]] magnus potator</i>, idem significant. </p>\n<p> [[40.10]] Nec video etiam cur <i>calor</i> ei sit concretum, <i>caloritas</i> abstractum. Pari jure etiam\n[[40.11]] abstractum abstracti porro formare potuisset, dicendo <i>caloritatitas</i>. </p>\n<p> [[40.12]] <i>Calefactivitas</i> quoque non est abstractum calefactionis, sed est abstractum peculiare,\n[[40.13]] differens a calefactione, ut potentia ab actu. </p>\n<p> [[40.14]] Omisisse se ait in <i>Charactere universali</i> quae certis locis et temporibus propria sunt,\n[[40.15]] ut titulos honorum et officiorum, gradus Academicos, vocabula Jurisconsultorum, Heraldica\n[[40.16]] ut <i>Chevron</i>, vestituum formas, genera pannorum, ludorum, potuum, cibariorum,\n[[40.17]] compositionum pharmaceuticarum, Musicorum modorum atque instrumentorum,\n[[40.18]] instrumentorum mechanicorum, sectarum philosophicarum, politicarum, theologicarum.\n[[40.19]] Sed quaecunque certas constantesque definitiones habent, ea etiam exprimi possunt\n[[40.20]] universali charactere, et licet res non sint perpetuae sed temporibus certis locisve propriae,\n[[40.21]] notio tamen sive idea earum perpetua est, alioqui et plantae certarum regionum\n[[40.22]] excludi deberent. Quod vero ait, haec si opus paraphrastice exprimi posse, id fateor; sed\n[[40.23]] respondeo si character philosophicus recte constitutus sit ipsam paraphrasticam expressionem\n[[40.24]] contractam sine ullo alio novo molimine vocem exhibere debere. </p>\n","number":"10₄.","title":"Notae criticae circa omittenda in lingua rationali","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

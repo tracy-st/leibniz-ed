@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_516","series":"Band VI 4 (1677 - 1690)","seq":516,"text":"[[2298.1]] <b>406.  Annotatiunculae praeparatoriae ad opuscula apologetica [1685 (?)]</b>\n [[2298.2]] <tab/>[1685 (?)] </p>\n<p> [[2298.15]] Augustini lib. 4. <i>De Trinitate: contra rationem</i> <i>nemo sobrius, contra scripturam</i>\n[[2298.16]] <i>nemo christianus, contra Ecclesiam nemo pacificus senserit</i>. </p>\n<p> [[2298.17]] <i>Apologia</i> <i>fidei Catholicae ex recta ratione</i>. </p>\n<p> [[2298.18]] Nulla esset obligatio credendi nisi Deus ipse per rationem in nobis loquens notas\n[[2298.19]] suppeditasset quibus verbum Dei a verbo impostoris discerneretur. Christus ipse <i>nisi me\n[[2298.20]] audissent peccatum non haberent</i>. </p>\n<p> [[2298.21]] Ipsi Theologi protestantium coacti sunt Theoriam suam a praxi sejungere et eo ipso\n[[2298.22]] testimonium contra se perhibent, neque enim aliis concedunt libertatem quam sibi sumserunt.\n[[2298.23]] Anabaptistae autem et Tremuli aliique id genus homines cum theoriam protestantium\n[[2298.24]] circa disciplinam ad praxin transtulissent illam horrendam confusionem introduxerunt\n[[2298.25]] in qua cuivis quicquid in mentem venit tanquam dictatum divini spiritus dicere et\n[[2298.26]] facere fas habetur. Antitrinitarii autem et similes cum eandem Theoriam ad praxin\n[[2298.27]] transtulissent circa doctrinam jam pene ad nihilum apud eos redacta sunt Christianae fidei\n[[2298.28]] mysteria. </p>\n<p> [[2299.1]] <i>Eines</i> <i>friedfertigen patrioten einfältige gedancken uber die friedfertigkeit so die\n[[2299.2]] franzosen in ihrem bekandten project und in der declaration von 28 September jungst zu\n[[2299.3]] Frankfurt an tag gegeben 1682</i>. 4^#'o, 1 boge wohlgeschrieben. </p>\n","number":"406.","title":"Annotatiunculae praeparatoriae ad opuscula apologetica","date":"[1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

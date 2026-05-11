@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_203","series":"Band II 3 (1695 - 1700)","seq":203,"text":"<p> [[537.1]] <b>203. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[537.2]] Dijon, 12. März 1699. [195.213.]</b></p>\n\n<p> [[537.21]] Dijon le 12. Mars <b>1699</b> </p>\n<p> [[537.22]] Voilà <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> enfin monsieur la reponse du p. Bonjour à mons^#'r Ludolfe. J'i joincts la copie de la\n[[537.23]] derniere lettre du Roy au Pape, et celle que mons^#'r l'abbé de la Charmoye autrement Dom Paul\n[[537.24]] Pezron auteur de <i>l'Antiquité des tems</i> m'a écript[e], touchant <b>l'origine des nations</b>; la\n[[537.25]] lettre du Roy au Pape luy a produit un bref du S^#'t Pere qui luy promet une prompte decision du\n[[537.26]] livre de mons^#'r de Cambray accompagné de beaucoup de compliments qui font croire aux\n[[537.27]] speculatifs que Rome ne decidera que le plus tard qu'elle pourra ce que le Roy reconnoissant\n[[538.1]] assés, et ennuyé de ce retard a convoqué à Versailles plusieurs eveques qui y doivent concerter\n[[538.2]] une reponse à ce bref, pour [qu']au cas que Rome n'y ayt pas d'egard, ils avisent à ce qu'ils\n[[538.3]] auront à faire; en verité mons^#'r de Cambray se seroit bien passé de troubler la paix de l'eglise\n[[538.4]] comme il a faict par son livre mystique et metaphysique que peu de personnes comprennent,\n[[538.5]] non pas même luy, comme l'on luy reproche. On ne voit point <i>cui Bono</i> il a produit un systeme\n[[538.6]] si bizarre et si particulier si non pour se distinguer et se faire des fastes dans le monde; il ne\n[[538.7]] laisse pas d'ecrire tous les jours aussi bien que mons^#'r de Meaux; mais l'on est si las de tout cela\n[[538.8]] qu'on ne s'avise pas de lire leurs ouvrages; on lit plutost les <i>dialogues</i> attribués à la Bruyere et\n[[538.9]] celluy de Nicodeme et de Bonnefoy son compere qu'on attribue à une demoiselle fille d'un\n[[538.10]] procureur du parlement de Paris, que je ne doubte qu'on vous aura envoyé. Ces sortes de\n[[538.11]] questions bizarres sont plus propres à estre raillées qu'à estre traitées serieusement comme ont\n[[538.12]] faict mons^#'r de Meaux et les autres; cette miserable controverse trouble non seullement la\n[[538.13]] tranquillité des fideles comme dit le Roy dans sa lettre, mais ruine entierement la rep. des lettres\n[[538.14]] car l'on n'imprime plus rien de bon en France; mons^#'r Graevius m'a envoyé le Callimaque et les\n[[538.15]] lettres de Gudius aux scavants et des scavants à Gudius et celles de mons^#'r Sarrau entieres et\n[[538.16]] parfaictes trouvées dans le cabinet de m^#'r Gudius. J'ay felicité mons^#'r de Spanheim sur son vaste\n[[538.17]] et scavant commentaire sur Callimaque; il me temoigne bien de la joye dans ses dernieres de\n[[538.18]] l'heureux retour de monseig^#'r d'Avranches à Paris. Ce scavant prelat regarde Callimaque comme\n[[538.19]] son poete favori, il me prie toujours dans les siennes de vous faire ses compliments. Il me\n[[538.20]] marque dans sa derniere qu'il ne respire que pour vostre <i>Codex Juris gentium diplomaticus</i>, et\n[[538.21]] qu'il veûst mal à vostre imprimeur de n'en avoir point envoyé en France; un de mes amis de\n[[538.22]] Paris qui en avoit veû un exemplaire chés mons^#'r Toinard à qui vous en aviés faict present\n[[538.23]] m'ecrivit qu'il s'etonnoit que vous aviés oublié ce prelat, et en rejettoit la faulte sur m^#'r Leers;\n[[538.24]] faictes part à mons^#'r Morell de la lettre de m^#'r l'abbé de la Charmoye et de celle du Roy; Je suis\n[[538.25]] Mons^#'r tout à vous </p>\n<p> [[538.26]] Nicaise </p>\n","number":"203.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 12. März 1699. [195.213.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

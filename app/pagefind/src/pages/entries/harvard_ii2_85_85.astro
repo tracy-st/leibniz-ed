@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_85","series":"Band II 2 (1686 - 1694)","seq":85,"text":"<p> [[348.6]] <b>86. LEIBNIZ AN ERHARD WEIGEL</p>\n<p> [[348.7]] September 1690. [263.]</b></p>\n<p> [[348.16]] Ex literis meis ad Weigelium Septembr. 1690 </p>\n<p> [[348.17]] Inter alia ostendi si planetis tribuatur duplex motus, unus paracentricus accedendi ad\n[[348.18]] solem tamquam centrum, aut a sole recedendi cujuscunque denique legis seu regulae, alter vero\n[[348.19]] circulandi circa solem, et quidem circulatione Harmonica hoc est tali ut distantiis a sole sumtis\n[[348.20]] in progressione Arithmetica velocitates circulandi sint in progressione Harmonica (quod fit si\n[[348.21]] velocitates sint distantiis reciproce proportionales), tunc planetam moveri secundum legem a\n[[349.1]] Keplero ex observationibus ductam, ut scilicet areae orbitae ex sole radiis eductis abscissae sint\n[[349.2]] temporibus proportionales. </p>\n<p> [[349.3]] Puto etiam Te specimina vidisse novae cujusdam analyseos a me inventae, cujus ope circa\n[[349.4]] indivisibilia (hoc est infinite seu incomparabiliter parva) et infinita ratiocinor perinde ut in\n[[349.5]] quantitatibus ordinariis. Eaque ratione lineas transcendentes (ut appello) quas Cartesius sua\n[[349.6]] Geometria et Analysi excluserat, calculi legibus subjicio. </p>\n<p> [[349.7]] Cum sciam multa Te habere praeclara cogitata atque inventa in Mathematicis imo et in\n[[349.8]] Philosophicis, ea hortor admodum ut compendio edas nec invideas publico. Equidem multos\n[[349.9]] Tibi adhuc annos et opto et auguror. Nemo tamen sibi quicquam promittere potest. Et publica\n[[349.10]] utilitas (post Dei cultum) prima nostrarum Actionum lex esse debet. Fateor ingratitudinem\n[[349.11]] hominum saepe nihil tale mereri. Sed cogitandum est, nobis cum Deo potius qui in publicum\n[[349.12]] collata sibi imputat, quam hominibus rem esse, sed nec deesse aut defore qui sciant aestimare\n[[349.13]] inventa. </p>\n<p> [[349.14]] Unum adhuc adjicio venia Tua. Habere nimirum velim favore tuo, adolescentem quendam\n[[349.15]] ingenii excitati, et tam in Mathematicis quam caeteris ad praeclara tendentem sed qui forte ob\n[[349.16]] rem domi angustam ope indigeat, et aliis inservire sit paratus, de caetero moribus bonis et stylo\n[[349.17]] jam tum valens. Is apud me fortasse inveniret initia ad majores successus. Vale. </p>\n","number":"86.","title":"LEIBNIZ AN ERHARD WEIGEL","date":"September 1690. [263.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

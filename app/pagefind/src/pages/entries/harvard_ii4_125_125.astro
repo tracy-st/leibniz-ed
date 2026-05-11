@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_125","series":"Band II 4 (1701 - 1707)","seq":125,"text":"<p> [[411.10]] <b>125. LEIBNIZ AN ISAAC JAQUELOT</p>\n<p> [[411.11]] [Hannover, nach dem 19. Februar 1706]. [89.129.] </b></p>\n<p> [[411.19]] Monsieur </p>\n<p> [[411.20]] J'esperois <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Monsieur Jaquelot predicateur ordinaire du Roy à Berlin</Fn> l'honneur de vous voir cet hyver, mais la saison et des occupations ne me le\n[[411.21]] permettront que vers paque, et je souhaite de vous trouver en parfaite santé. </p>\n<p> [[412.1]] Ayant envoyé il n'y a pas long temps à M. de Beauval Banage un petit memoire touchant\n[[412.2]] la controverse qui est entre Messieurs Bayle et le Clerc (où j'avois esté touché); à fin qu'il fut\n[[412.3]] inseré dans son <i>Histoire des ouvrages</i>, il me repondit de l'avoir fait, et me defie à cette occasion\n[[412.4]] de repondre aux objections que M. Bayle avoit proposées et renforcées contre les verités de la\n[[412.5]] religion, sur la liberté et la predestination. Il semble que cela vient de M. Bayle luy même; je\n[[412.6]] repondis à M. de Beauval par avance que j'estois d'avis qu'on ne devoit point se hazarder\n[[412.7]] facilement de vouloir donner la raison et l'explication des mysteres: mais que je croyois que ce\n[[412.8]] n'estoit pas trop pretendre, que de s'engager à repondre aux objections; et que cela suffisoit\n[[412.9]] pour maintenir la Conformité de la Foy avec la raison. Il me semble en effect que cet illustre\n[[412.10]] Auteur confond dans son <i>Dictionnaire</i> et ailleurs ces deux points, qui dans le fonds reviennent à\n[[413.1]] la distinction de ce qui est au dessus et de ce qui est contre la raison. Car si on pouvoit expliquer\n[[413.2]] parfaitement les mysteres et en rendre pleinement raison, ils ne seroient point au dessus de la\n[[413.3]] raison; mais si on ne pouvoit pas repondre aux objections, ils seroient contre la raison. </p>\n<p> [[413.4]] Il faut avouer cependant, que ce dernier point qui est de repondre aux objections n'est\n[[413.5]] point sans difficulté quelques fois, ce qui a fait que dans toutes les Eglises certains auteurs ont\n[[413.6]] laissé echapper des expressions qui pourroient estre tournées au desavantage de la religion, si\n[[413.7]] on les prenoit à la rigueur. Cependant quand ils ont parlé exactement ils sont revenus à la\n[[413.8]] distinction dont je viens de parler. </p>\n<p> [[413.9]] Pour moy j'ay examiné ces matieres de la liberté et de la predestination depuis l'age de 15\n[[413.10]] ans, ayant lû des lors Luther <i>de servo arbitrio</i>, et Valla contre Boëce, et quelques Scholastiques,\n[[413.11]] sans parler des nos auteurs ordinaires. J'en conferay depuis avec Messieurs de Walenburch à\n[[413.12]] Mayence, avec feu M. Fabritius à Heidelberg, et avec M. Arnaud à Paris, j'ay même echangé\n[[413.13]] des lettres avec le dernier. Et il m'a paru, qu'on pouvoit traiter solidement ces points de la\n[[413.14]] Theologie, qui servent à décharger Dieu de l'imputation du mal, et ceux de la religion revelée\n[[413.15]] qui nous exemtent d'accorder une damnation absolue avant le rapport au peché. Ce qui monstre\n[[413.16]] aussi comment on peut lever les difficultés sur l'ordre des decrets, et comment la certitude des\n[[413.17]] futurs et leur prevision est compatible avec la liberté et avec la contingence. Ainsi j'ay trouvé\n[[414.1]] qu'en donnant aux Termes des Notions distinctes et exactes, on peut satisfaire aux objections\n[[414.2]] avec beaucoup de facilité, et on vient à des ouvertures et à des veues, qui pour n'estre pas tout à\n[[414.3]] fait non vulgaires en part, ne laissent pas devoir cela de bon qu'elles menent à des conclusions\n[[414.4]] les plus conformes aux notions les plus communes, et qu'elles fournissent les expressions les\n[[414.5]] plus convenables. On s'eloigne des Supralapsaires aussi bien que des Pelagianisans, et on\n[[414.6]] trouve que la difference entre les Augustiniens et les Theologiens de la confession d'Augsbourg\n[[414.7]] n'est pas si grande qu'on pense. </p>\n<p> [[414.8]] Le Mal est, que d'autres distractions m'empechent de ranger mes pensées comme il faut.\n[[414.9]] Si un jour on me donnoit le loisir de m'arrester un peu chez vous, j'y employerois ce loisir.\n[[414.10]] Mais quand je suis icy, vous pouves bien juger Monsieur, que je songe à toute autre chose. Au\n[[414.11]] reste </p>\n","number":"125.","title":"LEIBNIZ AN ISAAC JAQUELOT","date":"[Hannover, nach dem 19. Februar 1706]. [89.129.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

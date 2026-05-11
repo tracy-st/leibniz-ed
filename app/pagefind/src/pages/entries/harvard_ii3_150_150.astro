@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_150","series":"Band II 3 (1695 - 1700)","seq":150,"text":"<p> [[401.1]] <b>150. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[401.2]] Wolfenbüttel, 20. (30.) Dezember 1697. [120.154.]</b></p>\n\n<p> [[401.12]] Wolgebohrener Herr Hochgeneigter Herr </p>\n<p> [[401.13]] Ich habe solang mit schreiben verzogen, bis ich was zu schreiben hätte. Der HofM.\n[[401.14]] eifersucht, der Edelleüte gallicismus u. liderligk. schneiden alle hofnung zu Collegiis ab, wozu\n[[401.15]] auch zweier Inspectorum falschheit kömt. Weil nun auf dise laquayen besoldung nicht zuleben,\n[[401.16]] wird hochnöthig sein, beim Grafen alles mögliche zu versuchen, weil ich sonst mit der\n[[401.17]] vertröstung hiher kommen, daß ich nicht nur was in Hannover aufgangen, sondern auch was auf\n[[401.18]] den Merz zur reise nöthig, fix bekommen möchte. Der catalogus erfodert zwar mehr kopfbrechens\n[[401.19]] als ich gemeint, doch würde di gewonheit leicht aufmuntern, wenn küpfern geld nicht\n[[401.20]] küpferne affecten machte u. die erwegung der unbilligk., daß di Verrichtung des geringern mit\n[[401.21]] 2-300, di Verrichtung des schwerern mit 100 bezahlt wird, unlust erwekte, sonderlich wenn\n[[401.22]] man über dieses schon 3 mal soviel gehabt: ich dächte, eine Verehrung von <angle bracket>50</angle bracket> Thl. nebst der\n[[401.23]] Tafel, wäre vor <zl>^#h(+5)1<ne>2<be> jahr, ohne erwehnung einer besoldung nicht zu viel; holz, stube u. das N. jahr\n[[401.24]] am tisch, werden gerade die 25 wegnehmen, wo bleibt das übrige? </p>\n<p> [[401.25]] Wenn mir aus Leipzig von Apoteker Linken 3, 4 brechpulver könten verschaft werden,\n[[401.26]] weil ich keinen bekanten da habe, wäre mirs ein überaus großer dienst. </p>\n<p> [[401.27]] Di untersuchung vom punct hätte wol mitgeschikt, aber beim catalogo viel u. adcurat thun\n[[401.28]] wollen, erfodert mehr Zeit, als man meint, ehe mans versucht: ich nehme wol 6, 7 Zettel in di\n[[402.1]] hand, di grillen erfodern, ehe einer kömt, der sein kästchen selbst gleich meldet, weil der\n[[402.2]] klaren, historis., physicalis. u.s.f. wenig, der metaphysisch theologis. so viel sind; und wenn ja\n[[402.3]] entweder an Vielheit oder adcuration mangeln sol, wil ichs liber laßen am ersten mangeln: doch\n[[402.4]] sol di Unterred. vom punct bald folgen. Der Vice HofM. ist zieml. falsch, der StalM. aber sehr\n[[402.5]] störrisch gegen mich, weil ich aus unwißenh., daß er vor jenem di <angle bracket>Stele</angle bracket> hat, ihm nicht eher\n[[402.6]] zugesprochen, als bis er mirs selbst an di <angle bracket> - - -</angle bracket>ßen: der OberMarschal ist freündl; hat doch\n[[402.7]] zum Herzog mich zuführen, weit hinaus gestelt. Das register meiner philosophorum möchte\n[[402.8]] wol wieder haben, weils sonst könnte in Vergeßenh., auch bei mir selbst, gerathen. Womit mich\n[[402.9]] befehle u. verbl. </p>\n<p> [[402.10]] Wohlgebohrner Hr., dero Gehors. G. Wagner </p>\n<p> [[402.11]] Wolfenb. 20. Dec. 97. </p>\n","number":"150.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Wolfenbüttel, 20. (30.) Dezember 1697. [120.154.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

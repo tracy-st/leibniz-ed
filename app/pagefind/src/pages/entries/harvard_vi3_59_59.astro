@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_59","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":59,"text":"[[471.59]] <b>59. Linea infinita est immobilis </b> <span>471.0;0:63:059:76!      :L:l^</span>.\n[[471.2]] 3. Januar 1676\n[[471.7]] 3 Ianuar. 1676.\n[[471.8]] Linea infinita est immobilis.\n[[471.9]] Sit linea AB infinita a parte B quae motu transferenda sit in AC. Sit inter B et C\n[[471.10]] ipsa DE parallela AC. Quando perveniet in AC, erit tota infra DE, et in quocunque\n[[471.11]] puncto ponatur, ut in AF, erit pars ejus infinita supra DE. Unde si AC ponatur\n[[471.12]] perfecte interminata, seu si nullum sit punctum\n[[471.13]] ultimum, necesse est, ut tandem simul tota illa\n[[471.14]] linea interminata infra DE descendat, totaque\n[[471.15]] spatium interjectum simul conficiat, id est ut sit\n[[471.16]] in pluribus locis. Atopon. Hinc videtur probari\n[[471.17]] interminatum corpus esse immobile. Etiamsi angulum FC facias infinite parvum,\n[[471.18]] tamen idem semper locum habebit, proportionaliter quod in his magnis. Similis enim\n[[471.19]] figura duci potest, supponendo ipsam BC infinite parvam.\n","number":"59.","title":"Linea infinita est immobilis","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

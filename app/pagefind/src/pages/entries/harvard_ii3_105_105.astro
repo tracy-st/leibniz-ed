@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_105","series":"Band II 3 (1695 - 1700)","seq":105,"text":"<p> [[281.14]] <b>105. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[281.15]] Hamburg, 6. (16.) März 1697. [103.107.]</b></p>\n\n<p> [[282.1]] HochEdler, Vest= und Hochgelehrter Herr, Hochgeneigter Hr. HofRaht </p>\n<p> [[282.2]] Das glük hindert mich ziemlich, di bedienung bei dem Hrn. Grafen anzutreten, u. welches\n[[282.3]] das meiste, dem Hrn. HofRaht aufzuwarten: di flüße haben mich von neüen so hart überfallen,\n[[282.4]] daß si nicht nur durch zähe schmerzen, von denen ich doch <angle bracket>(die</angle bracket> erste jugend ausgenommen)\n[[282.5]] jeder Zeit frei gewesen, den bakken sondern auch das eine auge so stark aufgetriben, daß ich\n[[282.6]] einer misgeburt ähnlicher als einem menschen gesehen, nun 5 tage: alle andere Zufälle zuerzehlen,\n[[282.7]] ist unnöthig. Hibei befürchte nun, dass der Hr. Graf ungedultig worden, u. eine ungnade auf\n[[282.8]] mich werfen möchte ehe ich einmal zu ihm komme: bitte derowegen gehorsamst, bei gelegenh.\n[[282.9]] alles gut zumachen, u. unbeschwert zuberichten, wi er gesinnet sei. Indem ich aber zum\n[[282.10]] schreiben wenig ruhe habe, schließe ich, u. befehle mich Ihrer hohen gewogenheit, </p>\n<p> [[282.11]] als M. Hochgeneigten Hn. HofRahts unterdienstl. G. Wagner </p>\n<p> [[282.12]] Hamb. 6. Merz 97. </p>\n<p> [[282.13]] P.S. Solte ich wieder gesund werden, ehe ich von Ihnen antw. bekähme, wil ich mich doch\n[[282.14]] auf di reise machen, in hofnung, der Hr. Graf werde noch vorigen sinnes sein u. di Verzögerung,\n[[282.15]] di von mir nicht herrührt, mir nicht zurechnen. Dise ungelegenheit ist mir auch verdrieslich,\n[[282.16]] daß bei disem Zustande, di reisegelder ziemlich drauf gehen u. di itzigen Zuhörer, nach\n[[282.17]] ankündigung des abzuges mich nicht bezahlen wollen, mich dadurch zwingen bei ihnen\n[[282.18]] zubleiben; weswegen si mir auch noch 100 Thl. jährl. zulegen wollen, u. auf allerlei art\n[[282.19]] Bükenburg zu verleiden suchen; doch hab ich mich bei ihnen auf keine Zeit verbunden, bleib\n[[282.20]] also frei, u. des sinnes, zureisen, so schier ich gesundh. wegen geschikt bin. </p>\n<p> [[282.21]] Mein Brief ist abzugeben, auf dem H. Geist Kirchhofe, bei Hrn. Putensen.\n[[282.22]] <yi>Dem HochEdlen, Vest= und Hochgelehrten Herrn, Hrn. Gotfried Wilhelm Leibniz, Ihr.\n[[282.23]] Churf. Durchl. zu Braunschw. HochVerordneten HofRaht, u.a. m. etc. Hannover. Franco. </p>\n","number":"105.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Hamburg, 6. (16.) März 1697. [103.107.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

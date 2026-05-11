@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_78","series":"Band II 3 (1695 - 1700)","seq":78,"text":"<p> [[203.1]] <b>78. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[203.2]] [Hannover, nach dem 12. Oktober 1696.] [77.115.]</b></p>\n\n<p> [[203.14]] <i>Phlebotomiae damnatae</i> libellum ut apparet non ineruditum, cum Ongarello accepi, et\n[[203.15]] gratias pro hoc quoque ago. Vereor tamen ut damnari prorsus possit nisi ab eo qui tam egregiis\n[[203.16]] medicamentis sit instructus, ut vicem ejus cum fructu praestare queat. Anceps remedium est, ut\n[[203.17]] pleraque. Cartesius neglectum ejus dicitur vita luisse. Si quid philosophicae difficultatis moveris,\n[[203.18]] candide sententiam dicam. An rem acu tetigerim penes Te judicium erit, ipsam tamen\n[[203.19]] sententiarum mearum connexionem non exiguum habeo judicium veritatis. </p>\n<p> [[203.20]] De Metereologicis quoque non pauca dicenda supersunt. Cl. Ramazzinus insignis apud\n[[203.21]] Mutinenses Medicus, cum observasset Aëris columnam pluvia imminente leviorem fieri, quod\n[[203.22]] dudum Gerickius primus virunculi prophetae inventor notaverat, miratus est non immerito ut\n[[203.23]] ipse in suis eruditis <i>Ephemeridibus</i> testatur, quas mihi transmisit. Causa nulla alia est, quam\n[[203.24]] quod guttae aquae dum dispersae sunt et in aëre sustinentur, cum eo gravitant; ubi vero\n[[204.1]] collectae descendunt, jam aërem non amplius sustinentem exonerant. Proposui eam in rem\n[[204.2]] experimentum in libra peragendum. </p>\n","number":"78.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"[Hannover, nach dem 12. Oktober 1696.] [77.115.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

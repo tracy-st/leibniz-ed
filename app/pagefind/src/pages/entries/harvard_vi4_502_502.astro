@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_502","series":"Band VI 4 (1677 - 1690)","seq":502,"text":"[[2202.6]] <b>394.  De hostia Oktober 1677</b>\n [[2202.7]] <tab/>Oktober 1677 </p>\n<p> [[2202.11]] Octobr. 1677 </p>\n<p> [[2202.12]] Hostia Romanae Ecclesiae est aut creator aut creatura. Si est creator, tunc sequitur\n[[2202.13]] creatorem sive Deum esse rem albam ac rotundam; nam negari non potest hostiam esse\n[[2202.14]] rem albam, rotundam, etc. et Theologi enim defendunt, albedinem quam videmus non\n[[2202.15]] esse apparentem, sed veram. Quare si hostia est Deus, etiam Deus talis res erit. </p>\n<p> [[2202.16]] Item: hostia quae est Romae non est hostia quae est Parisiis: sive plures sunt hostiae,\n[[2202.17]] quoniam vero non sunt plures dii, ideo Deus non est hostia, vel hostia non est Deus. </p>\n<p> [[2202.18]] Ponamus jam hostiam esse Creaturam, tunc aut erit creatura a Deo assumta, veluti\n[[2202.19]] corpus Christi; aut erit simplex creatura. Non est corpus Christi, quod probatur eodem\n[[2202.20]] argumento quo probatum est hostiam non esse Deum. Nam corpus Christi non est\n[[2202.21]] rotundum, hostia est rotunda; et unum est corpus Christi, hostiae sunt plures. </p>\n<p> [[2203.1]] Necesse est ergo, hostiam esse simplicem creaturam; sed hinc jam manifeste sequitur\n[[2203.2]] hostiam non posse adorari, seu non esse objectum cultus latriae.\n[[2203.3]] <b>Suppositiones</b>: </p>\n<p> [[2203.4]] 1) Ita late fusum est institutum missae Romanae, ut multa millia hostiarum consecratarum\n[[2203.5]] non in nostra tantum Europa, sed et aliis terrarum orbis partibus sumantur. </p>\n<p> [[2203.6]] 2) Creatura simplex (id est a Deo non assumta), non debet per se ac proprie adorari\n[[2203.7]] cultu Latriae.\n[[2203.8]] <b>Propositio I.</b> </p>\n<p> [[2203.9]] Hostia non est Deus. </p>\n<p> [[2203.10]] Hostiae consecratae sunt plures <i>per</i> <i>suppos. 1.</i> Deus est unicus. Ergo hostia non est\n[[2203.11]] Deus.\n[[2203.12]] <b>Propositio II.</b> </p>\n<p> [[2203.13]] Hostia non est corpus Christi. </p>\n<p> [[2203.14]] Hostiae consecratae sunt plures, <i>per suppos. 1.</i> Corpus Christi est unicum. Ergo\n[[2203.15]] hostia non est corpus Christi.\n[[2203.16]] <b>Propositio III.</b> </p>\n<p> [[2203.17]] <b>Hostia non debet adorari sive cultu latriae honorari.</b> </p>\n<p> [[2203.18]] Hostia non est Deus (<i>per prop. 1.</i>). Ergo est creatura. Si est creatura, erit aut creatura\n[[2203.19]] a Deo assumta, aut creatura simplex. Non est creatura a Deo assumta, quia non est corpus\n[[2203.20]] Christi (<i>per prop. 2.</i>), animam autem Christi non esse confessum est. Ergo est creatura\n[[2203.21]] simplex. Sed (<i>per</i> <i>suppos. 2.</i>) creatura simplex non debet adorari cultu latriae, Ergo nec\n[[2203.22]] hostia. Q. E. D. </p>\n<p> [[2203.23]] Suppono cum Theologis in Sacramento Eucharistiae nullam esse sensuum deceptionem,\n[[2203.24]] sed albedinem, rotunditatem, caeteraque accidentia non minus esse realia in\n[[2203.25]] hostia, quam in rebus aliis. </p>\n<p> [[2204.1]] Datur hoc loco albedo, datur et rotunditas vera. </p>\n<p> [[2204.2]] Id quod est album, est etiam rotundum. </p>\n<p> [[2204.3]] Datur ergo subjectum albedinis et rotunditatis. </p>\n<p> [[2204.4]] Demonstratum est ergo Hostiam non adorari; sed adorationem terminari in Christum. </p>\n","number":"394.","title":"De hostia","date":"Oktober 1677"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

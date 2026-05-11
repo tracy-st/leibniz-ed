@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_119","series":"Band II 1 (1663 - 1685)","seq":119,"text":"<p> [[330.9]] <b>104. OTTO VON GUERICKE AN LEIBNIZ</p>\n<p> [[330.10]] Magdeburg, 18./28. März 1672. [103.]</b></p>\n<p> [[330.22]] Wohl Edler vest. und hochgelarter etc. </p>\n<p> [[330.23]] Insonders großgünst. hoch geehrter Herr etc. </p>\n<p> [[330.24]] Daß <Fn><i>Das gesperrt Gedruckte wurde wohl von Leibniz unterstrichen.</i></Fn> derselbe mein antworth schreiben vom 1 <i>Martii styl. nov.</i> wohl empfangen habe,\n[[330.25]] will ich hoffen. Meiner darin gethanen zusage nach, uberschicke die <b>Schwäffel kugel vor\n[[330.26]] den Herrn Carcavium</b>, vermuthende daß dieselbe etwa zu gleicher zeitt, mitt meinem\n[[330.27]] <i>Tractatu de Spatio Vacuo</i>, nach Franckfurth kommen werde (den ich alle tage ietzo denselben\n[[330.28]] vom Buchführer zu Amsterdam erwarte) in welchem <i>Tractatu</i> von dieser kugel <i>lib. 4 cap. 15</i>\n[[330.29]] gehandelt wird. </p>\n<p> [[331.1]] Von neüen weiß ietzo nichts besonders zu mälden weil die Hambürger Post morgen erst\n[[331.2]] ankömbtt. Man sagtt daß der Frantzösische <i>Envoié</i>, nuhn von Churbrandenburgk nach Sachsen\n[[331.3]] gegangen sey; waß seine verichtung gewesen sey, ist noch unbekant. Zu Coppenhagen, solle\n[[331.4]] der Frantz. gesante Mons. Trelon hefftig getrohett haben, denen so die Hollendische Partey\n[[331.5]] anträtten würden: Daß der Bischoff von Münster keine Frantzosen einnehmmen und die\n[[331.6]] Colnischen erleichtern helffen will, wird von ihnen ungern gesehen. Zu Hamburgk werden vor\n[[331.7]] den Kayser mitt offen trommelschlagk, 2 Regiment Dragons geworben. Man kan sich noch in\n[[331.8]] Schweden, wohin es incliniren will, nicht gewisse richten; Nuhn sich Spanien bey Holland\n[[331.9]] behelt, wird es mitt Engeland sich umbkehren, dan der gemeine man die handelungen mitt\n[[331.10]] Spanien nicht entrathen kan. Wan meinem hochgeehrten Herrn belibete mitt meinem Sohne zu\n[[331.11]] Hamburgk, Churfürstl. Brandenb. Rathe und residenten im Niedersachs. kreisse, auch Otto von\n[[331.12]] Guericke genant, zu correspondiren, ist Er willig dazu, Ihme kömmett viel zuer hand, und\n[[331.13]] gehett die Post von Hamburgk uff Franckfurth schnälle. Inß Clefische hatt nuhn der Churfürst\n[[331.14]] auß diesen landen uber 4 Regimenter geschicktt und ligen diese gar nahe an die Cölnische. Der\n[[331.15]] H. Administrator zu Magdeburgk will auch lassen 1 Regiment zu Roß und 1 zu Fueß werben,\n[[331.16]] man kan aber nicht wissen voer wehm, oder eigentlich zu welchem ende. Der Churfürst von\n[[331.17]] Sachsen ist ietzo zu Leiptzigk, lassett die Bürgerschafft alda munstern. Sonst ist nichts mehres,\n[[331.18]] als Meinen hochgeehrten Herrn in Gottes schutz empfohlen, Derselbe wende auch abe, daß\n[[331.19]] grosse unheil so da scheinett vor zu stehen, und ich verbleibe </p>\n<p> [[331.20]] Meines hochgeehrten Herrns willigster Diener Otto von Guericke </p>\n<p> [[331.21]] Magdebgk den 18/28 Martii A^#'o 1672. </p>\n","number":"104.","title":"OTTO VON GUERICKE AN LEIBNIZ","date":"Magdeburg, 18./28. März 1672. [103.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

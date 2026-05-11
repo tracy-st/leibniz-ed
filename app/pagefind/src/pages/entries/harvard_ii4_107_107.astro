@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_107","series":"Band II 4 (1701 - 1707)","seq":107,"text":"<p> [[328.6]] <b>107. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[328.7]] Venedig, 20. September 1705. [106.130.] </b></p>\n<p> [[328.15]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[328.16]] L'umanissimo foglio di V. S. Ill^#'m^#'a mi riempie d'un'eccessiva consolatione, per la sicurezza\n[[328.17]] che mi dà nello istesso tempo dell'ottima sua salute, e continuatione del suo stimat^#'m^#'o\n[[328.18]] amore e patrocinio. Non so capire come si sieno smarrite tre altre mie lettere che io per mezo\n[[328.19]] del Sig^#'r^#'e Zanovelli hò trasmesse in varii tempi a V. S. Ill^#'m^#'a. Per il Sig^#'r^#'e Herman io hò fatto\n[[328.20]] quanto hò potuto, e testimonii ne sono questi Eccell^#'m^#'i Riformatori, a quali è nota la mia\n[[328.21]] vigilanza per questo affare, e benche la mutatione de Magistrati abbia molto alterate e sconcertate\n[[328.22]] le cose nondimeno spero che finalmente il Sig^#'r^#'e Herman sara condotto e chiamato alla\n[[328.23]] catedra di Padova col decoro ed utile dovuto al suo singolarissimo merito, ed io lo desidero\n[[328.24]] meco per le sue incomparabili virtù, e perche è strettissimo suo Amico, e ben informato di\n[[328.25]] quella sublime ed ora tanto rinomata Analisi, degnissimo parto della profonda e vasta mente di\n[[328.26]] V. S. Ill^#'m^#'a, quando le cose saranno perfettionate, allora ragguaglierò V. S. Ill^#'m^#'a di quanto hò\n[[328.27]] operato per il Sig^#'r^#'e Herman, il quale è la cagione principale che io ora mi trattengo in Venetia,\n[[329.1]] ove ci vuole una grand^#'m^#'a toleranza per condurre a fine un negotio. La Lettera che ieri ricevei di\n[[329.2]] V. S. Ill^#'m^#'a mi fù consegnata dal Sig^#'r^#'e Cristoforo Antonio Specht, da me non gia amato ma\n[[329.3]] adorato per le sue rarissime qualità, che benche Giovane, mi serve pure d'esemplare e norma\n[[329.4]] per il vivere savio e prudente, dotato egualmente d'un ludicidissimo intendimento ed un\n[[329.5]] incorrotto e soavissimo costume, a questo erudito, e religiosissimo Giovane hò con piena libertà\n[[329.6]] confidato i miei piu intimi e segreti pensieri, per manifestarli a suo tempo a V. S. Ill^#'m^#'a ad\n[[329.7]] oggetto di restituirmi finalmente a quella quiete e tranquillita d'animo, che tanto sospiro, e che\n[[329.8]] mi potrebbe anche molto conferire a coltivare il suo meraviglioso Metodo di geometrizare, e\n[[329.9]] publicare alcune mie operette filosofiche che hanno per principale fondamento la dottrina che\n[[329.10]] V. S. Ill^#'m^#'a un tempo qui mi comunicò. </p>\n<p> [[329.11]] Prego V. S. Ill^#'m^#'a dell'onore de' suoi riveritissimi comandamenti e mi resto </p>\n<p> [[329.12]] Di V. S. Ill^#'m^#'a Oblig^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[329.13]] Venetia, 20 Settembre 1705. </p>\n","number":"107.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 20. September 1705. [106.130.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

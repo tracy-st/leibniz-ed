@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_603","series":"Band VI 4 (1677 - 1690)","seq":603,"text":"[[2715.1]] <b>472.  Autoritas personae praevalet rationibus [1677 bis 1679 (?)]</b>\n [[2715.2]] <tab/>[1677 bis 1679 (?)]\n[[2715.7]] <tit2><b>Autoritas personae praevalet rationibus</b></tit2> </p>\n<p> [[2715.8]] Ich kam zu Paris in einen Buch-laden, da die <i>Critique</i> <i>de la recherche de la verité</i>\n[[2715.9]] verlegt. Ich fieng an ohngefehr von dieser materi zu reden, aber da war dem buchführer\n[[2715.10]] und der da befindtlichen Gesellschaft nichts eben. Ja der buchführer lachte mich aus, als\n[[2715.11]] ich ohngefähr sagte es sey eine <i>materia metaphysica</i> und ein ander, so dabey stand, fragte\n[[2715.12]] ob ich denn so gar den unterschied <i>inter Logicam et Metaphysicam</i> nicht wüßte. Ich\n[[2715.13]] mußte selbst mit lachen, weil ich bey mir stillschweigend bedachte, wie lächerlich die\n[[2715.14]] menschen ratiociniren, und wie sie auf nichtige <i>Externa</i> gehen, so ihnen das gemüth\n[[2715.15]] einnehmen und selbst die Vernunfft anstecken. </p>\n<p> [[2715.16]] Indem wir nun also reden, komt der autor des obgedachten buchs in den laden; der\n[[2715.17]] kannte mich vor längst, machte mir ein großmächtig compliment, nante mich einen\n[[2715.18]] <i>illustre</i> und sagte in einem athem so viel dings von meinen qualitäten, daß der buchführer\n[[2715.19]] mit den beystehenden maul und nasen auffsperrten. Da hätte man gesehen, was sie mir\n[[2715.20]] alle für complementen schnitten, was ich sagte war recht und applaudirt und habe ich\n[[2715.21]] niemals noch so sichtbarlich gemercket, was bey den Menschen die praeoccupation und\n[[2715.22]] das ansehn vermöge. </p>\n","number":"472.","title":"Autoritas personae praevalet rationibus","date":"[1677 bis 1679 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_189","series":"Band VI 4 (1677 - 1690)","seq":189,"text":"[[667.7]] <b>156₁.  Erste Fassung ERSTE FASSUNG </p>\n<p> [[667.12]] Extensum est totum continuum. </p>\n<p> [[667.13]] Extensi partes sunt coexistentes. </p>\n<p> [[667.14]] Extensum omne est pars alterius cujusdam extensi. </p>\n<p> [[667.15]] Duo quaelibet extensa data sunt partes ejusdem alicujus extensi. </p>\n<p> [[667.16]] In quolibet corpore habetur extensum dato simile. </p>\n<p> [[668.1]] Dato quolibet extenso datur aliud congruum cujus pars sit in corpore dato. </p>\n<p> [[668.2]] Extensum est continuum habens partes coexistentes. </p>\n<p> [[668.3]] Continuum est cujus partes sunt indefinitae. </p>\n<p> [[668.4]] Spatium infinitum est extensum uniforme in quo extensum, quodcunque existere\n[[668.5]] ponitur, existit. </p>\n<p> [[668.6]] Corpus ubique uniforme est, praeter quam in parte cujus termini pars eadem est cum\n[[668.7]] parte termini totius. </p>\n<p> [[668.8]] Corporis <i>A</i> aliqua pars <i>B</i> assumi potest, talis, ut si assumatur aliud <i>C</i> nullam habens\n[[668.9]] partem in <i>A</i> existentem, non possit dari aliquod comprehen[den]s tam <i>B</i> quam <i>C</i>, quin\n[[668.10]] partem habeat intra <i>A</i>. Et haec est notio profunditatis. </p>\n<p> [[668.11]] Satius forte simplicissimas adhibere notiones. </p>\n<p> [[668.12]] <b>Spatium</b> mundanum est quod extensum est, et in quo est omne quod in extenso\n[[668.13]] est. </p>\n<p> [[668.14]] Duo quaelibet extensa <i>A</i> et <i>B</i>, sunt in eodem extenso <i>C.</i> Vel adhuc generalius: Duo\n[[668.15]] quaelibet <i>A</i> et <i>B</i> quorum unumquodque in aliquo extenso est (licet diverso), sunt in\n[[668.16]] eodem extenso. </p>\n","number":"156₁.","title":"Erste Fassung","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

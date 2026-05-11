@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_92","series":"Band II 1 (1663 - 1685)","seq":92,"text":"<p> [[250.23]] <b>78. JEAN BERTHET FÜR LEIBNIZ</p>\n<p> [[250.24]] [1. Oktober 1671.] [158a.]</b></p>\n<p> [[251.1]] Experimentum P. Grandamici in eo verum est quod asserit Magnetis rotundi sive\n[[251.2]] terrellae partem aliquam semper ita dispositum iri ut respiciat eandem plagam v. g. hic Parisiis.\n[[251.3]] Sed falsum est in alia regione v. g. Constantinopoli eundem magnetem respecturum alias coeli\n[[251.4]] plagas. Neque P. Grandamicus inde colligere potest quod demonstraturum se pollicebatur.\n[[251.5]] Nam virtus magnetica praecise dirigitur ad polos, nec ullam habet connexionem cum oriente\n[[251.6]] vel occidente ad quae terrella est indifferens. Ratio autem quare quaedam pars terrellae semper\n[[251.7]] respiciat orientem et occidentem inde provenit quod nullus magnes est purus. Cum ergo plus\n[[251.8]] magnetis et minus heterogeneae materiae reperiatur in aliqua parte terrellae illa tendit ad\n[[251.9]] septentrionem unde partes distantes 90 gradibus componunt se necessario haec ad orientem\n[[251.10]] haec ad occidentem et hoc ubique continget. Imo si terrella projiciatur in aquam semper vasi\n[[251.11]] fundum ea sui parte tanget quae plus in se habet puri magnetis. Ergo quies telluris male inde\n[[251.12]] concludebatur a P. Grandamico qui vivit adhuc natus annos 86 nec potest a sua sententia\n[[251.13]] dimoveri senex optimus quanvis a doctis respuatur. </p>\n<p> [[251.14]] <i>Pour M. Leibnitius.</i> </p>\n","number":"78.","title":"JEAN BERTHET FÜR LEIBNIZ","date":"[1. Oktober 1671.] [158a.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

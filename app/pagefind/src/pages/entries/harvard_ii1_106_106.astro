@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_106","series":"Band II 1 (1663 - 1685)","seq":106,"text":"<p> [[302.10]] <b>92. ALBERT VON HOLTEN AN LEIBNIZ</p>\n<p> [[302.11]] Tübingen, 18. (28.) November 1671. [102.]</b></p>\n<p> [[302.20]] Vir Excellentiss. Amice Colende S. </p>\n<p> [[302.21]] Ut scriberem ad Te aliquid literarum duplicem causam habui, altera est, quod nonnemo\n[[302.22]] Professorum Tubingensium a me postulavit, ut si mihi intercederet cum aliquo Londinensium\n[[302.23]] literarum quoddam commercium, ab illo peterem, ut Londini inquireret, an libri quos inclusa\n[[302.24]] scheda exhibet, ibi prostent venales. Jam cum mihi quidem nulla, nisi per Te, detur copia, petito\n[[302.25]] huic Doctissimi viri satisfaciendi, ideoque rogo obnixissime, ut velis hanc schedam ad aliquem\n[[302.26]] tuorum amicorum ablegare, quo is eorum librorum, quotquot istic reperientur, pretium percontetur,\n[[302.27]] quod ad te perscriptum cum fuerit, spero te pro nostra amicitia me de ea re sine mora\n[[303.1]] certiorem facturum. Altera causa scriptionis mihi fuit, ut deliberarem tecum, an consultum\n[[303.2]] putes, me, cum Grammaticam meam Hebraicam in cylindris exhibitam edere parem, inventum\n[[303.3]] hoc Societati Regiae Anglicanae dedicare. Ut id cupiam plures habeo rationes, praecipue ut hoc\n[[303.4]] pacto et Regi, et multis Doctissimis ac Illustribus viris innotescam. Quod si tibi videbitur, velim\n[[303.5]] quam proxime ad me perscribas, quo titulo compellandi sint tum Rex, tum ipsum illud Societatis\n[[303.6]] Collegium Eminentissimum. Puto inventum novitate sua et concinnitate non indignum fore\n[[303.7]] tantis patronis. Forma externa oper[is] non parum habebit splendoris, quando convenienter\n[[303.8]] emblemati exhibebitur arca cui incumbunt duo cherubini inaurati; intus vero apparebunt\n[[303.9]] cylindri illi versatiles, et in operculo Decalogus punctationis Hebraicae, respondens numero,\n[[303.10]] praeceptorum Mosaicorum, in ventre arcae addito libello, cui titulum feci <i>lex Linguae Sanctae</i>,\n[[303.11]] ubi omnia Emblemati, quod de arca foederis sumptum est, exacte respondent. Mitto hic\n[[303.12]] lapidarium quoddam quod, quia arbitrabar nondum ad tuas manus pervenisse, communicare\n[[303.13]] volui: tu contra vide sis, ut mihi catalogum manuscriptorum Aethiopicorum Wanslebii dudum\n[[303.14]] promissum transmittas. Rogo etiam, ut amplius cum Zunnero agas, de editione Commentarii\n[[303.15]] Abarbenelis in Jonam a me versi. Wanslebii Relationem de Aegypto videre gestio, proximis\n[[303.16]] nundinis Francofurtensibus dabitur forsitan illius potiundae copia. Spinos[a] Judaeus, ut mali\n[[303.17]] ominis nomen gerit, ita pessimi exempli rem ausus est, et merito suo vapulabit a doctis.\n[[303.18]] Pfeiffero eum prima quavis occasione propinabo excarnificandum, si ille non renuit. Interim\n[[303.19]] vale, et rescribe si molestum non est, ad ea, quae a te scire percupio. </p>\n<p> [[303.20]] Tubingae Anno 1671. d. 18. Novembris. T. T. Albertus ab Holten. </p>\n<p> [[303.21]] Viro Nobilissimo, Excellentissimo, Doctissimoque Dn. Gothofredo Guilielmo Leibnizio\n[[303.22]] J.U.D. amico ac Patrono Colendo pateant. Mogunziae. </p>\n","number":"92.","title":"ALBERT VON HOLTEN AN LEIBNIZ","date":"Tübingen, 18. (28.) November 1671. [102.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_13","series":"Band II 3 (1695 - 1700)","seq":13,"text":"<p> [[32.7]] <b>13. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[32.8]] [Hannover,] 9. (19.) April 1695. [11.15.]</b></p>\n\n<p> [[32.17]] Vir celeberrime </p>\n<p> [[32.18]] Literas <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: 9 April. 1695 <i>A Mons. Placcius</i> </Fn> Tuas gratissimas accepi, et pro munere quod mihi destinas gratias praevias ago,\n[[32.19]] neque enim dubito, quin egregium sit futurum. Suffecerit fasciculum Brunsvigo-Luneburgico\n[[32.20]] veredario ordinario more solito committi; ita enim recte ad me deferetur. </p>\n<p> [[33.1]] Interea gaudeo a Te ipso nuntium de rebus Tuis accepisse, speroque Te optima valetudine\n[[33.2]] frui, cum antea diu nihil de Te accepissem, nisi occasione controversiae quam Tibi cum Dn.\n[[33.3]] Thomasio esse intellexi. </p>\n<p> [[33.4]] Aliquoties a Te volui quaerere qualisnam sit Jungianarum schedarum jactura ex incendio\n[[33.5]] aedium Vagetianarum. Spero tamen potissima quaeque fuisse servata, et tantum fortasse Apographa\n[[33.6]] fasciculorum plerorumque periisse. Fac igitur quaeso, ut sciam, quid supersit, aut quid\n[[33.7]] nobis inde promittere possimus. </p>\n<p> [[33.8]] Spero quod ad me mittere polliceris, <i>Ethicam</i> fore Tuam, a qua multum nobis bonae frugis\n[[33.9]] promitto; quemadmodum et ab iis quae edis omnibus, atque adeo et ab iis quae nuper de <i>IC^#'t^#'o\n[[33.10]] perfecto</i> iterato dedisti. </p>\n<p> [[33.11]] Ingenium Dn. Thomasii nostri utique magni facio, plerumque tamen facilius ipsi assentior,\n[[33.12]] cum profert propria, quam cum rejicit aliena. Ego diuturno usu didici nihil facile spernere.\n[[33.13]] Profundae illae Meditationes in omni doctrinarum genere habent et ipsae usus suos, etsi non\n[[33.14]] tam obvios. Itaque quod de variis interpretationum generibus meditatus es, majore solito\n[[33.15]] <greek>ăkribeía̧</greek> mihi applausum potius, quam contemtum mereri videtur; excitandosque potius doctos\n[[33.16]] ad notiones illas enucleationes prosequendas, quam deterrendos. </p>\n<p> [[33.17]] Quin sim lecturus avide et quantum licebit studiose, quicquid a Te proficiscitur, dubitare\n[[33.18]] non debes. Sed censuram exercere majoris operae est, nec a me expectandae, qui natura atque\n[[33.19]] instituto ita comparatus sum, ut in aliorum scriptis potius quaeram profectus meos, quam\n[[33.20]] defectus alienos. Si quid tamen monere necessarium videatur, pro meo candore non dissimulabo.\n[[33.21]] Vale etc. etc. </p>\n","number":"13.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"[Hannover,] 9. (19.) April 1695. [11.15.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

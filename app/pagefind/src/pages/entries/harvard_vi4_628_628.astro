@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_628","series":"Band VI 4 (1677 - 1690)","seq":628,"text":"[[2761.4]] <b>492₃.  Modalia et elementa juris naturalis. Zweite Fassung </p>\n<p> [[2761.9]] <b>Justitia</b> est charitas recte ordinata, seu virtus servans rationem in affectu hominis\n[[2761.10]] erga hominem. </p>\n<p> [[2761.11]] <b>Vir bonus</b> est, qui justitia praeditus est adeoque bonum commune quaerit quantum\n[[2761.12]] licet. </p>\n<p> [[2761.13]] <b>Bonum</b> <b>societatis</b> est quod plus uni bonum quam alteri malum est. </p>\n<p> [[2761.14]] <b>Malum societatis</b> est, quod plus uni malum quam alteri bonum est. </p>\n<p> [[2761.15]] <b>Bonum</b> alicujus est quod magis ad laetitiam ejus quam tristitam confert. </p>\n<p> [[2761.16]] <b>Malum</b> alicujus est, quod magis ad tristitiam ejus quam laetitiam confert. </p>\n<p> [[2761.17]] <b>Felicitas</b> (<b>Miseria</b>) est laetitia (tristitia) durabilis. </p>\n<p> [[2761.18]] <b>Praemium</b> est bonum privati a voluntate societatis ob bonum societatis a voluntate\n[[2761.19]] privati. </p>\n<p> [[2761.20]] <b>Poena</b> est Malum privati a voluntate societatis ob malum societatis a voluntate\n[[2761.21]] privati. </p>\n<p> [[2762.1]] <b>Debitum</b> est bonum societatis a voluntate privati secundum prudentiam agentis;\n[[2762.2]] itaque tale esse debet ut praemiis poenisque procurari possit in recte ratiocinante. </p>\n<p> [[2762.3]] <b>Illicitum</b> est Malum societatis a voluntate privati contra prudentiam agentis;\n[[2762.4]] itaque tale esse debet, ut praemiis poenisque impediri possit in recte ratiocinante.\n [[2762.5]] <petit> </p>\n<p> [[2762.6]] <i>Die folgenden Absätze in Kleindruck hat Leibniz wieder gestrichen</i>: </p>\n<p> [[2762.7]] Impossibilium nulla est obligatio.\n [[2762.8]] <tab/>Nam impossibile nullis praemiis vel poenis procurari potest. </p>\n<p> [[2762.9]] Omne necessarium est licitum seu Necessitas legem non habet.\n [[2762.10]] <tab/>Nam necessarium nullo modo, ac proinde nec praemiis vel poenis impediri potest. </petit> </p>\n<p> [[2762.11]] Uti se habent inter se necessarium, contingens, possibile, impossibile; ita se habent\n[[2762.12]] debitum, indebitum, licitum, illicitum.\n [[2762.13]] <tab/>Est enim debitum nihil aliud quam necessarium viro bono, et illicitum nihil\n[[2762.14]] aliud quam impossibile viro bono. Est autem vir bonus cujus charitas recte\n[[2762.15]] ordinata est seu qui bonum commune quaerit quantum licet salvo suo. Hinc\n[[2762.16]] patet omnia Theoremata de Modalibus huc transferri, ac totidem novas\n[[2762.17]] propositiones circa justum et injustum enuntiari posse. Eadem theoremata\n[[2762.18]] repeti possunt non tantum ratione viri boni, sed et ratione viri prudentis. </p>\n<p> [[2762.19]] <b>Liberum</b> est quod neque debitum neque illicitum est. Unumquodque praesumitur\n[[2762.20]] liberum. </p>\n","number":"492₃.","title":"Modalia et elementa juris naturalis. Zweite Fassung","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

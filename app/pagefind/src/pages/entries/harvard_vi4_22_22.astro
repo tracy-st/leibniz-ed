@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_22","series":"Band VI 4 (1677 - 1690)","seq":22,"text":"[[60.15]] <b>16.  Exercitia ingenii [1678 (?)]</b>\n [[60.16]] <tab/>[1678 (?)]\n[[61.1]] <tit2><b>Exercitia ingenii</b> </tit2> </p>\n<p> [[61.2]] Ut Rhetores exercitia habent orationis et Grammatici exercitia styli, ita ego in pueris\n[[61.3]] exercitia ingenii institui desidero. Exercitia ingenii nec gratiora nec efficaciora reperiri\n[[61.4]] posse arbitror, quam ludos: e. g. <i>da komt der kurze rundte bundte Mann</i>, quo discunt\n[[61.5]] aliquid memoriter recitare, <i>wozu ists stroh guth</i>, quo discunt extemporaneas invenire\n[[61.6]] applicationes rerum, nam quod in avena, id in aliis quoque rebus experiri licet. Verba quo\n[[61.7]] ordine recitata, iterum recitare, ope Mnemonicae cujusdam facilis; inverso etiam, si\n[[61.8]] placet, aut per saltus; historias ab aliis recitatas iterum recitare; ex tempore describere\n[[61.9]] urbes, praedia, itinera, quaeque ipsis visa aut audita. Historias ab aliis recitatas resumere\n[[61.10]] et denuo recitare. Fingere processus et jubere ut quis ex duorum disputationibus et\n[[61.11]] concertationibus statum causae cujusdam implicatae discat. Aenigmata facere aut solvere.\n[[61.12]] Ex nota quadam historia statim colligere probandi aliquid argumenta, aut refutandi.\n[[61.13]] Verae eloquentiae specimina edere, si jubeas ut puer unus alium persuadeat, et praemium\n[[61.14]] statuas successui. Itaque judices statues, ut qui suam causam probaverit, is vincat.\n[[61.15]] Ingeniosissimos aliquot ludos invenio in <i>Aramena</i>, unus ex illis imprimis placet, ubi\n[[61.16]] fictam historiam ab uno inceptam, caeteri ordine pertexunt habitu quisque suo. </p>\n","number":"16.","title":"Exercitia ingenii","date":"[1678 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

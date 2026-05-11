@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_12","series":"Band II 3 (1695 - 1700)","seq":12,"text":"<p> [[30.1]] <b>12. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[30.2]] [Hannover,] 6./16. April 1695. [16.]</b></p>\n\n<p> [[30.16]] Monsieur </p>\n<p> [[30.17]] J'ay <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Monsieur l'Abbé Foucher 6/16 Avril 1695</Fn> dû juger par la derniere, que j'ay receue de vous il y a long temps, que vous vouliés\n[[30.18]] suspendre nostre commerce à cause de la guerre. Et c'est pour cela, que je n'ay point voulu\n[[30.19]] vous importuner. Cependant je ne crois pas que vous ayiés voulu le quitter entierement, car\n[[30.20]] plusieurs autres m'écrivent non obstant cette guerre, où la philosophie ne prend aucun interest.\n[[30.21]] Et c'est ce qui fait que je vous écris cellecy pour m'informer de vostre santé. Et pour vous dire,\n[[30.22]] que la mienne depuis quelque temps n'est pas des mieux affermies. C'est ce qui me fait penser\n[[30.23]] à publier quelques pensées et entre autres mon <i>Systeme sur la communication des substances et\n[[30.24]] l'union de l'</i>[<i>ame</i>] <i>avec le corps</i>, dont je vous ay mandé quelque chose autres fois. Je crois que\n[[30.25]] c'est le seul qui puisse fournir une explication intelligible, et sans recourir à la toute puissance\n[[31.1]] de Dieu. Je seray bien aise que des personnes judicieuses y fassent des reflexions, et j'en\n[[31.2]] attends sur tout de vous, qui pourront servir à donner des lumieres. On pourra adjouter\n[[31.3]] peutestre, ce que M. Arnaud m'avoit objecté, et ce que je luy ay repondu. Peutestre aussi que le\n[[31.4]] R.P. de Malebranche ne nous refusera pas aussi ses lumieres là dessus. </p>\n<p> [[31.5]] J'apprends la mort de M. Lantin. Cependant j'espere qu'il nous aura laissé des belles choses,\n[[31.6]] dont le public pourra encor jouir un jour. Et je vous supplie de m'en donner des nouvelles. </p>\n<p> [[31.7]] Un professeur celebre à Leide, nommé Mons. Volder ayant publié sur la fin de l'année\n[[31.8]] passée une réponse à la Critique de Mons. l'Evêque d'Avranches; un amy qui me la porta, me\n[[31.9]] pria de luy en dire mon sentiment; En la lisant je fis des remarques, car il me sembloit, qu'il ne\n[[31.10]] satisfaisoit pas assés. Un jour cela se pourra joindre à d'autres animadversions sur la philosophie\n[[31.11]] de M. des Cartes, que j'ay faites, sur tout si l'on songeoit encor à une nouvelle edition de\n[[31.12]] la <i>Censure</i> de M. d'Avranches. </p>\n<p> [[31.13]] Vous aurés la bonté, Monsieur, de m'honnorer bientost de vostre reponse, àfin que je sois\n[[31.14]] au moins asseuré de vostre bon estat, et du progrés de vos meditations. </p>\n<p> [[31.15]] La <Fn><i>Am Rande von Bl. 33 r^#'o gestrichen</i>: Monsieur l'Abbé Nicaise m'a écrit, et envoyé des Lettres pour M. de Spanhem et pour M. Morel, que j'ay fait tenir, et je luy écriray aussi tost, que j'auray au moins la reponse de M. Morel, car M. Spanheim n'écrit pas si promtement, ayant des occupations. <i>Leibniz verweist anschließend durch die Kustode</i> vertatur <i>auf Bl. 33 v^#'o und den dort ebenfalls gestrichenen Text</i>: Monsieur l'Abbé Nicaise me mande, que Mons. le president Boisot frere de feu M. l'Abbé va à Paris. Et comme M. l'Abbé m'avoit promis par M. Nicaise des pieces curieuses, tirées des <i>memoires</i> du feu Cardinal de Granvelle; j'espere que M. le president voudra me faire jouir de l'effect des bontés de son frere.</Fn> perte de M. Tevenot, de M. Pelisson, de M. Ménage, de M. l'Abbé Boisot, de\n[[32.1]] M. Lantin me paroist faire quelque tort, non seulement à la France, mais encor à nostre siecle,\n[[32.2]] car je ne voy pas qu'assez de jeunes gens se mettent sur les rangs, pour remplir le vuide; et je ne\n[[32.3]] sçay pas ce qu'on se deuvra figurer du siecle, dont nous ne sommes gueres plus éloignes. Si\n[[32.4]] vous me pouvés faire connoistre des personnes, dont on puisse esperer, qu'ils en seront\n[[32.5]] l'ornement, je vous en auray de l'obligation, et je suis avec zele </p>\n<p> [[32.6]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz. </p>\n","number":"12.","title":"LEIBNIZ AN SIMON FOUCHER","date":"[Hannover,] 6./16. April 1695. [16.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

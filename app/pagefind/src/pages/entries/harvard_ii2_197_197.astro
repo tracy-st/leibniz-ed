@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_197","series":"Band II 2 (1686 - 1694)","seq":197,"text":"<p> [[645.1]] <b>199. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[645.2]] Hannover, 31. Dezember 1692 (10. Januar 1693). [190.220.]</b></p>\n<p> [[645.10]] [ ... ] De prophetia perplacet quod assentiris non posse eam quae ad specialia descendit,\n[[645.11]] nisi a perfectissima mente proficisci aut in aliam mentem imprimi, itaque omnis fatidica vis a\n[[645.12]] Deo est; et oracula vera rerum singularium a daemone malo proficisci non possunt, De\n[[645.13]] Apocalypseos vera interpretatione nondum habeo, quod dicam. Interim non improbabilis mihi\n[[645.14]] visa est Grotii sententia, praedictiones ejus dirigi in Romam Ethnicam. Tantum modo numerum\n[[645.15]] bestiae quem ille quaerit in voce <greek><i>OYLPIOS</i></greek> quasi in Trajano optime principe expressum, ego\n[[645.16]] cum veteribus malim quaerere in voce <greek><i>LATEINOS</i></greek> quae et ipsa hominis denominatio est. Grotii\n[[645.17]] interpretationem, sed interpolatam renovavit nuper Episcopus Meldensis in libro quem Jurio\n[[645.18]] opposuit. Vir quidam pereruditus et ingeniosus nuper casum Hierosolymorum et poenas a\n[[645.19]] judaica gente persecutrice piorum expetitas, in Apocalypsi visus est invenisse. Interea non\n[[645.20]] ausim me illis opponere, qui in eodem vaticinio etiam totius Ecclesiae statum futurum praefiguratum\n[[645.21]] arbitrantur. Et omnino de vaticiniis sentio esse tum demum intelligenda, cum fidem\n[[645.22]] faciet dies. </p>\n<p> [[645.23]] Minutiora autem, velut Caedem Regis Angliae Caroli I., obsidionem Bremae aliaque id\n[[645.24]] genus, velle in Apocalypsi quaerere est otio abuti, et nugas agere. Tecumque sentio has nugas\n[[645.25]] seria ducere in mala, nam simplicium animos movent, et saepe reipublicae quietem turbant,\n[[645.26]] subtiliores autem, sed non satis lectione sacra et rerum judicio munitos in magnas de religionis\n[[645.27]] veritate dubitationes conjiciunt, ut veros prophetas ejusdem cum novis istis somniatoribus\n[[645.28]] farinae fuisse suspicentur. Ignotae mihi fuere Bodani Amstelodamensis Ministri praedictiones\n[[646.1]] irritae contra Viennam. Similis Quirini Kuhlmanni audacia fuit apud Londinenses tum agentis.\n[[646.2]] Is Epistolis editis jactabundis, et a sana mente remotissimis tamen apud aliquos fidem invenit.\n[[646.3]] Domum Austriacum persecutricem sanctorum, et Romam erroris sedem ajebat per Gallos\n[[646.4]] delendam; His autem cessantibus per Turcas etc. Et cum mox respondere videretur eventus,\n[[646.5]] pulso Lotharingiae duce ad Petronellam, et Turcis sedem imperatoris obsidentibus, mira fuit\n[[646.6]] Kulmannianorum triumphatio, donec soluta obsidione pudefacti conticescere cogerentur. </p>\n<p> [[646.7]] Quod ais nihil videri contingere, quod non praesciatur a causa aliqua, de Deo assentior; de\n[[646.8]] caeteris substantiis, sic putem; praesentiri quidem ab omnibus sed non praesciri, sensum scilicet\n[[646.9]] esse confusum. Quin imo ita judico tantam esse rerum omnium connexionem, ut nihil mutationis\n[[646.10]] contingat in una substantia, quod non sentiant caeterae omnes quantumcunque remotae\n[[646.11]] tempore vel loco; ita tamen ut ipsae non animadvertant. Sunt in mundo ut in microcosmo ex\n[[646.12]] Hippocratis sententia, <greek><i>sýmpnoia pánta</i></greek>. Sed consistunt hae conspirationes in motibus insensibilibus.\n[[646.13]] An vero existant praeter Deum aliae mentes tantae perspicacitatis ut praedelineationes\n[[646.14]] illas mirificae ac prope immensae subtilitatis distincte legere possint, dicere non ausim, et secus\n[[646.15]] esse suspicor, vel ideo quod effectui cuivis singulari infinitae causae intercurrunt, quoniam\n[[646.16]] continuum in infinitum divisibile est, imo divisum actu. Quodsi universum constaret ex Atomorum\n[[646.17]] numero certo, tunc sagacitas creaturarum ad perfectam cognitionem universi pervenire\n[[646.18]] posset. [ ... ] </p>\n","number":"199.","title":"LEIBNIZ AN GERHARD MEIER (BREMEN)","date":"Hannover, 31. Dezember 1692 (10. Januar 1693). [190.220.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

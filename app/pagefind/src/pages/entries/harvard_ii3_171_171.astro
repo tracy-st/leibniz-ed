@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_171","series":"Band II 3 (1695 - 1700)","seq":171,"text":"<p> [[438.5]] <b>171. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[438.6]] Venedig, 1. Mai [1698]. [170.173.]</b></p>\n\n<p> [[438.11]] Ill^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[438.12]] La lettera di V. S. Ill^#'m^#'a mi capita in Venetia ove mi trovo per alcuni miei importantissimi\n[[438.13]] affari. Le lettioni di Padova già sono terminate, onde mi restano sei mesi liberi per studiare a\n[[438.14]] mio genio, ed intraprendere qualche viaggio secondo le congiunture. Ne' principii di maggio\n[[438.15]] furono dal Sig^#'r^#'e Zannovelli consegnate alcune mie lettere stampate ad un Gentiluomo che si\n[[438.16]] parti per costà, e credo che a questa ora V. S. Ill^#'m^#'a l' habbia recevute. Mi felicita la viva\n[[438.17]] speranza che hò di haverla un giorno a rivedere per apprendere a fondo il suo metodo analitico,\n[[438.18]] e principalmente il calcolo così differentiale, come integrale, cotanto celebrato da più rinomati\n[[438.19]] Geometri del Secolo, nè fin ora n' hò potuto ricevere tutti quei lumi, che m'abbisognano per\n[[438.20]] rendermi interamente capace, ed haverne l'uso spedito. Hò significato all'Amico le pretiosissime\n[[438.21]] gratie di V. S. Ill^#'m^#'a, che l' hanno sommamente consolato colla speranza di doversi\n[[438.22]] finalmente restituire alla quiete che tanto brama, m' hà imposto che da sua parte la riverissi, e la\n[[438.23]] supplicassi della continuatione del di lei autorevole e stimatissimo patrocinio affine di recevere\n[[438.24]] presto qualche buona nuova, tanto più che trovandosi in otio, e sciolto da ogni affare potrebbe\n[[439.1]] con molta facilità eseguire quanto le verrà da V. S. Ill^#'m^#'a proposto. Coll'ordinario vegnente\n[[439.2]] risponderò più distintamente alla sua, trovandomi presentemente occupato in molte visite di\n[[439.3]] Cavalieri che mi rubbano tutto il tempo, e divotamente riverendola, inalterabilmente mi rassegno </p>\n<p> [[439.5]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Oblg^#'m^#'o, Dev^#'m^#'o S^#'r^#'e vero M. A. F. </p>\n<p> [[439.6]] Venetia il Primo di Maggio </p>\n<p> [[439.7]] La priego rispondermi a dirrittura per Padova.\n[[439.8]] <yi>All'Ill^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di S.A.E. <b>Hannover</b> </p>\n","number":"171.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 1. Mai [1698]. [170.173.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

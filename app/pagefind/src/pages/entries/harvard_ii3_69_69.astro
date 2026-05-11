@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_69","series":"Band II 3 (1695 - 1700)","seq":69,"text":"<p> [[185.6]] <b>69. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[185.7]] Venedig, 10. August [1696]. [64.71.]</b></p>\n\n[[186.1]] <petit> imputet. Rogo ut ei salutem a me nunties et has ipsas lineas communices, ut discam an mea adhuc probet, an vero\n[[186.2]] putet alibi reperisse meliora.\" Leibniz beantwortet unseren Brief zusammen mit N. 71 durch N. 72. Beigeschlossen\n[[186.3]] (\"incluso in foglio\") war die Ankündigung von Fardellas Buch <i>Animae humanae natura ab Augustino\n[[186.4]] detecta</i> (Venedig 1698) noch unter dem ursprünglich vorgesehenen Titel <i>Animae rationalis natura, Democrito,\n[[186.5]] Platoni, Aristoteli, caeterisque philosophis ignota, ab Augustino, prospero eventu, detecta in libro de Quantitate\n[[186.6]] animae. Seu Augustinus de Quantitate animae, notis et dissertationibus illustratus</i> in <i>La Galleria di Minerva</i>,\n[[186.7]] Bd 1, Tl 2, Venedig 1696, S. 27-34 (LH IV, 3, 2b, Bl. 7-10). </petit> </p>\n<p> [[186.8]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o </p>\n<p> [[186.9]] Ricevo la benignissima di V. S. Ill^#'m^#'a che sommamente mi consola, essendo passato molto\n[[186.10]] tempo che non hò l'onore de' suoi pretiosi caratteri. Consegnarò al Sig^#'r^#'e Mendelino l'Ongarello\n[[186.11]] consistente in trecento e più fogli, l' ho fatto copiare in Padova con gran stento, e l'Abbate\n[[186.12]] Zacco non hà voluto lasciarmi il suo, onde m'è convenuto gettare via una copia imperfetta, e\n[[186.13]] procurarne un altro, che m'è stato concesso per un solo mese. Farò venire il manoscritto da\n[[186.14]] Padova e coll'occasione che passerà per Venetia la Principessa le sarà trasmesso forse insieme\n[[186.15]] con qualche altro manoscritto ed adoperarò tutto il mio talento per mandarle una copia del\n[[186.16]] manuscritto di Vergerio. Coll'ordinario vegnente l'informarò di quel che si è fatto dei manuscritti\n[[186.17]] del Convento delle Carceri, havendone data condissione ad un Amico che penetrarà tutto.\n[[186.18]] Ecco qui incluso un foglio, in cui leggerà l'argomento ed idea del libro che devo quanto prima\n[[186.19]] publicare. </p>\n<p> [[186.20]] La priego favorirmi d'accennarmi il suo sentimento circa la natura così dell'Anima, come\n[[186.21]] del Corpo, se questi consiste nel semplice e nudo stendimento, se lo Spatio è l'istesso che il\n[[186.22]] corpo, infinito, e senza termine. Di più la supplico mandarmi almeno un saggio della sua\n[[186.23]] Analisi acciò me ne possa servire. Mi comandi con libertà e sì persuada che sono </p>\n<p> [[186.24]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Obg^#'m^#'o S^#'r^#'e Michel Ang. Fardella </p>\n<p> [[186.25]] Venetia 10 Agosto. </p>\n<p> [[186.26]] Indrizzerà le risposte a Padova. </p>\n","number":"69.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 10. August [1696]. [64.71.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_106","series":"Band II 4 (1701 - 1707)","seq":106,"text":"<p> [[327.1]] <b>106. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[327.2]] Venedig, 29. Juli 1705. [102.107.] </b></p>\n<p> [[327.8]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[327.9]] Essendomi <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> portato ora in Venetia, ove dimorarò forse fin al venturo mese d'ottobre, sono\n[[327.10]] rimasto con grand^#'m^#'o dolore non avendo trovate lettere di V. S. Ill^#'m^#'a in casa del Sig^#'r^#'e Zanovelli, il\n[[327.11]] quale non sa capire come avendo trasmesse a V. S. Ill^#'m^#'a tre mie lettere in varii tempi, ed ancora\n[[327.12]] esso dato parte del mio stato e delle mie operationi per l'affare del Sig^#'r^#'e Herman al Sig^#'r^#'e Abbate\n[[327.13]] Guidi per informarne V. S. Ill^#'m^#'a, non n'abbia fin ora ricevuta risposta niuna, non ostante che\n[[327.14]] V. S. Ill^#'m^#'a mostrasse tanta brama di sapere il mio stato, ed i passi che si facevano per il Sig^#'r^#'e\n[[327.15]] Herman. Il che ora mi obligà a scrivere nuovamente alla V. S. Ill^#'m^#'a pregandola consolarmi con\n[[327.16]] quattro sue righe per assicurarmi dell'ottima sua salute, e della continuatione del suo amore e\n[[327.17]] stimatissimo patrocinio. Oggi scrivo al Sig^#'r^#'e Herman da cui V. S. Ill^#'m^#'a averà gia inteso quanto\n[[327.18]] hò qui operato per fargli conferire la catedra matematica con utile ed onore, e presentemente fò\n[[327.19]] tutto l'impeto possibile per venire all'ultima deliberatione[,] senza che fin ora l'oppositioni e\n[[327.20]] l'alteratione di molte cose m'abbiano sgomentato, e distolto dalla mia operatione, e gia\n[[327.21]] ultimamente l'Ecc^#'m^#'o Sig^#'r^#'e Procuratore Lando Capo dell'Ecc^#'m^#'o Magistrato de Riformatori dello\n[[327.22]] Studio di Padova m'hà promesso di stabilire e conchiudere tutto per il venturo mese, ed a suo\n[[327.23]] tempo V. S. Ill^#'m^#'a sarà pienamente informata di quanto io hò fatto per terminare quest' affare col\n[[327.24]] principale oggetto di servire in primo luogo V. S. Ill^#'m^#'a a cui io infinitamente devo, e poi per\n[[328.1]] avere mio Collega in Padova il dott^#'m^#'o Sig^#'r^#'e Herman da cui riceverò tutti i lumi che m'abbisognano\n[[328.2]] per intendere bene il calcolo differentiale ritrovato della felicissima e vastissima mente\n[[328.3]] di V. S. Ill^#'m^#'a e divotamente riverendola mi protesto </p>\n<p> [[328.4]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[328.5]] Venetia 29 Luglio 1705. </p>\n","number":"106.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 29. Juli 1705. [102.107.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

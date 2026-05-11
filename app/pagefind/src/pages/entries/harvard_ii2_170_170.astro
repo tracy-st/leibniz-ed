@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_170","series":"Band II 2 (1686 - 1694)","seq":170,"text":"<p> [[580.1]] <b>172. LEIBNIZ AN MARIE DE BRINON</p>\n<p> [[580.2]] Hannover, 12./22. September 1692. [113.265.]</b></p>\n<p> [[580.9]] Hanover 12/22 Septemb. 1692. </p>\n<p> [[580.10]] La <Fn><i>Am Kopf der Seite</i> : A Madame de Brinon.</Fn> sagesse même ne pouvoit rien dire de plus vray que ce que Vous dites, Madame, à\n[[580.11]] l'occasion des Recherches Genealogiques, qu'il vaut beaucoup mieux que le nom d'un Prince\n[[580.12]] soit écrit au livre de vie, que dans quelque vieille pancartes. Le moyen d'y estre enregistré,\n[[580.13]] n'est pas tant de fonder quelque chapelle, que de faire du bien. Et le plus grand bien qu'on peut\n[[580.14]] faire c'est de rendre les hommes meilleurs tant par son exemple, que par les ordres qu'on y met.\n[[580.15]] Aimer la justice, soulager les maux, favoriser la vertu, glorifier Dieu par la connoissance de ses\n[[580.16]] merveilles, à l'egard de la nature et de la grace, ce sont les veritables titres de la Genealogie des\n[[580.17]] enfans de Dieu. Les preuves de la vraye noblesse sont dans nostre conscience. Tout prince\n[[580.18]] qu'on est, on est degradé par la mechanceté, par l'injustice, par la dureté de coeur, qui fait\n[[580.19]] mépriser les cris des miserables, par cette mollesse, qui fait qu'on ne pense qu'à ses plaisirs,\n[[580.20]] plût à Dieu que vos belles leçons fussent entendues de tout le monde, et qu'on en profitât par un\n[[580.21]] veritable soin du salut. </p>\n<p> [[580.22]] Je suis Madame etc. </p>\n","number":"172.","title":"LEIBNIZ AN MARIE DE BRINON","date":"Hannover, 12./22. September 1692. [113.265.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

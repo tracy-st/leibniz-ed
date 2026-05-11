@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_445","series":"Band VI 4 (1677 - 1690)","seq":445,"text":"[[1992.7]] <b>366₁.  Verworfener Ansatz VERWORFENER ANSATZ </p>\n<p> [[1992.9]] Cum felicitas in Mentis perfectione consistat, mens autem nostra a corpore suo\n[[1992.10]] varie afficiatur, et corpus humanum a circumstantibus corporibus juvari ac laedi possit,\n[[1992.11]] ideo corporum naturam nosse magna sapientiae pars haberi debet, ut vim eorum noxiam\n[[1992.12]] declinemus, amicam experiamur. Bona enim censenda sunt tum quae voluptate nos\n[[1992.13]] afficiunt, modo non majus malum post se trahant, tum quae dolorem impediunt; tum vero\n[[1992.14]] quae nos reddunt potentiores ad grata comparanda, ingrata amolienda. Quae his contraria\n[[1992.15]] sunt, mala habentur. Bona autem tum produci, tum si jam producta sint nobis admoveri\n[[1992.16]] possunt, contra mala vel destrui sive immutari, vel depelli. Itaque cognoscendae sunt\n[[1992.17]] corporum proprietates; item quomodo corpora produci, immutari, atque etiam loco\n[[1992.18]] moveri possint. Antequam enim corporum natura ad usus nostros satis referri possit, prius\n[[1992.19]] ipsa per se intelligenda est. Omnis autem scientia actionis cujusdam causa expetenda est,\n[[1992.20]] quare Physicam non vanae cujusdam curiositatis aut ostentationis gratia, sed ideo tractabimus,\n[[1992.21]] ut majus in naturam imperium exerceamus, minusque ipsi a corporibus dependeamus,\n[[1992.22]] denique ut intellectum perficiamus et tantarum rerum autorem amando voluntatem\n[[1992.23]] nostram melioris vitae gustu imbuamus. </p>\n","number":"366₁.","title":"Verworfener Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

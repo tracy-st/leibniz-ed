@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_183","series":"Band II 1 (1663 - 1685)","seq":183,"text":"<p> [[592.1]] <b>165. LEIBNIZ AN HENRI JUSTEL</p>\n<p> [[592.2]] 4. (14.) Februar 1678. [154.]</b></p>\n<p> [[592.14]] Extrait d'une de mes lettres à M. Justel 4 Fevrier 1678. </p>\n<p> [[592.15]] [ ... ] Les oeuvres posthumes de feu M. Spinosa ont esté enfin publiées. La plus considerable\n[[592.16]] partie est <i>Ethica</i>, composée de 5 traités, <i>de Deo</i>, <i>mente, affectibus</i>, <i>servitute humana\n[[592.17]] seu de affectuum viribus, libertate humana seu de potentia intellectus.</i> J'y trouve quantité de\n[[592.18]] belles pensées conformes aux miennes, comme sçavent quelques uns de mes amis qui l'ont\n[[592.19]] aussi esté de Spinosa. Mais il y a aussi des paradoxes que je trouve ny veritables ny même\n[[592.20]] plausibles. Comme par exemple <i>non nisi unicam esse substantiam, nempe Deum, Creaturas\n[[592.21]] esse Modos seu accidentia Dei. Mentem nostram nihil amplius percipere post hanc vitam.\n[[592.22]] Deum ipsum cogitare quidem sed tamen nec intelligere nec velle. Omnia fieri fatali quadam\n[[592.23]] necessitate. Deum non agere ob finem sed quadam naturae necessitate. Quod est verbo\n[[592.24]] relinquere, re tollere providentiam et immortalitatem.</i> Je tiens ce livre dangereux pour des gens\n[[592.25]] qui se voudront donner la peine de l'approfondir. Car les autres n'ont garde de l'entendre. </p>\n","number":"165.","title":"LEIBNIZ AN HENRI JUSTEL","date":"4. (14.) Februar 1678. [154.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

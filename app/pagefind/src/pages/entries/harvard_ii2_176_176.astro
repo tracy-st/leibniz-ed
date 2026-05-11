@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_176","series":"Band II 2 (1686 - 1694)","seq":176,"text":"<p> [[592.12]] <b>178. LEIBNIZ FÜR JACQUES-BENIGNE BOSSUET</p>\n<p> [[592.13]] [Hannover, 11. Oktober 1692.] [157.184.]</b></p>\n[[593.1]] <petit>\n[[593.21]] <b>Sur les Monothelites</b> </p>\n<p> [[593.22]] Je crois que sans la decision de l'Eglise les Scholastiques disputeroient jusqu'au jour du\n[[593.23]] jugement, s'il y a deux differentes actions completes dans la personne de Jesus Christ, ou s'il\n[[593.24]] n'y en a qu'une. Je sçay par experience que des personnes de bon esprit et d'ailleurs instruites\n[[593.25]] sur la foy, quand on leur a proposé cette question, si les deux Volontés sçavoir la divine et\n[[593.26]] l'humaine exercent ensemble un seul acte, ou deux, sans leur rien dire de ce qui s'est passé là\n[[593.27]] dessus dans l'Eglise, se sont trouvé[e]s embarrassé[e]s. Il ne s'agit (dit-on) que de sçavoir, s'il\n[[593.28]] y a une ame humaine en J[esus] C[hrist]. Mais les Monothelites ne le sçavoient ils pas? Les\n[[593.29]] facultés (dit-on) sont données pour l'acte. Mais les adversaires en pouvoient demeurer d'accord,\n[[593.30]] car ils pouvoient dire, que la faculté de l'ame concourt à l'acte commun des deux natures. </p>\n<p> [[594.1]] Plusieurs Scholastiques ont soutenu qu'il n'est pas vray que la matiere ou que la forme\n[[594.2]] agisse, mais que l'action appartient au composé; et ils l'ont entendu de même à l'egard du corps\n[[594.3]] et de l'ame dans l'estat de l'union naturelle. </p>\n<p> [[594.4]] Les Adversaires pouvoient dire aussi, qu'en vertu de l'union personnelle (qui fait que la\n[[594.5]] nature humaine n'a pas sa propre subsistence, qu'elle auroit sans cela naturellement), on doit\n[[594.6]] juger que des actions naturelles de l'ame humaine n'auront pas en elles ce qui les rend\n[[594.7]] completes, non plus que la nature qui est leur principe; et que ce complement tant du suppost\n[[594.8]] que de son action, se trouve dans le verbe. Et si les actions ne se doivent attribuer <i>in concreto</i>,\n[[594.9]] qu'au suppost, ils diront que l'action, qui s'attribue proprement à une nature abstraite, est\n[[594.10]] incomplete, et qu'ils n'entendent parler que de celle qui s'attribue proprement <i>in concreto</i>,\n[[594.11]] lorsqu'ils n'en admettent qu'une; que sans cela on viole l'union des natures, et qu'on établit le\n[[594.12]] Nestorianisme par consequence, et sans y penser. Aussi sçait-on que les Monothelites imputoient\n[[594.13]] autant le Nestorianisme à leur adversaires, que ceux-cy leur imputoient l'Eutychianisme.\n[[594.14]] Je tiens que les Monothelites ne raisonnoient pas exactement dans le fonds, mais je tiens aussi\n[[594.15]] qu'ils ne manquoient point d'apparences tres plausibles, ny même d'autorités, qu'on sçait,\n[[594.16]] qu'ils alleguoient. Car il est ordinaire qu'avant une question emüe et éclaircie les auteurs n'en\n[[594.17]] parlent pas avec toute l'exactitude qui seroit à desirer; témoin le Pelagianisme et autres erreurs.\n[[594.18]] ll y a mille difficultés chez les Philosophes à l'égard du concours de Dieu avec les creatures.\n[[594.19]] Quelques uns ont crû que la creature n'agissoit point du tout, d'autres ont crû que l'action de\n[[594.20]] Dieu devenoit celle des creatures par leur reception, et y trouvoit sa limitation. On a douté aussi\n[[594.21]] quel Estre pouvoit estre l'action de Dieu, si c'estoit un Estre créé ou incréé; ou si ce n'estoit pas\n[[594.22]] l'action même de la creature, en tant qu'elle depend de Dieu. Et la difficulté devient encor plus\n[[594.23]] grande lorsque Dieu concourt avec une creature qui luy est unie personnellement, et qui n'a\n[[594.24]] qu'en luy sa subsistance ou son suppost. </p>\n","number":"178.","title":"LEIBNIZ FÜR JACQUES-BENIGNE BOSSUET","date":"[Hannover, 11. Oktober 1692.] [157.184.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

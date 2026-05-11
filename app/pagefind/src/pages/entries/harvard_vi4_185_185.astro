@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_185","series":"Band VI 4 (1677 - 1690)","seq":185,"text":"[[642.19]] <b>153.  De lingua rationali [Herbst 1685 (?)]</b>\n [[642.20]] <tab/>[Herbst 1685 (?)] </p>\n<p> [[643.1]] Lingua rationalis ita utiliter constituetur, ut cuilibet vocabulo aliarum linguarum\n[[643.2]] respondens possit, si velimus constitui, v.g. <i>Titius est magis doctus Cajo.</i> Sensus est:\n[[643.3]] quatenus Titius est doctus, et Cajus est doctus, eatenus Titius est superior et Cajus est\n[[643.4]] inferior. Haec analysis optima quidem est, sed non exprimitur vis singulorum verborum.\n[[643.5]] Quod ut assequamur, dicendum erit: Titius est doctus et qua talis superior, quatenus\n[[643.6]] inferior qua doctus est Cajus. Cumque si <i>doctior</i> sit idem quod <i>magis doctus</i> patet in\n[[643.7]] explicationem hujus: <i>doctior Cajo</i>, id est <i>doctior aliquo qui est Cajus</i>, ingredi hoc ipsum.\n[[643.8]] Et quidem <i>doctus</i> est quasi radicale, <i>magis aliquo qui est</i> <i>hic</i>, scil. <i>Cajus</i> esse servilia. Et\n[[643.9]] haec servilia debent posse ita esse constituta, ut apparet regula commutandi seu ex hoc\n[[643.10]] <i>Titius est doctus magis aliquo qui est Cajus</i> debet etiam fieri posse <i>Cajus est doctus\n[[643.11]] minus aliquo qui est Titius</i> item <i>doctrina Caji minor est quam Titii</i>, etc. </p>\n<p> [[643.12]] Notandum et non videri possibile esse ut abstrahendo aliquod commune semper\n[[643.13]] inveniamus jam commune illud in notione seu charactere, alioqui innumeris opus esset\n[[643.14]] literis ingredientibus, sed abstractio illa plerumque pendet ab aliquo respectu, itaque\n[[643.15]] videtur potius additione quorundam servilium interdum fieri abstractio, quam minuendo\n[[643.16]] seu excerpendo partem notionis. </p>\n<p> [[643.17]] Si velimus multiplicatione numerorum in se invicem exhibere compositas notiones\n[[643.18]] nonnihil haerebimus in iis inter se jungendis quae idem bis involvunt, ut si dicas <i>triangulum\n[[643.19]] aequilaterum</i>, manifestum est anguli notionem jam inferre notionem laterum et\n[[643.20]] contra. </p>\n<p> [[643.21]] Si duo inter se disputantes consentiant in quaestione hujus linguae verbis vel characteribus\n[[643.22]] exprimenda, postea ex ipsis characteribus dirimi poterit controversia. </p>\n<p> [[643.23]] Videndum an sic institui possint characteres, ut pro arbitrio transponi possint; salva\n[[643.24]] praesenti significatione, sed re melius considerata aliter faciendum arbitror, nam praeterquam\n[[643.25]] quod ita nimis multa forent synonyma, quae memoriam turbarent (tot scilicet\n[[643.26]] quot transpositiones), putem ne fieri quidem hoc posse quia non potest quaevis litera\n[[643.27]] absolute per se stare. </p>\n<p> [[644.1]] Reperio plurimas notiones incomplexas quae relationes involvunt, supponere quasdam\n[[644.2]] propositiones, sed generales seu indefinitas, verbi gratia <i>A est B.</i> Quid ergo si tot\n[[644.3]] faciamus syllabas vocabuli quot sunt praepositiones ingredientes notionem, ita ut syllaba\n[[644.4]] sit trium literarum, ex quibus una sit subjectum altera praedicatum [propositionis]\n[[644.5]] indefinitae, tertia modum connexionis cum reliquis praepositionibus exprimat. Videndum\n[[644.6]] quid hic possint diphthongi, item literae aspiratae, quae quodammodo duplices sunt. </p>\n<p> [[644.7]] <i>Aethiops est albus</i> <i>quoad dentes</i> sic explicari potest: Aethiops est albus quatenus\n[[644.8]] dentes (qui sunt partes quatenus Aethiops est totum) sunt albi. Ita videmus prius: <i>quatenus</i>\n[[644.9]] respicere ad omne quod sequitur, in quibus involvitur postea novum <i>quatenus</i>\n[[644.10]] strictius. Videmus et relativum <i>qui</i> adhiberi respectu unius termini, at <i>quatenus</i> respectu\n[[644.11]] integrae propositionis. Si quis vellet evitare repetitionem Aethiopis, sic rem instituere\n[[644.12]] posset: Aethiops seu <i>A</i> est albus quatenus dentes (qui sunt partes quatenus <i>A</i> est totum)\n[[644.13]] sunt albi. </p>\n<p> [[644.14]] <i>Dentes Aethiopis</i> hoc loco sic explicui: dentes qui sunt partes quatenus Aethiops est\n[[644.15]] totum. </p>\n","number":"153.","title":"De lingua rationali","date":"[Herbst 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

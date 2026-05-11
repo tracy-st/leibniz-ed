@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_534","series":"Band VI 4 (1677 - 1690)","seq":534,"text":"[[2471.1]] <b>422.  Excerpta ex Walenburgiorum libris [1. Hälfte 1677 (?)]</b>\n [[2471.2]] <tab/>[1. Hälfte 1677 (?)]\n[[2471.10]] <tit2><b>Excerpta ex Walenburgiorum libris</b></tit2> </p>\n<p> [[2471.11]] <i>Tract. 1. Examen principiorum fidei</i>. </p>\n<p> [[2471.12]] <i>Tenent Protestantes per modum principii solam scripturam sufficere ad probandos\n[[2471.13]] articulos fidei.</i> (+ Quaeritur an si nullus alius extaret liber de religione Christiana, quam\n[[2471.14]] scriptura sacra, nec aliunde quicquam de ea sciri posset. Fingamus in aliquam Maris\n[[2471.15]] Africani insulam in qua homines Arabicam linguam intelligant ejici naufragio codicem\n[[2471.16]] scripturae sacrae arabica lingua scriptum. Tollunt librum incolae et cum caeteris spoliis in\n[[2471.17]] unum acervum conjiciunt. Noctu igne concepto omnia comburuntur, solo Codice salvo,\n[[2471.18]] attoniti ea re incolae librum avide legunt, et doctrinam ejus praeparatu mirati sequendam\n[[2471.19]] sibi constituunt, quaeritur an ex eo solo mediocri judicio ac diligentia sibi veram religionem\n[[2471.20]] quantum ad salutem satis est concinnare possent, mihi id verisimile admodum\n[[2471.21]] videtur. +) </p>\n<p> [[2471.22]] Walenburch d. l. <i>Commune</i> Romanorum et Protestantium <i>principium est</i>, <i>doctrinam\n[[2471.23]] Christianorum primorum seculorum quae in libris sanctorum patrum et antiquorum\n[[2471.24]] Conciliorum reperitur esse incorruptam; saltem quoad articulos necessarios.</i> (+ Patres\n[[2471.25]] quasdam possunt habere opiniones cum Romana Ecclesia communes sed non ideo illa\n[[2472.1]] quae in Romana Ecclesia habes, quod scilicet Anathematismis Romana Ecclesia difficilem\n[[2472.2]] reddit unionem. +) </p>\n<p> [[2472.3]] An articuli fidei debeant ex sententia Protestantium esse in scriptura ita ut non sit\n[[2472.4]] opus consequentiis. Affirmant Walenburgii. </p>\n<p> [[2472.5]] Nisi Protestantes ex scriptura sacra probare possunt quis sit numerus articulorum\n[[2472.6]] fidei, non est eorum principium sufficiens. Non vero possunt, nam ea in re ipsi dissident\n[[2472.7]] inter se. Hoc argumentum ego non admitto. Sufficit aliquem credere articulum aliquem\n[[2472.8]] tametsi nesciat an sit necessarius. </p>\n<p> [[2472.9]] <i>Quomodo ullam controversiam catholicis movebunt legitime, nescientes an ob\n[[2472.10]] errorem</i> necessarium ab iis <i>recesserint.</i> </p>\n<p> [[2472.11]] Calviniani non possunt ostendere cur consensus inter ipsos et pontificios fundamentalior\n[[2472.12]] quam inter ipsos et Lutheranos. </p>\n<p> [[2472.13]] Decretum synodi Nationalis Carentoniensis anno 1631. (Walenb. pag. 3.) </p>\n<p> [[2472.14]] p. 4. Quaestio inter Protestantes et Pontificios <i>an Ecclesia sit infallibilis</i> [<i>judex</i>]\n[[2472.15]] <i>controversiarum</i> non tantum <i>quoad articulos necessarios</i>, id enim concedunt, inquit,\n[[2472.16]] <i>Protestantes, et eo ipso totam causam nobis tradunt</i>, sed <i>an sit infallibilis judex ex dono\n[[2472.17]] Spiritus Sancti, et promissione Christi sine ulla restrictione ad articulos sive omnibus\n[[2472.18]] necessarios sive non necessarios.</i> </p>\n<p> [[2472.19]] <i>De interpretatione scripturae per scripturam.</i> </p>\n<p> [[2472.20]] <i>Confessio Helvetica posterior artic. 2. illam duntaxat scripturae interpretationem\n[[2472.21]] agnoscimus, quae cum regula fidei et charitatis congruit</i> (+ regula fidei et charitatis, seu\n[[2472.22]] analogia fidei, quid? +). </p>\n<p> [[2472.23]] An si in syllogismo una propositio sit fidei, altera rationis, conclusio sit theologica.\n[[2472.24]] Concedit Musaeus si propositio illa rationis sit absolute necessaria, seu metaphysice cert\n[[2472.25]] [<i>bricht ab</i>] </p>\n","number":"422.","title":"Excerpta ex Walenburgiorum libris","date":"[1. Hälfte 1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

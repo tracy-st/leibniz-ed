@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_73","series":"Band II 4 (1701 - 1707)","seq":73,"text":"<p> [[244.1]] <b>73. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[244.2]] Venedig, 15. Juni 1704. [74.] </b></p>\n<p> [[244.26]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[244.27]] L'Esibitore della presente è il Sig^#'r^#'e Gio. Filippo Brienio di Dansica, d'anni Giovane, ma\n[[244.28]] nel senno e profonda cognitione delle più sane ed utili discipline vecchio, e veramente maturo.\n[[244.29]] Egli viaggia per maggiormente erudirsi, e conoscere i piu cospicui letterati dell'Europa, ed\n[[244.30]] essendosi fermato per alcuni mesi in Padova s'è guadagnata la stima e l'applauso de piu dotti\n[[244.31]] Professori, che anno in esso ammirata una lucida, e purgata letteratura, congionta con un\n[[244.32]] costume soavissimo e modestissimo che hà lungi d'ogn'esaggeratione rapito il cuore di tutti, e\n[[244.33]] principalmente il mio che l'adora per l'idea del Giovane savio e letterato. Or amando esso con\n[[244.34]] estrema passione, ed esercitando la Sapienza, si trova in necessità d'amare e sommamente\n[[245.1]] venerare V. S. Ill^#'m^#'a che possiede quella in se stesso in grado veramente eminente, e percio m'hà\n[[245.2]] pregato l'accompagnassi colla presente, accio nel suo passaggio per costà potesse avere la tanto\n[[245.3]] sospirata occasione di conoscerla ed approfittarsi della di lei dotta ed erudita conversatione.\n[[245.4]] Percio io mi prendo l'ardire di raccomandarlo con tutto il cuore all'autorevole e stimatissima\n[[245.5]] protettione di V. S. Ill^#'m^#'a, con degnarsi d'accoglierlo come me medesimo. Esso le rappresenterà\n[[245.6]] meglio de quel che io potessi fare colla penna, il mio stato, e la gloria che hò d'essere servitore\n[[245.7]] di V. S. Ill^#'m^#'a, che io venero come il primo letterato del Secolo, e riconosco come mio dichia^#'m^#'o\n[[245.8]] benefattore. Credo che V. S. Ill^#'m^#'a averà ricevute gia due mie, e coll'Ordinario venturo tornerò a\n[[245.9]] scrivergli diffusamente circa i miei studi, e l'opere che disegno publicare. Non sono arrivato\n[[245.10]] che oggi in Venetia, e volendosi partire subito il Sig^#'r^#'e Brienio per Vienna, non hò tempo di\n[[245.11]] scriverle di vantaggio. La prego dell'onore de' suoi stimatissimi comandamenti, e con tutto\n[[245.12]] rispetto riverendola mi rassegno </p>\n<p> [[245.13]] Di V. S. Ill^#'m^#'a Oblig^#'m^#'o Div^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[245.14]] Venetia 15 Giugno 1704. </p>\n","number":"73.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 15. Juni 1704. [74.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

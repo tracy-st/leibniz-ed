@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_189","series":"Band II 4 (1701 - 1707)","seq":189,"text":"<p> [[600.4]] <b>189. LEIBNIZ AN NICOLAS HARTSOEKER</p>\n<p> [[600.5]] Berlin, 9. April 1707. [187.193.] </b></p>\n<p> [[600.11]] Monsieur </p>\n<p> [[600.12]] Ce <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Monsieur Hartsoeker Conseiller et Medecin de S. A. E. à Dusseldorp</Fn> que M. Glauber appelloit la generation du Salpetre ou du Sel commun et que M. le\n[[600.13]] Chevalier Boyle a fait valoir d'avantage, est expliqué ordinairement comme s'il prouvoit\n[[600.14]] l'analyse et la composition de ces deux sels. Mais j'avoue que je suis encor un peu Chymiste\n[[600.15]] sceptique là dessus autant que M. Boyle l'estoit en bien d'autres choses dans son livre qui porte\n[[600.16]] ce titre. Il se peut que l'Esprit acide bien loin d'estre quelque chose de plus simple que le sel\n[[600.17]] dont il paroist estre tiré, soit une <b>decomposition</b> des parties du sel meme rendues tres petites\n[[600.18]] par le feu, et des parties ignées, le tout joint à quelque aquosité. Et puis ces petites parties se\n[[600.19]] rejoindront et en composeront de visibles, lorsque l'acide estranger qui les tient en suspens et\n[[600.20]] en division, sera mortifié par l'alcali du Tartre. Suivant cette hypothese nous ne produisons\n[[600.21]] point le sel et le salpetre, non plus que les metaux, nous ne les detruisons pas et nous n'y venons\n[[600.22]] pas à une veritable analyse. Si un acide et un alcali seuls principes et principes communs du Sel\n[[600.23]] commun et du Salpetre s'en pouvoient tirer, on pourroit changer l'un de ces Sels dans l'autre:\n[[600.24]] mais cela ne reussissant pas, c'est une marque que ce que nous en tirons, n'est pas un principe\n[[601.1]] commun, qui est specifie déja, et pourroit estre la chose même deguisée, ce qui est plus aisé à\n[[601.2]] expliquer que la destruction et generation du sel, dont on n'a aucune preuve. </p>\n<p> [[601.3]] Les miroirs spheriques fort grands ramasseront moins les rayons à proportion que les\n[[601.4]] petits, parce que les foyers qui au lieu d'estre des points, sont des surfaces notables, croissent\n[[601.5]] comme les quarrés des diametres de la sphere. Je crois qu'il y a un peu de difficulté à bien\n[[601.6]] étamer des miroirs de verre d'une figure differente du plan. </p>\n<p> [[601.7]] J'ay parlé non seulement du blanc qui vient de la multitude des couleurs de l'objet, mais\n[[601.8]] aussi de celuy des petits miroirs qui paroist le plus ordinaire: l'écume et la neige semblent estre\n[[601.9]] de cette nature. Si la Lune estoit un miroir elle nous paroistroit noire et ainsi quoyque les\n[[601.10]] miroirs fassent la blancheur par leur multitude neantmoins chaque miroir donne moins de\n[[601.11]] blancheur que s'il estoit un corps raboteux. </p>\n<p> [[601.12]] Ce que vous dites, Monsieur, touchant le changement de la couleur des rayons homogenes,\n[[601.13]] quand ils tombent sur les corps dont les couleurs sont fixes merite une discussion exacte, et je\n[[601.14]] souhaiterois que vous en conferassiés avec M. Newton luy meme, car sa maniere d'expliquer\n[[601.15]] les couleurs fixes est fondée sur l'immutabilité des rayons homogenes. </p>\n<p> [[601.16]] Les figures des petites parties des Sels principaux ne different point apparemment des\n[[601.17]] figures des parties notables de ces memes Sels, surtout dans le Sel commun dont la figure est si\n[[601.18]] simple. Cependant comme je ne suis point pour les Atomes, je crois que les dernieres parties\n[[601.19]] des sels sont formées par la nature et detruites dans les occasions; mais je doute que nous y\n[[601.20]] puissions arriver par nos operations, je n'asseure pourtant point que la chose est impossible non\n[[601.21]] plus que dans les metaux, et je ne m'y oppose que par provision, <b>donec probetur contrarium</b>. </p>\n<p> [[601.23]] Comme j'avois apprehendé que Ruggieri ne disparut un jour, j'ay insisté qu'on s'asseurât\n[[601.24]] des lettres en question sans differer, et M. le Comte de Wartenberg a esté ravi de trouver une\n[[601.25]] occasion de temoigner son zele à Monseigneur l'Electeur, qu'il souhaiteroit de pouvoir servir\n[[601.26]] en quelque chose de plus important. Il les a envoyées par la poste de voiture, parce que le\n[[601.27]] paquet estoit grand. De sorte que maintenant je ne doute point qu'elles n'ayent esté rendues. Je\n[[601.28]] suis entierement </p>\n<p> [[601.29]] Monsieur Vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[601.30]] Berlin ce 9 Avril 1707 </p>\n","number":"189.","title":"LEIBNIZ AN NICOLAS HARTSOEKER","date":"Berlin, 9. April 1707. [187.193.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

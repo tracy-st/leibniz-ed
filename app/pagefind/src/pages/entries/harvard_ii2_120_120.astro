@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_120","series":"Band II 2 (1686 - 1694)","seq":120,"text":"<p> [[438.1]] <b>121. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[438.2]] [Venedig,] 3. August [1691]. [119.122.]</b></p>\n<p> [[438.7]] Illu^#'m^#'o Sig^#'r^#'e, mio sig^#'r^#'e, sig^#'r^#'e colend^#'m^#'o </p>\n<p> [[438.8]] Due cose mi sembrano affatto irreconciliabili coll'umana libertà, il Decreto predeterminativo\n[[438.9]] di Dio, e la Prescienza. La libertà porta seco necessariamente il carattere della independenza\n[[438.10]] e sovranità, non si concepisce libero un Agente che subito non si intenda in qualche\n[[438.11]] maniera independente sovrano e padrone almeno in riguardo alla condotta ed economia delle\n[[438.12]] sue Facoltà ed attioni in maniera che tutto intieramente dipenda dal suo arbitrio e delettione,\n[[438.13]] che se è un altro che lo conduce, regola e determina prima a far più tosto una cosa che un'altra,\n[[438.14]] allora affatto cancellato il carattere dell'independenza e sovranità si distrugge affatto il concetto\n[[438.15]] di Libero; per il che per me ogni priorità ed antecedente determinatione offende l'attione libera\n[[438.16]] rendendola inevitabile e necessaria, e benché ancora ammesse la Predeterminatione e Prescienza\n[[438.17]] di Dio si intendano l' humane attioni contingenti, in quanto che il loro opposto <i>non\n[[438.18]] implicat contradictionem</i>, nondimeno da ciò solamente se n'inferisce che procedano liberamente\n[[438.19]] in riguardo al Decreto di Dio che poteva determinare le cose altrimente, sì come\n[[438.20]] liberamente e con tutta la piena indifferenza tali quali presentemente sono [le] dispose, ma non\n[[438.21]] se ne deduce che siano libere in riguardo all' huomo che le produce condotto, guidato e\n[[438.22]] predeterminato da un Agente più forte a cui l' huomo non può punto resistere. Non pregiudica\n[[438.23]] meno la nostra libertà la Prescienza, di quel che fà la Predeterminatione. Che Dio habbia\n[[438.24]] previsto tutta la serie infinita delli nostri pensieri rende talmente inevitabili e necessarie le\n[[438.25]] nostre operationi, che non sì possono dalla nostra libertà in conto veruno impedire; così tutto\n[[438.26]] sarebbe Fatale, nulla libero, e ciò pienamente e diffusamente mi sforzo dimostrarlo nella\n[[438.27]] seconda parte della mia <i>filosofia</i> ove con molte ragioni provo non essere necessario che Dio\n[[438.28]] prevegga l'attioni libere future dell' huomo, bastando a Dio l'idea di se stesso all'esclusione\n[[438.29]] d'ogni altra idea che rapresenta cosa diversa dalla divina essenza. Intendo chiaramente che per\n[[439.1]] lasciare l' huomo nella sua piena libertà secondo i disegni della sua inefabile Providenza nella\n[[439.2]] prima costitutione delle cose, possa dispensarsi dalla cognitione, e prescienza di tutto quello,\n[[439.3]] che noi liberamente per l'avvenire faremo senza punto pregiudicare la sua Sapienza, che\n[[439.4]] solamente da se stessa non già da alcuno oggetto straniero mendica la sua pienezza e perfettione.\n[[439.5]] All'Essere infinito perfettissimo basta conoscere se stesso talmente che possa se vuole\n[[439.6]] sospendere la cognitione, che tende alle cose finite e da esso diverse, sicché io intendo, che la\n[[439.7]] Scienza di tutto il creato esistente, futuro, e possibile, sia puramente arbitraria, e contingente,\n[[439.8]] non già naturale, e necessaria nel divino intendimento. La priego condonarmi se con tanta\n[[439.9]] libertà, e confidenza le propongo i miei sentimenti, che riusciranno sempre bassi, e deboli al di\n[[439.10]] lei ingegno robusto e luminoso, ne dia la colpa alla sua eccessiva bontà, che mi rende tanto\n[[439.11]] audace. </p>\n<p> [[439.12]] Nella sua passata V. S. Illu^#'m^#'a mi accennò che haveva trovato un nuovo stromento per\n[[439.13]] risolvere con ogni facilità l'equationi composte, <Fn><i>Leibniz hat dazu bemerkt</i>: Ma Machine des Equations est bonne si elle estoit executée avec la perfection requise, mais c'est ce qui est extremement difficile, et c'est comme si on vouloit trouver les moyennes proportionnelles par la machine de M. des Cartes. J'ay pensé à une voye moins geometrique à la verité mais bien plus practicable que je n'ay pas encor assez digerée.</Fn> se mi volesse favorire di mandarmene un\n[[439.14]] piccolo disegno, le ne restarei molto obligato, e se vi fosse il suo consenso, ne farei qui\n[[439.15]] Fabricare l'ordegno e ne farei mentione come opera sua nella mia <i>Dialectica Geometrica</i> che è\n[[439.16]] già pronta per la stampa. Non le raccordo il mio interesse conoscendo quanto V. S. Illu^#'m^#'a sia\n[[439.17]] inclinata a favorirmi e proteggermi e vivamente spero che Dio l' haverà scielta per stromento\n[[439.18]] della mia salute e quiete, le mie speranze sono tutte fondate nel suo amore sincero ed operativo.\n[[439.19]] Mentre dichiarandomi con passione tutto suo mi resto </p>\n<p> [[439.20]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o Affett^#'m^#'o Dev^#'m^#'o S^#'r^#'e </p>\n<p> [[439.21]] 3 Agosto </p>\n","number":"121.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"[Venedig,] 3. August [1691]. [119.122.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_432","series":"Band VI 4 (1677 - 1690)","seq":432,"text":"[[1961.13]] <b>354.  Revocatio qualitatum confusarum ad distinctas [1677 (?)]</b>\n [[1961.14]] <tab/>[1677 (?)] </p>\n<p> [[1961.20]] Analyseos physicae arcanum in hoc uno consistit artificio, ut qualitates sensuum\n[[1961.21]] confusas (nempe calorem et frigus, pro tactu; sapores pro gustu; odores pro olfactu; sonos\n[[1962.1]] pro auditu; colores pro visu) revocemus ad distinctas quae eas comitantur, quae sunt\n[[1962.2]] numerus, Magnitudo, figura, motus, consistentia, ex quibus duae postremae proprie\n[[1962.3]] physicae sunt. Itaque si deprehendamus certas qualitates distinctas semper comitari\n[[1962.4]] quasdam confusas (exempli gratia omnem colorem oriri ex radio refracto, non vero ex\n[[1962.5]] reflexo) et, si ope distinctarum qualitatum definite totam corporum quorundam naturam\n[[1962.6]] explicare possimus, ita ut demonstrare queamus, ipsa talis esse magnitudinis figurae et\n[[1962.7]] motus; eo ipso jam necesse est etiam qualitates confusas ex tali structura resultare, licet\n[[1962.8]] qualitates confusas ex ipsis aliter demonstrare non possimus, quia qualitatum confusarum\n[[1962.9]] nulla datur definitio, nec proinde de illis demonstratio. Sufficit ergo nos omnia distincte\n[[1962.10]] cogitabilia, quae ipsa comitantur, posse explicare constantibus conclusionibus, experientiae\n[[1962.11]] consentientibus. Nam ope quarundam qualitatum ad determinandam naturam corporum\n[[1962.12]] sufficientium possumus invenire causas; et ex his causis demonstrare reliquos\n[[1962.13]] affectus, seu caeteras qualitates, et ita invenietur per circuitum, quid realis et distincti\n[[1962.14]] qualitatibus confusis insit, reliquum enim quod explicari nequit, ut ex. g. illa ipsa apparentia\n[[1962.15]] quam flavedinem dicimus quomodo ex eo in quo flavedinem consistere a parte rei\n[[1962.16]] ostendimus oriatur, id sciendum est pendere non a re, sed nostrorum organorum dispositione\n[[1962.17]] et minutissimis constitutionibus rerum. Sufficit autem nos ostendere, quid a parte\n[[1962.18]] rei sit in corporibus ex quo nascitur flavedo. Idque ad usum vitae sufficiet. Ita enim\n[[1962.19]] modum producendi qualitates confusas habebimus. </p>\n<p> [[1962.20]] Utile quoque est ad minuendum laborem, si qualitates confusas reducamus ad alias\n[[1962.21]] simpliciores, ut si viriditatem reducamus ad compositionem flavi et caerulei, si ostendamus\n[[1962.22]] quosdam sapores et odores cohaerere quibusdam coloribus; etc. Facilius enim\n[[1962.23]] colores quam sapores ad distinctas qualitates revocantur. </p>\n","number":"354.","title":"Revocatio qualitatum confusarum ad distinctas","date":"[1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

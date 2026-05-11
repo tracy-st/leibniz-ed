@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_83","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":83,"text":"[[581.83]] <b>83. Principium meum est, quicquid existere potest et aliis compatibile est, id\nexistere </b> <span>581.0;0:63:083:76!      :L:l^</span>.\n[[581.11]] 2 Xbr. 1676.\n[[581.12]] Non est opus ad augendam rerum multitudinem pluribus mundis, neque enim\n[[581.13]] ullus est numerus, qui non sit in hoc uno mundo, imo in qualibet ejus parte.\n[[581.14]] Introducere aliud genus rerum existentium, aliumque velut Mundum etiam infinitum.\n[[581.15]] Est abuti existentiae nomine, neque enim dici potest an nunc existant illae\n[[581.16]] res an non. Existentia autem ut a nobis concipitur involvit aliquod tempus determinatum,\n[[581.17]] sive hoc demum existere dicimus, de quo certo aliquo temporis momento\n[[581.18]] dici potest, ista res nunc existit.\n[[581.19]] Multitudo est major rerum in toto quam in parte; etiam in infinita multitudine.\n[[581.20]] De vacuo formarum non inutilis dissertatio ut ostendatur non omnia possibilia per se\n[[581.21]] existere posse cum caeteris, alioqui multa absurda, nihil tam ineptum fingi posset,\n[[581.22]] quod non esset in mundo, non tantum monstra, sed et mentes malae et miserabiles,\n[[581.23]] item injustitiae, et nulla esset ratio cur Deus diceretur bonus potius quam malus;\n[[581.24]] justus quam injustus. Esset aliquis mundus in quo omnes probi poenis aeternis punirentur,\n[[581.25]] et omnes improbi pensarentur, felicitate luerent scelus.\n[[581.26]] Immortalitas mentis mea methodo statim probata habetur, quia possibilis in se,\n[[581.27]] et aliis omnibus compossibilis, sive rerum cursum non imminuit. Quia mentes n'ont\n","number":"83.","title":null,"date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

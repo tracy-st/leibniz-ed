@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_86","series":"Band II 2 (1686 - 1694)","seq":86,"text":"<p> [[349.18]] <b>87. LEIBNIZ AN CHRISTIAAN HUYGENS</p>\n<p> [[349.19]] [Hannover, Ende September bis Anfang Oktober 1690.] [88.]</b></p>\n<p> [[350.20]] [<i>L^#'1</i> ] </p>\n<p> [[350.21]] [ ...] <i>J'admets le vuide sans difficulté, et je crois que la nature du corps ne consiste pas\n[[350.22]] seulement dans l'étendue, mais dans la dureté parfaite qui le rende impenetrable et incapable\n[[350.23]] d'etre rompu.</i> [ ... ] </p>\n<p> [[350.24]] [<i>L^#'2</i> ] </p>\n<p> [[350.25]] Vous avés raison Monsieur, de dire p. 162 que la seule etendue ne fait pas l'essence de la\n[[350.26]] matiere, et j'ay tousjours crû, qu'outre cela il faut luy donner de la resistence. Mais je n'avois\n[[350.27]] pas crû qu'il estoit necessaire de luy accorder une dureté parfaite à quoy je vois que vous\n[[350.28]] inclinés. Cependant quand j'avois consideré l'uniformite de la matiere en elle meme, et\n[[351.1]] <angle bracket>qu'on</angle bracket> ne sçauroit approuver une position dont il est impossible de concevoir qu'il y ait une\n[[351.2]] raison, ce qu'il semble qu'on peut dire de l'inseparabilité des parties d'un corps, au lieu qu'on\n[[351.3]] conçoit aisement des corps qui sont à un grain de sable de meme que celuicy est à une\n[[351.4]] montagne (comme vous dites en quelque endroit de vostre ouvrage), item ce que vous dites\n[[351.5]] p. 13 que c'est <i>ce progres infini de differentes grosseurs et vistesses dont la nature se sert à\n[[351.6]] operer tant de merveilleux effects</i>; j'ay crû qu'on devoit raisonner des petits corps comme des\n[[351.7]] grands à proportion et qu'il est aussi peu convenable d'admettre des atomes que des montagnes\n[[351.8]] d'une dureté infinie car il n'y peut avoir de raison pourquoy cette indissolubilité ne passe pas\n[[351.9]] une certaine grandeur et je ne voy rien qui nous oblige de l'admettre. J'avois eu du panchant\n[[351.10]] autre fois pour le vuide et pour les Atomes, mais plusieurs raisons m'avoient fait croire depuis\n[[351.11]] que ce poste n'estoit pas tenable. Cependent j'avoue que cette controverse n'est pas fort\n[[351.12]] importante pour expliquer les phenomenes particuliers de la nature, pourveu qu'on n'admette\n[[351.13]] point de grand vuide. [ ... ] </p>\n","number":"87.","title":"LEIBNIZ AN CHRISTIAAN HUYGENS","date":"[Hannover, Ende September bis Anfang Oktober 1690.] [88.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

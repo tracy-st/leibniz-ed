@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_656","series":"Band VI 4 (1677 - 1690)","seq":656,"text":"[[2843.10]] <b>503₂.  De Scientia juris naturalis </p>\n<p> [[2843.15]] Scientiam Juris naturalis docere est, tradere Leges Optimae Reipublicae. </p>\n<p> [[2843.16]] Scientiam juris arbitrarii docere, est leges receptas cum legibus optimae Reipublicae\n[[2843.17]] conferre. </p>\n<p> [[2843.18]] Duae sunt partes juris, una de agendis, altera de actionum praemiis poenisque et\n[[2843.19]] generatim consequentiis, sive de bonis malisque quae vel ipso jure vel judicis officio,\n[[2843.20]] eoque vel proprio motu, vel ob postulationem alicujus explicato contingunt. Caeterum ea\n[[2844.1]] quae ipso jure contingunt non in re ipsa, sed in jure consistunt, ideoque denique in ea\n[[2844.2]] quae per ipsa judicis officio impetrari queunt, resolvuntur. </p>\n<p> [[2844.3]] Porro quaecunque Leges judicem etiam proprio motu facere volunt, ea nihilominus\n[[2844.4]] ab eo postulari possunt. </p>\n<p> [[2844.5]] Hinc tota jurisprudentia tradi potest, certa constantique methodo, ea ordine enumerando,\n[[2844.6]] quae a judice postulari possunt. </p>\n<p> [[2844.7]] Hinc duae sunt methodi jus tradendi, una secundum ordinem officiorum vitae, altera\n[[2844.8]] secundum ordinem Actionum seu postulationum in judicio. </p>\n","number":"503₂.","title":"De Scientia juris naturalis","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_47","series":"Band II 1 (1663 - 1685)","seq":47,"text":"<p> [[134.9]] <b>41. LEIBNIZ AN MARTIN FOGEL</p>\n<p> [[134.10]] Mainz, 3./13. Februar 1671. [38.52.]</b></p>\n<p> [[134.19]] Vir Nobiliss^#'e et Experientissime, Fautor Honoratissime. </p>\n<p> [[134.20]] Credo Te recte accepisse literas meas quas ad Nobil^#'m^#'u^#'m Wedderkopf Antecessorem Chiloniensem\n[[134.21]] destinaram. Collocutus sum nuper cum Eximio illo Mauritio egregiae prorsus doctrinae\n[[134.22]] et humanitatis viro, qui mirifico Tui amore omnes, quibuscum occasio fert, ac certe inter\n[[134.23]] eos me, implet implevitque. Quis sit Ravianorum Orientalium successus nosse desidero, si\n[[134.24]] libros quos memorat, habet, thesaurum profecto possidet ingentem. Ludovicum de Compiegne\n[[134.25]] Judaeum Metensem susceptore Rege Galliae baptizatum Heidelbergae nunc professorem fore\n[[134.26]] Edzardo scripsi. Mauritius memoravit <greek>sxedíasma</greek> quoddam meum de motu, in acidulis Svalbacensibus\n[[135.1]] raptim effusum Tibi in Angliam curandum dedisse, Te in nonnullis dissentire visum.\n[[135.2]] Quod ego adeo non aegre fero, ut magnopere sententiam tuam desiderem ac nunc quidem etiam\n[[135.3]] efflagitem. Quis enim in argumento tanti momenti tumultuarie tractato non facile lapsum\n[[135.4]] fateatur. Unde si nondum Anglis misisti, differri missionem gratum erit. Videbis mox, ut spero,\n[[135.5]] jam enim sub praelo calet, <greek>sxedíasma</greek> aliud paulo elaboratius de Hypothesi unici cujusdam\n[[135.6]] motus in Tellure nostra suppositi, <b>nec Tychonicis nec Copernicanis aspernandi</b>, ex\n[[135.7]] quo omnium naturae phaenomenorum ratio pendeat, et quia hortatore celeberrimo Oldenburgero\n[[135.8]] Societatis Regiae Secretario, publico, societati ipsi inscribendum duxi. Quae sint motus\n[[135.9]] Leges ex <b>Jungii</b> (quem ego virum, ut saepe testari soleo, inter illustria Germaniae sidera,\n[[135.10]] quomodo alterius argumenti librum Browerus inscripsit, numero) sententia per Te nosse opto,\n[[135.11]] quemadmodum et quo sint loco caetera ejus viri, quae reliquiarum instar sancte asservari,\n[[135.12]] publice interest. Florentinam Academiam a pristino ardore valde remisisse ajunt. Tu rectius\n[[135.13]] noveris, quemadmodum et caetera quae Italiae foecunditas quotidie profert, a nemine rectius\n[[135.14]] quam Te sciri posse constat. Si rescribere cum Ampl^#'m^#'o Edzardo dignaris poterit literis mihi\n[[135.15]] inscriptis operculum aliud hoc titulo circumdari: A Monsieur Monsieur Lasser Conseiller de\n[[135.16]] Son Altesse Electorale de Mayence, a Mayence. Quod restat vale faveque </p>\n<p> [[135.17]] Vir Ampl^#'m^#'e Cultori Tuo Gottfredo Guilielmo Leibnitio J.U.D. </p>\n<p> [[135.18]] Mog. 3/13 Feb. 1671. et Consil. Moguntino. </p>\n<p> [[135.19]] Nobil^#'m^#'o et Experientiss^#'o Dⁿ^#'o Vogelio, Medico et polyhistori celeberrimo, Fautori meo\n[[135.20]] Eximio. Hamburg. <i>par couvert.</i> </p>\n","number":"41.","title":"LEIBNIZ AN MARTIN FOGEL","date":"Mainz, 3./13. Februar 1671. [38.52.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

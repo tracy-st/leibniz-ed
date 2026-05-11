@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_149","series":"Band II 3 (1695 - 1700)","seq":149,"text":"<p> [[399.13]] <b>149. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[399.14]] Padua, 18. Dezember 1697. [143.159.]</b></p>\n\n<p> [[399.19]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o </p>\n<p> [[399.20]] Non hò risposto prima alla benignissima di V. S. Ill^#'m^#'a per l'occupatione delle publiche\n[[399.21]] lettioni, e l'incessante meditatione per compire la mia Opera attesa in Italia con impatienza da\n[[399.22]] gl'Amici letterati, la quale, a Dio piacendo s'incominciarà a stampare per il venturo Gennaio.\n[[399.23]] Hò molto pensato sopra la natura dell'Unità e del Numero, sopra de quali principalmente\n[[399.24]] s'appoggia il mio metodo di filosofare. Nella <i>Galleria di Minerva</i> fra molte mie lettere\n[[400.1]] stampate se ne trova una, in cui rigetto un Certo filosofo Genovese che haveva scritto contra la\n[[400.2]] dottrina del Cartesio intorno alla natura del Corpo, or havendo le mie ragioni fatto qualche\n[[400.3]] strepito in Italia, l'Avversario per riparare al suo onore m' ha risposto con qualche insolenza, a\n[[400.4]] cui io nuovamente rispondo, e si stamperà la mia risposta insieme colla censura dell'Avversario.\n[[400.5]] Se V. S. Ill^#'m^#'a mi comanderà la mandarò l'una e l'altra per riceverne il suo dotto giuditio.\n[[400.6]] Godo infinitamente che ella pensò di portarsi in Italia colla viva speranza di rivederla, e\n[[400.7]] servirla, come mio distintissimo Benefattore. O quanto mi giovarà la sua erudita, e dotta\n[[400.8]] conversatione per maturare alcuni miei pensieri, e principalmente per informarmi meglio della\n[[400.9]] sua Analisi, e del calcolo Integrale, giachè nel libro De Monsieur De l'Opital, hò alquanto\n[[400.10]] capito il Calcolo Differentiale, che tira l'origine dalla profonda ed acutissima mente de V. S.\n[[400.11]] Ill^#'m^#'a da me venerata come il magiore letterato del Secolo. Il Sig^#'r^#'e Conte Bertolli la serve con\n[[400.12]] tanto genio, che non bisogna pensare ad incommodarsi in cosa veruna, egli molto goderà di\n[[400.13]] conoscerla. La priego comandarmi con libertà[,] assicurandola che in tutte l'occasioni costantemente\n[[400.14]] sarò </p>\n<p> [[400.15]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Obg^#'m^#'o Cord^#'m^#'o S^#'r^#'e Michel Angelo Fardella </p>\n<p> [[400.16]] Padova 18 X^#'b^#'r^#'e 97\n[[400.17]] <yi>All'Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di S.A.E. <b>Hannover</b> </p>\n","number":"149.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 18. Dezember 1697. [143.159.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

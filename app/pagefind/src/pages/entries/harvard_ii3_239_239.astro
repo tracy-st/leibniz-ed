@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_239","series":"Band II 3 (1695 - 1700)","seq":239,"text":"<p> [[645.15]] <b>239. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[645.16]] Dijon, 14. Juni 1700. [237.240.]</b></p>\n\n<p> [[646.1]] Dijon le 14. juin <b>1700</b> </p>\n<p> [[646.2]] Je ne scay monsieur que dire de vostre long silence, je n'ay aucunes nouvelles de vostre\n[[646.3]] part du second pacquet de mons^#'r le president Boisot que je vous ay envoyé par m^#'r Brosseau, et\n[[646.4]] qui m'a escript vous l'avoir faict tenir; je n'en ay point non plus, du plan que je vous ay envoyé\n[[646.5]] d'un de nos amis deffunct sur une matiere pareille à celle que vous traictés dans vostre <i>codex\n[[646.6]] diplomaticus</i>; scavoir <i>de fide veterum instrumentorum</i>. Mons^#'r d'Avranches m'a ecrit ces jours\n[[646.7]] passés une grande et obligeante lettre où il me parle de vous d'une maniere egalement\n[[646.8]] obligeante, je luy avois [temoigné] que vous repareriés ce qu'on n'avoit pas executé suyvant\n[[646.9]] vos ordres touchant le <i>codex diplomaticus</i> que vous luy aviés destiné, qu'il le receuroit avec\n[[646.10]] plaisir et que s'il y en avoit eu à Paris; il se le seroit donné; Il me mande que le s^#'r Halma va\n[[646.11]] imprimer six gros vol. in fol. d'Inscriptions grecques et latines; je me doute qu'il y mettra le\n[[646.12]] Gruter, le Reynesius, le Spon et le Fabretti (qui est mort depuis peu à Rome) et qu'il y\n[[646.13]] adjoustera les inscriptions de Gudius avec l'explication qu'il en donne; que m^#'r Gronovius veut\n[[646.14]] encherir par ses <i>Antiquités grecques</i> sur m^#'r Graevius et nous donner tous les meilleurs et\n[[646.15]] principaux auteurs de cette Langue; on me mande de Rome que le s^#'r Gemelli medicin Calabrois\n[[646.16]] y a esté vers le tems de pasques, et y a apporté plusieurs exemplaires de son livre Intitulé <i>Giro\n[[646.17]] del mondo</i> in 8^#'o en 6. volumes rempli de figures des singularités qu'il a veues dans son voyage\n[[646.18]] de Turquie, de Perse, des Indes, de la Chine, des Isles philippines et [de] Mexico, principalement\n[[646.19]] pour ce qui est de l'histoire Naturelle; l'abbé Philippo della Torre acheve l'impression\n[[646.20]] de son livre Intitulé <i>Monumenta veteris Antii</i> etc., où il y aura des choses touchant l'Antiquité.\n[[646.21]] L'auteur est auditeur du cardinal Imperiali c'est le plus scavant homme qui soit à Rome\n[[646.22]] presentement depuis la mort de mons^#'r Fabretti; l'abbé Fontanini Bibliothequaire du meme\n[[647.1]] Cardinal faict imprimer l'<i>Aminta</i> de Torquato Tasso <i>diffeso e con varie osservationi illustrato</i>\n[[647.2]] in 8^#'o. On m'envoye de Rome <i>l'historia della volgar poesia</i> dont je vous ay parlé autrefois; on\n[[647.3]] ecrit de cette ville là du 27. du mois de may dernier que mons^#'r le cardinal de Bouillon part dans\n[[647.4]] deux Jours pour se rendre a Cluni selon l'ordre du Roy, et il y a apparence qu'il perdra par là\n[[647.5]] son decanat; mons^#'r le Grand duc est arrivé à Rome avec un grand nombre de chevaliers de\n[[647.6]] S^#'t Estienne jusqu'à 40 c'est à dire <i>Cavalieri non pisciano</i>. Voilà une lettre pour mons^#'r Morel. Je\n[[647.7]] suis du meilleur de mon Coeur Tout à vous </p>\n<p> [[647.8]] Nicaise\n[[647.9]] <yi>A Monsieur Monsieur de Leibniz prés de monseig^#'r le dûc d'Hanovre. <b>Hanovre</b> </p>\n","number":"239.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 14. Juni 1700. [237.240.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

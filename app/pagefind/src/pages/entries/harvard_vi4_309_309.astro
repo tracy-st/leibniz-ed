@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_309","series":"Band VI 4 (1677 - 1690)","seq":309,"text":"[[1355.14]] <b>255.  Le Cartesianisme l'antichambre de la véritable philosophie [1677 (?)]</b>\n [[1355.15]] <tab/>[1677 (?)] </p>\n<p> [[1356.1]] Il m'arriva un jour de dire que le Cartesianisme, en ce qu'il a de bon, n'estoit que\n[[1356.2]] l'antichambre de la veritable philosophie. Un homme de la compagnie qui frequentoit la\n[[1356.3]] cour, et qui avoit de la lecture, et qui se mêloit même de raisonner sur les sciences, poussa\n[[1356.4]] la figure jusqu'à l'allegorie, et peut estre un peu trop loin. Car il me demanda là dessus, si\n[[1356.5]] je ne croyois point qu'on pourroit dire sur ce pied là, que les anciens nous avoient fait\n[[1356.6]] monter l'escalier, que l'école des modernes estoit venue dans la salle des gardes; et si les\n[[1356.7]] innovateurs de nostre siecle, estoient venus jusque dans l'antichambre, qu'il me souhaittoit\n[[1356.8]] l'honneur de nous introduire dans le cabinet de la Nature. Cette tirade de paralleles\n[[1356.9]] nous fit tous rire, et je luy dis <i>vous voyés, Monsieur que vostre comparaison a rejoui la\n[[1356.10]] compagnie. Mais vous ne vous estes point souvenu qu'il y a la chambre d'audience entre\n[[1356.11]] l'antichambre et le cabinet, et que ce sera assez si nous obtenons audience, sans\n[[1356.12]] pretendre</i> <i>penetrer dans l'interieur</i>. </p>\n","number":"255.","title":"Le Cartesianisme l'antichambre de la véritable philosophie","date":"[1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

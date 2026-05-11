@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_62","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":62,"text":"[[479.20]] <b>62. De unione animae et corporis </b> <span>479.20;0:63:062:76?      :L:l^</span>.\n[[480.1]] L'opinion de Mons. Perrault est, que l'ame est egalement par tout le corps, et que\n[[480.2]] le sentiment se fait in ipso sensorio, dans les yeux, dans les pieds etc.\n[[480.3]] Ego crediderim esse liquorem quendam sive si mavis aetheriam substantiam,\n[[480.4]] toto corpore diffusam, continuumque; per quam sentiat anima; quae nervos inflet,\n[[480.5]] quae contrahat, quae displodat. Huius substantiae quamlibet partem animatam minime\n[[480.6]] credibile est, nam cum perpetuo avolet aliquid, etiam animae multiplicabuntur\n[[480.7]] dividenturque. Non potest intelligi unius rei plus quam unam actionem passionemque\n[[480.8]] esse. Anima autem si simul in pluribus est, id est operatur locis; simul plures\n[[480.9]] habebit operationes diversas. Nec video quomodo eveniat unio, pone duarum liquidi\n[[480.10]] partium obstrui communionem; quis non videt, animam in duas abituram. Ut si\n[[480.11]] fretum Gaditanum obstrueretur. Itaque crediderim in ipso illo liquore esse quendam\n[[480.12]] motus displosionisque fontem, ut in candela accensa. Porro in cerebri cavitatibus\n[[480.13]] videtur omnis peragi gyratio, et anima tueri Vorticem suum. Species ipsas non esse\n[[480.14]] nisi liquoris impressi undulationes. Omnem autem undulationem aeternum servari,\n[[480.15]] etsi aliis composita fiat imperceptibilis. Sed animam ipsam agitare vorticem, hoc vero\n[[480.16]] mirum est. Facit tamen, agimus enim non per simplicem machinam, sed ex illis\n[[480.17]] reflexionibus, sive actionibus in nos ipsos. An forte ipse totus vortex magni ^norbisö\n[[480.18]] simili anima vivificatur, quae causa est, cur systematis leges observentur, et ^ncompensenturö\n[[480.19]] omnia. Totus Mundus unus Deo vortex.\n","number":"62.","title":"De unione animae et corporis","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_118","series":"Band II 2 (1686 - 1694)","seq":118,"text":"<p> [[433.1]] <b>119. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[433.2]] [Venedig,] 26. Juli [1691]. [118.121.]</b></p>\n<p> [[433.8]] Illu^#'m^#'o Sig^#'r^#'e, mio sig^#'r^#'e, sig^#'r^#'e colend^#'m^#'o </p>\n<p> [[433.9]] Coll'ordinario passato diedi parte a V. S. Illu^#'m^#'a del mio arrivo in Venetia, e tumultuariamente\n[[433.10]] l'accennai qualche cosa di quel che penso intorno ad alcune materie filosofiche,\n[[433.11]] rimettendomi però sempre al suo savio, e purgatissimo giuditio da me infinitamente stimato, e\n[[433.12]] ad ogni altro preferito. Torno hora di nuovo a riverirla, e le porto gl'affettuosi, e riverenti saluti\n[[433.13]] del Signore Conte Douglas, e del Sig^#'r^#'e Cuningham, quali si confessano molto obligati alle sue\n[[433.14]] cortesi, ed amorevoli espressioni, imponendomi, che la riverissi da loro parte, ed assicurassi del\n[[433.15]] profondo rispetto, con cui essi venerano la sua rara, e sublime virtù. Hò già parlato con il\n[[433.16]] Signore Erverz, il quale mi hà consegnato la qui inclusa, havendo mostrato un eccessivo\n[[433.17]] godimento dell'onorevole ed affettuosa mentione che V. S. Illu^#'m^#'a fà della sua persona nell'altra\n[[433.18]] inviatami. Circa la copia del Diploma bisogna armarsi ancora di patienza, trovandosi confuse\n[[433.19]] ed a mucchio tutti i manuscritti del Monastero delle Carceri nella Nuntiatura. Si aspetta qui a\n[[433.20]] momenti il Sig^#'r^#'e Marchese Montecuccoli, e spero, che al suo arrivo si tornarà a parlare, e\n[[433.21]] sollicitare Monsig^#'r^#'e Nuntio per ottenere l'intento, non dubiti essa della mia assistenza, e\n[[433.22]] premura, essendomi molto a cuore i suoi comandi. <b>Le raccomando caldamente il mio\n[[433.23]] negotio, e stabilisco nella sua eroica, e cristiana carità tutte le speranze\n[[433.24]] della mia quiete.</i> Consegnai già al Sig^#'r^#'e Mendelino un corpo della mia operetta, e la priego\n[[433.25]] condonarmi, se mi sono preso l'ardire di mettere sotto l'occhio del primo letterato d'Europa\n[[433.26]] due libretti composti per Giovani, e partoriti da una Mente molto debole ed oscura. Le lettioni,\n[[433.27]] che mi sopragiungono questa matina non mi permettono potere scrivere di vantagio per ciò mi\n[[433.28]] resto\n [[433.29]] /  26 Luglio Di V. S. Illu^#'m^#'a Umil^#'m^#'o Affett^#'m^#'o </p>\n<p> [[434.1]] Parlando della necessità, che habbiamo di magiormente spiegare, e dimostrare quanto si\n[[434.2]] può gl'assiomi nel mio libro della Teoria matematica a carte 31 mi sono preso la libertà di\n[[434.3]] scrivere così. </p>\n<p> [[434.4]] <i>Ad quod acurate praestandum olim Venetiis me hortabatur Summus ille Geometra et\n[[434.5]] Philosophus Leibinitius Serenissimi Ducis Hannoverani aulicus Consiliarius qui ut mihi hujus\n[[434.6]] rei exemplum afferret hoc pacto ingeniose quidem conatus est demonstrare Pronunciatum illud\n[[434.7]] Geometricum, <b>Totum est majus sua parte.</b> col suo medesimo argomento che qui di suo\n[[434.8]] proprio pugno mi scrisse. Nell'istesso tomo a carte 464 parlando di quel, che essa mi comunicò\n[[434.9]] intorno al calcolo specioso chiudo il mio texto con queste parole. <i>O utinam si hic solertissimus\n[[434.10]] et incomparabilis Geometra, quae circa analysim felici eventu excogitavit, Posteritati consignare\n[[434.11]] dignaretur, sane ad maximam universalitatem evectam et omni ex parte expolitam Analysim\n[[434.12]] haberemus</i>. Nel mio tomo filosofico n' hò fatto similmente mentione in più luoghi e\n[[434.13]] principalmente a carte 414. Nelli miei seguenti tomi vi metterò tutto quello, che essa mi\n[[434.14]] comunicarà, o che trovarò negl'atti di Lipsia. </p>\n","number":"119.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"[Venedig,] 26. Juli [1691]. [118.121.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

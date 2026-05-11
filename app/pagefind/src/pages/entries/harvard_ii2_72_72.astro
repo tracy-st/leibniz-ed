@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_72","series":"Band II 2 (1686 - 1694)","seq":72,"text":"<p> [[299.7]] <b>73. LEIBNIZ AN VITALE GIORDANI</p>\n<p> [[299.8]] [Rom, Mitte November 1689.] [72.]</b></p>\n<p> [[299.18]] [<i>L^#'1</i> ] </p>\n<p> [[299.19]] 1. Secundum certum considerandi modum corpus est prius superficie, et superficies prior\n[[299.20]] linea. Sunt enim termini corporis nec per se subsistunt. Unde bene ex corporis sectione\n[[299.21]] derivantur. Nec simplicior derivandi ratio est quam secando corpus indeterminatum vel cujus\n[[299.22]] termini non considerantur et ita quidem ut terminus communis seu secans utrinque se habeat\n[[299.23]] eodem modo seu secet in partes respective congruentes et tunc fit <b>planum</b>. Et si rursus tale\n[[299.24]] eodem modo secetur prodit <b>recta</b>. Quae consideratio novitate et simplicitate sua applausum\n[[299.25]] aliquem ab ingeniis mereri posse videbatur. </p>\n<p> [[299.26]] 2. Non video quomodo aliquid de recta demonstrari possit, non utendo rectae definitione\n[[299.27]] aut proprietate ulla. Sane ex demonstrationibus a Proclo aut Clavio mutuatis cognosci non\n[[300.1]] potest, utrum pertineant ad lineam antea definitam quae scilicet brevissmia est inter extrema,\n[[300.2]] nec ullam aliam rectae notionem praesupponunt. </p>\n<p> [[300.3]] [...] </p>\n<p> [[300.4]] 4. Crediderim defectum in demonstratione Thaletis sine ullo tironum praejudicio emendari\n[[300.5]] posse. </p>\n<p> [[300.6]] 5. Annotavi ista non libidine contradicendi, sed quia scio magni referre ad perfectionem\n[[300.7]] Geometriae, ut axiomata Euclidea de natura Rectae perfecte demonstrentur. </p>\n<p> [[300.8]] [<i>L^#'2</i> ] </p>\n<p> [[300.9]] [ ... ] Caeterum non is ego sum qui mea velut ex tripode dicta statim recipi velim; et\n[[300.10]] ingenuitatem eorum inprimis amo, qui non diffitentur se utiliter admonitos. Itaque quod contra\n[[300.11]] meam rectae definitionem objicis dignum consideratu agnosco; utrum scilicet in eo peccet,\n[[300.12]] quod plani et solidi notiones supponit, an potius vel ideo laudem mereatur. Quod tibi porro\n[[300.13]] examinandum relinquo exactius, antequam dicamus tecum, currum esse positum ante boves.\n[[300.14]] Erit enim qui arbitretur corporis notionem priorem esse notione superficiei et lineae, tanquam\n[[300.15]] corporis terminorum, nec per se subsistentium; et has corporis sectione cognosci. Quod initio\n[[300.16]] assumo interminatum vel ita ut termini ejus non considerentur; ita ut ipsa sectio det terminos.\n[[300.17]] Prima autem et simplicissima corporis sectio est in partes sibi respondentes congruas, seu ita ut\n[[300.18]] secans ad utramque secti partem se habeat eodem modo; et haec fit per <b>planum</b>. Et prima\n[[300.19]] rursus plani sectio eodem modo fit <b>per rectam</b>, nec (quantum ego video) nisi per rectam.\n[[300.20]] Habemus ergo plani et rectae originem simplicissimam secundum hunc considerandi modum\n[[300.21]] qui sane novus apud ingenuos aliquem applausum sperare poterat. Nec ideo alios considerandi\n[[300.22]] modos improbo (quales et ipse habeo), dummodo par claritas obtineatur, quam in Euclidea\n[[300.23]] nondum hactenus agnoveramus. Interim quacunque demum utamur notione rectae, eam\n[[300.24]] influere ut ita dicam, oportet, in theoremata quae de recta demonstrare volumus, alioqui\n[[300.25]] ignotum est, utrum ea quae demonstramus ad eam rem pertineant, cujus data est definitio. Idque\n[[300.26]] in illis demonstrationibus Euclideorum Axiomatum quas a Proclo et Clavio mutuatus es\n[[300.27]] desiderare me jam innui, etsi hoc in responsione tua praeterieris. Quomodo enim ex iis sciemus\n[[300.28]] pertinere ad lineam brevissimam inter sua puncta extrema. Caeterum cum propositum esset in\n[[300.29]] <i>Euclide</i> tuo omnia qua licet exacte demonstrare, fortasse non diffiteberis rectius suppleri casus\n[[300.30]] qui ad perfectionem demonstrationis desiderantur quod tironibus opinor praejudicium facere\n[[300.31]] non poterat. Neque quisquam unquam tam bene subductis rationibus librum scripsit quin aliqua\n[[301.1]] hujusmodi admonitionum materia supersit, quas sine detrimento existimationis agnoscere possumus.\n[[301.2]] [ ... ] Sed nolo te his tenere diutius, voluique tantum respondere, ne me putes quadam\n[[301.3]] contradicendi libidine temerarias objectiones festinasse. Nam diu desideravi exactas videre\n[[301.4]] axiomatum istorum demonstrationes quoniam sciebam magni referre ad perfectionem Geometriae,\n[[301.5]] itaque dubitationes meas vel ideo tibi proponere volebam, ut Te quem parem superandae\n[[301.6]] difficultati putabam, ad supplenda quae desunt, excitarem. Vale et me ama. </p>\n","number":"73.","title":"LEIBNIZ AN VITALE GIORDANI","date":"[Rom, Mitte November 1689.] [72.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

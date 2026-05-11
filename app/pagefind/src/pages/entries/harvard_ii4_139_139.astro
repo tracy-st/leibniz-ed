@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_139","series":"Band II 4 (1701 - 1707)","seq":139,"text":"<p> [[458.6]] <b>139. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[458.7]] [Hannover,] 20. August 1706. [137.142.] </b></p>\n<p> [[458.12]] Extrait de ma lettre à Mons l'Abbé Fardella 20 Aoust 1706 </p>\n<p> [[458.13]] Mons. Gregory a voulu faire des objections contre mon Hypothese Astronomique, mais je\n[[458.14]] trouve qu'il ne l'a pas bien comprise. Car elle a un avantage curieux, dont il ne s'est pas\n[[459.1]] apperçû. C'est que les corps solides circulant harmoniquement peuvent aller dans le fluide qui\n[[459.2]] circule de meme, tout comme s'ils alloient dans le vuide, ou comme si le fluide n'y estoit pas,\n[[459.3]] et de meme le fluide pourra aller ainsi tout comme si le corps solide n'y estoit point, ce que\n[[459.4]] toute autre circulation ne sauroit effectuer c'est ce qui fait qu'à la longue le solide aussi bien\n[[459.5]] que le fluide se reduissent à cette circulation, quand même ils ne l'avroient pas eue auparavant\n[[459.6]] et c'est aussi ce qui n'a pas esté observé par ceux qui rejettent entierement les Tourbillons ou\n[[459.7]] les orbes fluides deferans. </p>\n","number":"139.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"[Hannover,] 20. August 1706. [137.142.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

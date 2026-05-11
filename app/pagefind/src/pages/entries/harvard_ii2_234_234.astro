@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_234","series":"Band II 2 (1686 - 1694)","seq":234,"text":"<p> [[732.16]] <b>237. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[732.17]] [September bis Oktober 1693.] [233.]</b></p>\n<p> [[733.8]] Vir Cl^#'m^#'e fautor honoratissime </p>\n<p> [[733.9]] Gratissimum mihi fuit intelligere optimo loco esse et valetudinem et caeteras res tuas, de\n[[733.10]] quo pene dubitare me coegerat silentium. Nolim putes mutati consilii tui rationes aliquid\n[[733.11]] detrahere de affectu meo posse, tametsi enim spe suavissima exciderimus, nostra tamen jactura\n[[733.12]] libenter redimimus successus tuos. Et si tu pro judicio exquisito tuo tibi ipse intus satisfacis,\n[[733.13]] atque illis obligationibus, quas rebus mature excussis Tibi imponendas judicas, de caetero non\n[[733.14]] alia magis re mihi satisfacere potes, quam prospere agendo. Gaudeo Te Montanario successorem\n[[733.15]] datum insigni certe viro, et tui olim amicissimo, qui profecto si habuisset optionem, non\n[[733.16]] alium quam Te sibi delegisset. Nescio an vivat adhuc Stephanus de Angelis vir clarissimus, cui\n[[733.17]] locutus sum Patavii, et magnam viri humanitatem sum expertus. Donavit mihi complura\n[[733.18]] opuscula sua, quae pleraque nondum antea videram. Cumque inspexissem attentius facile\n[[733.19]] deprehendi plena esse acuminis et doctrinae. Fuit ipsi cum Joh. Alph. Borello viro certe\n[[733.20]] doctissimo liticula, sed causae statum nondum satis examinandi otium fuit, quam multis enim\n[[733.21]] distrahar facile judicas. Si ut spero vivit tibique cum eo consuetudo est, rogo ut per occasionem\n[[733.22]] egregio viro significes gratam mihi ejus memoriam aestimatissimamque doctrinam haberi.\n[[733.23]] Quid moliaris discere semper volupe erit, neque enim a te nisi egregia expecto, et procedere\n[[733.24]] puto philosophiam tuam, ac subinde Mathesin quoque, in quibus tu prae multis aliis quo es\n[[733.25]] ingenio praestare aliquid praeclarum potes in Italiae tuae decus. </p>\n","number":"237.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"[September bis Oktober 1693.] [233.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

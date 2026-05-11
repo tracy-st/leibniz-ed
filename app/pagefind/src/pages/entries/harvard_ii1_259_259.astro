@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_259","series":"Band II 1 (1663 - 1685)","seq":259,"text":"<p> [[802.23]] <b>227c. DETLEV CLÜVER AN LEIBNIZ</p>\n<p> [[802.24]] London, 16./26. Juli 1680. [227a.227d.]</b></p>\n<p> [[803.2]] [ ... ] Sicuti et novos illos characteres, quorum beneficio summa et rectangulum quorumvis\n[[803.3]] numerorum per solam inspectionem determinare potes, elegantissimos esse credo, quamvis\n[[803.4]] contraria ratione jam olim, (nullos addendo novos) reliquas quas habemus figuras arithmeticas\n[[803.5]] ad simplices illas 0 et 1 reducendo; facillimam quandam hinc extrui posse logisticam deprehenderim,\n[[803.6]] quae per progressionem duplam nullo sit obnoxia multiplicationis vel divisionis\n[[803.7]] taedio. Verum Aethiopem forsan lavabit, qui nova quaedam hac de re <greek>meleth́mata</greek> Orbi\n[[803.8]] obtrudere vellet, cum altera illa signandi numeros consuetudo utique jam sit recepta. Regulam\n[[803.9]] illam diagnosticam, qua Entia prima a compositis discernuntur, nullus Philosophorum adhucdum\n[[803.10]] determinare potuit, Cartesius hic ingenue suam professus est ignorantiam, et qui in\n[[803.11]] tractandis numeris longe eo peritior fuit Fermatius, frustra in ejus indagatione desudavit. Certe\n[[803.12]] res est haud levis momenti, et quae humano intellectui prima velut mundi stamina suppeditare\n[[803.13]] poterit. Algebram imperfectionis dum accusas, ob difficultatem solvendi problemata illa quae\n[[803.14]] passim pro desperatis haberi solent, hominum potius inscitiam te objurgare crediderim, quam\n[[803.15]] pulchrae huic scientiae naevos ac defectus exprobrare velle. Neque enim (ex mea saltem\n[[803.16]] opinione) dantur hujusmodi problemata quae sint Transcendentia h. e. vel omnis vel nullius\n[[803.17]] generis. Totum siquidem vitium in eo latet, quod Algebrae Scriptores nondum penitus fuerint\n[[803.18]] admissi ad amplexus hujus amasiae perquam scrupulosae, plerosque enim omnes subsistere\n[[803.19]] videas in limine, dum partem illam <greek>ey̑ristikh́n</greek> maxime necessariam, quomodo scilicet et\n[[803.20]] quibus modis aequatio aliqua sit eruenda, et quanam serie una demonstratio ex altera sit\n[[803.21]] deducenda, vel plane negligunt vel parum excolunt. Lumini enim Rationis nihil non pervium\n[[803.22]] est, cum sit ipsius divinitatis imago quaedam absolutissima; atque per disquisitionem infiniti\n[[803.23]] nativum in se resuscitet splendorem. Staticae autem sive scientiae ponderandi persimilis videtur\n[[803.24]] haec Algebra, qua scilicet ex notis ad ignota proceditur, neque sane ex eo, quod multi in statera\n[[803.25]] punctum applicationis determinare haud possunt, illico tota virtus <greek>ăsyllogistíaw</greek> arguenda\n[[803.26]] venit, meristica enim sive distributiva quadam cognitione opus est, sed quam frustra penes illos\n[[803.27]] autores harum rerum cupidus quaesiverit. Ego sane per miras ambages tandem deprehendi\n[[803.28]] principium illud <greek>ălogíaw,</greek> quod omnibus hactenus obicem posuit, minime ex algebrae vitio, sed\n[[803.29]] ex insufficientia datorum et defectu ordinis suam originem traxisse. Neque enim (ut vulgo\n[[803.30]] solent) per tot intricatas demonstrationes, neque per literas Alphabeti mathematicum illum\n[[803.31]] calculum expedire soleo, sed numeris plane abstractis atque universalibus, tum methodo intellectuali\n[[804.1]] (quae gradu superat scientiam), prima ex ultimis et vice versa deduco, quinimo videbis\n[[804.2]] (ut spero brevi) quomodo per solam quantitatum seriem excessivam ac defectivam omnia\n[[804.3]] Trigonometriae problemata jucunde possint construi, atque unica opera innumeri casus limitibus\n[[804.4]] constringi. Combinatoriam quod attinet, num eandem simili tecum sensu accipiam, haud\n[[804.5]] liquet: mihi enim est scientia illa plastica Naturae, quae omnium rerum quas Mundus complectitur\n[[804.6]] varietatem dinumerat, ac leges compositionis sive congressus cum terminis figurarum\n[[804.7]] designat. Exurgit autem haec scientia perinde ut Arithmetica naturalis ex infinita unitatis\n[[804.8]] replicatione, quae deinde infinitas producit potentias, quas ope Algebrae dividimus, exquirendo\n[[804.9]] in quanam proportione illae <greek>dynámeiw</greek> concurrant ac quanam metathesi connectantur. [ ... ]\n[[804.10]] Linguam illam Philosophicam vel Cabalam figurativam hic frustra in auxilium vocamus, suo\n[[804.11]] enim loco eam relinquendam censeo, donec omnes rerum differentiae in lucem fuerint protractae,\n[[804.12]] de iis enim quae mens humana necdum nisi superficie tenus agnovit, vix intima\n[[804.13]] speranda sunt <greek>noh́mata</greek> inprimis per res itidem externas, neque rebus adhuc insipidis pansophica\n[[804.14]] nomina imponere licet, nisi rationis currum inverso ordine, instar illius in ursa Caelesti\n[[804.15]] circumagere ac posticae equos jungere parti conveniens quis duxerit. Verum hisce diutius tuam\n[[804.16]] haud detinere volo <greek>ĕpískecin</greek>. [ ... ] </p>\n","number":"227c.","title":"DETLEV CLÜVER AN LEIBNIZ","date":"London, 16./26. Juli 1680. [227a.227d.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

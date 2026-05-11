@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_474","series":"Band VI 4 (1677 - 1690)","seq":474,"text":"[[2086.1]] <b>382.  Aus und zur Medicina mentis von Tschirnhaus [Sommer bis Herbst 1688 (?)]</b>\n [[2086.2]] <tab/>[Sommer bis Herbst 1688 (?)] </p>\n<p> [[2086.13]] Tschirnhaus in seinem <i>eilfertigen bedencken</i> (inserirt <i>in mense jun.</i> der <i>ernst und\n[[2086.14]] scherzhafften gedancken</i>) pag. 754 sagt seine meinung sey nicht daß was wir nicht\n[[2086.15]] begreiffen, vor falsch zu halten sondern vorhehr sich p. 48 seines buchs also erclaret:\n[[2086.16]] <i>wenn zwo sachen sind deren Natur wir verstehen, und konnen solche in unseren gedankken\n[[2086.17]] nicht zusammen sezen, so heiße ich solche falsch.</i> <Fn><i>Auf Blatt 161 r^#'o eine nicht zum Stück gehörende Rechnung.</i></Fn> </p>\n<p> [[2086.18]] Spinosa sagt <i>falsitas consistit in cognitionis privatione</i>, ich meine <i>falsitas consistit\n[[2086.19]] in impossibili conjunctione duarum rerum quae concipi possunt.</i> </p>\n<p> [[2087.1]] Tschirnh. p. 19 <i>Medicinae mentis</i> per scientiam inveniendi novas veritates transmutari\n[[2087.2]] naturam nostram in suprahumanam, quin in talem quae haud parum de divina\n[[2087.3]] natura participare videtur. </p>\n<p> [[2087.4]] <b>Spinosa</b>, falsitatem consistere in defectu cognitionis, Tsch. p. 27 falsitatem consistere\n[[2087.5]] in eo quod non potest concipi. </p>\n<p> [[2087.6]] Tsch. ingenium in praef. vocatur humanam conditionem excedens. </p>\n<p> [[2087.7]] Autor der <i>Scherz und Ernsthafften gedancken mense junio</i> p. 828 gibt zu verstehen,\n[[2087.8]] daß viele gelehrten in zweifel ob habe er sie selbst gemacht. </p>\n<p> [[2087.9]] Tsch. p. 19 in erratis vitium typographicum ita corrigit: <i>Hic ultimus perfectionis\n[[2087.10]] gradus est, ad quam intellectus adminiculo nobis</i>, <i><b>et quin</b></i> (+ vielleicht <i><b>quin et</b></i> +)\n[[2087.11]] <i>cuicunque hujus universi creaturae pertingere datum.</i> </p>\n<p> [[2087.12]] Collectores <i>Bibliothecae Philosophicae</i> in der Vorrede ihres funfften Tomi: </p>\n<p> [[2087.13]] <i>Il y a une autre sorte de fautes qu'il n'est pas si facile de corriger, ce sont celles où\n[[2087.14]] l'on pourroit tomber en n'entendant pas bien certains auteurs qui n'ont que des idées\n[[2087.15]] confuses de ce qu'ils disent, qui s'expliquent mal, dont le stile est entrecoupé de parentheses,\n[[2087.16]] la pluspart inutiles, ou hors de leur place, qui entassent plusieurs raisonnemens\n[[2087.17]] l'un sur l'autre sans suite et sans distinction, qui prennent dans un même sens des mots\n[[2087.18]] d'une signification approchante, qui se servent des termes usités dans un sens nouveau,\n[[2087.19]] sans en avertir, et qui écrivent dans une langue qu'ils n'entendent qu'à demy comme ces\n[[2087.20]] gens là se brouillent, qu'ils ne sçavent souvent ce qu'ils veuillent dire, et que nostre\n[[2087.21]] langue ne souffre point de sens suspendu, de quelque manière qu'on les fasse parler, ils y\n[[2087.22]] trouvent à redire lors qu'ils sont en mauvaise humeur. Cette espece d'auteurs est encor\n[[2087.23]] incommode en ce qu'on ne peut jamais les satisfaire quelque peine qu'on se donne à lire\n[[2087.24]] leur ouvrages, à tacher de les entendre, et à y chercher quelque chose de bon, on n'a\n[[2087.25]] jamais tout dit, parce qu'on ne sçauroit indiquer toutes leurs nouvelles decouvertes en 20\n[[2087.26]] où 30 pages. Ce ne sont pas les habiles ny les personnes d'estude qui font ces sortes des\n[[2087.27]] plaintes. Ce sont ces sçavans qui n'ayant aucune connoissance de ce qui se passe,\n[[2088.1]] s'imaginent qu'ils sont fort au dessus du commun qu'ils ne pensent jamais comme les\n[[2088.2]] autres personnes, et que toutes leur imaginations sont des lumieres que le ciel ne\n[[2088.3]] communique qu'à eux.</i> </p>\n<p> [[2088.4]] Gewiß wenn man diese worte gegen das halt, was eben diese <i>collectores</i> darselbst\n[[2088.5]] von des H. T. seiner übersendeten <i>antwort</i> auf des Fatio de Duillier seine <i>reflexiones</i>\n[[2088.6]] <b>alsbald und unmittelbar</b> nach diesen worthen gedencken, wenn man die <i>Medicinam\n[[2088.7]] Mentis</i> selbst erlanget, und die <i>praefationem amici ad lectorem</i>, ingleichen gegen heutiges,\n[[2088.8]] <i>übereiltes bedencken</i> ansiehet, so solten sich wohl hundert finden, die das <i>juramentum\n[[2088.9]] credulitatis</i> ablegen solten, als wenn die <i>autores</i> der <i>Bibliothèque Universelle</i> in\n[[2088.10]] angefuhrten worthen des H. T. sein <i>pourtrait</i> vorgestellet und solches nach dem leben\n[[2088.11]] getroffen hätten. </p>\n","number":"382.","title":"Aus und zur Medicina mentis von Tschirnhaus","date":"[Sommer bis Herbst 1688 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

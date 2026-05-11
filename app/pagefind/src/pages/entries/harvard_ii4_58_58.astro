@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_58","series":"Band II 4 (1701 - 1707)","seq":58,"text":"<p> [[193.12]] <b>58. ISAAC JAQUELOT AN LEIBNIZ</p>\n<p> [[193.13]] [Berlin,] 2. Februar 1704. [50.59.] </b></p>\n<p> [[193.22]] J'ai <Fn><i>Am Kopf der Seite notiert Leibniz zunächst folgende Bemerkung, streicht sie aber wieder</i>: vers la fin de janvier 1704</Fn> fait réfléxion plus d'une fois, Monsieur, sur votre <b>harmonie préétablie</b>, depuis le\n[[193.23]] tems qu'une santé infirme me retient au coin de mon feu: et je ne saurois m'addresser à d'autre\n[[193.24]] qu'à vous, pour me tirer des difficultez, que j'y trouve. Je suppose le corps et l'ame comme\n[[193.25]] <b>deux pendules</b> etc. </p>\n<p> [[194.1]] 1.^#'o L'Ame a-t-elle reçu du Créateur la vertu de produire ses pensées? Ou Dieu les produit\n[[194.2]] il immédiatement dans l'ame? Ce dernier parti sera le systême des causes occasionnelles pour\n[[194.3]] peu qu'on y suppose de rapport au corps. Mais votre sentiment est que l'ame a la vertu de\n[[194.4]] produire ses pensées. </p>\n<p> [[194.5]] 2^#'o Que si l'Ame produit ses pensées, le fait elle avec le secours, ou du moins à la présence\n[[194.6]] des idées corporelles? Ou bien les produit elle, indépendamment de ces idées, et sans aucun\n[[194.7]] rapport nécessaire à elles? Si c'est à la présence de ces idées, on retombe, ou peu s'en faut, dans\n[[194.8]] les causes occasionnelles. Si c'est avec leur secours, il faudra savoir comment cela se fait; ce\n[[194.9]] qui paroit incompréhensible. </p>\n<p> [[194.10]] Si l'Ame produit ses pensées indépendamment des idées corporelles, et sans aucun rapport\n[[194.11]] nécessaire, à elles, je demande 1^#'o comment il est possible que l'Ame forme ses pensées, sans y\n[[194.12]] estre excitée, par aucun objet? Cela me semble un miracle aussi grand que la création: former la\n[[194.13]] pensée d'un Elephant, sans avoir jamais vu d'Eléphant; c'est plus qu'un miracle. </p>\n<p> [[194.14]] 2^#'o D'où vient que cette Ame ne forme pas de pensées dans un Enfant d'un an, si elle n'a\n[[194.15]] pas besoin du corps de l'Enfant, pour cet effet. Est ce que pendant ce tems là, Dieu retient dans\n[[194.16]] l'inaction, la vertu qu'il lui a donnée de penser? </p>\n<p> [[194.17]] 3^#'o D'où vient que l'Ame forme des pensées extravagantes, lors que le cerveau est troublé\n[[194.18]] par quelque transport? Pourquoi l'Ame dérangeroit elle ses pensées, à cause du trouble du\n[[194.19]] cerveau, si elle agit indépendamment de cet organe et sans y avoir aucun rapport? </p>\n<p> [[194.20]] 4^#'o D'où vient qu'il y a des peuples si indociles, comme les Hotentos etc. Est ce que leurs\n[[194.21]] ames sont d'une autre espéce, incapable de produire une suite de pensées raisonnables et bien\n[[194.22]] liées? </p>\n<p> [[194.23]] 5^#'o D'où vient qu'il y a des actions du corps qui paroissent toujours agir sur l'Ame, comme\n[[194.24]] les sons, les objets qui frappent la vue, et quelques petits sentimens de douleur et qui n'y font\n[[194.25]] pourtant aucune impression, lors qu'elle est fort appliquée à quelque méditation? De sorte que\n[[194.26]] cette idée corporelle est comme un coup perdu, une idée errante qui n'a ni suite, ni compagne,\n[[194.27]] dans cette harmonie. </p>\n<p> [[194.28]] 6^#'o Si les idées corporelles en vertu de cette harmonie vont toujours du pair avec les\n[[194.29]] pensées de l'Ame, pourquoi concevons nous tant de choses par la force du raisonnement, dont\n[[194.30]] nous ne pouvons nous former d'idées dans l'imagination. </p>\n<p> [[194.31]] Je ne prétens pas combattre votre opinion je n'ai d'autre dessein que de la bien comprendre\n[[194.32]] et de m'instruire mieux de votre systême. Je suis avec toute l'estime qui vous est due et\n[[194.33]] avec respect, </p>\n<p> [[194.34]] Monsieur Votre tres humble et tres obéïssant serviteur Jaquelot </p>\n<p> [[194.35]] Du 2 fevr. 1704 </p>\n<p> [[195.1]] J'ai appris qu'on faisoit votre portrait. Si j'avois quelque crédit chez le peintre je ne\n[[195.2]] voudrois pas qu'on mit autre chose au dessous de votre nom et de vos qualitez que ces trois\n[[195.3]] mots\n [[195.4]] <b>cui non notus</b>? </p>\n<p> [[195.5]] Je vous supplie d'assurer Monsieur l'Abbé Molanus, de mon amitié et de mes tres\n[[195.6]] humbles services. </p>\n","number":"58.","title":"ISAAC JAQUELOT AN LEIBNIZ","date":"[Berlin,] 2. Februar 1704. [50.59.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

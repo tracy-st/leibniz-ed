@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_630","series":"Band VI 4 (1677 - 1690)","seq":630,"text":"[[2764.7]] <b>492₅.  De his quae per se debita et illicita sunt\n[[2764.13]] <tit2><b>De his quae per se debita et illicita sunt</b> </tit2> </p>\n<p> [[2764.14]] Omne bonum malumve societatis per se debitum vel illicitum est.\n [[2764.15]] <tab/>Nam per accidens fieri potest, ut agenti necessarium vel impossibile sit, sive\n[[2764.16]] omnino, sive ex hypothesi miseriae aut felicitatis suae, quibus casibus utique\n[[2764.17]] praemiis poenisque in recte ratiocinante procurari impedirive non potest, per\n[[2764.18]] praecedentia. </p>\n<p> [[2764.19]] Ex quo sequitur malum cujusquam id per se illicitum est. </p>\n<p> [[2764.20]] Ex quo sequitur bonum cujusquam id per se debitum est. <Fn><i>Am Rande</i>: Unumquodque praesumitur licitum, unumquodque praesumitur indebitum.</Fn>\n [[2764.21]] <tab/>Nam (per definitiones bonorum malorumque societatis) malum bonumve\n[[2765.1]] ejus qui in societate est per se malum bonumve est societatis. Per se inquam.\n[[2765.2]] Nam per accidens fieri potest, ut alio alterius vel etiam hujus ipsius bono\n[[2765.3]] malove majore compensetur, quo casu non erit bonum malumve societatis. </p>\n<p> [[2765.4]] Quicquid debitum vel illicitum esse probabilius est, id per se debitum vel illicitum\n[[2765.5]] est.\n [[2765.6]] <tab/>Nam omne quod bonum malumve esse probabilius est, id per se procurare\n[[2765.7]] vel impedire bonum est. Idem est itaque de malo bonove societatis. Per se\n[[2765.8]] inquam, fieri enim potest, ut contrarium minus quidem verisimile, sed majus\n[[2765.9]] tamen bonum malumve sit.\n [[2765.10]] (In sequentibus cum aliquid debitum vel illicitum dicemus, subintelligemus: per se, nisi\n[[2765.11]] aliud appareat.) </p>\n","number":"492₅.","title":"De his quae per se debita et illicita sunt","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

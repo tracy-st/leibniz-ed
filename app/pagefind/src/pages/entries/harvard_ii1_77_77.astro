@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_77","series":"Band II 1 (1663 - 1685)","seq":77,"text":"<p> [[207.21]] <b>65. PIERRE DE CARCAVY AN LEIBNIZ</p>\n<p> [[207.22]] Paris, 20. Juni 1671. [61.66.]</b></p>\n<p> [[208.3]] Viro Clariss^#'o D. Leibnitio. P. De Carcavy. S. P, </p>\n<p> [[208.4]] Libros quos mittis nondum accepi, eorum videndorum desiderio accendor eo potissimum\n[[208.5]] nomine quod praeclarum opus a te elaboratum avide expecto. Qui apud nos libri prodeant tibi\n[[208.6]] indicare supervacaneum, eos enim tibi apprime esse notos fidem faciunt tuae litterae, Rem\n[[208.7]] porro gratam feceris si qui in Germania edentur mihi, ut coepisti, significaveris, et Illustriss^#'o\n[[208.8]] Abbati Gravellio detuleris, ut eos ad nos devehi curet. </p>\n<p> [[208.9]] Ad <Fn><i>Von</i> Ad machinam <i>bis zum Schluß am Rande angestrichen</i>.</Fn> machinam tuam quod attinet, quam curiosam et utilem existimo, eam si ad nos mittere\n[[208.10]] velis dabo operam ut Excellentiss^#'o Colberto innotescat, eamque nanciscar occasionem ut tua\n[[208.11]] merita apud eum extollam, scilicet Effecta verbis praepollent praesertim apud eum qui plura\n[[208.12]] facit quam dicit, nec dubito quin vir sagacissimus eam magni faciat, arcanum autem Religiosissime\n[[208.13]] servabo, is enim sum qui tibi inservire etiam atque etiam exopto. Doctissimus Paschalius\n[[208.14]] Mathematicarum olim peritissimus, jam a multis annis similem fere machinam invenit ex\n[[208.15]] multis rotis compositam, cujus beneficio additionem et substractionem, proindeque alias Arithmeticae\n[[208.16]] regulas conficere in promptu est; eam si non videris author sum ut videas. Interim vale\n[[208.17]] Vir Clarissime, et rem literariam illustrare perge. Lutet. Par. die XX^#'a Junii an. 1671. </p>\n<p> [[208.18]] A Monsieur Monsieur Libnits. Docteur en droit et con^#'e^#'r de Son Altesse Electorale de </p>\n<p> [[208.19]] Mayence. </p>\n","number":"65.","title":"PIERRE DE CARCAVY AN LEIBNIZ","date":"Paris, 20. Juni 1671. [61.66.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

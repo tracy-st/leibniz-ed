@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_536","series":"Band VI 4 (1677 - 1690)","seq":536,"text":"[[2473.8]] <b>423₁.  Sonderbare Erklärung der Offenbarung </p>\n<p> [[2473.10]] Weil ich sehe daß viel gottesfürchtige und wohlmeinende Leute sich durch falsche\n[[2473.11]] oder doch sehr ungewiße erclärungen der <i>offenbahrung</i> Johannis verführen laßen, so gar\n[[2473.12]] daß auch empöhrungen, meutereyen und allerhand weit aussehende anschläge, daher\n[[2473.13]] entstanden; auch einige unterm schein göttlichen befehls sich erkühnet Königen und\n[[2473.14]] Fürsten vorzuschreiben was sie thun solten, und auf den weigerungsfall oder sonst die\n[[2473.15]] gemeine gegen sie zu erregen. So will ich eine sonderbare erclärung der <i>offenbahrung</i>\n[[2473.16]] alhier mit wenigen beybringen, welche diesen gefahrlichen gedancken auf einmahl alle\n[[2473.17]] gelegenheit abschneidet. Nicht daß ich diese erclärung vor die gewißeste und beste halte;\n[[2473.18]] sondern damit man sehe wie so gar leicht sey, wenn man belesen, und hurtige einfalle hat,\n[[2473.19]] etwas artliches aus dem text und historien zusammen zu reimen. </p>\n<p> [[2473.20]] Ob die <i>offenbahrung</i> von Johanne dem Evangelisten und Apostel, oder Johanne\n[[2473.21]] Presbytero hehrrühre, ist bereits vor alters gezweifelt worden, wie dann auch Lutherus\n[[2473.22]] solchen streit nicht erörtern wollen. Es sey aber dieses buch von wem es wolle, so ists auf\n[[2474.1]] eine herrliche und ganz entzückende weise geschrieben; sonderlich zu trost der Christen,\n[[2474.2]] welche verfolget wurden von den Heyden; wie es dann auch zweifels ohne ein großes\n[[2474.3]] vermocht sie zu stärcken und freudig zur marter gehen zu machen. </p>\n<p> [[2474.4]] Ich seze demnach zum fundament das was man füglich von denen zeiten so Johanni\n[[2474.5]] am nächsten verstehen kan auff die dinge nicht zu ziehen so sehr weit davon entfernet.\n[[2474.6]] Vors andere durch Babylon sey Rom zu verstehen, und die zahl des thieres nehmlich\n[[2474.7]] sechshundert sechs und sechzig so eines menschen zahl, nehmlich wie bereits Irenaeus\n[[2474.8]] (so der Apostel discipel gesehen) es ausgeleget,\n [[2474.9]] ^&.bb <Leibniz special character><tab/>0 <tab/><greek>A</greek> <tab/>00 <tab/><greek>E</greek> <tab/>0 <tab/>0 <tab/>0 <tab/>00^&.b</i> <Leibniz special character> <tab/> <greek>L</greek> <tab/><greek>A</greek> <tab/> <greek>T</greek> <tab/><greek>E</greek> <tab/> <greek>I</greek> <tab/><greek>N</greek> <tab/> <greek>O</greek> <tab/> <greek>S</greek>\n [[2474.10]] <tab/>0 <tab/> 1 <tab/>00 <tab/> <tab/>0 <tab/>0 <tab/>0 <tab/>00\n [[2474.11]] welches der nahme eines gewißen königs gewesen, deßen auch Virgilius gedencket; von\n[[2474.12]] welchem die Latiner das ist Römer herkommen. Denn es scheint der autor der <i>offenbahrung</i>,\n[[2474.13]] habe die Römer als damahlige feinde oder verfolger der Christen nicht mit ihren\n[[2474.14]] eignen, sondern etwas entlehnten nahmen bemercken wollen. </p>\n<p> [[2474.15]] Was nun vom fall der babylonischen huhre prophezeyet wird haben die ersten\n[[2474.16]] Christen von zerstörung des Heydnischen Roms verstanden. </p>\n","number":"423₁.","title":"Sonderbare Erklärung der Offenbarung","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

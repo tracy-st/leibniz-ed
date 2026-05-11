@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_191","series":"Band II 1 (1663 - 1685)","seq":191,"text":"<p> [[614.9]] <b>173. ARNOLD ECKHARD AN LEIBNIZ</p>\n<p> [[614.10]] Rinteln, 5. (15.) April 1678. [149.]</b></p>\n[[614.21]] Vir Nobilissime et Amplissime, Domine et Fautor multis nominibus colende. </p>\n<p> [[614.22]] Renunciatum mihi est a Rev^#'m^#'o Dⁿ^#'o Abbate Loccensi, quam gravissimum istum casum, qui\n[[614.23]] me per aliquot menses afflixit, tandemque de omni pristino statu dejecit, familiariter tuleris:\n[[614.24]] quantaque fide, cura et diligentia Ser^#'m^#'o Brunsvicensium ac Luneburgensium Duci, Hero Tuo et\n[[614.25]] item meo clementissimo me studiaque mea commendaveris. Quo nomine equidem gratias Tibi\n[[614.26]] ago maximas: majores etiam habeo: memor futurus summorum Tuorum in me meritorum, dum\n[[614.27]] spiritus hos reget artus. O miram divini Numinis in me benignitatem, quam in mediis meis\n[[614.28]] angustiis sensisse me, impius sim, si negem! Dum enim fortunae fluctibus agitatus nil nisi\n[[615.1]] praesentissimum omnium fortunarum naufragium ante oculos video, adestis illico Vos, summi\n[[615.2]] Viri, tantoque Principe digni Ministri, rebusque meis fessis opem tempestivi acceleratis. Vos e\n[[615.3]] saevissima hyeme turbulentissimaque tempestate in exoptatum tranquillitatis portum me reduxistis.\n[[615.4]] Vestra egomet opera terram illam teneo, ubi et ego, et studia mea (nec vanum spero\n[[615.5]] augurium) spiritum, vitam, vigorem recipiemus. Faxit ille, a cujus nutu cuncta humana pendent,\n[[615.6]] ut omnia cedant feliciter: egoque Ser^#'m^#'o Hero devotissimum animi affectum, fidelissimaque\n[[615.7]] obsequia; Tibi autem, Amplissime Vir, et reliquis novi fati mei conciliatoribus studia, cultum et\n[[615.8]] observantiam meam ita probem, ut nec Vos dati beneficii poenitere, nec me accepti pudere\n[[615.9]] unquam possit. Vale, Vir Nobilissime, faveque </p>\n<p> [[615.10]] Nobiliss. Amplitud. T. Observantissimo A. Eckhardo. </p>\n<p> [[615.11]] Scribebam Rintel. ad d. V. April. 1678. </p>\n","number":"173.","title":"ARNOLD ECKHARD AN LEIBNIZ","date":"Rinteln, 5. (15.) April 1678. [149.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

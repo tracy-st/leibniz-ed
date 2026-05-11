@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_35","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":35,"text":"[[388.35]] <b>35. Aufzeichnungen </b> <span>388.0;0:63:035:77       :L:l^</span>.\n[[388.10]] Proprietas omnis quae continet efficientem rei causam, seu generationem, sufficit\n[[388.11]] ad omnia eius attributa invenienda. Scilicet quicquid generationem rei continet,\n[[388.12]] ut loquitur Hobbes.\n[[388.13]] Utile est ut dum meditamus corpus non in quiete contineamus, sed motui cuidam\n[[388.14]] permittamus, est enim opus quadam vi et coactione ad omnimodam quietem.\n[[388.15]] Unde cantus, fumare petum; aliaque id genus, deambulatio dicuntur servire ad meditationem.\n[[388.17]] Nomen petii Tabac, a pet à mon avis.\n[[388.18]] Droning en Suede et Dannemark veut dire la reine.\n[[388.19]] Wenn man geschossen wird fuhlt man keinen schmerzen vom Schuß, wegen\n[[388.20]] geschwindigkeit. Die Rohr so weite löcher haben stoßen sehr dahehr stoßt die musquete\n[[388.21]] gar sehr, die rohr nicht. An ab aëre magno intrante qui dat ab initio magna\n[[388.22]] inflammandi facilitatem, adeoque magnum impetum.\n[[388.23]] Eine Stuck Kugel so ein gespantes tuch so leicht abzuwehren trifft durchboorts\n[[388.24]] nicht, sondern nimts mit sich verwilket sich darinn und fallt nicht weit davon.\n","number":"35.","title":"Aufzeichnungen","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

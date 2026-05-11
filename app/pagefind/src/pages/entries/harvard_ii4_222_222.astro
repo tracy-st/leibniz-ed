@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_222","series":"Band II 4 (1701 - 1707)","seq":222,"text":"<p> [[679.1]] <b>222. LEIBNIZ AN BARTHÉLEMY DES BOSSES</p>\n<p> [[679.2]] Hannover, 31. Oktober 1707. [218.223.] </b></p>\n<p> [[679.15]] Admodum Reverende Pater, Fautor Honoratissime </p>\n<p> [[679.16]] Nuperas meas cum inclusis ad R. P. Janningium, recte ad Te perlatas non dubito, et spero\n[[679.17]] Te pro summa humanitate Tua, et erga me benevolentia, non aegre laturum, quod subinde ad Te\n[[679.18]] recurro. Itaque etiam rogare ausus sum, ut apud juvenem scribam <greek>ĕrgodiv́kthw</greek> esse velles.\n[[679.19]] Nunc rogo ut has quas adjeci literas ad Reverendum Patrem Orbanum curare velis; quem spero\n[[679.20]] adhuc valere et Serenissimi Electoris Confessarium agere. </p>\n<p> [[679.21]] Est apud nos S^#'m^#'u^#'s Dux Welfebytanus qui nudius tertius die ad vesperam inclinante\n[[679.22]] improvisus Herrenhusam venit. Eum consecutus est cursor Vienna veniens qui principem\n[[679.23]] Elisabetam nunc demum solemni functione sponsam Regis Caroli declaratam attulit, cum\n[[679.24]] Legatus Hispanicus, simulque ablegatus extraordinarius icona Regis ferens ab ea in conclavi\n[[680.1]] Imperatricis regnantis, quae matris vicem agebat, auditus fuisset; ajunt Hispanico sermone\n[[680.2]] respondisse nativo lepore, tanquam inter Hispanos ab infantia egisset. Dies itineri nondum\n[[680.3]] praestitutus est. </p>\n<p> [[680.4]] Reverendum patrem, qui Te praesente mihi libellum suum dabat, rogo a me salutes. Legi\n[[680.5]] eum, et visus est scriptus latine et eleganter. Vellem acerbitas abesse posset ab his scriptis: nec\n[[680.6]] video cur non possit. Fac enim adversarios moderatione non uti; erit solida laus ejus qui utetur.\n[[680.7]] Caeterum Beata Virgo apud nos Apologia opus non habet. Quod superest vale et me ama.\n[[680.8]] Dabam Hanoverae 31 Octobr. 1707 </p>\n<p> [[680.9]] deditissimus G. G. Leibnitius </p>\n","number":"222.","title":"LEIBNIZ AN BARTHÉLEMY DES BOSSES","date":"Hannover, 31. Oktober 1707. [218.223.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

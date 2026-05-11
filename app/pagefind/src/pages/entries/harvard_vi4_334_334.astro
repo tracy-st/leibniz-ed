@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_334","series":"Band VI 4 (1677 - 1690)","seq":334,"text":"[[1464.1]] <b>278.  An corpora sint mera phaenomena [Winter 1682/83 (?)]</b>\n [[1464.2]] <tab/>[Winter 1682/83 (?)] </p>\n<p> [[1464.5]] 1) Pono id quod non majorem habet Unionem, quam ligna in fasce seu strue\n[[1464.6]] lignorum, vel lateres sibi impositi, non esse proprie unum Ens sed potius Entia, licet\n[[1464.7]] unum pro omnibus nomen ponatur. </p>\n<p> [[1464.8]] Idque verum esse sive parva sive magna sit eorum distantia item sive lateres illi aut\n[[1464.9]] ligna in strue sint bene coordinata, sive non, id enim Unionem eorum non facit majorem;\n[[1464.10]] item licet singulae partes quendam motum communem habeant, vel aliud quiddam quod\n[[1464.11]] de omnibus praedicari possit. </p>\n<p> [[1464.12]] 2) Pono item in corpore nihil aliud quam extensionem intelligi seu quod habeat\n[[1464.13]] partes extra partes. </p>\n<p> [[1464.14]] 3) Pono denique omne corpus esse actu divisum in plures partes, quae sint etiam\n[[1464.15]] corpora.\n [[1464.16]] Hinc sequitur </p>\n<p> [[1464.17]] <b>Primo</b> nullum dari unum corpus. </p>\n<p> [[1464.18]] <b>Secundo</b> imo nec ulla dari corpora, quae nihil aliud sunt quam corpus et corpus. </p>\n<p> [[1464.19]] Hinc sequitur aut corpora esse mera phaenomena, non vero Entia realia, aut in\n[[1464.20]] corporibus aliud esse quam extensionem. </p>\n<p> [[1464.21]] Argumentum hoc procedit, etiamsi positio tertia non concedatur. Modo concedatur,\n[[1464.22]] solum contactum non facere unum Ens, et proinde si duo fingantur corpora triangularia\n[[1464.23]] aequalia (non amplius subdivisa) quae componunt cubum, non magis ex iis fieri unum\n[[1464.24]] novum Ens, quam si ita se tangant tantum per apices seu in punctis. Item non magis fieri\n[[1464.25]] ex iis unum Ens, si alterum apud alterum in illa compositione cubi quiescat, quam si\n[[1465.1]] moveantur aut si momento aliquo tantum sint illa situatione cubi, unde sequeretur cubum\n[[1465.2]] simul nasci et interire. </p>\n<p> [[1465.3]] Item non magis fieri inde unum novum Ens, sive moveantur ita ut se tangant, sed\n[[1465.4]] motu in aequali, aut in diversa; sive moveantur ut comites cubum componentes. </p>\n","number":"278.","title":"An corpora sint mera phaenomena","date":"[Winter 1682/83 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

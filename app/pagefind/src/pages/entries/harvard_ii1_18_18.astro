@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_18","series":"Band II 1 (1663 - 1685)","seq":18,"text":"<p> [[56.1]] <b>16b. LEIBNIZ AN PHILIPP JAKOB SPENER</p>\n<p> [[56.2]] Mainz, 10./20. Februar 1670. [33a.]</b></p>\n<p> [[56.16]] [ ... ] Suasu Ill^#'m^#'i Boineburgii (qui Te amice salutat) dedi nuper Bibliopolae vestrati\n[[56.17]] Nizolii libellum <i>de veris principiis et vera ratione philosophandi</i> recudendum, praemissa satis\n[[56.18]] prolixa praefatione <i>de optima philosophi dictione</i> a barbarie, a tropis, ab inutili terminorum\n[[56.19]] ultra modum coacervatione libera, sine qua nihil accurate demonstrari, nihil clare proponi\n[[56.20]] potest. Credo in eo esse, ut absolvat. Quanquam autem Nizolius id ex professo agat, ut\n[[56.21]] Scholasticos denigret, mihi tamen nimis acris nonnunquam visus est, tentavique rigorem illum\n[[56.22]] notulis quibusdam marginalibus mollire. Addidi epistolam ad doctissimum quemdam virum\n[[56.23]] aliquando a me scriptam <i>de Aristotele recentioribus</i> (id est Gassendo, Chartesio, Hobbio,\n[[56.24]] Digbio aliisque id genus philosophiae restauratoribus) <i>reconciliabili.</i> Qui Syncretismus mihi et\n[[56.25]] rectior theologico et tutior videtur. Sententiam Tuam coram audire desidero. Vale. </p>\n","number":"16b.","title":"LEIBNIZ AN PHILIPP JAKOB SPENER","date":"Mainz, 10./20. Februar 1670. [33a.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

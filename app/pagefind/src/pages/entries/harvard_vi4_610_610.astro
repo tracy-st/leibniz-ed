@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_610","series":"Band VI 4 (1677 - 1690)","seq":610,"text":"[[2727.12]] <b>479.  Aus und zu Diego de Rojas, Problemas en filosofia moral [1677 bis 1716 (?)]</b>\n [[2727.13]] <tab/>[1677 bis 1716 (?)] </p>\n<p> [[2728.1]] <i>Auf dem vorderen Schmutzblatt des Marginalienbandes innen hat Leibniz vermerkt</i>: </p>\n<p> [[2728.2]] Rojas vixit Caroli V tempore. p. 85 </p>\n<p> [[2728.3]] <i>Zahlreiche Unterstreichungen im spanischen Textteil sollten Leibniz wohl zur\n[[2728.4]] Sprachaneignung dienen und werden daher in dieser Reihe nicht berücksichtigt.</i> </p>\n<p> [[2728.5]] <i>Die durch einen Strich getrennten Auszüge sollten wohl auf zwei Zettel verteilt\n[[2728.6]] werden. Sie lauten</i>: </p>\n<p> [[2728.7]] Diego de Rojas, <i>Problemas en filosofia moral</i>, probl. 14. </p>\n<p> [[2728.8]] [p. 50] Que la opinion sea en mano nuestra o no, yo no lo se; mas que estemos nos\n[[2728.9]] otros en la suya. </p>\n<p> [[2728.10]] [p. 51] Si l'opinion est en nostre puissance ou non je ne le sçay; mais je sçay bien\n[[2728.11]] que nous sommes en la sienne. </p>\n<p> [[2728.12]] Diego de Rojas, <i>Problemas de la filosofia moral</i>, probl. 17. </p>\n<p> [[2728.13]] [p. 56, 58] Los que an hecho leyes an sido semejantes no a los dueños, mas a los que\n[[2728.14]] alquilan una Eredad, y de las plantas pequeñas de donde ellos no sacan fruto, se curan\n[[2728.15]] poco, ni miran si no por los arboles, que les dan provecho; y assi las leyes an proveydo\n[[2728.16]] muy poco sobre la dotrina de los niños, siendo la mas importante de todas; porque es cosa\n[[2728.17]] de [reyr], pensar, que por el temor de la pena todos los hombres ayan de mudar su mal\n[[2728.18]] proposito y costumbres; pues vemos que estando castigando a uno por ladron, otro roba la\n[[2728.19]] bolsa al que le està cerca en aquel mismo lugar: ni puede ser, que el arbol seco se\n[[2728.20]] enderece tambien como el verde; ni que en el marmol se labre como en la cera. </p>\n<p> [[2728.21]] [p. 57, 59] C'est à dire ceux qui ont fait les loix ont esté semblables non pas aux\n[[2728.22]] maistres ou seigneurs des maisons mais aux fermiers, qui louent un bien ou heritage qui\n[[2728.23]] ne se soucient gueres de petites plantes, qui ne portent point de fruit ne regardant qu'aux\n[[2728.24]] arbres qui leur sont utiles. De même les legislateurs ont peu pourveu à l'instruction des\n[[2728.25]] enfans. Cependant c'est une chose ridicule de s'imaginer que la crainte de la peine soit\n[[2728.26]] capable de changer les mauvaises inclinations et coustumes. Car nous voyons que lors\n[[2728.27]] qu'on fait pendre un larron, il se trouve un autre parmy les spectateurs, qui derobbe la\n[[2728.28]] bourse à son voisin. Aussi n'est il pas possible, qu'un arbre sec [se] dresse si bien qu'un\n[[2728.29]] arbre verd, [ny qu'on] travaille si aisement sur le marbre que sur la cire. </p>\n","number":"479.","title":"Aus und zu Diego de Rojas, Problemas en filosofia moral","date":"[1677 bis 1716 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

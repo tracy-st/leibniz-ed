@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_35","series":"Band II 1 (1663 - 1685)","seq":35,"text":"<p> [[108.1]] <b>31. SIR WILLIAM CURTIUS AN LEIBNIZ</p>\n<p> [[108.2]] Frankfurt, 13. (23.) Oktober 1670.</b></p>\n<p> [[108.9]] Amplissime Consultissime Domine Francofurti. 13. Octob. 70. </p>\n<p> [[108.10]] Zunnero vestro Wilkinsii nostri <i>characterem universalem</i>, te ita jubente, tradendum\n[[108.11]] curavi; eo ipso paene momento quo ad me e bibliopegi manibus pervenit. Id causae est, quod in\n[[108.12]] illo novo Schemate Philosophiae adhuc hospes sum, tuo deinceps judicio civitate donandus.\n[[108.13]] Olim cum studio mnemonico insudarem, id genus studiorum me forsan mirifice cepisset. Nunc\n[[108.14]] <greek>tò pãn</greek> meum Praxin spirat, obvia sua facilitate lassatum Genium demulcentem. </p>\n<p> [[108.15]] Litteras tuas Dⁿ^#'o Oldenburgio inscriptas e manibus optimi adfinis Dⁿ^#'i Fayi recte accepi et\n[[108.16]] paucis post diebus per Cursorem Antverpiensem curavi, fasciculo Dⁿ^#'i Comitis <b>Arlingtonii</b>\n[[108.17]] Secretarii status inclusas et ejus amanuensi Dn. <b>Williamsonio</b> peculiariter commendatas.\n[[108.18]] Est enim et hic Societatis nostrae membrum. </p>\n<p> [[108.19]] Dominum Legatum <b>Falcobrigium</b> Oppenhemio ad vos secundo Rheno defluxisse,\n[[108.20]] nunciavit mihi heri incoram Dn. Rokowodius. Male mihi est, quod Illustritati Suae cura vel\n[[108.21]] curiositas antiquum hospitium Regis nostri (tunc exulis) videndi defuit. Potuissem enim, ut est\n[[108.22]] politiori litteratura non obiter tinctus, Illustrissimi Dⁿ^#'i Boineburgii (cui me Te parario quam\n[[108.23]] officiosissime commendatum velim) et Tui notitiam et usum ei conciliare. Sed hanc jacturam\n[[108.24]] Fama forte adventus ejus et vestra humanitas suppleverit. Vale et Salve cum cumulatiss^#'o Dⁿ^#'o\n[[108.25]] Lassero a </p>\n<p> [[108.26]] Vestri studiosiss^#'o et ad omnia paranda paratissimo W. Curtio. Eq. Bar. </p>\n","number":"31.","title":"SIR WILLIAM CURTIUS AN LEIBNIZ","date":"Frankfurt, 13. (23.) Oktober 1670."}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

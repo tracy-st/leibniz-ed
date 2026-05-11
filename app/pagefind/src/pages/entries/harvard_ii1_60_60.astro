@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_60","series":"Band II 1 (1663 - 1685)","seq":60,"text":"<p> [[158.1]] <b>53. LEIBNIZ AN JOHANNES HEVELIUS</p>\n<p> [[158.2]] Frankfurt, 3. Mai 1671.</b></p>\n<p> [[158.16]] Vir Ampl^#'m^#'e et Celeberrime. </p>\n<p> [[158.17]] Si cultum quo Te prosequor apud Te exposuero, rem et parum Tibi gratam fecero, et cum\n[[158.18]] omnibus communem. Faciam ergo quod non omnes: sistam nimirum aliquid judicio Tuo, quod\n[[158.19]] ipsos Anglos, Gallos, Italos, tanti facere constat: audacter utique, sed humanitas Tua minuit\n[[158.20]] temeritatem meam. Videbis Hypothesin quandam paradoxam, brevem certe claramque omnium\n[[158.21]] phaenomenorum causam repetentem, ipsius etiam directionis Magneticae, a circulatione aetheris\n[[158.22]] cum luce, quam hactenus supposuit, quod sciam nemo. Magno me beneficio affeceris, si\n[[158.23]] Tuum, si Ampl^#'m^#'i Behmii, si aliorum amicorum judicia uberrima significaveris, si aliorum\n[[158.24]] egregiorum conatuum inventorumque participem feceris. Si quid vicissim in his locis curandum\n[[158.25]] mihi impones, summam promtitudinem senties. Vellem nosse, quid sentias de Vaticinatione\n[[158.26]] Philosophica quam dedit Henr. Bondius, si bene memini, Anglus eruditus qui declinationes\n[[158.27]] Magneticas futurorum annorum ex Hypothesi sua praedixit. Cum jam elapsi sint aliquot anni\n[[158.28]] nosse opto an cogitatis responderit eventus. P. Grandamicus S.J. (ut habet <i>in arte Magnetica</i>\n[[158.29]] editionis Romanae novissimae P. Kircher) observavit in magnete terrellae forma elaborato, ipso\n[[159.1]] polo suo suberi libratili imposito, <b>sine omni declinatione</b> meridianum quendam certum,\n[[159.2]] perpetuo obverti meridiano loci. De quo quid vos judicetis resciscere valde desidero. Vellem de\n[[159.3]] ejus successu edoceri, ad Hypotheses meas magneticas perficiendas. Quemadmodum et quid de\n[[159.4]] inclinatione acus magneticae, poli elevationem Gilberto et Kirchero referentibus monstrante,\n[[159.5]] sentiatis. Vale faveque </p>\n<p> [[159.6]] Vir Ampl^#'m^#'e et Celeberrime Cultori Tuo Gottfredo Guilielmo Leibnitio J.U.D. </p>\n<p> [[159.7]] Francofurti 3. Maji styl. novi 1671. et Consiliario Moguntino. </p>\n<p> [[159.8]] P. S. Si responso me dignaris, id Dn. Wachtler curabit et Dⁿ^#'o Zunnero Bibliopolae Francofurtensi\n[[159.9]] tradet, is mittet mihi. </p>\n<p> [[159.10]] Ampl^#'m^#'o Hevelio Reipublicae Dantiscanae Senatori. Danzig. </p>\n","number":"53.","title":"LEIBNIZ AN JOHANNES HEVELIUS","date":"Frankfurt, 3. Mai 1671."}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

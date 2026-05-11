@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_45","series":"Band II 2 (1686 - 1694)","seq":45,"text":"<p> [[208.1]] <b>46. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[208.2]] Hamburg, 14. (24.) Mai 1687. [44.49.]</b></p>\n<p> [[208.13]] I. N. J. C. </p>\n<p> [[208.14]] S. P. Vir Nobilissime Excellentissime. Domine et Amice honoratissime. </p>\n<p> [[208.15]] Nae Tu et morulam et opellam a me praestitam egregie pensas, tuis et eruditionis et\n[[208.16]] humanitatis adeo plenissimis litteris! In quibus tamen hoc prae aliis omnibus oblectat, quod\n[[208.17]] brevi Te coram videndi spem facis. Quaeso ne illa me fallat. Vix enim habeo quenquam, cum\n[[208.18]] quo aliquot horas aeque desiderem de rebus litterariis agere paulo confidentius. Interim mitto\n[[208.19]] Epistolam Vagetianam, cui juncta erat D^#'i Capelli discussio <i>rariorum Beccelerianorum</i>, in\n[[208.20]] monetis aliquot et aliis artificiosis partim et naturalibus consistentium. Libros memoratos\n[[208.21]] partim tantum vidi, sed nullum eorum legi, nisi Pufendorffiana carptim in paucis foliolis\n[[208.22]] necdum ligatis. Vel unius ejus adeo mordax et omni juri naturae contraria, de jure naturae\n[[208.23]] controvertendi ratio, me absterret, ne quid in eo argumenti meorum publici faciam juris, de\n[[208.24]] quibus Deo Volente coram. <i>Den Schaden Josephs</i> necdum vidi. De Analyticis accessionibus\n[[209.1]] idem tecum sentio, et opto. Ut nempe alii a Viotto et Conringio (quorum neuter iis par erat)\n[[209.2]] huic operi aliquando admoveant mentes. Sed illa quidem spes, nisi a Te impleatur, apud me\n[[209.3]] desperata est. Sed et de his coram, si Deus volet atque vivemus. Interim felix festum hoc et\n[[209.4]] omnia felicia alia Tibi precor ex animo. Vale. </p>\n<p> [[209.5]] Excellentissimi Tui Nominis observantissimus V. Placcius </p>\n<p> [[209.6]] Hamb. 1687 d. 14 Maij </p>\n<p> [[209.7]] <i>A Monsieur Monsieur Leibnütz. Conseiller de son Altesse à Hanover.</i> </p>\n","number":"46.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 14. (24.) Mai 1687. [44.49.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

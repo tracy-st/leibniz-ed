@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_106","series":"Band II 3 (1695 - 1700)","seq":106,"text":"<p> [[283.1]] <b>106. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[283.2]] 31. März (10. April) 1697. [104.111.]</b></p>\n\n<p> [[283.9]] I. N. J. C. </p>\n<p> [[283.10]] Excellentissimo et Amplissimo Dn. G. G. Leibnitio </p>\n<p> [[283.11]] V. Placcius S. P. D. </p>\n<p> [[283.12]] Quod cum eruditis aliis omnibus abruptum mihi litterarium commercium manet, tecum\n[[283.13]] uno conservare dum vivam volupe cum sit; exacte ad omnia ultimarum tuarum respondeo. Et\n[[283.14]] primo quidem de Weigeliana morte per Dei gratiam falsus est rumor excitatus litteris Helmestadianis\n[[283.15]] Dn. Schmidii. Ipse Weigelius superiori hebdomade hic transiit commoratus solo\n[[283.16]] biduo, nec mihi, sed Dn. Bussingio visus, et Viennam a nobis pergens. Jungianae Geometriae\n[[283.17]] spem superesse gaudeo, eamque in <i>Anonymis</i> meis publicabo. De <i>Menagianis</i> necdum mihi\n[[283.18]] satis fit, nescio an et quae nova illa editio. Tomum II. Parisiis 1695 equidem vidi, sed in ea nihil\n[[283.19]] de Jolante, Eleonora vel Alienora regina. Quaeso itaque, paulo explicatius me informes.\n[[283.20]] <i>Cautionis criminalis processus circa sagas</i> auctor te indice certus omnino mihi ut fiat opto.\n[[283.21]] Manet enim dubia illius mihi et ambigua valde hactenus notitia. Quidam amicorum in symbola\n[[283.22]] sua manuscripta N. Speeium, Jesuitam[;] Simon Pauli in <i>Catalogo</i> suo Herm. Sibram von\n[[284.1]] Singen nescio quem inscribit. Editio 1695. Solisbaci. Joannem Gronaeum C. Austriacum ut\n[[284.2]] puto fictitium nomen praefationi ad lectorem non operi facit. Librum lectu dignum legi. Quo\n[[284.3]] magis auctorem scire aveo. Denique an innotuerit tibi aut describi mihi quoque possit argumentum\n[[284.4]] et moles libri Cornelii Duplicii <i>Apologiae pro Christierno II. Daniae rege</i> in Belgium\n[[284.5]] profugo, circiter A. 1524 excusi, scire aveo. Vale. 1697. prid. Cal. April. </p></p>\n","number":"106.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"31. März (10. April) 1697. [104.111.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

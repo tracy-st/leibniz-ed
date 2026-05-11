@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_336","series":"Band VI 4 (1677 - 1690)","seq":336,"text":"[[1466.15]] <b>280.  Absurdum, falsum, difficile Cartesii [1683 bis 1685 (?)]</b>\n [[1466.16]] <tab/>[1683 bis 1685 (?)] </p>\n<p> [[1466.20]] Ait Cartesius materiam omnes formas quarum est capax ordine assumere. </p>\n<p> [[1466.21]] Quod mihi videtur absurdum. </p>\n<p> [[1466.22]] Falsa est ratiocinatio Cartesii quod Dei seu Entis perfectissimi ideam habeamus,\n[[1466.23]] quia vocabula illa <i>Ens</i>, et <i>perfectum</i>, et <i>summum</i>, intelligimus. Eodem argumento pro\n[[1467.1]] babitur nos habere ideam Motus celerrimi, vel Numeri maximi, quia vocabula intelligimus.\n[[1467.2]] Cum tamen rei impossibilis idea sit nulla. </p>\n<p> [[1467.3]] Videtur mihi Corpora omnia non nisi modos esse, neque enim ullum argumentum\n[[1467.4]] est, quo ostendi possit ea agere et pati, nihil aliud sunt quam sensiones nostrae. Nihil\n[[1467.5]] aliud ergo est corpus quam objectum sensionis; causa actionum quae corporibus tribuimus\n[[1467.6]] sine ratione Deus est. Omnes actiones sunt Dei, praeterquam nostrae, mentium\n[[1467.7]] scilicet, ergo corporum realitas nihil differt a realitate somniorum, nisi quod constantia\n[[1467.8]] sunt, et regula quadam nituntur, ea autem regula oritur a Dei voluntate, id est ab intellectu\n[[1467.9]] melioris. Causa ergo cur Cartesius difficultatem invenerit in unione mentis et corporis,\n[[1467.10]] est, quia corpora ut substantias consideravit, ego vero considero ut modos mentis, causa\n[[1467.11]] autem cur diversae mentes consentientia sentiant, est quia omnes cum eodem Ente nempe\n[[1467.12]] Deo, communicant. Dices eodem argumento, ostendi posse, nec debere asseri quod sint\n[[1467.13]] Mentes, quia nullus modus probandi quod sint. Imo respondeo est aliquis. Nam a priori\n[[1467.14]] ostendi potest, plures esse modos possibiles se non turbantes res sentiendi, et proinde\n[[1467.15]] necesse est illas existere. At de corporibus demonstratio est. Impossibile est enim ullam\n[[1467.16]] rationem etiam ab omniscio aliquo excogitari unde probetur quod corpora sint substantiae,\n[[1467.17]] unde nec sunt substantiae. </p>\n","number":"280.","title":"Absurdum, falsum, difficile Cartesii","date":"[1683 bis 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

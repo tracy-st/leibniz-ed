@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_368","series":"Band VI 4 (1677 - 1690)","seq":368,"text":"[[1614.14]] <b>311.  Du rapport général de toutes choses [April bis Oktober 1686 (?)]</b>\n [[1614.15]] <tab/>[April bis Oktober 1686 (?)] </p>\n<p> [[1615.1]] Le rapport general et exact de toutes choses entre elles, prouve que toutes les parties\n[[1615.2]] de la matiere sont pleines d'organisme. Car chaque partie de la matiere devant exprimer\n[[1615.3]] les autres et parmy les autres y ayant beaucoup d'organiques, il est manifeste qu'il faut\n[[1615.4]] qu'il y ait de l'organique dans ce qui represente l'organique. </p>\n<p> [[1615.5]] J'adjoute même qu'il n'y a point de caos dans la nature, rien qui ne soit travaillé\n[[1615.6]] artistement jusqu'aux parties quelques petites qu'elles puissent estre. Il est vray que nous\n[[1615.7]] remarquons beaucoup de morceaux grossiers et sans art en apparence, mais ce qui est\n[[1615.8]] travaillé est trop petit pour paroistre, et cependant il est par tout. La sagesse de Dieu ne\n[[1615.9]] permet point qu'il y ait jamais un caos veritable, ce seroit un defaut de son art. </p>\n<p> [[1615.10]] Il s'en suit qu'on ne sauroit point assigner des parties qui n'ayent rien d'organiques,\n[[1615.11]] parce qu'une telle partie exprimant les autres, qui sont organiques, auroit de l'organique\n[[1615.12]] aussi <i>contra Hypothesin.</i> </p>\n","number":"311.","title":"Du rapport général de toutes choses","date":"[April bis Oktober 1686 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

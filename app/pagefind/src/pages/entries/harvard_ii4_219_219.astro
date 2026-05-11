@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_219","series":"Band II 4 (1701 - 1707)","seq":219,"text":"<p> [[673.4]] <b>219. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[673.5]] Leipzig, 14. Oktober 1707. [216.220.] </b></p>\n<p> [[673.9]] Vir Illustris et Excellentissime, Patrone gratiosissime! </p>\n<p> [[673.10]] Responsionem Excellentiae Tuae ad binas meas hactenus expectavi, sed frustra; non\n[[673.11]] tamen dubito quin illae recte fuerint traditae, de itinere jam ante aliquot hebdomadas ab\n[[673.12]] Excellentia Tua suscepto a Dno Forstero certior factus, indeque Excellentiam Tuam reducem\n[[673.13]] demum litteras meas accepisse suspicor. Librum interim et quod erat pecuniae residuum a\n[[673.14]] Forstero accepi, eoque nomine hoc majores mihi agendae sunt gratiae, quo certiora inde\n[[673.15]] singularis benevolentiae erga tenuitatem meam tale nihil merentem ducere mihi licet argumenta.\n[[673.16]] Donum enim ipsum etsi in se magni sit aestimandum, ejus tamen apud me valor longe\n[[673.17]] maximus est, cum a TE (at quanto viro!) id proficisci cogito. In qua cogitatione defixus non\n[[673.18]] possum non infirmitatem meam agnoscere, idque tantum relictum mihi esse judicare, ut Tuam,\n[[673.19]] Vir Excellentissime, prae aliis mortalibus eminentiam tacito semper cultu venerer, DEUMque\n[[673.20]] immortalem, ut Orbis Eruditus Leibnitium diu habeat, precibus meis fatigare nunquam intermittam. </p>\n<p> [[674.1]] Novi hic parum in Re Literaria: plura aliunde expectamus. Bibliotheca Schambergiana\n[[674.2]] Libris Medicis quam maxime instructa finitis nundinis distrahetur. </p>\n<p> [[674.3]] Ex Anglia Fritschius noster Novi Testamenti accuratam cum variis Lectionibus et Observationibus\n[[674.4]] criticis editionem Andreae Mills, cujus specimen aliquod apud Boernerum meum\n[[674.5]] vidi, nec non Tomum Primum <angle bracket>librorum</angle bracket> LXX jam ad finem perductum, itemque Jamblichum\n[[674.6]] <i>de vita Pythagorae</i> a Ludolpho Kustero (qui nuper in Angliam secessit) notis illustratum\n[[674.7]] propediem se accepturum esse sperat. </p>\n<p> [[674.8]] In vicina Academia Halensi Versio Bibliorum Esthonica hactenus nondum visa typis\n[[674.9]] mandatur, curantibus studiosis quibusdam hunc in finem ab Augustissimo Suecorum Rege eo\n[[674.10]] ablegatis. </p>\n<p> [[674.11]] In Academia Jenensi Morhofii <i>Polyhistor</i> altero fere tanto auctior sub praelo sudat, et in\n[[674.12]] emendando Baylii dictionario toti sunt Celeb. Buddeus et Struvius ad litteram H jam progressi.\n[[674.13]] Hambergerus vero selectas suas disputationes ex. gr. <i>de Opticis oculorum vitiis</i>, <i>de Iride diluvii</i>,\n[[674.14]] <i>de Barometris</i>, <i>de Epochis</i>, <i>de Meritis Germanorum in mathesin</i> etc. conjunctim publicandas\n[[674.15]] curat. </p>\n<p> [[674.16]] Ex Italia etiam novi quid in Anatomicis allatum est. Bononiensium enim medicus quidam\n[[674.17]] Moragni in <i>Adversariis</i> suis <i>Anatomicis</i> Ovarium novum in cervice uteri detexisse dicitur, quod\n[[675.1]] tamen apud nos jam dudum observavit Anatomicus felicissimus mihique amicissimus Dominus\n[[675.2]] D. Naboth Professor Chymiae Extraordinarius. Ut taceam novos musculos in Oesophago et\n[[675.3]] Uvula a Valsalva nuper detectos. Quod superest me et mea studia Excellentiae Tuae quam\n[[675.4]] maxime cupio commendata, qui sum eroque semper </p>\n<p> [[675.5]] Illustris et Excellentissimi Nominis Tui Cultor perpetuus </p>\n<p> [[675.6]] Mich. Gottl. Hanschius </p>\n<p> [[675.7]] Lipsiae d. 14. Octobr. 1707. </p>\n<p> [[675.8]] P. S. B. Carpzovii spartam Avenarium Superintendentem Plaviensem alii, alii Schwertnerum\n[[675.9]] Super. Pirnensem nactum esse ex fama tamen adhuc dubia referunt. Marsiglianum Opus\n[[675.10]] ab Excellentia T[ua] desideratum utut imperfectum a Dn. Menckenio pro 13 gr. denuo impetravi,\n[[675.11]] et una cum reliquis libris Forstero tradidi, a quo pecuniam etiam recte accepi. Vale! </p>\n<p> [[675.12]] A Son Excellence Monseigneur de Leibnitz Conseiller privé de Son Altesse Electorale de\n[[675.13]] Brounswic et Lunebourg etc etc. à Hannover. Par ami que Dieu conduise! </p>\n","number":"219.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 14. Oktober 1707. [216.220.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_470","series":"Band VI 4 (1677 - 1690)","seq":470,"text":"[[2076.1]] <b>378₂.  Zweiter Ansatz ZWEITER ANSATZ </p>\n<p> [[2076.2]] <k>Quantitas effectus formalis in motu</k> <b>est</b> <b>cujus mensura est materiam\n[[2076.3]] certae quantitatis motu aequidistributo motam esse per certam longitudinem</i>. </p>\n<p> [[2076.5]] Ut quantitatem materiae contentam in <i>AB</i> translatam esse ex <i>₁A₁B</i> in <i>₂A₂B</i>, per\n[[2076.6]] longitudinem quae est lineae <i>₁A₂A</i> a quocunque corporis\n[[2076.7]] puncto ut <i>A</i>, descriptae; quae scilicet est <b>longitudo</b>\n[[2076.8]] motus aequidistributi (defin. 1. cap. de velocitate\n[[2076.9]] motus aequidistributi), ubi nempe linea a quocunque\n[[2076.10]] mobilis puncto descripta est aequalis\n[[2076.11]] (defin. 1. dicti cap.). </p>\n<p> [[2076.12]] Itaque si haec mensura in motu repetatur, etiam toties repetetur seu multiplicabitur\n[[2076.13]] quantitas Effectus. Hunc autem <b>Effectum</b> voco <b>formalem</b>, quia motui est essentialis,\n[[2076.14]] secus ac sunt effectus alii qui a peculiari qualitate moti, aut obstaculo occurente ac\n[[2076.15]] superato nasci forte possunt.\n[[2076.16]] Axioma </p>\n<p> [[2076.17]] <b>Duo Quantitatem habentia sunt inter se, ut numeri aequalium partium\n[[2076.18]] in quas resolvi possunt</i>. <b>Quicquid autem de genere aliquo quanti\n[[2077.1]] tatum verum est universaliter, id de alia verum est quantitate, quae a\n[[2077.2]] priori minus differt errore quovis dato</i>. </p>\n<p> [[2077.3]] Exempli causa Hexapoda resolvi potest in pedes sex, decempeda in pedes decem,\n[[2077.4]] vel (posita ulna duarum pedum) resolvi potest Hexapoda in ulnas tres, decempeda in\n[[2077.5]] ulnas quinque. Itaque Hexapoda est ad decempedam ut 6 ad 10 seu ut 3 ad 5. Et vero in\n[[2077.6]] universum nihil aliud est <b>quantitas</b> quam numerus partium posito mensuram quandam\n[[2077.7]] semper sibi congruentem assumi pro unitate. Et hinc usus <b>Scalarum</b> in partes aequales\n[[2077.8]] divisarum nascitur. </p>\n","number":"378₂.","title":"Zweiter Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

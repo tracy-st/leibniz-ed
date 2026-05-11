@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_183","series":"Band II 2 (1686 - 1694)","seq":183,"text":"<p> [[611.6]] <b>185. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[611.7]] [Wolfenbüttel,] 17./27. Oktober 1692. [166.212.]</b></p>\n<p> [[611.19]] Monsieur </p>\n<p> [[611.20]] Je remercie tres humblement M. l'Abbé Gallois des memoires de l'Academie royale, aussi\n[[611.21]] bien que de toutes ses autres bontés: qui passent mes merites. Je profiteray de vostre avis à son\n[[611.22]] egard. Il y a des meprises dans le recit de l'invention du phosphore, je sçay les choses\n[[611.23]] d'original. J'envoyeray un recit seur, si on le veut bien. Je ne dis pas cela pour choquer M.\n[[611.24]] Homberg, pour le quel j'ay bien de l'estime, mais je ne voudrois pourtant pas qu'on trouvât à\n[[612.1]] redire avec raison aux memoires d'une compagnie si illustre. Et si M. Homberg a esté abusé là\n[[612.2]] dedans par le rapport d'autruy, cela luy fera aussi peu de tort, qu'à Mons. l'Abbé Gallois luy\n[[612.3]] même. </p>\n<p> [[612.4]] Je n'avois garde de penser qu'on songeroit à m'accorder une place honnoraire dans\n[[612.5]] l'Academie, que je n'aurois osé prétendre. Et si j'avois dit en écrivant à M. Pelisson que j'estois\n[[612.6]] de l'Academie, on auroit eu sujet de se moquer de moy. Cependant je vous avoue Monsieur que\n[[612.7]] si j'avois sçu que M. Pelisson prevenu par la bonté qu'il a pour moy, trouveroit dans les lettres\n[[612.8]] que je luy écrivois quelque chose qu'il voudroit joindre à ses excellens ouvrages, <i>ut pannum\n[[612.9]] purpurae</i>, je me serois gardé d'entrer dans le detail des choses, qui me touchent; qui paroistra\n[[612.10]] affecté à ceux qui ne voyent pas les occasions que la suite des lettres avoit fournies. Ainsi je ne\n[[612.11]] songeois à rien moins qu'à voir ces choses publiées, jusqu'au moment que j'en ay receu\n[[612.12]] l'impression. </p>\n<p> [[612.13]] Je vous remercie aussi bien fort de vostre continuation de la philosophie des Academiciens\n[[612.14]] et je suis ravi de voir, que vous leur prestés des interpretations raisonnables. Le meilleur\n[[612.15]] seroit de reduire tout aux premieres verités, mais en attendant, il sera tousjours bon de prendre\n[[612.16]] les secondes qu'on [attrape] en chemin. </p>\n<p> [[612.17]] L'auteur qui repond à mon argument contre l'etendue prise pour l'essence de la matiere\n[[612.18]] m'accorde ce que je veux sans y penser. Il avoue que l'etendue est indifferent au mouvement et\n[[612.19]] au repos, et que pour expliquer l'inertie de la matiere il faut employer autre chose, sçavoir la\n[[612.20]] force. Je m'etonne souvent que des personnes d'esprit, et qui meprisent Aristote, s'eloignent\n[[612.21]] tellement de la logique en raisonnant. </p>\n<p> [[612.22]] A Mons. l'Abbé Foucher </p>\n<p> [[612.23]] 17/27 d'octobr. 1692.\n[[612.24]] Mes baisemains sur tout à M. Lantin. </p>\n","number":"185.","title":"LEIBNIZ AN SIMON FOUCHER","date":"[Wolfenbüttel,] 17./27. Oktober 1692. [166.212.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

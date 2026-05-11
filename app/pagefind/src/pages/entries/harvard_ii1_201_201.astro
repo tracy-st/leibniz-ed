@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_201","series":"Band II 1 (1663 - 1685)","seq":201,"text":"<p> [[636.20]] <b>183. SIMON FOUCHER AN LEIBNIZ</p>\n<p> [[636.21]] Paris, 12. August 1678. [120.205.]</b></p>\n<p> [[637.7]] Monsieur A Paris du 12 Aoust 1678. </p>\n<p> [[637.8]] Il y a longtems que j'ay dessein de vous écrire pour vous prier de me conserver l'honneur\n[[637.9]] de vostre amitié et pour vous assurer que M^#'r le conseiller Lantin et moy nous avons redoublé\n[[637.10]] ensemble l'estime que nous avons pour vous. Il n'y a que quelques mois que je suis de retour de\n[[637.11]] province et l'une des premieres choses que j'ay faitte icy a esté de m'informer de vous aupres\n[[637.12]] de M^#'r l'Abbé Mariotte. Il m'a dit qu'il recevoit souvent de vos nouvelles en quoy je l'estime\n[[637.13]] heureux. Il m'a temoigné aussi que vous souhaitiez que je vous fisse faire un hygromettre à ma\n[[637.14]] façon. Plusieurs personnes que je considere fort entrautre M^#'r Lantin Messieurs Maltesté M^#'r\n[[637.15]] D'alancé M^#'r Justel etc. ont demandé la même chose, et je n'ay pas encor fait ce qu'ils\n[[637.16]] souhaitent. J'espere, Monsieur, que je satisferay tous ces messieurs et vous pour le premier.\n[[637.17]] Mais il ne me sera guere plus difficile de faire beaucoup de ces machines que d'en faire une\n[[637.18]] seule. Je vous ay dit Monsieur, ce qui m'a empesché d'en faire jusqu'à cet heure. Il faut les\n[[637.19]] experimanter et en faire en plusieurs manieres pour juger la meilleure. Je suis pourtant un peu\n[[637.20]] trop paresseux pour prendre cette pene, mais je ne laisseray pas de faire quelque jour ce que je\n[[637.21]] pourray pour perfectionner cette sorte de machine. Il faut que je sois un peu débarrassé\n[[637.22]] auparavant de quelque autre chose que j'ay dans l'esprit. On dit que M^#'r Hautefeuille veut faire\n[[637.23]] un mouvement perpetuel par le moyen des hygrometres, et d'un pendule. Il y a d'autres moyens\n[[637.24]] d'en venir à bout. Si celuy là peut estre exécuté, j'en ay sur d'autres principes. Mais le prejugé\n[[637.25]] que l'on a de l'impossibilité du mouvement perpetuel empesche qu'on ne se fie à ces sortes de\n[[637.26]] machines. On a cru autre fois des choses impossibles que l'on a executées en d'autres tems. Je\n[[637.27]] panse, Monsieur, que vous ne manquez pas non plus de conjectures pour ce mouvement. Il y a\n[[637.28]] un 3^#'m^#'e tome <i>de la Recherche de la verité</i> dans lequel le R. Pere Malbranche s'explique sur\n[[637.29]] plusieurs sujets. Il s'accorde en ce volume avec beaucoup de choses de <i>la critique</i>, 1^#'eⁿ^#'t en ce\n[[637.30]] qu'il veut que nous ne connoissions pas par les sens qu'il y a des corps hors de nous, 2. en ce\n[[637.31]] qu'il avouë dans un chapitre particulier que nous n'avons point d'idée claire de la nature de\n[[638.1]] nostre ame. Cela estant jugez Monsieur des consequences qu'on en peut tirer contre sa\n[[638.2]] philosophie. Je panse que vous vairrez ce 3^#'m^#'e volume. Je n'ay pas encor fait imprimer la\n[[638.3]] reponse à Dom Robert. Vous aves vu cette reponse en manuscrit il y a plus de 2 ans. Depuis\n[[638.4]] j'ay fait <i>l'apologie des Academiciens</i> et quelques autres petites remarques sur les prejugez des\n[[638.5]] sens. Tout cela n'est pas imprimé par ce que je ne suis guere propre à chercher des libraires. Si\n[[638.6]] vous me faite la faveur de me faire reponse je vous prie d'ecrire un mot à M^#'r le conseiller\n[[638.7]] Lantin afin que je le luy fasse tenir, il n'est jamais plus joyeux que quand il entend parler de\n[[638.8]] vous. Je vous assure, Monsieur, que je suis de son humeur en cela et si vous sçaviez ce que je\n[[638.9]] panse de vous, vous vairriez qu'on ne sçauroit avoir de meillieurs sentiments d'une personne\n[[638.10]] que ceux que j'ay de vous, Monsieur, à qui je suis entierement tres humble et </p>\n<p> [[638.11]] tres affectionné serviteur S. Foucher. </p>\n<p> [[638.12]] A Monsieur Monsieur de Libnyz Conseillier et Bibliothecaire du Duc d'Annovre. A\n[[638.13]] Annovre. </p>\n","number":"183.","title":"SIMON FOUCHER AN LEIBNIZ","date":"Paris, 12. August 1678. [120.205.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_89","series":"Band II 3 (1695 - 1700)","seq":89,"text":"<p> [[247.4]] <b>89. LEIBNIZ AN ─ (?)</p>\n<p> [[247.5]] [1696 (?).]</b></p>\n\n<p> [[247.15]] Je vous renvoye, Monsieur, avec remerciment les <i>Conjectures sur le peché Originel</i>.\n[[247.16]] L'Auteur a droit de rejetter l'opinion de Flacius, et il a raison de dire, que ce [qui] est\n[[247.17]] substantiel à l'ame, n'est point corrompu. Et je crois méme qu'on peut accorder, que la\n[[247.18]] depravation de la nature humaine par peché n'est autre chose que l'infection de la source des\n[[247.19]] pensées. Mais lorsque l'auteur veut que le peché originel ne consiste que dans les pensées\n[[247.20]] mêmes, et qu'il n'y a point d'autre dereglement, il semble qu'il dit un peu trop. Je croy\n[[247.21]] pourtant, qu'on le doit expliquer favorablement par luy méme, puisqu'il entend par pensées non\n[[247.22]] seulement l'acte de la pensée, mais encor les habitudes et les dispositions, et c'est je croy ce\n[[247.23]] qu'il appelle pensées habituelles. </p>\n<p> [[247.24]] Il faut faire distinction dans l'ame entre l'essence et les proprietés essentielles d'un costé,\n[[247.25]] et les modifications accidentelles de l'autre. Mais il faut encor distinguer les modifications en\n[[247.26]] qualités, et en actions ou passions. Les qualités sont durables, mais les actions ou passions sont\n[[247.27]] transitives. Ces qualités sont des dispositions, des habitudes, ou des inclinations à l'action et à\n[[248.1]] la passion, et sont encor ou nées avec nous, ou acquises. Ainsi quand on considere bien ces\n[[248.2]] distinctions, toutes difficultés disparoissent d'elles mémes. Il est manifeste que ce qui est\n[[248.3]] essentiel à l'ame, n'est point changé; autrement l'ame [seroit] destruite. Donc le peché originel\n[[248.4]] ne sçauroit étre autre chose, que [ce] qui s'appelle chez les philosophes <i>habitus innatus</i>, dont le\n[[248.5]] sujet est la substance méme avec ses facultés, où le mal a pris racine, puisqu'il est durable, et\n[[248.6]] consiste ainsi non seulement dans les pensées, mais encor dans la source, qui les produit.\n[[248.7]] Maintenant pour rechercher plus particulierement, ce que c'est que cette habitude, on peut dire,\n[[248.8]] qu'il y a des idées dans l'entendement, et des inclinations dans la volonté, qui sont nées avec\n[[248.9]] l'homme, et qui en repondant aux imperfections du corps, font que l'homme est porté au mal.\n[[248.10]] Et l'auteur reconnoist luy méme, qu'on peut naître non seulement avec l'idée de quelque chose,\n[[248.11]] mais encor avec une inclination ou aversion, qui accompagne une idée corporelle. Ainsi\n[[248.12]] l'homme dans cet estat de la nature corrompuë a la disposition de n'estre frappé aisement que\n[[248.13]] par les sentiments confus des biens et maux sensibles, jusqu'à ce qu'il se desabuse par\n[[248.14]] l'experience ou par l'instruction: au lieu que dans un éstat plus sublime il avoit des sentiments\n[[248.15]] plus distincts, qui l'empéchoient de se borner aux sens et autres biens particuliers. Cependant il\n[[248.16]] faut croire, qu'il y avoit encor dans cet estat de la nature entiere une vicissitude de pensées, et\n[[248.17]] que l'esprit ne pouvant pas estre toujours bandé aux choses intelligibles, s'abbaissoit quelques\n[[248.18]] fois pour jouir des objets sensuels, et ce fut dans cet estat qu'il fut surpris par le peché. Ainsi\n[[248.19]] lorsque l'auteur demande <i>l'origine du peché d'Adam</i>, il faut repondre, qu'il est venu de\n[[248.20]] l'imperfection ou limitation originelle des creatures, qui les empéche d'estre des Dieux. </p></p>\n","number":"89.","title":"LEIBNIZ AN ─ (?)","date":"[1696 (?).]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

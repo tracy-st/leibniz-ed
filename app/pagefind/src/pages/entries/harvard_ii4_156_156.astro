@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_156","series":"Band II 4 (1701 - 1707)","seq":156,"text":"<p> [[502.1]] <b>156. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[502.2]] [Coburg,] 11. Oktober 1706. [155.159.] </b></p>\n<p> [[502.9]] Perillustris atque Excellentissime Domine </p>\n<p> [[502.10]] Quod <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> Tibi mei oblivionem nondum passus es obrepere, in praecipua felicitatis parte pono,\n[[502.11]] ac memorem hujus aliorumque beneficiorum animum semper praestabo. </p>\n<p> [[502.12]] Schulenburgii impedimenta vidimus cum milite, cui illorum custodia credita fuerat. Dux\n[[502.13]] ipse dicitur copias prope Francofurthum collegisse, irruptionem in Bipontinos facturus. Igitur\n[[502.14]] literas Tibi reddo bona fide, curaturus omni studio, si certa mihi perferendarum ratio non\n[[502.15]] deesset. </p>\n<p> [[502.16]] Dignatus es ex me quaerere, Vir Perillustris, cui rei nunc studeam? Respondebo Tibi\n[[502.17]] duobus verbis, Here optime. Ex quo me Helmstadio ejecit invidia, quicquid temporis subducere\n[[502.18]] laboribus publicis et Franconicae nobilitatis juventuti licet, historiae ac juri naturae gentiumque\n[[502.19]] impendo, incertus, an me his rebus docendis velint aliquando fata adhibere. Te precor, Vir\n[[503.1]] Summe, ut me olim in lucem academicam denuo protrahas, daturum operam, ut commendationis\n[[503.2]] Te nunquam poeniteat. Vale, Vir maxime, et, si id adjici pateris; Here omni obsequii\n[[503.3]] genere devenerande, et me ornare ne desine. Scrib. d. XI. Octobr. 1706. </p>\n<p> [[503.4]] T. aeterno obsequio ac fide Ernestus Salomo Cyprianus. </p>\n","number":"156.","title":"ERNST SALOMON CYPRIAN AN LEIBNIZ","date":"[Coburg,] 11. Oktober 1706. [155.159.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

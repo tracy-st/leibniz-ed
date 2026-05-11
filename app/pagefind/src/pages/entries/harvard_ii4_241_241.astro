@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_241","series":"Band II 4 (1701 - 1707)","seq":241,"text":"<p> [[736.1]] <b>241. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[736.2]] [Berlin, 15. Februar 1707 (?)]. [240.242.] </b></p>\n[[736.13]] <petit> <k>[Definitio] CLXXXV. Conatus Partium Materiae</k>\n[[736.14]] est nisus sive tendentia continua partium materiae ad producendum motum, quae se ad directionem omnem et\n[[736.15]] celeritatem motus indifferenter habet, qua facultas loco motiva, directione et celeritate motus ab alio principio\n[[736.16]] externo determinata, in actum deducitur [ ... ].\n[[736.17]] Scholion I. Conatus hic in omnes plagas solum illud est, quod in motu partium materiae reale est. Quodsi enim\n[[736.18]] directio a principio externo determinetur, motus necessario sequitur, et impossibile est, posita hac motus\n[[736.19]] determinatione in uno, non sequi hunc motum in altero, nisi impediatur. Jam vero sublato impedimento nihil novi\n[[736.20]] accedit partibus motis, quod ante non inerat.\n[[736.21]] Scholion II. LEIBNITIUS, in Epistola Berolino XV. Febr. MDCCVII. ad me data:</petit>\n [[736.22]] \"Praeter tres dimensiones singula puncta, ex. gr. in cubo gravitatem et impetum recipiunt.\" </p>\n[[736.23]] <petit> <k>[Definitio] CCIII. Unum per se</k>\n[[736.24]] est Monadatum, quod a Monade dominante vegetatur, sive Monas incorporata.\n[[736.25]] Scholion I.</petit>\n [[736.26]] \"Tale est homo, Ovis\", </p>\n[[736.27]] <petit> <k>Leibnitius</k> in Epistola Berolino XV. Febr. MDCCVII. ad me data.\n[[736.28]] Scholion II. <k>Idem</k> Tomo II. <i>du Recueil. p. 329.</i> \"Une veritable substance, telle, qu'un animal, est composée d'une\n[[736.29]] ame immaterielle et d'un corps organique; et c'est le composé de ces deux, qu'on appelle <i>unum per se</i>.\" </petit> </p>\n","number":"241.","title":"LEIBNIZ AN MICHAEL GOTTLIEB HANSCH","date":"[Berlin, 15. Februar 1707 (?)]. [240.242.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

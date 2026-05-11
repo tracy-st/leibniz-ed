@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_305","series":"Band VI 4 (1677 - 1690)","seq":305,"text":"[[1352.5]] <b>251.  Quod non omnia possibilia ad existentiam perveniant, seu quaedam esse possibilia, quae nec sunt, nec fuere, nec erunt [1677 (?)]</b>\n [[1352.6]] <tab/>[1677 (?)]\n [[1352.11]] <b>Quod non omnia possibilia ad existentiam perveniant</b>,\n [[1352.12]] <b>seu quaedam esse possibilia, quae nec sunt, nec fuere, nec erunt</b> </p>\n<p> [[1352.13]] Possibile voco quod supponi sive intelligi potest sine contradictione, verbi gratia in\n[[1352.14]] toto mundo non esse nisi globulos seu corpora rotunda, nihil in se continet quod contradictionem\n[[1352.15]] includat. Hinc jam probo quaedam hujusmodi possibilium nunquam\n[[1352.16]] ex[t]itisse, vel extitura esse. Nam si ponamus omnia esse globulos, impossibile est\n[[1352.17]] naturae viribus eos unquam esse cessare, omnes ergo aliae Atomorum figurae nec\n[[1352.18]] extiterunt naturaliter (alioqui nunquam inde facti fuissent globuli) nec existent. Contra si\n[[1352.19]] alia quaevis figura assumatur impossibile est globulorum figuram aliquando extitisse aut\n[[1352.20]] fore. Utroque ergo modo aliquid ex possibilibus in se impossibile erit existere ob alia\n[[1352.21]] posita, seu ob statum universi. Quo semel admisso habemus Deum non qualem Cartesius\n[[1352.22]] et Spinosa, sed qualem docent Christiani. </p>\n<p> [[1353.1]] Si demonstrari potest, non posse quamlibet materiae partem a quavis alia separatam\n[[1353.2]] intelligi, sed dari quasdam Atomos, idem manifeste demonstratum habetur. Sed etsi\n[[1353.3]] omnia rursus subdividi ponamus, quia tamen variis modis institui potest subdivisio: non\n[[1353.4]] utique omnia possibilia contingunt. </p>\n","number":"251.","title":"Quod non omnia possibilia ad existentiam perveniant, seu quaedam esse possibilia, quae nec sunt, nec fuere, nec erunt","date":"[1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

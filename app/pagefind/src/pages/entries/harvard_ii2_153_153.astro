@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_153","series":"Band II 2 (1686 - 1694)","seq":153,"text":"<p> [[544.1]] <b>155. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[544.2]] Padua, 23. Juni [1692]. [149.159.]</b></p>\n<p> [[544.8]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[544.9]] Sono due settimane, che mi trovo con Sua Eccellenza alla visita della Provincia, il che fù\n[[544.10]] caggione che non le scrivessi con l'Ordinario passato; arrivato però oggi in Padova, la prima\n[[544.11]] cosa, che fò, è inchinare con questa V. S. Illu^#'m^#'a, assicurandola della mia ferma risolutione di\n[[544.12]] portarmi costì secondo il concertato. Io già mi sarei partito, se l'Eccell^#'m^#'o Sig^#'r^#'e Capitano non mi\n[[544.13]] havesse ancora con violenza trattenuto, pregandomi di non abbandonarlo, finche si proveda\n[[544.14]] d'altro Soggetto a proposito per dare l'ultima mano all'istruttione del suo Primogenito. Questa\n[[544.15]] mattina hò di nuovo supplicato Il Sig^#'r^#'e Marsilio Pappafava, acciò da mia parte pregasse Sua\n[[544.16]] Eccellenza di lasciarmi andare, con pretesto di dovermi portare in Roma per alcuni miei\n[[544.17]] rilevanti affari. L'Inferno adopera tutte le sue forze per tenermi alla catena dell'errore in Italia,\n[[544.18]] e quando, a Dio piacendo, sarò qui, le raccontarò le difficoltà grandissime, che incontro per\n[[544.19]] separarmi da questo Paese, ove le lusinghe, e preghiere degl'amici, l'amorevoli insidie e larghe\n[[544.20]] promesse di questi Senatori cospirano insieme per tenermi lontano da cotesto Cielo, da me\n[[544.21]] sospirato per mettermi nella vera libertà evangelica, e liberarmi per sempre da questa orribile\n[[544.22]] superstitione, in cui qui viviamo. Se la prima lettera di V. S. Illu^#'m^#'a mi fosse capitata in Venetia,\n[[544.23]] prima di portarmi in questo reggimento con Sua Eccellenza, a questa hora sarei infallibilmente\n[[544.24]] costì, ma l'essermi impegnato a servire questo Sig^#'r^#'e Capitano in tutto il tempo del suo governo\n[[544.25]] qui, è l'unico motivo della mia tardanza. Io farò tutto per partirmi con sodisfattione di S^#'a E^#'a,\n[[544.26]] però quando esso andasse tirando le cose in lungo, e con affettuoso inganno valesse distormi\n[[544.27]] dal mio viaggio, allora io scordato di tutte l' humane convenienze preferirò ad ogni mondano\n[[544.28]] interesse quello di Dio e della mia salute. Priego fratanto V. S. Illu^#'m^#'a patientare ancora, e\n[[544.29]] compatirmi se uso molta cautela nel presente affare, essendo il mio scopo di partirmi con il\n[[544.30]] minore strepito, che si può. Domani, a Dio piacendo, mi portarò dal Sig^#'r^#'e Marchese del Pozzo,\n[[544.31]] che mi hà promesso fare ogni diligenza in Verona per le notitie, che essa brama, e sentirò da\n[[545.1]] Venetia quanto prima qualche cosa circa il diploma delle Carceri. Farò capitare nelle mani del\n[[545.2]] Sig^#'r^#'e Mendelino un Fulvio Testi, e due <i>Gallerie</i> del Marino. Mi comandi con libertà, e\n[[545.3]] pregandole dal Cielo ogni prosperità mi resto </p>\n<p> [[545.4]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o, Oblig^#'m^#'o S^#'r^#'e vero M. A. F. </p>\n<p> [[545.5]] Padova 23 Giugno </p>\n","number":"155.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 23. Juni [1692]. [149.159.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

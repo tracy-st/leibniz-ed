@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_216","series":"Band II 2 (1686 - 1694)","seq":216,"text":"<p> [[701.1]] <b>219. SIMON FOUCHER AN LEIBNIZ</p>\n<p> [[701.2]] Paris, 30. Mai 1693. [212.225.]</b></p>\n<p> [[701.12]] de Paris le 30 may 1693. </p>\n<p> [[701.13]] Une de vos lettres que vous m'aviez ecrite a esté perduë, et c'est celle que vous aviez\n[[701.14]] addressée à feu M^#'r Pelisson. J'ay pourtant vu un fragment entre les mains de M^#'r l'Abbé du\n[[701.15]] Hamel, où vous raportez un trait de Socrates tiré de Platon et où vous repondez au P. Malebranche\n[[701.16]] et à M^#'r l'Abbé Catelan. Vos deux petites pieces ont esté inserées dans le journal,\n[[701.17]] scavoir, celle que vous avez envoyée à M^#'r Pelisson pour repondre sur l'essence de la matiere et\n[[701.18]] celle que vous avez envoyée à M^#'r l'Abbé Nicaise le quel m'a ecrit de Dijon me priant d'en\n[[701.19]] parler à M^#'r le president Cousin, ce que j'ay fait et elle a esté inserée dans un journal après avoir\n[[701.20]] esté gardée six mois. Cette piece contient vostre jugement des ouvrages de M^#'r Descartes. Vous\n[[701.21]] m'en avez écrit un mot dans vostre derniere et je suis bien aise de ce qu'elle n'a point esté\n[[701.22]] perduë. Je vous ay repondu dans le journal du 17 mars de cette année sur vos axiomes de\n[[701.23]] Physique et sur le doute universel qu'on attribuë faussement aux Academiciens. Si vous\n[[701.24]] souhaitez me repondre là dessus et faire mettre vostre reponse dans le journal, je vous offre\n[[702.1]] pour cela mon service. Cela se fera fidelement. Je voudrois avancer ma Philosophie des\n[[702.2]] Academiciens mais le tems est peu favorable aux libraires à cause qu'ils ne scauroient avoir\n[[702.3]] commerce dans les pays etrangers, au reste la Philosophie, qui est assurement le genre d'estude\n[[702.4]] le plus important et le meilleur, n'a pas tant d'aprobateurs en cette ville que les belles lettres et\n[[702.5]] la polimatie. Les <i>Menagiana</i> viennent de paroistre et on en espere bientost un second volume.\n[[702.6]] Quand vous me faites l'honneur de m'ecrire, Monsieur, ecrivez je vous prie à vostre maniere\n[[702.7]] ordinaire, car je lis fort bien vostre ecriture laquelle renferme beaucoup en peu d'espace. Je\n[[702.8]] l'aime mieux que de gros caracteres en lettres d'or. Je n'ay point encor vu la critique de <i>la</i> <i>vie</i>\n[[702.9]] <i>de M^#'r Descartes</i> ecrite par M^#'r Baillet. Je crois que vous avez vu le livre de M^#'r d'Avranches\n[[702.10]] intitulé <i>Memoires pour servir à l'histoire du Cartesianisme</i>. C'est un dialogue addressé à M^#'r\n[[702.11]] Regis. Il ne contient que 5 fueilles au plus assurement. Il est ecrit d'une maniere adroite et\n[[702.12]] pleine d'esprit mais je ne voudrois pas qu'elle tournasse la Philosophie en ridicule et je ne\n[[702.13]] pense pas que l'Auteur regarde autrement ce livre que comme un roman ingenieux. On en\n[[702.14]] pourroit faire une infinité de cette maniere, et pour dire vray il n'y a rien que l'on ne puisse\n[[702.15]] tourner en ridicule parce que dans le monde il y a des esprits de toutes sortes de caracteres.\n[[702.16]] Vous vous accordez assez avec M^#'r d'Avranches au sujet des ouvrages de M^#'r Descartes et je\n[[702.17]] demeure d'accord avec vous que sa metaphysique est le moindre et neanmoins j'avouë avec\n[[702.18]] vous et avec plusieurs personnes d'esprit qu'on est obligé à ce grandhomme de ce qu'il a mis\n[[702.19]] les esprits en meilleur train qu'ils n'estoient pour philosopher. <Fn><i>Am Rande</i>: Je n'ay point vu vostre <i>Dynamique</i>. Il faut mieux envoyer des imprimez que des manuscrits, car les imprimez se peuvent communiquer à plusieurs personnes et sont deffendus par quelques uns.</Fn> </p>\n","number":"219.","title":"SIMON FOUCHER AN LEIBNIZ","date":"Paris, 30. Mai 1693. [212.225.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

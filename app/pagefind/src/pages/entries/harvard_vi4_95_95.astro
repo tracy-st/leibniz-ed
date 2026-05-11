@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_95","series":"Band VI 4 (1677 - 1690)","seq":95,"text":"[[317.5]] <b>78₃.  Dritter Ansatz DRITTER ANSATZ </p>\n<p> [[317.6]] In re Mathematica in universum, sive de Numeris ac Figuris, sive de Motibus,\n[[317.7]] aliisque rebus mensurabilibus agatur, omnia problemata huc redeunt, ut ex propositis\n[[317.8]] conditionibus reperiatur productio quaesiti, sive certus operandi modus, quo absoluto,\n[[317.9]] ipsis conditionibus desideratis eadem opera sit satisfactum. Est autem hoc loco conditio\n[[317.10]] nihil aliud quam relatio quaesiti ad datum involvens magnitudinem. Operatio autem est\n[[317.11]] quidam modus tractandi vel res ipsas datas per constructionem, vel earum characteres\n[[317.12]] quibus repraesentantur per <b>calculum</b>. Ita vero institui potest operatio quo pleraque\n[[317.13]] peragantur potius circa characteres, et ut novissime circa rem ipsam, quando ad eam\n[[317.14]] denique accedendum est, pauca agenda supersint. Veluti si valorem cujusdam lineae\n[[317.15]] quaesitae in numeris reperiamus, manifestum est inventam longitudinem in scala tantum\n[[317.16]] quadam sumi debere, ut Constructio, sive operatio linearis absolvatur. Interdum tamen\n[[317.17]] constructio ipsa quae linearum ductu fit satis commoda brevisque est aut elegantiam\n[[317.18]] habet peculiarem. Quare ita instituendi sunt characteres, ut etiam constructiones per ipsos\n[[317.19]] cognosci possint commodissimaeque earum eligantur. </p>\n","number":"78₃.","title":"Dritter Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

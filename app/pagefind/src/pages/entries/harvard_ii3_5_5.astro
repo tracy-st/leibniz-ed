@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_5","series":"Band II 3 (1695 - 1700)","seq":5,"text":"<p> [[19.1]] <b>5. ANTONIO ALBERTI AN RUDOLF CHRISTIAN VON BODENHAUSEN</p>\n<p> [[19.2]] 5. Februar 1695. [18.]</b></p>\n\n<p> [[19.13]] Je suis persuadé Mon tres honoré Monsieur qu'il na pas tenu à vous que je n'aye receu\n[[19.14]] exactement la reponse aux lettres que je me suis donné l'honneur de vous ecrire pour vous\n[[19.15]] informer de ce que j'avois fait en execution de ce que vous m'aviez ordonné. Je vous prie\n[[19.16]] Monsieur de vouloir bien excuser l'Abbé della Stuffa. Je vous asseure qu'il n'a point de tort, et\n[[19.17]] qu'il m'avoit écrit diverses fois de Florence pour me demander ce que j'avois imploré pour vos\n[[19.18]] copies. Mais je ne scais comme quoy j'oubliai de luy repondre sur cet article. Au reste je suis\n[[19.19]] sensiblement affligé de l'Indisposition de notre Illustre et incomparable M. Libnits. En verité je\n[[19.20]] ne puis penser à la perte d'un si grand homme sans ressentir une tres vive douleur. Ce qui\n[[19.21]] m'afflige d'avantage c'est qu'il mourroit hors du sein de l'eglise catholique. À propos de quoy\n[[19.22]] je vous veux dire ce que dit l'autre jour un grand Cardinal à qui on informait du grand merite de\n[[19.23]] notre ami. Il asseura que s'il étoit dans la disposition de se reunir à l'eglise on pouvoit comter\n[[19.24]] que non seulement on lui donneroit le poste de <i>primus Custos</i> de la Vaticane mais encore\n[[19.25]] beaucoup d'autres avantages, en sorte qu'il pourroit employer tout ce qui lui reste de vie à\n[[19.26]] servir utilement et glorieusement le public. Je vous ecris ceci non que je voie grande apparance\n[[20.1]] à le faire reussir; mais pour communiquer à une personne que j'estime et que j'honore\n[[20.2]] infiniment une des choses que je desire le plus au monde. </p>\n<p> [[20.3]] J'ay dit à M^#'r Landini qui me paroit un parfait honnete homme, ce que j'ay depensé pour\n[[20.4]] faire les copies dont est question. J'ay emprunté à Msgr Champini le tome de 1693 et l'ai donné\n[[20.5]] au dit sieur Landini pour en faire copier ce qu'il trouvera à propos et de la manière et par qui il\n[[20.6]] voudra. Je voudrais Mon tres honoré Monsieur trouver quelque occasion plus importante pour\n[[20.7]] vous temoigner à quel point je suis avec tout le respect et l'attachement possible </p>\n<p> [[20.8]] Monsieur votre tres humble et tres obeissant serviteur </p>\n<p> [[20.9]] ce 5 febrier 1695 Ant. Alberti </p>\n","number":"5.","title":"ANTONIO ALBERTI AN RUDOLF CHRISTIAN VON BODENHAUSEN","date":"5. Februar 1695. [18.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_188","series":"Band II 3 (1695 - 1700)","seq":188,"text":"<p> [[473.7]] <b>188. LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT</p>\n<p> [[473.8]] Hannover 18./28. Oktober 1698. [185.]</b></p>\n\n<p> [[473.22]] Hanover 18/28 Octobre 1698 </p>\n<p> [[473.23]] Nous avions peur tout de bon, Madame l'Electrice et moy que vous n'eussiés este enlevé\n[[473.24]] de nouveau, pour estre envoyé une seconde fois à l'inquisition. Vous avés grand sujet, Monsieur,\n[[473.25]] de menager maintenant vostre santé, et de vous donner du repos jusqu'à la revolution du\n[[474.1]] printemps; ou nous souhaitons que vous nous reveniés avec les hirondelles; ce retour valant\n[[474.2]] mieux pour à present que celui des ames. Je crois veritablement que les bons desseins que nous\n[[474.3]] ne pourrons point achever dans cette presente vie, ne periront pas pour cela, ny pour la nature,\n[[474.4]] ny même pour nous. Mais il vaut tousjours mieux d'achever icy le plus qu'on peut; pour gagner\n[[474.5]] le temps, de sorte que je seray bien aise de voir encor beaucoup de vos ouvrages. Il ne sera pas\n[[474.6]] mauvais de les faire par demandes et par réponses. Ainsi ceux qui vous parleront, vous\n[[474.7]] donneront occasion d'ecrire. Je vous souhaitte d'employer encore autant d'encre et de papier,\n[[474.8]] que Mad. Hübener n'en a employé jusqu'icy et je suis etc. </p>\n","number":"188.","title":"LEIBNIZ AN FRANCISCUS MERCURIUS VAN HELMONT","date":"Hannover 18./28. Oktober 1698. [185.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

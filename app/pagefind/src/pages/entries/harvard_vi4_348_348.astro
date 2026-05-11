@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_348","series":"Band VI 4 (1677 - 1690)","seq":348,"text":"[[1490.1]] <b>292.  De natura Mentis et Corporis [Sommer 1683 bis Winter 1685/86 (?)]</b>\n [[1490.2]] <tab/>[Sommer 1683 bis Winter 1685/86 (?)]\n[[1490.7]] <tit2><b>De natura Mentis et corporis</b></tit2> </p>\n<p> [[1490.8]] Illae solae animae sunt Mentes in quas cadit cognitio sui ipsius seu conscientia. Hae\n[[1490.9]] solae praemiorum poenarumque sunt capaces, et solae habendae sunt pro civibus ejus\n[[1490.10]] Reipublicae cujus Rex est Deus. Ex mentibus autem eae solae felices sunt, quibus datur\n[[1490.11]] cognitio Dei. Aliud est percipere, aliud percipere quod perceperis, seu meminisse. In\n[[1490.12]] brutis itaque perceptionem agnosco sive sensum eorum quae fiunt, agnosco et imaginationem,\n[[1490.13]] sensu cessante manentem, et ideo recursum priorum imaginum, si qua nova\n[[1490.14]] imago uni priorum similis occasionem praebeat; sed non agnosco in illis conscientiam, ut\n[[1490.15]] scilicet oblata quadam cogitatione percipiant eam vel aliam similem, jam sibi affuisse.\n[[1490.16]] Reflexio itaque seu memoria vel conscientia, mentium propria est. Reflexio proprie est\n[[1490.17]] memoria cogitationis proxime praecedentis. In sui ipsius perceptione consistit imago\n[[1490.18]] divina nobis indita. Non puto ab ullo bruto exerceri illam vim quam in me experior cum\n[[1490.19]] volo ut cogitem me nunc cogitare, et hoc ipsum admirer, et continue in me replicem,\n[[1490.20]] nullo signi alicujus usu interveniente sed intima quadam perceptione, ubi vim simul nobis\n[[1490.21]] facimus imagines ab ea cogitatione avocantes amoliendo. <Fn><i>Am Rande</i>: Cogitatio videtur esse circa aliquam distinctam propositionem, secus perceptio.</Fn> Etiamsi fingeretur dissolutis\n[[1491.1]] membris Mentem nostram aliquandiu nova valde distincta non percipere, sed dormire, vel\n[[1491.2]] etiam nova percipere quae cum prioribus nullam habeant connexionem, ita ut illis\n[[1491.3]] durantibus non recordetur prioris status; tamen si quando post multos annorum milliones\n[[1491.4]] (nam intervallum finitum in aeternitate pro nullo est, et mille annis aut uno dormiisse\n[[1491.5]] perinde est) rediret status congruus ei qui aliquando fuit (proxime praecedenti tamen\n[[1491.6]] quippe diverso memoria non connexus), et praecedentium memoria rediret. Nullane in\n[[1491.7]] bruto cognitio distincta? </p>\n<p> [[1491.8]] Si fingamus animal aliquod instar papilionis ex verme factum, et antequam talis\n[[1491.9]] fieret vermis rursus ex alio forte adhuc minore factum, et ita porro retro, usque ad initium\n[[1491.10]] mundi, et ubi extinguitur rursus in vermiculum, vel aliquod animalculum insensibile\n[[1491.11]] redigi (neque enim de his vermibus loquor, qui per accidens ex membris oriuntur), anima\n[[1491.12]] semper in omnibus eadem manente, non erit quidem sola Metempsychosis in hoc animali,\n[[1491.13]] sed etiam Metasomatosis seu transformatio eritque non tantum eadem semper anima, sed\n[[1491.14]] et eadem semper substantia corporea. Poterit autem hoc animal post innumerabiles\n[[1491.15]] transformationes aliquando rursus redire ad prioris continuationem atque exaltationem\n[[1491.16]] seu perfectionem. Et credibile est ita esse ordinata haec omnia ut pulchrius id fieri non\n[[1491.17]] possit. In transformationibus quodammodo membra exurgentia jam affuerunt. Quaestio:\n[[1491.18]] an omnia animalia ejusdem speciei extinctione in eandem speciem transformentur. Sane\n[[1491.19]] ex erucis combustis non fierent papiliones. </p>\n","number":"292.","title":"De natura Mentis et Corporis","date":"[Sommer 1683 bis Winter 1685/86 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

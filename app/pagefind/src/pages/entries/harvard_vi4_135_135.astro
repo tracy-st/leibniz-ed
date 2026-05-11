@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_135","series":"Band VI 4 (1677 - 1690)","seq":135,"text":"[[442.1]] <b>110.  Synopsis libri cui titulus erit: Initia et Specimina Scientiae novae Generalis pro Instauratione et Augmentis Scientiarum ad publicam felicitatem [Frühjahr 1682 (?)]</b>\n [[442.2]] <tab/>[Frühjahr 1682 (?)]\n [[442.8]] <b>Synopsis libri cui titulus erit:\n [[442.9]] Initia et Specimina Scientiae novae Generalis</i>\n [[442.10]] <b>pro Instauratione et Augmentis Scientiarum\n [[442.11]] ad publicam felicitatem</i> </p>\n<p> [[442.12]] Introductione praemissa, dicendum erit qua ratione inciderim in artis tam mirabilis\n[[442.13]] fundamentum. Dicendum erit quoque de statu praesenti eruditionis. </p>\n<p> [[442.14]] Ut appareat discrimen meorum principiorum a Cartesianis operae pretium erit praemittere\n[[442.15]] excerpta ex objectionibus virorum doctorum ad Cartesii <i>Meditationes</i>, Cartesiique\n[[442.16]] <i>responsionibus</i>, quibus subjiciam meas replicationes, et quomodo a me suppleantur quae\n[[442.17]] viri illi egregii a Cartesio frustra desiderabant. </p>\n<p> [[442.18]] Subjiciam et Analysin judiciorum humanorum vulgarem, seu principia quibus vulgo\n[[442.19]] hominum opiniones nituntur, non contemnenda quidem sed dialectica. Quae tamen non\n[[442.20]] adeo necesse esset revocare ad certiora, si nihil aliud quam jam nota confirmare propositum\n[[442.21]] esset, sed quia ab Analysi veritatis, seu correctione judiciorum nostrorum pendet\n[[442.22]] totum arcanum artis inveniendi, quo humana scientia in immensum produci posset, ideo\n[[442.23]] utile est nos ad ultimam usque analysin progredi. </p>\n<p> [[442.24]] Sequuntur ipsa Elementa veritatis aeternae, ubi exponitur modus in omnibus dandi\n[[442.25]] demonstrationes plane rigorosas et Mathematicis pares, imo superiores, quia Mathematici\n[[443.1]] multa supponunt, quae hic poterunt demonstrari. Itaque profertur hic calculus quidam\n[[443.2]] novus et mirificus, qui in omnibus nostris ratiocinationibus locum habet, et qui non minus\n[[443.3]] accurate procedit, quam Arithmetica aut Algebra. Quo adhibito semper terminari possunt\n[[443.4]] controversiae quantum ex datis eas determinari possibile est, manu tantum ad calamum\n[[443.5]] admota; ut sufficiat duos disputantes omissis verborum concertationibus sibi invicem\n[[443.6]] dicere: <b>calculemus</b>; ita enim perinde ac si duo Arithmetici disputarent de quodam\n[[443.7]] calculi errore, ipsa praescripta methodus etiam ignorantibus vel invitis exitum dabit.\n[[443.8]] Ostenditur etiam modus disputandi in forma, conveniens tractationi rerum, a taedio\n[[443.9]] Scholasticorum syllogismorum vacuus, et supra distinctiones illas positus, quibus in\n[[443.10]] scholis alter alterum eludit. </p>\n<p> [[443.11]] Specimina subjicienda erunt novae artis, nempe mea Mathesis generalis. Nova\n[[443.12]] Mechanica fundamenta hactenus incognita. Demonstrationes physicae generalis, et tentamenta\n[[443.13]] quaedam physicae specialis cum Medicina provisionali. Elementa Scientiae moralis\n[[443.14]] et civilis, jurisque naturae et utilitatis publicae. Ubi et de subditis onerum magna parte\n[[443.15]] levandis, majore principum utilitate, et scientia militari. Sequitur Metaphysica et Theologia\n[[443.16]] naturalis; denique fundamenta rei literariae seu humaniorum literarum et hinc\n[[443.17]] ductae demonstrationes Historicae pro Theologia revelata. Subjicitur paraenesis ad viros\n[[443.18]] dignitate doctrinaque egregios de humana felicitate exiguo tempore (si velimus modo) in\n[[443.19]] immensum augenda. </p>\n","number":"110.","title":"Synopsis libri cui titulus erit: Initia et Specimina Scientiae novae Generalis pro Instauratione et Augmentis Scientiarum ad publicam felicitatem","date":"[Frühjahr 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

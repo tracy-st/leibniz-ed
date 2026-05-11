@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_174","series":"Band VI 4 (1677 - 1690)","seq":174,"text":"[[592.10]] <b>142.  De Analysi veritatis et judiciorum humanorum [Ende 1684 bis Anfang 1685 (?)]</b>\n [[592.11]] <tab/>[Ende 1684 bis Anfang 1685 (?)]\n[[593.1]] <tit2><b>De Analysi veritatis et judiciorum humanorum</b> </tit2> </p>\n<p> [[593.2]] Apud Theologos libri habentur de Analysi Fidei, qualis extat Gregorii de Valentia\n[[593.3]] Societatis Jesu, et Henrici Holdeni Angli Theologi Parisini. Mirandum est itaque apud\n[[593.4]] philosophos nihil haberi de Analysi veritatis, nam libri <i>Analyticorum</i> Aristotelis sive\n[[593.5]] <i>posteriores</i> sive <i>priores</i> nihil minus quam analysin sive principia ultima humanorum\n[[593.6]] judiciorum continent. Scholastici quoque nonnulli de Primo Cognito potius disputare\n[[593.7]] more suo, quam quae sint prima cognita, et quomodo ex illis aliae cognitiones deriventur\n[[593.8]] monstrare voluere, nam si hoc praestitissent, dedissent nobis philosophiae Elementa\n[[593.9]] accurata, et ad Mathematicum morem exacta. Et viri ingeniosi qui scripsere nostro\n[[593.10]] tempore de inquirenda veritate, multa quidem elegantia et utilia exoterico quodam tractandi\n[[593.11]] modo, disserunt de humanis affectibus et praejudiciis infantiae, sed cum id agitur ut\n[[593.12]] certa judicandi principia substituantur, haerent ipsi et nos tandem revocant ad regulam\n[[593.13]] illam decantatam, quod iis demum fidendum sit, quae clare et distincte percipimus. </p>\n<p> [[593.14]] Verum non magnum usum habet ea regula quamdiu non habetur modus dijudicandi,\n[[593.15]] quid clarum et distinctum sit. Quod non satis novisse video illos ipsos qui regulam hanc\n[[593.16]] maxime celebrant; nam quaedam distinctissime sibi percipere visa sunt, quae falsa esse\n[[593.17]] compertum habemus et quae ipsi omni conatu adhibito cum demonstrare non possent,\n[[593.18]] coacti sunt monere, ut si alii eadem mentis prae oculis videre vellent, quae ipsi, eadem\n[[593.19]] quae ipsi meditarentur diu. Callide profecto, nam certum est consuetudine cogitandi\n[[593.20]] quaedam nobis ita familiaria fieri, ut depravato vel mutato naturali judicio tandem nobis\n[[593.21]] clara videantur. Idque inprimis succedit in his, quae, dictione nitida et ad plausum facta,\n[[593.22]] non sine quadam simplicitatis et evidentiae fucata artificiose specie proponuntur a celebri\n[[593.23]] autore. Et cum denique ad experientiam internam idearum provocant hi scriptores, eo\n[[593.24]] ipso et objectiones declinare et onere probandi se eximere conantur. Alii iisdem principiis\n[[594.1]] insistentes, sed apertiores, professi sunt, id clarum distinctumque censeri debere quod\n[[594.2]] sine interiore quadam repugnantia et conscientiae quasi morsu negari non potest. Verum\n[[594.3]] haec nota uti non contemnenda est, ita tamen dialectica tantum censeri debet. Sunt qui\n[[594.4]] omnia resolvunt in autoritatem. Ultima enim principia ajunt a nobis admitti, quia a\n[[594.5]] nemine revocantur in dubium. Ego quidem fateor in plerisque vulgo judiciis id esse\n[[594.6]] verum, contendo tamen altiora et certiora adesse. </p>\n","number":"142.","title":"De Analysi veritatis et judiciorum humanorum","date":"[Ende 1684 bis Anfang 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

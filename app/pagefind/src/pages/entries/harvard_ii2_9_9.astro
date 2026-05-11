@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_9","series":"Band II 2 (1686 - 1694)","seq":9,"text":"<p> [[38.19]] <b>9. LANDGRAF ERNST VON HESSEN-RHEINFELS AN LEIBNIZ</p>\n<p> [[38.20]] Rheinfels, 21./31. Mai 1686. [8.10.]</b></p>\n<p> [[39.1]] Rheinfels ce 21/31 May 1686. </p>\n<p> [[39.2]] Monsieur Leibnitz </p>\n<p> [[39.3]] Vous voyez par les cy joinctes que le bon Mons. Arnauld prend quasi à tache de prendre\n[[39.4]] tout le contrepied de ce que le P. Hazard Jesuite ne veult pas faire, et que je vouldrois qu'il fist\n[[39.5]] et que Mes. à Wolfenbuttel ne font pas pour la restitution une fois et par vos mains de mon\n[[39.6]] livre, assavoir de la seconde partie de <i>l'Apologie pour les Catholiques</i>, dont je ne vois ny\n[[39.7]] entends plus rien de tout. Au reste aultant auprès des simples et mal informés Catholiques on\n[[39.8]] espere, souhaitte, [divulgue] et desire, la Conversion de vostre maistre et de sa famille, comme\n[[39.9]] on a de mesme apprehendé auprés des Protestants celle de l'Electeur de Saxe, bien que tant\n[[39.10]] auprés de l'une que de l'autre personne il n'y aye aulcune apparence de cela, au moins point de\n[[39.11]] motifs surnaturels pour les y porter jusques à present. Car pour se faire bon et veritable\n[[39.12]] Catholique, il faut bien aultre chose que de veues d'ambition et avarice temporel et le faste et\n[[39.13]] bombance mondaine. D'icy en trois sepmaines nous verrons où l'armée chrestienne en Hongrie\n[[39.14]] tournera sa face et si on vouldra pour une aultre fois esprouver le siege de Bude, car de\n[[39.15]] s'esloigner du Danube c'est se vouloir perdre. Nous esperons de nous conserver en paix ceste\n[[39.16]] année de ce coste du Rhyn. Je vous suis ce que vous sçavez E. </p>\n<p> [[39.17]] Mons. le duc Anthon Ulrich ne m'escrit plus je n'espere pas neantmoins que je sois en sa\n[[39.18]] disgrace, mais qu'il se trouve tres occupé en d'aultres affaires qui luy importent plus que non\n[[39.19]] ma correspondance.\n [[40.1]] 10. LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS\n<p> [[40.2]] [Hannover, Juni 1686.] [9.11.]</b></p>\n<p> [[40.23]] Je supplie V.A. de demander à M. Arnauld comme d'elle même, s'il croit veritablement\n[[40.24]] qu'il y a un si grand mal de dire que chaque chose (soit espece, soit individu ou personne) a une\n[[40.25]] certaine notion parfaite, qui comprend tout ce qu'on en peut enoncer veritablement; selon la\n[[40.26]] quelle notion Dieu (qui conçoit tout en perfection) conçoit la dite chose. Et si M. A. croit de\n[[40.27]] bonne foy qu'un homme qui seroit dans ce sentiment ne pourroit estre souffert dans l'Eglise\n[[40.28]] Catholique, quand même il desavoueroit sincerement la consequence pretendue de la fatalité. Et\n[[40.29]] V.A. pourra demander, comment cela s'accorde avec ce que M. A. avoit écrit autresfois, qu'on\n[[40.30]] ne feroit point de peine à un homme dans l'Eglise pour ce[s] sortes d'opinions; et si ce n'est pas\n[[40.31]] rebuter les gens par une rigueur inutile et hors de saison, que de condamner si aisement toute\n[[40.32]] sorte de sentimens qui n'ont rien de commun avec la foy. </p>\n<p> [[41.1]] Peut on nier que chaque chose (soit genre, espece, ou individu) a une notion accomplie,\n[[41.2]] selon la quelle Dieu la conçoit, qui conçoit tout parfaitement, c'est à dire une notion qui\n[[41.3]] enferme ou comprend tout ce qu'on peut dire de la chose: et peut on nier que Dieu peut former\n[[41.4]] une telle notion individuelle d'Adam ou d'Alexandre, qui comprend tous les attributs, ­affections,\n[[41.5]] accidens, et generalement tous les predicats de ce sujet. Enfin si S. Thomas a pû soutenir, que\n[[41.6]] toute intelligence separée diffère specifiquement de toute autre, quel mal y aurat-il d'en dire\n[[41.7]] autant de toute personne, et de concevoir les individus comme les dernieres especes, pourveu\n[[41.8]] que l'espece soit prise non pas physiquement, mais metaphysiquement ou mathematiquement.\n[[41.9]] Car dans la physique, quand une chose engendre son semblable, on dit qu'ils sont d'une même\n[[41.10]] espece, mais dans la metaphysique ou dans la geometrie <i>specie differre dicere possumus\n[[41.11]] quaecunque differentiam habent in notione in se explicabili consistentem, ut duae Ellipses,\n[[41.12]] quarum una habet duos axes majorem et minorem in ratione dupla, altera in tripla. At vero\n[[41.13]] duae Ellipses, quae non ratione axium, adeoque nullo discrimine in se explicabili, sed sola\n[[41.14]] magnitudine seu comparatione differunt, specificam differentiam non habent. Sciendum est\n[[41.15]] tamen Entia completa sola magnitudine differre non posse.</i> </p>\n","number":"9.","title":"LANDGRAF ERNST VON HESSEN-RHEINFELS AN LEIBNIZ","date":"Rheinfels, 21./31. Mai 1686. [8.10.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

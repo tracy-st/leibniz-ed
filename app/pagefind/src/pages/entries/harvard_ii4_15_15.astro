@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_15","series":"Band II 4 (1701 - 1707)","seq":15,"text":"<p> [[47.1]] <b>15. LEIBNIZ AN PIERRE-DANIEL HUET</p>\n<p> [[47.2]] Hannover, 27. Februar 1702</b></p>\n<p> [[47.26]] Monseigneur Hanover 27. Fevrier 1702 </p>\n<p> [[47.27]] J'espere que vous ne trouverés point mauvais que je prends la liberté de vous écrire pour\n[[47.28]] donner à Monsieur Burnet gentilhomme écossois, l'occasion qu'il souhaitte de vous faire la\n[[47.29]] reverence. Il est parent de deux auteurs illustres du même nom, qui sont M. l'Evêque de\n[[47.30]] Salisbury, et M. Thomas Burnet auteur du livre intitulé: <i>Theoria Telluris sacra</i>. Et il a luy\n[[47.31]] même du savoir, outre qu'il a déja voyagé en Allemagne et en Italie. Il vous pourra dire bien\n[[48.1]] des choses qui regardent les lettres et les savans d'Angleterre, si vous estes curieux de vous en\n[[48.2]] informer. Il comptera pour beaucoup l'honneur de vostre connoissance et protection. Pour moy je\n[[48.3]] vous auray obligation en mon propre et privé nom, des bontés que vous pourrés luy temoigner. </p>\n<p> [[48.4]] Pour <Fn><i>In L^#'1 am Kopf von Bl. 16 v^#'o von Leibniz' Hand</i>: A Monsieur Huet Eveque d'Avranche le meme commencement, mais vers la fin, cecy</Fn> adjouter un mot touchant les <i>nouvelles de la Republique des lettres</i>, je vous diray\n[[48.5]] que M. Begerus, que vous connoissés (je crois) par les ouvrages qu'il a faits sur les medailles\n[[48.6]] de l'Electeur palatin, et puis sur celles du roy de prusse, s'est proposé maintenant de publier\n[[48.7]] quelques anciens auteurs <i>in</i> <i>usum principis Regii Brandeburgici</i>, avec des remarques qui seront\n[[48.8]] enrichies de temps en temps de figures prises des medailles et autres antiquités. Deux Ministres\n[[48.9]] François qui sont à Berlin travaillent à une version françoise du nouveau Testament, et ils ont\n[[48.10]] coustume d'envoyer leur cahiers à M. de Spanhem pour estre revus. L'ouvrage sera bientost\n[[48.11]] achevé. </p>\n<p> [[48.12]] Une des meilleures nouvelles que M. Burnet me pourra apprendre de Paris, sera celle de\n[[48.13]] vostre bonne santé, et les particularités de vos desseins. Car je suppose que vous continués dans\n[[48.14]] celuy d'instruire le public, et de luy faire part de vos tresors. Quelque estime qu'il accorde à\n[[48.15]] vostre eminent merite, il ne vous sauroit honnorer plus que fait </p>\n<p> [[48.16]] Monseigneur vostre treshumble et tres obeissant serviteur Leibniz </p>\n","number":"15.","title":"LEIBNIZ AN PIERRE-DANIEL HUET","date":"Hannover, 27. Februar 1702"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

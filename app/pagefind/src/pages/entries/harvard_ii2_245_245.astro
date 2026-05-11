@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_245","series":"Band II 2 (1686 - 1694)","seq":245,"text":"<p> [[762.1]] <b>248. JOHANN HEINRICH PAPE AN LEIBNIZ</p>\n<p> [[762.2]] Lüneburg, 13. (23.) Dezember 1693. [112.251.]</b></p>\n<p> [[762.7]] Vir Excellentissime, Patrone plurimum suspiciende ac devenerande </p>\n<p> [[762.8]] Accepi <Fn><i>Am Kopf der Seite</i>: Pape Ictus</Fn> datas nuper ad me literas, eo nomine gratissimas, quod non obscurae testes sint\n[[762.9]] durantis erga me favoris, quo si propius et coram frui mihi licuisset, uti quidem annis abhinc\n[[762.10]] aliquot in votis mihi erat, non ambigo sane quin praeter alia commoda solidiorum quoque juris\n[[762.11]] cognitionem inde reportassem. Verum huic consilio meo obstiterunt aliqui, non una at vana spe\n[[762.12]] memet lactantes, et inprimis parentis mei obitus, qui haereditatem mihi obtrusit et maxime\n[[762.13]] damnosam et pluribus litigiis obnoxiam, quibus nulla ratione ita expediri potui, quin Charybdin\n[[762.14]] vitare cupiens, in Scyllam incidissem. Interea non omnem quidem solidioris Jurisprudentiae\n[[762.15]] amorem penitus exui, sed saepe optavi, ut talia extarent juris naturalis elementa, quae Tuis in\n[[762.16]] <i>Methodo</i> subindicatis principiis congruant, et unde colligere liceat, quidnam eorum quae in\n[[762.17]] libris juris reperiuntur, naturale sit, quid positivum, et porro inter naturalia quid ex mero jure,\n[[762.18]] quidve ex aequitate descendat: His enim potissimum, et a Te quidem solo, illustrari Jurisprudentiam\n[[762.19]] posse puto: At ego curis domesticis divexatus, ineptis meis quaestiunculis graviora Tua\n[[762.20]] interpellare negotia ausus non fui. Gaudebo igitur, si in praefatione <i>Codicis</i> Tuis <i>juris gentium</i>\n[[762.21]] (quem librum pro loci hujus, nullo bibliopolio instructi, ratione nondum mihi visum hactenus,\n[[762.22]] curabo tamen aliunde afferri ut obtineam) jus naturae plenius explicatum deprehendero.\n[[762.23]] Foemina illa Galla, cui nomen Madame la Vallée, a populari suo quaesita, non amplius heic\n[[762.24]] commoratur, sed circa proximi veris exitum aestatisque auspicium hinc abiit, in Angliam, ut\n[[762.25]] putant, profecta. Caeterum sciat Excellentia Tua, me non intermisisse inquirere apud eos qui\n[[762.26]] officinae laterariae dant operam, an plura in fodinis suis reperiantur singularium rerum vel\n[[763.1]] antiquitatum genera, quam quae antehac transmisi, nihil vero oblatum fuisse praeter lignum\n[[763.2]] tale, cujus frustum aliquod sero satis nunc exhibeo, cum vix dignum judicaverim quod sine\n[[763.3]] comite mitteretur. Lapis vero ille pellucidus, quem addidi, et nostrates vocant <i>Marienglaß</i>, in\n[[763.4]] summo calcarii montis cacumine, quo fere nemini patet aditus, nascitur, uti non ita pridem mihi\n[[763.5]] innotuit. An sit illud ipsum, quod alioquin apud eos qui in calcis fodina laborant, Tuo jussu, at\n[[763.6]] frustra, quaesivi, nescio, Tuamque Excellentiam quam optime diutissimeque valere jubeo.\n[[763.7]] Dabam Lüneburgi d. 13. Decembris anno 1693. </p>\n<p> [[763.8]] Excellentiae Tuae Cultor devotissimus Johannes Henricus Pape. </p>\n<p> [[763.9]] Viro Excellentissimo Dn. Godefrido Guilielmo Leibnitio Consiliario Electorali Aulico\n[[763.10]] Hanoverae </p>\n","number":"248.","title":"JOHANN HEINRICH PAPE AN LEIBNIZ","date":"Lüneburg, 13. (23.) Dezember 1693. [112.251.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

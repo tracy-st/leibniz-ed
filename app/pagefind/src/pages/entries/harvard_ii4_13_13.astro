@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_13","series":"Band II 4 (1701 - 1707)","seq":13,"text":"<p> [[42.5]] <b>13. LEIBNIZ AN PIERRE BAYLE</p>\n<p> [[42.6]] Berlin, 27. Dezember 1701. [10.25.] </b></p>\n<p> [[42.18]] Extrait de ma reponse Berlin 27 Xbr. 1701 </p>\n<p> [[42.19]] Si je ne m'estois imaginé que la communication de vos nouvelles considerations estoit\n[[42.20]] sans difficulté, je n'aurois eu garde de vous en importuner. On pourra se servir de l'expedient\n[[42.21]] dont je me suis servi deja avec permission de M. de Bauval. Mais mon principal but estant\n[[42.22]] d'approfondir les choses, et de decouvrir la verité, je suis bien faché d'avoir esté privé si long\n[[42.23]] temps de vos pensées, qui m'auroient servi beaucoup sans doute, et de n'en pouvoir estre\n[[42.24]] instruit que par la voye des libraires. Car en connoissant le prix, et estant convaincu de vostre\n[[42.25]] grande penetration, il me tardera de voir encor un autre ouvrage de vostre part, si je ne pourray\n[[42.26]] apprendre que par là ce que vous penserés sur ce que je pourray faire mettre dans l'<i>Histoire des\n[[42.27]] ouvrages des savans</i>. Il est vray que je souhaitte assez sans cela que vous enrichiés le public de\n[[42.28]] vos productions, mais je doute que je sois tousjours homme à les attendre. Je me souviens\n[[43.1]] d'avoir remarqué qu'en parlant de Payva Andradius vous le supposés peu connu, et croyés\n[[43.2]] qu'on ne le cite gueres que sur le rapport de Kemnitius. Je vous avoue Monsieur, qu'il n'est que\n[[43.3]] peu connu aujourdhuy; mais il l'estoit beaucoup du siecle passé. Ses ouvrages publiés en Italie,\n[[43.4]] ayant esté reimprimés à Cologne et nos controversistes appelloient Andradiens ceux qui le\n[[43.5]] suivoient. Pour moy, j'ay eu son livre à la main, lorsque je le citois en ecrivant à feu\n[[43.6]] M. Pelisson, car il se trouve chez nous. Ce que je dis pour n'estre pas enveloppé dans\n[[43.7]] l'accusation generale. </p>\n<p> [[43.8]] J'ay esté icy quelques mois durant par ordre de la Reine de Prusse et avec permission de\n[[43.9]] Monsg^#'r l'Electeur son frere, le Roy de Prusse ayant voulu aussi que je contribue à mettre un peu\n[[43.10]] en ordre ce qui regarde la nouvelle societé des sciences que sa Mté vient de fonder, faisant\n[[43.11]] bastir un observatoire à Berlin, et faisant regler quelques autres choses necessaires pour le but\n[[43.12]] qu'on se propose. Je ne neglige pas entierement le service de l'Electeur cependant; mais je me\n[[43.13]] dispose pourtant à retourner bientost chez moy. La Reine m'a dit de vous avoir vû en personne,\n[[43.14]] et qu'elle eût souhaité de vous pouvoir entretenir plus long temps. Cependant elle vous connoist\n[[43.15]] bien mieux par vos ouvrages comme aussi Mad. l'Electrice sa Mere. </p>\n","number":"13.","title":"LEIBNIZ AN PIERRE BAYLE","date":"Berlin, 27. Dezember 1701. [10.25.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

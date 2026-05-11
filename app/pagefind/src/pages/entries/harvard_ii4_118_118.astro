@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_118","series":"Band II 4 (1701 - 1707)","seq":118,"text":"<p> [[381.1]] <b>118. LEIBNIZ AN JACQUES BERNARD</p>\n<p> [[381.2]] [Hannover, 19.] Januar 1706. [133.] </b></p>\n<p> [[382.13]] Monsieur </p>\n<p> [[382.14]] J'ay <Fn><i>Am Kopf von L^#'1 von Leibniz' Hand</i>: janvier 1706 A Mons. Bernard à Leide nicht abgangen</Fn> receu une lettre de M. Burnet, gentilhomme Ecossois, qui me dit de vous avoir\n[[382.15]] monstré un papier que je luy avois donné sur les natures plastiques, que vous avés paru disposé\n[[382.16]] à le publier, Monsieur, et que vous avés bien voulu aussi donner conseil sur quelques bagatelles\n[[382.17]] que j'avois projettées pour les faire imprimer en Hollande. </p>\n<p> [[382.18]] Je vous suis obligé, Monsieur, de ces manieres officieuses; et je profiteray un de ces jours\n[[382.19]] de vostre bonne volonté en vous envoyant quelque reponse que j'ay faite au Pere <b>Lami</b> qui\n[[383.1]] avoit attaqué mon systeme de l'Harmonie preétablie dans son livre de la <i>Connoissance de soy\n[[383.2]] même</i>. Mais ce que j'avois fait sur les natures plastiques, a déja esté envoyé à Mons. Beauval-Banage. </p>\n<p> [[383.4]] Feu M. Lock m'avoit encouragé à faire des remarques sur son Ouvrage: mais sa mort\n[[383.5]] m'en a découragé. J'avois eu en veue principalement de donner quelque occasion au public de\n[[383.6]] profiter de nostre conference. </p>\n<p> [[383.7]] J'ay echangé plusieurs lettres sur la philosophie et sur d'autres matieres, avec des personnes\n[[383.8]] distinguées; dont il ne seroit peutestre pas mal de donner un recueil au public, commençant par\n[[383.9]] les Françoises. J'ay joint quelques fois des Memoires aux Lettres, quand les lettres auroient esté\n[[383.10]] trop prolixes en y mettant le tout. Si quelque libraire s'en charge un jour, je ne luy demanderay\n[[383.11]] qu'un bon nombre d'exemplaires, car il m'en faudra beaucoup pour quantité d'amis. </p>\n<p> [[383.12]] J'ay remarqué dernierement dans un de vos journaux des reflexions curieuses sur les\n[[383.13]] couleurs. Il seroit bon de les comparer avec les profondes recherches de M. Newton sur ce sujet. </p>\n<p> [[383.14]] Au reste je suis </p>\n<p> [[383.15]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[383.16]] En me voulant adresser quelque chose, il suffira de l'envoyer à M. de Bothmar Ministre\n[[383.17]] d'Estat et Envoyé extraordinaire de cette Cour qui est à la Haye. </p>\n","number":"118.","title":"LEIBNIZ AN JACQUES BERNARD","date":"[Hannover, 19.] Januar 1706. [133.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

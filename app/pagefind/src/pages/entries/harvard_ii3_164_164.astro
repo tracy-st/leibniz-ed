@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_164","series":"Band II 3 (1695 - 1700)","seq":164,"text":"<p> [[424.11]] <b>164. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[424.12]] Venedig, 6. April [1698]. [163.170.]</b></p>\n\n<p> [[425.1]] Ill^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[425.2]] Hò consegnato al Sig^#'r^#'e Zannovelli le mie lettere di contesa con il Sig^#'r^#'e Giorgi. Priego V. S.\n[[425.3]] Ill^#'m^#'a leggerle, e poi scrivermene il suo purgatissimo sentimento. Nella mia seconda lettera ove\n[[425.4]] rispondo alle repliche del Genovese vi sono corsi molti errori, i principali de quali ella trovarà\n[[425.5]] corretti nell'inclusa lettera. Scrivo all'infretta dovendomi subito mettere in viaggio per Padova.\n[[425.6]] Col venturo Ordinario le scriverò più distintamente. Fra tanto con tutto il cuore la riverisco, e le\n[[425.7]] raccomando l'interesse dell'Amico che brama una buona occasione per la sua quiete. Mi\n[[425.8]] prenderò l'ardire di consegnare nell'altro mese una mia lettera al nome immortale di V. S. Ill^#'m^#'a\n[[425.9]] e divotamente riverendola mi resto </p>\n<p> [[425.10]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Obg^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[425.11]] Venetia 6 Aprile </p>\n","number":"164.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 6. April [1698]. [163.170.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

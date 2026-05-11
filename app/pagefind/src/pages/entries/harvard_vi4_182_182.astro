@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_182","series":"Band VI 4 (1677 - 1690)","seq":182,"text":"[[640.1]] <b>150.  Facilius intelligere Deum, comprehendere corpus [Mitte 1685 bis Ende 1688 (?)]</b>\n [[640.2]] <tab/>[Mitte 1685 bis Ende 1688 (?)] </p>\n<p> [[640.11]] Vulgo dici solet, <i>quid Tu, divina et spiritualia</i> <i>a Te explicari posse</i> <i>speras, qui nec\n[[640.12]] muscae aut minimi insecti structuram nosti</i>. Haec ab hominibus proficiscuntur in vera\n[[640.13]] Notionum Analysi non versatis. Nihil Deo, nihil mente clarius est, quia nihil simplicius,\n[[640.14]] quin imo hae Substantiae inter prima cognita a sapientibus habentur, in quibus ipsa\n[[640.15]] consistit Lux mentium, et fons veritatum. Sed composita explicatu difficilia sunt, praeser-\n[[640.16]] tim cum magnus est partium numerus, eaeque sensibus non objiciuntur. Libro opus fuit\n[[640.17]] non uno ad naturam iridis explicandam; et tamen nihil est iridis formatio prae animalium\n[[640.18]] structura, quae vel in uno minimo insecto non uno immenso volumine tradenda esset, si\n[[640.19]] quis mortalium ejus intelligens daretur. Vere igitur etsi paradoxe dicetur, infinituplo\n[[640.20]] faciliorem esse Dei quam Muscae cognitionem, cognitionem inquam, non comprehensionem,\n[[640.21]] haec enim duo quantum differant, vel unus circulus ostenderit, quo vix\n[[640.22]] quicquam facilius intellectu, et tamen quam multa in eo sunt quae nondum mens humana\n[[640.23]] exhausit? Ita ergo emendabimus, vel potius supplebimus paradoxum, ut endoxum reddatur.\n[[640.24]] Infinituplo facilius est intelligere Deum quam corpus, sed contra infinituplo facilius\n[[640.25]] est comprehendere corpus quam Deum. Est enim foecundissima divina simplicitas,\n[[640.26]] ex qua composita cuncta nascuntur. </p>\n","number":"150.","title":"Facilius intelligere Deum, comprehendere corpus","date":"[Mitte 1685 bis Ende 1688 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

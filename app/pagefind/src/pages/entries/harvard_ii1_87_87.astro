@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_87","series":"Band II 1 (1663 - 1685)","seq":87,"text":"<p> [[235.1]] <b>73. HEINRICH OLDENBURG AN LEIBNIZ</p>\n<p> [[235.2]] London, 5. (15.) August 1671. [68.81.]</b></p>\n<p> [[235.16]] Ampliss^#'e Vir, </p>\n<p> [[235.17]] Ante paucos dies Studioso cuidam Francofurtensi, Hamburgum hinc velificaturo, literas\n[[235.18]] ad Te datas commisi, satis, ut puto, prolixas, quas Tibi rite traditas jam esse dubitare nolim.\n[[235.19]] Continent illae, quid philosophorum nostratium nonnulli de Hypothesi tua sentiant, quidque\n[[235.20]] Ego de eadem in <i>Transactionibus philosophicis</i> commemorandum duxerim. Supersunt nonnulla\n[[235.21]] in literis tuis novissime ad me datis, quibus responsum debeo, quod tamen cum paratum\n[[235.22]] necdum habeam, in aliud tempus differre cogor. Interim dimittere harum gerulum nobilissimum\n[[235.23]] haud potui, quin Te salutarem, simul et fidem facerem, me reliqua, quae de me exspectas,\n[[235.24]] quamprimum fieri id poterit, confecturum. Caeterum cum eximius Helmontius, affectu mihi\n[[235.25]] conjunctissimus, propediem ad nos sit reversurus, poteris, si placet, ipsi tuto committere,\n[[235.26]] quaecunque forsan mihi scribenda vel communicanda occurrerint. </p>\n<p> [[235.27]] In novissimo Nundinarum Francofurtensium Catalogo unus alterve liber juridicus occurrit,\n[[235.28]] quorum tituli singulare quid spondere videntur. Sunt illi quidem, Strykii <i>Tractatus de Jure\n[[236.1]] Sensuum</i>, et Gutherii <i>Tractatus de Jure Manium</i>. Siquidem libros hos lectu dignos judicaveris,\n[[236.2]] ut mihi hac occasione transmittas, rogo, operam daturo, ut quibusdam authoribus hinc tibi\n[[236.3]] mittendis beneficium rependam. Vale, et raptim ex nimia festinatione scribenti ignosce\n [[236.4]] Tibi Addictissimo </p>\n<p> [[236.5]] Londini d. 5. Augusti 1671. H. Oldenburg. </p>\n<p> [[236.6]] Clariss^#'o et Ampliss^#'o Viro, Dⁿ^#'o Gothofredo Guilielmo Leibnitio J.U.D. et Consiliario\n[[236.7]] Moguntino. Maintz. </p>\n","number":"73.","title":"HEINRICH OLDENBURG AN LEIBNIZ","date":"London, 5. (15.) August 1671. [68.81.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

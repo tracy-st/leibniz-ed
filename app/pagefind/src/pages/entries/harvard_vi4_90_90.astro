@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_90","series":"Band VI 4 (1677 - 1690)","seq":90,"text":"[[311.15]] <b>77₁.  Erster Ansatz ERSTER ANSATZ </p>\n<p> [[311.16]] Cum videam hodie passim praesertim inter juvenes Mathematicos in Geometria\n[[311.17]] interiore parum versatos invaluisse opinionem falsam, quodvis problema solvi posse per\n[[311.18]] Algebram qualis hodie circumfertur; succurendum eorum errori existimavi. Nihil enim\n[[311.19]] magis obest scientiarum progressui quam vel desperatio inveniendi nova, vel fiducia\n[[311.20]] inanis praestandi quidvis: quoniam ita neque per nos aliquid novi aggredimur et praeclara\n[[311.21]] aliorum inventa, quasi et in nostra potestate essent, temere spernimus. Itaque hoc loco\n[[311.22]] omnia repetendo ab initiis, ipsosque Mathematicorum problematum fontes recludendo,\n[[311.23]] ostendam, tum quam angusta res sit Algebra quae extat, tum quomodo Analysis Mathematica\n[[311.24]] in immensum proferri possit: ita autem scribam, ut lectorem meum necesse non sit\n[[312.1]] vel Algebrae vel Geometriae ullam habere peritiam. Mirabitur ipse introductum sese in\n[[312.2]] haec arcana cum adhuc in vestibulo consistere sibi videretur. Tantum ab eo desidero ut\n[[312.3]] intelligat Arithmeticam utcunque quemadmodum vulgo pueri solent. </p>\n","number":"77₁.","title":"Erster Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_251","series":"Band II 1 (1663 - 1685)","seq":251,"text":"<p> [[790.15]] <b>223. CHRISTIAN PHILIPP AN LEIBNIZ</p>\n<p> [[790.16]] Hamburg, 21. (31.) Januar 1680. [222.224.]</b></p>\n<p> [[790.24]] Hambourg ce 21^#'e Janvier, 1680. </p>\n<p> [[790.25]] [ ... ] Je vous suis extremement obligé de l'instruction solide que vous m'avez donné,\n[[790.26]] touchant ce qu'il y a de dangereux dans la Philosophie de M^#'r des Cartes: je suis asseuré, que\n[[790.27]] M^#'r Rabel, et ceux, qui sont de cette secte, y trouveront de quoy s'exercer. Vous avez veû sans\n[[790.28]] doute un livre intitulé: <i>Apologia pro Cartesio, autore le Grand.</i> M^#'r Rabel estime fort <i>La\n[[791.1]] Recherche de la verité</i>, dont je vous ay prié de me dire vostre sentiment. On m'a dit à Paris,\n[[791.2]] qu'il y a des Paralogismes dans la Geometrie de M^#'r des Cartes, et M^#'r Rabel ne le nie pas: c'est\n[[791.3]] l'argument le plus fort dont je me sers pour prouver, qu'il peut bien avoir aussy manqué en\n[[791.4]] d'autres choses. [ ... ] </p>\n","number":"223.","title":"CHRISTIAN PHILIPP AN LEIBNIZ","date":"Hamburg, 21. (31.) Januar 1680. [222.224.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

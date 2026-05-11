@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_208","series":"Band II 4 (1701 - 1707)","seq":208,"text":"<p> [[652.1]] <b>208. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[652.2]] Venedig, 12. August 1707. [206.211.] </b></p>\n<p> [[652.9]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[652.10]] Ieri <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> ricevei una lettera del nostro dottissimo Sig^#'r^#'e Herman, il quale mi dà parte del suo\n[[652.11]] felice arrivo in Padova, e m'assicura che sarà qui per domenica prossima ventura. Questo\n[[652.12]] inaspettato e tanto da me sospirato avviso m'ha riempito d'una eccessiva e vivissima consolatione,\n[[652.13]] ed è stato sommamente grato qui a gli Uomini dotti, e massimamente a questi Eccell^#'m^#'i\n[[652.14]] nostri Sig^#'r^#'i Riformatori che allo spesso mi domandavano se si fosse gia portato in Italia. Qui vi\n[[652.15]] sono molti Signori di conditione che m'han detto di volersi trasferire in Padova nell'inverno\n[[652.16]] venturo per apprendere dalla voce del Sig^#'r^#'e Herman la tanto celebre e prodigiosa Analisi, che\n[[652.17]] coll'ammiratione, ed applauso della Republica tutta letterata V. S. Ill^#'m^#'a c'hà insegnata, ed io me\n[[652.18]] ne saprò ben approfittare. Nell'istesso giorno che mi capitò una sì prospera nuova, mi fù dato\n[[652.19]] un accrescimento di ducati 200 dall'Ecc^#'m^#'o Senato, ed oggi ne riceverò la Ducale. L'Amico da\n[[652.20]] Vicenza mi scrive d'avere raccolta una gran quantità di semi di Mori bianchi d'ottima razza,\n[[652.21]] che si devono cavare dal frutto che benche sia stato molto tempo al Sole, non s'è pero ancora\n[[652.22]] ben seccato, che subito che sara secco secondo il bisogno, ne raccorrà il seme e me lo manderà,\n[[652.23]] e ricevutolo sarà da me consignato al Sig^#'r^#'e Zanovelli che lo farà ricapitare poi a V. S. Ill^#'m^#'a e\n[[652.24]] divotamente riverendola con tutta veneratione mi protesto </p>\n<p> [[652.25]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[652.26]] Venetia 12 Agosto 1707 </p>\n<p> [[652.27]] All'ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. <b>Hannover</b> </p>\n","number":"208.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 12. August 1707. [206.211.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

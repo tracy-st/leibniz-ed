@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_83","series":"Band VI 4 (1677 - 1690)","seq":83,"text":"[[297.1]] <b>71.  Conversio Logica [Frühjahr bis Sommer 1679 (?)]</b>\n [[297.2]] <tab/>[Frühjahr bis Sommer 1679 (?)]\n[[297.14]] <tit2><b>Conversio Logica</b> </tit2> </p>\n<p> [[297.15]] Ex hujusmodi schemate ostendi possunt omnes conversiones: </p>\n<p> [[297.16]] <tab/><picture>302</picture> <tab/>Non <tab/>Animal\n [[297.17]] <tab/><picture>302</picture> <tab/> Non homo\n [[297.18]] <tab/>Animal\n [[297.19]] <tab/> Homo (omnis) </p>\n<p> [[297.20]] Omnis homo est animal. </p>\n<p> [[297.21]] Ergo quicquid est non animal est non-homo. </p>\n<p> [[297.22]] Patet ex schemate. Nam quia omnis homo sub animali, ergo nullus utique sub\n[[297.23]] non-animali. </p>\n<p> [[297.24]] Quoddam animal est homo. </p>\n<p> [[297.25]] Ergo quidam homo est animal. </p>\n<p> [[297.26]] In schemate patet antecedens, quia homo est species animalis, id est quoddam\n[[297.27]] animal. Patet et consequens, quia utique de homine <i>animal</i> praedicatur. </p>\n<p> [[298.1]] Quoddam animal non est homo. </p>\n<p> [[298.2]] Ergo quidam homo non est animal. </p>\n<p> [[298.3]] Non sequitur. </p>\n<p> [[298.4]] <i>Omnis</i> id est <i>nullus non</i>. </p>\n<p> [[298.5]] <i>Omne A est B</i>, id est, <i>omnia exempla ipsius A continentur sub exemplis ipsius B</i>. Jam\n[[298.6]] eadem exempla non possunt simul sub exemplis <i>B</i> et sub exemplis ipsius <i>non-B</i> contineri.\n[[298.7]] Ergo, omnia exempla ipsius <i>A</i> non continentur sub exemplis ipsius <i>non-B</i>. Syllogismus\n[[298.8]] itaque erit talis:\n [[298.9]] Omne <i>B</i> non est <i>non B</i>.\n [[298.10]] Omne <tab/> <picture>202</picture>\n [[298.11]] <tab/> <i>A</i> est <i>B</i>.\n [[298.12]] vel quoddam\n [[298.13]] Ergo Omne <tab/> <picture>202</picture>\n [[298.14]] <tab/> <i>A</i> non est <i>non-B</i>.\n [[298.15]] vel quoddam\n [[298.16]] Pro <i>non-B</i> scribamus <i>C</i>, et fiet propositio:\n [[298.17]] Omne <i>A</i> non est <i>C</i>.\n [[298.18]] Ergo omne <i>C</i> non est <i>A</i>, id est\n [[298.19]] Ergo omne <i>non-B</i> non est <i>A</i>, seu:\n [[298.20]] nullum <i>non-B</i> est <i>A</i>, seu\n [[298.21]] quicquid non est <i>B</i> [non] est <i>A</i>\n [[298.22]] (: nota aliud dicere: <i>nullum-non B</i> aliud <i>nullum non-B</i> :). </p>\n<p> [[298.23]] Hinc patet si datur propositionis universalis negativae conversio simpliciter dari\n[[298.24]] universalis affirmativae conversionem per contrapositionem, et contra. </p>\n<p> [[298.25]] Jam <i>Nullum A est C. Ergo nullum C est A</i> demonstratur hoc modo: Si falsum est\n[[298.26]] nullum <i>C</i> esse <i>A</i>, ergo aliquod <i>C</i> est <i>A</i>. Ergo aliquod <i>A</i> est <i>C</i>, cum tamen assumserimus\n[[298.27]] nullum <i>A</i> esse <i>C</i>. Vel sic: Nullum <i>A</i> est <i>C</i>. Ergo non, quoddam <i>A</i> est <i>C</i>. Ergo non,\n[[298.28]] quoddam <i>C</i> est <i>A</i>. Ergo nullum <i>C</i> est <i>A</i>. Probanda ergo sola conversio simplex particularis\n[[298.29]] affirmativae. <i>Quoddam A est C. Ergo quoddam C est A</i>. Quod per se patet, idem enim est\n[[298.30]] ac si diceremus dari exemplum commune ipsius <i>C</i> et ipsius <i>A</i>. </p>\n<p> [[298.31]] Per propositiones particulares cuncta possunt absolvi:\n [[298.32]] <i>Omne A est B</i>, id est <i>non, quoddam A non est B</i>, seu falsa propositio ista. Similiter\n [[299.1]] <i>Nullum A est D</i>, id est <i>non, quoddam A est D</i>.\n [[299.2]] Hinc assumto [<i>Quoddam</i>] <i>A est D. Ergo</i> [<i>quoddam</i>] <i>D est A</i> cuncta demonstrantur. </p>\n<p> [[299.3]] Negatio particularis negativae est affirmatio universalitatis. Hinc ex meris particularibus\n[[299.4]] concluditur sic: <i>quoddam A non est B</i> est falsa, <i>quoddam A est A</i> est vera, Ergo\n[[299.5]] <i>quoddam A est B</i> est vera. </p>\n","number":"71.","title":"Conversio Logica","date":"[Frühjahr bis Sommer 1679 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_215","series":"Band II 3 (1695 - 1700)","seq":215,"text":"<p> [[577.15]] <b>215. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[577.16]] Helmstedt, 29. Juni (9. Juli) 1699. [211.216.]</b></p>\n\n<p> [[578.1]] Illustris Domine, </p>\n<p> [[578.2]] Inter beneficia, queis Deus me, indignum hominem, mactavit, primo loco annumeranda\n[[578.3]] est cura mearum rerum, quam suscepisti, et patrocinium, quo me reputasti exornandum. Numini\n[[578.4]] id adscribo, quod excelsam animam Tuam literarum mearum quodam sensu voluit affectam.\n[[578.5]] Mihi autem duo incumbunt, nimirum ut redhostimenti loco Tibi me ipsum tradam, et deinde\n[[578.6]] summa ope efficere anniter, quemadmodum clientis Tui singulae actiones in Illustris Nominis\n[[578.7]] Tui gloriam cedant. Facile id fiet, si nunc exorari Te permittas. </p>\n<p> [[578.8]] Professio Philosophiae Extraordinaria vacat. Affuturos propediem, Tibi nec visos, nec\n[[578.9]] cognitos, qui eam expetituri sint, certum est. Crediderunt autem nonnulli Professores, studiis\n[[578.10]] meis consultum iri, si eam Tuo beneficio consequar. Ego vero etsi meo me modulo metiri\n[[578.11]] didicerim, id tamen video, ad munus Presbyteri nonnihil ineptum me fore; praecipue quod in\n[[578.12]] Ecclesiastico munere, ut est hodie comparatum, multa occurrant, quae mihi magnopere displicent.\n[[578.13]] Praeterea Philosophiae cognitio, quantulacunque illa sit, magno mihi labore sudoreque\n[[578.14]] constat. Accedit juxta cum multis aliis hoc, quod studiosi frequentes me audiant philosophicas\n[[578.15]] praeceptiones exponentem. Existimavi itaque negotium omne in Tuam perferendum esse notitiam,\n[[578.16]] ut de me, quod velis, statuas. Scio, Illustris Domine, nunquam Te gratia Tua quenquam\n[[578.17]] complexum, qui majori devotione Tibi placere velit, atque ego. Scio etiam, solum Te quasi\n[[578.18]] manibus tenere professionem, quam pro lubitu conferre possis in eum, qui in spem praeclarae\n[[578.19]] literaturae videatur adolescere. Exaudi igitur vota clientis, ut tandem industriae meae quandam\n[[578.20]] mercedem feram. Studia consectabor, quae Tibi placuerint, vitae genus, quod Tu probaveris.\n[[578.21]] Sinas ergo, ut mihi potius, quam homini ignoto, liceat amoenitatibus academicis semper\n[[578.22]] delectari, quarum haud prorsus incapax mihi obtigit ingenium. D. Schmidius mei curam prolixe\n[[578.23]] Tibi commendabit deinceps, ea fide, quam Tibi debet. Vale, I<angle bracket>llustris</angle bracket> Patrone, ac Dn. Cancellario\n[[578.24]] studia mea co<angle bracket>mmen</angle bracket>da. Scrib. in Acad. Jul. MDCIC d. XXIX. Jun. </p>\n<p> [[578.25]] Illustr. Nom. T. subjectissimus M. Ernestus Salomo Cyprianus.\n[[578.26]] <yi><i>A Son Excellence Monsieur Leibnitz, Conseiller privé de S.A.E. de Brunsvic et Luneburg.\n[[578.27]] Hannover. par couvert.</i> </p>\n","number":"215.","title":"ERNST SALOMON CYPRIAN AN LEIBNIZ","date":"Helmstedt, 29. Juni (9. Juli) 1699. [211.216.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

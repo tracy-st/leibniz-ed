@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_150","series":"Band II 2 (1686 - 1694)","seq":150,"text":"<p> [[533.4]] <b>152. ADAM ADAMANDUS KOCHAŃSKI AN LEIBNIZ</p>\n<p> [[533.5]] Warschau, 30. Mai 1692. [133.160.]</b></p>\n<p> [[533.15]] [ ... ] De Nova quadam Lingua Universali, ab usitatis diversa, non est quod cogitemus.\n[[533.16]] Ideas enim ejus rei elegantes nobis formare possumus, sed in earum executione Labor et otium\n[[533.17]] male collocandum videtur. Scio in Gallia nonneminem hac de re scripsisse <i>dans le Mercure</i>\n[[533.18]] [<i>Galant</i>] <i>Extraordinaire</i>, (: Annum non memini :) sed non venit is liber in manus meas. Posset\n[[533.19]] alioqui ad hujusmodi Linguam ediscendam stimulus addi, si ea conscriberetur Liber, Arcana\n[[533.20]] Chemica, Physica, et Medica continens: Et ipsa Lingua eximi posset ab omnibus anomaliis\n[[533.21]] inflexionum et exceptionibus, ac longe copiosior Latina effici, in qua multa dicere non licet,\n[[533.22]] etiam dum res ipsa postulat: v.g. <i>sedeor, ambulor</i>, casu quo unus alteri insideat, vel per eum\n[[533.23]] gradiatur etc. [ ... ] </p>\n","number":"152.","title":"ADAM ADAMANDUS KOCHAŃSKI AN LEIBNIZ","date":"Warschau, 30. Mai 1692. [133.160.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_665","series":"Band VI 4 (1677 - 1690)","seq":665,"text":"[[2861.11]] <b>505₅.  Fünfter Ansatz FÜNFTER ANSATZ </p>\n<p> [[2861.15]] Jus in quo versamur est scientia caritatis et justitia caritas sapientis. Est enim\n[[2861.16]] <b>caritas</b> habitus amandi omnes, et qui ita affectus est <b>vir bonus</b> vocatur. Justitia vero\n[[2861.17]] virtus est quae affectum hominis erga hominem ratione moderatur. Porro <b>sapientia</b> est\n[[2861.18]] scientia felicitatis. Felicitas autem in eo posita est, ut in Dei gratia atque amore vivamus\n[[2861.19]] cujus potentia et perfectio summa est. Cumque idem sapientissimus sit, perfectionem\n[[2861.20]] rerum generalem, et maxime praestantissimarum creaturarum quae scilicet ratione utuntur\n[[2861.21]] sibi propositam habebit. Itaque qui Deum amat, id est qui sapit omnes amabit, sed\n[[2861.22]] unumquemque eo magis quo expressiora in eo divinae virtutis vestigia lucebunt, et quo\n[[2861.23]] promtiorem validioremque in communi bono, vel quod eodem redit gloria Dei omnium\n[[2861.24]] bonorum autoris procuranda socium habebit. </p>\n<p> [[2862.1]] Si jam omnes ita animati atque exercitati essent, quod recta educatione consequi\n[[2862.2]] possimus, neque Magistrorum praeceptis, neque legum potestate admodum opus esset;\n[[2862.3]] nunc jam vero plerique neque ipsi per se intelligunt veras justi injustique causas; nec\n[[2862.4]] facile ad omnes species factorum generales juris regulas accommodare possint: in horum\n[[2862.5]] gratiam demonstrandum est, justitiam, non ut quidam veterum dicebat, stultitiam, sed\n[[2862.6]] potius sapientiam esse: et enumeratis potissimis causarum figuris admonendum est quid\n[[2862.7]] justum sit. Quia vero plurimi non tam intelligentia <Fn><i>Über</i> intelligentia: ingenio</Fn> quam quod pejus est bona mente et\n[[2862.8]] recte agendi voluntate, alii autem virtutis exercitio carent facileque affectibus abripiuntur,\n[[2862.9]] necesse fuit societatis tuendae causa regulas a prudentibus praescriptas publica potestate\n[[2862.10]] armari, unde in majoribus societatibus communis felicitatis causa initis quas vocant\n[[2862.11]] <b>Respublicas</b>, jura civilia nata esse constat. </p>\n","number":"505₅.","title":"Fünfter Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

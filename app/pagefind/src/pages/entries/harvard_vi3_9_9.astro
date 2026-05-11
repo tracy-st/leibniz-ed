@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_9","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":9,"text":"[[152.9]] <b>9. Dialogus de religione rustici </b> <span>152.0;0:63:009:73!      :L:l^</span>.\n[[152.2]] November 1673\n[[152.13]] Paris. 1673. Mense Novembri.\n[[152.14]] Dialogus\n[[152.15]] de religione rustici\n[[152.16]] Biennium est et duo praeterea menses cum Argentorato Moguntiam secundo\n[[152.17]] Rheno descendi. Nam tunc fluvius ille quietis utrinque ripis tutus, felicique autumno\n[[152.18]] Bacchum ostentans, longa peregrinatione fatigatum ad iter placidius invitabat. Credidisses\n[[152.19]] in tam profunda orbis tranquillitate colles ipsos exultare, ducentibus circum\n[[152.20]] choreas Hercyniae nymphis, quodam insolentis laetitiae tripudio. Sed ut saepe animalium\n[[152.21]] lascivia mutationem aëris indicat, et liberiores delphinum lusus omina tempestatis\n[[152.22]] habentur, ita tunc visa est Germania ambitiosius frui velle mox amittenda\n[[152.23]] pace: Et Rex fluviorum Rhenus velut fatorum conscius non diu duratura libertate\n[[152.24]] gaudebat: nam nunc ille miser, jam ingentibus exercitibus septus, jam vado temeratus,\n[[152.25]] jam classibus stratus, jam pontibus injectis sub jungum missus, nuperae\n[[152.26]] felicitatis tantum meminit gemendo. Sed abducamus animum ab ingratissima cogitatione.\n[[153.1]] Ego igitur ut mei magis juris essem. Argentorati scapham mediocrem conduxi,\n[[153.2]] tectilem, si ita forte aër juberet, et aliquot hominum, tabulaeque ac lectuli non\n[[153.3]] aegre capacem; junxit se nobis rusticus quidam, e Palatinatu inferiori, homo ut postea\n[[153.4]] apparuit minime absurdus, ac religionis suae genio habens nescio quid subtile\n[[153.5]] atque argutum. Nam Calvinistae per Germaniam caeteris nasutiores habentur, opinione\n[[153.6]] in ipsos usque rusticos sparsa; non illibenter hominem suscepimus, quod loco\n[[153.7]] nauli remigio subinde succedere polliceretur: denique cum jam oram solvissemus\n[[153.8]] Iudaeus, quod genus toto Rheni tractu non infrequens, procul inclamans, me nonnihil\n[[153.9]] repugnante, magistrum navis lucri cupidum perpulit, ut ripae rursus applicaret:\n[[153.10]] hoc ergo recepto, bona fide tandem navigare coepimus. Ego nonnihil lassus, cum\n[[153.11]] praeterea nox appeteret, in lectulum me composui. Atque ita tunc nox transacta est,\n[[153.12]] postero mane alacrior, fallendi temporis causa cum vectoribus caeteris paulatim in\n[[153.13]] familiare colloquium descendere coepi.\n[[153.14]] Tum vero magister navis captata occasione, Domine, inquit, etsi ignoremus quis\n[[153.15]] aut cujas sis, ita tamen persuasi sumus de candore tuo, ut controversiae cujusdam\n[[153.16]] quae hesterna nocte inter compotandum nobis nata est, TE judicem communi suffragio\n[[153.17]] elegerimus: si modo nobis beneficium hoc non deneges; ego subridens quaerere\n[[153.18]] coepi, quid istud controversiae esset, id enim, inquam, me scire opus est, antequam\n[[153.19]] subeam onus fortasse viribus impar. Tum Palatinus, de religione, inquit, quaestio\n[[153.20]] inter nos est; qualiscunque autem tua sit, rogamus, ut tantisper affectum in eam\n[[153.21]] exeas, atque inprimis ne famulo tuo prae caeteris faveas, qui ingenti calore fervet pro\n[[153.22]] Romana. Ad haec ego: rem petitis amici gravem, ac nonnihil captiosam, nam\n[[153.23]] alterutrum prope necesse est, aut praevaricatorem me fieri juris vestri, aut proditorem\n[[153.24]] mei. Ille vero: est aliquod inter utrumque temperamentum, si modo a pagi nostri\n[[153.25]] sculteto, honesto viro, et quantum a rustico expectari potest legum morumque perito,\n[[153.26]] in simili causa non sum deceptus: is enim disputabat, judicem adeo a partium studio\n[[153.27]] alienum esse debere, ut nec testem se ferre possit, etiam in sibi compertis, et ad totam\n[[154.1]] tum de iis quae inter litigantes acta et probata essent: ita me cujuscunque\n[[154.2]] sententiae essem, nihil in illam pronuntiaturum, sed tantum in eius defensorem ^nneö\n[[154.3]] argumen^ntisö utent^nurö ^n-ö. Neque vero se tam stultos esse, ut mecum in certamen\n[[154.4]] descendant homine, ^nutö appare ^n-ö ^nsibiö cum sui ^nsimilibusö ^n--ö neque rationibus\n[[154.5]] uti ^nconstituisseö, quam quae rusticis quoque in mentem venire possent, quare me\n[[154.6]] rogatum velle, ut immobilis ipse ac nulli succurrens, quantum a quoque praestaretur,\n[[154.7]] tantum judicarem. Ego hac quidem methodo collaudata, acceptaque conditione, ad\n[[154.8]] audiendum, illi ad dicendum, se quisque comparavimus.\n","number":"9.","title":"Dialogus de religione rustici","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

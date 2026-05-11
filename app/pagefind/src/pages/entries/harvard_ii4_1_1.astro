@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_1","series":"Band II 4 (1701 - 1707)","seq":1,"text":"<p> [[3.1]] <b>1. JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ</p>\n<p> [[3.2]] Wildeshausen, 1. Februar 1701. [9.] </b></p>\n<p> [[3.10]] Vir Excellentissime, Patrone Colendissime </p>\n<p> [[3.11]] Eurer <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp.</Fn> Excellenz gehorsahmst auffzuwarten trage ich um so viel weniger bedencken, um\n[[3.12]] so viel mehr ich Eur. Excellenz Hohen Gunstzuneigung durch Höchstgeneigten ­Schrifft─wechsel\n[[3.13]] schon von Bremen auß versichert bin, absonderlich da es Gott so gefüget, daß bekandter maßen\n[[3.14]] unser Stadt und Ambt Wildeshausen unter Ihr. Churfl. Durchl. vollenkommenen Gehorsahm\n[[3.15]] gekommen ist. Ich weiß nicht ob Eur. Excellenz schon zu Augen gekommen ist ein kleiner\n[[3.16]] Auffsatz vom <i>Tempel zu Jerusalem</i>, da in denen notis, verhoffentl. mit dero hohen Erlaubnüß\n[[3.17]] etwas auß dero Tieffgelehrten Mst. <i>adversum Cartes. Princip.</i> vermuhtlich auch nach ihrem Sinn,\n[[3.18]] angeführet habe. Selbigen habe samt einer dissertation <i>de terra natante Tractus Waakhusani in\n[[4.1]] ducatu Bremensi</i>, zuletzt bey meinem bremischen Abzug ventiliret, an Ihr. Hochwürden Dhl.\n[[4.2]] Abt Molan gehorsahmst jetzo übersendet, und um deßen Communicirung an Eur. Excellenz,\n[[4.3]] weil kein Exemplar mehr zu handen ist, in dem wegen Mangel meines hiesigen Haußwesens\n[[4.4]] meine meiste Sachen noch in Bremen stehen, außgebeten. Eure Excellenz werffen ein gütiges\n[[4.5]] Auge auff dise Chartequen, empfehlen bey Gelegenheit Ihr. Churfl. Durchl. meinem Gnädigsten\n[[4.6]] Herrn, meine Geringe Persohn und zerfallenes Pfarrhauß unterthänigst, und bleiben nechst\n[[4.7]] Gottl. Obhut Hochstgeneigt gewogen </p>\n<p> [[4.8]] Eurer Excellenz Gebet u. Gehorsahm schüldigsten\n [[4.9]] M. J. C. Schulenburg, Past. Primar.\n [[4.10]] der Stadt u. des Ambts Wildshausen </p>\n<p> [[4.11]] Wildshausen ipsis Calend. Febr. 1701. </p>\n<p> [[4.12]] A Monsieur Monsieur Leibnütz Conseiller de S. A. Serenissime Electoral de B. et Lunebourg\n[[4.13]] bien humb. à <b>Hannover</b> </p>\n","number":"1.","title":"JOHANN CHRISTIAN SCHULENBURG AN LEIBNIZ","date":"Wildeshausen, 1. Februar 1701. [9.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

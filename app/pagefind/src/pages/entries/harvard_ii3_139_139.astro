@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_139","series":"Band II 3 (1695 - 1700)","seq":139,"text":"<p> [[371.13]] <b>139. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[371.14]] Venedig, 22. August 1697. [135.143.]</b></p>\n\n<p> [[372.1]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[372.2]] Non hò scritto prima a V. S. Ill^#'m^#'a per essere stato in viaggio per alcune settimane\n[[372.3]] coll'Ecc^#'m^#'o Foscareni, e non siamo ritornati in Venetia, che oggi. Le trasmetto qui inclusa la mia\n[[372.4]] seconda lettera in foglio nella maniera che giace nella <i>Galleria di Minerva</i>, non essendo stata\n[[372.5]] ancora trasportata in ottavo come la prima. Di mese in mese s'andaranno stampando l'altre\n[[372.6]] finchè dia tutto il mio metodo di studiare, con scuoprire prima gli abusi e difetti dell'arti, che\n[[372.7]] principalmente corrono nella nostra Italia. È sotto il torchio una mia censura sopra alcune\n[[372.8]] riflessioni del Sig^#'r^#'e Matteo Giorgi Genovese nel suo opuscolo intitolato <i>Saggio della Nova\n[[372.9]] dottrina di Renato Cartesio</i>. Col seguente Ordinario mi pigliarò la libertà d'inviarlela, acciò ne\n[[372.10]] riceva poi il di lei dottissimo parere. Il Sig^#'r^#'e Mocenigo consegnarà a V. S. Ill^#'m^#'a il mio piego ove\n[[372.11]] si trovano alcuni manuscritti che forse potranno giovare al suo fine, fra tanto che qui adopero\n[[372.12]] tutta la mia diligenza per potere trovare qualche altra cosa nella Camerlengheria de' Principi\n[[372.13]] Estensi. Spero quanto prima publicare la mia Opera sopra il libro della Quantità dell'Anima di\n[[372.14]] S^#'o Agostino, e subito ne riceverà una copia. La priego della continuatione del suo stimatissimo\n[[372.15]] patrocinio, e dell'onore de' suoi comandi, e divotamente riverendola mi resto </p>\n<p> [[372.16]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Obg^#'m^#'o, Cord^#'m^#'o S^#'r^#'e Michel Angelo Fardella </p>\n<p> [[372.17]] Venetia 22. Agosto 1697 </p>\n","number":"139.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 22. August 1697. [135.143.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

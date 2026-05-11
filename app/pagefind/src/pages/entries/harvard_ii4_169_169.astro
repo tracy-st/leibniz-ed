@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_169","series":"Band II 4 (1701 - 1707)","seq":169,"text":"<p> [[526.15]] <b>169. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[526.16]] Padua, 15. Januar 1707. [150.188.] </b></p>\n<p> [[527.1]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[527.2]] Supplico <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> umilmente V. S. Ill^#'m^#'a di benigno compatimento, se sono ormai passati quattro\n[[527.3]] mesi, che non la vengo con miei caratteri a riverire, e ricordarle secondo il mio debito l'antica e\n[[527.4]] fedelissima mia servitù, mentre che fin dal settembre caduto sono stato sempre ammalato, e\n[[527.5]] perciò inabile a qualsisia applicatione. La cagione del mio male è stato un calcolo, che nel suo\n[[527.6]] passaggio per il canale dell'orina, avendomi rotta un piccola arteria di notte tempo, se ne usci\n[[527.7]] da essa una gran copia di sangue, cinque libre in circa, e se non occorreva presto il Medico, era\n[[527.8]] necessario, che morissi. Il che poi mi cagionò una languidezza così estrema, e vertigini così\n[[527.9]] frequenti, che hò durato fatica a rimettermi, ne hò potuto ancora portarmi alla catedra per le\n[[527.10]] publiche lettioni, mi vò nondimeno sempre piu corroborando, e spero a Dio piacendo ben presto\n[[527.11]] restituirmi al primo mio vigore. La presente dunque servirà per assicurarla dell'inalterabile mia\n[[527.12]] gratitudine e viva memoria che conservo dell'adoratissime gratie di V. S. Ill^#'m^#'a, a cui mi protesto\n[[527.13]] infinitamente obligato, con pregare incessantemente Dio la feliciti, e lungamente conservi a\n[[527.14]] beneficio della Republica delle lettere in cui V. S. Ill^#'m^#'a ora con somma giustitia gode il primo\n[[527.15]] luogo per l'eminenza, e vastità del purgatissimo ed incomparabile suo sapere. Scrissi nella\n[[527.16]] settimana caduta al nostro Dott^#'m^#'o Sig^#'r^#'e Herman, pregandolo a patientare ancora, che per quanto\n[[527.17]] mi viene scritto da Venetia, si crede che nel presente mese sarà portata in Senato la sua parte di\n[[527.18]] Matematico dagli Ecc^#'m^#'i Riformatori, che io non hò mai cessato di battere per vedere presto\n[[527.19]] perfettionato l'incominciato, ed averei ottenuto tutto, se la guerra presente non avesse rotte tutte\n[[527.20]] le misure mie e di questo Studio. Hò qui avuto l'onore di riverire molte volte il Sig^#'r^#'e Sprecher,\n[[527.21]] gran veneratore dell'altissimo merito di V. S. Ill^#'m^#'a, e l'hò trovato d'un ottimo intendimento, e\n[[527.22]] religiosissimo costume. In gratia si degni V. S. Ill^#'m^#'a consolarmi con quattro sue stimati^#'m^#'e righe,\n[[527.23]] che contengano al solito qualche bellissimo lume per le discipline matematiche, molto bramoso\n[[527.24]] di sapere se sia per publicare presto alcune sue altre inventioni analitiche, come s'è sparsa qui la\n[[527.25]] voce. Per la ventura Primavera raccoglierò quanto seme di Celsi bianchi potrò per servirla; e\n[[527.26]] rivenderola mi resto </p>\n<p> [[527.27]] di V. S. Ill^#'m^#'a Umil^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[527.28]] Padova 15 Gennaio 1707. </p>\n<p> [[527.29]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. <b>Hannover</b> </p>\n","number":"169.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 15. Januar 1707. [150.188.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

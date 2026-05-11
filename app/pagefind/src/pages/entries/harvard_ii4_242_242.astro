@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_242","series":"Band II 4 (1701 - 1707)","seq":242,"text":"<p> [[737.1]] <b>242. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[737.2]] [Berlin, 19. Februar 1707 (?)]. [241.243.] </b></p>\n<p> [[737.17]] <petit> <k>[Definitio] CLXX. Monadatum (Substantiatum)</k>\n[[737.18]] est compositum ex monadibus per aggregationem [ ... ].\n[[737.19]] Scholion I. Sicut ex non-mixtura fit mixtura, ex non-exercitu fit exercitus per compositionem: ita pariter ex non-aggregato\n[[737.20]] (simplicibus) fit aggregatum (compositum) per compositionem.\n[[737.21]] Scholion II. LEIBNITIUS in Epistola Brunsuiga IV. Septembr. MDCCXVI. ad me data: </petit>\n [[737.22]] \"<i>Substantiatum</i> ego appello aggregatum ex monadibus.\" </p>\n[[737.23]] <petit> Scholion III. Dici possent Monades, stylo Leibnitiano, <i>partes Monadatorum</i>, sed non nisi <i>infinite parvae</i>, quae\n[[737.24]] scilicet infinities sumtae partem aliquam Monadati constituunt [ ... ].\n[[737.25]] Scholion IV. <k>Leibnitius</k> ita rationes inire solebat: </petit>\n [[737.26]] \"Substantiale vel est substantia simplex, vel substantiatum: hoc vel Unum per se, vel Unum per\n[[737.27]] accidens\",\n [[737.28]] <petit> in Epistola Berolino XIX. Febr. MDCCVII. ad me data.</petit> </p>\n[[738.1]] <petit>Scholion V. Alias compositum ex Monadibus in <i>Principiis Philosophiae</i> §. 1. 2. et dans sa Replique aux\n[[738.2]] reflexions de Mr. <k>Bayle</k> Tom. II. <i>du Recueil p. 400.</i> vocat <i>Compositum absolute</i>, quia omne compositum ens est\n[[738.3]] propter Monades in partes ejus ingredientes. Hae autem solae sunt verae atque reales Unitates. Minus accurate\n[[738.4]] dicitur <i>Substantia composita</i>; quamvis ipse <k>Leibnitius</k> interdum cum vulgo loquatur, in his ipsis principiis §. 7.\n[[738.5]] et 30. [ ... ]. </petit> </p>\n","number":"242.","title":"LEIBNIZ AN MICHAEL GOTTLIEB HANSCH","date":"[Berlin, 19. Februar 1707 (?)]. [241.243.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_8","series":"Band II 3 (1695 - 1700)","seq":8,"text":"<p> [[23.6]] <b>8. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[23.7]] Padua, 3. März 1695. [10.]</b></p>\n\n<p> [[23.20]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[23.21]] Il Tempo, e la lontananza non saranno mai capaci di rendermi ingrato con scordarmi di\n[[23.22]] quanto devo all'incomparabile bontà di V. S. Illu^#'m^#'a, le di cui pretiose gratie viveranno sempre\n[[23.23]] nel mio cuore. Il Signore Magliabechi m' hà consolato coll'avviso felice della sua ottima\n[[23.24]] salute, e dell'eruditissime opere, che ella mette alle stampe, e mi scrive d' haverle mandata una\n[[23.25]] mia Pagina, in cui si contiene l'ordine delle mie lettioni di questo anno, che devono essere da\n[[24.1]] me dette in questa Università, ove hò insegnato la materia delle Comete, e per ordine de\n[[24.2]] gl'Eccell^#'m^#'i nostri Riformatori presentemente raggiono in catedra del Terremoto con gran concorso\n[[24.3]] d'Uditori, e ciò per sodisfare alla comune curiosità circa le particolarità osservate in\n[[24.4]] questa orribile scossa, che fù qui intesa nel mese caduto. Sarei molto contento se tanto circa la\n[[24.5]] natura delle Comete, quanto del Terremoto potessi sapere il suo dotto, e purgato sentimento, e\n[[24.6]] principalmente vorrei sapere <i>An Cometae sint potius Corpora sempiterna, quam temporanea, et\n[[24.7]] posito quod non sint Planetae ut arridet Domenico Cassini, sed potius corpora quaedam de\n[[24.8]] novo procreata, an Sint Corpora semidiaphana ex Stellarum effluviis efformata, ut potius\n[[24.9]] appellanda sint Spectra, et ludibria sensuum ex lumine reflexo atque refracto potissimum\n[[24.10]] profluentia, quam substantiae verae, et reales. Quemadmodum etiam vellem a te scire, an in\n[[24.11]] Centro Telluris vere ignis ardeat, qui centralis, ac perpetuus dici valeat</i>. Con altra occasione la\n[[24.12]] supplicarò d'illuminarmi circa quello che concerne la natura del Corpo, e sua divisibilità, se si\n[[24.13]] distingue dallo Spatio, se riceve il movimento da un altro, come anche intorno alla natura\n[[24.14]] dell'Etere, e cimento che unisce insieme le parti nel Solido, ed in che principalmente consiste\n[[24.15]] l'energia, e forza architettonica, che si racchiude nel Seme delle cose. Se mai potrò, ed haverò\n[[24.16]] soldo che basta nelle vacanze dello Studio penso di mettermi in viaggio a cotesta volta per\n[[24.17]] rivederla, e di presenza ringratiarla dei rilevanti beneficii, che ella m' hà fatto, come anche\n[[24.18]] renderla capace delli forti motivi che m'indussero a fermarmi qui, e non portarmi costì secondo\n[[24.19]] il concertato; l' hò comunicato con tutta secretezza a Monsieur Bouchet, il quale non sa\n[[24.20]] disapprovare la mia condotta. Del resto mi creda che con il cuore sono sempre costì, ed il\n[[24.21]] commodo onorevole che qui godo non hà già estinto i lumi che per tanto tempo mercé la Divina\n[[24.22]] Misericordia vivono nella mia Mente, essendo costantemente l'istesso che prima. La priego\n[[24.23]] perciò con tutto il cuore a continuarmi la sua protettione, e perdonarmi se le circostanze del\n[[24.24]] tempo m'obligarono a rifiutare le sue gratie, come anche persuadersi che mai mi scordarò di\n[[24.25]] quanto le sono obligato, inalterabilmente protestandomi </p>\n<p> [[24.26]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o, Oblig^#'m^#'o, Affett^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[24.27]] Padova 3 Marzo 1695 </p>\n","number":"8.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 3. März 1695. [10.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

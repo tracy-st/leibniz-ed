@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_450","series":"Band VI 4 (1677 - 1690)","seq":450,"text":"[[2013.4]] <b>367₃.  De mutatione situs DE MUTATIONE SITUS\n[[2013.5]] <tit2><b>De Mutatione Situs</b> </tit2> </p>\n<p> [[2013.6]] Si duo tantum essent puncta in rerum natura, eaque inter se situm mutare ponerentur,\n[[2013.7]] hoc non posset notari, quia situs cognoscitur per distantiam ab alio. Distantia est magnitudo\n[[2013.8]] intervalli. Magnitudo autem cognoscitur sola comparatione. Exempli [causa] si\n[[2013.9]] puncto <i>a</i> quiescente, punctum <i>b</i> mutet situm, et transeat per\n[[2013.10]] loca <i>1b, 2b, 3b</i>, hoc notari non poterit ex <i>a</i>, neque an <i>b</i>\n[[2013.11]] moveatur, quia nullum est principium judicandi ex <i>a</i> utrum\n[[2013.12]] recta <i>a2b</i> sit major quam recta [<i>a1b</i>]. Nec judicari poterit quomodo <i>b</i> moveatur, quia\n[[2013.13]] nullum est principium judicandi utrum puncta <i>a, 1b, 2b</i> cadant in unam rectam, et utrum\n[[2013.14]] <i>1b, 2b, 3b</i> cadant etiam in unam rectam. </p>\n<p> [[2013.15]] Si vero loco punctorum adhiberentur corpora, mutatio illa posset notari. Nam si\n[[2013.16]] ponamus puncto <i>a</i> quiescente <i>b</i> transferri ex <i>1b</i> in <i>2b</i>, constare poterit mutatio, sumtis\n[[2013.17]] enim in corpore moto punctis <i>c, d</i>, quae durante motu ipsi puncto medio <i>b</i> parallela\n[[2013.18]] ferantur, angulus <i>cad</i> crescente distantia diminuetur, exempli causa <i>1ca1d</i> erit major\n[[2013.19]] quam <i>2ca2d</i>, angulus autem ut <i>1ca1d</i> notari poterit in partibus ipsius corporis <i>a</i>, nempe in\n[[2013.20]] <i>ef</i>. </p>\n","number":"367₃.","title":"De mutatione situs","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_153","series":"Band II 1 (1663 - 1685)","seq":153,"text":"<p> [[476.6]] <b>137. GEORG HERMANN SCHULLER AN LEIBNIZ</p>\n<p> [[476.7]] Amsterdam, 29. März 1677. [136.159.]</b></p>\n<p> [[476.22]] Amstelodami 29 Mart. 1677. </p>\n<p> [[476.23]] [ ... ] Gaudeo sane quod de coëmenda <i>Ethica</i> nihil adhuc Principi Tuo dixeris, nam plane\n[[476.24]] animo mutatus sum, ut (licet possessor pretium adauxerit) de illo commercio instituendo jam\n[[476.25]] tibi author esse nolim, ratio est, quod amicorum animos plane dissentientes ita ad consensum\n[[476.26]] disposuerim, ut non solum hanc <i>Ethicam</i>, verum etiam omnia MS^#'t^#'a Fragmenta (quorum potior\n[[476.27]] pars, nimir. 1. <i>de Emendatione Intellectus</i>, 2. <i>de Nitro</i>, 3. de Politia, 4. Epistolae variae, in\n[[477.1]] autographo ad manus meas devoluta est) in commune bonum typis publicare constituerim,\n[[477.2]] quod Tibi confidenter communico, cum nullus dubitem, Te id, quominus propositum hoc\n[[477.3]] impediatur, omnes, etiam Amicos, celaturum. Objectionem Tuam certe doctissimam ac\n[[477.4]] ingeniosam tunc ipsemet enervare scies, quando totius operis concatenationem ac Authoris\n[[477.5]] intentionem plenius videre licebit; Ejusdem generis alia inter Epistolas contra eandem propositionem\n[[477.6]] continetur, docte tamen satis ab Authore enodata. Pervelim ex Te discere num ex\n[[477.7]] sequentibus libris (quorum catalogum (: cum hac inscriptione <i>libri rarissimi</i> :) inter posthuma\n[[477.8]] reperi) unquam aliquos videris 1. Florentinus de rebus Sacris. 2. Joh. Beneventensis de nefandis\n[[477.9]] Christianae religionis erroribus. 3. Alius de Beneventensis <Fn><i>Am Rande in A von Leibniz' Hand</i>: Est Joh. de Casa Episcopus Beneventanus quem libidinem praeposteram laudasse ait Thuanus. </Fn> Sodomiae laudibus. 4. Averrois\n[[477.10]] argumenta de aeternitate Mundi. 5. Anonymus quidam Italus de commercio Sanctor. et Sanctarum.\n[[477.11]] 6. Idem de Stultitia gentium. 7. Idem de Magia Mosis et Muhamedis. 8. Francisci Datisii\n[[477.12]] Homo politicus. liber rariss. <Fn><i>Am Rande in A von Leibniz' Hand</i>: Vidi librum sub titulo <i>Hominis</i> <i>politici</i>.</Fn> 9. Du Mas Abbas <Fn><i>Am Rande in A von Leibniz' Hand</i>: Forte scribi debet: Joachimus Abbas.</Fn> opuscula missoria. 10. <Fn><i>Am Rande in K von Leibniz' Hand</i>: pessima.</Fn> A S^#'t^#'o Bernardo Monachus\n[[477.13]] Hispanus de commercio daemonum. Idem de eorundem in hoc Mundo Politia et actionibus.\n[[477.14]] Ejusd. cum ipsis familiaria colloquia. Idem de examine 3 quaestionum Joh. 22. Papae\n[[477.15]] sc. de existentia Dei, animae immortalitate et inferno[.] Opus rarissimum. 11. Vir de Religione\n[[477.16]] Bona dictus ubi de Novis Religionis Christianae reformatoribus verbi gr. Luthero, Calvino et\n[[477.17]] Melanthone. Idem de examine duorum regum Caroli 5. et Francisci 1. author Hispanus est.\n[[477.18]] 12. Abavillus hispanus Monachus Turca factus de Authoritate Politices in Eccles. deque suae\n[[477.19]] Mutationis rationibus. Ejusd. Problemata politica. Ejusd. dicta [Christiana]. 13. Prophetiae\n[[477.20]] Malachiae Hibern. Episcopi de Pontificibus. [ ... ] </p>\n","number":"137.","title":"GEORG HERMANN SCHULLER AN LEIBNIZ","date":"Amsterdam, 29. März 1677. [136.159.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_56","series":"Band II 3 (1695 - 1700)","seq":56,"text":"<p> [[159.1]] <b>56. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[159.2]] Hamburg, 11. (21.) April 1696. [52.58.]</b></p>\n\n<p> [[159.9]] I. N. J. C. </p>\n<p> [[159.10]] Excell^#'m^#'o et Amplissimo Dⁿ^#'o G. G. Leibnitio </p>\n<p> [[159.11]] V. Placcius S. P. D. </p>\n<p> [[159.12]] Responsurus <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: <i>Brand von Lubec. China.</i></Fn> ultimis tuis remitto commodatam dissertationem cum gratiis, et auctario\n[[159.13]] levidensi Amanuensis mei Rostochium propediem migraturi. Quem ut vides in Logicis Jungianis\n[[159.14]] ita exercui, ut alios docere cum fructu possit. Illius Jungii aliqua Cimeliis tuis inserere si\n[[159.15]] volueris, nil erit dignius ejusdem <i>Noematicis definitionibus et divisionibus</i>, cum cura summa\n[[159.16]] elaboratis, et folia pauca conficientibus. <i>Ethicae</i> quoque paucissimorum foliorum <i>disputationes</i>\n[[160.1]] adsunt, sed non aequi valoris. Responsio ad <i>limam</i> Scharffii non est penes me, sed ab amico\n[[160.2]] impetrari credo possit. Sunt alia parvae molis, edita aeque ac si non edita essent; combustis\n[[160.3]] nempe plerisque omnibus exemplaribus, aut perpaucis ab initio impressis, adeo ut vix exstent.\n[[160.4]] Id quod de <i>Geometriae</i> ipsius <i>Empiricae</i> foliis Germanice versis, quae cum Fogelii Bibliotheca\n[[160.5]] ad vos pervenere, dictum etiam volo. Quorum aliud exemplar nullum extare putem. Dⁿ^#'i Weigelii\n[[160.6]] reditum huc avidus expecto. Ex Cabalisticis Helmontii et Knorrii ego fateor me parum aut nihil\n[[160.7]] proficere potuisse. Non video fundamenta illius rei solida ulla. Opinionum vero et placitorum\n[[160.8]] arbitrariorum plus nimis est ferax imaginatio humana. Utinam iis relictis ad <greek>ĕpidóseiw tṽn\n[[160.9]] texnṽn</greek> accuratas tandem accingerentur Philosophi omnes, Tecum et cum similibus Tui, quos\n[[160.10]] veneror. Vale. Hamb. 1696. d. 11. Aprilis. </p></p>\n","number":"56.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 11. (21.) April 1696. [52.58.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

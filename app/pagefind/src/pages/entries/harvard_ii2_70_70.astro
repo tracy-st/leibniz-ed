@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_70","series":"Band II 2 (1686 - 1694)","seq":70,"text":"<p> [[297.5]] <b>71. LEIBNIZ AN VITALE GIORDANI</p>\n<p> [[297.6]] [Rom, Ende Oktober bis Anfang November 1689.] [72.]</b></p>\n<p> [[297.18]] [ ... ] Sed in universum in horum axiomatum de recta demonstrationibus illam difficultatem\n[[297.19]] reperio, quod in eas nullo modo ingreditur definitio rectae nec ulla rectae proprietas\n[[297.20]] axiomate aliquo praemittendo contenta. Definitio enim rectae a te assumta est quod sit brevissima\n[[297.21]] inter duo puncta, quae pulchre uteris pro parallelarum proprietate, sed hic eam non\n[[297.22]] adhibes nec aliud de recta axioma praemittis. Itaque in omnibus istis demonstrationibus posset\n[[297.23]] alia quaecunque linea pro recta assumi quod tamen male fieret. Itaque videtur aliquid his\n[[297.24]] demonstrationibus deesse. Et difficulter absolvi poterit demonstratio nisi quis assumat\n[[298.1]] notione[m] rectae, qualis est qua ego uti soleo, quod corpore aliquo duobus punctis immotis\n[[298.2]] revoluto locus omnium punctorum quiescentium sit recta vel saltem quod recta sit linea secans\n[[298.3]] planum interminatum in duas partes congruas; et planum sit superficies secans solidum interminatum\n[[298.4]] in duas partes congruas. </p>\n","number":"71.","title":"LEIBNIZ AN VITALE GIORDANI","date":"[Rom, Ende Oktober bis Anfang November 1689.] [72.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

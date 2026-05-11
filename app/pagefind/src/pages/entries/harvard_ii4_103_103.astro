@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_103","series":"Band II 4 (1701 - 1707)","seq":103,"text":"<p> [[320.15]] <b>103. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[320.16]] Quedlinburg, 2. Mai 1705. [78.104.] </b></p>\n<p> [[321.1]] Hochwolgebohrner Herr. </p>\n<p> [[321.2]] Zu <Fn><i>Am oberen Rand von Leibniz' Hand</i>: resp</Fn> guter lezt habe nochmals vernemen wollen, ob ich nicht von Inen die übrigen 24. Thl,\n[[321.3]] indem von dem bekommenen, nur di lezten 10. Thl rechnen kan, zu hoffen habe, weil von den\n[[321.4]] hohen personen nichts zu erhalten gewesen. Ich zweifle nicht, wenn Si mir selbige erlegt, daß\n[[321.5]] Si leicht erstattung erlangen: Doch wenns auch nicht erfolgte, würde es Inen ein leidliger\n[[321.6]] schade sein; mir aber ist es di ganze barschaft gewesen: Zudem kan ich nicht davor, daß Si von\n[[321.7]] hohen personen hintergangen sind, denn ja Si, nicht ich, von denselben hintergangen worden;\n[[321.8]] Si, nicht jene, haben mir die hofnung wo nicht zu bestallung, doch zu widererhaltung der\n[[321.9]] zerungskosten gemacht, darauf bin ich nach Berlin gereiset. </p>\n<p> [[321.10]] Gewiß nicht weisheit u. klugheit machen einen Weltweisen, sondern deren Vereinigung\n[[321.11]] mit Recht u. billigk. etc. Ist eine rache in der Natur, so wird si dis rächen, wo ich nicht das\n[[321.12]] meinige widerbekomme: nicht alle wünsche sind vergeblig, die sele würkt auch außer dem\n[[321.13]] leibe darin sie stekt; zugeschweigen des schlechten namens, der daraus folgen würde. </p>\n<p> [[321.14]] Ob ich das geld baar widerbekomme, oder der Hr. Kuno zu aushändigung meiner bücherei\n[[321.15]] vermacht wird, sol mir gleich viel sein, weils onedem hizu bestimt war. Ich erwarte ehests\n[[321.16]] antw., welche zuwenigsten hoffen werde, damit ich wiße woran ich sei, weil vileicht über\n[[321.17]] 3. wochen nicht mehr werde hir sein. Di aufschrift an mich, weil ich unbekant sein wil, wird\n[[321.18]] stat meines namens, diese sein müßen: Hn. Gotfried Wesener, buchhändler, so izt sich aufhaltend\n[[321.19]] in Qvedlburg: abzugeben auf der Hohenstraße in der AmtRaht Heikelin hause, bei der\n[[321.20]] Frau Garken. </p>\n<p> [[321.21]] Ich verbl. Wolgebohrner Herr, Dero Verpflichtester </p>\n<p> [[321.22]] G Wagner. </p>\n<p> [[321.23]] Gwedlburg 2. May [1]705. </p>\n","number":"103.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Quedlinburg, 2. Mai 1705. [78.104.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_161","series":"Band II 4 (1701 - 1707)","seq":161,"text":"<p> [[512.10]] <b>161. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[512.11]] Aschersleben, 29. Oktober 1706. [104.164.] </b></p>\n<p> [[512.17]] Wolgebohrner Herr Hoher Gönner </p>\n<p> [[512.18]] Nachdem ich an der deütsch. <i>Weltweisen Geschicht</i> so weit kommen, daß ich one di <i>Acta\n[[512.19]] Erud.</i>, <i>Ephem. Nat. Cur.</i> u.d.g. durch zulaufen, nicht weiter fort kan, wenn ich meinen Zweck,\n[[513.1]] Spraten einzuholen, erreichen wil, so habe nun größere lust, das <i>reale</i> Wörterbuch so Si mir etl.\n[[513.2]] mal vorgeschlagen, zu versuchen: hätte ich dises eher auf mich genommen, wäre ich mit meiner\n[[513.3]] <i>Weltweisen Geschicht</i> nimmer dahin kommen, da ich izt bin. Derowegen habe vernemen\n[[513.4]] wollen, ob Si noch gesonnen, mir gelegenh. zu selbem wörterbuch zu geben, so wolte mich auf\n[[513.5]] befehl gleich einstellen; ich würde doch one zweif. di <i>Ephem.</i> u. <i>Acta Er.</i> meine Geschicht zu\n[[513.6]] volfüren, daneben haben können. So bitte nun gehorsamst, mir hirauf bald antw. zu gönnen,\n[[513.7]] damit mich danach richten könne u. verbl. </p>\n<p> [[513.8]] Wohlgebohr. Herr, Dero gehorsamster </p>\n<p> [[513.9]] Gabriel Wagner. </p>\n<p> [[513.10]] Aschersleben 29. Weinm. [1]706. </p>\n","number":"161.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"Aschersleben, 29. Oktober 1706. [104.164.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

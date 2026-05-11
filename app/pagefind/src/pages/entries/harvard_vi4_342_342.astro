@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_342","series":"Band VI 4 (1677 - 1690)","seq":342,"text":"[[1473.6]] <b>286.  De conscientia memoriaque [1683 bis 1685 (?)]</b>\n [[1473.7]] <tab/>[1683 bis 1685 (?)] </p>\n<p> [[1473.13]] Conscientia est nostrarum actionum memoria. Cartesius vult ideo nulli demonstrationi\n[[1473.14]] posse fidi, quia omnis demonstratio memoria praecedentium propositionum indiget;\n[[1473.15]] in qua nos potentia alicujus mali genii fortasse falli posset. Sed si hucusque producimus\n[[1473.16]] dubitandi titulos, etiam conscientiae nostrae de praesentibus fidere non licet, semper enim\n[[1473.17]] involvitur memoria, cum nihil sit absolute loquendo praesens praeter momentum. </p>\n<p> [[1473.18]] Memoriam in demonstrando sublevant scripturae seu notae, nullum autem dari\n[[1473.19]] malum genium qui nos in illis quoque adulterandis fallat nihil melius firmat quam\n[[1473.20]] successus seu felix eventus, in quem denique omnis certitudinis nostrae fiducia resolvitur,\n[[1473.21]] nec aliter somnium valde clarum a vigilia distingui potest. </p>\n<p> [[1474.1]] Datur Conscientia visionis, apparitionis, voluptatis, doloris; non datur conscientia\n[[1474.2]] veritatis, certitudinis, justitiae, eorumve omnium quae colligi debent, ideoque nec de eis\n[[1474.3]] jurari potest. </p>\n","number":"286.","title":"De conscientia memoriaque","date":"[1683 bis 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi2_12","series":"Band VI 2 (1663-1672); durchgesehener Nachdruck 1990","seq":12,"text":"[[292.43]] <b>43. Auszüge aus Sinclair und Mechovius. Aufzeichnung zur Medizin\n [Februar\n(?) 1671</b> <span>292.0;0:62:043:7103-7105:E:l^</span>.\n[[292.1]] Sinclarus in arte magna gravitatis lib. de Chronoscopio tractat de revolutionibus\n[[292.2]] penduli horizontalibus quarum nemo ante ipsum meminerit; observat p. 502.93., si idem\n[[292.3]] sit pondus diversa longitudo funiculorum brevioris plures sunt revolutiones eodem tempore,\n[[292.4]] sed longioris diutius durant. Si eadem longitudo diversum pondus pendulum gravis et\n[[292.5]] plures habet et diutius durantes perseverationes. Si aequale pondus diversa longitudo\n[[292.6]] ut 1 ad 2 erunt vibrationes ut 4 ad 3 cum funiculi ut 3 ad 2 vibrationes ut 5 ad 6 cum\n[[292.7]] funiculi ut 8 ad 6 vibrationes ut 7 ad 8 cum funiculi ut 9 ad 7 vibrationes ut 9 ad 10.\n[[292.8]] Rationem non reddit. Explicat differentias inter vibrationes perpendiculi et tensorum, ut\n[[292.9]] chordarum ratione longitudinis chordarum.\n[[292.10]] Ratio cur diapason sit gratissima Sinclarus p. 504 ex recursuum unione. Idem et\n[[292.11]] caeterarum consonantiarum rationem explicat. Melius forte, quam Chambrerus in de Luce.\n[[292.12]] Sinclarus p. 509. Tenui funiculo 37 digitis longe cum semisse annectatur globulus\n[[292.13]] ferreus viginti octo unciarum, ejus quaevis simplex vibratio secundum horarium dabit.\n[[292.14]] Sed ut sint accurate non ultra 30 vel 36 digitos globulus excurrat.\n[[292.15]] Sinclarus p. 602. Notavi cum Batavi Tilandiburgenses oppugnarent 36 minutis\n[[292.16]] secundis serius fumi speciem, quam sonum ad me, qui 70o0 passuum distabam pervenisse.\n[[292.17]] Et cum nube dirupta fragor saepe fulgure vix sex septemve minutis sit posterior, credibile\n[[292.18]] est vix mille passibus has nubes graviores a nobis distare.\n[[292.19]] p. 606 ajunt Ill^#'m^#'u^#'m Comitem a Kincardin excogitasse modum ita suspendendi pendula\n[[292.20]] ut nulla motui eius ex agitatione navis sit remora.\n[[293.1]] Habet Sinclarus non contemnenda de Horologio^#'1 cuilibet planetae sigillatim\n[[293.2]] assignando pro observationibus.\n[[293.3]] Plato in Polit. Charitatem vocat epimeleian de ge anthropines sympases koinonias\n[[293.4]] affectionem curamve totius generis humani, apud Mechov. cap. de Caritate p. 369. lib. 4.\n[[293.5]] phil. par. c. 6.\n[[293.6]] Compilanda Testimonia de Medicinae dignitate, Medicorum vitiis, rei Medicae\n[[293.7]] emendatione. Cardanus memorat ses fourberies dans sa vie. Porta quoque narrat se noctu\n[[293.8]] turbatum a parientis foeminae illustris ministro aequam rosarum ei dedisse et pulverem\n[[293.9]] immundum ex pavimento abrasum addidisse. Foeminam ea nocte masculum enixam.\n[[293.10]] Mane gratias agentium et divinum Medicamen extollentium turba plenas aedes fuisse.\n[[293.11]] Vide Baronium in opusc. ubi de Imaginatione.\n","number":"43.","title":null,"date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

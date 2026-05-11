@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_205","series":"Band II 3 (1695 - 1700)","seq":205,"text":"<p> [[541.22]] <b>205. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[541.23]] Helmstedt, 20. (30.) März 1699. [206.]</b></p>\n\n<p> [[542.4]] Vir Illustris, </p>\n<p> [[542.5]] Quum sciam, ad laudem studiorum meorum pertinere, Tuo olim judicio exornari, diu\n[[542.6]] multumque reverentiam Tibi literis praestandam existimavi, quod differendi diutius nulla mihi\n[[542.7]] probabilis ratio occurrit: praecipue quod Venerandus D. Schmidtius tenuitatem meam testimonio\n[[542.8]] apud Te ea sit fide prosecuturus, quam Tibi debet, ac praeterea Nominis Tui splendor ad\n[[542.9]] usum indulgentiae Tuae bonam mentem vehementer provocet atque attollat. Rogo itaque,\n[[542.10]] domine, precibus meis faveas, Tuoque me patrocinio deinceps digneris. </p>\n<p> [[542.11]] Ut autem gratiae Tuae primordia sentiam, non est observantiae meae dissimulare, plurimum\n[[542.12]] Te collaturum utilitatibus studiorum meorum, si, ubi aliquando commodum fuerit, vacaveritque\n[[542.13]] valde, Liberii a S. amore epistolam Theologicam primam inspicere Tuoque me consilio\n[[542.14]] regere velles. Quum enim epistolae nondum confutatae sint: et vero, si a me fiat, profuturum id\n[[542.15]] mihi his regionibus dicatur: constitui mecum modestissimis animadversionibus libello adversari.\n[[542.16]] Etsi autem epistolae reliquae parum habeant difficultatis, ac tertia praecipue absurda\n[[542.17]] expositione Trinitatis implicet mysterium: fatendum tamen est, primam intricatiorem videri, de\n[[542.18]] qua quid sentias ex Clarissimo cive meo M. Wagnero intellecturum me confido. Libelli autorem\n[[542.19]] ignorari haud patitur Poiretus <i>de erudit</i>. p. m. 460. Nec tamen dubito, huic quoque notitiae\n[[542.20]] lucem affulsuram sermonibus Tuis a M. Wagnero annotandis. </p>\n<p> [[542.21]] Vale, Vir Illustris, rationemque constare puta, quare Reverendissimo Abbati Gerardo\n[[542.22]] atque excelsae animae Tuae omnes actiones meas cupiam probare. Scrib. in Acad. Jul.\n[[542.23]] XX. Mart. MDCIC. </p>\n<p> [[542.24]] Illustr. Nom. T. subjectissimus servus M. Ernestus Salomo Cyprianus </p>\n","number":"205.","title":"ERNST SALOMON CYPRIAN AN LEIBNIZ","date":"Helmstedt, 20. (30.) März 1699. [206.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

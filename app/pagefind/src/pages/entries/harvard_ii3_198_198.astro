@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_198","series":"Band II 3 (1695 - 1700)","seq":198,"text":"<p> [[522.1]] <b> 198. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[522.2]] Hannover, 27. Dezember 1698 (6. Januar 1699). [148.]</b></p>\n\n<p> [[522.10]] Vir Nobilissime et Consultissime Fautor imprimis honorande. </p>\n<p> [[522.11]] Pati <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: Ad Dn. Vincentium Placcium IC^#'t^#'u^#'m Hamburgensem </Fn> non possum ut annus iste transeat Te insalutato. Gavisus sum non mediocriter cum a\n[[522.12]] Dn^#'o de Mastricht intellexi praeclarum Tuum opus <i>Anonymorum et Pseudonymorum</i> esse absolutum.\n[[522.13]] Idque Tibi ex animo gratulor. </p>\n<p> [[522.14]] Hortatu ejus scripsi ad Dn. Baylium virum egregie doctum, cui alioqui respondendum erat\n[[522.15]] ex alio capite; insinuavique posse ipsi committi operis editionem cum ampla potestate, si modo\n[[522.16]] eam in se recipiat Roterodamus Bibliopola. </p>\n<p> [[522.17]] Sed non minor mihi cura est ingentis Tui operis Ethici, immo major, nec immerito. Cum\n[[522.18]] enim a multis annis omne huc studium contuleris, sisque a doctrina, et arte instructissimus,\n[[522.19]] Zeloque etiam abundes; non potest non egregium aliquid a Te esse confectum, quod non perire\n[[522.20]] Reipublicae etiam Christianae interesse censeo. </p>\n<p> [[523.1]] Praeterea cum multa praeclara meditata Te habere oporteat in variis Studiorum generibus,\n[[523.2]] velim ne haec quidem perire. Et nisi me terreret Jungianorum fatum, suaderem patriam Bibliothecam\n[[523.3]] depositariam deligi. Nescio quis mihi narravit Te in eo esse, ut insignem librorum\n[[523.4]] Tuorum collectionem, illuc legato destines, conditionibus minime aspernandis. Quod si confectum\n[[523.5]] est, bene habet. Sin aliquid oblatum est difficultatis, uti Langenbeccii exemplum facit ut\n[[523.6]] verear, ausim suggerere Augustam Guelfebytanam, cujus magna et merita in orbe laus famaque\n[[523.7]] est. Nec dubitem Serenissimos duces Fratres magnos literarum statores, favituros voluntati\n[[523.8]] Tuae, quantum aequitatis ratio esset suasura. Sed haec ego ex me scribo; et sincero affectu.\n[[523.9]] Caeterum opto ac spero consilia haec Tua in multos adhuc annos exitu suo differenda quos ego\n[[523.10]] Tibi cum eo quem nunc ingredimur laetissimos precor, ut diu adhuc Tu fama, nos doctrina Tua\n[[523.11]] fruamur. Vale. Dabam Hanoverae 27. Decembr. 1698. </p>\n<p> [[523.12]] deditissimus G. G. Leibnitius </p>\n","number":"198.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"Hannover, 27. Dezember 1698 (6. Januar 1699). [148.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

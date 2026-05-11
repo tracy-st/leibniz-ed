@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_265","series":"Band VI 4 (1677 - 1690)","seq":265,"text":"[[1037.1]] <b>222.  Aus und zu Mariotte, Essay de logique [Sommer 1678 (?)]</b>\n [[1037.2]] <tab/>[Sommer 1678 (?)]\n [[1037.3]] <petit> </p>\n<p> [[1037.4]] </petit>  <petit> </p>\n<p> [[1037.5]] Mariottes <i>Essai de Logique</i>, dessen Anfang er in Manuskriptform schon in Paris in der ersten Jahreshälfte\n[[1037.6]] 1676 eingesehen hatte, erhielt Leibniz in mehreren Teilen über Hansen aus Paris zwischen März und April/Mai\n[[1037.7]] 1678 (vgl. I, 2 N. 300, S. 320, N. 313, S. 330; III, 2 N. 145, S. 352, III, 2 N. 163, S. 407). Die kurzen Exzerpte\n[[1037.8]] und die Marginalien dürften in unmittelbarem Anschluß daran, also wohl zwischen März und Juni 1678,\n[[1037.9]] angefertigt worden sein. Die sich auf mathematische Probleme beziehenden Stücke N. 222₃ bis 222₅, von denen\n[[1037.10]] die letzteren beiden auf den 1. Juli 1678 datiert sind, stehen in zeitlichem und inhaltlichem Zusammenhang mit\n[[1037.11]] der Korrespondenz mit Mariotte in der ersten Jahreshälfte 1678. Wohl am 7. April 1678 hatte Leibniz Mariotte\n[[1037.12]] einen analytischen, d.h. nicht-geometrischen Beweis, daß das Produkt zweier negativer Zahlen positiv ist,\n[[1037.13]] geschickt (III, 2 N. 295, S. 694-698). Mariotte unterzog am 23. April 1678 diesen Beweis zusammen mit einem\n[[1037.14]] analogen von La Hire einer Kritik (III, 2 N. 299 u. 300), die Leibniz ausführlich am 30. Juni 1678 beantwortete\n[[1037.15]] (III, 2 N. 318, S. 775 f.; vgl. N. 308). In dieser Antwort wird auch die in N. 222₅ ausdrücklich dem Beweis\n[[1037.16]] vorangestellte Voraussetzung (nämlich, daß das Produkt zweier positiver Zahlen positiv und das Produkt aus\n[[1037.17]] einer positiven und einer negativen Zahl negativ ist) explizit betont. Aufgrund des kritisch über Mariotte\n[[1037.18]] referierenden Scholions von N. 222₅ (das inhaltlich identisch ist mit N. 222₄) sind diese Stücke allerdings\n[[1037.19]] unabhängig von Leibniz' Briefwechsel mit Mariotte zu sehen, vielmehr Teil seiner Auseinandersetzung mit\n[[1037.20]] dessen <i>Essay de Logique</i>. Sie stellen nämlich eine Kritik der dort gemachten Bemerkung dar, ein solcher\n[[1037.21]] Beweis sei auf analytischem Wege unmöglich, setzen also die Lektüre des <i>Essay</i> voraus. N. 222₃, dessen\n[[1037.22]] Schlußbemerkung in N. 222₅ ihre Verwirklichung findet, muß N. 222₅ und damit auch N. 222₄ vorangegangen\n[[1037.23]] sein und wird daher wohl kurz vorher, aber noch im Zusammenhang mit der Lektüre, vermutlich Ende Juni,\n[[1037.24]] verfaßt worden sein. </p>\n<p> [[1037.25]] Die Referenzen stehen in eckigen Klammern vor den entsprechenden Textpassagen. </petit> </p>\n","number":"222.","title":"Aus und zu Mariotte, Essay de logique","date":"[Sommer 1678 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

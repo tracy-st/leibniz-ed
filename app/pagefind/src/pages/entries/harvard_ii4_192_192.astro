@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_192","series":"Band II 4 (1701 - 1707)","seq":192,"text":"<p> [[606.7]] <b>192. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[606.8]] Padua, 12. Mai 1707. [191.201.] </b></p>\n<p> [[606.17]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[606.18]] Gia <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> gratie a Dio dopo tante diligenze ed un lunghissimo esercitio di patienza è stato con\n[[606.19]] pienezza di voti ed universale applauso confermata dall'Ecc^#'m^#'o Senato l'elettione fatta da S. S.\n[[606.20]] Eccell^#'m^#'i Riformatori in persona del nostro Sig^#'r^#'e Herman per la catedra matematica di questo\n[[606.21]] Studio, a cui per diverse strade gli n'ho portata la notitia coll'Ordinario caduto, avendogli\n[[606.22]] scritto e mandato la copia della Ducale, o sia decreto del Senato per ordine publico, come costa\n[[607.1]] dalla lettera che conservo appresso di me dell'Ill^#'m^#'o Sig^#'r^#'e Segretario Gadaldini, che da parte\n[[607.2]] dell'Ecc^#'m^#'o Magistrato mi comanda che ne porga l'avviso subito al Sig^#'r^#'e Herman con sollecitarlo\n[[607.3]] a trasferirsi subito in Padova. Questa è stata la prima promotione di catedre che sia stata fatta in\n[[607.4]] Senato dopo due anni con il contento di tutti coloro che amano la buona letteratura, non ostante\n[[607.5]] le forti oppositioni per cio che riguardava la Religione, superate tutte, esempio che è molto\n[[607.6]] tempo che qui non s'è veduto, tanto in questo affare han potuto la mia patienza, e l'autorità di\n[[607.7]] V. S. Ill^#'m^#'a che come io diceva agli Ecc^#'m^#'i Riformatori nella scelta e ricordo del Sig^#'r^#'e Herman non\n[[607.8]] si può ingannare per la singolarissima cognitione che V. S. Ill^#'m^#'a hà nelle discipline Matematiche,\n[[607.9]] e che non può ingannare, per il sommo candore e già tanto nota onestà del suo costume.\n[[607.10]] Io hò incluso una mia diretta a V. S. Ill^#'m^#'a nel piego che trasmessi al Sig^#'r^#'e Herman. Nondimeno\n[[607.11]] accio ne riceva sicuramente ed il piu presto che si può l'avviso, replico la presente con\n[[607.12]] includerle la copia della Ducale. Credo che V. S. ill^#'m^#'a averà ricevuta un'altra mia in cui\n[[607.13]] l'esponeva il bisogno, che averei nelle congiunture presenti dell'autorevole e generoso suo\n[[607.14]] patrocinio, accio nel tempo opportuno mi favorisse d'una efficace e calda raccomandatione\n[[607.15]] appresso la Maestà della nuova Regina delle Spagne, che mi potrebbe sommamente giovare per\n[[607.16]] me e la mia Casa in Sicilia, che per quanto qui corre la voce[,] sarà presto sotto il dominio di\n[[607.17]] Carlo Terzo, del di cui partito io sono costantemente stato. V. S. Ill^#'m^#'a se vuole[,] può essere\n[[607.18]] autore d'un grand^#'m^#'o mio bene, e quando si degnerà avvisarmi dell'ottima sua dispositione a\n[[607.19]] favorirmi, io subito con piena libertà l'aprirò il mio bisogno, e sentimento. In gratia mi\n[[607.20]] responda, e non m'abbandoni in questo affare che per la mia quiete molto mi preme. Averò tutta\n[[607.21]] l'attentione per le due libre di semi di Mori bianchi che le saranno a suo tempo mandate, ed\n[[607.22]] all'infretta mi rassegno </p>\n<p> [[607.23]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o Div^#'m^#'o <angle bracket>Col^#'m^#'o</angle bracket> S^#'r^#'e vero M. A. Fardella </p>\n<p> [[607.24]] Padova 12 Maggio 1707. </p>\n<p> [[607.25]] I Dottissimi Sig^#'r^#'i Guglielmeni, e Ramazzini divotamente la riveriscono. </p>\n<p> [[607.26]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di stato di S. A. E. <b>Hannover</b> </p>\n","number":"192.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 12. Mai 1707. [191.201.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

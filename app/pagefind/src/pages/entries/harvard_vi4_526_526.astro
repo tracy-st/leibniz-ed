@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_526","series":"Band VI 4 (1677 - 1690)","seq":526,"text":"[[2340.5]] <b>414.  De non violando principio contradictionis in divinis contra Honoratum Fabri [Februar bis Oktober 1685 (?)]</b>\n [[2340.7]] <tab/>[Februar bis Oktober 1685 (?)] </p>\n<p> [[2340.10]] Virtualitates vocant Metaphysici rationes quasdam diversas in objecto, quae revera\n[[2340.11]] realiter eaedem sunt inter se, in ordine tamen ad praedicata contradictoria perinde se\n[[2340.12]] habent, atque si realiter distinguerentur. Tales virtualitates esse volunt naturam divinam et\n[[2340.13]] personam verbi, quae licet sint idem quid realiter, in ordine tamen ad praedicata contradictoria\n[[2340.14]] perinde se habent, ac si distinguerentur realiter. Has nonnulli volunt reperiri et\n[[2340.15]] in rebus creatis. At P. Fabry in <i>Metaph.</i> lib. 1. prop. 31. nullam dari nec posse dari\n[[2340.16]] distinctionem virtualem in rebus creatis. Probatur, inquit, nam praedicata contradictoria\n[[2340.17]] eidem non insunt (<b>per axioma</b>). Ergo nec distinctio virtualis (<b>per def.</b>), loquor\n[[2340.18]] scilicet, inquit de distinctione virtuali majore, qua idem ad praedicata contradictoria\n[[2340.19]] perinde se habet, ac si distingueretur a semet ipso. Fateri cogimur multa esse in rebus\n[[2340.20]] divinis, quae omnem hominis superant captum quae tamen ob infusam nobis divinitus\n[[2340.21]] fidem credimus. Sed has tenebras nemo prudenter rebus creatis obducat. Inde nonnulla\n[[2340.22]] exempla virtualitatum in creatis proposita refutat et illis qui dicunt etiam praedicata quae\n[[2341.1]] in divinis distinctionem formalem supponunt non esse contradictoria formaliter, sed\n[[2341.2]] tantum per intellectum, id est secundum nostrum concipiendi modum; reponit P. Fabry\n[[2341.3]] esse omnino contradictoria formaliter quorum unum negat alterum, et nostrum concipiendi\n[[2341.4]] modum aut esse verum aut falsum. Si verus, habemus intentus, sin falsus praescribendus\n[[2341.5]] est ille modus, qui chimaeras inducit, neque enim res literaria figmentis et\n[[2341.6]] mendaciis indiget (+ multo minus Theologia +). Denique objicientibus eandem rationem\n[[2341.7]] probare distinctionem non esse ponendam in divinis, quae probat non esse in creatis\n[[2341.8]] admittendam, respondet, habemus ex fide multa inesse Deo quae nostrum superant\n[[2341.9]] captum. Dices, inquit, si admittantur in Deo praedicata contradictoria argumentis Atheorum\n[[2341.10]] responderi non posse, at respondet, ut valeat principium istud quo dicimus contradictoria\n[[2341.11]] non posse esse simul, nulla distinctio virtualis supponitur, quae tamen in Deo est\n[[2341.12]] propter infinitam perfectionis vim. Praeterea inquit, ubi semel demonstravero Atheo\n[[2341.13]] Deum existere, facile concedet inesse Deo quae hominis captum superant, et principia\n[[2341.14]] quibus utimur ad rem scientificam ex creatis esse eruta. Si rebus creatis inessent virtualitates\n[[2341.15]] concedit nullam fore humanam scientiam, omnia enim principia reduci ad principium\n[[2341.16]] contradictionis. Haec P. Fabry. </p>\n<p> [[2341.17]] Videmus ex his quo usque praeconcepta opinio hominem ducere possit, habemus\n[[2341.18]] reum confitentem, fatetur in divinis locum non habere principium contradictionis, erutum\n[[2341.19]] scil. tantum ex creatis, secundum ipsum, cum tamen hoc principium locum debeat habere,\n[[2341.20]] ubicunque veritas et falsitas. Quid Athei quid Antitrinitarii gratius audiunt? Ergo nihil\n[[2341.21]] absurdi non asseri potest in divinis, neque ulla locum habebit refutatio aut ratiocinatio.\n[[2341.22]] Communiter dicitur nulla in divinis esse contra rationem, multa super eam. Hi vero\n[[2341.23]] Scholastici in inferioribus suis recessibus contrarium statuunt, et revera contra Lateranense\n[[2341.24]] concilium admittunt duplicem veritatem. An putat se demonstrare posse Atheis\n[[2341.25]] Deum existere, principio contradictionis negato? Prudentius ergo et sanius dicetur, neque\n[[2341.26]] in divinis neque in creatis admittendas esse propositiones contradictorias. </p>\n<p> [[2341.27]] Et omnino ita explicandum est S. Trinitatis Mysterium ut effugiatur contradictio vera\n[[2341.28]] et propria, vel profecto ad Antitrinitarios erit transfugiendum. Quin et principium illud\n[[2341.29]] humanae argumentationis: <i>quae eadem sunt eidem tertio sunt eadem inter se</i> (cum in\n[[2341.30]] contradictionis principio fundetur); omnino dicendum est, ne in divinis quidem violari,\n[[2342.1]] alioqui omni sublata argumentatione, quidvis circa Deum impune asserere licebit, et\n[[2342.2]] neque syllogismi in Theologicis fieri debebunt, nec modi ac figurae locum habebunt.\n[[2342.3]] Itaque cavendum est ne talia asserendo haeresin confirmemus, et omnino ita explicare\n[[2342.4]] debemus Trinitatis mysterium, ut tales scopuli evitentur. </p>\n","number":"414.","title":"De non violando principio contradictionis in divinis contra Honoratum Fabri","date":"[Februar bis Oktober 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

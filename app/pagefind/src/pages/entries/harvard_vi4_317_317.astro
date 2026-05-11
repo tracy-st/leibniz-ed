@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_317","series":"Band VI 4 (1677 - 1690)","seq":317,"text":"[[1373.1]] <b>261.  Scientia Media November 1677</b>\n [[1373.2]] <tab/>November 1677\n[[1373.7]] <tit2><b>Scientia Media</b> </tit2> </p>\n<p> [[1373.8]] Novembr. 1677 </p>\n<p> [[1373.9]] Principium illud summum: <b>nihil esse sine ratione</b>, plerasque Metaphysicae\n[[1373.10]] controversias finit. Illud enim videtur negari non posse a Scholasticis, nihil fieri, quin\n[[1373.11]] Deus si velit rationem reddere possit, cur factum sit potius quam non sit. Quin etiam de\n[[1373.12]] futuris conditionatis circa quae scientiam mediam introduxere Fonseca et Molina, idem\n[[1373.13]] dici potest. Scit Deus quid infans fuisset facturus si adolevisset, sed et scientiae hujus\n[[1373.14]] suae si vellet rationem reddere posset, et convincere dubitantem; cum id homo quoque\n[[1373.15]] aliquis imperfecte possit. Non ergo in quadam Visione consistit Dei scientia, quae\n[[1373.16]] imperfecta est et a posteriori; sed in cognitione causae, et a priori. Ponamus Petrum in\n[[1373.17]] certis quibusdam circumstantiis constitui, cum certo quodam gratiae auxilio; et Deum\n[[1373.18]] mihi permittere ut a se quaeram, quid facturus sit Petrus in hoc statu. Non dubito quin\n[[1373.19]] Deus respondere possit aliquid certum et infallibile, quanquam aliquos Scholasticos ea de\n[[1373.20]] re dubitare ausos mirer. Ponamus ergo Deum respondere, quod Petrus gratiam sit rejecturus.\n[[1373.21]] Quaero porro an Deus hujus sui pronuntiati rationem reddere possit, ita ut me\n[[1373.22]] quoque possit reddere scientem hujus eventus. Si dicimus id Deum non posse imperfecta\n[[1374.1]] erit ejus scientia, si dicimus Deum id posse, manifesto eversa erit scientia media. Secundum\n[[1374.2]] veros Philosophos et S. Augustinum, ratio cur Deus sciat rerum actiones necessarias\n[[1374.3]] vel liberas, absolutas, vel conditionatas, est perfecta naturae [ipsarum] cognitio, quemadmodum\n[[1374.4]] Geometra novit quid per circulum et regulam in aliquo casu proposito possit\n[[1374.5]] praestari; vel quis futurus sit datae alicujus machinae effectus, si datis rebus ac viribus\n[[1374.6]] applicetur. Ponamus Paulum cum iisdem circumstantiis et auxiliis poni, cum quibus\n[[1374.7]] positus est Petrus, et Deum mihi dicere, quod Petrus tunc rejecturus esset gratiam, Paulus\n[[1374.8]] vero accepturus; necesse est utique aliquam dari rationem differentiae hujus; ea vero non\n[[1374.9]] aliunde peti poterit, quam ex Petrinitate et Paulinitate; seu ex natura voluntatis Pauli, et\n[[1374.10]] natura voluntatis Petri, quae differentia harum duarum libertatum facit, ut alter hoc alter\n[[1374.11]] illud eligat. Differentiam autem istam etiam in ordine ad hanc electionem, Deo cognitam\n[[1374.12]] esse necesse est, eamque si mihi explicare dignaretur intelligerem, atque ita plenam de\n[[1374.13]] eventu futuro conditionato scientiam a priori nanciscerer. Secundum autores <b>scientiae\n[[1374.14]] mediae</i> non posset Deus rationem reddere sui pronuntiati, nec mihi explicare. Hoc\n[[1374.15]] unum dicere poterit quaerenti cur ita futurum esse pronuntiet; quod ita videat actum hunc\n[[1374.16]] repraesentari in magno illo speculo intra se posito, in quo omnia praesentia, futura,\n[[1374.17]] absoluta vel conditionata exhibentur. Quae scientia pure empirica est, nec Deo ipsi\n[[1374.18]] satisfaceret, quia rationem cur hoc potius quam illud in speculo repraesentetur, non\n[[1374.19]] intelligeret. Quemadmodum is qui in Tabulis Calculatos invenit numeros, non vero ipse\n[[1374.20]] eos calculare potest. Deus scit futura absoluta quia scit quid decreverit, et futura conditionata,\n[[1374.21]] quia scit quid esset decreturus. Scit autem quid esset decreturus, quia scit quid in\n[[1374.22]] eo casu futurum sit optimum, optimum enim est decreturus, sin minus sequetur Deum\n[[1374.23]] non posse certo scire, quid ipsemet in eo casu facturus esset. Praeclara Scoti sententia,\n[[1374.24]] quod intellectus divinus nihil cognoscat (ex rebus facti), quod non determinavit, alioqui\n[[1374.25]] vilesceret. Vasquez egregia sententia quod voluntas ex duobus objectis non potest eligere\n[[1374.26]] nisi alterius bonitas fortius repraesentetur. 1. p. c. 2. d. 43. <i>in 1. 2.</i> init. Ut ostendit\n[[1374.27]] Macedo in <i>diff. Thom. et Scot.</i> coll. XI, diff. 1, <i>circa scientiam mediam</i>. </p>\n","number":"261.","title":"Scientia Media","date":"November 1677"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

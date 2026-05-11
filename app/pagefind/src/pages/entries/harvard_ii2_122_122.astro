@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_122","series":"Band II 2 (1686 - 1694)","seq":122,"text":"<p> [[445.24]] <b>123. LEIBNIZ AN MELCHISÉDECH THÉVENOT</p>\n<p> [[445.25]] Braunschweig, 24. August (3. September) 1691.</b></p>\n[[446.6]] [ ... ] J'ay aussi quelques demonstrations sur les veritables loix du mouvement, et la juste\n[[446.7]] estime de la force, on a esté prevenu jusqu'icy que la quantité du mouvement (<i>factum ex ductu\n[[446.8]] corporis in celeritatem</i>) est la quantité de la force. Et les Cartesiens se laisseroient tuer pour le\n[[446.9]] soutenir. Quelques sçavans hommes comme Messieurs Wallis, Hugens, Wren, Borelli, Mariotte,\n[[446.10]] et autres ont bien vû, que la meme quantité de mouvement, ne se conserve pas tousjours.\n[[446.11]] Mais il semble aussi, qu'ils ont crû, que la meme quantité de la force ne subsistoit pas. Ce qui a\n[[446.12]] paru pourtant estrange. Et moy meme j'y estois embarassé autres fois, mais enfin je decouvris il\n[[446.13]] y a deja plusieurs années, ce que c'est que la force, et qu'elle se conserve tousjours, et comment\n[[446.14]] par là on peut reduire cette matiere à des loix Geometriques; par une espece d'Equation entre la\n[[446.15]] cause et l'effect, et concilier les phenomenes avec la raison. Depuis donc que je croy que la\n[[446.16]] Geometrie et la Mecanique se sont rendus entierement analytiques, j'ay pensé d'etendre le\n[[446.17]] calcul à des matieres, qu'on en a jugé jusqu'icy tout à fait incapables. J'appelle icy calcul, toute\n[[446.18]] notation qui represente le raisonnement, quand elle n'auroit point de rapport aux nombres.\n[[446.19]] [ ... ] </p>\n","number":"123.","title":"LEIBNIZ AN MELCHISÉDECH THÉVENOT","date":"Braunschweig, 24. August (3. September) 1691."}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

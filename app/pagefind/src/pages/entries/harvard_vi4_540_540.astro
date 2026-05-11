@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_540","series":"Band VI 4 (1677 - 1690)","seq":540,"text":"[[2498.10]] <b>426.  Augustinus de Eucharistia [1677 bis 1716 (?)]</b>\n [[2498.11]] <tab/>[1677 bis 1716 (?)] </p>\n<p> [[2498.15]] Videntur quaedam Augustini loca ostendere, cum in Eucharistia accipi signum\n[[2498.16]] corporis Christi dixit, non intelligi signum nudum; sed symbolum traditionis ipsius rei\n[[2498.17]] coelestis. </p>\n<p> [[2498.18]] Lib. 3. <i>de Trinitate</i> cap. 4. <i>Quod cum per manus hominum ad illam visibilem\n[[2498.19]] speciem perducitur</i> (+ panis et vini scilicet +), <i>non sanctificatur, ut sit tam magnum\n[[2499.1]] sacramentum, nisi operante invisibiliter spiritu Dei, cum haec omnia quae per corporales\n[[2499.2]] motus in illo opere fiunt, Deus operetur.</i> </p>\n<p> [[2499.3]] Tr. 26 <i>in Johannem</i>: <i>Hoc quando caperet caro, quod dixit panem carnem? Vocatur\n[[2499.4]] caro, quod non capit caro.</i> </p>\n<p> [[2499.5]] Ad locum <i>libri contra Adimantum</i>, quidam respondent Augustinum cum dixit: <b>Hoc\n[[2499.6]] est corpus meum, cum signum daret corporis sui</i>, locutum ex sententia\n[[2499.7]] Manichaeorum. </p>\n<p> [[2499.8]] Alii volunt intelligere signum non nudum, sed cum re. Nam explicat verba <i>Deuter.</i> 12.\n[[2499.9]] sanguis est anima, quia sit signum animae, nempe ut ait q. 57. in <i>Leviticum</i> quod\n[[2499.10]] continet animam. </p>\n","number":"426.","title":"Augustinus de Eucharistia","date":"[1677 bis 1716 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

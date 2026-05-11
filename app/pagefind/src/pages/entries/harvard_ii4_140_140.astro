@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_140","series":"Band II 4 (1701 - 1707)","seq":140,"text":"<p> [[459.8]] <b>140. BARTHÉLEMY DES BOSSES AN LEIBNIZ</p>\n<p> [[459.9]] Hildesheim, 20. August 1706. [135.141.] </b></p>\n<p> [[459.24]] Illustrissime Domine </p>\n<p> [[459.25]] Distuli responsum ad postremas I[llustrissimae] D[ominationis] T[uae] litteras, quod\n[[459.26]] Papebrochii responsorias expectarem una mittendas, quae necdum advenerunt: Significandum\n[[459.27]] interim duxi, esse hic adolescentem qui post octiduum Romam cogitet futurus ibidem Alumnus\n[[459.28]] Collegii Germanici, et Ptolomaeum magistrum auditurus. Qua occasione si quae forsan habes\n[[459.29]] quae Ptolomaeo communicata velis, poterunt commodissime transmitti. </p>\n<p> [[460.1]] Roma intelligimus proscriptas nuper e Scholis nostris esse triginta propositiones philosophicas,\n[[460.2]] e Cartesio Malebranchioque fere depromptas, quarum aliquas quia circa materiam a\n[[460.3]] te praeclare elucidatam versantur, et censura jam pridem tuo calculo comprobata est, hic a me\n[[460.4]] adduci non aegre feres. </p>\n<p> [[460.5]] 6^#'a <i>Modi vel Accidentia, in aliquo subjecto semel producta non amplius indigent actione\n[[460.6]] positiva cujusquam Causae ipsa conservantis, sed tamdiu durare debent donec positiva actione\n[[460.7]] Causae alicujus externae destruantur.</i> </p>\n<p> [[460.8]] 7^#'a <i>Ut aliquid de Quantitate Motus a Deo primum indita Materiae periisse crederetur,\n[[460.9]] Deum oporteret fingi mutabilem et inconstantem.</i> </p>\n<p> [[460.10]] 10^#'a <i>Essentia Materiae seu Corporis in Extensione consistit externa et actuali.</i> </p>\n<p> [[460.11]] 16^#'a <i>Est in Mundo certa ac definita Quantitas Motus, quae nec aucta unquam, nec\n[[460.12]] imminuta fuit. </i> </p>\n<p> [[460.13]] 19^#'a <i>Solus Deus est qui movere potest corpora; Angeli vero, Anima rationalis, ipsaque\n[[460.14]] corpora non sunt causae motus efficientes, sed occasionales tantum.</i> </p>\n<p> [[460.15]] 20^#'a <i>Creaturae non producunt Efficienter ullos Effectus, sed solus Deus illos ad praesentiam\n[[460.16]] illarum efficit: loca vero Scripturae, in quibus creaturis tribuitur actio, intelligenda sunt\n[[460.17]] sensu figurato.</i> </p>\n<p> [[460.18]] 21^#'a <i>Belluae sunt mera Automata, omni sensu et cognitione carentia.</i> </p>\n<p> [[460.19]] 22^#'a <i>Animae Rationalis unio cum corpore in eo solum consistit, quod Deus voluerit ad\n[[460.20]] certas mutationes corporis, certas in anima perceptiones aut motus excitari, et vice versa pro\n[[460.21]] certis animae cogitationibus seu voluntatibus, certos in corpore motus sequi.</i> </p>\n<p> [[460.22]] 23^#'a <i>Hanc motuum et affectionum communicationem non exigit ipsa corporis animaeque\n[[460.23]] natura sed solum decretum Dei liberum.</i> </p>\n<p> [[460.24]] 25^#'a <i>Corpora Mixta, etiam Brutorum non aliter differunt inter se, quam ex varia magnitudine,\n[[460.25]] situ, figura, textura, quiete vel motu atomorum sive particularum materiae insensibilium\n[[460.26]] quibus constant.</i> </p>\n<p> [[460.27]] 28^#'a <i>Nullae sunt formae substantiales corporeae a materia distinctae.</i> </p>\n<p> [[460.28]] Gratulor Censoribus nostris quod te conspirantem imo ducem nacti sint. Breve tuum, sed\n[[460.29]] succi plenum ad binas dubitationes meas postremas responsum, amplum meditandi campum\n[[461.1]] mihi suppeditavit. Qua de re scribam ad te prolixius ubi Papebrochii litteras accepero. Vale et\n[[461.2]] tuae mihi benevolentiae honorem conserva. Dabam Hildesii 20 Augusti 1706. </p>\n<p> [[461.3]] Illustrissimae Dominationis tuae Humillimus et obsequentissimus servus in Christo </p>\n<p> [[461.4]] Bartholomaeus Des Bosses S J </p>\n<p> [[461.5]] P. S. Inter relegendum video omissam esse a me propositionem 4^#'a^#'m quae sic habet: <i>Mens\n[[461.6]] nostra eo quod finita sit, nihil certi de infinito potest scire, proindeque a nobis disputari de illo\n[[461.7]] nunquam debet.</i> Cujus falsitatem utinam aliquando in promisso a te <b>de scientia infiniti</b> libro\n[[461.8]] demonstratam legamus. </p>\n","number":"140.","title":"BARTHÉLEMY DES BOSSES AN LEIBNIZ","date":"Hildesheim, 20. August 1706. [135.141.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

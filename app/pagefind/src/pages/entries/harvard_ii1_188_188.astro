@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_188","series":"Band II 1 (1663 - 1685)","seq":188,"text":"<p> [[610.23]] <b>170. GEORG HERMANN SCHULLER AN LEIBNIZ</p>\n<p> [[610.24]] Amsterdam, 19./29. März 1678. [160.]</b></p>\n<p> [[611.4]] [ ... ] Editorem ob Tuum in posthumis Spinosae sine meo rogatu expressum nomen\n[[611.5]] acriter reprehendi, quamvis id periculi expers credam, cum praeter Mathematica nil contineant\n[[611.6]] literae Tuae; Accurate satis de aliorum [nominibus] divinasti. Ultimae a 61. usque ad penultimas\n[[611.7]] a me et Tschirnh. simul datae et redditae. S. de Vries Mercator et Mennonista jam ante\n[[611.8]] annos aliquot obiit, et Legatum 100 Imperialium quotannis Authori legavit. J.V.M. est Joh. van\n[[611.9]] der Meer. J.J. Jarigh Jellis uterque Mercator adhuc in vivis. J.O. Joh. Oosten Chirurgus\n[[611.10]] Roterodamensis. Epist. 56. scripta est ad pensionarium sive Syndicum Gorcomiensem Hugonem\n[[611.11]] Buxen Mutatione Principis Auriaci ab officio A^#'o 72, depositum. Epistola 50. ad J.J. data.\n[[611.12]] [ ... ] Cartesiana pro Te describuntur. [ ... ] </p>\n<p> [[611.13]] Amstel. 29/19 Mart. 1678 </p>\n","number":"170.","title":"GEORG HERMANN SCHULLER AN LEIBNIZ","date":"Amsterdam, 19./29. März 1678. [160.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

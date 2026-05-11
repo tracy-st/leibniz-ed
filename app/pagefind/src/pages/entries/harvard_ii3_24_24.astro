@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_24","series":"Band II 3 (1695 - 1700)","seq":24,"text":"<p> [[59.1]] <b>24. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[59.2]] [Hannover,] 16./26. Juli 1695. [20.29.]</b></p>\n\n<p> [[59.14]] Je <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: A Mons. Banage Bauval 16/26 Juillet 1695</Fn> viens d'apprendre, Monsieur, la mort de Monsieur Hugens, il m'est fatal d'ecrire des\n[[59.15]] lettres à des amis qui ne sçauroient repondre. Le Prince Erneste Landgrave de Hesse, et Mons.\n[[59.16]] de Seckendorf, ne purent lire les miennes; et M. Pelisson la lût en effet, mais la mort l'empecha\n[[59.17]] de faire la reponse qu'il avoit déja promise. </p>\n<p> [[59.18]] La perte de l'illustre M. Hugens est inestimable, peu de gens le sçavent autant que moy. Il\n[[59.19]] a égalé à mon avis la reputation de Galilei et de Descartes, et aidé par ce qu'ils avoient fait, il a\n[[59.20]] surpassé leur decouvertes. En un mot il faisoit un des premiers ornemens de ce temps. Je l'ay\n[[59.21]] souvent exhorté à nous donner ses pensées quand ce ne seroit que par lambeaux et d'une\n[[59.22]] maniere familiere. J'espere que son livre sur le systeme du monde et la constitution interieure\n[[60.1]] des planetes aura esté achevé. Mais comme il avoit coustume de mettre ses pensées par écrit, en\n[[60.2]] assez bonne forme, j'espere qu'on trouvera un grand Tresor parmy ses papiers. Je ne sçay s'il\n[[60.3]] n'aura donné quelques ordres pour cela; ce que je serois bien aise d'apprendre. Mais en cas que\n[[60.4]] non, nous y devons songer. Et moy sur tout qui ay eu l'honneur de le connoistre depuis tant\n[[60.5]] d'années, et de communiquer souvent avec luy, ce qui m'a donné le moyen de penetrer dans ses\n[[60.6]] pensées un peu mieux que beaucoup d'autres. Il connoissoit par des preuves publiques combien\n[[60.7]] j'estois sincere à reconnoistre en quoy je luy estois redevable. Et il me rendoit la pareille au\n[[60.8]] delà de ce que je meritois. Je n'ay pas l'honneur de connoistre Monsieur de Zulichem son frere,\n[[60.9]] Secretaire d'Estat du Roy. Sans cela je prendrois la liberté de l'exhorter à y mettre quelque\n[[60.10]] ordre convenable. Et si vous avés quelque liaison avec luy, ou avec ses amis; je vous supplie de\n[[60.11]] leur faire connoistre mes souhaits qui tendent egalement au bien public, et à la gloire de ce\n[[60.12]] grand homme, qu'on ne sçauroit assez honnorer. J'ay écrit pour faire marquer mes sentimens\n[[60.13]] dans les Actes de Leipzig sur ce sujet. Mais vous Monsieur, qui n'estes pas moins qu'eux en\n[[60.14]] droit d'avoir soin de la gloire des grands hommes ne manquerés pas de rendre justice à un tel\n[[60.15]] ami dans vostre <i>Histoire des ouvrages</i>. Au reste je me rapporte à ma precedente, et suis avec\n[[60.16]] bien du zele </p>\n<p> [[60.17]] Monsieur vostre tres humble et tres obeissant serviteur </p>\n","number":"24.","title":"LEIBNIZ AN HENRI BASNAGE DE BAUVAL","date":"[Hannover,] 16./26. Juli 1695. [20.29.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

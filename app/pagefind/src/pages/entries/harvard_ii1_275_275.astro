@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_275","series":"Band II 1 (1663 - 1685)","seq":275,"text":"<p> [[839.5]] <b>240. LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF</p>\n<p> [[839.6]] Zellerfeld, [11. Juni] 1683. [242.]</b></p>\n<p> [[839.25]] [ ... ] Quoniam Blasii Pascalii et Petri Danielis Huetii mentionem facis, qui pro Religione\n[[839.26]] cum laude scripserunt, dicam aliqua de illis mihi comperta. Nam Huetio quidem saepe\n[[840.1]] locutus sum, vidique opus ejus cum adhuc non nisi Manuscriptum haberetur, et postea in\n[[840.2]] Germania ab eo literas accepi. Pascalius vero obierat dudum, cum ego apud Parisios versarer,\n[[840.3]] sed aderat ejus soror, foemina erudita et ingeniosa, et ex sorore nepotes, cum quibus multa mihi\n[[840.4]] notitia intercessit, quemadmodum et cum Ill^#'m^#'o Duce Rohanesio, qui Pascalio usus erat familiarissime,\n[[840.5]] et his studiis valde afficiebatur. Ab his nonnulla inedita Pascalii legenda accepi, sed\n[[840.6]] pleraque Mathematica; intellexi et nonnulla ad vitam ejus pertinentia, et consilia praeclara,\n[[840.7]] quae pietatis propagandae causa agitabat: quae alias potero narrare prolixius. Unum dicam,\n[[840.8]] Pascalium moralibus solum argumentis (qualia sane egregia extant in libello <i>cogitationum</i>\n[[840.9]] posthumo) studuisse, Metaphysicis vero, quibus Plato et D. Thomas, aliique Philosophi et\n[[840.10]] Theologi ad divinam existentiam, animarumque immortalitatem comprobandam usi sunt, non\n[[840.11]] multum tribuisse: in quo ipsi non assentior. Puto enim, Deum non tantum in historia sacra et\n[[840.12]] civili aut etiam naturali nobis loqui, sed et intus in Mente nostra, per abstractas illas a materia\n[[840.13]] aeternasque Veritates. Et licet fatear, argumenta illa nondum ad plenae demonstrationis vim\n[[840.14]] perducta esse, tantam tamen jam tum mihi habere videntur, quantam ipsa moralia, et credo\n[[840.15]] paulatim ab hominibus perfici, ac forte aliquando rigorosa demonstratione absolvi posse. Itaque\n[[840.16]] nihil puto contemnendum, quod nobis usui esse possit, licet non omnes omnibus, sed quisque\n[[840.17]] illis merito utatur, quae suo magis instituto consentanea sunt. Huetium non puto secutum esse\n[[840.18]] Pascalianas Cogitationes, sed publicationem earum molitione operis sui longe praevertisse; nec\n[[840.19]] aliud, ni fallor, praefatio ejus innuit; et cum tota ratio operis in eo consistat, ut ostendat,\n[[840.20]] Prophetias in Jesu Christo fuisse adimpletas, quo argumento jam ipsi Apostoli usi sunt, et quod\n[[840.21]] ipse magna utique eruditione, multisque praeclaris suis observationibus locupletavit, non video\n[[841.1]] quomodo Pascalium secutus commode dici possit. Quod admoneri a me, justitiae suum cuique\n[[841.2]] tribuentis ratio exigit. Illud tamen fateor passim ab eo intermisceri quaedam minus firma,\n[[841.3]] quibus summam quidem eruditionem suam ostendit, sed adversariis cavillandi occasionem\n[[841.4]] reliquit, quae vellem in aliud opus rejecisset, ut cum probare conatur omnem philosophiam et\n[[841.5]] Theologiam gentilium a Judaica depravata fluxisse, ac Bacchum, Adonidem et nescio quos\n[[841.6]] alios ex Mose efformatos: cui opinioni assentiri ego non possum. Quasi diabolus ad fingendum\n[[841.7]] auxilio opus habeat, aut sua cuique genti fabularum materia defuerit. Circa nonnullorum\n[[841.8]] quoque librorum sacrorum autores, dubitationes aliquae superesse videntur. Sed haec\n[[841.9]] tamen, quae in egregio opere minus probo, summae rei non officiunt. [ ... ] </p>\n<p> [[841.10]] Dabam Zellerfeldae ad Hercyniae fodinas 1683. </p>\n","number":"240.","title":"LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF","date":"Zellerfeld, [11. Juni] 1683. [242.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

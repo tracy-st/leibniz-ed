@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_6","series":"Band II 1 (1663 - 1685)","seq":6,"text":"<p> [[13.3]] <b>6. CHRISTIAN DAUM AN LEIBNIZ</p>\n<p> [[13.4]] Zwickau, 28. April (8. Mai) 1666. [5.7.]</b></p>\n<p> [[13.11]] Cl. et Pereximie Vir </p>\n<p> [[13.12]] Porphyrium cum caeteris pergratum Tibi fuisse lubens intellexi. Editione sane ejus nova\n[[13.13]] opus est, et adsunt praeterea aliqua alia adjumenta. Sed otium ejusmodi Opus elaborandi et\n[[13.14]] sumptus ad illud in publicum proferendum necessarios quis procurabit? Nescio an videris\n[[13.15]] Rhabanum Maurum qui mirificas pari fere opera figuras exstruxit in libro <i>de laudibus S. Crucis</i>,\n[[13.16]] cujus antiquam et novam Editionem possideo. Utar his in meis de Lat. lingua (si Deo videbitur)\n[[13.17]] Commentariis. Distichon quod reperire non potuisti, vides in Pithoeana haberi p. 378. Nisi\n[[13.18]] fallor, inerit et Velserianae. Eos meos libros proximis Nundinis exspecto reduces. De dividendis\n[[14.1]] vel separatim scribendis Diphthongis quae injecisti vera sunt: Et in multis antiquis membranis\n[[14.2]] ita reperi. (Nam et valde antiquas membranas habeo, in quibus connexae conspiciuntur illae\n[[14.3]] literae). Usum tamen <greek>kalligrafíaw</greek> per connexionem qui tot secula obtinuit velle convellere\n[[14.4]] nescio an e re sit literarum. Est interdum genus eruditionis vitare quae doctis placent: ait\n[[14.5]] Cassiodorus. Consilium aperiendi variationum fontes quod dedisti, possum amplecti, si non\n[[14.6]] abnuent sequi typographi, vel bibliopolae. Et nisi opera illa valde increscat, quod valde vereor.\n[[14.7]] Concinnatum est a me Volumen, Stichographiae nomine, ex plus mille (non mentior) Poëtis et\n[[14.8]] infinitis Philologo-Criticis, sed perpetuo a triginta jam annis lusu ita attritum, ut nisi in mundum\n[[14.9]] descriptum nemini fere esse possint usui haec, ut ita appellem, Sibyllae folia. Et opus ipsum, si,\n[[14.10]] quae praeterea observavi interim adjecero, exaequet fere magnitudine Statianum Barthii Commentarium.\n[[14.11]] Vident et tenent manibus hoc mei. Sed ne quid pereat, non facile cuiquam utendum\n[[14.12]] concedo. Excerpta tamen jam olim confecta et summam quasi etsi imperfecta multis concessi,\n[[14.13]] quae et ipse videre queas, si denuo <greek>paliggenesíä</greek> quasi quadam in purum descripta fuerint. Pro\n[[14.14]] Voto tuo et Exercitio gratias ago ingentes et ut brevitati huic meae, qui hactenus infinitis\n[[14.15]] occupationibus avocatus alio animum attendi, volens ignoscentiam indulgeas rogo. B.V. PerEximie\n[[14.16]] Dⁿ^#'e et fave qui omnia Tibi felicia precatur, et haec defestinabat </p>\n<p> [[14.17]] Cygn. d. 28. Aprili. 1666. Clarit. Tuae Studiosiss^#'o Christiano Daumio. </p>\n<p> [[14.18]] Ab harum Exhibitore meo nuper discipulo, quem (tenuium parentum filium, probum\n[[14.19]] tamen et diligentem) peculiariter Tibi commendo, si qua in re illi commodare potes, Excerptorum\n[[14.20]] illorum quae dixi conspectum petere licebit, quae tamen lima omnino habent opus, et\n[[14.21]] meliore digestione. </p>\n<p> [[14.22]] Quanti vaeneat in Bibliopolio Diatriba tua scire velim, unum et alterum mihi pro alibi\n[[14.23]] Amicis exemplum comparaturus. </p>\n","number":"6.","title":"CHRISTIAN DAUM AN LEIBNIZ","date":"Zwickau, 28. April (8. Mai) 1666. [5.7.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

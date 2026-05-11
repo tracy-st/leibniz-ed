@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_187","series":"Band II 3 (1695 - 1700)","seq":187,"text":"<p> [[472.1]] <b>187. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[472.2]] Venedig, 24. Oktober [1698]. [186.191.]</b></p>\n\n<p> [[472.12]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[472.13]] Questa mattina portandomi alla libreria del Sig^#'r^#'e Albritio trovai un'obligatissima lettera\n[[472.14]] dell'Ill^#'m^#'o ed Eruditissimo Sig^#'r^#'e Abbate Mauro, e nell'istesso tempo m'imbattei con un Tedesco\n[[472.15]] in punto di partirsi per Germania, ed havendolo pregato di consegnare la mia Opera a V. S.\n[[472.16]] Ill^#'m^#'a nel suo passaggio per costà egli con somma generosità subito s'esibì di favorirmi, e si tolse\n[[472.17]] la copia in foglio con una mia lettera da presentarla a V. S. Ill^#'m^#'a. Il nome e qualità del Tedesco\n[[472.18]] che porta il libro V. S. Ill^#'m^#'a lo trovarà nel qui accluso polisino. Non ricevendo sue lettere e quasi\n[[472.19]] havendo perso la speranza dell'impiego che ella motivava, mi sono aiutato per mezzo di gran\n[[472.20]] personaggi di guadagnarmi il patrocinio del Seren^#'m^#'o Elettore Palatino Duca di Neoburgo il\n[[472.21]] quale hà già ricevuto il mio libro, e si mostra molto disposto di chiamarmi per darmi qualche\n[[472.22]] posto litterario. Io ne do parte a V. S. Ill^#'m^#'a acciò possa proteggermi ed assistermi appresso la\n[[472.23]] Corte Palatina. Il mio desiderio è di vivere in Germania vicino a V. S. Ill^#'m^#'a. Il mio libro s'è\n[[472.24]] stampato all'infretta e senza assistenza di Correttori alla maniera d'Italia, perciò la priego di\n[[472.25]] compatimento se [lo troverà pieno] d'errori. Qui trovarà inclusa la mia lettera indirizzata al\n[[472.26]] Sig^#'r^#'e Magliabechi, ove si contiene l'idea ed argomento dell'Opera. Priego V. S. Ill^#'m^#'a riverire e\n[[473.1]] ringratiare in mio nome l'Ill^#'m^#'o Sig^#'r^#'e Abbate Mauro con fargli vedere queste mie fatiche. Imploro\n[[473.2]] il di lei alto patrocinio, la priego consolarmi con suoi caratteri, ed assicurarsi che sono </p>\n<p> [[473.3]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Obg^#'m^#'o, Cord^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[473.4]] Venetia 24. Ottobre </p>\n<p> [[473.5]] Mi favorirà indrizzare le risposte per Padova. </p>\n<p> [[473.6]] Compatirà alcuni errori che sono corsi nella lettera stampata. </p>\n","number":"187.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 24. Oktober [1698]. [186.191.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

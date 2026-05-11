@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_18","series":"Band II 4 (1701 - 1707)","seq":18,"text":"<p> [[55.10]] <b>18. LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE</p>\n<p> [[55.11]] Hannover, 5. Mai 1702. [4.19.] </b></p>\n<p> [[56.1]] Monsieur Hanover ce 5 May 1702 </p>\n<p> [[56.2]] Ayant <Fn><i>In L^#'1 am Kopf der Seite von Leibniz' Hand</i>: A Monsieur des Fontenelles à Paris</Fn> consideré combien vous devés estre occupé non seulement par vostre charge dans\n[[56.3]] l'Academie des Sciences, par l'<i>Histoire</i> que vous en faites et par le <i>Journal des savans</i> reformé;\n[[56.4]] sans rien dire des pieces jolies à qui ces travaux serieux ne font point de tort, et dont Madame a\n[[56.5]] communiqué quelques unes de temps en temps à Mad. l'Electrice sa tante, j'ay crû que je ne\n[[56.6]] devois point vous interrompre trop souvent sans fruit. </p>\n<p> [[56.7]] Maintenant ayant receu de Berlin des observations d'une nouvelle Comete, je les adresse à\n[[56.8]] M. l'Abbé Bignon avec cette lettre pour vous, Monsieur, et je ne doute point qu'il ne vous les\n[[56.9]] envoye pour l'Academie. Comme il y a de l'apparence qu'on aura observé la Comete chez\n[[56.10]] vous, il sera bon de comparer les observations. </p>\n<p> [[56.11]] Je vous avois envoyé un jour, Monsieur, ou à M. l'Abbé Bignon, quelques questions d'un\n[[56.12]] ami qui a des meditations sur le changement de la face de la terre. Il souhaiteroit des\n[[57.1]] particularités sur la disposition du terrain le long du Canal. Je vous supplie, Monsieur, d'y faire\n[[57.2]] penser si cela se peut commodement. </p>\n<p> [[57.3]] Quant à l'objection qu'il semble qu'on a faite, Monsieur que la multitude des chifres dans\n[[57.4]] le Calcul Binaire est incommode, elle ne va point au but, que j'y propose. Je conseille ce Calcul\n[[57.5]] non pas pour les usages vulgaires, mais pour trouver des regles et methodes; à quoy il est plus\n[[57.6]] propre que quelque autre progression à cause de sa simplicité de ses ingrediens. Et ce qui\n[[57.7]] paroist multitude est abregé, lors qu'on peut regler par là les series qui vont à l'infini. Aussi la\n[[57.8]] regle estant trouvée on n'a point besoin d'écrire expressement toutes ces notes. Si j'avois vû\n[[57.9]] que quelqu'un fut entré dans ma pensée, j'aurois pris plaisir à la pousser, et à en expliquer les\n[[57.10]] usages. </p>\n<p> [[57.11]] Je ne doute point que M. Tidius n'ait communiqué à l'Academie Royale, ou du moins à\n[[57.12]] M. Cassini son cycle de 592 ans, suivant la grandeur qu'il assigne à l'année; pretendant\n[[57.13]] qu'apres cette periode les deux Luminaires reviennent sous le même meridien à leur commencemens\n[[57.14]] au même degré et minute, même jour du mois, suivant le stile qu'il assigne, même\n[[57.15]] jour de la semaine, heure et minute. Enfin que les mouvemens des deux luminaires deviennent\n[[57.16]] ainsi commensurables. Je n'oserois dire que cela est exact, cependant on le trouve heureux, et\n[[58.1]] assez approchant et je souhaitte d'en apprendre le sentiment de M. Cassini, de M. de la Hire, et\n[[58.2]] d'autres habiles Astronomes de la Compagnie. M. Tidius pretend prouver par les anciennes et\n[[58.3]] modernes observations, que la Grandeur Tychonique de l'année est moins juste que la sienne. </p>\n<p> [[58.4]] Il ne paroist point à M. Hofman, qui nous a donné par deçà il y a quelque temps\n[[58.5]] l'experience de deux liqueurs qui s'enflamment, que cela reussisse generalement avec toute\n[[58.6]] l'huyle essentielle aromatique des Indes. Cependant non seulement l'huyle de canelle et de\n[[58.7]] sassafras, dont vous parlés, Monsieur, mais encor celle de girofle y reussit fort bien. Il me\n[[58.8]] semble qu'il en est autrement de l'hyle de Macis. </p>\n<p> [[58.9]] Je n'ay garde, Monsieur, d'esperer avant le public des relations circomstanciées des belles\n[[58.10]] choses, qui se passent dans l'Academie. Mais si lors que vous me faites l'honneur de m'ecrire,\n[[58.11]] vous pouvés adjouter sans consequence quelque mot de nouveauté literaire qui la regarde, je\n[[58.12]] vous en auray de l'obligation. </p>\n<p> [[58.13]] J'espere aussi que le proces sur le Calcul des differences sera terminé; je serois surpris si\n[[58.14]] on se servoit des contestations metaphysiques sur l'infini, pour forger des scrupules sur un\n[[58.15]] calcul, qui n'en a que faire, et qui se verifie tousjours visiblement par des grandeurs moindres\n[[58.16]] qu'aucunes données. </p>\n<p> [[58.17]] Au reste je suis avec zele </p>\n<p> [[58.18]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n","number":"18.","title":"LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE","date":"Hannover, 5. Mai 1702. [4.19.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

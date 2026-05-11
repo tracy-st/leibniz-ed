@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_128","series":"Band II 3 (1695 - 1700)","seq":128,"text":"<p> [[345.1]] <b>128. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[345.2]] Venedig, 5. Juli [1697]. [126.129.]</b></p>\n\n<p> [[345.13]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o </p>\n<p> [[345.14]] Non posso esprimere a V. S. Ill^#'m^#'a quanto viva obligato alla generosa bontà del Sig^#'r^#'e Conte\n[[345.15]] Bertolli Consultore di Stato il quale colla sua grande autorità, eruditione e diligenza m' hà\n[[345.16]] finalmente ottenuta la copia dell'incluso diploma estratto dal suo vero originale che sta registrato\n[[345.17]] nel catastico del Monastero delle carceri, scritto con caratteri gotici, e molto oscuri, per\n[[345.18]] così dire deciferati dal migliore Scrittore che qui si trova. Io ne resto consolatissimo d' havere\n[[345.19]] una volta sodisfatto il suo genio, e servito cotesto Serenissimo Principe doppo tanti impedimenti,\n[[345.20]] ed una lunghissima ricerca che hà straccato il Sig^#'r^#'e Mocenigo, ed il Sig^#'r^#'e Zannovelli\n[[345.21]] agente del Serenissimo di Zel; a quali non hò ancora confidato il felice successo del ritrovato\n[[345.22]] privileggio, per non haverli veduti. Nei diplomi delle Carceri, non <angle bracket>v</angle bracket>'altro diploma che\n[[345.23]] appartenga a Duchi di Sassonia, e sono certissimo che si[a] quello che si cerca. Domenica\n[[345.24]] mattina io, il Sig^#'r^#'e Conte Bertolli, l'Ecc^#'m^#'o Proc^#'r^#'e Giustiniani si portassimo in San Marco e doppo\n[[345.25]] essere saliti per una vecchia e laboriosa scala, trovassimo nella sommità del Tempio la camera\n[[345.26]] dell'Abbate Gioachimo, in faccia alla quale vi era una piccola stanza, e perche non si trovavano\n[[346.1]] le chiavi, si ruppero le porte, dentro vi trovassimo una grandissima quantità di scritture e\n[[346.2]] diplomi appartenenti alla Seren^#'m^#'a Republica, con un grandissimo Armario, ove si custodiscono i\n[[346.3]] manuscritti del Petrarca, mi fù permesso di ricercarli tutti, ed havendoli attentamente essaminati\n[[346.4]] non fù possibile trovare questo piccolo dittionario della lingua persico cumana. Questi manuscritti\n[[346.5]] sono tutti laceri, e consumati dal tempo. Il Sig^#'r^#'e Conte Bertolli stima che sieno stati\n[[346.6]] rubbate le scritture più cospicue, ed insigni del Petrarca, e resta molto addolorato di non haverla\n[[346.7]] potuto servire circa que<angle bracket>ll</angle bracket>o particolare, e mi creda che non è stato poco d'entrare in un luogo\n[[346.8]] così geloso coll'autorità di copiare quel che c'abbisognava a modo nostro. Io hò fatto già tutte\n[[346.9]] le diligenze, e mi dispiace che non si trovi questo manuscritto da essa tanto bramato, gradirà la\n[[346.10]] mia buona volontà. Io farò tutto per trovare il soldo necessario di mettermi in viaggio e quando\n[[346.11]] non potessi eseguire quanto hò già risolto, ne dia la colpa all'impotenza in cui mi trovo di fare\n[[346.12]] un viaggio così dispendioso havendo già consumato quasi tutto il mio soldo in piantare casa in\n[[346.13]] Padova. Del resto raccomando all'amore generoso di V. S. Ill^#'m^#'a il nostro comune amico acciò le\n[[346.14]] possa trovare qualche nuova occasione d'accommodarsi con decoro e quiete, essendo egli\n[[346.15]] risolto di eseguire quanto le scrisse, quando ella si degnarà colla sua autorità favorirle attendo\n[[346.16]] con impatienza sue risposte, e pregandola dell'onore de' suoi stimatissimi comandi, inalterabilmente\n[[346.17]] mi protesto </p>\n<p> [[346.18]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Div^#'m^#'o, Oblig^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[346.19]] Venetia 5 Luglio </p></p>\n","number":"128.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 5. Juli [1697]. [126.129.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

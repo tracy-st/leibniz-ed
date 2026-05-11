@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_61","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":61,"text":"[[478.61]] <b>61. De sede animae </b> <span>478.0;0:63:061:76       :L:l^</span>.\n[[478.2]] Februar 1676\n[[478.13]] Sex annis abhinc Serenissimus dux Hannoveranus, solitus de religione meditari\n[[478.14]] Boineburgio commiserat ut sententiam meam exquireret circa resurrectionem carnis.\n[[478.15]] Hanc brevi scripto comprehensam tunc Duci transmisi. Nunc Februario anno 1676\n[[478.16]] incido communicante Knorrio in scriptum Boylii 1675 editum de possibilitate resurrectionis,\n[[478.17]] ubi multa meis egregie consentientia. Tantum ille chymicis illustrationibus\n[[478.18]] diutius institit. Difficultates ego presse magis secutus sum. Nimirum arbitror\n[[478.19]] florem substantiae esse corpus nostrum. Hunc florem substantiae in omnibus mutationibus\n[[478.20]] subsistere perennem. Adumbratum per Luz Rabbinorum. Facile hinc apparere\n[[478.21]] cur Canibales hominem vorantes nihil habeant juris in substantiae florem.\n[[478.22]] Hunc substantiae florem per totum corpus diffusum, solam quodammodo formam\n[[478.23]] continere. Adde huc quae Borellus in Microscopicis observationibus habet de arboris\n[[478.24]] cerasi figura in cortice grani sive trucis fructui inclusae. Item quae de Arbore Philosophorum.\n[[478.25]] Item quae in Diario Gallico ex Anglico de vi plastica, Vim plasticam\n[[478.26]] nihil aliud esse quam substantiam illam activam certae figurae, quae se cum potest\n[[479.1]] auget. Videtur ea esse jam ante conceptionem, (con)ceptione tantum ei augmenti dari\n[[479.2]] facultatem. Adde Scheckium de vi plastica, Davissonium aliosque. Ego (tantum) addo,\n[[479.3]] quod non observatum Boylio, videri animam huic ipsi flori substantiae firmiter implantatam.\n[[479.4]] Vide quae Perraltus ratiocinabitur contra Mariottum de sede animae. Si\n[[479.5]] vero opus esset explicare etiam caeterae massae restitutionem, quod tamen non opus,\n[[479.6]] cum sit fere terra (vide quae huc duci possunt de existentia corporum in corpore, de\n[[479.7]] aqua Eucharistica et vino et pane; scholastici), posset id forte fieri in dissolutione\n[[479.8]] generali, quemadmodum mira ratione singulari experimento, si varii sales in eadem\n[[479.9]] aqua solvantur, singuli cognati reconpinguntur sine perturbatione, quod autem in\n[[479.10]] quatuor id majore subtilitate in 1 000 000 000 etc. speciebus salium etiam effici\n[[479.11]] potest; jam fingantur? Quot in qualibet salium specie fit, in quolibet humano individuo\n[[479.12]] fieri, subtiliore scilicet illa solutione et celeriore tempore omnia poterunt recompingi\n[[479.13]] per crystallisationem. Argumentum a Canibalibus sumtum, demonstrativum\n[[479.14]] est et probat florem substantiae intelligi debere. Adde huc quae Libavius et\n[[479.15]] Quercetanus habent de resurrectione, et quae Kircherus, item Glauberus de regeneratione\n[[479.16]] Nitri, item (bricht ab)\n","number":"61.","title":"De sede animae","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

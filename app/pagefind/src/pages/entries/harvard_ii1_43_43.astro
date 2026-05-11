@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_43","series":"Band II 1 (1663 - 1685)","seq":43,"text":"<p> [[124.1]] <b>37. JAKOB THOMASIUS AN LEIBNIZ</p>\n<p> [[124.2]] Leipzig, 7. (17.) Januar 1671. [35.50.]</b></p>\n<p> [[124.13]] Non merebantur <i>dialogi physici</i> mei elogium illud, quod iis tribuis. Majore merito\n[[124.14]] provocabit eruditorum plausus vel illud schediasma tuum, de quo scribis, cujusque veluti\n[[124.15]] summam literis tuis complecteris. In quo cum legerem aetherem illum, quem ais cum luce solis\n[[124.16]] circa terram ferri, videbar equidem agnoscere aliquid, si non idem, saltem forsan simile aetheri\n[[124.17]] de quo ago p. 46, 47, <i>physicorum</i>. Qua in re forte decipior, tamdiu tamen hic error me\n[[124.18]] delectabit, donec ipsam voluptatem alia depellat, ubi ex te didicero certiora. Pro carmine, quod\n[[124.19]] mittis, habeo gratias. Nunc disputatio quaedam habenda me praeside de feminarum eruditione\n[[124.20]] prelo tradita est. Eam occasione proxima mittam. </p>\n<p> [[124.21]] Cum jam in manibus ea esset typographi, notitia demum facta mihi est, libelli, cui titulus:\n[[124.22]] <i>Ehren-Preiß des Frauenzimmers</i>, auctore cancellario Fuldensi Schützio, cui personatus quidam\n[[124.23]] Poliandinus respondit, qui et inde libellum suum nominavit: <i>gestürzten Ehrenpreiß.</i> Ea re\n[[124.24]] factum, ut vix duobus verbis tangere licuerit in disputatione nostra hos duos libellos, vocandos\n[[124.25]] alioqui sub accuratiorem censuram. Decrevi tamen de iis aliquid, ut solemus, praefari. Schützium\n[[124.26]] intelligo apostatam esse, unde venit mihi in mentem suspicari, nomen Ignatii, quod cum\n[[125.1]] Wilhelmo praefert, ipsi inditum esse in professione religionis novae. Poliandinum ajunt, nescio\n[[125.2]] quem esse, Johannem Gorgiam, Transylvanum, hominem nescio an religionis nostrae, dissolutae\n[[125.3]] certe vitae, et e patria profugum, cum ancillae patris vitium intulisset. Ejusdem quoque\n[[125.4]] ajunt esse, <i>den Jungferlichen Zeit-Vertreiber</i>, nomine Veriphantoris editum, scriptum impurum.\n[[125.5]] Quae me res movit, ut crederem, feminei sexus dedignationem, qua plenum est scriptum ejus,\n[[125.6]] Schütziano oppositum, non ex alio fonte proficisci, quam quod feminas non aliunde aestimaret,\n[[125.7]] quam ex eo abusu, quo scorta impuri hominis humores foedos matularum instar excipiunt. Sic\n[[125.8]] vicissim impulsum Schützium credebam tenero quodam, sed coniugali in hunc sexum amore, et\n[[125.9]] misericordia versus eas, quae a viris duriter tractantur; nam in ejusmodi viros aculeum subinde\n[[125.10]] emittit; indignatione insuper in eos, qui optimo sexui convicia dicunt: Huc enim referebam\n[[125.11]] historiam de nescio quo nobili incivili, qui ex itinere Gallico nihil aliud retulerat domum, quam\n[[125.12]] in feminas convicia. Narro tibi somnia mea, ut ex te veriora sive de Schützio, sive de Poliandino\n[[125.13]] discam. Tametsi enim non exspectabit ista praefatio mea tuas literas, jucundum tamen\n[[125.14]] erit, hujus ut ita dicam, monomachiae historiam per te cognoscere. Ajunt esse Schützium\n[[125.15]] insigni munere affectum ab imperatrice, cui dedicavit libellum, tolerabilem, nisi Agrippam\n[[125.16]] secutus, quem semel citat, passim describit, altius levasset hunc sexum, quam eum locaverat\n[[125.17]] creator. </p>\n<p> [[125.18]] Est et aliud quiddam, in quo velim opera tua uti. Suntne tibi notae orationes Nicolai\n[[125.19]] Schoenbergii Cardinalis, coram Julio II. Pontifice, habitae, <i>de pugna Christi cum diabolo in\n[[125.20]] deserto</i>, quas <i>Bibliotheca</i> Gesneri memorat. Eas apud nos etiam a. 1511 editas esse didici e\n[[125.21]] postilla Bausthiana in illud Evangelium, sed frustra quaesivi in nostris bibliothecis: magnopere\n[[125.22]] tamen vellem, vel ipsas, vel apographon earum procurare possem ex illa familia maximo\n[[125.23]] cuidam viro. Quaeso, si me potes, adjuva. Bene vale amice optime, et Illustrissimo Boineburgio\n[[125.24]] fausta quaeque a me, in hunc et sequentes annos, quos et tibi felicissimos fluere iubeat Deus,\n[[125.25]] precare. Lips. d. 7 Jan. anni ineuntis, 1671. </p>\n","number":"37.","title":"JAKOB THOMASIUS AN LEIBNIZ","date":"Leipzig, 7. (17.) Januar 1671. [35.50.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

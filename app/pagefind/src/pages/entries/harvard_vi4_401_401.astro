@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_401","series":"Band VI 4 (1677 - 1690)","seq":401,"text":"[[1689.1]] <b>333.  Incerti autoris nota de metaphysica ex sententia Augustini scribenda [1677 bis 1716 (?)]</b>\n [[1689.3]] <tab/>[1677 bis 1716 (?)] </p>\n<p> [[1689.9]] Cum his diebus otium aliquod a consuetis laboribus mihi imperasset afflicta paulisper\n[[1689.10]] corporis valetudo, legere incepi D. Augustini <i>Confessionum</i> libros, antea non nisi\n[[1689.11]] nomine mihi notos, quae lectio tantum animum recreavit, ut summam quam de Augustino\n[[1689.12]] ex libris <i>de Civitate Dei</i> conceperam opinionem auxerit mirifice. Quamvis enim non\n[[1689.13]] ignorem Petrum Castellanum, Episcopum Matissonensem, Magnum Franciae Eleemosynarium,\n[[1689.14]] ita inimice insectatum esse hunc Ecclesiae Doctorem, <Fn>Notat id Petrus Gallandius, Regius Latinarum litterarum Professor, in <i>vita Petri Castellani</i>, quam Baluzius A. 1674 in 8^#'o edidit, c. 27 quod accipiens Baluzius in Praefatione monet, nemini mirum videri debere, quod Castellanus alicubi acerbe et contumeliose in Pontifices Romanos illorum temporum invehatur, etiamsi alioqui de Sedis Apostolicae dignitate magnifice sentiret, et communionem cum ea retinendam esse putavit, cum nec ab Augustino quidem Hipponensi Episcopo se abstinuerit.</Fn> ut eum <b>bonarum\n[[1689.15]] artium magis non ignorantem, quam peritum</i> dici posse praedicaret, adeoque\n[[1689.16]] <b>ejus lucubrationes citra fastidium legi vix posse ab homine liberaliter\n[[1689.17]] in litteris educato, praeterea linguarum ignoratione somniasse frequenter\n[[1689.18]] atque etiam delirasse sacra explicando</i> asseveraret; tamen opus ejus\n[[1690.1]] <i>de Civitate Dei</i> doctissimae varietatis, hos vero <i>Confessionum</i> libros profundissimae\n[[1690.2]] veritatis deprehendisse mihi videor. Et operae quidem pretium esset scribi ab aliquo\n[[1690.3]] Metaphysicam ex sententia S. Augustini; uberrimam certe materiam inveniret; neque\n[[1690.4]] enim scio utrum argumentum hoc satis pro dignitate tractaverit Benedictus a S. Jacobo\n[[1690.5]] Ferrariensis, Congregationis fratrum Eremitarum Discalceatorum, sacrae Theologiae\n[[1690.6]] Lector, cujus <i>Tomus III. Augustini Philosophiae naturalis complectens ea, quae in libris\n[[1690.7]] de anima controvertuntur, verbis et sententiis ejusdem patris contentus et scholiis\n[[1690.8]] explicatus</i> Mediolani in forma, quam XII. vocant, prodiit, sed hactenus a me frustra\n[[1690.9]] quaesitus est. </p>\n","number":"333.","title":"Incerti autoris nota de metaphysica ex sententia Augustini scribenda","date":"[1677 bis 1716 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

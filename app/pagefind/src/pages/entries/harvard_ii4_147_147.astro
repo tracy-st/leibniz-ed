@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_147","series":"Band II 4 (1701 - 1707)","seq":147,"text":"<p> [[477.1]] <b>147. LEIBNIZ AN JACQUES BERNARD</p>\n<p> [[477.2]] [Hannover, Ende September bis Mitte Oktober 1706]. [133.] </b></p>\n<p> [[477.23]] Monsieur </p>\n<p> [[477.24]] Vos <i>nouvelles de la Republique des lettres</i> estant fort instructives, j'ay coustume de les lire\n[[477.25]] pour estre mieux informé de ce qui se passe dans le pays literaire. Et comme j'y ay remarqué un\n[[477.26]] endroit qui me touche, où vous donnés l'extrait d'un recit qui regarde l'Histoire de mon\n[[477.27]] invention de l'Analyse infinitesimale, mais qui n'est pas trop bien fondé; j'ay crû necessaire,\n[[478.1]] Monsieur, de vous envoyer le papier cyjoint qui en contient une narration exacte et circomstantiée,\n[[478.2]] approuvée même par Monsieur Bernoulli professeur maintenant à Bale et auparavant à\n[[478.3]] Groningue, qui avec feu Monsieur son frere y est le plus interessé à qui je l'avois communiqué,\n[[478.4]] et c'est la cause que vous le recevés un peu tard. Quoyque la narration que je refute, paroisse\n[[478.5]] fait pour favoriser ces Messieurs en apparence à mes depens; ils ont esté tousjours trop\n[[478.6]] raisonnables pour avoir des telles pretensions et leur avantages veritables et solides sont assez\n[[478.7]] grands sans qu'ils ayent besoin d'en chercher de faux. Aussi se seroient ils crû deshonnorés par\n[[478.8]] les procedés artificieux et injustes qu'on leur attribue. Ainsi je ne doute point que vous ne nous\n[[478.9]] fassiés la justice de publier nostre Apologie. Peutestre qu'un savant Medecin ecossois de mes\n[[478.10]] amis vous aura monstré en passant une longue lettre que je luy ay donnée pour Monsieur Coste\n[[478.11]] traducteur des <i>Essais</i> de M. Lock, et du livre de Mylady Masham contre M. Norris touchant\n[[478.12]] l'Amour divin. Ma Lettre regarde ce dernier livre que Mons. Coste m'avoit envoyé. Au reste je\n[[478.13]] suis </p>\n<p> [[478.14]] Monsieur vostre etc. </p>\n<p> [[478.15]] P. S. Si vous aviés quelque chose à m'ordonner Monsieur, vous pourriés l'envoyer à\n[[478.16]] Monsieur Mezquita Agent de Madame l'Electrice de Bronsvic à Amsterdam. </p>\n","number":"147.","title":"LEIBNIZ AN JACQUES BERNARD","date":"[Hannover, Ende September bis Mitte Oktober 1706]. [133.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

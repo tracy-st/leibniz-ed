@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_131","series":"Band II 4 (1701 - 1707)","seq":131,"text":"<p> [[435.1]] <b>131. LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE</p>\n<p> [[435.2]] [April] 1706. [94.138.] </b></p>\n<p> [[435.15]] Monsieur </p>\n<p> [[435.16]] Il <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: nicht abgangen</Fn> y a du temps que j'avois pris la liberté de vous recommander pour le <i>journal des savans</i>\n[[435.17]] une reponse au R. P. Lami sur une matiere qui avoit esté traitée autresfois dans vos journaux.\n[[435.18]] J'eus pour reponse qu'on n'y mettoit rien de polemique. J'aurois souhaité de bien entendre ce\n[[435.19]] que cela signifie, pour me regler là dessus une autresfois, car nostre dispute ne regardoit que la\n[[435.20]] philosophie, et il me semble que vostre journal parle même des controverses de Theologie, il\n[[435.21]] n'y avoit rien aussi dans ma reponse qui fut choquant. Mais je n'ay obtenu aucun éclaircissement\n[[435.22]] là dessus, et même mon memoire ne m'a pas esté rendu quoyque je l'eusse souhaité. </p>\n<p> [[436.1]] Depuis ayant demandé justice contre certaines objections publiées en matiere d'analyse,\n[[436.2]] dont la chicane saute aux yeux, je n'ay pas obtenu le moindre mot de réponse. J'en serois moins\n[[436.3]] surpris si je n'avois à faire à des personnes, qui ont la reputation d'en user d'une maniere fort\n[[436.4]] equitable et fort obligeante. </p>\n<p> [[436.5]] Jugés, Monsieur, si je ne me dois croire en disgrace, et si je n'ay sujet de vous supplier de\n[[436.6]] me faire connoistre par où je puis avoir merité ce que je n'avois pas encor eprouvé. Cette\n[[436.7]] connoissance me fera mieux prendre mes mesures une autre fois, et vous suppliant Monsieur de\n[[436.8]] faire mes recommendations chez Monsieur l'Abbé Bignon. </p>\n","number":"131.","title":"LEIBNIZ AN BERNARD LE BOVIER DE FONTENELLE","date":"[April] 1706. [94.138.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

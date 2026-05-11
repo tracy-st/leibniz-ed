@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_142","series":"Band II 4 (1701 - 1707)","seq":142,"text":"<p> [[465.1]] <b>142. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[465.2]] Venedig, 3. September 1706. [139.143.] </b></p>\n<p> [[465.10]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e e Padrone Cole^#'m^#'o </p>\n<p> [[465.11]] Il S^#'r^#'e Zianovelli m'hà consegnato l'humanissimo foglio di V. S. Ill^#'m^#'a in data 20 d'agosto,\n[[465.12]] che mi ha sommamente consolato, e rallegrato, essendomi arrivato in tempo, che molto mi\n[[465.13]] tormentava la Malinconia cagionatami d'un ostinato dolore di Fiancho il quale benché si sia\n[[465.14]] dissipato, mi ha lasciato non di meno cosi languido ed abbatuto, che per non mancare al mio\n[[465.15]] dovere, mi prendo hora l'ardire di rispondere a V. S. Ill^#'m^#'a coll'altrui charattere non havendo io\n[[465.16]] ancora forze di regere a mio modo la penna. Ho letto con mio grandissimo profitto, e contento\n[[465.17]] le delicate, e savie sue riflettioni, sopra la presente improvisa mutatione delle cosse d'Europa,\n[[465.18]] effetto della divina providenza per liberarla dall'intolerabile giogo che la minaciava V. S. Ill^#'m^#'a\n[[465.19]] che tanto vede m'intende abastanza, e piace<angle bracket>ndo</angle bracket> a Dio che potessimo nella nostra Italia\n[[465.20]] respirare l'aria di quella dolce, e <b>semper</b> tanto sopperata libertà, che si ricerca alla coltura, e\n[[465.21]] perfettione delle scienze; sperava che oggi si radunasse l'eccel^#'m^#'o Magistrato dei S^#'r^#'i Riformatori\n[[465.22]] dello studio di Padova per stabilire di mettere la parte della condotta del dottissimo S^#'r Herman\n[[465.23]] nell'Eccel^#'m^#'o Senato, ma l'urgenza degli affari publici in questi tempi pericolosi non l'han\n[[465.24]] permesso. Mi lusingo pero che ciò possa accadere nella ventura settimana, ed io sono attentissimo\n[[465.25]] per terminare quest'affare, che tanto mi preme, e che hora niuno lo può turbare, ed\n[[465.26]] alterare essendo già stabilito nell'Eccel^#'m^#'o Magistrato, non altro hora ricercandosi che la conferma\n[[465.27]] dell'Eccel^#'m^#'o Senato, il che si sarebbe gia ottenuto, se le presenti calamitose circonstanze,\n[[465.28]] non havessero obligato gli Eccel. Riformatori a differirlo coll'oggietto di dare poi il colpo piu\n[[465.29]] sicuro nel Senato. Intorno ai Semi de Celsi mori bianchi, io n'ho qui appresso di me una buona\n[[465.30]] quantità mandatami da Padova d'un mio Servitore che gli ha raccolto egli medesimo con tutta\n[[465.31]] diligenza dal frutto di quest'anno, pero egli ha mancato in questo, che n'ha raccolto meno d'una\n[[465.32]] libra, con dire che ci volevano delle molte piante, per raccorne una maggiore quantità, e perche\n[[466.1]] stimo che sia un meo sbaglio il dire che V. S. Ill^#'m^#'a ne voglia una libra mentre l'ha attesa la\n[[466.2]] dispositione che si ricerca a seminare separatamente questi minutissimi, e quasi invisibili semi,\n[[466.3]] una libra di questi bastarebbe hormai di cuoprire la superficie del ter[r]eno tutto, ed Europeo,\n[[466.4]] hor in che risate non cadrà quando gli scriverò che secondo gl'ordini di V. S. Ill^#'m^#'a n'hò bisogno\n[[466.5]] di 4 libre. Oltre di quel che m'ha mandato il mio servitore ne conservo un altro piccolo\n[[466.6]] scattolino, che riceve da Modona il nostro eruditissimo commune amico il S^#'r^#'e Ramacino, il\n[[466.7]] quale per gl'ordini colla dati n'ha aspetta degl'altri, e di varie sorti, essendo quel paese per una\n[[466.8]] particolare coltura feracissimo di queste piante. Il tutto nostro Professore S^#'r^#'e Valseniere m'haveva\n[[466.9]] ancora esso promesso mandarmene una gran quantità da Reggio di Modena ov'egli\n[[466.10]] presentemente si trova, ma essendo hora tutto quel paese infestato dagli esserciti stranieri, non\n[[466.11]] so che cossa possa sperare. E necessario perciò che V. S. Ill^#'m^#'a dia ordine ai S^#'r Zianovelli accio\n[[466.12]] riceva quel pocho seme che io ho, e glielo trasmetta con tutta diligenza che se poi ella ne vorrà\n[[466.13]] di piu, farò tutto aciò per l'anno venturo ne raccolga anche 4 libre secondo il suo desiderio, non\n[[466.14]] essendomi cossa in questo mondo che mi possa recare piu contento, ed honore, quanto il\n[[466.15]] vedermi impiegata in cosse di suo servitio, per un essercitio di quell'inalterabile, ed obligata\n[[466.16]] gratitudine che le professo. Coll'ordinario venturo a Dio piacendo le scriverò di proprio pugno,\n[[466.17]] sperando d'essermi rimesso nelle mie prime forze, molto ora pregiudicate dal dolore che\n[[466.18]] lungamente m'hà tormentato, et divotamente riverendola mi resto </p>\n<p> [[466.19]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[466.20]] Venetia 3 7^#'b^#'r^#'e 1706 </p>\n","number":"142.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 3. September 1706. [139.143.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_82","series":"Band II 4 (1701 - 1707)","seq":82,"text":"<p> [[270.1]] <b>82. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[270.2]] Venedig, 30. August [1704]. [81.84.] </b></p>\n<p> [[270.9]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[270.10]] Avendo significato all'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Marcello Capo dell'Ecc^#'m^#'o Magistrato de Sig^#'r^#'i\n[[270.11]] Riformatori dello Studio di Padova come V. S. Ill^#'m^#'a m'aveva ricordato il Sig^#'r^#'e Herman per la\n[[270.12]] professione delle Matematiche nella nostra Università, ove ora vaca la catedra di Matematica,\n[[270.13]] mi fù da Sua Eccellenza comandato che sopra di ciò le ne dassi una piccola memoria che fù\n[[270.14]] presentata ieri all' Ecc^#'m^#'o Magistrato che ebbe grandissimo contento d'una tale propositione,\n[[270.15]] persuadendosi che per promovere il Sig^#'r^#'e Herman fosse il maggiore testimonio l'approvatione\n[[270.16]] di V. S. Ill^#'m^#'a oggi così celebre e rinomata per l'alto suo sapere e principalmente per le\n[[270.17]] cognitioni matematiche nel Mondo letterato. L'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Veniero uno de' tre Riformatori\n[[270.18]] ne scrive oggi ad Hannover ad un Sig^#'r^#'e di cotesta Corte, credo, per averne per mezzo di\n[[270.19]] V. S. Ill^#'m^#'a una piu piena e distinta relatione del Soggetto proposto, e forse anche per assicurarsi\n[[270.20]] della di lei approvatione; e se ne scriverà ancora al loro Residente in Milano, accio si maneggi\n[[270.21]] con qualcheduno di Basilea per informarsi meglio del Soggetto, e stabilire le maniere di farlo\n[[270.22]] venire a Padova. Io hò tacciuto il punto della Religione, e dovendo il Sig^#'r^#'e Herman venire per\n[[270.23]] insegnare non gia la Teologia, ma le Matematiche[,] spero, che non si farà sopra ciò difficolta\n[[270.24]] veruna, e poi sperarei questo punto superarlo con altri motivi che ho gia pensati, che riguardano\n[[270.25]] il bene e populatione dello Studio. </p>\n<p> [[270.26]] L'Ecc^#'m^#'o Sig^#'r^#'e Procu^#'r^#'e Marcello m'hà comandato che ne scriva subito a V. S. Ill^#'m^#'a pregandola\n[[270.27]] di disponere il Sig^#'r^#'e Herman ad accettare l'impiego, e spiegarsi sopra lo stipendio che\n[[270.28]] desidera per il suo trattenimento in Padova. Giacche questo Ecc^#'m^#'o Magistrato s'è ora così\n[[271.1]] invogliato d'averlo, molto inclinando a scegliere per la catedra di Matematica Un Uomo dotto e\n[[271.2]] celebre della Germania, per allettare così la Natione Todesca a portarsi in Padova, bisogna\n[[271.3]] operare con calore e sollecitudine, e risolvere presto, accio l'Ecc^#'m^#'o Magistrato possa prendere le\n[[271.4]] sue misure, e sapere cio che deve farsi. Io nella mia memoria dissi che il Sig^#'r^#'e Herman fosse\n[[271.5]] Professore delle Matematiche in Basilea, essendomi per quel che essa mi scrisse così imaginato,\n[[271.6]] non vorrei avere fallato, o trovarmi detta una cosa che non fosse, la prego percio scrivermi\n[[271.7]] sopra questo particolare, e rispondermi subito, e divotamente riverendola, costantemente mi\n[[271.8]] protesto </p>\n<p> [[271.9]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella. </p>\n<p> [[271.10]] Venetia 30 Agosto </p>\n","number":"82.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 30. August [1704]. [81.84.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

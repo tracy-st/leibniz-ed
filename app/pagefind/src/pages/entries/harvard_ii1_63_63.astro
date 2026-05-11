@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_63","series":"Band II 1 (1663 - 1685)","seq":63,"text":"<p> [[161.12]] <b>56. HEINRICH OLDENBURG AN LEIBNIZ</p>\n<p> [[161.13]] London, 24. April (4. Mai) 1671. [48.57.]</b></p>\n<p> [[162.1]] Nobiliss^#'o et Ampliss^#'o Viro </p>\n<p> [[162.2]] Dⁿ^#'o Gothofredo Guilielmo Leibnitzio, J.U.D. </p>\n<p> [[162.3]] et Consiliario Moguntino digniss^#'o </p>\n<p> [[162.4]] Henr. Oldenburg S. </p>\n<p> [[162.5]] Paucis abhinc diebus per Tabellionem ordinarium de plurimis rebus Philosophicis, nec non\n[[162.6]] de <i>Hypothesi</i> tua <i>Physica</i> ad Te scripsi, inprimis vero ursi, ut partem ejus secundam <i>de\n[[162.7]] Abstractis Motus regulis</i> quantocius, ad majorem totius rei lucem, huc transmittas. Spero,\n[[162.8]] litteras illas rite Tibi fuisse traditas. Jam quod scribam aliud non suppetit, nisi ut significem, me\n[[162.9]] per Bibliopolam nostratem, Martinum, et per Schultzium Hamburgensem, ad Zunnerum Francofurtensem\n[[162.10]] libros a Te desideratos, quos quidem eorum concessu potui, transmisisse, nempe\n [[162.11]] lib. sterling. shill.^&.!! <Leibniz special character: distilletur>\n [[162.12]] <i>Phil. Transact.</i> annorum 68, 69, 70 1 0 0.\n [[162.13]] <i>Lexicon</i> Bluntii 0 4 6.\n [[162.14]] Boylius <i>de Rarefactione Aëris</i> 0 0 6.\n [[162.15]] Boilii <i>Tractatus</i> aliquot <i>de qual. Cosmicis</i> etc. 0 1 8.\n [[162.16]] Glanvils <i>Plus Ultra</i> 0 1 6.\n [[162.17]] <i>Mercur. librarius</i> 0 1 6.\n [[162.18]] Sum ^#6+ 1 [9] 8.^#6- </p>\n<p> [[162.19]] Persuasissimum habeo, Te Curaturum, ut Zunnerus Schultzio de precio satisfaciat, ut\n[[162.20]] Schultzius deinde possit satisfacere Martino; absque quo si fuerit, difficilis erit imposterum\n[[162.21]] Martinus noster in consimili occasione. Vale, et a Tui observantissimo plurimum Salve. Dabam\n[[162.22]] Londini d. 24. April. 1671. </p>\n<p> [[163.1]] Deinceps Schultzius Amplitud^#'i Tuae suppeditabit omnes hujusmodi libros, in Anglia\n[[163.2]] impressos: Noster enim Martinus cum eo rem habet. </p>\n<p> [[163.3]] Nobiliss^#'o et Consultiss^#'o Viro Dⁿ^#'o Gothofredo Guilielmo Leibnitz J.U.D. et Consiliario\n[[163.4]] Moguntiaco. Maintz. </p>\n","number":"56.","title":"HEINRICH OLDENBURG AN LEIBNIZ","date":"London, 24. April (4. Mai) 1671. [48.57.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

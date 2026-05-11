@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_265","series":"Band II 2 (1686 - 1694)","seq":265,"text":"<p> [[811.17]] <b>268. LEIBNIZ AN CHRISTIAAN HUYGENS</p>\n<p> [[811.18]] Hannover, 12./22. Juni 1694. [264.282.]</b></p>\n<p> [[812.6]] Hanover ce 12/22 juin 1694 </p>\n<p> [[812.7]] [ ... ] Quant à la difference entre le mouvement absolu et relatif, je croy que si le\n[[812.8]] mouvement ou plustost la force mouvante des corps est quelque chose de reel comme il semble\n[[812.9]] qu'on doit reconnoistre, il faudra bien qu'elle ait un <i>subjectum</i>. Car <i>a</i> et <i>b</i> allant l'un contre\n[[812.10]] l'autre, j'avoue que tous les phenomenes arriveront tout de meme, quel que soit celuy dans\n[[812.11]] lequel on posera le mouvement ou le repos; et quand il y auroit 1000 corps, je demeure\n[[812.12]] d'accord que les phenomenes ne nous sçauroient fournir (ny meme aux anges) une raison\n[[812.13]] infallible pour determiner le sujet du mouvement ou de son degré; et que chacun pourroit estre\n[[812.14]] conçû à part comme estant en repos, et c'est aussi tout ce que je crois que vous demandés; mais\n[[812.15]] vous ne nierés pas (je crois) que veritablement chacun a un certain degré de mouvement ou si\n[[812.16]] vous voulés de la force; non obstant l'equivalence des Hypotheses. Il est vray que j'en tire cette\n[[812.17]] consequence qu'il y a dans la nature quelque autre chose que ce que la Geometrie y peut\n[[812.18]] determiner. Et parmy plusieurs raisons dont je me sers pour prouver qu'outre l'etendue et ses\n[[812.19]] variations, qui sont des choses purement Geometriques, il faut reconnoistre quelque chose de\n[[812.20]] superieur, qui est la force; cellecy n'est pas des moindres. Monsieur Newton reconnoist\n[[812.21]] l'equivalence des Hypotheses en cas des mouvemens rectilineaires; mais à l'egard des Circulaires,\n[[812.22]] il croit que l'effort que font les corps circulans de s'éloigner du centre ou de l'axe de la\n[[812.23]] circulation fait connoistre leur mouvement absolu. Mais j'ay des raisons qui me font croire que\n[[812.24]] rien ne rompt la loy generale de l'Equivalence. Il me semble cependant que vous meme,\n[[812.25]] Monsieur, estiés autres fois du sentiment de M. Neuton à l'egard du mouvement circulaire.\n[[812.26]] [ ... ] </p>\n","number":"268.","title":"LEIBNIZ AN CHRISTIAAN HUYGENS","date":"Hannover, 12./22. Juni 1694. [264.282.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

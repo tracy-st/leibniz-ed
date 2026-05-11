@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_223","series":"Band VI 4 (1677 - 1690)","seq":223,"text":"[[866.4]] <b>182₃.  De terminis vel singularibus vel universalibus </p>\n<p> [[866.7]] Ens omne singulare seu individuum est, sed Termini sunt vel singulares vel universales,\n[[866.8]] v.g. cum hominem intelligo in genere, quemlibet intelligo, sed Terminus singularis\n[[866.9]] est, qui involvit omnia praedicata sui subjecti; universalis terminus est terminus\n[[866.10]] exprimens praedicatum incompletum. Ita et terminus unus alio latior vel strictior est prout\n[[866.11]] plura vel pauciora praedicata involvit. Et Terminus qui omnia praedicata essentialia\n[[866.12]] involvit, est species infima. Similiter ergo Termini concreti alii sunt essentiales alii\n[[866.13]] accidentales. Etsi enim idem sit qui rationalis est, et docilis et qui doctus, tamen rationalis\n[[866.14]] est essentialis primitivus, docilis essentialis derivativus; doctus accidentalis. Nempe\n[[866.15]] abstracta sunt formae substantiales, quantitates seu abstractum materiae accidentia quae\n[[866.16]] sunt formae accidentales, vel variationes. <Fn><i>Am Rande</i>: formae</Fn> Quodammodo quantitas est abstractum\n[[866.17]] Materiae, est enim aliquid essentiale, neque enim manente re aggregata mutari potest.\n[[867.1]] Rectius tamen fortasse materia prima instar abstracti concepta est resistentia, cum alias\n[[867.2]] videatur ipsa semper esse subjectum seu principium concreti. </p>\n","number":"182₃.","title":"De terminis vel singularibus vel universalibus","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

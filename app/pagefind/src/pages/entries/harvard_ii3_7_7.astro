@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_7","series":"Band II 3 (1695 - 1700)","seq":7,"text":"<p> [[21.1]] <b>7. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[21.2]] [Hannover,] 28. Januar (7. Februar) 1695. [2.14.]</b></p>\n\n<p> [[21.12]] [<i>L^#'1</i> ] </p>\n<p> [[21.13]] Extrait de ma reponse </p>\n<p> [[21.14]] Je vous envoye icy une lettre sur une contestation militaire. Elle a esté ecrite depuis peu\n[[21.15]] par un Officier du premier rang, et des plus experimentés; qui sert à un grand prince et qui s'est\n[[21.16]] trouvé aux Paysbas dans une conversation des Generaux où cette Matiere fut agitée. Comme il\n[[21.17]] y en a gueres d'exemplaires, et que c'est tout autant que si c'estoit un Ms. je crois que vous la\n[[21.18]] pourriés quasi inserer dans un de vos mois. Celuy qui a traduit les <i>Memoires</i> de Melleville, est\n[[21.19]] M. Smith envoyé de S.A.E. à la Cour de Suede. J'ay de temps en temps l'honneur de ses lettres. </p>\n<p> [[21.20]] J'ay lû la troisieme partie de <i>l'Histoire d'Angleterre</i> du P. d'Orleans. Elle est considerable,\n[[21.21]] parceque des personnes des mieux instruites luy ont fourni des notices. Et quoyqu'il soit\n[[21.22]] aisé de juger, qu'il a fait pancher les narrations en leur faveur, je ne laisse pas de souhaitter,\n[[21.23]] qu'on en pût avoir beaucoup de semblables sur les affaires du temps. </p>\n<p> [[21.24]] Il n'y a point eu de contestation sur l'examen des lettres de feu M. Conringius. Il y avoit\n[[21.25]] des endroits trop hardis dans celles qu'on a deja donné au public. C'est pourquoy on a ordonné\n[[22.1]] à celuy qui les a de n'en donner qu'après une censure preallable. Je fus chargé moy même de\n[[22.2]] dire mon sentiment sur ce livre. </p>\n<p> [[22.3]] Mons. Chapuzeau tout aagé qu'il est, ne laisse pas de se bien porter, et de faire esperer un\n[[22.4]] bon succes de son grand dessein. </p>\n<p> [[22.5]] Vous aurés vû le <i>Journal</i> <i>de Hambourg</i>. Je m'etonne qu'on y critique si sechement M. de\n[[22.6]] la Placette, qui ne paroist pas avoir tant de tort. </p>\n<p> [[22.7]] J'ay demandé nouvelles de mes animadversions, de Mons. Nieuwentid, du traité philosophique\n[[22.8]] de M. Hugens. </p>\n<p> [[22.9]] [<i>L^#'2</i> ] </p>\n<p> [[22.10]] Mons. Moetjens libraire à la Haye a dit à mes amis, qu'il fait reimprimer mon <i>Code\n[[22.11]] diplomatique</i>. Je trouve cela un peu estrange. Et je ne sçay s'il y trouvera son compte, en ne\n[[23.1]] point communiquant avec moy. Ce qui seroit le plus raisonnable. Et il y auroit peutestre moyen\n[[23.2]] de s'accommoder, d'autant plus que j'ay encor tant d'autres pieces qui pouvoient entrer dans le\n[[23.3]] premier Tome, et qui ne cedent gueres à celles que j'ay données. Faites moy la grace Monsieur\n[[23.4]] de luy en parler à fonds, et celle de m'en informer au plus tost. </p>\n<p> [[23.5]] Extrait de ma lettre à Mons. Bauval 28 janvier 1695 </p>\n","number":"7.","title":"LEIBNIZ AN HENRI BASNAGE DE BAUVAL","date":"[Hannover,] 28. Januar (7. Februar) 1695. [2.14.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_92","series":"Band II 3 (1695 - 1700)","seq":92,"text":"<p> [[253.12]] /  <b>92. HEINRICH HORCH AN LEIBNIZ</p>\n<p> [[253.13]] Herborn, 6. (16.) Januar 1697. [97.]</b></p>\n\n<p> [[254.1]] Vir Nobilissime ac Prae-Strenue, Domine ac Fautor Honoratissime. </p>\n<p> [[254.2]] Etiamsi tot tantaque sint Tua in Remp. literariam merita, ut omnes Mathematum Cultores\n[[254.3]] ob praeclara Tua inventa, quibus omnium retro seculorum Mathematicos longo post Te intervallo\n[[254.4]] reliquisti, merito Te suspiciant ac venerentur tanquam communem suum Praeceptorem;\n[[254.5]] non ausus tamen fuissem, incomtis unquam literis meis temere ad Te affectare gradum, nisi per\n[[254.6]] Gravissimos Viros, quorum merita non aliter ac jussa revereri queo, ad commercium me\n[[254.7]] literarium quam humanissime invitasses. Ex qua proinde humanitate Tua ut quoddam in studia\n[[254.8]] mea redundet emolumentum, veniam dabis, Vir Nobiliss. quod hoc Tibi Problema resolvendum\n[[254.9]] proponam. Nimirum <b>Tradere <Fn><b>Tradere ... extensae</b>: <i>Am Rande wohl von Leibniz durch Doppelstriche gekennzeichnet.</i></Fn> modum, quo Deus in mente sua formare quiverit\n[[254.10]] ideam extensionis, posito esse eum naturae tantum cogitantis et minimae\n[[254.11]] extensae.</b> Dignum sane autumo hoc Problema cum Theologo, cujus interest nosse, quomodo,\n[[254.12]] ajente S. Paulo, ex Deo sint omnia, et quomodo, ut Jesaias loquitur, coelos extenderit ex semet\n[[254.13]] ipso? tum etiam Mathematico et Philosopho; quum id agat de extensione, communi objecto et\n[[254.14]] Geometriae et Physicae. Cujus proinde genesin, si quam habet, sibi habere accuratius perspectam,\n[[254.15]] multum sane apparet facere ad solidanda ipsam et principia harum disciplinarum: et\n[[254.16]] praeterea etiam ad finiendam illam controversiam, quae hodie exercet eruditos, nimirum an\n[[254.17]] extensio accensenda sit attributis Dei? Si enim hoc Problema deprehenditur esse contradictorium,\n[[254.18]] ut multis videtur, manifestum fit, agnoscendam esse in Deo extensionem; si vero reale ac\n[[254.19]] possibile, citra dubium referenda erit in censum rerum a Deo diversarum. Modum denique\n[[254.20]] aperiet illius solutio, aliarum quoque rerum conceptus eruendi quasi ex sinu ipsius Dei,\n[[254.21]] tanquam primi omnium rerum Exemplaris: quod quam proficuum sit perspiciendis intime rebus\n[[254.22]] et quoad suam radicem, me etiam non dicente intelligit quivis. Neque dubito, solutionem illius\n[[254.23]] Tibi, Vir Nobiliss. dudum jam esse in promptu, quum ea, ni admodum fallor, inveniri debeat ea\n[[254.24]] via, qua Tu in rebus Mathematicis Orbi erudito adeo admirandum Te praestitisti. Vale interim ad\n[[254.25]] rei literariae decus, ac favere perge </p>\n<p> [[254.26]] Praeclarissimarum Virtutum Tuarum Cultori perpetuo Henrico Horchio </p>\n<p> [[254.27]] Herbornae die 6 Jan. 1697. </p>\n","number":"92.","title":"HEINRICH HORCH AN LEIBNIZ","date":"Herborn, 6. (16.) Januar 1697. [97.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

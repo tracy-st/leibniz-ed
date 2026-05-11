@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_115","series":"Band II 2 (1686 - 1694)","seq":115,"text":"<p> [[428.1]] <b>116. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[428.2]] [Hannover, 22. Juni 1691.] [110.118.]</b></p>\n<p> [[428.9]] Extrait de ma reponse </p>\n<p> [[428.10]] Quant à la construction des Equations, j'ay inventé un instrument quel estant fait une fois\n[[428.11]] serviroit à toutes les Equations qui ne passent pas un degré limité par la grandeur de l'instrument,\n[[428.12]] au lieu que l'instrument de des Cartes ne sert qu'à trouver les moyennes proportionelles\n[[428.13]] c'est à dire à resoudre les Equations, qui n'ont que deux termes. J'ay aussi inventé un\n[[428.14]] moyen de me servir dans le Calcul d'Algebre ou de la specieuse de tous les avantages de la\n[[428.15]] preuve de l'Abjection Novenaire. </p>\n<p> [[428.16]] L'Espace selon moy n'est pas une substance, non plus que le temps. Et je crois qu'effectivement\n[[428.17]] il ne se trouve point de vuide; quoyque l'essence de la matiere ne consiste pas dans\n[[428.18]] l'étendue. </p>\n<p> [[428.19]] Nos idées viennent sans doute de Dieu, parceque nous l'exprimons en quelque façon, et\n[[428.20]] même nous exprimons l'infinité de Dieu quoyque d'une maniere confuse. Les idées de toutes\n[[428.21]] choses sont en nous, quoyqu'elles ne soyent developpées que dans les sciences demonstratives. </p>\n","number":"116.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"[Hannover, 22. Juni 1691.] [110.118.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_299","series":"Band VI 4 (1677 - 1690)","seq":299,"text":"[[1333.12]] <b>245.  Ad grammaticam linguae universalis Philippi Labbii [1689 (?)]</b>\n [[1333.13]] <tab/>[1689 (?)] </p>\n<p> [[1333.18]] <i>Grammatica linguae universalis Missionum et Commerciorum simplicissimae, brevissimae\n[[1333.19]] facillimae, ut ejus beneficio multa dicantur et audiantur paucis, multa scribantur\n[[1333.20]] et legantur paucis; terra fiat Labii unius accessere Lexici et Tirocinii specimina\n[[1333.21]] autore Phil. Labbe S. J.</i> </p>\n<p> [[1333.22]] Meminit in praefatione conferendum hoc suum opus cum cognatis quibusdam,\n[[1334.1]] nempe cum <i>Intelligentiis</i> Johannis de Villiers Parisiis 1587 excusis, et cum libello <i>De\n[[1334.2]] Charactere Universali</i> Johannis Douet in eadem urbe 1627 publicato; et duobus libris ab\n[[1334.3]] H. Justello communicatis, Londini excusis, uno 1657, altero 1661. Addit haec sibi decreta\n[[1334.4]] arrisisse: 1) ablegandos esse casus a nominibus, a verbis personas, quae illos per particulas,\n[[1334.5]] has per pronomina suppleri posse. 2) ablegandum superlativa comparativa, Tum\n[[1334.6]] genera nisi cum discernitur sexus. 3) Plurales a singulari adjuncti sibilo <i>S</i> distinguendos.\n[[1334.7]] 4) modos verborum mutatione vocalis finalis tempora inserta consonante characteristica,\n[[1334.8]] vocem passivam addito <i>R</i> posse formari. 5) Pronomina quae saepissime occurrunt, et\n[[1334.9]] personas in verbis agunt brevissimo unius vocalis signo exprimenda. 6) Maximam derivatorum\n[[1334.10]] compositorumque rationem habendam, ut quam minimo sumtu fiat, eodemque\n[[1334.11]] tenore; nec negligenda esse numeralia, quibus omnis illuminatur oratio. 7) Particularum\n[[1334.12]] hoc est praepositionum conjunctionum adverbiorumque sylvam certis limitibus, iisque\n[[1334.13]] arctissimis concludendam. 8) Fundanda haec in cognitissimae Europaeis omnibus Latinae\n[[1334.14]] linguae radicibus, in flexione quam minima servato naturae ipsius ductu atque ordine in\n[[1334.15]] syntaxi et pronuntiatione. 9) Exhibendum specimen Grammaticae et Januae. 10) Subjungendum\n[[1334.16]] Lexicon, in quo verba ad suas radices atque origines revocentur. </p>\n<p> [[1334.17]] Interim noto autorem in cap. de syntaxi (contra propria decreta exceptiones excludentia)\n[[1334.18]] dicere <b>pleraque</b> substantiva debere adjectivis praeponi; item plerasque conjunctiones\n[[1334.19]] et quaedam adverbia, quae aliis optativum vel subjunctivum, hic regere infinitivum. </p>\n","number":"245.","title":"Ad grammaticam linguae universalis Philippi Labbii","date":"[1689 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

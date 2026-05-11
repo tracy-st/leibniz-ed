@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_114","series":"Band II 4 (1701 - 1707)","seq":114,"text":"<p> [[371.1]] <b>114. BURCHARD DE VOLDER AN LEIBNIZ</p>\n<p> [[371.2]] Leiden, 5. Januar 1706. [108.119.] </b></p>\n<p> [[371.15]] Amplissimo Viro Godefrido Guilelmo Leibnitzio S. P. B. De Volder. </p>\n<p> [[371.16]] Diuturni mei silentii causa non tam est valetudo, quamquam et ea non satis commoda\n[[371.17]] fortasse etiam nonnihil eo contulerit, quam quod ad tuas nihil novi quod reponerem, haberem,\n[[371.18]] verererque ne earundem rerum repetitione tibi nauseam crearem. Nescio enim, qui fiat, ut\n[[371.19]] etiamnum in iisdem, quas in ultimis meis posui, difficultatibus haeream. Neque enim vim illam\n[[371.20]] primitivam mihi videor intelligere, nec capio, qui ex indivisibilibus extensum fieri, aut, si ita\n[[371.21]] malis, apparere queat. Invasit me insuper desperatio quaedam tuae opinionis rite percipiendae,\n[[371.22]] cum post tot tentamina tam parum promoverim, ut ea requiri ad ejus intelligentiam existimem,\n[[371.23]] quae tu instar ultramundanorum ne quaerenda quidem censes. Accessit ex his oris discessus\n[[371.24]] amici nostri Bernoullii, qui mihi hunc ad te aditum paraverat. Quae quidem omnia me ad\n[[371.25]] scribendum inertiorem fecerunt, veritus, ne recocta saepius hac mea crambe, tibi incommodarem\n[[371.26]] nimium. Neque enim praeter ea quae ante scripsi, et quae pauculis his continentur,\n[[371.27]] quidquam porro, quod addam, habeo. </p>\n<p> [[371.28]] De Hugenii Huddeniique scriptis, quod quaeris, de iis sic habe. Nos inter Hugenii scripta\n[[371.29]] nihil ultra invenisse, quod editioni aptum existimaremus. Scripta vero ipsa, in Bibliotheca Acad.\n[[371.30]] nostrae, cui ea legaverat Hugenius, asservari. De Huddenianis quoque nihil expecto; cum illa\n[[372.1]] omnia secundum testamenti ejus tabulas pervenerint ad Dedelium, ejus ex fratre nepotem, nunc\n[[372.2]] apud Amstelodamenses scabinum, sed rerum mathematicarum imperitum. Memini me saepe\n[[372.3]] vidisse apud defunctum libellum in 8^#'o, satis crassum, in quo multa sua inventa descripta esse\n[[372.4]] dicentem saepius audivi, sed ita, ut vix ipse jam ea intelligere posset, tantum abesse, ut ab alio\n[[372.5]] intelligi ullo modo queant. Sed quidquid hujus sit, inciderunt in eas manus, ut de iis nihil\n[[372.6]] sperem. </p>\n<p> [[372.7]] Forsitan rumor ad te detulit, me laboribus Academicis valedixisse, et in id, quantum\n[[372.8]] poteram, incubuisse, mihi ut succederet amicus noster communis Bernoullius, sed frustra cum\n[[372.9]] ille se suis Basileensibus addixerit. Nostri interea D^#'o Bernard^#'o, qui scribit les <i>Nouvelles de la\n[[372.10]] Rep. des Lettres</i>, facultatem dederunt docendi Philosophiam et Mathesin, quem tamen Professoris\n[[372.11]] titulo non donarunt, visuri, opinor, rei successum. Clariss. Bernoullius mihi commendavit\n[[372.12]] D. [Hermannum], qui me dum ante paucos annos has oras inviseret, compellavit, et cujus\n[[372.13]] egregia quaedam iisdem in Novellis, specimina in Mathematicis vidi. Provocat noster ad tuum\n[[372.14]] de eodem Hermanno testimonium, sed nihil adjungit quidnam ille praestare queat in Philosophicis,\n[[372.15]] Metaphysicisque. Qua de re si, quod nosti, perscribere non dedigneris, possit hoc\n[[372.16]] aliquando in ejus utilitatem cedere. Licet enim mihi persuadeam nostros nunc nihil subito\n[[372.17]] facturos, tuum tamen testimonium, quod procul dubio nostri plurimi facient, ipsi data occasione\n[[372.18]] fructuosissimum fore nullus dubito. Nihil restat, nisi ut tibi hunc quem jam ingressi sumus, et\n[[372.19]] plures porro secuturos annos faustos, felicesque voveam. Vale. </p>\n<p> [[372.20]] Lugd. Batav. a. d. V. Januarii MDCCVI. </p>\n<p> [[372.21]] A Monsieur Monsieur, Godefried Guillaume Leibnitz Conseiller privé de son Altesse\n[[372.22]] Electorale d'Hanover à Hanover </p>\n","number":"114.","title":"BURCHARD DE VOLDER AN LEIBNIZ","date":"Leiden, 5. Januar 1706. [108.119.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

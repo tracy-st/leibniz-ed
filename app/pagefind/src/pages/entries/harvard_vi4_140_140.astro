@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_140","series":"Band VI 4 (1677 - 1690)","seq":140,"text":"[[449.10]] <b>114₁.  Erster Ansatz ERSTER ANSATZ </p>\n<p> [[449.12]] Rem tractare aggressus, cujus vim a multis agnosci, omnium interest, praevaricator\n[[449.13]] essem in causa publica si quae ad commendationem ejus atque accendendos homines\n[[449.14]] studia necessaria dictu videntur dissimularem, mihi enim pene adhuc puero divino\n[[449.15]] munere obtigere initia, satis quidem tenuia, artis cujusdam Magnae, cujus quantum legere\n[[449.16]] vel audire contigit, ne suspicio quidem inter homines fuisse videtur, itaque veniam mihi\n[[449.17]] ab aequitate lectoris spero, si de praesenti negotio loqui magnificentius, quam ego de\n[[449.18]] rebus meis sentire soleo. Cum enim eo consilio scribam, ut ad conferendam operam\n[[449.19]] accendantur homines, intellecta magnitudine praesentaneae utilitatis, praevaricator essem\n[[449.20]] in causa publica, si quae ad persuadendum valere possunt, dissimularem. Ajo igitur\n[[449.21]] sequentia ab hominibus etiam mediocris ingenii, sed praeclarae voluntatis, inter se conspirantibus,\n[[449.22]] exiguo tempore, nec magnis sumtibus praestari posse: </p>\n<p> [[450.1]] Primum scilicet constituetur <b>Canon</b>, sive <b>Ars</b> quaedam <b>judicandi</b>, cujus ope\n[[450.2]] omnes controversiae quae sive de scientiis humanis sive etiam de singularibus vitae\n[[450.3]] negotiis, rebusque agendis oriri possunt. Palpabili quodam modo ad calculi Mathematici\n[[450.4]] instar tam accurate definiantur, quam ex datis utrinque rationibus possibile est. Ita\n[[450.5]] scilicet, ut cum sufficientia sunt data ad veritatem infallibiliter determinandam,\n[[450.6]] demonstratio habeatur veritatis; sin minus, habeatur saltem interim demonstratio maximae\n[[450.7]] probabilitatis, quae argumentorum utrinque pugnantium commodorumque atque\n[[450.8]] incommodorum aestimatione certo semper determinari ex datis potest. Nec jam clamoribus\n[[450.9]] res agatur, sed dissentientium alter alteri, aut etiam quisque secum disputans sibi\n[[450.10]] dicere possit: <i>calculemus</i>. Non enim soli Logicorum Syllogismi sed et computistarum\n[[450.11]] rationes reddentium Tabulae, et Arithmeticorum vel Algebristarum dispositiones ac processus,\n[[450.12]] recte, argumenta in formam redacta nominabuntur. Error autem omnis erit vel\n[[450.13]] calculi, vel omissionis alicujus ex datis; et error quidem calculi semper deprehendi atque\n[[450.14]] emendari poterit ex ipsis calculi regulis; at omissionem sive insufficientem enumerationem\n[[450.15]] emendare pertinet non ad formam sed ad materiam, id est non ad artem judicandi,\n[[450.16]] sed inveniendi. Initia autem hujus <b>Canonis</b>, sive artis judicandi, trademus hoc loco\n[[450.17]] constitutis <b>Elementis veritatis aeternae</b>, unde apparebit, an sperari possint, quae\n[[450.18]] pollicemur. Quod si certa demonstratione conficiemus, haec non tantum possibilia, sed et\n[[450.19]] in potestate nostra sita esse; omnium certe mortalium quod sua interest intelligentium\n[[450.20]] voluntates excitari oportet, ad favendum constitutioni tantae artis, sed eorum maxime, qui\n[[450.21]] de maximis rebus deliberantes majore periculo decipiuntur; plerumque enim etiam magni\n[[450.22]] viri post multas rationes utrinque ventilatas, non omnes in unam summam colligunt, cum\n[[450.23]] ea ars addendi rationes, ne quidem satis extet, sed vel prima qua praeoccupati sunt, vel\n[[450.24]] ultima quae maxime adhuc in memoria eorum viget, vel illa denique quae affectibus\n[[450.25]] eorum secunda est, vel denique quo cumque nullum sit periculo salutis periculum majus,\n[[450.26]] de quo deliberare debent omnes; quantivis pretii erit in rebus divinis ac moralibus a\n[[450.27]] ratione pendentibus, circa Deum atque Animam demonstrationes tandem aliquando asse-\n[[451.1]] ­qui, vel plane absolutas, vel moralem certitudinem, aut etiam maximae probabilitatis\n[[451.2]] gradum definientes. Fatendum est enim hactenus in his rebus potius demonstrationum\n[[451.3]] tentamenta, vel simulacra, quam demonstrationes haberi. In publicis quoque negotiis\n[[451.4]] maximum artis usum esse necesse est ut non jam negligenter, neque etiam anxie, et cum\n[[451.5]] multa formidine, sed secure, et quadam fidentis animi tranquillitate agamus, ut solent illi,\n[[451.6]] qui certas in agendo leges sequuntur. Nunc enim [<i>bricht ab</i>] </p>\n","number":"114₁.","title":"Erster Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

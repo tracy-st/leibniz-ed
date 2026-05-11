@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_160","series":"Band II 1 (1663 - 1685)","seq":160,"text":"<p> [[501.23]] <b>144. LEIBNIZ AN HERMANN CONRING</p>\n<p> [[501.24]] [April 1677.] [49.145.]</b></p>\n<p> [[502.6]] Ampl^#'m^#'e et Cl^#'m^#'e Dⁿ^#'e </p>\n<p> [[502.7]] Aliquot anni sunt, quod mihi non innotescere Tibi tantum, sed et tecum per literas\n[[502.8]] commercium colere datum est, quod postea itinera mea abrupere. Nunc Germaniae redditus,\n[[502.9]] tibique vicinior, indignus profecto essem fortuna qua uti nescirem. Itaque ubi primum Hanoveram\n[[502.10]] appuli, et delatum a Serenissimo Principe Consiliarii munus accepi, in primis illud mihi\n[[502.11]] faciendum putavi, ut neque absentia neque silentio imminutum intelligeres cultum illum, quem\n[[502.12]] nomini tuo ab omnibus verae eruditionis aestimatoribus deberi sentio. Quam animi mei sententiam\n[[502.13]] hae literae tibi non facunde quidem, attamen ex vero, interpretabuntur. Et cum Princeps\n[[502.14]] etiam Bibliothecae suae curam a me geri velit, certe non negligendi mihi viri sunt, qui\n[[502.15]] praeclaris monumentis rem literariam auxere, praesertim in vicino positi, et in humanitatem\n[[502.16]] effusi, qualem in te sum expertus. Gratulor autem inprimis aetati tuae, quae de vigore animi\n[[502.17]] nihil detraxit. Video enim novissima monumenta tua nihil illis cedere quae triginta ab hinc et\n[[502.18]] amplius annis adornasti. Quare avide expecto quae circa religionem te moliri ab egregio Viro,\n[[502.19]] Molano nostro intellexi. Nam post tot annorum lectionem atque meditationem exquisitum\n[[502.20]] aliquid a te sibi pollicentur etiam qui ab adversa stant parte. Neque illi audiendi sunt qui\n[[502.21]] alienam hanc putant a Medico vel Jurisconsulto curam. Quasi vero cuiquam interdictum sit ex\n[[502.22]] ipsis fontibus sapere, et ubi sibi satisfacere visus est, publico prodesse velle. Quin imo hanc\n[[502.23]] esse debere arbitror piis omnibus, quibus vitae genus inquisitionem permittit, maximam et\n[[502.24]] novissimam solicitudinem, ut rationem spei suae reddere possint. Qua quidem occasione unum\n[[502.25]] a te desiderare audeo, fretus illa benignitate quam sum olim expertus, nimirum quae sit\n[[502.26]] sententia tua, de illis demonstrationibus quae de vertice rerum, mente, et immortalitate nostrae\n[[502.27]] animae feruntur. Velim enim argumentum illud coli diligentius, et exquisitis demonstrationibus\n[[502.28]] si fieri potest adornari. Nam quae vir ingeniosissimus Renatus Cartesius, cui in Gallia et\n[[502.29]] Batavis passim fasces submiserunt eruditi, publicavit, rem si quid judico non absolvunt. Ut cum\n[[503.1]] probare contendit Ens perfectissimum necessario existere, quia ipsa existentia in perfectionum\n[[503.2]] numero est, adeoque enti perfectissimo deesse non potest. Quae quidem ratiocinatio pro certo\n[[503.3]] sumit, quandam essentiam perfectissimam intelligi posse, hoc enim posito, reliqua manifesta\n[[503.4]] sunt. At qui subtiliores sunt adversarii ajunt Ens perfectissimum tam implicare contradictionem\n[[503.5]] quam numerum maximum. Quod si ergo hanc notionem Entis perfectissimi vel Entis necessario\n[[503.6]] existentis intelligibilem esse non evicerit, nec existere Ens illud effecerit. </p>\n<p> [[503.7]] De caetero magno me beneficio affeceris, si quae alia publico bono moliris, mihi indicaveris:\n[[503.8]] neque enim dubito quin multae praeclarae tibi in variis studiis restent meditationes,\n[[503.9]] quas equidem nollem perire. Inprimis optem cogitata tua circa rem medicam non intercipi,\n[[503.10]] qualia multa esse non ambigo. Nam plurima haud dubie a tot annis in te aliisque observasti, et\n[[503.11]] qua polles judicii acrimonia ex observatis conclusisti. Qualia vel ideo magis expetenda censeo,\n[[503.12]] quod jactura in hoc studiorum genere non facile reparatur; mihi enim semper facilius visum est\n[[503.13]] et JC^#'t^#'o^#'s et Theologos egregios, quam Medicos excellentes habere. Si secus feceris plurimum\n[[503.14]] ipsis Medicis nocebis: multi enim putabunt te eo ingenio virum vix quicquam certi quod de re\n[[503.15]] medica scriberes habuisse, non tua haud dubie sed artis culpa. Sed ne modum Epistolae\n[[503.16]] excedam finiam ubi hoc unum adjecero intellexisse me ex Gallia duo praeclara scripta mox\n[[503.17]] proditura, unum Cl^#'m^#'i Cangii <i>Glossarium</i>, alterum doctissimi viri Petri Danielis Huetii librum <i>de\n[[503.18]] religionis christianae veritate</i> opus amplum et exquisitum. </p>\n","number":"144.","title":"LEIBNIZ AN HERMANN CONRING","date":"[April 1677.] [49.145.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

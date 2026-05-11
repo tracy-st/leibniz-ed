@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_144","series":"Band II 3 (1695 - 1700)","seq":144,"text":"<p> [[382.6]] <b>144. LEIBNIZ AN VINCENT PLACCIUS</p>\n<p> [[382.7]] [Hannover,] 29. September (9. Oktober) 1697. [142.148.]</b></p>\n\n<p> [[382.15]] Ex Epistola mea ad V. Cl. Vincentium Placcium. 29. Septembr. 1697 </p>\n<p> [[382.16]] De Theologia naturali, quae rectae rationi consentiat, nihilque detrahat Revelatae honorique\n[[382.17]] divino, quam optas diu multumque jam a multis annis cogitavi, mecumque ita inivi\n[[382.18]] rationes, ut res satis in potestate videatur. Deum duplici modo considerare oportet, physice et\n[[382.19]] moraliter. Physice scilicet ut ultimam rationem rerum, nempe quoad omnem perfectionem,\n[[382.20]] quae illis inest; moraliter vero ut Monarcham perfectissimae Reipublicae, qualis est ipsa ut sic\n[[382.21]] dicam Civitas Mentium totius universi. Hoc posito Theologia practica nihil aliud est quam\n[[382.22]] jurisprudentia pro republica universali, cujus rector est Deus, quatenus nostra in ea officia\n[[382.23]] comprehendit. Hinc autem porro solvitur difficilis ille praedestinationis Nodus, qui varie\n[[383.1]] homines torsit. Nempe Deus non permitteret peccatum, aut malum, nisi majus bonum obtineret\n[[383.2]] ex malo. Pro certo etiam habendum, neminem damnari nisi a se ipso, imo ne perseverare\n[[383.3]] quidem in statu miseriae nisi voluntate sua. Multa etiam alia praeclara meo judicio dici possunt,\n[[383.4]] non quidem satis vulgo animadversa explicatave Theologis; neque tamen contraria sanae\n[[383.5]] Theologiae inter nos receptae. Socinianis certe non assentior, qui putant satisfactione aut\n[[383.6]] vindicta opus non esse; sed contra potius judico ultra emendationem peccantis et exemplum\n[[383.7]] alios praeservans, spectari posse et debere in poena harmoniam ipsam, quae vindicta demum\n[[383.8]] justa impletur. Itaque puto in republica universi nullum bonum factum esse sine praemio,\n[[383.9]] nullum peccatum sine poena. Quod si igitur irae detrahatur imperfectio, quae in rationis\n[[383.10]] obnubilatione dolorisque sensu consistit, tantumque vindicandi voluntas relinquatur, Deo tribui\n[[383.11]] potest, scripturae sacrae exemplo. Nempe peccatum non Deo malum est neque universo\n[[383.12]] (correctione scilicet accedente, quae majus inde bonum procurat) sed peccanti. Omnis scilicet\n[[383.13]] affectus (: exceptis illis qui per se mali aliquid involvunt, qualis est invidia, quam veteres inepte\n[[383.14]] diis suis tribuebant :) si pro appetitu rationali habeatur, seposito nempe sensitivo tumultu, Deo\n[[383.15]] ascribi potest. Fortasse tamen vocabula subinde adhibere licebit purgatiora, de quibus ipse\n[[383.16]] optime dispicies. </p>\n<p> [[383.17]] Nuper ex Gallia mihi missa est Epistola quam Archiepiscopi et Episcopi aliquot ad\n[[383.18]] pontificem Romanum scripsere contra <i>Nodum praedestinationis solutum</i> Cardinalis Sfondrati,\n[[383.19]] cujus censuram expetere videntur, improbant inprimis quod dixit infantes sine baptismo\n[[383.20]] defunctos etsi ad coelestia gaudia non perveniant, tamen meliore et perfectiore in statu esse ob\n[[383.21]] summam innocentiam, quam qui adulti per poenitentiam salutem aeternam sunt consecuti. Mihi\n[[383.22]] ut verum fatear errasse videtur Sfondratus, sed bono animo, et horrore peccati, quo judicavit\n[[383.23]] praestare non peccare et coelo carere, quam peccare et regnum coeleste obtinere. Qualia cum\n[[383.24]] sint dudum agitata inter scholasticos, censuram mereri non videntur, etc. </p>\n","number":"144.","title":"LEIBNIZ AN VINCENT PLACCIUS","date":"[Hannover,] 29. September (9. Oktober) 1697. [142.148.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

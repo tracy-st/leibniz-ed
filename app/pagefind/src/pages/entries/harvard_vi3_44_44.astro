@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_44","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":44,"text":"[[412.11]] <b>44. Analysis ad alias res quam quantitates applicata </b> <span>412.11;0:63:044:74       :L:l^</span>.\n[[412.24]] Analysis ad alias res quam quantitates applicata.\n[[412.26]] Quod omnium maxime quaero est Machina, quae pro nobis faciat operationes\n[[412.27]] analyticas, quemadmodum Arithmetica a me reperta facit numericas.\n[[413.1]] Sed video positis operandi formulis quibus utimur rem fieri non posse, quia transpositiones\n[[413.2]] sunt nimis variae nimisque frequentes; sed ego satis agnosco, his quibus\n[[413.3]] utimur signis, non satis exprimi operationes mentis. Nam omnes cogitationes non\n[[413.4]] sunt nisi simplices complicationes idearum; uti voces literarum alphabeti, res ergo ad\n[[413.5]] eam reducenda est simplicitatem, ut solis compositionibus huiusmodi transpositionibusque\n[[413.6]] in linea recta naturali plane ratione fiant, atque ita ut machina non tantum\n[[413.7]] multiplicationes, sed et divisiones et radicum extractiones facere possit; item divulsiones\n[[413.8]] in partes seu in formulas toto simpliciores, sive additione, sive multiplicatione,\n[[413.9]] sive divisione totum formantes. Sed quia ista nimis infinita sunt, suffecerit\n[[413.10]] machinam a proposita qualibet formula posse tollere fractiones si velis; item facere\n[[413.11]] multiplicationes divisionesque formularum propositarum per alias propositas. Nam\n[[413.12]] ut ipsamet inveniat veros divisores hoc est nimium postulare.\n[[413.13]] Restant aliae plane Analyses sive Combinationes, circa Ordines rerum, circa\n[[413.14]] qualitates, actiones, aliaque infinita, quae aliis plane modis (licet etiam per literas\n[[413.15]] simpliciave alia signa) exprimi debent quam quantitates, et cuius rei specimen video,\n[[413.16]] in literis meis, quibus usus sum ad signa ambigua exprimenda; ibi enim non quantitas,\n[[413.17]] sed relatio quaedam sive ordo, ad signorum analyticorum instar exprimitur. Sed\n[[413.18]] universalis analysis dependet a charactere universali, etsi interim in longis calculis\n[[413.19]] pro characteribus peculiaribus liceat adhibere generales seu literas alphabeticas, ut in\n[[413.20]] Geometria, sed re jam per particulares praeparata. Et ita ut postea facile ad particulares\n[[413.21]] possint reduci generales.\n[[413.22]] Ope Analyseos in pura mechanica, id est quae non pendet ab experimentis, eadem\n[[413.23]] fieri possunt, quae in Arithmetica et Geometria, scilicet in Statica, Hydrostatica,\n[[413.24]] Pneumatica, Pyrobolica, Elastica, Oscillatoria; Optica, Musica; Nautica, Astronomia,\n[[413.25]] Geographia generali; aliisque in infinitis quorum ideae atque formae a materia purgatae\n[[413.26]] analyticis characteribus exhiberi possunt, non ita docendi tradendique ac demonstrandi,\n[[413.27]] sed inveniendi causa. Unde patet re eo reducta quantus sit futurus usus\n[[413.28]] artis analyticae sive combinatoriae, cum formulae aequationesque quae nunc non nisi\n[[413.29]] numeros, et lineas aliaque sterilia et sicca repraesentant, spatia et motus, et tempora,\n[[413.30]] et vires, et effectus exhibebunt. Quando problema analyticum solvere, et aequationis\n[[413.31]] cuiusdam radices invenire, vel divisores, erit arcana naturae detegere, et machinas\n[[414.1]] vitae utiles dare; et quando constructiones elegantes invenire, erit compendia mechanica\n[[414.2]] vitae utilia exhibere. Combinatoriam ergo interim magis magisque perfici\n[[414.3]] interest generis humani, quantum enim (bricht ab)\n","number":"44.","title":"Analysis ad alias res quam quantitates applicata","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

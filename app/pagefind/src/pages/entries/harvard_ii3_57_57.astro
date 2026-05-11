@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_57","series":"Band II 3 (1695 - 1700)","seq":57,"text":"<p> [[160.11]] <b>57. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[160.12]] Dijon, 30. April 1696. [50.68.]</b></p>\n\n<p> [[161.1]] Dijon le 30 avril <b>1696</b> </p>\n<p> [[161.2]] Voilà monsieur une lettre pour monsieur Morel que je prends la liberté de vous adresser;\n[[161.3]] Je la laisse ouverte pour que vous y voyiés ce que je luy mande et que cela me delivre de vous\n[[161.4]] faire une grande lettre; je croy que vous aurés recû ma precedente où j'en avois mis une de\n[[161.5]] mons^#'r le president Boisot. Je n'ay pas dit à mons^#'r Morel une nouvelle qu'on m'ecript de Rome,\n[[161.6]] que le pape n'a pas voulu permettre à mons^#'r Fabretti d'y faire imprimer son grand Receüil\n[[161.7]] d'Inscriptions. On refute en Hollande d'imprimer celles de mons^#'r Gudius, dont vous m'avés\n[[161.8]] ecript de si belles choses; il fault que le siecle soit bien ennemy de la belle antiquité et des\n[[161.9]] sciences, et soit d'un goust bien depravé, temoin ce qu'on vient de me mander au subjet de\n[[161.10]] l'ouvrage de cette Beate Espagnole dont je croy vous avoir parlé dans ma derniere; voicy ce\n[[161.11]] qu'on m'en ecrivoit ancor hier. <i>Il court une lettre facheuse contre mons^#'r de Meaux au subjet de\n[[161.12]] la censure de ce livre intitulé <b>La mystique cité de Dieu</b> composé par la soeur Marie du\n[[161.13]] convent d'Agreda religieuse portugoise traduit en francois par un Recolect et imprimé à\n[[161.14]] Marseille; dans cette lettre on se dechaisne impytoiablement contre ce prelat; elle est adressée\n[[161.15]] au p. Quesnel par un colonel d'Infanterie. Le livre de la religieuse est in fol. en 3 vol. Il y a une\n[[161.16]] infinité de folies et d'extravagances dignes des petites maisons; ce sont des Revelations\n[[161.17]] perpetuelles sur des faicts impertinents. Le 1^#'e^#'r tome est la vie de la vierge dans le ventre de S^#'t^#'e\n[[161.18]] Anne et dans le berceau. Il y a beaucoup de Revelations sur les SS^#'t^#'s et les SS^#'t^#'e^#'s dont on ne trouve\n[[161.19]] point de Reliques comme S^#'t^#'e Anne, S^#'t Joachim, S^#'t Joseph</i> etc. </p>\n<p> [[161.20]] Je ne reçois plus de lettres de nostre philosophe mons^#'r Foucher; il est appliqué à sa\n[[161.21]] traduction de S^#'t Augustin. J'ay faict part à nostre eminence de vostre Beau distique sur sa\n[[162.1]] promotion. Huict jours après sa lettre recûe j'en recûs une d'un de mes amis de Rome qui\n[[162.2]] m'appris la mort de nostre bon amy mons^#'r Bellori. C'est une perte considerable pour Rome et\n[[162.3]] pour la rep. des lettres. Je suis monsieur Tout à vous et du meilleur de mon Coeur. </p>\n","number":"57.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 30. April 1696. [50.68.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_303","series":"Band VI 4 (1677 - 1690)","seq":303,"text":"[[1350.6]] <b>249.  De perfecta notione substantiarum [1677 (?)]</b>\n [[1350.7]] <tab/>[1677 (?)] </p>\n<p> [[1350.13]] Substantia est Ens quod omnia necessaria praedicata ejusdem subjecti involvit, ut\n[[1350.14]] <i>aër</i>. Adjunctum est quod non omnia involvit, ut <i>transparens</i>. Nam <i>aër</i> involvit <i>transparens,\n[[1350.15]] liquidum, subtile</i>, <i>elasticum</i> etc. neque aliud quicquam de ea re, de qua praedicatur\n[[1350.16]] <i>aër</i> necessario praedicatur, quod non jam in aëris notione contineatur. Daturque aut\n[[1350.17]] certe intelligi potest aër purus, id est Ens, de quo nihil aliud praedicari queat, quam quod\n[[1350.18]] aëris natura postulat; sed non potest dari transparens purum, id est Ens in quo sit\n[[1350.19]] transparentia et nihil ultra. Hinc videtur sequi substantias tantum appellari debere species\n[[1350.20]] infimas sive individuales, quarum notio scilicet perfecta sive talis est, ut in ea responsio\n[[1351.1]] ad omnia ea quae de re quaeri possunt contineatur. Animalis vero notio non est talis,\n[[1351.2]] quaeri enim adhuc potest, sitne rationale an brutum, quadrupes an bipes, quia alia\n[[1351.3]] animalia rationalia, alia bruta sunt. Nisi forte credamus dari posse animal purum, sive in\n[[1351.4]] quo nihil aliud reperiatur, quam quod praecise requiritur ad notionem animalis; atque\n[[1351.5]] ideo velimus animal appellare substantiam, quia ejus notio saltem per se subsistere possit.\n[[1351.6]] Sed an purum animal sit possibile, Ego valde dubito. Nam non tantum pedibus carebit,\n[[1351.7]] sed et sensu, quia notio animalis non exprimit quid sentire debeat. Itaque illi tantum\n[[1351.8]] termini generales, sunt substantiarum, qui homogenei sunt, et talis est conceptus Entis\n[[1351.9]] puri seu absoluti, sive Dei. </p>\n","number":"249.","title":"De perfecta notione substantiarum","date":"[1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

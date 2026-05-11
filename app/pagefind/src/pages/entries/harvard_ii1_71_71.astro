@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_71","series":"Band II 1 (1663 - 1685)","seq":71,"text":"<p> [[191.1]] <b>61. PIERRE DE CARCAVY AN LEIBNIZ</p>\n<p> [[191.2]] Paris, [5. Juni] 1671. [65.]</b></p>\n<p> [[191.19]] Viro Amplissimo </p>\n<p> [[191.20]] G. Gulielmo Leibnitio J.U.Doctori. Petrus de Carcavy. S.P.D. </p>\n<p> [[191.21]] Illustriss^#'o Abbati Gravellio magnas debeo gratias quod te mihi notum fecerit, et majores in\n[[191.22]] posterum debebo si amicitiae tuae meis obsequiis demerendae ansam mihi praebuerit, ut et si\n[[191.23]] declarandae ejus quam de egregio tuo merito concepi opinionis locum mihi fecerit. </p>\n<p> [[191.24]] Epistolam <Fn><i>Von</i> Epistolam <i>bis</i> feceris <i>am Rande angestrichen</i></Fn> quam ad me scripsisti cum Academicis nostris communicavi, eam ut par erat\n[[191.25]] laudarunt, et gratiss^#'u^#'m ipsis mihique feceris, si quaestiones aliquot Physicas discussas et iuxta\n[[191.26]] principia tua examinatas ad nos miseris. Quod si in Germania reperiretur nonnemo qui Mathematicis\n[[191.27]] operam daret, et ad ea potiss^#'u^#'m quae ad Theoriam spectant animum appelleret, magna\n[[191.28]] certe voluptate nos affeceris si eum nobis indicaveris, ad nos quod attinet eum postquam nobis\n[[191.29]] innotuerit majore quo poterimus favore prosequemur. </p>\n<p> [[191.30]] Litteras quas ad Cl. Capellanum te scripsisse narras non vidi, quid causae sit nescio, sed\n[[191.31]] solitas ejus infirmitates accuso, quae eum quominus ad nos accedat saepe impediunt. Vide in\n[[192.1]] quo tibi mea officia praestare possim, et mecum obsecro libere age, nostrum vero literarum\n[[192.2]] commercium continues rogo et tibi me addictissimum putes velim. Lutetiae Paris. Nonis\n[[192.3]] Quinctil. 1671. </p>\n<p> [[192.4]] A Monsieur Monsieur Leibnitz Docteur en droit et con^#'e^#'r de S.A. de Mayence. </p>\n","number":"61.","title":"PIERRE DE CARCAVY AN LEIBNIZ","date":"Paris, [5. Juni] 1671. [65.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

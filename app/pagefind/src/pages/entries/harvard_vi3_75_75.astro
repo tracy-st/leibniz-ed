@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_75","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":75,"text":"[[522.10]] <b>75. De formis simplicibus </b> <span>522.10;0:63:075:76!      :L:l^</span>.\n[[522.15]] Formae simplices: perceptio, situs. At Mutatio et Materia, sive ipsae Modificationes\n[[522.16]] sunt resultantia ex omnibus aliis Formis simul sumtis. Sunt enim infinite varia\n[[522.17]] in materia et motu. Quae varietas infinita, non nisi ex causa infinita, id est variis\n[[522.18]] formis, oriri potest. Unde facile intelligitur formas simplices esse infinitas. Modificationes\n[[522.19]] autem ex omnibus resultantes, relatae ad singulas, constituunt in illis varietatem.\n[[522.20]] Videtur perceptio et situs esse ubique, at materia esse in aliis atque aliis diversa,\n[[522.21]] adeoque aliae atque aliae oriri leges; ut si in nostro sit Lex, ut eadem semper\n[[522.22]] servetur quantitas motus. Potest alia esse rerum natura, in qua etiam aliae leges. Sed\n[[522.23]] tamen necesse est, hoc spatium differre ab illo, erit scilicet positio quaedam, et multitudo,\n[[522.24]] sed non erit necesse ut sit longitudo, latitudo et profunditas. Videmus jam in\n[[522.25]] tempore, in angulo, aliisque varia esse genera quantitatum. Ubique videtur esse perceptio,\n[[523.1]] voluptas, felicitas, eius enim haec est natura mira, ut duplicet imo in infinitum\n[[523.2]] multiplicet rerum varietatem. Sed diversitas videtur aliis modis posse fieri. Quae\n[[523.3]] scilicet in nostram mentem non cadunt. Varietas eadem in quolibet genere mundi,\n[[523.4]] nec est quicquam aliud, quam eadem essentia diversimode relata, ut si urbem eandem\n[[523.5]] ex diversis locis aspicias, aut si essentiam senarii referas ad ternarium, erit 3x2 vel\n[[523.6]] 32, sin ad quaternarium erit 6 / 4 = 3 / 2 seu 6 = 4 x 3 / 2. Unde mirum non est, produci\n[[523.7]] quodammodo diversa.\n[[523.8]] Cum Mens aliquid percipit in Materia, negari non potest, dum alia atque alia\n[[523.9]] percipit, etiam in ipsa esse mutationem. Dum alius fit me major, crescendo, utique in\n[[523.10]] me quoque aliqua accidit mutatio, cum mutata sit denominatio de me. Et hoc modo\n[[523.11]] omnia in omnibus quodammodo continentur. Sed alia plane ratione in Deo, quam in\n[[523.12]] Rebus, et in Rerum generibus, seu Mundis quam in singulis. Fiunt autem res non ex\n[[523.13]] sola combinatione, formarum, in Deo, sed et cum subjecto. Subjectum ipsum seu\n[[523.14]] Deus cum sua ubiquitate dat immensum, hoc immensum combinatum cum aliis subjectis,\n[[523.15]] facit sequi Modos omnes possibiles, seu Res in ipso. Varia resultantia ex formis\n[[523.16]] combinata cum subjecto, faciunt resultare particularia. Quomodo res resultent ex\n[[523.17]] formis, non aliter quam similitudine Numerorum ex unitatibus possum explicare,\n[[523.18]] hoc adhuc discrimine, quod unitates omnes homogeneae, formae vero sunt differentes.\n","number":"75.","title":"De formis simplicibus","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

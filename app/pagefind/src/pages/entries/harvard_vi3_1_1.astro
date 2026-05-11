@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_1","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":1,"text":"[[3.1]] <b>1. Specimen hypotheseos demonstrativae </b> <span>3.0;0:63:001:72      :L:l^</span>.\n[[3.11]] Specimen Hypotheseos demonstrativae.\n[[3.12]] Hypothesis est causa Phaenomenorum possibilis. Et cum causa sit id quo\n[[3.13]] posito aliud (Effectus scilicet) existit, Hypothesis erit id quo posito phaenomena\n[[3.14]] consequentur. Phaenomena autem sunt quae sensu certa sunt. Sed si eam causam\n[[3.15]] existere non tantum ex concordantia cum phaenomenis, sed et aliunde constet, sive\n[[3.16]] ratione sive Experientia Hypothesis erit demonstrativa seu certa. Ut quando\n[[3.17]] unum phaenomenon primarium ad aliorum phaenomenorum secundariorum causas\n[[3.18]] reddendas assumitur. Cum ergo mihi videar ex solo motu Luminis circa Globum\n[[3.19]] terrae, quod est phaenomenon aliquod primarium et universale, rationem reddere\n[[3.20]] posse effectuum naturalium potissimorum particularium in globo nostro, eam Hypothesin\n[[3.21]] Demonstrativam appellari posse credo. Quia enim unius rei non nisi\n[[3.22]] una causa sufficiens eodem tempore esse potest, ideo si quid causa phaenomeni esset,\n[[3.23]] modo existeret, et existere aliunde constat, causa phaenomeni vera solaque erit.\n","number":"1.","title":"Specimen hypotheseos demonstrativae","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

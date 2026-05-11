@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_252","series":"Band II 3 (1695 - 1700)","seq":252,"text":"<p> [[728.10]] <b>252. LEIBNIZ FÜR GABRIEL WAGNER</p>\n<p> [[728.11]] [Ende März 1698.] [251.253.]</b></p>\n\n<p> [[729.1]] Vana disceptatio est, ubi vocabula diversimode accipiuntur. Si quis punctum intelligat\n[[729.2]] quod sit divisibile in infinitum, imo quod sit lineola, libens concedam ex talibus punctis lineam\n[[729.3]] componi. Sed punctum quod ego intelligo, partem habere non potest, et sic etiam ab Euclide et\n[[729.4]] aliis accipitur. </p>\n<p> [[729.5]] Hoc punctum ajo non nisi terminum esse seu rem privativam, nec (: ex linea :) <Fn>(: ex linea :): <i>Diese Passage hat Leibniz in l in eckige Klammern gesetzt, wohl um sie von der Abfertigung auszuschließen.</i></Fn> oriri nisi\n[[729.6]] per sectionem, demonstrare tamen ista in me nunc non susceperam, sed tantum objectionibus\n[[729.7]] contrariis respondere, idque sufficienter factum puto. Nam a me probationes exigere jam non\n[[729.8]] amplius opponere est. Exponere vero absurditates quae ex contrario consequuntur res est\n[[729.9]] majoris operae, studiumque postulat singulare non tantum in exponente, sed etiam in lecturo. </p>\n<p> [[729.10]] Quod elementa attinet, sciendum est non omnem magnitudinem, seu rem partibilem\n[[729.11]] componi ex elementis. Exemplo sit Unitas, cujus partes infinitis modis diversis assumi possunt,\n[[729.12]] veluti <zl>^#h(+5)^#h(+5)1<ne>2<be> et <zl>^#h(+5)^#h(+5)1<ne>2<be> , item <zl>^#h(+5)^#h(+5)1<ne>3<be> et <zl>^#h(+5)^#h(+5)2<ne>3<be> , item <zl>^#h(+5)^#h(+5)1<ne>4<be> et <zl>^#h(+5)^#h(+5)3<ne>4<be> , item <zl>^#h(+5)^#h(+5)1<ne>5<be> et <zl>^#h(+5)^#h(+5)4<ne>5<be> , item <zl>^#h(+5)^#h(+5)2<ne>5<be> et <zl>^#h(+5)^#h(+5)3<ne>5<be> etc. tot modis, quot numeri variari\n[[729.13]] possunt, imo etiam per incommensurabilia. Interim nullum vel fingi potest animo, elementum\n[[729.14]] unitatis, seu simplicissimum positivum cujus repetitione unitas constituatur, quodque adeo sit\n[[729.15]] minimum in Numeris. Eodem igitur modo se de continuo res habet, quod iisdem prorsus modis\n[[729.16]] quibus unitas secari potest; et, si daretur elementum continui, daretur et elementum unitatis seu\n[[729.17]] minimum numericum. </p>\n<p> [[729.18]] Haec ad rem illustrandam sufficere nunc arbitror, nam si omnia vellem discutere transverse\n[[729.19]] accepta in scheda transmissa, magnum laborem frustra sumerem. Si qua tamen superesse\n[[729.20]] videatur singularis difficultas, eoque proponatur animo, ut appareat subesse studium proficiendi\n[[729.21]] in cognitione veritatis, libenter et ut spero facile satisfaciam. </p>\n","number":"252.","title":"LEIBNIZ FÜR GABRIEL WAGNER","date":"[Ende März 1698.] [251.253.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

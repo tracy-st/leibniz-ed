@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_649","series":"Band VI 4 (1677 - 1690)","seq":649,"text":"[[2812.8]] <b>498.  De tribus praeceptis aeternae legis tres partes justitiae complectentibus [Sommer bis Winter 1678/79 (?)]</b>\n [[2812.10]] <tab/>[Sommer bis Winter 1678/79 (?)] </p>\n<p> [[2812.17]] <b>Juris</b> est (amplissimo sensu) quicquid rationis est in regenda circa aliorum bona\n[[2812.18]] malaque voluntate, id est quicquid sapiens praescriberet, cui omnium felicitas curae esset,\n[[2812.19]] ita etiam misericordia qua poenae non sine ratione remittuntur, et caritas qua egentibus\n[[2812.20]] prudenter succuritur ad justitiam pertinent. Nec tantum primum aeternae legis praecep\n[[2813.1]] tum est <b>neminem laedere</b> sive damno dato sive lucro intercepto, sed et proximum\n[[2813.2]] huic, juvare omnes, plus tamen minusve hos aut illos prout exigit majus commune\n[[2813.3]] bonum, unde aestimandum est quid cuique congruat, seu quis sit secundi praecepti\n[[2813.4]] sensus, quod <b>suum cuique tribuere</b> jubet. Denique quia interest rei communis\n[[2813.5]] singulis bene esse, justitia id est alieni boni sapiens cura, exigit, ut quisque etiam bonum\n[[2813.6]] proprium curet, itaque <b>honeste vivere</b>, tertium est summumque praeceptum, quod\n[[2813.7]] etiam priora involvit, huc tendens ut quisque virtutem colat, id est voluntatem assuefaciat\n[[2813.8]] ad rationis obsequium cuique felicitatis suae viam monstrantis. Atque hoc est quod vulgo\n[[2813.9]] fertur virtutes omnes justitia contineri. Tertium enim hoc praeceptum <b>justitiae</b> est\n[[2813.10]] <b>universalis</b>, quae inter caeteras virtutes etiam particularem justitiam binaque ejus\n[[2813.11]] priora praecepta, alterum <b>commutativae</b> justitiae alterum <b>distributivae</b>, complectitur.\n[[2813.12]] Nam in optima republica, cujus rector Deus est, nihil negligitur, nihil fit impune aut\n[[2813.13]] gratis. Quare caeterorum interest, ut quantum in ipsis est, ego sim felix; mea, ut quantum\n[[2813.14]] in me est, felices sint ipsi.\n[[2813.15]] <tit2><b>Pars prima De justitia commutativa</b></tit2> </p>\n<p> [[2813.16]] Regula prima: Si quis damnum dedit malo animo, datur laeso actio ad omne quod\n[[2813.17]] sua interest. </p>\n<p> [[2814.1]] Exceptio prima est si etiam in laeso malus animus fuerit, ita actio cessat. Dubito an\n[[2814.2]] pars tantum restituetur. Hic alterius malus animus non dat mihi actionem, dat ei exceptionem.\n[[2814.3]] Uti pactum nudum, ita dolus nudus dabit exceptionem, non actionem. Ad actionem\n[[2814.4]] opus est ut accedat synallagma, voluntarium vel invitum. </p>\n<p> [[2814.5]] Exceptio secunda si in laeso culpa fuerit, ita actio minuitur. </p>\n<p> [[2814.6]] Exceptio tertia si casus interveniens, qui non facile poterat timeri, damnum majus\n[[2814.7]] fecerit quam laedentem voluisse apparet, ob excessum damni non amplius petetur quam\n[[2814.8]] laedens commode facere possit. </p>\n<p> [[2814.9]] An qui malum aliquod voluisse videtur, etiam de illis tenebitur malis quae singulari\n[[2814.10]] casu, qui timeri facile non poterat, inde sunt nata? Videtur considerandum an aliquis\n[[2814.11]] animo lucrandi, an simpliciter malevole seu animo nocendi laeserit. Item an ex damno\n[[2814.12]] utilitatem ceperit, sive extet lucrum, sive sit consumtum, et vel in rem versum vel secus.\n[[2814.13]] Cum quis ex damno dato lucratus non est, actio ex parte laesi est rei persecutoria[e], ex\n[[2814.14]] parte laedentis est poenalis. Actio poenalis non debet extendi ad eversionem Rei, cum\n[[2814.15]] actor salvus esse potest nisi gravissima sit malitia rei. </p>\n","number":"498.","title":"De tribus praeceptis aeternae legis tres partes justitiae complectentibus","date":"[Sommer bis Winter 1678/79 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

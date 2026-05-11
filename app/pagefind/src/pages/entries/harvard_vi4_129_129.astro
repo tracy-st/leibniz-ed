@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_129","series":"Band VI 4 (1677 - 1690)","seq":129,"text":"[[423.16]] <b>105₁.  Erste Aufzeichnung ERSTE AUFZEICHNUNG </p>\n<p> [[423.20]] De arte combinatoria scribenda. Circa de variis ludorum generibus. <i>Von</i> interest,\n[[423.21]] <i>oder</i> de apparentia moriendi. <i>Dahin von bills of mortality</i>. <i>Pharos scientiarum</i> Izquierdo.\n[[424.1]] De Cryptographicis. De arte observandi aliquid curiosum ex oblatis Tabulis. De arte\n[[424.2]] casus formandi seu fingendi casus difficiles. De exceptionibus, replicis, duplicis et earum\n[[424.3]] usu in disciplinis ubi universalia facile haberi non possunt quasi via ad universalia. De\n[[424.4]] ludis <i>wozu ists stroh guth</i>. Deque exercenda juventute per ludos. De logica ratione datis\n[[424.5]] duabus rebus inveniendi commune genus proximum seu proprium. De magnitudine libri\n[[424.6]] in quo omnes hexametri possibiles scripti extent. De libro in quo scriptae jam habeantur\n[[424.7]] omnes veritates quae ab hominibus comprehendi possunt. De applicatione combinatoriae\n[[424.8]] ad Algebram deque Algebrae perfectione. De formis, de formis simplicibus; de potentiis,\n[[424.9]] de Trinomiis. De Numeris combinatoriis, de Harmonicis. </p>\n<p> [[424.10]] Addatur Henrici Mylpfortii Vratislaviensis <i>Encyclopaediae Aphoristicae Consilium\n[[424.11]] seu Isagoge, per Definitiones et Soritas.</i> </p>\n","number":"105₁.","title":"Erste Aufzeichnung","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

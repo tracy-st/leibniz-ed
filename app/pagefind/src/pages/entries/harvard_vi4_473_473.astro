@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_473","series":"Band VI 4 (1677 - 1690)","seq":473,"text":"[[2085.1]] <b>381.  Remarques sur les étoiles fixes et tourbillons de Bovier de Fontenelle [1687 (?)]</b>\n [[2085.3]] <tab/>[1687 (?)]\n [[2085.11]] <petit> </p>\n<p> [[2085.12]] In seinem Handexemplar hat Leibniz auf S. 120 die Passage:</petit> </p>\n<p> [[2085.13]] Les Tourbillons dont nous voyons les Soleils, touchent le Tourbillon où nous sommes.\n[[2085.15]] <petit> angestrichen und daneben vermerkt:</petit> </p>\n<p> [[2085.16]] celà le point necessaire\n[[2085.17]] <petit> </p>\n<p> [[2085.18]] Auf dem kleinen Blatt steht:</petit> </p>\n<p> [[2085.19]] Je vois des endroits où l'auteur des <i>entretiens</i> <i>de la pluralité des Mondes</i> n'a pas\n[[2085.20]] assez consideré ce qu'il dit. Par exemple pag. 84 il dit que les etoiles fixes paroissent plus\n[[2085.21]] petites aux habitans de Mercure qu'à nous, et qu'ils en reçoivent bien peu de lumiere, ou\n[[2085.22]] peutestre point du tout. Sans doute qu'il s'est imaginé cela à cause de leur eloignement.\n[[2085.23]] Mais c'est une erreur, la distance d'icy à Mercure ne fait rien, puisque le double de la\n[[2085.24]] distance de la terre au soleil n'opere rien et que nous remarquons aucune difference aux\n[[2085.25]] estoiles fixes de quel costé du Soleil que nous nous trouvions. </p>\n<p> [[2085.26]] Il s'imagine aussi que nous ne voyons que les estoiles fixes dont les tourbillons\n[[2085.27]] touchent le nostre. Si cela estoit les habitans d'un autre tourbillon verroient tres peu\n[[2085.28]] d'estoiles fixes, et il leur paroistroit un grand vuide du costé du nostre. </p>\n","number":"381.","title":"Remarques sur les étoiles fixes et tourbillons de Bovier de Fontenelle","date":"[1687 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_97","series":"Band II 2 (1686 - 1694)","seq":97,"text":"<p> [[372.9]] <b>98. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[372.10]] Hamburg, 3. (13.) Januar 1691. [85.115.]</b></p>\n<p> [[372.17]] I. N. J. C. </p>\n<p> [[372.18]] Nobilissimo et Amplissimo Dⁿ^#'o G. G. Leibnutzio </p>\n<p> [[372.19]] S. P. D. V. Placcius. </p>\n<p> [[372.20]] Dum <Fn><i>Am Fuß der Seite von Leibniz' Hand</i>: <i>Le Sieur des Essars auteur de l'Amadis françois. Memoire</i> <i>des dames de Brantome.</i> <angle bracket><i>Ch.</i></angle bracket> <i>de la reine Marguerite.</i></Fn> sub anni hujus ineuntis auspicium, quod auspicatissimum plane tibi ex animo precor\n[[372.21]] augurorque, rationes meas, qua domesticas, qua litterarias subduco, video me in aere tuo inde a\n[[372.22]] Septembri mense adhuc esse. Ne malum plane nomen sim itaque, tandem reddo quod debeo\n[[373.1]] responsum, veniam morae a sola tua benevolentia petens. Neque tamen interim in mandatis tuis\n[[373.2]] exequendis aeque ac in rescribendi officio segnis fui. Quamvis enim Meisneri compellandi\n[[373.3]] occasionem hucusque frustra quaesitam necdum invenerim: cum Dⁿ^#'o Zimmermanno tamen\n[[373.4]] illius Collegii membro facile praecipuo et de pertinentibus ad ipsum aliis, et de iis quae super\n[[373.5]] Collegio Arithmetico scribis, ita communicavi, ut non frustra id factum putem. Siquidem laetari\n[[373.6]] mihi visus est, occasione commercium litterarium, et hisce et aliis de rebus Tecum ineundi.\n[[373.7]] Quod an coeptum sit, scire aveam. Ni factum etiam, promoturus, ut quamprimum ineatur. Id\n[[373.8]] quod sine reipublicae litterariae insigni emolumento non fore spero augurorque. Tschirnhausiana\n[[373.9]] legi, et haberem circa illa quae percontarer, siquidem otii hoc tui esse intelligam, ut\n[[373.10]] cognoscas, et sententiam aperias tuam de quaesitis, Logicis quidem potissimum. Nam Physica\n[[373.11]] et Mathematica superant meas vires. Ad Philosophiam practicam vero facientia ex meis facile\n[[373.12]] principiis expedio. Quae uti experior indies magis sufficere magisque resolvendis omnibus in\n[[373.13]] hoc argumento difficultatibus, ita ut perpoliantur, et ad specialissima quaeque, descensu facto,\n[[373.14]] magis porrigantur, assidue laboro. Nec aliud est impedimentum aeque obstans <i>Anonymorum et\n[[373.15]] Pseudonymorum</i> editioni. De quibus apud Bailletum quid fiat, an scias, vel scire possis, oppido\n[[373.16]] percupiam resciscere. Nam anno jam et quod excurrit ab eo litterarum nihil habui, neque novi\n[[373.17]] per internuntios. Et bellorum hae necdum finem ostendentes turbae, parum in propinquo\n[[373.18]] repositum spei sinunt. Nisi tuo itaque auxilio quid comperiam, desperatum hoc est desiderium.\n[[373.19]] Quod tamen antequam expleatur, ad publicandos meos auctores non accedam. Enimvero\n[[373.20]] praeire ipsum mallem me, quam sequi. Caussae multae sunt: quarum praecipuam facile divinas.\n[[373.21]] Vale, et an hac de re certiorem me facere queas, quaeso vide. </p>\n<p> [[373.22]] Hamb 1691. d. 3 Januarii. </p>\n<p> [[373.23]] <i>A Monsieur Monsieur Leibnutz. Conseiller de Son Altesse à Hannover.</i> </p>\n","number":"98.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 3. (13.) Januar 1691. [85.115.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

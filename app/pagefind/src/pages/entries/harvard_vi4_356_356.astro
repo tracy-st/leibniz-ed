@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_356","series":"Band VI 4 (1677 - 1690)","seq":356,"text":"[[1498.11]] <b>299₁.  Gestrichener Ansatz GESTRICHENER ANSATZ </p>\n<p> [[1498.14]] <p>Si <Fn><i>Am Kopf der Seite</i>: Literae, ut <i>A, B, C</i> mihi significant hoc loco Terminum concretum aliquid positivi involventem, propositio ut <i>A est B</i> semper a me hoc loco intelligitur universalis, nisi aliter admoneatur.</Fn> <i>A</i> sit vel <i>B</i> vel <i>C</i> vel <i>D</i>, et ita porro, tunc <i>A</i> dicetur <b>Aliquid</b>, et specialiter\n[[1498.15]] <b>Aliquis</b> homo idem erit quod <i>B</i> homo vel <i>C</i> homo vel <i>D</i> homo, et ita porro; verbi gratia\n[[1498.16]] Europaeus homo vel Asiaticus homo, etc. </p>\n<p> [[1498.17]] Si <i>N</i> sit neque <i>B</i> neque <i>C</i> neque <i>D</i>, et ita porro tunc <i>N</i> dicetur esse <b>Nihil</b>, atque hoc\n[[1498.18]] est quod vulgo dicunt Nihili nulla esse attributa. Specialiter <b>Nullus</b> homo idem erit\n[[1498.19]] quod neque Europaeus homo, neque Asiaticus homo, et ita porro. </p>\n<p> [[1499.1]] Quid sit <b>Ens</b> vel Res non melius nunc quidem declarare possum quam dicendo <i>A</i>\n[[1499.2]] esse Ens, et <i>B</i> esse Ens, et <i>C</i> esse Ens, et <i>D</i> esse Ens, et ita porro tanquam si dicerem Ens\n[[1499.3]] esse commune omnium genus. Aliquid autem et Ens revera quidem idem sunt, sed\n[[1499.4]] differunt in modo concipiendi. Possum etiam dicere Ens esse cujus conceptus aliquid\n[[1499.5]] positivi involvit, seu aliquid ponit quod a nobis concipi potest. </p>\n<p> [[1499.6]] <b>Existit</b> Ens quod immediate percipi potest, aut ex eo quod immediate percipi\n[[1499.7]] potest sequitur. Immediate percipi illa dico, quorum nobis conscii sumus seu quae sunt\n[[1499.8]] intra intellectum nostrum, tunc enim medium nullum est inter id quod percipit et quod\n[[1499.9]] percipitur neque a Deo ratio erroris intelligi potest. Porro ut Ens definio per conceptum,\n[[1499.10]] ita Existens definio per sensum sive perceptionem; concipimus Entia etiam possibilia,\n[[1499.11]] percipimus existentia, aut quae apparent existentia. </p>\n<p> [[1499.12]] Perceptio est cogitatio ex qua sequitur conatus agendi. Sed ut distinctius intelligamus\n[[1499.13]] quid sit existere, videamus quibus modis rem aliquam existere probetur. Et quidem\n[[1499.14]] me varia cogitantem deinde existere quoque phaenomena varia menti meae adversantia\n[[1499.15]] sive apparitiones plurimas. </p>\n","number":"299₁.","title":"Gestrichener Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

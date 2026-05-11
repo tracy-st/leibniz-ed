@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_60","series":"Band II 3 (1695 - 1700)","seq":60,"text":"<p> [[167.1]] <b>60. FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ</p>\n<p> [[167.2]] Berlin, 28. Mai (7. Juni) 1696. [6.193.]</b></p>\n\n<p> [[167.13]] Extrait de la lettre de Mons. Dobrzenski Berlin 28^#'d^#'e May 1696 </p>\n<p> [[167.14]] Je vous ay Monsieur, une obligation particuliere de la bonté que vous avés eue de\n[[167.15]] m'envoyer le secret de mariner les truites. </p>\n<p> [[167.16]] Les truffles de Madame l'Electrice sont merveilleuses, et par bonheur on a trouvé icy de\n[[167.17]] parfaitement bonne huile, pour les accommoder et conserver de la maniere que vous me l'avés\n[[167.18]] ecrit. </p>\n<p> [[167.19]] On attend icy Mad. l'Electrice Douairiere de Saxe, on se flatte même qu'elle pourroit\n[[167.20]] rester icy une bonne partie de l'Esté. Mad. l'Electrice la voudroit regaler d'un opera Allemand.\n[[167.21]] Mons. Helmont vous rend bien des complimens, il est logé chez moy. Il m'endort tous les soirs\n[[167.22]] au coin du feu, par ses raisonnemens sur l'ame, et ne me fait rever la nuit qu'à des transmigrations\n[[167.23]] d'un corps dans l'autre; mais quand je considere que ces reveries de la transmigration\n[[167.24]] de l'ame ne sont pas à beaucoup prés si agreables que celles de la transmigration d'une partie\n[[167.25]] de nostre corps dans l'autre, que nous practiquons si souvent pendant que nous sommes en vie,\n[[167.26]] je deviens plus sensuel que philosophe et souhaiterois de mourir sans estre brulé comme Olindo\n[[167.27]] aupres de Sofronia dans le Tasse: <i>che l'anima mia nella tua bocca spiri</i> etc. </p>\n","number":"60.","title":"FRIEDRICH BOGUSLAV DOBRZENSKY AN LEIBNIZ","date":"Berlin, 28. Mai (7. Juni) 1696. [6.193.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

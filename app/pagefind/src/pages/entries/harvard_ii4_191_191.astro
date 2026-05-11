@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_191","series":"Band II 4 (1701 - 1707)","seq":191,"text":"<p> [[604.15]] <b>191. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[604.16]] Padua, 7. Mai 1707. [188.192.] </b></p>\n<p> [[605.1]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[605.2]] Questa <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> mia lettera sara ricapitata a V. S. Ill^#'m^#'a per mezo del nostro Dottissimo Sig^#'r^#'e\n[[605.3]] Herman da Basilea, a cui oggi trasmetto la copia della parte o sia Ducale, in cui con grandissima\n[[605.4]] lode dell'istesso s'espone il decreto dell'Ecc^#'m^#'o Senato, che conferma ed approva l'elettione\n[[605.5]] fatta dall'Ecc^#'m^#'o Magistrato de S. S. Riformatori coll'assignamento di prima condotta di\n[[605.6]] fiorini 600 a lire sei di valuta corrente. Questa copia me l'han trasmessa gli Eccell^#'m^#'i Padroni\n[[605.7]] medesimi per mezo dell'Ill^#'m^#'o Segretario Gadaldini che mi comanda da parte dell'Ecc^#'m^#'o Magistrato,\n[[605.8]] che la mandi subito al Sig^#'r^#'e Herman sollecitandolo alla partenza. Questa è stata dopo due\n[[605.9]] anni la prima promotione di lettore fatta in Senato, cotanto differita dall'infelicità de' tempi, e\n[[605.10]] da me promossa con tutta l'attentione possibile, senza perdonare a fatiga niuna, sommamente\n[[605.11]] premendomi in quest'occasione servire ed obbedire a V. S. Ill^#'m^#'a[,] a cui vivo cotanto obligato,\n[[605.12]] ed a cui vorrei potere in tutte le congiunture almeno dare qualche saggio dell'inalterabile, ed\n[[605.13]] obligata mia gratitudine. Qui tutti questi Professori, e quanti amano le buone lettere grandemente\n[[605.14]] applaudono a questa promotione che molto contribuisce allo splendore e riputatione di\n[[605.15]] questo Studio, atte[s]e le rare virtù del Sig^#'r^#'e Herman così dotto ed acuto nelle Discipline\n[[605.16]] matematiche, e massimamente nella nova analisi[,] nobilissimo parto della gran Mente di V. S.\n[[605.17]] Ill^#'m^#'a che con i suoi molti ritrovati ha cotanto illustrate e promosse le buone lettere. </p>\n<p> [[605.18]] Credo che per via del Sig^#'r^#'e Zanovelli V. S. Ill^#'m^#'a averà già ricevuta a quest'ora un'altra mia\n[[605.19]] lettera, in cui umilmente l'esponeva il bisogno che averei dell'alta e potente protettione della\n[[605.20]] Principessa di Bransvich, nova Regina delle Spagne, che V. S. Ill^#'m^#'a mi potrebbe ben guadagnare\n[[605.21]] quando volesse, il che molto mi potrebbe giovare per potere avere a suo tempo qualche\n[[605.22]] avantaggio così io come la mia casa in Sicilia, che come qui si dice presto insieme con il Regno\n[[605.23]] di Napoli caderà sotto il dominio del mio Augustissimo Carlo Terzo, del di cui partito io sempre\n[[605.24]] sono costantemente stato. Desiderarei dunque sopra ciò sentire la dispositione che averebbe\n[[605.25]] V. S. Ill^#'m^#'a a favorirmi, acciò poi con tutta libertà le potessi comunicare il mio sentimento. V. S.\n[[605.26]] Ill^#'m^#'a che m'è stato fin ora un gran Benefattore non m'abbandoni in gratia in questa occasione,\n[[605.27]] mentre che se vorrà, potrebbe essere cagione d'un gran mio bene come le significarò. Scrivo\n[[606.1]] oggi all'infretta, avendo dovuto replicare le lettere che scrivo al Sig^#'r^#'e Herman, acciò smarren-\n[[606.2]] dosi l'una, le possa capitare l'altra. Mi ricordo de' semi de' Celsi mori bianchi, che le saranno a\n[[606.3]] suo tempo trasmessi nella copia che brama, e divotamente rivenderola mi resto </p>\n<p> [[606.4]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e vero M. A. Fardella </p>\n<p> [[606.5]] Padova, 7 Maggio 1707. </p>\n<p> [[606.6]] All'Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o Il Sig^#'r^#'e Leibniz Consigliere di Stato di S. A. E. <b>Hannover</b> </p>\n","number":"191.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 7. Mai 1707. [188.192.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

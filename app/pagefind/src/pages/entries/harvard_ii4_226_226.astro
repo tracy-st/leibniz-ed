@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_226","series":"Band II 4 (1701 - 1707)","seq":226,"text":"<p> [[686.1]] <b>226. LEIBNIZ AN PIERRE HUMBERT</p>\n<p> [[686.2]] [Hannover, nach dem 18. November 1707]. [225.] </b></p>\n<p> [[686.29]] Monsieur </p>\n<p> [[686.30]] J'ay receu l'honneur de vostre lettre, que M. de la Croze m'a envoyée et je vous reponds\n[[686.31]] directement. L'ouvrage dont il vous a parlé sera un livre <i>in octavo</i>: il contient des meditations\n[[687.1]] de plusieurs années, mais qui paroissent a present plus de saison que jamais. Le but est de\n[[687.2]] justifier la justice de Dieu et la liberté de l'homme et de monstrer que le mal est compatible\n[[687.3]] avec l'un et l'autre de ces attributs. Il y a des pensées un peu singulieres: mais qui ne choquent\n[[687.4]] aucun point de la Theologie établie, et comme elles sont fondées en bonne partie sur mon\n[[687.5]] <i>systeme</i> <i>nouveau</i> de l'Harmonie preetablie, dont il est parlé dans les journaux et chez M. Bayle\n[[687.6]] dans son <i>Dictionaire</i> Article <i>Rorarius</i>; et comme ce systeme qui porte la sagesse de Dieu et la\n[[687.7]] spontaneité de l'homme au de là de ce qu'on en avoit conçu, a esté assez bien receu dans le\n[[687.8]] monde; j'espere qu'on n'en desapprouvera pas tout à fait les consequences. On satisfait aux\n[[687.9]] difficultés de M. Bayle, de Laurent Valla, et de plusieurs autres. On examine le systeme du\n[[687.10]] P. Malebranche sur les volontés particulieres et generales de Dieu. Il y aura un Echantillon\n[[688.1]] nouveau d'une Theologie presqu'Astronomique d'un de mes amis; en fin on y fait entrer\n[[688.2]] beaucoup de discussions du temps. On finit par une fiction agreable commencée par Laurent\n[[688.3]] Valla, mais corrigée et poussée plus loin pour faire voir que ce qui paroissoit le plus embarassant\n[[688.4]] selon Valla luy meme nous fournit une issue fort commode. On met devant cet ouvrage\n[[688.5]] un <i>discours preliminaire</i> touchant <i>la conformité de la Foy avec la Raison</i>, le plus souvent mal\n[[688.6]] entendue. </p>\n<p> [[688.7]] Apres cet ouvrage publié, je pense donner [au] public des lettres que j'ay echangées avec\n[[688.8]] M. Arnaud, M. Bayle, un ami de M. Lock, Mons. l'Eveque de Meaux et quelques Princes et\n[[688.9]] Princesses, sur des matieres de Philosophie et de Theologie. Sans parler maintenant de plusieurs\n[[688.10]] autres pieces de ma façon, et particulierement de mes reflexions sur les ouvrages du P. de\n[[688.11]] Malebranche, de Mons. Lock, et de quelques autres personnes celebres. </p>\n<p> [[688.12]] J'ay aussi quelques Manuscrits d'autruy que je pourrois donner dont il y en a d'Historiques.\n[[688.13]] Entre <Fn><i>Die Passage</i> \"Entre autres ... tousjours accompagné.\" <i>hat Leibniz angestrichen und mit</i> NB <i>gekennzeichnet</i>.</Fn> autres je pourrois publier le journal des voyages de l'Empereur Charles V. depuis\n[[688.14]] sa jeunesse, jusqu'à sa retraite en Espagne, fait par une personne qui l'a tousjours accompagné.\n[[688.15]] Ce journal eclairât bien des choses, et contient bien des particularités. </p>\n<p> [[689.1]] Je ne demande qu'un nombre considerable d'exemplaires. J'en ay besoin à cause de la\n[[689.2]] quantité d'amis que j'ay de tous costes; de sortes qu'il me faut au moins 120 exemplaires, si je\n[[689.3]] ne veux estre reduit à en acheter moy meme. Et cela me servira à faire connoistre l'ouvrage par\n[[689.4]] tout. <Fn><i>Leibniz vermerkt am Ende des Konzepts</i>: adressé sous couvert de M^#'r Gargant envoyé à M^#'r Mezquita </Fn> </p>\n","number":"226.","title":"LEIBNIZ AN PIERRE HUMBERT","date":"[Hannover, nach dem 18. November 1707]. [225.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

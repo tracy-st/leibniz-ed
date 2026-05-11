@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_278","series":"Band II 1 (1663 - 1685)","seq":278,"text":"<p> [[850.1]] <b>243. LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF</p>\n<p> [[850.2]] 24. Dezember 1683 / 3. Januar 1684. [242.249.]</b></p>\n<p> [[850.21]] [ ... ] Consilium in Scripto vernaculo et exoterico abstinendi Metaphysicis argumentis,\n[[850.22]] quae tuendae Divinae naturae, atque immortalis animae gratia afferri possunt, plane laudo. De\n[[850.23]] caetero apud Viros meditationum capaces, id est suo loco, magnam et in illis vim esse arbitror\n[[850.24]] et multos in Gallia et Batavis novi, qui valde illis capiuntur. Nec a Scholasticis inventa, sed jam\n[[850.25]] inde a Pythagora et Platone frequentata apud philosophos et fortasse cum animarum transmigratione\n[[850.26]] (corruptela praeclarae veritatis) a Pythagora ex oriente in Graeciam allata puto.\n[[850.27]] Platonis certe <i>Phaedonem</i> atque alia scripta, ubi talia pulcherrime tractantur, et mirifica arte\n[[850.28]] disserendi plana ac facilia redduntur, saepe magno animi assensu legi, et argumenta illa de\n[[850.29]] reminiscentia seu quod eodem redit notitia aeternarum veritatum ex sensibus non pendentium,\n[[851.1]] de fluxa ac minime substantiali natura materiae ac rerum materialium, ac <greek>perì th̃w ay̆tokinh́sevw</greek>\n[[851.2]] plus habere in recessu puto, quam vulgo animadvertitur. Tametsi agnoscam Platonem\n[[851.3]] plerumque in probandi conatu deficere, et passim fabulas illorum temporum captui\n[[851.4]] accommodatas admiscere. Sed istis diutius immorandi non est locus. [ ... ] </p>\n","number":"243.","title":"LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF","date":"24. Dezember 1683 / 3. Januar 1684. [242.249.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

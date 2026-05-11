@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_111","series":"Band VI 4 (1677 - 1690)","seq":111,"text":"[[375.1]] <b>91.  Methodus solvendi problemata [1680 (?)]</b>\n [[375.2]] <tab/>[1680 (?)]\n[[375.6]] <tit2><b>Methodus solvendi problemata</b></tit2> </p>\n<p> [[375.7]] Quaestio proposita tractatur vel absolute vel relate ad cognitionem ejus, qui jam\n[[375.8]] theoremata ad quaestionem solvendam utilia novit vel in promtu habet. Prior prolixior\n[[375.9]] est, sed certa. Posterior magis a memoria pendet, aut certe minus est artificialis. </p>\n<p> [[375.10]] Problema vel per se tractatur, vel resolvitur in alia problemata; prior via est magis\n[[375.11]] algebraica et recepta; posterior non minus methodica; et saepe elegantior. </p>\n<p> [[375.12]] In omni problemate Res datae et quaesitae, conditiones datae et ejusdem generatio\n[[375.13]] seu constructio quaesita et relationes datae et quaesitae. Relationes datae sunt conditiones\n[[375.14]] problematis continentes requisita determinantia quaesitum sive notas quibus agnosci\n[[375.15]] possit, ubi inventum fuerit Quaesitum. Relationes quaesitae sunt quae pertinent ad causam\n[[375.16]] efficientem seu generationem quaesitae rei. Interdum certus generandi modus praescribitur\n[[375.17]] vel desideratur. </p>\n<p> [[376.1]] Tot necessariae sunt conditiones, quot sunt requisita causae efficientis a se invicem\n[[376.2]] independentia, alioqui data non sunt sufficientia. Est enim analysis inquisitio geneseos\n[[376.3]] seu causae efficientis. </p>\n<p> [[376.4]] Generalis methodus analyseos est fingere Genesin assumto quaesito ut dato et\n[[376.5]] productum conferre cum dato. </p>\n<p> [[376.6]] Quaestio est vel determinata vel amphibola, cui pluribus modis non coincidentibus\n[[376.7]] satisfieri potest. </p>\n<p> [[376.8]] Item vel definita cui satisfit per certum quaesitum, vel indefinita, cui satisfit per\n[[376.9]] locum infinitorum. </p>\n<p> [[376.10]] Media finem eundem obtinendi sunt plura, eligenda sunt autem illa, quae sunt\n[[376.11]] pauciora, simpliciora, minus amphibola, quaesito propiora, aut certe prae aliis signata. </p>\n<p> [[376.12]] Nihil faciendum sine ratione quadam sufficiente neque ex pluribus rebus quantitatibusve\n[[376.13]] homoeoptotis vel similibus una alteri sine causa praeferenda est. </p>\n<p> [[376.14]] Si problema calculo magnitudinum tractandum sit, tunc omnia revocanda sunt ad\n[[376.15]] quantitates (nempe numeros definitos vel indefinitos), quantitatumque relationes. </p>\n<p> [[376.16]] De homoeoptotis. </p>\n<p> [[376.17]] De electione quantitatum incognitarum, quibus cognitis haberetur quaesitum. Deque\n[[376.18]] modo ea[s] revocandi in Catalogum (de compendiosa expressione inprimis in datis). </p>\n<p> [[377.1]] De modo revocandi relationes alias ad aequationes. </p>\n<p> [[377.2]] Quot sunt quantitates incognitae sufficientes a se invicem independentes, tot oportet\n[[377.3]] esse aequationes a se invicem independentes, nec plures nec pauciores exceptionum\n[[377.4]] conciliationes. Cum nimis multae sunt, oriri solet absurdum, nisi in casibus singularibus.\n[[377.5]] Interdum pauciores sunt incognitae quam videntur. </p>\n<p> [[377.6]] De modo revocandi aequationes plures ad pauciores, et denique ad unicam novissimam\n[[377.7]] deque ordine in eo servando (quomodo aliae aliis conjungi debeant). </p>\n<p> [[377.8]] De modo inveniendi valorem quantitatis quae reperitur in duabus aequationibus. </p>\n<p> [[377.9]] De modo inveniendi potentiam quamlibet literae quae in duabus aequationibus\n[[377.10]] habetur. </p>\n<p> [[377.11]] De modo tollendi eam potentiam. </p>\n<p> [[377.12]] De modo tollendi eam literam. </p>\n<p> [[377.13]] De novissima aequatione. </p>\n<p> [[377.14]] Si incognitae omnes homoeoptotae erit eadem aequatio pro omnibus seu reperientur\n[[377.15]] simul. </p>\n<p> [[377.16]] De inventione caeterarum incognitarum una inventa. </p>\n<p> [[377.17]] De constitutione et limitibus aequationis secundum aliquam literam. </p>\n<p> [[377.18]] De sublatione fractionum, semper succedit multiplicatione radicum. </p>\n<p> [[377.19]] De sublatione irrationalium, non succedit hoc solo. </p>\n<p> [[377.20]] De sublatione fractionum et irrationalium in quibus ipsa incognita. </p>\n<p> [[377.21]] De divisibilitate aequationis per aliquam rationalem. </p>\n<p> [[377.22]] De inventione certa radicis exactae rationalis, quando haberi potest (supra per\n[[377.23]] extractionem radicis affectae utrobique). </p>\n<p> [[377.24]] De modo extrahendi etiam radices irrationales propositae formae, quando id fieri\n[[377.25]] potest. Hoc potius referendum ad superiora de extractione radicum affectarum. </p>\n<p> [[377.26]] De inventione duarum aequationum ejusdem incognitae quas necesse est habere\n[[377.27]] communem divisorem et tunc problema reduci posse. </p>\n","number":"91.","title":"Methodus solvendi problemata","date":"[1680 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

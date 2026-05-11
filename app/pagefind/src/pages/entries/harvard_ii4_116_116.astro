@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_116","series":"Band II 4 (1701 - 1707)","seq":116,"text":"<p> [[376.14]] <b>116. LEIBNIZ AN RENÉ JOSEPH TOURNEMINE</p>\n<p> [[376.15]] [Mitte Januar 1706]</b></p>\n<p> [[377.28]] Monsieur, </p>\n<p> [[377.29]] Vous estes bien obligeant de m'avoir voulu rendre compte de ce que vous avies fait mettre\n[[377.30]] dans le journal de Trevoux au sujet de l'Analyse des infinitesimales. Je voy que Vous avés suivi\n[[377.31]] Monsieur l'idee de Monsieur de Fontenelles. Il imite quelquesfois les excellens Historiens de\n[[377.32]] l'antiquité, qui mêlent souvent les tours de leur esprit avec les faits. Je n'ay point caché ma\n[[377.33]] methode et messieurs Bernoulli ne m'ont rien enlevé, et n'en ont pas eu le dessein. Il[s]\n[[377.34]] savoient dejà practiquer cette methode, lors que l'ainé me proposa un probleme un peu difficile.\n[[377.35]] Vous savés Monsieur, qu'outre les Methodes generales il faut souvent quelque tour d'adresse\n[[377.36]] pour resoudre des problemes difficiles; ainsi pour les animer d'avantage, je leur cachay ma\n[[377.37]] solution. Il n'y eut que le cadet qui y pût reussir. Mais aussi depuis ce temps là l'un et l'autre a\n[[378.1]] donné de beaux échantillons. Ces Messieurs n'ont pas eu autant de part que moy à l'invention\n[[378.2]] de la Methode, mais ils ont eu autant de part que moy à son usage[.] </p>\n","number":"116.","title":"LEIBNIZ AN RENÉ JOSEPH TOURNEMINE","date":"[Mitte Januar 1706]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_117","series":"Band II 3 (1695 - 1700)","seq":117,"text":"<p> [[310.13]] <b>117. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[310.14]] Neustadt, 27. Mai (6. Juni) 1697. [113.121.]</b></p>\n\n<p> [[311.1]] I. N. J. C. </p>\n<p> [[311.2]] Excellentissimo dignitate officiorum, Virtutum et Eruditionis omnigenae meritis\n[[311.3]] G. G. Leibnitio Electorali Consiliario </p>\n<p> [[311.4]] S. P. D. V. Placcius. </p>\n<p> [[311.5]] Rusticationem in praediolo meo amoenissimo amoeniorem etiam fecere multo litterae\n[[311.6]] Tuae, cum adjecto dono. Cui nunc nisi disputatiunculam hanc, quod reponam non habeo.\n[[311.7]] Habiturus propediem, ni bibliopola fefellerit; qui recepit editionem Problematum IIX. <i>de\n[[311.8]] affectibus</i> et quidem Christiane movendis Primum C. D. B. V. e Theologicis meis opusculum.\n[[311.9]] Ad quod contra decretum animi mei publice professum, edendum me Conscientiae meae arbiter\n[[311.10]] M. Dornemannus impulit. Eis ut adaequent molem Tui libelli, addam alia aeque diu jam pressa.\n[[311.11]] Videlicet 1. <i>de Interitu mundi dissertationem contra annihilationi Luthero improbatae addictos</i>,\n[[311.12]] 2. <i>De hora crucifixionis Christi et antilogia Marci Evangelistae cum Johanne</i>, 3. <i>de\n[[311.13]] Soliloquiis Christianis</i>. Interim tua <i>Sinica</i>, meos etiam <i>Anonymos</i> auctura, perlegi. Sane quam\n[[311.14]] optarem voto tuo respondere successum! tam parum a mea incredulitate impetro spem tantam.\n[[311.15]] Et quaeso quis credat Jesuitas nos in suae felicitatis jam stabilitae partem ullam admissuros, aut\n[[311.16]] rem ita unquam agi permissuros, ut ne intelligant Sinenses quibus inter nos dissideamus. Cum\n[[311.17]] illi dudum impleverint sua superstitione, quam nos antichristianam dicimus omnia nec sine illa\n[[311.18]] unquam sint perrecturi docere? Mitto tot alia impedimenta, etiam a nostris partibus obstitura.\n[[311.19]] Interim exosculor tua pia desideria, sed (faxit ut errem Deus et falsus evadam Vates!) in\n[[311.20]] desideriis substitura. Ni fallor alias etiam Thomae Mori Utopienses narrantur ita sectis suis\n[[311.21]] innumeris addicti, ne quis publicos illorum cultus sacros frequentans id animadvertat. Ita si\n[[311.22]] fieret, revera evaderent id quod sunt, Luthero versae logomachiae 1. <i>Tim.</i> VI. 4. <i>Schuhlgezaenk</i>.\n[[311.23]] Id quod facile impetrari aliquatenus potuisset, si hoc solum egissent statim ab initio Magnates\n[[311.24]] adjuncta potentia; ne aliter quam Latine talia disceptarentur. Sed haec quidem extra oleas. Bina\n[[311.25]] Tua exemplaria Dn. Bussingio et Mejero destinata simulac in urbem rediero tradam. De\n[[311.26]] Weigelio et ipse miror, quod nec indicium sui reditus et transitus fecerit mihi. Quo magis\n[[311.27]] despero et nostros desperare conjecturo de Scholastica per ipsum emendatione hic locorum ulla.\n[[311.28]] Nempe Pietismi et Diotrephis calumnias timent, in hoc qui adjuvare nos debebant, sane hac in\n[[311.29]] parte me magis meticulosi, qui minus esse debebant. Vale, in Neostadorensi meo Tusculanulo,\n[[311.30]] d. 27. Maji 1697. </p>\n","number":"117.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Neustadt, 27. Mai (6. Juni) 1697. [113.121.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

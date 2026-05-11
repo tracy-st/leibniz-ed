@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_237","series":"Band II 4 (1701 - 1707)","seq":237,"text":"<p> [[714.1]] <b>237. BARTHÉLEMY DES BOSSES FÜR LEIBNIZ</p>\n<p> [[714.2]] [Hildesheim, 23. Dezember 1707]. [236.238.] </b></p>\n<p> [[714.10]] Antonius Perez in 2^#'d^#'a^#'m 2^#'d^#'a^#'e Tract. IV. disputatione VI, caput 3. De Augmento charitatis. </p>\n<p> [[714.11]] 1. Duae sunt difficultates hic a nobis per angustias temporis brevissime attingendae. Prima\n[[714.12]] difficultas est utrum actibus remissis, et duratione libera actus caritatis augeatur meritorie\n[[714.13]] caritas. Existimo partem affirmantem satis aperte colligi ex sess. 6. Trident. cap. 10 et 16 et\n[[714.14]] Canone 24. Sed solet hic negotium facessere objectio quaedam vulgaris sumpta ex eo quod\n[[714.15]] videatur sequi ex qualibet duratione actus charitatis infinitum augmentum charitatis; nam in\n[[714.16]] ultimo instanti V. G. durationis aliquis gradus charitatis datur in praemium; at in quolibet\n[[714.17]] instanti praecedente datus est alius aut plures gradus non minores illo: cum ergo instantia sint\n[[714.18]] infinita, gradus acquisiti aequales erunt infiniti. </p>\n<p> [[714.19]] Omitto aliorum solutiones, quarum aliae negant infinitatem in continuo, aliae concessa\n[[714.20]] infinitate negant existere in continuo puncta et momenta actualia; aliae negant continuam\n[[714.21]] libertatem durationis, aliae dicunt in singulis momentis solum produci indivisibile praemii et\n[[714.22]] quasi punctum. Sed nos ne de his rebus quaestionem faciamus, admittimus continuam libertatem\n[[714.23]] durationis et disputationis gratia infinitatem momentorum, et in singulis momentis\n[[714.24]] acquiri plusquam indivisibile praemii. </p>\n<p> [[714.25]] Respondeo itaque ex propria sententia, plerosque authores in hac re latuisse quoddam\n[[714.26]] principium: est autem illud, quantitatem charitatis et qualitatis intensae non esse unicae dimensionis.\n[[714.27]] Quantitatem unicae dimensionis voco in qualitate illam quae est proportionalis lineae et\n[[714.28]] tempori; si enim quantitas qualitatis proportionalis lineae ponatur in loco et extendatur, solum\n[[714.29]] occupabit unam lineam spatii: quando autem potest occupare, si extendatur, locum correspondentem\n[[714.30]] superficiei tunc dico esse duplicis dimensionis, et esse proportionalem superficiei,\n[[715.1]] quando autem potest occupare locum solidum, tunc dico esse trinae dimensionis et proportionalem\n[[715.2]] corpori. Dico ergo concedi posse quolibet momento augeri charitatem augmento proportionali\n[[715.3]] lineari quantitati, et licet augeatur in singulis momentis aequaliter, inde solum sequi\n[[715.4]] augmentum finitum proportionale superficiei finitae continentis lineam infinities. Sic si charta\n[[715.5]] illuminetur a sole successive, ita ut in primo momento temporis illuminatur linea prima chartae,\n[[715.6]] et in sequentibus successive illuminentur caeterae, donec tota charta in fine temporis maneat\n[[715.7]] illuminata, non sequitur superficiem illuminatam seu quantitatem lucis extensam esse infinitam\n[[715.8]] in ratione superficiei, sed solum sequitur continere infinitas lineas sicut linea continet infinita\n[[715.9]] puncta, quod juxta sententiam continui quam supponimus, non censetur absurdum. </p>\n<p> [[715.10]] Si quid autem absurdum est in sententia nostra, tota absurditas consistit in suppositione\n[[715.11]] affirmante infinitam multitudinem punctorum actualium aut instar mathematicorum in quantitate\n[[715.12]] et tempore, quam ego existimo esse impossibilem etiam de potentia absoluta; nam licet\n[[715.13]] continuum sit in infinitum divisibile ut ego existimo et infinita contineat indivisibilia metaphysica,\n[[715.14]] mathematica tamen actualia non potest continere infinita actu sed solum in potentia.\n[[715.15]] Quomodo autem differat indivisibile metaphysicum, et indivisibile mathematicum actuale, et\n[[715.16]] indivisibile mathematicum potentiale alibi explicui; et in hac dinstinctione existimo consistere\n[[715.17]] solutionem difficultatis continui; sed ut dixi ad hunc locum non spectat haec quaestio. Sufficit\n[[715.18]] ostendisse ex affirmatione meriti durationis actus caritatis nullam difficultatem novam oriri\n[[715.19]] contra naturam continui. </p>\n<p> [[715.20]] Hucusque Ant. Perez. Caetera in eodem capite contenta non spectant ad hanc materiam. </p>\n","number":"237.","title":"BARTHÉLEMY DES BOSSES FÜR LEIBNIZ","date":"[Hildesheim, 23. Dezember 1707]. [236.238.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

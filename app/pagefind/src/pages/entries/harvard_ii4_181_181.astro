@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_181","series":"Band II 4 (1701 - 1707)","seq":181,"text":"<p> [[565.10]] <b>181. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[565.11]] Leipzig, 19. Februar 1707. [180.184.] </b></p>\n<p> [[565.17]] Vir Illustris et Excellentissime, Patrone gratiosissime! </p>\n<p> [[565.18]] Locutus sum nuperrime cum Consultissimo Carpzovio nostro de scripto Bernardi <greek> ănekdót^v</greek>\n[[565.19]] atque ex eo intellexi, inter Beati Fratris scrinia nihil tale fuisse inventum. Fritschium\n[[565.20]] itaque ipsum adivi, qui Librum se adhuc possedere mihi fassus est, et Dn. Smitho subirascens,\n[[565.21]] se praestitutum esse suo tempore quod Bernardo olim promisisset, regessit. Vidit enim apud\n[[565.22]] ipsum scriptum hoc Dn. L. Olearius Fautor et Amicus meus honorandus, sed indigestum adhuc\n[[565.23]] esse, et ulteriori lima indigere priusquam edatur, mihi retulit. Feci igitur, Vir Excellentissime,\n[[565.24]] quantum in viribus meis fuit positum, neque video, qua ratione ex viri hujus manibus\n[[566.1]] concreditum scriptum recuperari possit. Si aliquid amplius hac in re a me expectare poteris,\n[[566.2]] Excellentiae Tuae gratia laetus agam lubensque. </p>\n<p> [[566.3]] Ipse jam <i>Diatribam</i> Historico-philosophicam <i>de Enthusiasmo Platonico</i> luci publicae\n[[566.4]] proxima quaque occasione exponere constitui, in qua ex primis Platonicae philosophiae principiis\n[[566.5]] demonstrabo, finem ejus ultimum esse <b>animae humanae in Essentiam DEI reditum</b>,\n[[566.6]] in originem simul atque progressum hujus doctrinae inquirendo, eandemque secundum\n[[566.7]] rectae rationis principia examinando. Sed desunt adhuc quaedam adminicula ad uberiorem\n[[566.8]] hujus argumenti deductionem atque illustrationem oppido necessaria. Nim[irum] scriptis ex\n[[566.9]] Anglis praeter Henricum Morum quem possideo, etiam Mericus Casaubonus de Enthusiasmo\n[[566.10]] Naturali anglico idiomate Londini 1656. Hunc tractatum diu in Bibliothecis quaesivi, sed\n[[566.11]] frustra in ipsa etiam Guelpherbytana. Quare rem mihi gratissimam, omnibusque obsequiis\n[[566.12]] iterum demerendam faciet Excellentia Tua, si copiam hujus libri mihi facere possit, vel alia\n[[566.13]] etiam ad hoc argumentum facientia suppeditare. Quod superest sum maneoque </p>\n<p> [[566.14]] Illustris atque Excellentissimi Nominis Tui Cultor observantissimus </p>\n<p> [[566.15]] M. G. Hanschius </p>\n<p> [[566.16]] Lipsiae d. 19. Febr. 1707. </p>\n<p> [[566.17]] A Son Excellence Monseigneur de Leibnitz Conseiler de Sa Majesté le Roy de Prusse à\n[[566.18]] Berlin </p>\n","number":"181.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 19. Februar 1707. [180.184.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

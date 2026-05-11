@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_134","series":"Band II 3 (1695 - 1700)","seq":134,"text":"<p> [[357.16]] <b>134. LEIBNIZ AN LOUIS COUSIN</p>\n\n[[358.1]] <e21>Mit der nicht gefundenen Abfertigung unseres Briefes wendet sich Leibniz an Louis Cousin als den Herausgeber\n[[358.2]] des <i>Journal des Sçavans</i>, um auf die gegen seinen Willen anonym durch Pierre-Sylvain Régis am 17. Juni 1697\n[[358.3]] dort mit dem Titel <i>Reflexions sur une letre de M. Leibnits ecrite à M. l'Abé Nicaise, dans laquelle il pretend faire\n[[358.4]] voir que les principes de la Filosofie de M. Descartes, renferment des consequences contraires à la Religion et à\n[[358.5]] la pieté</i> (S. 273-276) veröffentlichten Äußerungen aus seinem Brief an Nicaise (N. 100) zu reagieren. Einer\n[[358.6]] zuvor geäußerten Bitte (nicht gefunden) wohl zur Verhinderung dieser Publikation war Cousin nicht nachgekommen.\n[[358.7]] Aus diesem Grund übersendet Leibniz ihm mit unserem Schreiben seine Antwort, die er aufgrund ihrer\n[[358.8]] Länge in zwei Artikel für das <i>Journal</i> unterteilt: <i>Réponse aux réflexions qui se trouvent dans le 23. Journal des\n[[358.9]] Savans de cete anée, touchant les conséquences de quelques endroits de la Filosofie de Descartes</i> (19. August\n[[358.10]] 1697, S. 381-384) und <i>Suite de la reponse aux reflexions sur les conséquences de quelques endroits de la\n </p>\n<p> [[358.12]] Monsieur </p>\n<p> [[358.13]] J'avois pris la liberté de vous écrire dernierement pour deux raisons; mais ayant appris que\n[[358.14]] l'une ne peut plus avoir lieu, j'espere que vous prendrés l'autre en bonne part. Cependant pour\n[[358.15]] redresser ce qui pourroit tourner à mon prejudice, j'ay esté obligé de faire l'Apologie que voicy\n[[358.16]] dont je vous supplie de faire part au public suivant vostre bonté et vostre equité ordinaire. Je me\n[[358.17]] flatte que vous trouverés, Monsieur, comme qu'il n'y a rien que de moderé, et qu'aussi\n[[358.18]] Messieurs les Cartesiens mieux informés me feront la justice de croire, que ce je n'ay point\n[[358.19]] parlé ny par animosité, ny par ambition, comme on m'impute[,] mais pour le bien public, et que\n[[358.20]] je n'attaque point la pieté de M. des Cartes non plus que la leur. Lorsque je croy qu'on peut tirer\n[[358.21]] des mauvaises consequences de quelques endroits des principes de cet auteur, j'ay eu soin\n[[358.22]] d'adjouter des eclaircissemens, qui auront peutestre quelque utilité, car je ne crois pas que des\n[[358.23]] simples Apologies ou disputes personnelles doivent charger vostre <i>Journal des Sçavans</i>. J'ay\n[[358.24]] partagé ce discours cyjoint en deux, parce qu'il est trop grand pour un journal. Je suis\n[[358.25]] cependant avec zele </p>\n<p> [[358.26]] Monsieur vostre etc. </p>\n<p> [[358.27]] P.S. J'ose aussi vous supplier, que lors qu'on repliquera peutestre contre moy, ou en des\n[[358.28]] rencontres semblables, vous vouliés avoir la bonté de faire marquer mon nom seulement par les\n[[358.29]] lettres initiales. </p>\n","number":"134.","title":"LEIBNIZ AN LOUIS COUSIN","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

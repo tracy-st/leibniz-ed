@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_160","series":"Band II 3 (1695 - 1700)","seq":160,"text":"<p> [[420.1]] <b>160. GABRIEL WAGNER AN LEIBNIZ</p>\n<p> [[420.2]] [Wolfenbüttel,] 15. (25.) März 1698. [157.162.]</b></p>\n\n<p> [[420.7]] Wolgebohrner Hr. </p>\n<p> [[420.8]] Himit überschikke di untersuchung: ich weiß nicht, ob di gedanken alle werden zusammen\n[[420.9]] hangen, wiwol ich di sache gnung inne habe, weil der bewuste F. (<i>de frigido mente</i>) mich\n[[420.10]] seither der Maße so gequält, daß ich sovielmal den tod ausgestanden, sovielmal ich zutische\n[[420.11]] gangen; ja itzo da er der Leipziger Schelmerei in der ganzen stat fast ausgebracht, (ohne zweifel\n[[420.12]] aus Sturms unehrl. Bericht) sind mir sinn und gedanken di ärgste pein, und wollte daß ich si\n[[420.13]] nicht hätte. Ich habs allen 3 <i>ephoris</i> vielmal geklagt, aber der unterste ist zu schwach <i>et forte\n[[420.14]] non satis candidus, medius, agrestis et tumidus, supremus</i> <i>nebulonis agnatus videtur vel centum\n[[420.15]] Machiavellos vel 100 diabolos sub pectore alere</i>: daher hatte ich beschloßen eine Suppl. an den\n[[420.16]] Hn. zumachen, aber dem lezten wird doch di sache aufgetragen, oder er drum befragt, und also,\n[[420.17]] <i>nisi ipse admissus vix quidquam efficerem</i>: <i>In officii negotiis</i> hab seither der maßen nicht soviel\n[[420.18]] gethan als vorher in 3 tagen, <i>nam ubique de securitate et liberatione meditandum est. Si\n[[420.19]] 10 imperialium particeps fuissem, decies abiissem, vestes venales exposui emtores non reperi;\n[[420.20]] hinc si adventus huc maturari posset, gauderem, quia nescio quamdiu haec sustinere possim, et\n[[420.21]] quotidie meditor fugam, modo viae essent</i>. Ich erwarte eiligst antw. u. verharre </p>\n<p> [[420.22]] <i>Vir Illustris</i> <i>Quem nosti</i>. </p>\n<p> [[420.23]] 15. Merz. 98\n[[421.1]] <yi>Dem Wolgebohrnen Hern Herrn Gotfried Wilhelm Von Leibniz, Ihr. Churf. Durchl.\n[[421.2]] Brunschw. Geheim. Justiz Raht, u.a.m. Hannover </p>\n","number":"160.","title":"GABRIEL WAGNER AN LEIBNIZ","date":"[Wolfenbüttel,] 15. (25.) März 1698. [157.162.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

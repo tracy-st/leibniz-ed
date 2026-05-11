@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_67","series":"Band II 2 (1686 - 1694)","seq":67,"text":"<p> [[294.9]] <b>68. LEIBNIZ AN ─ (?)</p>\n<p> [[294.10]] [Rom, Sommer 1689.] [69.]</b></p>\n<p> [[295.1]] Le R.P. Baldigiani a compris la force de ma demonstration, et ne voit pas ce qu'on y\n[[295.2]] pourroit repliquer. Si vous le pouvés desabuser, Monsieur, cela servira à me desabuser aussi. </p>\n<p> [[295.3]] J'admire que vous pouvés digerer cette consequence sçavoir qu'un corps se peut faire\n[[295.4]] elever à une plus grande hauteur que celle dont il descend; sans qu'il survienne une autre force\n[[295.5]] ou action exterieure, qu'il n'ait pas fait naistre luy même, et il n'est pas moins estonnant de\n[[295.6]] voir, Monsieur, que vous ne faites pas scrupule d'admettre, que le centre commun de gravité\n[[295.7]] des deux corps pesans peut monter plus haut qu'il n'estoit au commencement, sans aucune\n[[295.8]] action qui ne naisse de leur pesanteur et descente. Quand on est reduit là il semble que le\n[[295.9]] contraire est demonstré: et le subterfuge du temps ne sert point, car, quelque temps qu'on donne\n[[295.10]] à une machine elle ne se remontera jamais d'elle même. Et je defierois qui que ce soit de\n[[295.11]] trouver un exemple, où le temps serve à faire naistre enfin un effect plus grand que celuy qui\n[[295.12]] estoit au commencement sans qu'on employe une action survenue de dehors. </p>\n","number":"68.","title":"LEIBNIZ AN ─ (?)","date":"[Rom, Sommer 1689.] [69.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_285","series":"Band II 1 (1663 - 1685)","seq":285,"text":"<p> [[865.18]] <b>250. LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS</p>\n<p> [[865.19]] Hannover, 29. Dezember 1684 (8. Januar 1685). [246.251.]</b></p>\n<p> [[866.3]] Hanover 29 X^#'b^#'. 1684. </p>\n<p> [[866.4]] [ ... ] Je n'ay pas encor veu ny le livre du P. Malebranche des idées, ny les deux livres de\n[[866.5]] Mons. Arnaud sur ce sujet. Le P. Malebranche auteur <i>de la recherche de la verité</i> est tres\n[[866.6]] ingenieux et a quelques pensées tres bonnes et tres solides, mais il en a d'autres qui sont un peu\n[[866.7]] hyperboliques ou legerement conçues. Il suit en quelque façon les traces de des Cartes, mais des\n[[866.8]] Cartes mêmes ne me satisfait pas en ces matieres. Leur principe (que tout ce qu'on peut\n[[866.9]] conclure de l'idée qu'on a d'une chose luy peut estre attribué veritablement) est fort sujet à\n[[866.10]] caution, et à moins que de donner des marques d'une conception distincte, il est inutile de dire,\n[[866.11]] que tout ce qu'on conçoit clairement et distinctement est veritable. Cette Analyse de nos\n[[866.12]] pensées est de grande importance tant pour juger que pour inventer. Et j'ay dit ce qui m'en\n[[866.13]] semble dans un petit echantillon inseré <i>in Actis Eruditorum</i> de Leipzig mois de novembre 1684.\n[[866.14]] pag. 537. sur quoy je serois bien aise d'apprendre le sentiment de Mons. Arnaud. Je ne doute\n[[866.15]] point que V.A.S. ne reçoive ces actes de temps en temps. On en imprime tous les mois et ils\n[[866.16]] sont assez bien faits. Quelques uns de ceux qui y travaillent sont de mes amis. </p>\n","number":"250.","title":"LEIBNIZ AN DEN LANDGRAFEN ERNST VON HESSEN-RHEINFELS","date":"Hannover, 29. Dezember 1684 (8. Januar 1685). [246.251.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

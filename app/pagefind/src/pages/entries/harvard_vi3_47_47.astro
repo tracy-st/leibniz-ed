@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_47","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":47,"text":"[[426.15]] <b>47. Theoremata sunt cogitandi compendia </b> <span>426.15;0:63:047:74       :L:l^</span>.\n[[426.23]] Omnia Theoremata non nisi Tachygraphias seu cogitandi compendia esse, ut\n[[426.24]] animus a rebus ipsis distincte cogitandis dispensetur, nec ideo minus omnia recte\n[[426.25]] proveniant, in hoc consistit omnis utilitas verborum, et characterum, ut in Arithmetica\n[[426.26]] sunt decimales, ut sunt Notae Analyseos, ut innumeros et saepe impossibiles\n[[426.27]] expressu, aut mire implicatos linearum motuumque ductus persequi necesse non sit.\n[[427.1]] Hoc etsi non verbis, aut reflexione animi, reapse tamen autores Algebrae expressere,\n[[427.2]] sed et inventores Algorithmi, et verborum in scientiis, et proinde omnis scientiarum\n[[427.3]] abstractarum laus consistit in compendiosis loquendi scribendique notis, et his notis\n[[427.4]] fit ut possimus computare progressionis alicujus terminum summamque, tout d'un\n[[427.5]] coup, etsi per singula non eamus, ut possimus ipsi infinito exhibere finitum aequale,\n[[427.6]] quaeque alia sunt huius generis non intelligentibus rationes rerum admiranda.\n","number":"47.","title":"Theoremata sunt cogitandi compendia","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

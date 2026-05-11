@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_39","series":"Band II 2 (1686 - 1694)","seq":39,"text":"<p> [[164.1]] <b>40. LEIBNIZ AN ANTOINE ARNAULD</p>\n<p> [[164.2]] [Göttingen, 30. April 1687.] [36.41.]</b></p>\n<p> [[164.26]] En <Fn><i>Am Kopf des Briefes</i>: ist nicht abgangen</Fn> matiere de religion (puisque vous touchés cette corde) il y a des gens de ma\n[[164.27]] connoissance (car je ne vous parle point de moy), qui ne sont pas eloignés des sentimens de\n[[164.28]] l'Eglise catholique Romaine, qui trouvent les definitions du Concile de Trente assez raisonnables\n[[164.29]] et conformes à la Sainte Ecriture et aux Saints Peres, qui jugent que le systeme de la\n[[164.30]] Theologie Romaine est mieux lié que celuy des Protestans, et qui avouent que les dogmes ne les\n[[164.31]] arresteroient pas. Mais ils sont arrestés premierement par quelques abus de practique tres\n[[165.1]] grands et trop communs, qu'ils voyent tolerés dans la Communion Catholique Romaine surtout\n[[165.2]] en matiere de culte; ils craignent d'estre engagés à les approuver ou au moins à ne pas oser les\n[[165.3]] blâmer, ils apprehendent de donner par là du scandale à ceux qui les prendroient pour des gens\n[[165.4]] sans conscience, et que leur exemple quoyque mal entendu porteroit à l'impieté; ils doutent\n[[165.5]] même, si on peut communier avec des gens qui pratiquent certaines choses peu tolerables; et ils\n[[165.6]] considerent qu'en ces rencontres il est plus excusable de ne pas quitter une Communion que d'y\n[[165.7]] entrer. </p>\n<p> [[165.8]] Secondement, quand cet obstacle ne seroit pas, ils se trouvent arrestés par les Anathematismes\n[[165.9]] du Concile de Trente, ils ont de la peine à souscrire à des condemnations qui leur\n[[165.10]] paroissent trop rigides, et peu necessaires, ils croyent que cela est contraire à la charité et que\n[[165.11]] c'est faire ou fomenter un schisme. </p>\n<p> [[165.12]] Cependant ces personnes se croyent veritablement Catholiques, comme le seroient ceux\n[[165.13]] qu'on a excommuniés injustement, <i>clave errante</i>, car ils tiennent les dogmes de l'Eglise\n[[165.14]] Catholique, ils souhaitent de plus la communion exterieure, à quoy d'autres mettent des\n[[165.15]] obstacles ou la leur refusent. </p>\n<p> [[165.16]] Un celebre Theologien Catholique Romain muni de l'approbation de plusieurs autres\n[[165.17]] avoit proposé un expedient; et avoit crû qu'un protestant, qui ne seroit arresté que par les\n[[165.18]] anathematismes et même par quelques definitions du Concile de Trente, et qui douteroit, si ce\n[[165.19]] Concile a esté veritablement Oecumenique, mais qui seroit prest à se sousmettre à un Concile\n[[165.20]] qui le seroit veritablement, et qui par consequent receuvroit les premiers principes de l'Eglise\n[[165.21]] Catholique, tellement que son erreur ne seroit pas de droit, mais de fait seulement; qu'un tel,\n[[165.22]] dis-je, pourroit estre receu à la communion sans faire aucune mention du Concile de Trente,\n[[165.23]] puisqu'aussi bien ce Concile n'a pas encor esté receu par tout, et que la profession du pape\n[[166.1]] Pie IV n'est faite que pour les Ecclesiastiques ou pour ceux qui enseignent, et que je ne crois\n[[166.2]] pas que le Concile de Trente soit entré dans la profession de tous ceux qu'on a receus à la\n[[166.3]] communion en France. Mais on doute que cet expedient soit approuvé. </p>\n","number":"40.","title":"LEIBNIZ AN ANTOINE ARNAULD","date":"[Göttingen, 30. April 1687.] [36.41.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

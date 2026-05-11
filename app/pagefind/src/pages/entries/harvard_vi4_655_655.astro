@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_655","series":"Band VI 4 (1677 - 1690)","seq":655,"text":"[[2842.7]] <b>503₁.  De publica felicitate DE PUBLICA FELICITATE </p>\n<p> [[2842.12]] Quicquid publice utile est, faciendum est. </p>\n<p> [[2842.13]] Commune bonum aestimatur ex collectis in unam summam bonis singulorum. </p>\n<p> [[2842.14]] Curandum ante omnia est, ut omnes sint contenti, sive ut nemo dolore afficiatur. </p>\n<p> [[2842.15]] Proximum est efficere ut omnes sint felices, sive quam jucundissime vivant. </p>\n<p> [[2842.16]] Potius est voluptatibus carere quam doloribus affici. </p>\n<p> [[2842.17]] <b>Laetitia</b> est status voluptatum praevalentium, <b>Tristitia</b> dolorum. </p>\n<p> [[2842.18]] <b>Felicitas</b> est status laetitiae duraturae. </p>\n<p> [[2842.19]] <b>Miseria</b> est status tristitiae duraturae. </p>\n<p> [[2842.20]] Bonum <b>necessarium</b> est, sine quo miseri sumus, caetera tantum <b>utilia</b> appellantur. </p>\n<p> [[2842.22]] Bona malaque ita inter homines dispensanda sunt, ut minimum inde oriatur malum,\n[[2842.23]] aut maximum bonum commune. </p>\n<p> [[2842.24]] Curandum est ut homines sint <b>prudentes, virtute praediti, facultatibus</b>\n[[2842.25]] abundantes, nimirum ut optima agere sciant, velint, possint. Prava autem nec cogitent,\n[[2842.26]] nec velint, nec possint. </p>\n<p> [[2843.1]] <k>Prudentia</k> et <k>virtus</k> in animis inseruntur tum <b>praeceptis</b>, et eorum rationibus\n[[2843.2]] quae sunt praemia poenaeque naturales pariter et civiles, tum <b>usu</b> sive virtutum exercitio. </p>\n<p> [[2843.4]] Praecepta <Fn><i>Diesen Absatz hat Leibniz durch Umrandung hervorgehoben.</i></Fn> sunt vel de actibus internis sive cogitationibus, quae complectitur Theologia\n[[2843.5]] moralis quam vocant seu Doctrina Casuum Conscientiae; vel de Actibus externis\n[[2843.6]] qui in aliorum cognitionem per se incurrere possunt, de quibus agit jurisprudentia civilis. </p>\n<p> [[2843.7]] <k>Facultates</k> autem, sive Bona quae inter homines dispensari possunt, arbitrio\n[[2843.8]] cujusdam potestatem habentis, sunt vel spiritualia vel temporalia, unde duplex jurisprudentia\n[[2843.9]] Ecclesiastica et Secularis. </p>\n","number":"503₁.","title":"De publica felicitate","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

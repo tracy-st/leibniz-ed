@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_42","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":42,"text":"[[409.17]] <b>42. Desiderata analytica </b> <span>409.17;0:63:042:74       :L:l^</span>.\n[[410.1]] 1674.\n[[410.2]] Desiderata Analytica.\n[[410.3]] Multum a perfectione ipsius artis analyticae absumus: ad analyticam numerorum\n[[410.4]] figuratorum absolvendam opus est tantum. Valorem quantitatum arbitrarium ita mutare,\n[[410.5]] ut eo in aequatione substituto evanescat rationalitas, hac ratione aequationum\n[[410.6]] omnium radices in numeris rationalibus reperiri possunt, quando id possibile est.\n[[410.7]] Cum saepe id fieri possit multis modis, artis fuerit omnes modos possibiles determinare,\n[[410.8]] quod hactenus in numeris potuit nemo. Huc pertinet, Ars inveniendi\n[[410.9]] quantitatem, quae eodem modo componatur ex AB et ex CD (posito CD componi ex\n[[410.10]] AB) quando id fieri potest, aut si non potest (,) demonstrare impossibilitatem. Huc\n[[410.11]] pertinet ars inveniendi quantitatem, quae certo quodam modo sed in ipsammet redeunte\n[[410.12]] tractata, producat datam, quando scilicet modus tractandi aequatione exprimi\n[[410.13]] non potest. Et tale est problema methodus tangentium inversa. Sunt et quaedam\n[[410.14]] problemata, in quibus compendium quaeritur, ut cum quaeritur additio terminorum\n[[410.15]] finitorum alicuius seriei; item terminus dato eius loco non inventis omnibus intermediis,\n[[410.16]] etc. Sed si series sit infinita, necessarium fit eiusmodi compendium. Facilius\n[[410.17]] invenitur series infinitarum linearum spatium componentium, quam infinitorum spatiorum\n[[410.18]] spatium finitum componentium.\n[[410.19]] Freniclius non utitur analysi, sed methodo quam vocat exclusivam: scil. determinat\n[[410.20]] numerum qui quaeritur non esse v.g. ternarium, non quaternarium etc. ac\n[[410.21]] exclusis paulatim omnibus eum eo reducit, ut tandem definiri possit. Haec methodus\n[[410.22]] dependet ex theorematis multis jam praedemonstratis.\n","number":"42.","title":"Desiderata analytica","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

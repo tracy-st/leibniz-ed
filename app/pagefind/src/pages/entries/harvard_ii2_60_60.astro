@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_60","series":"Band II 2 (1686 - 1694)","seq":60,"text":"<p> [[278.7]] <b>61. LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS</p>\n<p> [[278.8]] [Wien, 20. Mai 1688.] [60.62.]</b></p>\n<p> [[279.1]] [ ... ] Je renvoye la Lettre du R.P. Jobert, marquée de <i>Remittatur</i>; je vois qu'il n'a rien à\n[[279.2]] reprocher à M^#'r Arn. pour le traiter d'heretique que les pauvres cinq propositions. Mais puisque\n[[279.3]] M^#'r Arn. les desavoue depuis plus de 20 à 30 ans, que veut il davantage? outre qu'il y a bien\n[[279.4]] d'equivoques cachées dans ces cinq propositions, comme on sçait assez par les divers sentimens\n[[279.5]] des Censeurs. C'est pourquoy je m'imaginois charitablement que les R.R. P.P. Jesuites\n[[279.6]] luy imputent des choses qu'il ne peut desavouer si aisement, comme par exemple la creance de\n[[279.7]] la necessité de la contrition. J'avoue tres volontiers que V.A.S. est mille fois mieux informée\n[[279.8]] que moy des contestations qu'il y a entre les Jesuites et les Jansenistes, et qu'ainsi il y aura bien\n[[279.9]] des controverses qui me seront echappées. De plus quand M^#'r Arnaud avoit mille fois soustenu\n[[279.10]] les cinq propositions avant leur condamnation, méme dans le sens condamné, cela ne le feroit\n[[279.11]] nullement heretique, puisqu'on ne sçauroit nier, qu'il les a desavouées après leur condamnation,\n[[279.12]] pour ne pas dire, que selon les principes du Clergé Gallican, la condamnation des cinq\n[[279.13]] propositions faite par le Pape seul n'en fait point une heresie, et qu'il faut qu'un Concile\n[[279.14]] Universel pour cela, ou bien une Tradition constante et notoire. </p>\n<p> [[279.15]] Je m'imagine aisement que M^#'r Arnaud a bien d'autres choses à faire que de s'amuser à\n[[279.16]] disputer avec moy sur des matieres abstraites; mais je serois content si j'apprends que maintenant,\n[[279.17]] quoyqu'il ne soit peutestre pas encor de mon sentiment, il n'y trouve plus rien de\n[[279.18]] mauvais, comme il avoit crû au commencement, avant que de l'avoir bien compris. Et ce sera\n[[279.19]] assez s'il a la bonté de s'expliquer là dessus, soit à V.A.S. ou à moy. [ ... ] </p>\n","number":"61.","title":"LEIBNIZ AN LANDGRAF ERNST VON HESSEN-RHEINFELS","date":"[Wien, 20. Mai 1688.] [60.62.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

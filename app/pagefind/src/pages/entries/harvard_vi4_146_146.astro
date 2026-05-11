@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_146","series":"Band VI 4 (1677 - 1690)","seq":146,"text":"[[506.1]] <b>119.  De demonstratione axiomatum non identicorum [Mai 1682 bis Dezember 1684 (?)]</b>\n [[506.2]] <tab/>[Mai 1682 bis Dezember 1684 (?)] </p>\n<p> [[506.13]] Demonstrari possunt, non tantum theoremata, sed etiam ipsa Axiomata quae identica\n[[506.14]] non sunt. Ita demonstravi Axioma Euclideum: <b>Quod aequalia uni tertio, sunt\n[[506.15]] aequalia inter se</i>, per definitionem Aequalitatis. Talem autem assigno definitionem\n[[506.16]] Aequalitatis: <b>Aequalia</b> sunt quorum unum alteri substitui potest, salva circa magnitudinem\n[[506.17]] veritate. Demonstrandum jam esto Axioma, de aequalibus uni tertio etiam\n[[506.18]] aequalibus inter se, quod sic exponi potest more Geometrarum: Esto <i>a</i> aequale ipsi <i>b</i>, et\n[[506.19]] rursus esto <i>c</i> aequale ipsi <i>b</i>, ajo fore <i>a</i> et <i>c</i> aequalia inter se. Nam (primo) quia <i>a</i> = <i>b</i> ex\n[[506.20]] hypothesi, et (2do) <i>c</i> = <i>b</i>, itidem ex hypothesi, ergo in aequatione prima in locum <i>b</i>,\n[[506.21]] poterit substitui <i>c</i>, et fiet <i>a</i> = <i>c</i>. Quod erat dem. </p>\n<p> [[506.22]] <b>Definitio</b>. <k>Aequalia</k> sunt quae sibi substitui possunt salva magnitudine. </p>\n<p> [[506.23]] <b>Axioma identicum</b>. Unumquodque sibi ipsi aequale est.\n [[506.24]] Axioma demonstrabile reductum ad <b>Theorema</b>\n [[507.1]] <b>Si aequalibus addas aequalia, proveniunt aequalia.</b>\n [[507.2]] Ecthesis\n [[507.3]] Esto 1) <i>a</i> = <i>l</i> et (2do) esto <i>b</i> = <i>m</i>. Dico fore <i>a</i> + <i>b</i> = <i>l</i> + <i>m</i>.\n [[507.4]] Demonstratio\n [[507.5]] Nam quia (3tio) <i>a</i> + <i>b</i> = <i>a</i> + <i>b</i> per Axiom. ident. Ergo in dextro latere hujus aequalitatis\n[[507.6]] pro <i>a</i> substituendo <i>l</i> (ob aequ. 1), et pro <i>b</i> substituendo <i>m</i> (per aequ. 2) quod fieri potest\n[[507.7]] (per definit. Aequalium) habebimus <i>a</i> + <i>b</i> = <i>l</i> + <i>m</i>. Quod erat demonstrandum. </p>\n<p> [[507.8]] Simili ratione aliquando ostendi Logicas consequentias commode demonstrari per\n[[507.9]] veritates identicas. Exempli gratia haec consequentia: <i>Omnis homo est animal. Ergo\n[[507.10]] quidam homo est animal</i>, est Enthymema, quod perficitur et transit in syllogismum ope\n[[507.11]] suppletae propositionis identicae: <i>Omnis homo est animal. Quidam homo est homo. Ergo\n[[507.12]] quidam homo est animal.</i> Fateor nos non habere opus his demonstrationibus, sed tamen\n[[507.13]] utiles eas arbitror ad [<i>bricht ab</i>] </p>\n","number":"119.","title":"De demonstratione axiomatum non identicorum","date":"[Mai 1682 bis Dezember 1684 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

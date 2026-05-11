@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_160","series":"Band II 2 (1686 - 1694)","seq":160,"text":"<p> [[557.1]] <b>162. LEIBNIZ AN HENRI JUSTEL</p>\n<p> [[557.2]] Hannover, 29. Juli (8. August) 1692. [89.]</b></p>\n<p> [[557.9]] [ ... ] J'avois cherché long temps les oeuvres du celebre Suisset, scholastique Anglois,\n[[557.10]] dont Jules Cesar Scaliger et autres parlent avec grandissime eloge; il avoit introduit les\n[[557.11]] Mathematiques dans la Scholastique; et on l'appelloit pour cela le Calculateur. Mais ses\n[[557.12]] ouvrages sont devenus si rares, à cause de l'oubli sans doute, et du mépris qu'on a eu depuis\n[[557.13]] pour ces études, que je ne les ay vûs qu'à Florence. Mais je crois qu'ils se trouveront assez en\n[[557.14]] Angleterre. Cependant je remarquay qu'il y avoit des pensées profondes; et Mons. Wallis ne\n[[557.15]] devoit pas oublier dans son traité Historique de l'Algebre cet ornament de l'Angleterre et du\n[[557.16]] Calcul. [ ... ] </p>\n<p> [[557.17]] Le Pere Bonanni, dont vous aurés vû le livre <i>de Testaceis</i> avec des fort jolies figures, vient\n[[557.18]] de donner un ouvrage nouveau intitulé: <i>Observationes circa viventia quae in rebus non\n[[557.19]] viventibus reperiuntur autore Philippo Bonanni Soc. Jes. Romae 1691</i>. Il pretend de prouver la\n[[557.20]] generation equivoque, comme on l'appelle contre nos modernes persuadés comme vous sçavés\n[[557.21]] que tout animal ne vient naturellement que d'un autre animal. Il paroist sçavant homme, mais il\n[[557.22]] aura de la peine à reussir. D'autant que les semences estant souvent imperceptibles il sera\n[[557.23]] difficile à cet auteur de prouver sa negative. Nous verrons ce que les partisans de Messieurs\n[[557.24]] Schwammerdam et Redi y repondront. [ ... ] </p>\n","number":"162.","title":"LEIBNIZ AN HENRI JUSTEL","date":"Hannover, 29. Juli (8. August) 1692. [89.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

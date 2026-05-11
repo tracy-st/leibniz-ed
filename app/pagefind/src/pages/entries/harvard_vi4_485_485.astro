@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_485","series":"Band VI 4 (1677 - 1690)","seq":485,"text":"[[2149.4]] <b>387₁.  De obligatione credendi. Erste Fassung DE OBLIGATIONE CREDENDI. ERSTE FASSUNG\n[[2149.7]] <tit2><b>De obligatione credendi</b></tit2>\n[[2149.8]] <b>Definitiones</b> </p>\n<p> [[2149.9]] <b>Obligatio</b> est necessitas sub poenae justae metu. </p>\n<p> [[2149.10]] <b>Poena justa</b> est, quam infligeret sapientissimus ac potentissimus. </p>\n<p> [[2149.11]] <b>Sapientia</b> est scientia felicitatis. </p>\n<p> [[2149.12]] <b>Scientia</b> est cognitio certa. </p>\n<p> [[2149.13]] <b>Felicitas</b> est status voluptatis sine dolore. </p>\n<p> [[2149.14]] <b>Credere</b> est rationum quae persuadent conscium esse. </p>\n<p> [[2149.15]] <b>Probabilitas</b> est excessus rationum pro re de qua agitur facientium supra contrarias. </p>\n<p> [[2149.17]] Idem est esse <b>in tua potestate</b> sive pendere a voluntate tua, id est existere si\n[[2149.18]] velis.\n[[2149.19]] <b>Axiomata</b> </p>\n<p> [[2149.20]] Existit Ens sapientissimum et potentissimum. </p>\n<p> [[2149.21]] Nulla obligatio est ad ea quae non sunt in potestate.\n[[2150.1]] <b>Theorema I</b> </p>\n<p> [[2150.2]] Quoties de fide agitur sola attentio diligens pendet a voluntate nostra. </p>\n<p> [[2150.3]] Nam fides vel credere est rationum conscientia ut dixi ad rationum conscientiam\n[[2150.4]] opus est tum rationibus, tum earum conscientia sine sensu, rationes pendent a natura rei;\n[[2150.5]] solum ergo quod a nobis esse potest, est earum perceptio sine conscientia; ad eam autem\n[[2150.6]] pervenire possumus duobus modis, vel ut casu se offerant rationes, vel ut a nobis\n[[2150.7]] inquirantur, casus non pendet a voluntate nostra, inquisitio pendet ab attentione, sola ergo\n[[2150.8]] attentio cum de rationum conscientia id est fide agitur pendet a voluntate nostra quod\n[[2150.9]] ostendendum susceperamus.\n[[2150.10]] <b>Theorema II</b> </p>\n<p> [[2150.11]] Nulla est obligatio ad ea, quae non sunt in potestate. </p>\n<p> [[2151.1]] Quaecunque non sunt in potestate sapientis, ea non sunt necessaria sapienti, ergo si\n[[2151.2]] casu externo contingere hoc rerum statu non possunt, omnino contingere hoc rerum statu\n[[2151.3]] non possunt. Quae hoc rerum statu contingere impossibile, ea hoc rerum statu non\n[[2151.4]] contingere necessarium est, sive contrarium eorum est necessarium. </p>\n","number":"387₁.","title":"De obligatione credendi. Erste Fassung","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

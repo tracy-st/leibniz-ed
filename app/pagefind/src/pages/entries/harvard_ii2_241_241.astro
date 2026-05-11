@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_241","series":"Band II 2 (1686 - 1694)","seq":241,"text":"<p> [[752.5]] <b>244. JACQUES L'ENFANT FÜR LEIBNIZ</p>\n<p> [[752.6]] [7. November 1693.] [235.245.]</b></p>\n<p> [[752.12]] Monsieur de Leibnitz fait trop d'honneur à mes petites difficultés d'y répondre en termes\n[[752.13]] si obligeans et avec tant d'exactitude, et il est bien rare de trouver un si grand savoir joint à un\n[[752.14]] si facile accés. </p>\n<p> [[752.15]] Un extrait semblable à celui du <i>Journal des Savans</i> ne peut gueres donner une idée\n[[752.16]] complette d'un systéme, sur tout quand des matieres de controverse s'y trouvent enchainées.\n[[752.17]] Ainsi j'attens avec impatience le traitté du Dynamisme <Fn><i>Leibniz hat verbessert</i>: de Dynamique</Fn> que ce savant homme fait esperer au\n[[752.18]] public. Cependant je prendray encore la liberté de proposer quelques doutes qui me restent sur\n[[752.19]] ses doctes éclaircissemens. </p>\n<p> [[753.1]] 1. Je conviens qu'il y a dans les corps une force d'agir et de resister à l'action, mais il me\n[[753.2]] semble que la notion de l'étenduë est anterieure à celle de cette force, puisque l'action et la\n[[753.3]] resistance suppose dans les corps <i><b>partes extra partes et erga se invicem agentes</i></b>. </p>\n<p> [[753.4]] 2. Je veux bien que le mouvement ne soit qu'un resultat de la force d'agir des corps, mais\n[[753.5]] cela ne me donne pas encore une idée positive de cette force; or c'est de quoy il s'agit. </p>\n<p> [[753.6]] 3. Je ne comprens pas bien que l'axiome Metaphysique, <i><b>effectus integer respondet\n[[753.7]] causae plenae</i></b> rende raison de la force primitive et originaire, d'où naît la force secondaire\n[[753.8]] et exercée. </p>\n<p> [[753.9]] 4. Pour la controverse de la presence reele je ne voy pas qu'elle soit terminée quand on\n[[753.10]] ôteroit à l'étenduë le rang que les Cartesiens lui donnent, en la regardant comme l'essence du\n[[753.11]] corps. Et il suffit que les corps soient impenetrables pour renverser entierement cette hypothese\n[[753.12]] Theologique. Mais peut etre vaut il mieux laisser cette dispute aux Theologiens qui ont toujours\n[[753.13]] dans l'autorité de celui qui parle, ou qu'ils font parler, un recours assûré. </p>\n<p> [[753.14]] 5. Toute la question est donc de savoir si la force d'agir des corps est dans la matiere\n[[753.15]] quelque chose de distinct et d'independant de tout ce qu'on y concoît d'ailleurs. Sans quoy\n[[753.16]] cette force n'en peut etre l'essence, et demeurera le resultat de quelque qualité primitive. </p>\n<p> [[753.17]] Mais c'est peut être fatiguer trop longtems Monsieur de Leibnitz qui a des occupations\n[[753.18]] plus importantes, et le faire trop souffrir de mon ignorance. </p>\n","number":"244.","title":"JACQUES L'ENFANT FÜR LEIBNIZ","date":"[7. November 1693.] [235.245.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

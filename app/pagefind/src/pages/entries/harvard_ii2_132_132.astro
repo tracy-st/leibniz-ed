@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_132","series":"Band II 2 (1686 - 1694)","seq":132,"text":"<p> [[478.5]] <b>133. LEIBNIZ AN ADAM ADAMANDUS KOCHAŃSKI</p>\n<p> [[478.6]] Hannover, Dezember 1691. [152.]</b></p>\n<p> [[478.21]] [ ... ] In Analytico Calculo ego Cartesii notis utor quibus addidi novas quasdam meas sed\n[[478.22]] pro rebus Cartesio non adhibitis. Per calculum Analyticum semper scire possumus utrum\n[[478.23]] Problema sit planum, an solidum an suprasolidum, et quoto gradu et possumus excogitare loca\n[[478.24]] seu lineas aptas ad ejus constructionem, et quia talia problemata semper reduci possunt ad\n[[478.25]] aequationes et Vieta generalem modum dedit pro Numerica aequationum solutione, hinc omnia\n[[478.26]] Geometriae ordinariae problemata vel in lineis vel in numeris solvere possumus. Sed dantur\n[[478.27]] praeterea innumera problemata Geometriae extraordinariae (praesertim in applicatione ad\n[[478.28]] Mechanicam et Physicam) quae Cartesius callide exclusit a sua <i>Geometria</i>: His igitur ego\n[[478.29]] subsidium aliquod paravi. Et talia problemata reduci possunt ad aequationes infinitas, ita ut\n[[478.30]] posthac etiam in illis saltem quoad praxin nihil amplius desiderem. Et ita quoad praxin dici\n[[479.1]] potest Geometriam esse hodie absolutam. Interim quia praxis una facilior est alia semper augeri\n[[479.2]] poterit scientiae perfectio, ut quantum licet perveniamus ad optimas constructiones, id enim\n[[479.3]] fateor nondum semper esse in potestate. </p>\n<p> [[479.4]] Absoluta igitur Geometria, quantum sufficit ad usum Generis humani, id jam agitur ut\n[[479.5]] eadem perfectio obtineatur in Mechanica. Quam in rem molior nova quaedam Elementa\n[[479.6]] Dynamica de quibus et specimina quaedam dedi. Distinguo vim mortuam et vivam, vim vivam\n[[479.7]] triplicem esse reperi, absolutam, directivam, et respectivam; Aggregatum directivae et respectivae.\n[[479.8]] Sed falsum est quod eandem servat quantitatem motus ut crediderant Cartesiani. In\n[[479.9]] Physicis quoque et caeteris Philosophiae partibus quasdam demonstrationes habeo quae alicujus\n[[479.10]] momenti videntur et in summa rerum valde a Cartesianis abeo. [ ... ] </p>\n","number":"133.","title":"LEIBNIZ AN ADAM ADAMANDUS KOCHAŃSKI","date":"Hannover, Dezember 1691. [152.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

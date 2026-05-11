@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_274","series":"Band VI 4 (1677 - 1690)","seq":274,"text":"[[1064.19]] <b>226.  Annotationes ad Logicam Hamburgensem [Herbst 1678 bis Winter 1679/80 (?)]</b>\n [[1064.20]] <tab/>[Herbst 1678 bis Winter 1679/80 (?)]\n[[1065.1]] <tit2><b>Annotationes ad Logicam Hamburgensem </b> </tit2> </p>\n<p> [[1065.2]] <b>Prolegom. n. 1.</b> <i>Logica est ars mentis operationes dirigens ad verum a falso\n[[1065.3]] discernendum</i>. Annot. Videtur logicae officium esse non tantum judicium adjuvare sed et\n[[1065.4]] inventionem. Inventionem inquam non tantum argumentorum (quibus aliqua propositio\n[[1065.5]] probetur aut refellatur), sed et propositionum; imo ipsa ars quaerendi seu quaestiones\n[[1065.6]] inveniendi Logica est. Pertinet etiam ad Logicam invenire omnes species dati generis;\n[[1065.7]] duarum specierum infimum genus commune. Datis duabus rebus valde discrepantibus\n[[1065.8]] invenire similitudinem (quod magni usus est in arte Mnemonica), datis duabus rebus\n[[1065.9]] valde similibus invenire discrimen, quod maximi usus est in omni examine. </p>\n<p> [[1065.10]] Lib. IV. cap. X. <i>de demonstratione</i> num. 6. <i>Propositio per se vera dicitur quae\n[[1065.11]] absque demonstratione partim inductione, partim naturali mentis lumine innotescit.\n[[1065.12]] Ideoque etiam indemonstrabilis, itemque immediata propositio</i>. Annot. Non video quomodo\n[[1065.13]] certae veritatis sit, quod sola inductione innotescit, cum impossibile sit omnia\n[[1065.14]] exempla explorare. Quid autem sit naturali mentis lumine innotescere non intelligo. Unde\n[[1065.15]] enim scimus, lumen esse non tenebras? nisi ad communem opinionem recurrimus et\n[[1065.16]] successum quae probabilitatem parit non scientiam. Fateor ut infra <b>n. 11.</b> dicitur axiomata\n[[1065.17]] auditori proposita statim fidem reperire: sed hic non quid homines credant aut non\n[[1065.18]] credant, sed qua ratione certi simus, quaeritur. Ipse autor ait sequenti <b>n. 12.</b> principiis\n[[1065.19]] contradictionis aliorum axiomatum veritatem inniti, probari possunt ergo. Eandem difficultatem\n[[1065.20]] reperio circa <b>n. 42.</b> capitis ejusdem. Ita enim scientiarum fundamenta ­deni-\n [[1065.21]] ­que in opinionem communem, seu id quod admitteret quivis auditor resolverentur. </p>\n<p> [[1065.22]] <b>N. [43.]</b> dicitur hypothesin quae omnibus phaenomenis satisfaciat necessario veram\n[[1065.23]] credi: sed quoniam ejusdem rei multae possunt esse causae non video quomodo hinc\n[[1065.24]] necessario constet hujus effectus hanc quae assignata est, esse causam. </p>\n<p> [[1065.25]] Lib. IV. cap. 17. esse ait generalia quaedam de quibus nihil demonstrari possit ut <i>de\n[[1065.26]] triangulo prout a rectilineo, sphaerico, cylindrico, conico, etc. abstrahitur.</i> Mihi contra\n[[1065.27]] videtur quamvis notionem generalem et proprietates quasdam generales habere. </p>\n<p> [[1065.28]] Miror autorem paucis de demonstratione ac ordine didascalico propositis statim\n[[1065.29]] transire ad dialecticam seu loca probabilium argumentorum, nec vero topicam apodic-\n[[1066.1]] ticam saltem attigisse. Et cum de integrae cujusdam scientiae systemate ac dispositione,\n[[1066.2]] sub ordinis didascalici appellatione tractasset, hoc ipsum eum admonere debebat, ut de\n[[1066.3]] methodo etiam illa ageret, qua scientia aliqua aut de novo inveniri, aut perdita restitui, aut\n[[1066.4]] arcta nimis extendi et locupletari possit. Item de methodo quae cuidam quaestioni peculiaris\n[[1066.5]] est, seu de arte resolvendi problemata, et demonstrandi theoremata proposita. Scio\n[[1066.6]] autorem de his omnibus potuisse praeclara dicere, eoque magis miror, hic ne digito\n[[1066.7]] quidem indicasse, aut per summa capita digessisse, quae in hanc rem meditata habebat.\n[[1066.8]] Nisi forte in arcano habere ea maluit, meditans adhuc societatem quandam <angle bracket>heu</angle bracket>reticam,\n[[1066.9]] cui servari praecepta inveniendi <angle bracket>con</angle bracket>sultius judicavit. </p>\n","number":"226.","title":"Annotationes ad Logicam Hamburgensem","date":"[Herbst 1678 bis Winter 1679/80 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

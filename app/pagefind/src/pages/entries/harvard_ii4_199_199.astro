@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_199","series":"Band II 4 (1701 - 1707)","seq":199,"text":"<p> [[620.19]] <b>199. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[620.20]] Leipzig, 25. Juni 1707. [197.202.] </b></p>\n<p> [[621.1]] Vir Illustris atque Excellentissime, Patrone gratiosissime! </p>\n<p> [[621.2]] Quod aliquanto serius fidem Excellentiae Tuae datam libero varia effecere negotia, quibus\n[[621.3]] hactenus a scribendi officio exclusus sum. </p>\n<p> [[621.4]] Sed eo faciliorem fore Excellentiam Tuam ad condonandum hoc silentium spero, quo\n[[621.5]] affectu in me immerentem sinceriore fertur. Totus autem in eo fui, ut Librorum ab Excellentia\n[[621.6]] Tua desideratorum potirer, eorumque numerum in Schedula hic adjecta consignavi, illud saltem\n[[621.7]] moneas, Astorii <i>Commentariolum in antiquum Alcmanis Monumentum e Graecia allatum</i> me\n[[621.8]] maxima sui parte mancum et mutilum reperisse, nec non Aloysii Ferdinandi Comitis Marsigli\n[[621.9]] <i>operis Danubialis Prodromum</i>, ideoque cognito defectu utrumque Venditoribus reddidisse.\n[[621.10]] Alios duos cum pretio minimo comparaverim reddere nolim, sed siquidem ita placuit, Excellentiae\n[[621.11]] Tuae una cum reliquis mittam, sin minus, retinebo. </p>\n<p> [[621.12]] Quod superest me et mea Studia cum omnibus officiis atque obsequiis meis ex fide et\n[[621.13]] formula antiqua lubens Excellentiae Tuae consecro atque dedico </p>\n<p> [[621.14]] Illustris atque Excellentissimi Nominis Tui Cultor observantissimus </p>\n<p> [[621.15]] Mich. Gottlieb Hanschius. </p>\n<p> [[621.16]] Lipsiae MDCCVII d. XXV Junii </p>\n<p> [[621.17]] A Son Excellence Monseigneur de Leibniz Conseiller privé de Son Altesse Electorale de\n[[621.18]] Brunswic et Lunebourg presentement à Hannover </p>\n","number":"199.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 25. Juni 1707. [197.202.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

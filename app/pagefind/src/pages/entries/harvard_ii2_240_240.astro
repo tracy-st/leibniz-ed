@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_240","series":"Band II 2 (1686 - 1694)","seq":240,"text":"<p> [[751.1]] <b>243. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[751.2]] Wolfenbüttel, 20. (30.) Oktober 1693. [220.246.]</b></p>\n<p> [[751.19]] Excerptum ex responsione. </p>\n<p> [[751.20]] Etiamsi concederetur spiritus separatos finitos non posse agere in corpora, nihil tamen\n[[751.21]] inde probaretur contra Angelos et Daemones, nam multi veterum credidere etiam ipsos ex\n[[751.22]] mente et corpore subtili constare. Neque id ego absurdum censeo, aut unquam ab Ecclesia\n[[751.23]] damnatum. Eaque opinio multas tolleret difficultates. Et de anima quoque separata dicendum\n[[751.24]] esset, nunquam eam omni corpore exui. Et magnae rationes sunt, quae suadent omnem substantiam\n[[751.25]] finitam corpore praeditam esse. </p>\n<p> [[751.26]] Quod rationis usum in Theologia attinet, fateor nihil debere credi, nisi aliquod credendi\n[[751.27]] fundamentum afferatur, ita ut saltem magna sit vis argumentorum, si non plane certitudo\n[[751.28]] moralis. Deo creditur sine argumentis, sed opus est argumentis ut sciamus Deum esse locutum.\n[[751.29]] Sherloki demonstrationes pro fide nostra non vidi. Ego ipse olim tale quid hortante Boineburgio\n[[751.30]] molitus eram ante 23 annos. Spizelius quiddam meum sed breviculum a Boineburgio per\n[[751.31]] Spenerum acceptum (sed autorem ignorans) suae <i>Epistolae de Atheismo eradicando</i> subjecit.\n[[752.1]] Sed tractabantur ibi tantum aliqua pertinentia ad Theologiam naturalem. Multa vero et de\n[[752.2]] revelata probare susceperam, item de possibilitate mysteriorum. Sed facilius est cogitare, quam\n[[752.3]] scribere. Vale aut potius convalesce quam primum. Id optat et sperat </p>\n<p> [[752.4]] 20 Octob. 1693. Cultor obsequentissimus Leibnitius. </p>\n","number":"243.","title":"LEIBNIZ AN GERHARD MEIER (BREMEN)","date":"Wolfenbüttel, 20. (30.) Oktober 1693. [220.246.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

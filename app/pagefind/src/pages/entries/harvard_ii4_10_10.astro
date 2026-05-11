@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_10","series":"Band II 4 (1701 - 1707)","seq":10,"text":"<p> [[35.18]] <b>10. PIERRE BAYLE AN LEIBNIZ</p>\n<p> [[35.19]] Rotterdam, 5. Oktober 1701. [13.] </b></p>\n<p> [[36.24]] Monsieur </p>\n<p> [[36.25]] Il m'est absolument impossible de vous envoier la copie de mes observations sur le\n[[36.26]] memoire que vous envoiates à M^#'r de Bauval, et que je souhaitai qu'il inserat dans son <i>journal</i>,\n[[36.27]] car comme je n'ai point de copiste, je donne aux imprimeurs ce que je compose et sans l'avoir\n[[36.28]] même mis au net: ils impriment sur l'original quelque raturé qu'il soit et puis quand la\n[[36.29]] correction des epreuves est faite ils dechirent ou jettent au feu cet original. Il y auroit un remede\n[[36.30]] à cela Monsieur, qui seroit de vous envoier imprimées les pages où sont contenues mes\n[[36.31]] observations, mais cela ne serviroit de rien pour le principal usage que j'en pourrois tirer et le\n[[36.32]] public aussi par mon <i>dictionaire</i>, car avant que ces pages fussent entre vos mains les imprimeurs\n[[36.33]] auront achevé, et pour le plutard ils acheveront avant que j'eusse pu recevoir votre\n[[36.34]] reponse. Ils travaillent deja à la table des matieres, et le libraire les presse d'achever afin\n[[36.35]] d'eviter la dificulté qu'il y a de faire secher les feuilles pendant l'hiver qui commence ici des le\n[[36.36]] mois de novembre. </p>\n<p> [[36.37]] Je suis tres faché Monsieur, de n'avoir pas scu plutot ce que votre derniere lettre m'a\n[[36.38]] apris; j'aurois eu par ce moien l'avantage d'enrichir mes additions de vos savantes et incomparables\n[[36.39]] reflexions. Le public n'y perdra rien, car vous aurez bien tot l'occasion de les envoier\n[[36.40]] à M^#'r de Bauval pour etre inserées dans son <i>histoire des ouvrages des savans</i>. </p>\n<p> [[37.1]] Je vous suis infiniment obligé Monsieur, de vos bons souhaits, c'est pour les grans\n[[37.2]] hommes comme vous qu'il les faut faire, et personne ne les fait avec plus d'ardeur que moi qui\n[[37.3]] suis avec la plus grande admiration du monde </p>\n<p> [[37.4]] Monsieur Votre tres humble et tres obeissant serviteur Bayle </p>\n<p> [[37.5]] A Rotterdam le 5. d'Oct. 1701 </p>\n","number":"10.","title":"PIERRE BAYLE AN LEIBNIZ","date":"Rotterdam, 5. Oktober 1701. [13.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

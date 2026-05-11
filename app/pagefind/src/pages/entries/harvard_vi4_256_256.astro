@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_256","series":"Band VI 4 (1677 - 1690)","seq":256,"text":"[[1012.12]] <b>213.  Allgemeine Charactere nach Marshall und Becher [1677 bis 1679 (?)]</b>\n [[1012.13]] <tab/>[1677 bis 1679 (?)] </p>\n<p> [[1012.18]] That a person of parts, educated only to read and write the Language of the Nation\n[[1012.19]] wherein he was born, may in an hours time be taught to set down any matter, secret or\n[[1012.20]] other, in another language as Latine, Greek, French etc. and the Latine or other Language\n[[1012.21]] to be true and the sense good and continued. ... it may be done many several wayes. ...\n[[1012.22]] I have seen the whole Model and Systeme of it in several Languages besides our own,\n[[1012.23]] and but that it would make my letter of too great a Bulk should here with have sent you a\n[[1012.24]] transcript of one of them. </p>\n<p> [[1012.25]] William Marshall Dr. of Physick in London in the first answer of his book intituled:\n[[1012.26]] <i>Answers upon several heads in philosophy</i>, London 1670. 8^#'o. pag. 14. Habeo librum. </p>\n<p> [[1013.1]] Putem huic scopo inservire etiam posse Becheri <i>Characterem universalem</i>, in quo\n[[1013.2]] promittit unius diei informatione ita scribere aliquem docere, ut ab unoquoque in sua\n[[1013.3]] lingua intelligatur; adhibitis scilicet Lexicis qui numeros (pro characteribus universalibus\n[[1013.4]] hic sumtos) in quaque lingua interpretantur. Eadem autem opera praestare potuisset, quod\n[[1013.5]] erat adhuc mirabilius, ut quis posset in qualibet ipsa lingua ignota scribere; modo Lexicon\n[[1013.6]] quale opus est, cum paucis quibusdam praeceptis necessariis dentur. Quae ut dixi intra\n[[1013.7]] diei spatium disci possunt. </p>\n","number":"213.","title":"Allgemeine Charactere nach Marshall und Becher","date":"[1677 bis 1679 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

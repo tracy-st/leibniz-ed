@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_24","series":"Band VI 4 (1677 - 1690)","seq":24,"text":"[[62.8]] <b>18.  De propositionibus probabilibus in physicis adhibendis [1678 bis 1680 (?)]</b>\n [[62.9]] <tab/>[1678 bis 1680 (?)] </p>\n<p> [[62.18]] <p>In physicis (perinde ac in re Ethica affectuum et morum) adhibendae sunt praesertim\n[[62.19]] in praxi specialiori quaedam propositiones rationibus probabilibus nixae et quasi praesumtivae,\n[[62.20]] ut mulum participaturum esse de equi et asini qualitatibus, majoris animalis\n[[62.21]] majorem fore foetum, quod tamen saepe falsum, corpora volatilia reddi, si volatilia saepe\n[[62.22]] ab ipsis sublimentur: si ea quae per vim a se invicem separata sunt reconjungantur ipsa\n[[62.23]] sese rursus attractura cum aliquo nisu; quae pugnent cum uno tertio, non esse pugnatura\n[[62.24]] inter se. Ipsae propositiones probabiles serviunt saltem ad inveniendum et occasionem\n[[62.25]] dant tentandis experimentis secundum has propositiones conjecturales, ut appareat qua-\n[[63.1]] ­tenus succedant. Cavendae tamen ineptae quaedam et divinatoriae, quae in astrologicis\n[[63.2]] aut similibus analogiis longe remotis sunt fundatae, quibus homines chimaericoteri utuntur.\n[[63.3]] Simili fere arte etiam in Arithmeticis utimur ad theoremata observatione sive inductione\n[[63.4]] invenienda, quae postea comprobantur inquaerendo in rationes solidas et necessarias. </p>\n","number":"18.","title":"De propositionibus probabilibus in physicis adhibendis","date":"[1678 bis 1680 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

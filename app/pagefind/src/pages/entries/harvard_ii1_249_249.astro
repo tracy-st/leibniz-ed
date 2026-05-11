@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_249","series":"Band II 1 (1663 - 1685)","seq":249,"text":"<p> [[782.15]] <b>220. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[782.16]] [Dezember 1679.] [205b.235.]</b></p>\n[[783.25]] [<i>L^#'1</i> ] </p>\n<p> [[783.26]] [ ... ] Subjiciam pauca de quibusdam aliis quae ad Geometriam non spectant. Certum est\n[[783.27]] haberi et a me certo determinari posse methodum praestandi omnia sine calculo. Opus est\n[[783.28]] tamen signis aliis sub quibus ego comprehendo imagines et verba. Optima signa sunt imagines,\n[[783.29]] et verba ut apta sint debent imagines accurate repraesentare. Quod cum in Geometricis non\n[[783.30]] faciat Algebra, ideo illi meum calculum geometricum praefero, quem Tibi ostendi. Non experior\n[[783.31]] eam de qua quereris in optimis definitionibus reperiendis difficultatem. Possum enim hoc\n[[783.32]] problema certa analysi solvere: <b>Datis omnium terminorum proprietatibus reciprocis\n[[783.33]] seu definitionibus qualibuscunque, invenire definitiones optimi\n[[783.34]] generis.</b> Per <b>definitiones optimi generis</b> intelligo eas ex quibus constat rem definitam\n[[784.1]] esse possibilem, quia alioqui nihil tuto ex definitionibus concludi potest, nam de impossibilibus\n[[784.2]] possunt duo contradictoria simul concludi. Itaque ad hanc necessariam et primam definitionis\n[[784.3]] bonae notam ipsa me cogitandi methodus duxit id enim denique satis bonum est quod usum\n[[784.4]] praestat quem desideramus. Hujus notae corollarium est tantum, ut causa efficiens includatur in\n[[784.5]] eorum definitionibus, quae causam efficientem habent. Hinc patet etiam quod definitiones non\n[[784.6]] sint arbitrariae ut putavit Hobbius. </p>\n<p> [[784.7]] Annum agens aetatis decimum octavum scribensque libellum <i>de Arte Combinatoria</i> quem\n[[784.8]] biennio post edidi secutus certum meditandi filum inveni admirabile verae analyseos arcanum,\n[[784.9]] cujus corollarium est lingua vel characteristica rationalis. Hanc nemo credo alius intellexit,\n[[784.10]] alioqui qui eam intellexisset, omnibus aliis missis eam fuisset persecutus, nihil enim majus ab\n[[784.11]] homine praestari potest. [ ... ] </p>\n<p> [[784.12]] [<i>L^#'2</i> ] </p>\n<p> [[784.13]] [ ... ] Certum est haberi methodum praestandi omnia sine calculo; sed opus est aliis\n[[784.14]] characteribus, sub characteribus autem et imagines comprehendo et verba. Verba autem ita\n[[784.15]] ordinanda sunt, ut respondeant imaginibus: in his scilicet quorum imagines habentur. </p>\n<p> [[784.16]] Definitiones cujusque rei invenire, etiam optimas difficile non est, datis qualibuscunque:\n[[784.17]] possum enim hoc problema solvere: <b>datis omnium terminorum proprietatibus reciprocis\n[[784.18]] seu definitionibus qualibuscunque, invenire optimas</b>. Hoc inquam problema\n[[784.19]] solvere possum analysi tam certa quam est arithmetica vel algebraica, itaque non reperio\n[[784.20]] eam de qua quereris in definitionibus optimis investigandis difficultatem. Per optimas intelligo\n[[784.21]] eas ex quibus constat rem definitam esse possibilem. Sic enim loqui malo, quam requirere ut\n[[785.1]] involvant causam efficientem, nimirum ut eas etiam complectar quarum causa efficiens nulla\n[[785.2]] est. Ratio autem cur requiram ut constet rem definitam esse possibilem, haec est, quod alioqui\n[[785.3]] nihil tuto de ea concludere possum quia de rebus impossibilibus contradictoria simul possunt\n[[785.4]] esse vera. Itaque ipsa methodus generalis cogitandi me ad hanc optimae definitionis notam\n[[785.5]] duxit: cujus corollarium est tantum quod de causa efficiente ajunt. Haec causa etiam est cur\n[[785.6]] definitiones non sint arbitrariae, ut putavit Hobbius, sed constare nobis debet notiones quas\n[[785.7]] conjungimus consistere posse. [ ... ] </p>\n<p> [[785.8]] Meministi et loci Cartesii de lingua philosophica, sed olim fassus erga me es te nunquam\n[[785.9]] intellexisse quid in ea sibi vellet Cartesius. Haud dubie itaque nunc melius intelligis ex quo\n[[785.10]] mecum locutus es, tametsi alias intelligendi eam occasiones nunc narres. Spinosa etiam ea[m]\n[[785.11]] habuit pro chimaeris. Credo ipsum Cartesium non potuisse praestare quod dixit nisi deserta\n[[785.12]] methodo sua. Ideo fassus est etiam nihil tale sperari debere. Ego cum vix octodecim annorum\n[[785.13]] essem, nondumque vidissem literas Cartesii, paulo melioribus auspiciis verae methodi et\n[[785.14]] linguae principia sum assecutus. Lingua autem methodi non nisi corollarium est. Algebra non\n[[785.15]] est vera characteristica geometriae, sed mea quam tibi monstravi, propius accedit. </p>\n","number":"220.","title":"LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS","date":"[Dezember 1679.] [205b.235.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

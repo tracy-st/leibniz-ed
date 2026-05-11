@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_449","series":"Band VI 4 (1677 - 1690)","seq":449,"text":"[[2011.6]] <b>367₂.  De motu corporis DE MOTU CORPORIS </p>\n<p> [[2011.7]] <b>Corpus in Motu est</b>, quod est causa efficiens proxima cur pars quaelibet ipsius\n[[2011.8]] situm cum aliis corporibus mutet; alioqui dicitur <b>Quiescere</b>. </p>\n<p> [[2011.9]] Consideremus duo haec corpora, Solem et Tellurem, quae cum inter se distantias\n[[2011.10]] mutent, adeoque et situm, dicimus quidem aliquem adesse motum, sed non ideo dicere\n[[2011.11]] possumus utrum eorum moveatur aut quiescat, et an fortasse ambo moveantur, sed si\n[[2011.12]] sciamus quodnam causa proxima sit mutati situs, ei motum tribuemus; verbi gratia si\n[[2011.13]] telluri quaedam intelligentia inesset, quae illam circumageret; aut si paulo ante mota\n[[2011.14]] fuisse ponatur, quia motus semel positus sine ratione non desinit; aut si in fluido tellurem\n[[2011.15]] ambiente quaedam contingerent, quae ex vi quadam agendi telluris in motu existentis\n[[2011.16]] consequantur, aliter autem per causam aliquam explicari non possint, nempe si aether\n[[2012.1]] circumjectus ita a tellure recedat, uti ab ea rejici deberet, si ipsa moveretur, utique\n[[2012.2]] constabit tellurem moveri, nam aliter motus adeo varii in fluido ambiente ad unam\n[[2012.3]] causam revocari non possent. Quodsi nihil tale contingeret in sole, sola tellus foret in\n[[2012.4]] motu. Sin contingerent et in tellure et in sole, utrique motus attribuendus esset, et uterque\n[[2012.5]] pro parte ad mutationem situs contribuet. </p>\n<p> [[2012.6]] Partium autem mentionem in definitione ideo feci, quia si corpus circa proprium\n[[2012.7]] axem tantummodo moveatur, dici non potest ipsum mutare situm cum aliis, licet quaelibet\n[[2012.8]] ejus pars situm cum aliis mutet. Si chorda aliqua utrinque aequaliter tendatur, [<i>bricht\n[[2012.9]] ab</i>]\n [[2012.10]] <petit> </p>\n<p> [[2012.11]] <i>Die folgenden vier Absätze in Kleindruck stellen vier weiterführende Ansätze dar, die Leibniz nacheinander\n[[2012.12]] verworfen und im folgenden Stück wieder aufgegriffen hat</i>: </p>\n<p> [[2012.14]] Si vero tria sint corpora mutatio situs notari potest.\n[[2012.15]] Exempli causa ponamus tria esse corpora <i>a, b, c</i>, et per <i>a,\n[[2012.16]] b</i> transeat circulus cujus centrum sit <i>c</i> in quo sit spectator,\n[[2012.17]] et ponamus ipsa <i>a, b</i> distantiam quidem retinere a spectatore,\n[[2012.18]] sed mutare distantiam inter se, exempli causa <i>a</i>\n[[2012.19]] transire ex loco <i>1a</i> in locum <i>2a</i>, ipsis <i>b</i> et <i>c</i> immotis,\n[[2012.20]] utique notare potest spectator angulum <i>2acb</i> esse majorem\n[[2012.21]] quam <i>1acb</i>, sed si duo tantum essent corpora, ut si spectator\n[[2012.22]] esset in <i>b</i>, et corpus <i>a</i> moveretur, utique is qui esset\n[[2012.23]] in <i>b</i> non posset judicare [<i>bricht ab</i>] </p>\n<p> [[2012.24]] Si visibile consideretur instar puncti, et spectator quoque\n[[2012.25]] velut in puncto collocatus, sintque duo tantum puncta\n[[2012.26]] in quorum alterutro sit spectator, non poterit notare situs\n[[2012.27]] mutationem quae inter haec duo puncta contingat. Poterit vero eam notare, si punctum adhuc unum praeterea\n[[2012.28]] assumatur, et mutatio [<i>bricht ab</i>] </p>\n<p> [[2013.1]] Si duo tantum sint puncta in rerum natura, eaque situm mutare intelligantur, hoc non poterit notari; quia\n[[2013.2]] distantia est magnitudo intervalli, magnitudo autem sola comparatione intelligi potest. </p>\n<p> [[2013.3]] Si duo tantum ponantur [<i>bricht ab</i>] </petit> </p>\n","number":"367₂.","title":"De motu corporis","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_96","series":"Band II 3 (1695 - 1700)","seq":96,"text":"<p> [[263.1]] <b>96. LEIBNIZ AN GABRIEL WAGNER</p>\n<p> [[263.2]] [nach dem 1. Februar 1697.] [95.99.]</b></p>\n\n<p> [[263.10]] Von Pechlin, Marco Meibom, Aizema und Kuflern kan nichts weiters mit gewisheit\n[[263.11]] schreiben. <i>Pegelii</i> gedancken sind alzu unreif umb mit des <i>Rogerii Baconi</i> seinen verglichen zu\n[[263.12]] werden. Kepler war excellent in der Geometri, aber die ist anders abstract als die Metaphysic,\n[[263.13]] welche von der imagination nicht geleitet wird. </p>\n<p> [[263.14]] Die begebenheiten der Natur sind gewiß aber nicht nothig sondern zufallig. Wie die\n[[263.15]] bewegungsgesez so sind auch die arten der materi, als welche allein durch die bewegung\n[[263.16]] unterschieden. Der Seelen unsterbligkeit und Gottes willkührliche regirung halte nicht fur\n[[263.17]] glaubensartikel sondern fur gewiße lehren, nur daß man Gott keine solche willkührigkeit\n[[263.18]] zulege, die unsern unvollkomenheiten unterworffen. Die Dynamic handelt nicht von diesen\n[[263.19]] dingen, sondern die Metaphysic, von welcher jene ihre principia entlehnet. </p>\n<p> [[263.20]] Mich düncket in der antwort sey zuviel galle, solte nicht beßer seyn die gegner außlachen\n[[263.21]] als außschelten. Zweifle noch immer ob Hr. Professor Meyer autor der wiedrigen schrifft sey.\n[[263.22]] Ich finde daß die Menschen offt ein ander entgegen seyn, weil sie ein ander nicht kennen. Es\n[[263.23]] gehet ihnen wie den Americanern, da die so nicht einerley sprache reden ein ander freßen. Hrn.\n[[263.24]] Placcium und Hrn. Meyern habe ich für feine leute gehalten und kan ihnen nicht wohl eine\n[[263.25]] boßheit zutrauen. </p>\n","number":"96.","title":"LEIBNIZ AN GABRIEL WAGNER","date":"[nach dem 1. Februar 1697.] [95.99.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

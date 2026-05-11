@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_35","series":"Band II 3 (1695 - 1700)","seq":35,"text":"<p> [[94.1]] <b>35. MENTET KETTWIG AN LEIBNIZ</p>\n<p> [[94.2]] Emden, 26. Oktober (5. November) 1695. [38.]</b></p>\n\n<p> [[94.9]] Illustri et Magnifico Viro Godef. Guilielmo Leibnitzio Ment. Kettwig S.D.P. </p>\n<p> [[94.10]] Has Vir illustris ad Te curare litteras, hasque pagellas offerre perlegendas, non una causa\n[[94.11]] fuit. Tum Amplissimi Feltmanni singulare profundioris tuae eruditionis testimonium, Te videlicet\n[[94.12]] omnium optime, hac de quaestione judicaturum, futurumque Censorem ut earum rerum\n[[94.13]] callentissimum, ita et aequissimum; Cum illustria tua scripta, et incomparabilis foetus <i>Codicis\n[[94.14]] juris gentium Diplomatici</i>, cujus ad Lectorem praemissa praefatio certiorem me reddidit, Te\n[[94.15]] haudquaquam cum plebe Philosophorum Hobbesium judicare brutum, sed (: qualis revera est :)\n[[94.16]] acutissimum. Sisto itaque pagellas has illustri tuo judicio, non, ut materia suadet, eas exasciatas\n[[94.17]] quidem, sed ut ab homine juvene et forensibus negotiis occupatissimo profectas, cui tamen, si\n[[94.18]] bonis avibus otium concederetur tutius, et a strepitu fori magis remotum, curae cordique semper\n[[94.19]] foret, id studiorum genus excolere, et juris privati principia, ad veram solidamque juris naturae\n[[94.20]] normam revocare, equidem oppido multa sunt, quae satis jejune IC^#'t^#'i adstruunt, nec ultra, quam\n[[94.21]] Papinianus dixit, inquirunt. Ast nolo esse longior, sed voto finire; Velit Te Deus, in emolumentum\n[[94.22]] Serenissimae Domus Electoralis, Reipublicae litterariae, Tuaequae gentis, diu sospitem.\n[[94.23]] Embdae in Frisiis orientalibus d. XXVI. Octobris MDCXCV. </p>\n","number":"35.","title":"MENTET KETTWIG AN LEIBNIZ","date":"Emden, 26. Oktober (5. November) 1695. [38.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

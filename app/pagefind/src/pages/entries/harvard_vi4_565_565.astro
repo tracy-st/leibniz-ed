@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_565","series":"Band VI 4 (1677 - 1690)","seq":565,"text":"[[2639.1]] <b>444.  Aus und zu Malebranche, Traité de la nature et de la grâce [Mai 1684 bis Ende 1684 (?)]</b>\n [[2639.2]] <tab/>[Mai 1684 bis Ende 1684 (?)] </p>\n<p> [[2639.11]] Le P. Malebranche <i>de la Nature et de la Grace</i> p. 31, dit que Dieu auroit pu faire un\n[[2639.12]] monde plus parfait que celuy cy, mais qu'il auroit fallu changer la simplicité de ses\n[[2639.13]] voyes. Mais il faut mieux dire que nous ne connoissons pas les fins particulieres de toutes\n[[2639.14]] choses. </p>\n<p> [[2639.15]] <b>Dieu n'a produit aucune de ses creatures pour la rendre malheureuse</b>,\n[[2639.16]] et ceux qui sont exclus du salut ne le sont que par la simplicité des loix de Dieu.\n[[2639.17]] Malebranche <i>de la nature et de la grace</i>, p. 72. </p>\n<p> [[2639.18]] [p. 109] Lors que Dieu jure qu'il ne veut pas la mort du pecheur, il l'entend d'une\n[[2639.19]] volonté particulière. </p>\n<p> [[2639.20]] Le P. Malebranche, p. 114 <i>de la Nature et de la Grace</i>, dit que le Verbe entant que\n[[2639.21]] Verbe represente bien la nature des creatures ou leur essence, mais non pas leur existence. </p>\n<p> [[2639.22]] [p. 233] Le P. Malebranche veut que le péché se peut trouver où il n'y a point de\n[[2639.23]] liberté. <i>Eclaircissement</i> sur le livre 2, ch. 7. </p>\n<p> [[2639.24]] Un theologien dit à une personne de ma connoissance que Dieu avoit le droit de\n[[2639.25]] tourmenter eternellement une creature innocente à quoy cette personne repondit fort\n[[2640.1]] naïvement: Est cela là l'idée que vous avez de Dieu? Vraiment c'est celle que j'avois du\n[[2640.2]] diable. </p>\n<p> [[2640.3]] Le P. Malebranche dit que nous ne sommes asseurés des corps que par la foy,\n[[2640.4]] comme si la foy n'estoit pas appuyée sur la diposition des sens. </p>\n<p> [[2640.5]] Un de mes amis m'a dit qu'en effect le P. Malebranche ne croit pas qu'il y a des\n[[2640.6]] corps. </p>\n","number":"444.","title":"Aus und zu Malebranche, Traité de la nature et de la grâce","date":"[Mai 1684 bis Ende 1684 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

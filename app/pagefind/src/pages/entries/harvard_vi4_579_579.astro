@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_579","series":"Band VI 4 (1677 - 1690)","seq":579,"text":"[[2690.1]] <b>452.  Controversia de peccato philosophico [Herbst 1689 (?)]</b>\n [[2690.2]] <tab/>[Herbst 1689 (?)]\n [[2690.3]] <petit> </p>\n<p> [[2690.4]] Die im Juni 1686 in Dijon unter dem Vorsitz von François Musnier durch Stephan Bougot vertretenen\n[[2690.5]] Thesen zum <i>Peccatum philosophicum</i> lösten besonders seit der zweiten Jahreshälfte 1689 heftige Diskussionen\n[[2690.6]] aus, die auch Leibniz mit großem Interesse verfolgte, wie etwa im Briefwechsel mit Antonio Magliabechi (13.\n[[2690.7]] Januar 1690, I, 5 N. 282, S. 510; 20. Februar 1690, I, 5, N. 297, S. 528 f.; 26. Oktober 1690, I, 6 N. 133,\n[[2690.8]] S. 280), und Landgraf Ernst (14. Juli 1690, I, 5, N. 360, S. 616 f.; 14. September 1690, I, 6 N. 62, S. 107; 26.\n[[2690.9]] November 1690, I, 6 N. 72, S. 132 f. u. ö.) deutlich wird. Neben zwei sorgfältig exzerpierten Thesen von\n[[2690.10]] Bougot und Ignatius de Jonghe jeweils mit französischer Übersetzung (N. 452₁) liegen mehrere Auszüge vor, so\n[[2690.11]] aus der in den ersten Septembertagen 1689 anonym erschienenen Schrift Antoin Arnaulds <i>Nouvelle hérésie de\n[[2690.12]] la morale</i> (N. 452₂), der ersten seiner fünf Abhandlungen zum <i>peccatum philosophicum</i>. Leibniz hat diese\n[[2690.13]] Schrift wohl unmittelbar nach ihrem Erscheinen, sicher aber noch während seines Aufenthaltes in Rom bis\n[[2690.14]] Mitte November 1689 einsehen können (I, 7 N. 145, S. 290). Ebenso exzerpierte er die Antwort des Jesuiten\n[[2690.15]] Joseph de Reux auf Arnaulds Ausführungen (N. 452₃), die seit Anfang Oktober bekannt war, sowie die\n[[2690.16]] Debatten zwischen de Reux und Martin Steyaert vornehmlich vom 18. August 1689 (N. 452₄). Leibniz dürfte\n[[2690.17]] die vorliegenden Auszüge kurze Zeit nach Bekanntwerden der Schriften und somit im Herbst 1689 angefertigt\n[[2690.18]] haben. Dafür spricht ebenfalls der Gebrauch italienischen Papiers mit einem gemeinsamen, für die Zeit ab\n[[2690.19]] Juli/August 1689 erschlossenen Wasserzeichen in den Unterstücken N. 452₂₋₄. </petit> </p>\n","number":"452.","title":"Controversia de peccato philosophico","date":"[Herbst 1689 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

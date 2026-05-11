@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_276","series":"Band II 2 (1686 - 1694)","seq":276,"text":"<p> [[837.9]] <b>279. JOHANN HEINRICH PAPE AN LEIBNIZ</p>\n<p> [[837.10]] Lüneburg, 26. Juli (5. August) 1694. [251.281.]</b></p>\n<p> [[837.14]] Vir Excellentissime, Patrone quam plurimum devenerande </p>\n<p> [[837.15]] Postquam <i>diplomatum juris gentium</i> ab Excellentia Tua editus tomus primus ad me\n[[837.16]] perlatus est, dicere vix possum, quam avide quantaque delectatione cum totam in librum\n[[837.17]] apprime curiosum praefationem, tum illam praecipue partem legerim, quae jus naturae gentiumque\n[[837.18]] attingit, illud quidem ex definitione quarundam notionum derivando, tresque ei gradus,\n[[837.19]] sicut jam olim in <i>Methodo juris</i> factum fuerat, assignando, quorum posterioribus duobus non\n[[837.20]] parum lucis nunc demum accessisse apparet, de gentium vero placitis tacitoque populorum\n[[837.21]] consensu receptis moribus per exempla ex ipsis diplomatibus petita ostendendo, quid circa\n[[837.22]] personas, res actusque juri naturali superaddiderint. Sed quemadmodum plura hujus argumenti\n[[837.23]] in libro aut libri praefatione repertum iri, vel ipso titulo duce augurabar sperabamque, antequam\n[[837.24]] ab Excellentia Tua in literis ad me datis novissimis de eo specialius monerer; ita quod Te studio\n[[838.1]] historico, in quo nunc versaris, aliquando decurso resumturum esse ais ordinandi juris cogitationes,\n[[838.2]] de eo universae Jurisprudentiae gratulor, precorque Deum, ut egregio isti consilio Tuo\n[[838.3]] otium spatiumque indulgeat clementissime, praesertim cum vix conjiciam alium quenquam\n[[838.4]] huic tam difficili negotio parem esse. Dn. Feldenus, quem nonnulli prae caeteris idoneum\n[[838.5]] putant juris naturalis scientiae constituendae, et mihi visus est strictum jus plane seponere vel\n[[838.6]] cum aequitate confundere (quorum tamen discrimen ab Excellentia Tua eleganter propositum,\n[[838.7]] ad multas Doctorum dissensiones inter se conciliandas aptum est), neque sat accuratis terminorum\n[[838.8]] definitionibus inniti, sine quibus accuratam methodum et solidam demonstrationem dari\n[[838.9]] non posse persuasissimum habeo. Cum vero accuratas definitiones exstruere res magni\n[[838.10]] momenti nec minoris operae sit, ab eo qui philoso<greek>f</greek>ia accuratiori non innutritus est, nullatenus\n[[838.11]] exigendae, parum equidem miror, neminem hactenus ICtorum, quorum pars maxima communem\n[[838.12]] sectatur <greek>F</greek>iloso<greek>f</greek>iam, multi etiam plerasque res morales definiri inutile putant et tantum\n[[838.13]] non rident, a Te inventam praescriptamque juris methodum facto ipso exequi conatum esse.\n[[838.14]] Mihi sane valde arriserunt Tuae in <i>Codicis</i> praefatione positae definitiones justitiae, amoris,\n[[838.15]] sapientiae, nihilque magis in votis est, quam talium definitionum, quippe quae non solum rerum\n[[838.16]] cognitionem promovere, sed, nisi fallor, ad stylum quoque contrahendum et ab ineptis tautologiis\n[[838.17]] liberandum conducere possunt, farraginem quandam videre, quam quidem dare, in\n[[838.18]] proclivi esse existimo Tuae Excellentiae. Tametsi enim hebetis ingenii mei probe conscius non\n[[838.19]] id mihi sumo, aliquid in me facultatis esse vel fore etiam ad ornanda juris studia, vix tamen ulli\n[[838.20]] concedo in iis amandis, nec erubescam unquam addiscere, etiam ea quae primos academicae\n[[838.21]] vitae meae annos magis decuissent. Cui rei vel illud argumento sit, quod nunc demum decretum\n[[838.22]] mihi atque propositum est, sub autumnum, volente Deo, quamprimum res meae in aliqualem\n[[838.23]] ordinem redigendae id permittent, relicta urbe patria mea Hanoveram venire et aliquandiu\n[[838.24]] ibidem commorari, primo quidem ut cominus Te venerari, et si quid forte earum doctrinarum\n[[838.25]] quas ad meum palatum esse nosti, pro summa Tua humanitate et singulari in me benevolentia,\n[[838.26]] cujus non unae literae Tuae magnam mihi fidem fecerunt, mecum communicare dignaberis,\n[[838.27]] commodius eodem frui mihi liceat, deinde etiam ut beneficio Tuae commendationis, quam\n[[838.28]] sicuti plurimum in Electorali non modo sed aliis quoque aulis etiam ultra merita mea posse ac\n[[838.29]] valere scio, sic maximopere peto speroque, tolerabili cuidam functioni (quam hoc loco expectare\n[[838.30]] longum fuerit) forte Secretariatus aut simili admovear. Ita igitur, ut dixi, faciam, si modo\n[[838.31]] prius intellexero, non displicere Tuae Excellentiae hoc meum consilium, et simul, quod modis\n[[838.32]] omnibus rogo atque contendo, de gratia et patrocinio Tuo securum me esse jusseris. Deus O. M.\n[[838.33]] Excellentiam Tuam publico, inprimis rei literariae bono vigentem florentemque servet! Dabam\n[[838.34]] Lüneburgi d. 26. Julii anno 1694. </p>\n<p> [[838.35]] Excellentiae T. Cultor humillimus Johannes Henricus Pape </p>\n","number":"279.","title":"JOHANN HEINRICH PAPE AN LEIBNIZ","date":"Lüneburg, 26. Juli (5. August) 1694. [251.281.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

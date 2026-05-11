@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_177","series":"Band VI 4 (1677 - 1690)","seq":177,"text":"[[607.15]] <b>145.  De modo docendi ludimagistrorum [Mitte 1685 (?)]</b>\n [[607.16]] <tab/>[Mitte 1685 (?)] </p>\n<p> [[608.1]] Vossius aliique majorum gentium eruditi de paedagogis et modo docendi ab ipsis\n[[608.2]] recepto interdum contemtim loquuntur, et re tantum obiter inspecta culpant quae probari\n[[608.3]] merentur. Ita Vossius in <i>Aristarcho</i> notat non esse cur Paedagogi in declinando ad\n[[608.4]] ablativum <i>Patre</i> addunt <greek>tò</greek> <i>A, a patre</i>, alioqui pari jure deberent accusativo addere <i>ad</i>, et\n[[608.5]] declinare non <i>patrem</i>, sed <i>ad patrem</i>. Ego fateor istud <i>a patre</i> habere incommoda, pueris\n[[608.6]] enim videri possit praepositionem <i>a</i> semper cum ablativo cohaerere; fuit tamen gravis\n[[608.7]] ratio quae Grammaticos impulit, ut <i>a</i> adderent ad ablativum, non <i>ad</i> ad accusativum.\n[[608.8]] Quia scilicet ludimagistri linguis vernaculis (quas jam norunt pueri), accommodare volebant\n[[608.9]] declinationes. </p>\n<p> [[608.10]] <i>Der Vater, <tab/>des Vaters, <tab/>dem Vater, <tab/>den Vater, <tab/>o Vater, <tab/>von dem Vater</i> </p>\n<p> [[608.11]] <i>Pater, <tab/>patris, <tab/>patri, <tab/>patrem, <tab/>o pater, <tab/>a patre</i>.\n [[608.12]] Scilicet vocativo praeponunt <i>o</i>, Ablativo <i>a</i>, quia aliter discerni non possunt, vocativus a\n[[608.13]] nominativo, ablativus a dativo, saltem in lingua Germanica. Cum ergo necesse esset\n[[608.14]] addere ad <i>dem Vater</i> praepositionem <i>von</i>, ut posset in Germanico agnosci ablativus;\n[[608.15]] coacti sunt similiter praepositionem in latino ponere, Germanicae respondentem. </p>\n<p> [[608.16]] Itaque bonis ludimagistris saepe fit injuria, ab his qui eorum rationes necessitatesque\n[[608.17]] non satis tenent. Quod in aliis quoque vitae generibus plerumque usu venire solet. </p>\n","number":"145.","title":"De modo docendi ludimagistrorum","date":"[Mitte 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_235","series":"Band VI 4 (1677 - 1690)","seq":235,"text":"[[924.1]] <b>194.  De definitionibus characterisandis et propositionibus demonstrandis [Sommer 1688 (?)]</b>\n [[924.3]] <tab/>[Sommer 1688 (?)] </p>\n<p> [[924.12]] Tutissime philosophabimur abstinendo ab abstractis, praesertim ne Metaphysicis\n[[924.13]] speculationibus abutendo in Theologiam incurramus. Pleraeque controversiae philosophico-Theologicae\n[[924.14]] irrite agitantur, ob nomina non rite definita. Opus est autem definitionibus\n[[924.15]] quales sunt meae, nempe palpabiles, et ope characterum ad sensibile aliquid\n[[924.16]] redactae. </p>\n<p> [[924.17]] Optima Methodus perveniendi ad Analysin notionum, a posteriori, est quaerere\n[[924.18]] demonstrationes propositionum maxime Axiomaticarum, quae videntur aliis per se notae.\n[[924.19]] Itaque meliora excerpantur ex <i>regulis</i> <i>philosophicis</i> Stahlii et Thomasii, ex <i>Anima</i> <i>scientiarum</i>\n[[924.20]] Novarini, Brocardicis Jurisconsultorum, <Fn><i>Darüber</i>: add[antur] Vigel[ius] Menoch[ius] et Mascard[us] </Fn> et sententiis ethico-politicis quae in\n[[925.1]] proverbiis, dictis poetarum, et historicorum, ac similibus aliis continentur. Percurrantur\n[[925.2]] praeterea scripta Platonis, Aristotelis, Cardani, Galilei, Jungii, Cartesii, Fabrii, Hobbii,\n[[925.3]] Feldeni, Spinosae. Addantur Campanella, Valerianus M., Arnaldus, Malebranchius. </p>\n<p> [[925.4]] Inspiciendi, tum qui multas habent propositiones notabiles, maxime ad principia\n[[925.5]] ducentes; Tum etiam qui multos terminos exhibent dispositos ordine reali, ut ii qui\n[[925.6]] praedicamenta ad minutiora deduxere. <i>Nomenclator</i> Junii, et qui ex eo. Pomey. Wilkins.\n[[925.7]] Becher. Indices Du Cangii, autores, qui per Tabulas scribunt. Tabulae terminos disponunt.\n[[925.8]] Addantur libri Distinctionum, seu fontes distinguendi, servientes ad tollendas ambiguitates,\n[[925.9]] talis Castaneus. Lexica philosophica, et omnia omnis generis dictionaria exquisitiora,\n[[925.10]] praesertim quae dare solent definitiones. Utiles et Etymologi, et Scaligeri origines\n[[925.11]] passim scriptis philosophicis inspersae. Est enim definiendi artifex. Et in jure definitiones\n[[925.12]] Cujacii et Feldeni. </p>\n<p> [[925.13]] Possunt duae voces definiri per unam ut <i>prius-Natura</i>, est <i>possibilius</i>. Nam <i>Prius\n[[925.14]] Natura</i> est quasi una vox, alioqui hic definiendum esset <greek>tò</greek> <i>prius</i> et <greek>tò</greek> <i>natura. Possibilius</i>\n[[925.15]] autem est quasi duae voces, id est <i>magis possibile</i>, terminatio enim seu affixa accedit\n[[925.16]] radici. Hobbius non putabat definitionem fieri posse per unam vocem. </p>\n","number":"194.","title":"De definitionibus characterisandis et propositionibus demonstrandis","date":"[Sommer 1688 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

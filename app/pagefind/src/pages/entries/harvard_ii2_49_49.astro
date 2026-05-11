@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_49","series":"Band II 2 (1686 - 1694)","seq":49,"text":"<p> [[217.1]] <b>50. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[217.2]] [Juli 1687.] [45.63.]</b></p>\n<p> [[217.13]] Monsieur </p>\n<p> [[217.14]] J'ay <Fn><i>Am Kopf des Konzepts</i>: À Mons. Foucher</Fn> receu la vostre avec celle de M. Thevenot. Je vous suis bien obligé de ce soin. J'ay\n[[217.15]] repondu à M. Catelan dans les <i>Nouvelles de la rep. des lettres</i> au commencement de cette\n[[217.16]] année, et comme j'y avois touché en passant les corrections que le R. P. Malebranche a voulu\n[[217.17]] apporter aux regles du mouvement de M. des Cartes, ce Pere a repliqué et il est demeuré\n[[217.18]] d'accord, qu'en partie j'ay eu raison, mais comme il adjoute des choses, qui ne s'accordent pas\n[[217.19]] avec mes principes, j'ay envoyé une duplique en Hollande, qui sera peutestre imprimée dans les\n[[217.20]] dites <i>Nouvelles</i>. J'espere d'avoir la satisfaction de vous faire entendre mes pensées sur ces\n[[217.21]] matieres et d'autres, et d'entendre vos sentimens là dessus. </p>\n<p> [[218.1]] J'ay vû Augustinus Steuchus Eugubinus <i>de perenni philosophia</i>, mais son dessein est\n[[218.2]] principalement d'accommoder les anciens au christianisme (: ce qui est en effect tres beau :),\n[[218.3]] plustost que de mettre les pensées de philosophie dans leur jour. </p>\n<p> [[218.4]] Je croy d'avoir remarqué que Leucippe a conçu quelque chose de semblable aux tourbillons\n[[218.5]] de M. des Cartes, il l'appelle <greek><i>dínhn</i></greek>, <i>vorticem</i>. J'ay trouvé aussi chez les anciens la\n[[218.6]] comparaison du baston dont M. des Cartes se sert pour expliquer la vision. Je vous diray encor\n[[218.7]] que les anciens avoient une certaine Analyse Geometrique toute differente de l'Algebre, et que\n[[218.8]] ny M. des Cartes ny les autres que je sçache ne connoissent point du tout, mais il faudroit bien\n[[218.9]] des meditations pour la redresser. J'en pourray un jour informer le public. Elle a de tout autres\n[[218.10]] usages que l'Algebre et comme elle luy cede en certaines choses, elle la surpasse en d'autres. </p>\n","number":"50.","title":"LEIBNIZ AN SIMON FOUCHER","date":"[Juli 1687.] [45.63.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

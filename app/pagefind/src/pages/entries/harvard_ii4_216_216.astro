@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_216","series":"Band II 4 (1701 - 1707)","seq":216,"text":"<p> [[669.8]] <b>216. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[669.9]] Leipzig, 24. September 1707. [213.219.] </b></p>\n<p> [[669.14]] Vir Illustris atque Excellentissime, Patrone longe gratiosissime! </p>\n<p> [[669.15]] Thesaurum <Fn><i>Am Kopf des Bogens von Leibniz' Hand</i>: semiresp - misi indicem Keplerianorum ad Dn. Cuno Berolinum</Fn> illum Mss^#'t^#'o^#'r^#'u^#'m Keplerianorum, quem nuper adhuc proprie Excellentiae Tuae\n[[669.16]] indicavi, magno conatu ambit Hambergerus Professor Mathematum Jenensis celeberrimus,\n[[669.17]] quare necessarium duco, ut si quid TUI gratia hac in re agere debeo, quantociusque id mihi\n[[669.18]] significes, qui in me nihil desiderare patior quo declarare possim, me esse </p>\n<p> [[669.19]] Excellentiae Tuae observatissimum M. G. Hanschium </p>\n<p> [[670.1]] In B. Carpzovii Theologi Saxoniae nostrae primarii nuper fato suo functi locum Seligmannum\n[[670.2]] nostrum suffectum iri nonnulli arbitrantur. Scribeb. Lipsiae 1707. d. 24. Septembr[.] </p>\n<p> [[670.3]] NB A Son Excellence Monseigneur de Leibnitz Conseiller privé de Son Altesse Electorale\n[[670.4]] de Brounsvic et Lunebourg à Hannover </p>\n","number":"216.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 24. September 1707. [213.219.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

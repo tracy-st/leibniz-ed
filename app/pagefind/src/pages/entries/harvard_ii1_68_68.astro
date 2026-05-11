@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_68","series":"Band II 1 (1663 - 1685)","seq":68,"text":"<p> [[185.21]] <b>60. LEIBNIZ AN MAGNUS WEDDERKOPF</p>\n<p> [[185.22]] [Mai 1671.]</b></p>\n<p> [[186.13]] <b>Fatum</b> est Decretum Dei seu necessitas eventuum. <b>Fatalia</b> quae necessario eventura.\n[[186.14]] Bivium difficile, Deus aut non de omnibus decernit, aut si de omnibus decernit, esse absolute\n[[186.15]] omnium autorem. Nam si de omnibus decernit et res dissentiunt a decreto, non erit omnipotens.\n[[186.16]] Si vero non de omnibus decernit, videtur sequi non esse omniscium. Impossibile enim videtur\n[[186.17]] omniscium judicium suum de aliqua re suspendere. Quod nos saepe judicia suspendimus fit ex\n[[186.18]] ignorantia. Hinc sequitur Deum nunquam se posse habere pure permissive. Sequitur etiam\n[[186.19]] nullum decretum Dei esse revera non absolutum. Nos enim suspendimus judicia nostra conditionibus\n[[186.20]] et alternationibus, quia minime exploratas rerum circumstantias habemus. Sed dura\n[[186.21]] haec? fateor. Quid ergo? Ecce Pilatus damnatur. Cur? quia caret fide. Cur caret, quia caruit\n[[186.22]] voluntate attentionis. Cur hac, quia non intellexit rei necessitatem, attendendi utilitatem. Cur\n[[186.23]] non intellexit, quia causae intellectionis defuere. Omnia enim necesse est resolvi in rationem\n[[186.24]] aliquam, nec subsisti potest, donec perveniatur ad primam, aut admittendum est, posse aliquid\n[[186.25]] existere sine sufficiente ratione existendi, quo admisso, periit demonstratio existentiae Dei\n[[186.26]] multorumque theorematum Philosophicorum. Quae ergo ultima ratio voluntatis divinae? intellectus\n[[186.27]] divinus. Deus enim vult quae optima item harmonicota<greek>ta</greek> intelligit eaque velut seligit ex\n[[186.28]] numero omnium possibilium infinito. Quae ergo intellectus divini? harmonia rerum. Quae\n[[186.29]] harmoniae rerum? nihil. Per exemplum quod ea ratio est 2 ad 4 quae 4 ad 8, ejus reddi ratio\n[[186.30]] nulla potest, ne ex voluntate quidem divina. Pendet hoc ex ipsa Essentia seu Idea rerum.\n[[186.31]] Essentiae enim rerum sunt sicut numeri, continentque ipsam Entium possibilitatem quam Deus\n[[186.32]] non facit, sed existentiam: cum potius illae ipsae possibilitates seu Ideae rerum coincidant cum\n[[186.33]] ipso Deo. Cum autem Deus sit mens perfectissima, impossibile est ipsum non affici harmonia\n[[186.34]] perfectissima, atque ita ab ipsa rerum idealitate ad optimum necessitari. Quod nihil detrahit\n[[186.35]] libertati. Summa enim libertas est ad optimum a recta ratione cogi, qui aliam libertatem\n[[186.36]] desiderat stultus est. Hinc sequitur, quicquid factum est, fit aut fiet, optimum ac proinde\n[[187.1]] necessarium esse, sed ut dixi necessitate nihil libertati adimente, quia nec voluntati et rationis\n[[187.2]] usui. In nullius potestate est velle quae velit, etsi interdum posse quae velit. Imo nemo optat sibi\n[[187.3]] hanc libertatem volendi quae velit, sed potius volendi optima. Cur ergo quae nec ipsi optamus,\n[[187.4]] Deo affingimus? Hinc patet absolutam aliquam voluntatem non a rerum bonitate dependentem\n[[187.5]] esse monstrosam, contra, nullam esse in omniscio voluntatem permissivam, nisi quatenus\n[[187.6]] Deus ipsi se rerum idealitati seu optimitati conformat. Nihil ergo absolute malum esse\n[[187.7]] putandum, alioqui Deus aut non erit summe sapiens ad deprehendendum, aut non summe\n[[187.8]] potens ad eliminandum. Hanc fuisse sententiam Augustini nullus dubito. Peccata mala sunt,\n[[187.9]] non absolute, non mundo, non Deo, alioqui nec permitteret, sed peccanti. Deus odit peccata,\n[[187.10]] non ut nec conspectum eorum ferre possit, uti nos quae aversamur, alioquin eliminaret, sed quia\n[[187.11]] punit. Peccata bona sunt, id est harmonica, sumta cum poena aut expiatione. Nulla enim nisi ex\n[[187.12]] contrariis harmonia est. Sed haec ad Te: nolim enim eliminari. Nam nec rectissima a quovis\n[[187.13]] intelliguntur. <Fn><i>Leibniz hat später hinzugefügt</i>: Haec postea correxi. Aliud enim infallibiliter eventura esse peccata, aliud necessario.</Fn> </p>\n","number":"60.","title":"LEIBNIZ AN MAGNUS WEDDERKOPF","date":"[Mai 1671.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_30","series":"Band VI 4 (1677 - 1690)","seq":30,"text":"[[70.10]] <b>24.  De grammatica rationali et arte memoriae April 1678</b>\n [[70.11]] <tab/> April 1678 </p>\n<p> [[70.17]] Aprilis 1678 </p>\n<p> [[70.18]] <p>[Grammatica rationalis] habebitur si partes orationis earumque flexiones et rectiones\n[[70.19]] accurate resolvi possint. Quod ita intelligo: </p>\n<p> [[70.20]] Verba possunt resolvi in nomina. <i>Petrus scribit</i>, id est <i>Est Scribens</i>. Unde omnia\n[[70.21]] verba reducentur denique ad solum verbum substantivum. </p>\n<p> [[71.1]] Reducenda omnia alia ad ea quae sunt absolute necessaria ad sententias animi\n[[71.2]] exprimendas. </p>\n<p> [[71.3]] In cogitando reducuntur omnia ad qualitates sensibiles, tum internas, ut calor, frigus,\n[[71.4]] lux, tum externas, ut, essentia, existentia, cogitatio, sensio, nihil, unitas, multitudo;\n[[71.5]] identitas, diversitas; extensio, duratio, situs; voluptas, possibilitas, actus: hoc. </p>\n<p> [[71.6]] Res est, non est. Res est possibilis. Existens. cogitans, sentiens. una. Eadem.\n[[71.7]] extensa. durans. sita. grata. laeta. </p>\n<p> [[71.8]] In lingua notanda ea tantum quae per regulas constitutas explicari non possunt, item\n[[71.9]] phrasium condendus est catalogus, quae prae caeteris celebrantur. </p>\n<p> [[71.10]] Ars memoriae, ut ea quae retinenda sunt certis loculamentis condamus, quae si\n[[71.11]] praesentia habeamus in animo, aut alias nota, ut Patriarchas, Apostolos, imperatores;\n[[71.12]] aliasque personas quarum nota nobis vita est, facile et ordine omnia collocabimus, et\n[[71.13]] subito inveniemus aliquid quo rem loculamento jungamus.\n[[71.14]] <petit> Johannes <tab/>equus <tab/>mulus <tab/>bos <tab/>leo <tab/>echo <tab/>canis <tab/>asinus <tab/>fornax\n [[71.15]] Julius <tab/>Augustus <tab/>Tiberius <tab/>Caligula <tab/>Claudius <tab/>dum mater <tab/>Galba <tab/>Otho <tab/>Vitellius\n [[71.16]] <tab/>in statua <tab/>seminobilis <tab/>ob <tab/>minime <tab/>Neronis <tab/>ob <tab/>ob <tab/>ob vitellum\n [[71.17]] <tab/>equestri <tab/>ab Augusto <tab/>ineptiam <tab/>leo <tab/>occiditur <tab/>avaritiam <tab/>pigritiam <tab/>ovi prope\n [[71.18]] <tab/>adoptatus <tab/>echo ad <tab/>fornacem\n [[71.19]] <tab/>litus <tab/>cocti</petit> </p>\n<p> [[71.20]] Ut numeros prorsum et retrorsum possimus enuntiare, pro numeris sumamus nobis\n[[71.21]] voces alias hominum vel animalium, easque constanter retineamus, ut postea semper\n[[71.22]] possimus vocem adhibere pro dicto numero. Si quis mihi dicat voces barbaras pro iis\n[[71.23]] substituam vicinas notas, ut pro <i>cipolski, Zwiebeln</i>. </p>\n<p> [[71.24]] Utile est personarum quas eligimus notissimam nobis esse vitam, ad minutias usque\n[[71.25]] ut possimus facile instituere connexiones. Poterimus etiam eligere regiones vel provincias.\n[[71.26]] Item literas Alphabeti. </p>\n<p> [[71.27]] Cuilibet imperatori licebit distichon ascribere Vitam ejus complectens, in quolibet\n[[71.28]] cum sint variae voces, facile una aliqua nostro scopo serviet, et a nobis notabitur,\n[[71.29]] exigendum ut lente dictetur. </p>\n","number":"24.","title":"De grammatica rationali et arte memoriae","date":"April 1678"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

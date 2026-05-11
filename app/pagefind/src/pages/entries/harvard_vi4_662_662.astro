@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_662","series":"Band VI 4 (1677 - 1690)","seq":662,"text":"[[2854.5]] <b>505₂.  Zweiter Ansatz ZWEITER ANSATZ </p>\n<p> [[2854.11]] <b>Jus in quo versamur</b> est ars aequi et boni (1.1. § 1. de <i>Justitia et Jure</i>), hoc est\n[[2854.12]] scientia efficiendi ut omnes aequaliter tractentur, nisi cum bonum commune aliter postulat. </p>\n<p> [[2854.14]] <b>Vir bonus</b> est qui erga omnes bene affectus est, eo tamen magis quo quisque ad\n[[2854.15]] commune bonum aptior est. </p>\n<p> [[2854.16]] Itaque <b>justitia</b> est caritas sapientis et <b>justus</b> etsi ipse sapiens non esset, in\n[[2854.17]] regendo atque mediocritate prudenti continendo hominis erga hominem affectu, sapientem\n[[2854.18]] imitatur. Unde fit ut quae regulis comprehendi omnia non possunt boni prudentisque\n[[2854.19]] viri arbitrio committantur. </p>\n<p> [[2855.1]] Porro quemadmodum in agendo quaedam impossibilia quaedam possibilia, et ex his\n[[2855.2]] nonnulla necessaria sunt; ita quae recte, atque ut virum bonum decet, facturo impossibilia\n[[2855.3]] sunt, haec <b>injusta</b> vocamus; contra possibilia ipsi, <b>licita sive justa</b>; nam quae facta\n[[2855.4]] contra bonos mores sunt, ea in jure nec facere nos posse credendum est; <b>jus</b> itaque quod\n[[2855.5]] habemus facultas quaedam est sive potentia moralis: et <b>obligatio</b> est necessitas moralis,\n[[2855.6]] unde quorum necessitas viro bono imposita est, ea <b>debita</b> appellantur. </p>\n<p> [[2855.7]] Regulae juris generales sunt Honeste vivere, neminem laedere, suum cuique tribuere.\n[[2855.8]] Est autem <b>honeste vivere</b>, virtutem sequi, vitia fugere, nihil ad juvandum agere,\n[[2855.9]] quo animum indicet vitio corruptum quod societati nocere possit, alioqui etsi non aliter\n[[2855.10]] laeseris, suspectum te facies et cavendum, fiduciamque et tranquillitatem tolles: et satis\n[[2855.11]] jam laesisti, si Societati autem actu ipso nocetur, vel eos qui in ea vivunt offendendo,\n[[2855.12]] quod prohibetur altero praecepto quo jubemur; <b>neminem laedere</b>; vel bona malaque\n[[2855.13]] communia aut non procurando avertendoque aut non ita distribuendo, quemadmodum\n[[2855.14]] societatis interest, interest autem societatis frui unumquemque communibus bonis proportione\n[[2855.15]] meritorum in societatem aut virtutum a quibus scilicet merita sperari possunt; et\n[[2855.16]] quia mala quorundam evitari nequeunt, malos potius quam innocentes affligi: qui sensus\n[[2855.17]] est praecepti quo jubemur <b>suum cuique tribuere</b>. Suum, id est quod ad ipsum\n[[2855.18]] pervenire publice refert. </p>\n<p> [[2855.19]] Tres itaque habemus partes jurisprudentiae de justitia universali, sive virtutibus\n[[2855.20]] societati utilibus, de justitia particulari in jure publico pariter et in jure privato. </p>\n","number":"505₂.","title":"Zweiter Ansatz","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_169","series":"Band II 2 (1686 - 1694)","seq":169,"text":"<p> [[579.7]] <b>171. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[579.8]] Padua, 18. September [1692]. [170.173.]</b></p>\n<p> [[579.12]] Illu^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Colend^#'m^#'o </p>\n<p> [[579.13]] Invio questa altra mia a V. S. Illu^#'m^#'a per mezo del Sig^#'r^#'e Mendelino, havendole indrizzata\n[[579.14]] un'altra, ricapitata in Venetia alli Sig^#'r^#'i Hopfer, e Bacmeister, affine di sapermi regolare per\n[[579.15]] l'avvenire per il sicuro ricapito delle nostre, volendo schivare il tormento, che mi cagiona il\n[[579.16]] vedermi per lungo tempo privo de' suoi pretiosissimi caratteri. Già nell'altre mie l' hò significato\n[[579.17]] abastanza i ragionevoli motivi, che mi han distolto dalla partenza da me fermamente\n[[579.18]] stabilita per questo autunno, che saranno senza fallo approvati da V. S. Illu^#'m^#'a, che sommamente\n[[579.19]] ama l'onore, e la gratitudine, perciò hò differito il viaggio per la ventura primavera, sperando\n[[579.20]] colla protettione di Dio trovarmi costì per il futuro prossimo aprile. Coll'Ordinario vegnente le\n[[579.21]] darò parte d'alcune cose litterate mentre farò più seria riflessione sopra quel che essa dottamente\n[[579.22]] m' hà scritto del Calcolo ed equationi [algebraiche]. Mi onori de' suoi comandi, ed\n[[579.23]] all'infretta mi resto\n [[579.24]] / Di V. S. Ill^#'m^#'a Umil^#'m^#'o Oblig^#'m^#'o Divoti^#'m^#'o S^#'r^#'e vero Fardella\n [[579.25]] / Padova 18 Settembre </p>\n","number":"171.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Padua, 18. September [1692]. [170.173.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

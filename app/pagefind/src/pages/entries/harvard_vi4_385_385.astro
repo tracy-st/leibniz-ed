@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_385","series":"Band VI 4 (1677 - 1690)","seq":385,"text":"[[1659.12]] <b>327₁.  Radix contingentiae est infinitum in rationibus\n[[1659.16]] <tab/><k>Veritas</k> <tab/><k>Proportio</k>\n [[1659.17]] 1) <tab/>est praedicatum inesse subjecto <tab/> 1) <tab/>est quantitatem minorem\n [[1659.18]] <tab/>certo modo inesse majori\n [[1659.19]] 2) <tab/>ostenditur reddendo rationem <tab/> 2)<tab/>ostenditur explicando habitudinem\n [[1659.20]] 3) <tab/>quod fit per quandam analysin <tab/> 3)<tab/>quod fit per quandam analysin\n [[1659.21]] <tab/>terminorum <tab/>terminorum\n [[1659.22]] 4) <tab/>in notiones communes utrique. <tab/> 4)<tab/>in quantitates communes utrique.\n [[1660.1]] 5) <tab/>Haec Analysis vel finita est, <tab/> 5) <tab/>Haec Analysis vel finita est\n [[1660.2]] <tab/>vel infinita. <tab/>vel infinita.\n [[1660.3]] 6) <tab/>Si finita sit dicitur <tab/> 6) <tab/>Si finita sit, dicitur\n [[1660.4]] <tab/>Demonstratio <tab/>Inventio maximae communis\n [[1660.5]] <tab/>mensurae,\n [[1660.6]] 7) <tab/>et veritas dicitur <tab/> 7) <tab/>et proportio dicitur\n [[1660.7]] <tab/>necessaria, <tab/>commensurabilium\n [[1660.8]] 8) <tab/>reducitur enim ad veritates <tab/> 8)<tab/>reducitur enim ad congruentiam\n [[1660.9]] <tab/>identicas, <tab/>cum mensura eadem repetita\n [[1660.10]] 9) <tab/>seu principium contradictionis. <tab/> 9) <tab/>seu principium aequalitatis\n [[1660.11]] <tab/>eorum quae sibi congruunt.\n [[1660.12]] 10) <tab/>Sin nunquam perveniatur <tab/>0) <tab/>Sin nunquam perveniatur\n [[1660.13]] <tab/>ad exhaustionem <tab/>ad exhaustionem\n [[1660.14]] 11) <tab/>et analysis procedat in infinitum <tab/>1) <tab/>et analysis procedat in infinitum\n [[1660.15]] 12) <tab/>veritas dicitur contingens <tab/>2) <tab/>proportio est incommensurabilita-\n [[1660.16]] <tab/>tis\n [[1660.17]] 13) <tab/>quae infinitas involvit rationes <tab/>3) <tab/>quae infinitos habet quotientes\n [[1660.18]] 14) <tab/>ita tamen ut semper aliquod <tab/>4)<tab/>ita tamen ut semper aliquod\n [[1660.19]] <tab/>sit residuum <tab/>sit residuum\n [[1660.20]] 15) <tab/>cujus iterum quaerenda est ratio <tab/>5) <tab/>novum praebens quotientem\n [[1660.21]] 16) <tab/>continuata autem analysi <tab/>6)<tab/>continuata autem analysi\n [[1660.22]] <tab/>prodit series infinita <tab/>prodit series infinita\n [[1660.23]] 17) <tab/>quae tamen a Deo <tab/>7)<tab/>circa quam Geometra\n [[1660.24]] <tab/>perfecte cognoscitur. <tab/>utique multa cognoscit.\n [[1660.25]] 18) <tab/>Et haec est scientia visionis <tab/>8)<tab/>Et haec est doctrina de numeris\n [[1660.26]] <tab/><tab/>surdis, decimo <i>Elementorum</i>\n[[1660.27]] contenta\n [[1660.28]] 19) <tab/>distincta a scientia simplicis <tab/>9)<tab/>distincta ab Arithmetica communi\n [[1660.29]] <tab/>intelligentiae\n [[1660.30]] 20) <tab/>utraque tamen non experimentalis <tab/>0)<tab/>utraque non experimentis sensuum,\n [[1661.1]] <tab/>sed a priori habens infallibilitatem <tab/>sed demonstrationibus innixa\n [[1661.2]] 21) <tab/>neque inter has media datur. <tab/>1)<tab/>neque inter has media datur.\n [[1661.3]] <tab/>Quam vero vocant Scientiam Mediam\n [[1661.4]] <tab/>est scientia visionis\n [[1661.5]] <tab/>contingentium possibilium.\n [[1661.6]] 22) <tab/>Ex his apparet radicem <tab/>2)<tab/>Ex his apparet radicem\n [[1661.7]] <tab/>contingentiae esse <tab/>incommensurabilitatis esse\n [[1661.8]] <tab/>infinitum in rationibus. <tab/>infinitum in materiae partibus. </p>\n","number":"327₁.","title":"Radix contingentiae est infinitum in rationibus","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

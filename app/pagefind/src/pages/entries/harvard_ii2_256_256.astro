@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_256","series":"Band II 2 (1686 - 1694)","seq":256,"text":"<p> [[796.15]] <b>259. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[796.16]] [Hannover, Anfang März 1694.] [256.]</b></p>\n<p> [[796.22]] [ ... ] Omnem substantiam creatam ab alia substantia creata, non tam vim agendi, quam\n[[796.23]] existentis in ipsa virtutis agendi seu conatus limites ac determinationem accipere spero me\n[[796.24]] aliquando explicaturum. Et difficile illud problema de Actione substantiarum in substantias\n[[796.25]] explicaturum. </p>\n<p> [[797.1]] Optimum haud dubie Theologiae revelatae systema concinnaretur ipsius scripturae verbis.\n[[797.2]] Haec (praeter demonstrationes verae philosophiae) tutissima est ratio de Deo loquendi. Anathemata\n[[797.3]] insubida procul facessere jubere oporteret. </p>\n<p> [[797.4]] Christianus Thomasius ingenio quidem pollet sed profundum aliquid eruere non promittit. </p>\n<p> [[797.5]] Si quid Tibi compertum de edendis Jungianis apud Hamburgenses, fac quaeso ut sciam.\n[[797.6]] Utinam fecissent dudum homines lentuli. Nunc plerisque combustis, quid juvat amisso claudere\n[[797.7]] septa grege. Recte tamen faciunt, quod quae restant servant per typos. Ego viri summum\n[[797.8]] judicium saepe commendavi, etiam aliquando in schediasmatis Lipsiam missis, selectiores ex\n[[797.9]] chartis volaticis conservare res magni usus foret. [ ... ] </p>\n","number":"259.","title":"LEIBNIZ AN GERHARD MEIER (BREMEN)","date":"[Hannover, Anfang März 1694.] [256.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

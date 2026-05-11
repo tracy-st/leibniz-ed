@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_71","series":"Band II 4 (1701 - 1707)","seq":71,"text":"<p> [[238.6]] <b>71. BURCHARD DE VOLDER AN LEIBNIZ</p>\n<p> [[238.7]] Leiden, 31. Mai 1704. [57.75.] </b></p>\n<p> [[239.3]] Illustri Viro Guilielmo Gothefrido Leibnitio S. P. B. De Volder. </p>\n<p> [[239.4]] Ita mihi videris argumentari; Quod semper ulterius et ulterius dividi potest, id nullam\n[[239.5]] habet realitatem, nisi ex rebus, ex quibus aggregatur, adeoque nullam, nisi rerum, quae dividi\n[[239.6]] non queunt. Quod argumentum recte quidem concludit in mole corporum non posse assignari\n[[239.7]] unitates indivisibiles; sed tamen non persuadet, nullam realitatem habere corpus Mathematicum\n[[239.8]] (nisi forte in voce realitatis quaedam sit ambiguitas), cujus innumeras proprietates evidentissime\n[[239.9]] concipio, in eo quod concipere possum existens, et nulli alteri inhaerens, quae vulgaris\n[[239.10]] substantiarum solet esse notio. </p>\n<p> [[239.11]] Corpus 10 pedum constat ex 10 pedibus, ex 17280 digitis, et sic porro; Quae unitas licet\n[[239.12]] sit arbitraria[,] magnitudo tamen potest esse vera et vere existens. </p>\n<p> [[239.13]] Deinde, si comparemus inter se opinionem corporum, quae in infinitum possint dividi,\n[[239.14]] cum tua <greek>ĕntelexeiṽn</greek>, non video tantum discriminis, quantum prima fronte apparet. Unumquodque\n[[239.15]] corpus constat ex partibus, et hae rursum ex aliis, et sic porro in infinitum. Unaquaeque\n[[239.16]] substantia corporea, sub se habet infinitas alias, et hae rursus alias, et sic porro in infinitum, ita\n[[239.17]] ut neutro in casu possimus pervenire ad substantiam non plures in se continentem. Unicum\n[[239.18]] discrimen est, quod singulis his addas indivisibilem <greek>ĕnteléxeian</greek> omnia successive producentem.\n[[239.19]] Cujus si claram distinctamque notionem efformare possem, hoc plurimum faceret ad rem\n[[239.20]] ipsam amplectendam; Nunc praeter nomen nihil mihi videor percipere, nisi quod generalem\n[[239.21]] virium notionem ei adjunctam animadverto. </p>\n<p> [[239.22]] Per vires autem semper intellexi, non quid substantiale, sed quidpiam substantiae inhaerens.\n[[239.23]] Imo vires absque fundamento, ex quo fluunt, spectatas semper consideravi instar denominationis\n[[239.24]] externae, fundamentum vero id ipsum, quod in re esset. Hoc fortasse idem est, quod\n[[239.25]] tu vires primitivas vocas, ex quibus derivatae fluunt, sed de his, quae mei ingenii est imbecillitas,\n[[239.26]] nihil percipio, nisi quod asseveres, reliquas omnes mutationes ex iis fluere. </p>\n<p> [[239.27]] Ubi dixi, universum corporeum, hoc enim expresse addidi, esse forte unam substantiam,\n[[239.28]] nihil aliud dixi, quam quod Cartesius, et omnes illi, qui mechanicam philosophandi rationem\n[[239.29]] secuti sunt, voluerunt, rerum omnium corporalium unicam esse substantiam. Verum hoc jam in\n[[239.30]] superioribus monui, ita ut mirer idem iterari. Ex singularibus, ais, temporalia sequi; nec\n[[239.31]] repugno. Sed explicandum restat, quid differant ab universalibus singularia, et cur haec ex his,\n[[239.32]] non ex illis sequantur. Universalia in se invicem non agunt, singularia agunt; ideoque respectu\n[[239.33]] actionum obnoxia sunt mutationi. Hoc qui in substantias in se invicem non agentes cadat, mihi\n[[239.34]] equidem obscurum est. </p>\n<p> [[240.1]] Haec ita brevibus recensui; non tam ut responderem, quam ne, si silerem plane, meum hoc\n[[240.2]] silentium aliorsum, quam vellem, acciperes. Dissimulare enim nolim mihi ingratum admodum\n[[240.3]] accidisse ex tuis animadvertere, te nescio quibus suspicionibus indulgere, quasi mihi non\n[[240.4]] placeret nos inter nos convenire, etc. Ex quibus equidem aliud conjicere non possum, quam tibi\n[[240.5]] ingrata esse, ea quae scripsi. Ego autem amicis importunus esse prorsus nolim. Quare desino.\n[[240.6]] Vale. </p>\n<p> [[240.7]] Dabam Lugd. Batav. a. d. XXXI Maij MDCCIV. </p>\n","number":"71.","title":"BURCHARD DE VOLDER AN LEIBNIZ","date":"Leiden, 31. Mai 1704. [57.75.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

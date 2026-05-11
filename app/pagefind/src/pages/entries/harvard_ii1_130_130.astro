@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_130","series":"Band II 1 (1663 - 1685)","seq":130,"text":"<p> [[367.3]] <b>116. LEIBNIZ AN PIERRE DANIEL HUET</p>\n<p> [[367.4]] [Paris,] 10. Mai 1673. [115.185a.]</b></p>\n<p> [[367.28]] Illustri Viro D. Petro Danieli Huetio </p>\n<p> [[367.29]] S.P.D. Gottfredus Guilielmus Leibnitius. </p>\n<p> [[367.30]] Pro certo comperi Vitruvium celeberrimi Valesii sub praelo sudare: editore nobis multa\n[[367.31]] nova ac singularia a se primum detecta, promittente, in quibus omnes hactenus interpretes\n[[368.1]] lapsi sint, eosque errores per totum Vitruvium fusos esse. Quae res facit, ut antequam editio ista\n[[368.2]] prodeat, manum admoliri scriptori non ausim, ac ne constituere quidem mecum, quid Tibi\n[[368.3]] promittere debeam, praeterquam enim, quod vir tantus fortasse hominem novum in occupatam\n[[368.4]] a se materiam involare non satis aequo animo laturus sit, paratus ipse succum Gallicae editionis\n[[368.5]] Latina complecti, ut quemadmodum illic Colberto, ita hic Montauserio, utrobique Regi satisfaciat;\n[[368.6]] superest et aliud cogitandum mihi, an nimirum post messem ejus spicilegium mihi\n[[368.7]] relictum sit, observationum quarundam non contemnendarum. Ita enim ego animatus sum, ut ne\n[[368.8]] attingere quidem argumentum audeam, ubi spes non sit praestari aliquid extra ordinem posse,\n[[368.9]] nam medullam bonorum interpretum clare breviterque exhibere, fortasse non adeo difficile\n[[368.10]] fuerit. Quare venia Tua, Vir Amplissime, eousque deliberationem meam differre cogor, nisi\n[[368.11]] quis interim, aptior me, in tanta praestantium virorum copia, eam operam occupaverit. </p>\n<p> [[368.12]] Ac fortasse interea, nisi Tibi aliter videtur, Martianum absolvero, cum disciplinae quas\n[[368.13]] tractat ille, magis in medio positae, novo quodam apparatu tantopere non indigeant: at qui\n[[368.14]] Vitruvium pro argumenti dignitate tractare velit, eum ad nostri temporis experimenta respicere,\n[[368.15]] et cum opificibus atque architectis conferre debere censeo: ut collatis veterum praeceptis, et\n[[368.16]] peritia nostrorum, aliquid inde usus in publicum dimanet. Sed haec tempus otiumque huic uni\n[[368.17]] rei aliquandiu impensum postulant. </p>\n<p> [[368.18]] Ad Martianum vero sunt mihi jam in promtu nova quaedam ac forsan digna scitu,\n[[368.19]] plerisque artibus quas ille tractat, nonnihil illustrandis; quae et publici magis saporis sunt,\n[[368.20]] juvenique, quali laboratur congruentiora. Cum Vitruviana non nisi ab artificibus, aut aliis\n[[368.21]] quidem, sed in severiorum disciplinarum cultu profectis, intelligantur. Adde quod Capella a\n[[368.22]] nemine perpetuo commentario illustratus est, et, si quis alius Veterum, remedio ab Ill^#'m^#'o Duce\n[[368.23]] Montauserio invento, id est versione, ut sic dicam Latina, indiget. </p>\n<p> [[368.24]] Mitto ecce specimen in Martianum, idem illud, quod jam monstraveram, sed reformatum.\n[[368.25]] Ex intertexta enim explicatione continuam velut versionem feci. Notae sunt tumultuariae;\n[[368.26]] scriptae scilicet, nullo alio libro adhibito, praeterquam ipso Martiano: postea polientur. Cavi ne\n[[368.27]] a Grotio dicta repeterem, cujus notas, nisi aliter sentis, integras inserere cogito. Mitto et\n[[368.28]] <i>Argumentum totius fabulae</i>, quod inter legendum memoriae causa ludens contexui. Haec a Te\n[[368.29]] coram, ubi permiseris, recepero. </p>\n<p> [[369.1]] Nisi interrumpar solito frequentius, faxo ne moram meam accusetis et interrumpor sane\n[[369.2]] non raro, cum demonstrationes quasdam in Arithmetica tum simplici, tum infinitorum, et\n[[369.3]] Geometria, et Scientia motus, et Optica, et Mechanicis, a me repertas, poliri ac publicari amici\n[[369.4]] flagitent. Nec negligendum est commercium literarium, cum amicis in Germania, Anglia,\n[[369.5]] Septentrione. Nuper ut obiter dicam, misere mihi ex [Anglia], rationem Corporis Algebraici\n[[369.6]] condendi, quod moliuntur absolutissimum certe, congestis in unum omnibus omnium, quae\n[[369.7]] hactenus in eo argumento extant, inventis. Sed et Machina Arithmetica me subinde sibi\n[[369.8]] vendicat, quae nunc properat ad metam, specimen fortasse datura, posse a machinis effici, quae\n[[369.9]] hominis etiam industrii non manum tantum, sed et ingenium fatigant. </p>\n<p> [[369.10]] Haec spero, Vir Ampl^#'m^#'e, excusabunt me apud Te, si assiduitatem praestare semper non\n[[369.11]] possum; et hodie certe venire me, ut erat officii mei, mutatio domicilii, quod nunc in S. Germani\n[[369.12]] suburbium, ac Palatii Luxemburgici viciniam transfero, prohibet: dissolvendis componendisque\n[[369.13]] reculis occupatum. Spero habiturum me occasionem, nisi statim San Germanum\n[[369.14]] redis, excusandi me coram. </p>\n<p> [[369.15]] Interea vale ac homini Tibi obsequentissimo fave. </p>\n","number":"116.","title":"LEIBNIZ AN PIERRE DANIEL HUET","date":"[Paris,] 10. Mai 1673. [115.185a.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

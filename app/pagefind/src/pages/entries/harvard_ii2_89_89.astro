@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_89","series":"Band II 2 (1686 - 1694)","seq":89,"text":"<p> [[355.5]] <b>90. LEIBNIZ AN GERHARD MEIER (BREMEN)</p>\n<p> [[355.6]] 16. (26.) Oktober 1690. [96.]</b></p>\n<p> [[356.1]] [ ... ] De Cartesianis habes sententiam meam a Tua non abhorrentem, parum ab ipsis\n[[356.2]] praestari hodie, dignum Magistri ingenio coeptisque. Et vix quicquam ab illis inventum nomines\n[[356.3]] dignum memoratu; usque adeo fatale est torpore occupari animos autoritati mancipatos. Ne\n[[356.4]] in Geometricis quidem uno Huddenio demto quicquam praestitere Cartesiani. Nam Hugenium\n[[356.5]] ego inter Cartesianos minime numero. Unde intelligas, vel Cartesium non publicasse suas artes\n[[356.6]] vel a discipulis non fuisse intellectas. Quanquam ipse Cartesius in Geometriam illam sublimiorem\n[[356.7]] non satis penetraverit. Unde fassus est alicubi in sua potestate non esse problemata, ubi\n[[356.8]] ex proprietate tangentium quaeritur natura lineae. </p>\n<p> [[356.9]] Huetius in <i>Censura</i> sua quanquam interdum paulo acrius, multa tamen in Cartesianos\n[[356.10]] recte dixit. Itaque velim aliquem ex primipilis in Batavis Galliaque respondere Viro Doctissimo\n[[356.11]] et Magistri doctrinam et existimationem multis modis laborantem vindicare. Id expectare\n[[356.12]] aequum videtur, ut utraque parte audita judicemus. Ac tum demum tertio intervenienti medium\n[[356.13]] quodammodo interponere se partibus fas erit. Quod si quis facere occupet festinatione nimia\n[[356.14]] vereor ne neutris satisfaciat. Nam nec Huetius auxilia non necessaria sibi mitti probabit, nec\n[[356.15]] Cartesiani defensionem suam praeveniri aequo animo ferent. Et sane nondum mihi visus qui\n[[356.16]] Huetio responderit. </p>\n<p> [[356.17]] Sed nec cujusvis est hoc sibi vindicare officium, quod illi facere debent, qui primores\n[[356.18]] gentis habentur. [ ... ] </p>\n<p> [[356.19]] P. S. In Lipsiensium Actis per occasionem jam aliqua admoneri curavi de Cartesii artificio\n[[356.20]] in aliorum inventa in sua convertendis. Observatum est ab Anglis et a Wallisio fuse ostensum in\n[[356.21]] opere novissimo Algebraico magnam partem libri tertii <i>Geometriae</i> Cartesianae sumtam fuisse\n[[356.22]] ex Harrioto, quem egomet vidi, et miram consonantiam deprehendi. Cum tamen Harrioti liber\n[[356.23]] et quidem posthumus ante Cartesianum opus prodierit. Cum igitur rogantibus Actorum Autoribus\n[[356.24]] relationem de Wallisiano opere mitterem, sane plagii accusationem non praetermisi. Et ab\n[[356.25]] Isaaco Vossio primum observatum deinde a Mariotto et Neutono repetitum est, veram regulam\n[[357.1]] refractionum a Willebrordo Snellio fuisse inventam et ab Hortensio nonnullis discipulis traditam.\n[[357.2]] Quae cum ad Cartesii in Batavis versantis notitiam pervenisset, coquus elegans suo jure\n[[357.3]] addito ferculum inde nobis adornavit, sed demonstrationem infeliciter tentavit, quod ignoraret,\n[[357.4]] quo artificio Snellius ad praeclarum illud Theorema devenisset; id ego quoque alicubi in actis\n[[357.5]] Lipsiensium admonui post Cl. Spleissium, qui jam in iisdem actis rei mentionem fecerat. </p>\n<p> [[357.6]] Ab Ismaële Bulialdo observatum est Keplerum in <i>paralipomenis ad Vitellionem</i> Cartesio\n[[357.7]] viam praeivisse ad reddendam rationem aequalitatis angulorum incidentiae et reflexionis per\n[[357.8]] compositionem duorum motuum normalis et transversalis. Idem notavit Keplerum ex calculo\n[[357.9]] deprehendisse Lineam Refractionibus aptam ad Hyperbolam accedere. Unde Cartesius meliore\n[[357.10]] jam Analysi instructus facile deprehendere potuit ipsam Hyperbolam satifacere. A me notatum\n[[357.11]] est in Lipsiensium actis Keplerum primum invenisse adumbrationem Gravitatis per conatum\n[[357.12]] recedendi a Centro, quod inter elegantissima Cartesii merito censetur et Hugenius nuper\n[[357.13]] correxit ac perfecit. </p>\n<p> [[357.14]] Cum Romae essem, Cl. Auzoutus mihi referebat esse nunc in Gallia qui Cartesii vitam\n[[357.15]] scribere pararent; et cum nonnulla a me audiisset vulgo non cognita, quae ad hoc institutum\n[[357.16]] facere possent, petiit ut in chartam conjicerem amicis illis transmittenda. Quod et feci et Tibi,\n[[357.17]] Vir Cl^#'m^#'e, hic adjunctam schedam mitto, quam recipere desidero. Dubito autem an illi quibus\n[[357.18]] missa fuit scheda, sint usuri meis observationibus, fortasse enim ea tantum quaerunt, quae\n[[357.19]] Cartesio honorifica sunt. </p>\n","number":"90.","title":"LEIBNIZ AN GERHARD MEIER (BREMEN)","date":"16. (26.) Oktober 1690. [96.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

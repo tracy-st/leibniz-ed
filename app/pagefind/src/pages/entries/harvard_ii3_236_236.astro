@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_236","series":"Band II 3 (1695 - 1700)","seq":236,"text":"<p> [[637.1]] <b>236. CLAUDE NICAISE AN LEIBNIZ </p>\n<p> [[637.2]] Dijon, 6. Mai 1700. [228.237.]</b></p>\n\n<p> [[637.9]] Dijon le 6 may <b>1700</b> </p>\n<p> [[637.10]] Il y a long tems monsieur que je n'ay reçu de vos Nouvelles; J'attribue ce silence à vos\n[[637.11]] grandes occupations et surtout à celle que vous donne presentement vostre <i>Codex diplomaticus</i>.\n[[637.12]] Je croy que vous devés avoir recû il y a long tems le pacquet de mons. le president Boisoit que\n[[637.13]] je donnay icy à l'abbé Maumenêt allant à Paris pour le remettre es mains de mons^#'r de Brosseau\n[[637.14]] qui m'en a remercié; Je luy en espargnay le port ce que mons^#'r le president ne fit pas à mon\n[[637.15]] egard me l'ayant envoyé par la poste; il vouloit même à ce qu'il me mandoit vous l'envoyer par\n[[637.16]] la même voye à Hanovre; Je serois faché qu'il fûst ancor arrivé quelque disgrace à ce pacquet.\n[[637.17]] J'ay enfin busqué avec assés de peine le plan du traicté <i>de fide veterum instrumentorum</i> dont je\n[[637.18]] vous ay parlé autrefois et que vous m'avés temoigné desirer; je vous l'envoye dans cette lettre.\n[[637.19]] Le dessein en paroist beau; mais je ne sçay si l'autheur l'avoit pû accomplir; Il y a dix ans qu'il\n[[637.20]] est mort. Les lettres des scavants à mons^#'r de Peiresk s'achevent d'imprimer à Geneve chés\n[[637.21]] mons. de Tournes qui a faict jusqu'à present un grand mystere de cette impression, crainte\n[[637.22]] qu'on ne luy allast à la traverse; J'ay veû celles de Vargas traduites par le pere Le Vassor qui y a\n[[637.23]] mis une preface fort outrée et qui luy a faict tort et ancor plus que cela l'histoire abominable de\n[[637.24]] Louis 13. Il porte maintenant la peine de sa temerité, vous scavés que le Roy d'Angleterre\n[[638.1]] Guillaume l'a mis entre les mains de nostre Ambassadeur qui l'a faict conduire au mont\n[[638.2]] S^#'t Michel où il est pour le reste de ses jours; <i>discere justitiam Moniti et non spernere Divos</i>.\n[[638.3]] J'ay veû celles d'Hubert Languet en 2 vol. 4^#'o. sens preface sens Augmentation aux epitres\n[[638.4]] longues et prolixes et sens aucun Index. Vous m'avés osté de la peine où j'estois avec beaucoup\n[[638.5]] d'autres gens, qu'on eut oublié la vie de l'auteur par m^#'r de la Mare qu'on a imprimé separement.\n[[638.6]] Je ne scay pourquoy on ne l'a pas mis à la liste de ces epitres; elle auroit pû servir en\n[[638.7]] quelque facon de preface; le tiltre d'<i>Arcanum saeculi decimi sexti</i> ne luy est pas mal mis; car en\n[[638.8]] verité l'on n'a guere eu de soin de rendre cette edition agreable et intelligible. Je croy qu'on\n[[638.9]] nous la donnera bientost meilleure en Hollande. Mons^#'r Thiers a donné depuis peû l'histoire de\n[[638.10]] la <i>S^#'t^#'e Larme de Vandosme</i> qui a beaucoup irrité les benedictins qui ont employé dom Mabillon à\n[[638.11]] y repondre par une dissertation qu'il dedie à mons^#'r l'eveque de Blois; le scavant prelat mons^#'r\n[[638.12]] d'Avranches me faict toujours mention de vous dans ses lettres, où vous avés toujours les\n[[638.13]] eloges que vous merités; les imprimeurs les plus considerés de Geneve ont faict une societé\n[[638.14]] ensemble; ils vont r'imprimer le <i>dictionnaire universel</i> d'Hofman en six vol. fol; jamais on n'a\n[[638.15]] tant veu de dictionnaire; le p. Simon promet de nous donner quelques lettres sur ce chapitre et\n[[638.16]] sur celluy des journaux qui ruinent tout[,] car on se contente de lire ces sortes de livres et l'on\n[[638.17]] ne recourt plus aux originaux; je ne scay mons^#'r si vous avés veû ces lettres postumes attribuées\n[[638.18]] au p. Simon contre le p. Marcianay; on nous en promet des suittes où l'on verra des traictés ou\n[[638.19]] plustost quelques fragments de ce pere contre les benedictins; et entr'autres un qui portera\n[[638.20]] celluy de dom Faussaire, et l'autre dom Titriet. L'auteur dont je vous envoye le plan auroit esté\n[[638.21]] ravi de voir ces ouvrages; car il n'aymoit pas les Benedictins; Je suis monsieur Tout à vous </p>\n<p> [[638.22]] Nicaise\n[[638.23]] <yi>Pour Monsieur de Leibniz prés de monseig^#'r le Duc d'Hanovre. <b>Hanovre</b> </p>\n","number":"236.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Dijon, 6. Mai 1700. [228.237.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

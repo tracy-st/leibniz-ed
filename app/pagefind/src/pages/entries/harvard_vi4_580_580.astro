@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_580","series":"Band VI 4 (1677 - 1690)","seq":580,"text":"[[2690.20]] <b>452₁.  Ex Thesibus Theologicis de Peccatis, quas in Aula majore Collegii Divionensis defendit P. Stephanus Bougot Societati Jesu Divione, die .. junii 1686\n[[2690.22]] <tit2><b>Ex Thesibus Theologicis de Peccatis, quas in Aula majore Collegii\n[[2690.23]] Divionensis defendit P. Stephanus Bougot Societati Jesu Divione, die\n[[2690.24]] ... junii 1686</tit2>\n[[2690.25]] <tit2><b>Thesis prima</b></tit2> </p>\n<p> [[2690.26]] <b>Peccatum philosophicum</b> seu <b>morale</b> est actus humanus disconveniens\n[[2691.1]] naturae rationali et rectae rationi. <b>Theologicum</b> vero et <b>mortale</b> est transgressio\n[[2691.2]] libera divinae legis. Peccatum philosophicum quantumvis grave, in illo qui Deum ignorat\n[[2691.3]] vel de Deo actu non cogitat est grave peccatum sed non est offensa Dei neque peccatum\n[[2691.4]] mortale dissolvens amicitiam Dei, neque aeterna poena dignum.\n[[2691.5]] <tit2><b>Ex aliis Thesibus P. Ignatii Jonghe Jesuitae in Belgio</b> </tit2> </p>\n<p> [[2691.6]] Peccatum <b>Philosophicum</b> non meretur aeternam poenam sensus, uti nec originale,\n[[2691.7]] quam tamen peccatum actuale mortale theologicum mereri manifestum est, non alia\n[[2691.8]] de causa quam quod sit malitiae infinitae. Malitiam infinitam ex eo habet quod sit gravis\n[[2691.9]] formalis offensio personae dignitatis infinitae cognitae qua talis.\n[[2691.10]] <tit2><b>Extrait des Theses Theologiques de la nature du Peché soutenues a\n[[2691.11]] Dijon dans le College des Jesuites par le P. Étienne Bougot au mois de\n[[2691.12]] juin 1686</i></tit2>\n[[2691.13]] <tit2><b>These premiere</b></tit2> </p>\n<p> [[2691.14]] <b>Le peché philosophique</b> ou <b>moral</b> est une Action humaine, contraire a ce qui\n[[2691.15]] convient à la nature raisonnable et à la droite raison. Mais le <b>Peché Theologique</b> et\n[[2691.16]] <b>mortel</b> est une libre transgression de la loy de Dieu. Le peché philosophique quelque\n[[2691.17]] grief qu'il puisse estre estant commis par celuy qui n'a point de connoissance de Dieu, ou\n[[2691.18]] qui ne pense actuellement à Dieu, peut estre un peché fort grief, mais n'est une offense de\n[[2691.19]] Dieu ny un peché mortel, qui rompe l'amitié de l'homme avec Dieu, ni qui mérite la\n[[2691.20]] peine eternelle.\n[[2692.1]] <tit2><b>Extrait d'une autre These du P. Ignace Jonghe Jesuite des Pays bas</b></tit2> </p>\n<p> [[2692.2]] Le Peché Philosophique comme aussi le peché originel ne merite pas une peine\n[[2692.3]] eternelle positive. Mais le peché theologique Actuel merite des peines eternelles de\n[[2692.4]] l'enfer; dont la raison est, qu'il a en soy une malice infinie, puisqu'il est une offense\n[[2692.5]] d'une personne infinie en dignité, et <b>reconnue pour telle.</b> </p>\n","number":"452₁.","title":"Ex Thesibus Theologicis de Peccatis, quas in Aula majore Collegii Divionensis defendit P. Stephanus Bougot Societati Jesu Divione, die .. junii 1686","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_204","series":"Band II 1 (1663 - 1685)","seq":204,"text":"<p> [[640.9]] <b>185a. LEIBNIZ AN PIERRE DANIEL HUET</p>\n<p> [[640.10]] Hannover, 18./28. Oktober 1678. [116.203.]</b></p>\n<p> [[641.6]] Illustri Viro Petro Danieli Huetio </p>\n<p> [[641.7]] Gottfredus Guilielmus Leibnitius. </p>\n<p> [[641.8]] Intellexi magno gaudio meo insigne opus et victurum, <i>de veritate Religionis</i> nostrae\n[[641.9]] tandem prodiisse in lucem. Neque vero dignius argumentum reperire poteras, cui destinaretur\n[[641.10]] maximus ille eruditionis apparatus, quem tantis vigiliis collegisti. Quid enim denique Religione\n[[641.11]] praestantius est, et quid mortales animos afficit magis? Dulcissimum profecto est, et mirifice\n[[641.12]] solatur incommoda vitae, immortalitatem asseri nobis, non quamlibet, sed qualem optare\n[[641.13]] possimus; id est qualem docuit Christus. Quem ostendere promissum tot oraculis fuisse Messiam\n[[641.14]] generis humani restauratorem, maxima conclusionum est post duas illas capitales de Deo\n[[641.15]] et Mente. Certe non video quam possimus utilitatem expectare majorem ab historia et eruditione.\n[[641.16]] Amplius dico, mihi studium antiquitatis omne hunc propemodum unicum habere videtur\n[[641.17]] usum, ut vetera felicitatis atque ut ita dicam nobilitatis nostrae, quam ad Christum regenerati\n[[641.18]] referre debemus, documenta a dubitationibus et corruptelis vindicemus. Ostendendum enim est\n[[641.19]] primum libros sacros quos habemus genuinos esse, et ad nos pervenisse incorruptos quoad\n[[641.20]] summam rerum. Quod nemo satis potest nisi Criticae artis mysteria intellexerit, et manuscriptorum\n[[641.21]] fidem explorare possit, et linguarum proprietates, et genium illorum seculorum, et\n[[641.22]] seriem temporum norit. Deinde ostendendum est autorem tantarum rerum ad quem libri sacri\n[[641.23]] referuntur, coelo missum fuisse, id vero oracula testantur quae multis post seculis nasciturum\n[[641.24]] cecinere, et mira facta eorum quos sua Christus autoritate armavit, et sanctitas doctrinae\n[[641.25]] incomparabilis, et martyrum constantia, et denique triumphus crucis. Haec vero omnia ita ut\n[[641.26]] narrantur gesta fuisse, demonstrari non potest nisi tota historia universali sacra et profana\n[[641.27]] accuratissime constituta, collectisque et manuscriptis et numismatis et inscriptionibus, aliisque\n[[641.28]] cimeliis eruditorum. His enim fit Historiae fides. Itaque saepe mecum cogitans optavi esse qui\n[[642.1]] nobis <b>inventarium</b> ut ita dicam exhibeat pretiosi hujus thesauri omnium quae hodieque\n[[642.2]] supersunt reliquiarum antiquitatis; quoad ejus fieri potest. Tale quiddam circa inscriptiones\n[[642.3]] expectamus a summo in his studiis Viro Marquardo Gudio, nec numismatis deerunt Ezechiel\n[[642.4]] Spanhemius aliique excellentes Viri, maxime autem Carcavius vester tantarum in hoc genere\n[[642.5]] opum custos meritissimus. Sed Historiam Manuscriptorum hactenus desidero, qua enumerentur\n[[642.6]] meliores qui nunc quoque extant in Europa Codices, illi inprimis ex quibus autores expressi\n[[642.7]] sunt, et qui sunt unici. </p>\n<p> [[642.8]] Sed haec obiter: interea suffecerit omnem eruditionis apparatum ad Historiam sacram\n[[642.9]] comprobandam, velut scopum potissimum, dirigi debere. Quod cum a Te felicissime factum\n[[642.10]] esse non dubitem, quanquam non nisi partem operis inediti Te olim monstrante viderim;\n[[642.11]] gratulandum meliori eruditioni arbitror, quae verum usum suum te duce invenit; gratulandum\n[[642.12]] Tibi qui famam et utilitatem conjunxisti. Ipsum opus non ego tantum avide desidero (quanquam\n[[642.13]] jam in itinere ad nos esse arbitrer), sed et expectat Serenissimus <k>Johannes Fridericus</k>\n[[642.14]] Brunsvicensium et Luneburgensium Dux, Princeps supra quam credi possit et intelligens, et\n[[642.15]] rerum omnium maximeque eruditionis sacrae curiosus, cui non ignotum est nomen Tuum, et qui\n[[642.16]] me institutum tuum enarrantem summa cum voluptate audivit. </p>\n<p> [[642.17]] Vale illustris Vir, et cultori nominis tui ac Virtutum tuarum fave. </p>\n<p> [[642.18]] Dabam Hanoverae 18 Octobr. 1678. </p>\n<p> [[642.19]] P. S. Has literas accipies ab ornatissimo ac plane doctissimo Hansio Holsato amico meo\n[[642.20]] qui famam tuam et virtutes juxta mecum colit. </p>\n","number":"185a.","title":"LEIBNIZ AN PIERRE DANIEL HUET","date":"Hannover, 18./28. Oktober 1678. [116.203.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

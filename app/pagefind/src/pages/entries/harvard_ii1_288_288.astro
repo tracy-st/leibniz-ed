@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_288","series":"Band II 1 (1663 - 1685)","seq":288,"text":"<p> [[872.9]] <b>253. LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF</p>\n<p> [[872.10]] [26. Juli 1685.] [252.]</b></p>\n<p> [[872.21]] Ill^#'m^#'e ac Generosissime Dⁿ^#'e </p>\n<p> [[872.22]] Incomparabile opus Tuum, de vera ratione status Christianorum transmittente D. Menckenio\n[[872.23]] nostro recte accepi, lautoque muneri quo me beasti et communes cum iis omnibus, ad quos\n[[872.24]] inde fructus pervenire potest maximus, et privatas gratias ago. Habemus sane multa pie et\n[[872.25]] quaedam erudite et sapienter et nonnulla etiam eloquenter scripta nostro sermone vernaculo,\n[[872.26]] sed ubi omnes illae laudes tanta mensura collectae ac cumulatae reperiantur, equidem extra\n[[873.1]] librum tuum videre me non memini. Plura non addo, ne mediocria de eo dicendo veritatem,\n[[873.2]] digna tentando modestiam tuam offendam. Ubi primum accepi, temperare mihi non potui, quin\n[[873.3]] statim pervaderem a capite ad calcem; maxima cum delectatione. Nunc vero, ubi a Bibliopego\n[[873.4]] recepi, in eo sum ut attente relegam, et singulis partibus immorer quo majorem inde fructum\n[[873.5]] percipiam. Si quis mihi notus esset Gallus Germanicae linguae peritus, et scribendo validus, ei\n[[873.6]] autor essem ego futurus, ut transfunderet in suam linguam. </p>\n<p> [[873.7]] Novissimas meas circa superiores nundinas recte perlatas spero. Nuper legi missum ad\n[[873.8]] Serenissimam nostram libellum vel potius Schediasma Ducis Buckinghamii pro veritate Religionis,\n[[873.9]] Anglica lingua scriptum cujus illa est intelligentissima. Ingenium sane autoris ostendit,\n[[873.10]] quanquam sint quae non satis liquido confirmantur. Aliqua video inspergi quae a Weigelii\n[[873.11]] nostri placitis non abhorrent et a me aliquando expensa sunt. Putat enim nihil manere idem, sed\n[[873.12]] omnia esse in perpetuo fluxu excepto Deo. Weigelii demonstrationem existentiae Dei, quam\n[[873.13]] Germanica pariter ac latina lingua aliquot abhinc annis amicis communicavit, vidisse te arbitror.\n[[873.14]] Mihi valde consideratu digna videtur, tametsi nonnulla supplenda videri monuerim, quorum\n[[873.15]] adhuc demonstrationem desiderabam. Optima mihi haec videtur via si ostendi posset\n[[873.16]] omnia accidentia nihil aliud esse quam modos substantiam concipiendi, ita enim demonstratum\n[[873.17]] esset quod illi ponunt, substantias ipsas revera non durare, si rem ad summam <greek>ăkribeían</greek>\n[[873.18]] exigas, sed alias atque alias prioribus similes vel si mavis easdem a Deo continue creari, Deus\n[[874.1]] autem necessario eximi deberet, alioqui si omnia continuo perirent, ne ipso quidem excepto,\n[[874.2]] nihil esset quod ea restitueret, nam ubi semel nihil esset in toto universo, in aeternum nihil\n[[874.3]] maneret. Sed haec occasione Buckinghamiarum meditationum. Cum vero in eodem libello Dux\n[[874.4]] tolerationem heterodoxorum suasisset Anglis, exortus est refutator quidam anonymus, cujus\n[[874.5]] schedam vidi, sed quae exigui momenti apparuit. Vale. </p>\n","number":"253.","title":"LEIBNIZ AN VEIT LUDWIG VON SECKENDORFF","date":"[26. Juli 1685.] [252.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

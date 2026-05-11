@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi2_23","series":"Band VI 2 (1663-1672); durchgesehener Nachdruck 1990","seq":23,"text":"[[476.0]] <b>55. De reductione hypothesium ad demonstrationes ac phaenomenorum ad\ntheoremata </b> <span>476.0;0:62:055:6909-7012:L:l^</span>.\n[[476.1]] Petrus Ramus in Mathematicis omnia problemata reduxit ad theoremata. Et merito.\n[[476.2]] Quia modo tantum applicandi differunt. Solutio enim problematis est theorema, verbis\n[[476.3]] tantum operativis mutatis. V.g. problema: datum Circulum mutare. Solutio seu\n[[476.4]] Canon: multiplicetur quadratum diametri, seu circumscriptum, producto\n[[476.5]] circumscribatur Circulus, is erit multiplex dati. Theorema: Circuli sunt ut quadrata diametrorum\n[[476.6]] seu circumscripta. Similiter mihi venit in mentem omnes Hypotheses ad demonstrationes,\n[[476.7]] omniave phaenomena ad theoremata reduci posse. V. g. Phaenomenon est: Lumen\n[[476.8]] quoad sensum instanti movetur, seu minore celeritate, quam est quaelibet sensibilis.\n[[476.9]] Hypothesis: Supponatur nullam esse sensibilem in pleno lineam, quae non contineat\n[[476.10]] lineam aliquam insensibilem contigui sibi corporis subtilissimi, quod aetherium vocant.\n[[476.11]] Solutio: Luce igitur orta, seu corpore lucido emissis ex se radiis impellere lineas luminis\n[[476.12]] incipiente, quo primum momento initium lineae impellit, eo et impellet finem eius ad\n[[477.1]] quantamcunque distantiam. Uti qui baculum impellit totum simul impellit, etsi\n[[477.2]] protendantur in infinitum. Ergo quo primum momento lux orietur lumen sentietur. Theorema\n[[477.3]] fieri potest: Si ad certam distantiam a lucido nulla sit linea recta sensibilis quae non\n[[477.4]] contineat luminosam; orta lux ad distantiam eandem momento videbitur.  Quod\n[[477.5]] theorema est prorsus necessarium, et reddit causam possibilem Luminis instantanei. Si esset\n[[477.6]] convertibile seu si hypothesis demonstrabilis esset vel sensu certa, redderet causam\n[[477.7]] prorsus necessariam, seu ostenderet nullam aliam esse posse, quod fit in hoc exemplo:\n[[477.8]] Phaenomenon: Grave projectum aliquamdiu impetum retinet. Hypothesis: 1.) Gravi\n[[477.9]] projecto nihil statim occurit aeque validum. 2.) Cui nihil occurit aeque validum, id\n[[477.10]] impetum semel acquisitum retinet. Solutio: Igitur grave projectum impetum retinet.\n[[477.11]] (Theorema: Quicquid semel movetur, id eadem via et celeritate semper movebitur nisi\n[[477.12]] sit quod impediat; et, si quid sit quod impediat, sed non aeque validum, minuetur\n[[477.13]] impetus; si id continue obstet, minuetur continue impetus, donec desinat.) Theorema: Si\n[[477.14]] gravi projecto nihil statim occurrit aeque validum, et motus omnis durat nisi impediatur;\n[[477.15]] impetus gravis projecti aliquamdiu durabit. Ita causa reddita est possibilis. Sed cum\n[[477.16]] Hypothesis non solum sit possibilis, sed et certa, altera sensu, altera demonstratione;\n[[477.17]] et converti possit Theorema hoc modo, atque et sic demonstrari: Si gravis projecti\n[[477.18]] impetus durat; nisi impediatur, sequitur nihil statim occurrere aeque validum, et omnem\n[[477.19]] motum durare nisi impediatur. Cum ergo et hoc conversum verum sit, erit causa reddita\n[[477.20]] non solum possibilis, sed et necessaria.\n","number":"55.","title":null,"date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

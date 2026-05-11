@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_159","series":"Band II 4 (1701 - 1707)","seq":159,"text":"<p> [[510.1]] <b>159. LEIBNIZ AN ERNST SALOMON CYPRIAN</p>\n<p> [[510.2]] Hannover, 22. Oktober 1706. [156.] </b></p>\n<p> [[510.12]] Vir celeberrime, Fautor et Amice Honoratissime </p>\n<p> [[510.13]] Gratias <Fn><i>Am Kopf von L^#'2</i> : Ex responsione ad Dn. Cyprianum, directorem Gymnasii Coburgensis 22. Octobr. 1706</Fn> ago, quod literas remisisti, quae apud vos curari non poterant. </p>\n<p> [[510.14]] Praeclare etiam facis quod studia quibus Helmestadium ornabas prosequeris qua in re\n[[510.15]] etiam Franconicae nobilitatis commodo a Te consuli non dubito. </p>\n<p> [[510.16]] Vastissimus campus Historia est, sive Ecclesiastica sive civilis, multaque sunt loca adhuc\n[[510.17]] culturam expectantia ab eruditis viris: quo magis utile judico plurimos huic rei operam dare. </p>\n<p> [[510.18]] De jure naturae et gentium ita censeo pleraque scripta quae hodie teri in hoc genere solent,\n[[510.19]] parum satisfacere. Pufendorfiana certe et quae ex Pufendorfianis sunt procusa et in principiis\n[[510.20]] laborant, et in principiorum usu vacillant. Sed cum plerique superficiaria quadam cognitione\n[[510.21]] sint contenti quae attentionem meditationemque non postulat, curentque magis ut videantur\n[[510.22]] esse quam ut sint docti: Hinc tales libelli vulgo plausum invenere magno solidae doctrinae\n[[510.23]] detrimento. </p>\n<p> [[510.24]] Quod superest vale et me ama. Dabam Hanoverae 22 octobr. 1706 </p>\n<p> [[510.25]] Deditissimus Godofridus Guilielmus Leibnitius </p>\n<p> [[511.1]] P. S. Si qua se offerat inserviendi occasio, non sum neglecturus. </p>\n<p> [[511.2]] A Monsieur Monsieur Cyprianus directeur du Gymnase illustre à Coburg </p>\n","number":"159.","title":"LEIBNIZ AN ERNST SALOMON CYPRIAN","date":"Hannover, 22. Oktober 1706. [156.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

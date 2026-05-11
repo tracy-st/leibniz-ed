@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_471","series":"Band VI 4 (1677 - 1690)","seq":471,"text":"[[2077.9]] <b>379.  De potentiae absolutae conservatione [Winter 1689/90 (?)]</b>\n [[2077.10]] <tab/>[Winter 1689/90 (?)] </p>\n<p> [[2077.19]] Eadem semper in mundo servatur potentia absoluta, ut potentia elevandi tantum\n[[2077.20]] pondus ad tantam altitudinem; vel tendendi arcum ad tantum usque tensionis gradum. Et\n[[2077.21]] proinde semper servantur in mundo eaedem quantitates virium quae fiunt ex ductu\n[[2077.22]] corporum in quadrata celeritatum. </p>\n<p> [[2077.23]] Eadem semper servatur in mundo potentia reactiva seu respectiva, qua scilicet\n[[2077.24]] corpora concurrentia in se invicem agere possint, seu qua a se invicem repellantur. Et ea\n[[2078.1]] potentia habetur, si corpora ducantur in celeritates [quibus] unumquodque recedit a\n[[2078.2]] centro gravitatis communi. </p>\n<p> [[2078.3]] Motus autem quem habet eorum centrum gravitatis commune, siquidem id mutatur,\n[[2078.4]] debet motui eorum proprio non misceri, sed talis [ipsis] motus tribuendus est, qualem\n[[2078.5]] haberent centro gravitatis communi spectato ut quiescente. Et hac vi corpora duo concurrentia\n[[2078.6]] agunt in se invicem. </p>\n<p> [[2078.7]] Potentia absoluta mortua fit ex ductu celeritatis mortuae in molem. Potentia viva ex\n[[2078.8]] ductu celeritatis vivae impetu quaesitae. Celeritas mortua potest dici conatus, viva impetus.\n[[2078.9]] Conatus est ponderis in statera, impetus gravis ex altitudine aliqua in stateram\n[[2078.10]] cadentis. </p>\n<p> [[2078.11]] In vi qua corpus in corpus agit, seu vi\n[[2078.12]] respectiva omnis celeritas computatur quasi mortua,\n[[2078.13]] ut si vis elastica corpora <i>A</i> et <i>B</i> separet, vim\n[[2078.14]] respectivam corpora inter se divident, at eadem\n[[2078.15]] accipient celeritates proportionales reciproce,\n[[2078.16]] magnitudinibus. Ratio quia vis viva manet\n[[2078.17]] mortuae proportionalis, ut ponamus primo\n[[2078.18]] momento <i>cd</i> corpus minus <i>A</i> accipere celeritatem\n[[2078.19]] majorem <i>de</i>, corpus vero majus <i>B</i> celeritatem\n[[2078.20]] minorem <i>df</i>, in ratione reciproca corporum, ut\n[[2078.21]] quia <i>B</i> [duplum] <i>A</i>, sit <i>de</i> dupla <i>df</i>. Quia primo\n[[2078.22]] momento est vis mortua. Secundo momento\n[[2078.23]] celeritas addita <i>rh</i> proportionalis est additae <i>sl</i> et\n[[2078.24]] ita porro. Celeritates ergo semper proportionales.\n[[2078.25]] Ergo et vires, quia et effectus, id enim tantum\n[[2078.26]] quaeritur, ut a se invicem repellantur mutuo, nec\n[[2078.27]] refert quod unum celerius aut tardius moveatur,\n[[2078.28]] ut si fingamus arcum qui sagittam expellere debet esse libere suspensum, ut aeque possit\n[[2078.29]] procedere arcus ac recedere sagitta. Ergo vis haec corporum a se invicem recessu\n[[2078.30]] quaesita, et ipsis distributa semper manet proportionalis primae mortuae qua a se invicem\n[[2078.31]] recedere conantur, quae reciproce proportionalis est corporibus. Et manet generalis\n[[2079.1]] regula, quod semper spatium ducendum est in corpus, ad vim habendam. Et vis quam a\n[[2079.2]] separante accipiunt, eadem est quae vis qua in se invicem agerent, si iterum concurrerent.\n[[2079.3]] Ergo et vi ista concurrunt. Ergo ex principio quod vis mortua aestimanda facto celeritatis\n[[2079.4]] in corpus caetera sequuntur tam in respectiva actione seu vi, quia tunc primae proportionalis,\n[[2079.5]] quam in absoluta, quia tunc vis ultima est ut quadrata primorum conatuum,\n[[2079.6]] seu ut spatium. Generalissime autem verum manet vim esse factum ex ductu corporis in\n[[2079.7]] spatium. Debet autem corpori ascribi motus pro concursu talis seu tale spatium, ut\n[[2079.8]] utriusque corporis eadem sit vis; quia certum est duo corpora concurrentia aequali vi\n[[2079.9]] concurrere, seu tantam vim sentire unum quantam sentit alterum. </p>\n","number":"379.","title":"De potentiae absolutae conservatione","date":"[Winter 1689/90 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

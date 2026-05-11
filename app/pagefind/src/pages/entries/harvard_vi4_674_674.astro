@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_674","series":"Band VI 4 (1677 - 1690)","seq":674,"text":"[[2912.1]] <b>513.  Libri de clarissimis jurisconsultis [1677 bis 1682 (?)]</b>\n [[2912.2]] <tab/>[1677 bis 1682 (?)] </p>\n<p> [[2912.7]] Baptista Caccialupus <i>de illustribus jurisconsultis</i>. </p>\n<p> [[2912.8]] Bernardinus Rutilius <i>de vitis veterum Jurisconsultorum</i>. </p>\n<p> [[2912.9]] Joh. Fichardus <i>de vitis recentiorum Jurisconsultorum</i>. </p>\n<p> [[2912.10]] <i>Catalogus veterum Jurisconsultorum carmine</i> autore Joh. Lorichio. </p>\n<p> [[2912.11]] <i>Catal. recentiorum Jurisconsultorum</i> autore Matthaeo Gribaldo. </p>\n<p> [[2912.12]] Baldus Perusinus <i>de commemorationibus famosissimorum doctorum in utroque jure</i>. </p>\n<p> [[2912.13]] Thom. Diplovat[at]ius Patritius Constantinopolitanus <i>de praestantia doctorum et\n[[2912.14]] clarissimorum juris consultorum ad nostra usque tempora.</i> </p>\n<p> [[2912.15]] Marq. Freheri Chronologia <i>juri orientali</i> praemissa, spissus in ea error, ostenditur a\n[[2912.16]] Vossio <i>de Hist. Graecis</i> in Eustathii aetate. </p>\n","number":"513.","title":"Libri de clarissimis jurisconsultis","date":"[1677 bis 1682 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

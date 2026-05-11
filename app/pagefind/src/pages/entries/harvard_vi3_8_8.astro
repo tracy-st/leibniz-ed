@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_8","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":8,"text":"[[150.8]] <b>8. L'auteur du peché </b> <span>150.0;0:63:008:73       :L:f^</span>.\n[[150.8]] Touchant cette grande Question de l'Auteur du Peché, on croit communement\n[[150.9]] esquiver la difficulté, en disant, que le Peché dans son essence n'est qu'une pure\n[[150.10]] privation sans aucune realité; et que Dieu n'est pas l'auteur des privations. Pour cet\n[[150.11]] effect, on a introduit cette fameuse distinction entre le physique, et le moral du peché,\n[[150.12]] dont on abuse un peu, quoyque elle soit bonne en elle méme.\n[[150.13]] Le Physique ou reel du Vol, par exemple, est l'object, ou la proye qui irrite\n[[150.14]] l'indigence du Voleur, les rayons visuels qui frappent ses yeux, et qui entrent jusque\n[[150.15]] au fond de son ame; les imaginations, les inquietudes et les deliberations qui se\n[[150.16]] forment là dessus, et qui se terminent en fin à la conclusion, qui est de profiter de\n[[150.17]] l'occasion, et d'entreprendre l'execution du crime.\n[[150.18]] On ne sçauroit nier que tout cela ne soyent des realitez, et il faut méme avouer\n[[150.19]] que la derniere determination de la volonté, apres avoir balancé long temps, et examiné\n[[150.20]] toutes les circomstances, est un acte reel, qui est dans le Predicament de l'Action,\n[[150.21]] aussi bien que la Pensée et le mouvement: et pourtant cette derniere determination\n[[150.22]] est ce qui nous rend criminels.\n[[150.23]] Où est donc ce Moral du Peché dont on parle tant? On dira peut estre, qu'il\n[[150.24]] consiste dans l'Anomie, comme la sainte Écriture l'appelle, ou dans la difformité de\n[[150.25]] l'Acte à l'égard de la Loix; qui est une pure privation. J'en demeure d'accord, mais je\n[[150.26]] ne vois pas, ce que cela contribue à l'éclaircissement de nostre question. Car de dire\n[[150.27]] que Dieu n'est pas l'auteur du peché, par ce qu'il n'est pas auteur d'une privation:\n[[150.28]] quoyque il puisse estre appellé auteur de tout ce qu'il y a de reel et de positif dans le\n[[150.29]] peché, c'est une illusion manifeste; c'est un reste de la philosophie visionnaire du\n[[151.1]] temps passé, c'est un faux-fuyant dont un homme raisonnable ne se laissera jamais\n[[151.2]] payer. Je m'en vay le declarer par un exemple. Un peintre fait deux tableaux, dont\n[[151.3]] l'un est grand pour servir de modelle d'une tapisserie, l'autre n'est qu'une petite\n[[151.4]] miniature. Prenons la miniature et disons qu'il y a deux choses à considerer là dedans,\n[[151.5]] premierement son positif et reel, qui est, la table, le fonds, les couleurs, les traits; et\n[[151.6]] son privatif qui est la disproportion au grand tableau, ou sa petitesse. Ce seroit donc\n[[151.7]] se moquer du monde, que de dire, que le peintre est l'auteur de tout ce qu'il y a de reel\n[[151.8]] dans les deux tableaux, sans estre pourtant l'auteur du privatif, ou de la disproportion\n[[151.9]] qui (est entre) le grand et le petit, car par la meme raison ou plus tost par plus forte\n[[151.10]] raison on pourroit dire, qu'un peintre peut estre auteur d'une copie, ou d'un pourtraict,\n[[151.11]] sans estre l'auteur de la disproportion entre la copie et l'original, ou sans estre\n[[151.12]] l'auteur de sa faute. Car en effect le privatif n'est rien qu'un simple resultat ou\n[[151.13]] consequence infallible du positif, sans avoir besoin d'un auteur à part. Je m'estonne\n[[151.14]] que ces gens ne passent plus avant, et ne tachent de nous persuader, que l'homme\n[[151.15]] méme n'est pas auteur du peché, par ce qu'il n'est auteur que du physique ou reel, la\n[[151.16]] privation estant une chose dont il n'y a point d'auteur.\n[[151.17]] Je conclus de ce que je viens de dire, que ceux qui disent, que Dieu est auteur de\n[[151.18]] tout ce qu'il y a de reel ou de positif dans le peché; et qui avouent, que Dieu est\n[[151.19]] l'auteur de la loix, et qui nient pourtant, que Dieu est l'auteur du resultat de ces deux\n[[151.20]] choses, c'est à dire, de la difformité entre la loix et le positif du peché; ne sont\n[[151.21]] eloignez de Calvin, que dans la façon de parler; et qu'ils font Dieu auteur du peché,\n[[151.22]] sans le dire, quoyque ils protestent de faire le contraire.\n","number":"8.","title":"L'auteur du peché","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

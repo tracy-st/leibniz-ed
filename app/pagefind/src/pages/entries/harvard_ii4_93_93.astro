@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_93","series":"Band II 4 (1701 - 1707)","seq":93,"text":"<p> [[299.1]] <b>93. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[299.2]] [Padua, Ende Oktober bis Anfang November 1704]. [92.99.] </b></p>\n<p> [[299.15]] Ill^#'m^#'o Sig^#'r^#'e Sig^#'r^#'e Padron Col^#'m^#'o </p>\n<p> [[299.16]] Non <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: resp</Fn> posso esprimere il dolore che fin ora m'ha cagionato il vedermi privo di sue risposte,\n[[299.17]] che io tanto bramava per sodisfare gli Ecc^#'m^#'i Signori Riformatori dello Studio, che vorrebbono\n[[299.18]] venire presto all'elettione del Publico Matematico, e fanno grand^#'m^#'o caso della propositione e\n[[299.19]] testimonianza di V. S. Ill^#'m^#'a, che oggi con giustitia hà il primo luogo ed il maggiore grido, non\n[[299.20]] dico fra soli Matematici, ma fra i piu celebri dotti e letterati del Secolo, ed infatti avendo un\n[[299.21]] Nobile proposto all'Ecc^#'m^#'o Magistrato un Soggetto suo partiale per la catedra delle Matematiche,\n[[299.22]] ed essendogli stato risposto che se gli offeriva un altro per l'istesso impiego proposto dal tanto\n[[299.23]] celebre Leibinitio; Quello tacque, e disse che non voleva piu altro, per la veneratione e stima\n[[299.24]] del nome di V. S. Ill^#'m^#'a. Or ecco oggi rasserenato il mio animo coll'improviso arrivo di due sue\n[[299.25]] lettere, che mi capitano in Padova, ove ora mi fermarò per le publiche lettioni, le quali con\n[[299.26]] sommo mio contento m'assicurano della continuatione del suo amore e stimati^#'m^#'o patrocinio, e\n[[299.27]] questa Universita, e comunicare alla nostra Italia quella meravigliosa e tanto profittevole mi\n[[299.28]] fanno vivamente sperare, che il Sig^#'r^#'e Herman possa ben presto venire ad erudire ed illustrare\n[[299.29]] Analise, che trae la sua prima origine dall'elevata, e profonda Mente di V. S. Ill^#'m^#'a. Io poi che\n[[299.30]] teneramente amo l'ingenua e candida natione alemana, e principalmente V. S. Ill^#'m^#'a, che\n[[299.31]] riguardo come mio grand^#'m^#'o ed affettuosissimo Benefattore, vederei qui molto volintieri il\n[[299.32]] dott^#'m^#'o Sig^#'r^#'e Herman per essere Alemano, e poi proposto da V. S. Ill^#'m^#'a, e gia penso di farlo\n[[300.1]] dimorare vicino alla mia casa, per goderlo e servirlo a mio modo nel caso che si risolvesse a\n[[300.2]] venire, con esibirgli tutto me stesso e l'istessa mia piccola casa con una vera e germana\n[[300.3]] cordialità, e potrà V. S. Ill^#'m^#'a assicurarlo, [che] sarò gelosissimo e partialissimo del suo onore, e\n[[300.4]] l'assisterò come se fosse me stesso. Prego dunque V. S. Ill^#'m^#'a solecitare fra tanto le risposte e\n[[300.5]] risolutioni del Sig^#'r^#'e Herman mentre io darò subito parte di quanto essa mi scrive a gli Ecc^#'m^#'i\n[[300.6]] Riformatori, e farò tenere vuota e sospesa la catedra fin a tanto che si riceva la sua deliberatione.\n[[300.7]] Il Sig^#'r^#'e Ramazzini sì trattiene ancora in Modona, al suo arrivo la servirò. La riverisco e mi resto </p>\n<p> [[300.8]] Di V. S. Ill^#'m^#'a Obl^#'m^#'o Div^#'m^#'o S^#'r^#'e M. A. Fardella </p>\n","number":"93.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"[Padua, Ende Oktober bis Anfang November 1704]. [92.99.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

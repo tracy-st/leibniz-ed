@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_218","series":"Band II 3 (1695 - 1700)","seq":218,"text":"<p> [[584.10]] <b>218. ERNST SALOMON CYPRIAN AN LEIBNIZ</p>\n<p> [[584.11]] Helmstedt, 28. Juli (7. August) 1699. [216.221.]</b></p>\n\n<p> [[584.16]] Illustris Domine, </p>\n<p> [[584.17]] Tua singularis humanitas, qua in tanta fortuna exsplendescis, ac venerantium vota provocas,\n[[584.18]] impellit me, ut Tibi gratias agam pro cura mearum rerum, quam suscepisti. Praeter\n[[584.19]] gratias autem ac vota, quae pro salute Tua nuncupo, nihil mihi est, obscuro homini, quod de\n[[584.20]] mea devotione testetur. At nulli unquam vitio fuit, Illustris Domine, Deos colere, quoquo modo\n[[584.21]] posset. Itaque nullus dubito, quin pretiosa Tibi apparitura sint munuscula mea, animus videlicet\n[[584.22]] gratus, ac devotissima subjectio: quum hae sint meae divitiae. </p>\n<p> [[585.1]] Ad systema definitionum post nundinas intrepide accingar, atque obscuris ingenii conatibus\n[[585.2]] nonnihil claritudinis a nominis Tui, si patieris, splendore conciliabo: omnia coram expositurus,\n[[585.3]] ubi ad sacrosanctos pedes Tuos devoluto eosdem licuerit exosculari. Professionem\n[[585.4]] extraordinariam Tuis auspiciis consecuturum me confido, quandoquidem et Cellis sunt, qui\n[[585.5]] favent. Sed Deo atque Tibi rem omnem committam. Respice igitur clientem, et magnam mihi\n[[585.6]] praeclare agendi necessitatem impositam arbitrabor. Vale. Scrib. in Acad. Julia MDCIC\n[[585.7]] d. XXVIII. Jul. </p>\n<p> [[585.8]] Illustr. Nom. T. aeternum subjectissimus M. Ernestus Salomo Cyprianus. </p></p>\n","number":"218.","title":"ERNST SALOMON CYPRIAN AN LEIBNIZ","date":"Helmstedt, 28. Juli (7. August) 1699. [216.221.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

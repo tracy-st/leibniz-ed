@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_224","series":"Band II 4 (1701 - 1707)","seq":224,"text":"<p> [[682.12]] <b>224. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[682.13]] Leipzig, 5. November 1707. [220.230.] </b></p>\n<p> [[682.19]] Vir Illustris et Excellentissime,\n [[682.20]] Patrone omni observantia devenerande! </p>\n<p> [[682.21]] Recte <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: resp.</Fn> accepi Tuas, speroque etiam Excellentiam Tuam a Dno. Forstero accepisse meas\n[[682.22]] rerum apud nos gestarum nuncias. </p>\n<p> [[683.1]] Carpzovii Spartam nactus est Magnificus noster Seligmannus. Magnificus Dn. D. Ittigius\n[[683.2]] de variis Collectionum Scriptorum Ecclesiasticorum editionibus pro more suo erudite commentatus\n[[683.3]] est. Dn. D. Rivinus novam suam Plantarum collectionem sedulo continuat, et postquam\n[[683.4]] Plantarum flore irregulari monopetalo tetrapetalo et pentapetalo Ordinem absolvit,\n[[683.5]] Appendices jam adjungere apud se constituit. </p>\n<p> [[683.6]] Dn. Junckerus Curtium aliosque bonae latinitatis auctores notis suis illustrat. De reditu Dn.\n[[683.7]] Junii multi mira hic loquuntur, sed forte adhuc incerta. De Dn. Tentzelio autem tale nihil audivi.\n[[683.8]] Editio Numismatum Morelliana aegre procedit, cum alia tractet Dn. Slegelius. </p>\n<p> [[683.9]] Tractatulus meus proximis forte nundinis lucem videbit publicam, <angle bracket>in</angle bracket> hanc prodire non\n[[683.10]] ausus nisi Tuo stipatus judicio, quod omnibus aliorum censuris longissime antepono. </p>\n<p> [[683.11]] Mox etiam specimen dabo Physico-mathematicum de Lacrymis, tentaturus phaenomena\n[[683.12]] Lacrymarum ex hypothesi demonstrare mechanico-hydraulica, simul ac occasio dabitur, cogitata\n[[683.13]] circa texturam glandularum et tubulorum lacrymalium viros experimentis roborandi. </p>\n<p> [[683.14]] Dicere n. non possum, quanto in haec studia amore ferar, quibus omne tempus omnesque\n[[683.15]] facultates meas, si liceret, impendere vellem. Hunc enim in finem non tantum praeterito anno\n[[683.16]] sub ductu privatissimo felicissimi nostri Anatomici Dn. D. Naboth Anatomiam absolvi, sed ex\n[[683.17]] praesenti huc anno hujus ex Celeb. Bohnii manuductione in Chymia utor, sine qua neminem in\n[[683.18]] corporum natura et proprietatibus indagandis operae pretium facere posse persuasus sum. </p>\n<p> [[684.1]] At enim vero facultates meae tenues et jam maximam partem Academicis studiis insumtae,\n[[684.2]] his studiis cum fructu continuandis non sufficiunt. Beneficium etiam quo fruor in Collegio\n[[684.3]] hujus Academiae Mariano sup[p]ortationi meae necessariae impendendum est. Quocirca venit\n[[684.4]] nuper in mentem Tuo me et consilio et auxilio posse frui. Nimirum cum essem Hanoverae\n[[684.5]] aditum etiam nactus sum apud supremum Ecclesiarum Vestrarum Directorem Reverendiss.\n[[684.6]] Gerardum Molanum, quem elegantiorum litterarum, et inprimis scientiae naturalis omniumque\n[[684.7]] huic ad nobilitatem generis humani promovendam sedulo studentium amantissimum expertus\n[[684.8]] sum. Quare Tuam, si fas est, sollicitarer indulgentiam, ut Reverendiss. Abbati mea studia\n[[684.9]] commendare, et utrum ex Coenobio Loccumensi ad continuanda illa aliquid commodi in me\n[[684.10]] quoque redundare queat, data occasione explorare, ne dedigneris. Quo ipso faciet Excellentia\n[[684.11]] Tua rem mihi gratissimam omnibusque obsequiorum generibus vicissim demerendam </p>\n<p> [[684.12]] Illustri atque Excellentissi[mi] Nominis Tui Cultor perpetuus </p>\n<p> [[684.13]] Mich. Gottl. Hanschius. </p>\n<p> [[684.14]] Lipsiae MDCCVII d. 5. Nov. </p>\n<p> [[684.15]] NB A Son Excellence Monseigneur de Leibniz Conseiller privé à Son Altesse Electorale\n[[684.16]] de Brounsvic et Lunebourg à Hannover </p>\n","number":"224.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 5. November 1707. [220.230.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

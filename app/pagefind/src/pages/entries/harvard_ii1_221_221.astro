@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_221","series":"Band II 1 (1663 - 1685)","seq":221,"text":"<p> [[688.12]] <b>200. JOHANN VAGETIUS AN LEIBNIZ</p>\n<p> [[688.13]] Hamburg, 21. Februar (3. März) 1679. [180.211.]</b></p>\n<p> [[688.20]] Hamb. 21. Febr. 1679. </p>\n<p> [[688.21]] Jungiana quod attinet, ut postulatis tuis satisfaciam, <i>Vermium</i> <i>historia</i> paratur editioni, hac\n[[688.22]] aestate, ut spero, lucem visura. Fogelii <i>Lexicon Philosophicum</i> jam in eo est, ut praelum subeat.\n[[688.23]] Concinnatum et ipsum maximam partem ex Jungianis hypomnematibus. </p>\n<p> [[688.24]] De caeteris quoque, nil dissimulans, ut respondeam, Demonstrationi resolvendae et dijudicandae\n[[688.25]] Librum IV^#'t^#'u^#'m <i>Log. Hamb.</i> cum Generali Formae resolvendae doctrina conjunctum\n[[689.1]] scio ego sufficere. Heureticam autem Logicae inserendam esse affirmare non ausim. In Axiomatum\n[[689.2]] definitione subintelligendum est genus. Propositio Principalis per se i.e. ex terminis\n[[689.3]] vera i.e. una voce Principium. Ita quod de ideis mones jam in ea deprehenditur inclusum. </p>\n<p> [[689.4]] Inductio vero primus est sciendi gradus, quod vel <i>Geometria</i> Jungii <i>Empirica</i> et Demonstrationum\n[[689.5]] Ecthesis [ostendunt], ubi ad singulas voces inductio ex individuo universalitatem\n[[689.6]] concludit, et indubitato animadvertit, se non falli. Hac certitudine majorem qui quaerit, fixos\n[[689.7]] homini limites quod transit, mihi videtur quaerere. In Cautionibus tamen (quod <i>Log. Hamb.</i>\n[[689.8]] monet) Argus oportet ut sit Inductor. Ita demum deprehensus isto pacto assensus est is ipse\n[[689.9]] certitudinis gradus qui jure scientia audit. </p>\n<p> [[689.10]] Ex definitionibus vero tantum abest, ut solis statim demonstrentur axiomata, ut definitiones\n[[689.11]] ne propositiones quidem sint in demonstratione mentali, cum definitum et definitio eadem\n[[689.12]] apprehendantur notione. </p>\n<p> [[689.13]] Demonstratio autem (more auctoribus recepto) Jungio describitur, qualis in Euclide occurrit,\n[[689.14]] ubi cum axiomatum demonstrationes nullae legantur, nec Jungius eas demonstrari (sc.\n[[689.15]] Mathematicis) docet. Argumentationes vero illas, quibus ex definitionibus illae deducuntur, si\n[[689.16]] non sint identicae, i.e. nugatoriae, apodicticas quidem, non tamen apodixes appellat, partem\n[[689.17]] demonstrationis in oratione externa eas agnoscens, non integram demonstrationem. </p>\n<p> [[689.18]] Protonoëmata secundum quid sunt quaecunque coram sensibus aut intellectui sunt exhibita.\n[[689.19]] Absolute talia inventa nondum sunt. Cogitatio haudquaquam est prima notio. Involvit\n[[689.20]] enim cogitantem et respectum inhaerentis ad subjectum, imo effecti ad causam. Ex horum enim\n[[689.21]] locorum Maximis concludit, qui concludit: Cogito Ergo sum. </p>\n<p> [[689.22]] Haec de rudimento literarum illarum qualia inveni volui transscribere, multis quidem\n[[689.23]] modis tunc mutata, sed quos revocare in memoriam occupatior nunc non possum, nec actum\n[[689.24]] agere. </p>\n","number":"200.","title":"JOHANN VAGETIUS AN LEIBNIZ","date":"Hamburg, 21. Februar (3. März) 1679. [180.211.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

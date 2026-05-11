@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_207","series":"Band II 4 (1701 - 1707)","seq":207,"text":"<p> [[651.1]] <b>207. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[651.2]] Hannover, 4. August 1707. [205.210.] </b></p>\n<p> [[651.9]] Vir Clarissime </p>\n<p> [[651.10]] Ecce literas, quas occasione dissertationis Tuae elegantis et eruditae scripsi, quas spero\n[[651.11]] fore ad mentem Tuam. Gratias etiam ago pro libris redemtis. Si forte occasione Nundinarum\n[[651.12]] Brunsvicensium mitti in eam urbem fasciculus librorum, et Forstero Bibliopolae Hanoverano\n[[651.13]] commendari posset, possent hac ratione mature ad me deferri. Sin minus, expectabo nundinas\n[[651.14]] Lipsienses, unde per onerarium quendam vectorem vel Brunsvigam, vel huc usque libri mitti\n[[651.15]] poterunt. Si Brunsvigam destinantur commendari poterit fasciculus vel arcula Dno Polich,\n[[651.16]] Magistro illic postae S^#'m^#'a^#'e domus Brunsvicensis. </p>\n<p> [[651.17]] Cui pecuniam dari velis quam pro me expendisti, indicabis[.] Si nemo occurrat, saltem in\n[[651.18]] nundinis Lipsiensibus per Forsterum accip[i]es. </p>\n<p> [[651.19]] Gratias etiam ago, quod cum Dno Fritschio in mei gratiam locutus es. </p>\n<p> [[651.20]] Quod superest vale et me ama. Dabam Hanoverae 4. Aug. 1707 </p>\n<p> [[651.21]] deditissimus G. G. Leibnitius\n[[651.22]] P. S. Si pretium pro Alcmanis monumento, et Marsiglii Danubio non usque adeo nimium\n[[651.23]] est, mallem eos libros accipere etsi imperfectos, quam plane iis carere. Idque inprimis de\n[[651.24]] Marsigliano opere dictum velim, quod fortasse longius promotum non fuit. </p>\n","number":"207.","title":"LEIBNIZ AN MICHAEL GOTTLIEB HANSCH","date":"Hannover, 4. August 1707. [205.210.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_171","series":"Band II 4 (1701 - 1707)","seq":171,"text":"<p> [[531.8]] <b>171. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[531.9]] Berlin, 25. Januar 1707. [162.172.] </b></p>\n<p> [[531.18]] Vir Clarissime et doctissime </p>\n<p> [[531.19]] Recte accepi quae misisti, et quam bonum nomen fueris, ut par est, agnosco. Gratias\n[[531.20]] officium facienti non debes. </p>\n<p> [[532.1]] Dn. Wolfius mihi Berolini locutus est, professionis dignitatem Halae nactus est, non\n[[532.2]] dubito etiam emolumenta accessura. Erat cum eo juvenis eruditus Silesius, Mathematici studii\n[[532.3]] non expers. </p>\n<p> [[532.4]] Spero Lipsiensem Academiam paulatim ad pristinam statum redituram, etsi urbi et studiis\n[[532.5]] illic vulnus non facile sanabile fuisse inflictum satis appareat. </p>\n<p> [[532.6]] Ecce quid a TE petam, si vacat. Reverendissimus Meyerus Theologus Suediae Regis per\n[[532.7]] Germaniam Primarius a me accepit librum Manuscriptum R. P. Longi de Congregatione Oratorii\n[[532.8]] Parisina, in quo continetur Catalogus interpretum Scripturae sacrae Germanorum. Similem\n[[532.9]] confecit pro aliis nationibus. Hunc in Germaniam misit, ut suppleretur et corrigeretur. Id Dn.\n[[532.10]] Mayerus in se susceperat, sed multo jam tempore elapso Longus suum librum repetit. Rogo\n[[532.11]] ergo ut Dn. Mayerum si adhuc Lipsiae agit, meo nomine adeas ac perofficiose salutes, et petas\n[[532.12]] ut librum remittat, et si qua observata jam in eam rem habet, adjungat. Longus in eo jam est ut\n[[532.13]] ab Editionibus scripturae sacrae suum opus Bibliothecae scripturariae incipiat. Si qua ea in re\n[[532.14]] adhuc suppeditare potest Ampl^#'m^#'u^#'s Maierus vel alius amicus, rem gratam et utilem faciet. </p>\n<p> [[533.1]] Quaesivit etiam a me R. P. Longus, quo anno obierint Andr. Acoluthus Vratislaviae,\n[[533.2]] Matthias Beckius Augustae, Frider. Albertus, judaeus conversus, Elias Huterus, Marcus Meibomius,\n[[533.3]] Sebastianus Schmidius, Caspar Ulenbergius, David Wolderus Hamburgensis mihi\n[[533.4]] ignotus. Si in his succurrere potes per TE vel amicos rem gratam facies. </p>\n<p> [[533.5]] Si quid me voles, mitte quaeso Berolinum sub operculo <i>a Monsieur Monsieur Jablonski\n[[533.6]] secretaire du Roy</i>. Quod superest vale et me ama[.] Dabam Berolini 25 Januar 1707 </p>\n<p> [[533.7]] deditissimus G. G. Leibnitius </p>\n<p> [[533.8]] A Monsieur Monsieur Hansch Maistre ès arts et Collegiat à Leipzic </p>\n","number":"171.","title":"LEIBNIZ AN MICHAEL GOTTLIEB HANSCH","date":"Berlin, 25. Januar 1707. [162.172.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

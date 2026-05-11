@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_131","series":"Band II 3 (1695 - 1700)","seq":131,"text":"<p> [[350.1]] <b>131. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[350.2]] Venedig, 25. Juli [1697]. [130.134.]</b></p>\n\n<p> [[350.6]] Ill^#'m^#'o Sig^#'r^#'e, Sig^#'r^#'e, mio Padron Col^#'m^#'o </p>\n<p> [[350.7]] Col passato Ordinario diedi parte a V. S. Ill^#'m^#'a di quanto s'era operato col Sig^#'r^#'e Conte\n[[350.8]] Bertolli per ottenere il bramato diploma sotto Enrico non già Duca di Sassonia, ma di Baviera, e\n[[350.9]] che non v'era speranza di riuscirvi, però in questa settimana m'è pervenuta all'orecchio una\n[[350.10]] nuova notitia, che mi fà nuovamente sperare di poterla servire. M'è stato detto che nell'archivio\n[[350.11]] d'un Gentiluomo, che comprò la magiore parte de' beni del Monastero delle carceri, si trovi un\n[[350.12]] grosso manuscritto di lettere gotiche, ove stanno registrate tutte le donationi e diplomi fatti al\n[[350.13]] Monastero delle Carceri dal principio della sua fondatione, potrebbe essere che in esso si\n[[350.14]] trovasse quel che desideriamo. Per mezo d'un gran Senatore spero ben presto havere nelle mani\n[[350.15]] il sudetto manuscritto e coll'aiuto d'un bravo Scrittore unico, che intenda qui il carattere gotico,\n[[350.16]] farò cavare tutto quello che riguarda la Serenissima Casa Estense, e le ne saranno subito\n[[350.17]] trasmesse le copie, e priego Dio che habbia la fortuna di trovare il diploma ricercato. Il Sig^#'r^#'e\n[[350.18]] Conte Bertolli hà saputo che in casa dell'Ecc^#'m^#'o Pisani Moretta si trovi la Camerlengaria\n[[350.19]] de' Principi Estensi, comprata molto tempo fà, ove ci sono molte antiche scritture appartenenti\n[[350.20]] al nostro interesse, perciò supplico V. S. Ill^#'m^#'a scrivermi quel che in particolare si desidera, acciò\n[[350.21]] sappia quel che devo domandare, mentre che haverò mezo potente d'ottenere tutto. In Casa\n[[350.22]] dell'Ecc^#'m^#'o Proc^#'r^#'e Foscarini, ove io qui alloggio si copia presentemente un antico manuscritto\n[[350.23]] gotico che contiene molte cose passate fra questa Serenissima Republica, ed i Principi Estensi\n[[350.24]] allora Padroni di Ferrara. Per la settimana vegnente farò estrarre quanto vi si contiene di più\n[[351.1]] riguardevole, e le ne mandarò una copia. Hò letto il suo dotto e sottile Opuscoletto, e l' hò\n[[351.2]] trovato molto giuditioso e ricco di rare, e nobili notitie. Coll'Ordinario venturo l'accennarò\n[[351.3]] alcuni miei dubii, affine di maggiormente illuminarmi, non permettendomelo oggi la gran folla\n[[351.4]] d'affari, che mi rubbano tutto il tempo. Le mandarò ancora la mia seconda lettera stampata\n[[351.5]] sopra gl'abusi e corruttione dell'Arte di parlare. La prego della continuatione del suo pretiosissimo\n[[351.6]] amore, e dell'onore stimatissimo de' suoi comandi, e strettamente abbracciandola mi\n[[351.7]] resto </p>\n<p> [[351.8]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Obg^#'m^#'o, Cord^#'m^#'o S^#'r^#'e Michel Angelo Fardella </p>\n<p> [[351.9]] Venetia 25 Luglio </p>\n","number":"131.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 25. Juli [1697]. [130.134.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

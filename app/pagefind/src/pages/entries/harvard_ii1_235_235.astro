@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_235","series":"Band II 1 (1663 - 1685)","seq":235,"text":"<p> [[733.13]] <b>208. NICOLAS MALEBRANCHE AN LEIBNIZ</p>\n<p> [[733.14]] Paris, 31. Juli [1679]. [207.210.]</b></p>\n<p> [[734.2]] Monsieur </p>\n<p> [[734.3]] L'Auteur des <i>Meditations Metaphysiques</i> est Monsieur l'Abbé de Lanion. Quoiqu'il\n[[734.4]] n'ait point mis son nom il ne s'en cache point, je le sçai parce qu'il me l'a dit et à plusieurs\n[[734.5]] autres personnes que je connois. Ainsi Monsieur ne m'attribuez point s'il vous plaist cet\n[[734.6]] ouvrage. </p>\n<p> [[734.7]] Un gentilhomme Allemand est passé ici et qui je croi doit vous aller voir, lequel à ce que\n[[734.8]] l'on dit et que je ne croi pas possible, a trouvé le moyen de faire evanouir tous les termes d'une\n[[734.9]] Equation hormis le l^#'e^#'r et le dernier. Quoique je ne m'applique nullement depuis bien du tems à\n[[734.10]] ces sortes d'etudes je serois pourtant bien aise de sçavoir si cela est possible et je ne doute pas\n[[734.11]] que vous ne vous donniez la peine de l'examiner lorsque ce gentilhomme vous le communiquera. </p>\n<p> [[734.13]] L'Auteur des <i>Elemens</i> est persuadé qu'il y a bien des decouvertes à faire sur l'analyse\n[[734.14]] mais il a peine à s'appliquer à ces sortes d'etudes, je l'ai pourtant porté à revoir son ouvrage\n[[734.15]] pour le faire plus exact. Il y a long tems Monsieur que vous nous faites esperer quelque chose\n[[734.16]] sur cette matiere et sans doute vous pouvez tout. </p>\n<p> [[734.17]] Monsieur des Billetes a toujours la fievre quarte, il pensa mourir il y a environ deux mois.\n[[734.18]] Je pense que vous sçavez que M^#'r^#'s Arnaud et Nicole ne paroissent plus, ils se sont cachez, je\n[[734.19]] n'en sçai pas les raisons particulieres. Il y a des gens qui disent qu'ils sont allez à Rome mais je\n[[734.20]] ne croi pas que cela soit vrai. </p>\n<p> [[734.21]] Je ne sçai point d'ouvrage ni de nouvelle decouverte dont je puisse allonger ma lettre.\n[[734.22]] Ainsi permettez de me dire </p>\n<p> [[734.23]] Monsieur Votre tres humble et tres obeissant serviteur Malebranche P. D. L'O. </p>\n<p> [[734.24]] A Paris ce dernier Juillet. </p>\n<p> [[734.25]] A Monsieur Monsieur Leibniz Conseiller de Son Altesse Monseigneur le Duc de Hanovre\n[[734.26]] Prince de l'Empire. À Hanovre. </p>\n","number":"208.","title":"NICOLAS MALEBRANCHE AN LEIBNIZ","date":"Paris, 31. Juli [1679]. [207.210.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

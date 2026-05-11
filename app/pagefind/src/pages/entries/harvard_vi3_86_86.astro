@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_86","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":86,"text":"[[586.86]] <b>86. Cogitatio non est motus. </b> <span>586.0;0:63:086:76!      :L:l^</span>.\n[[586.8]] Quicquid a nobis immediate percipitur nec percipitur esse motus, id non est\n[[586.9]] motus.\n[[586.10]] Cogitatio a nobis immediate percipitur nec percipitur esse motus.\n[[586.11]] Ergo cogitatio non est motus.\n[[586.12]] Minor ita probatur. Cogitationem esse motum percipitur vel sensu vel demonstratione\n[[586.13]] ex eo quod sentimus ducta; non sensu percipitur, quia nemo dicere\n[[586.14]] potest qualemnam sentiat motum: non demonstratione ex eo quod sentimus ducta;\n[[586.15]] quia ipsius perceptionis simplicissima perceptio est, tametsi eius quod perceptum est,\n[[586.16]] varietas magna sit. Ex simplicissimo autem nihil potest demonstrari: certe locum non\n[[586.17]] involvit ipsa perceptio, etsi locum involvat objectum perceptionis. Ergo nec cogitatio,\n[[586.18]] ergo nec motum, quia motus involvit locum. Ut accurata sit demonstratio debet ita\n[[586.19]] fieri, si quid in se aliquid simplicissimum non involvit, nec involvit id quod hoc\n[[587.1]] simplicissimum continet (qui non habet partem non habet totum). Extensio est aliquid\n[[587.2]] simplicissimum. In omni intellectione pura seu a characteribus purgata percipitur\n[[587.3]] omnis forma simplex quam res involvit. Ergo si purgata a characteribus cogitatione\n[[587.4]] aliqua forma simplex non deprehenditur in aliquo, ideo utique non inest.\n[[587.11]] Ad existentiam necesse est aggregatum omnium adesse Requisitorum. Requisitum 5\n[[587.12]] est id sine quo res esse non potest. Aggregatum omnium requisitorum est causa\n[[587.13]] plena rei. Nihil est sine ratione. Quia nihil est sine aggregato omnium requisitorum.\n[[587.14]] In corporibus non est ratio existendi. Ut facile demonstrari potest, nimirum etiam si\n","number":"86.","title":"Cogitatio non est motus.","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

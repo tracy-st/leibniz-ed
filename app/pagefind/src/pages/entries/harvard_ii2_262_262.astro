@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_262","series":"Band II 2 (1686 - 1694)","seq":262,"text":"<p> [[804.1]] <b>265. LEIBNIZ AN MARIE DE BRINON</p>\n<p> [[804.2]] Wolfenbüttel, 30. Mai (9. Juni) 1694. [172.272.]</b></p>\n<p> [[804.16]] [ ... ] Car mettant la contrainte à part, l'experience a fait voir, qu'il est difficile et presque\n[[804.17]] impossible de venir à la conviction, quelques écrits qu'on publie, et quelques colloques ou\n[[804.18]] conferences qu'on tienne; puisqu'il y a maintenant de part et d'autre de tres habiles gens, et\n[[804.19]] d'argumens tres plausibles, soit qu'on se serve de l'écriture, ou des peres, ou de la raison; en\n[[804.20]] sorte qu'une seule controverse, si on vouloit s'opiniastrer à l'épuiser, pourroit devenir un\n[[804.21]] procés dont la discussion demanderoit la vie d'un homme, quand il ne voudroit faire que cela.\n[[804.22]] Et après tout il arriveroit ce qu'on voit dans des procés difficiles, qu'à la fin on se trouveroit\n[[804.23]] aussi embrouillé, et plus encor que dans les commencemens; et cela d'autant plus, que dans les\n[[804.24]] procés, les juges et les ordonnances tiennent la main à faire observer aux disputans un certain\n[[804.25]] ordre, au lieu que dans les controverses de religion chacun donnant aux choses un tour qui luy\n[[804.26]] paroist le plus avantageux pour son parti, il y a tant de routes et tant d'écarts, qu'on ne finira\n[[804.27]] jamais; à moins que de convenir d'une certaine nouvelle Logique, qui est encor à inventer, et\n[[804.28]] qui deuvroit faire dans les controverses ce que les ordonnances font dans les procés, et bien plus\n[[805.1]] encor; (: puisque <Fn>(: puisque ... opposées. :): <i>Diese Passage hat Leibniz in eckige Klammern gesetzt, wohl um sie von der Abfertigung auszuschließen.</i></Fn> cette Logique deuvroit nous donner une balance des raisons, inconnue\n[[805.2]] jusqu'icy, mais necessaire pour determiner visiblement quel parti on doit choisir, lors qu'il y a\n[[805.3]] de deux costés un grand nombre de vraisemblances plausibles, mais opposées. :) Ainsi pendant\n[[805.4]] que les esprits ne sont pas encor preparés, et qu'il n'y a point de gouvernement commun, qui les\n[[805.5]] lie ensemble, il ne faut point s'attendre à convaincre ses adversaires. [ ... ] </p>\n","number":"265.","title":"LEIBNIZ AN MARIE DE BRINON","date":"Wolfenbüttel, 30. Mai (9. Juni) 1694. [172.272.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_282","series":"Band II 1 (1663 - 1685)","seq":282,"text":"<p> [[860.1]] <b>247. LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS</p>\n<p> [[860.2]] [Hannover, 17. Oktober 1684.] [237.]</b></p>\n<p> [[860.23]] [ ... ] Il y a bien du temps que mes correspondances de France et partout ailleurs sont\n[[860.24]] interrompües. Et je n'apprends presque d'autres nouveautés maintenant en matiere de lettres,\n[[860.25]] que ce que les Actes de Leipzig m'apprennent. </p>\n<p> [[860.26]] J'ay ouy parler autres fois de Mons. Gallet comme d'un habile homme, mais j'ay de la\n[[860.27]] peine à croire que l'anneau de Saturne ne soit qu'une simple apparence comme il dit. </p>\n<p> [[860.28]] En Hollande on dispute maintenant fort et ferme si les bestes sont des machines, et même\n[[860.29]] le peuple s'en divertit, et traite les Cartesiens de ridicules, qui s'imaginent qu'un chien qu'on\n[[860.30]] bat, crie à peu prés comme une musette qu'on touche. Pour moy, quoyque j'accorde aux\n[[860.31]] Cartesiens que toutes les operations exterieures des bestes peuvent estre expliquées machinalement,\n[[860.32]] je croy neantmoins que les bestes ont quelque connoissance, et qu'il y a en eux quelque\n[[861.1]] chose qui n'est point étendu[e] proprement, et qu'on peut appeller ame ou si vous voulés forme\n[[861.2]] substantielle. </p>\n<p> [[861.3]] On m'a dit que Mons. Carcavy n'a plus la garde de la Bibliotheque du Roy, qu'on y a mis\n[[861.4]] un certain Abbé Varese, qui est mort bien tost apres, et que Mons. Cordemoy qui y pretendoit,\n[[861.5]] est mort aussi. </p>\n<p> [[861.6]] Je m'etonne que Messieurs Arnaud et Malebranche, qui estoient si bons amis, quand\n[[861.7]] j'estois à Paris, écrivent maintenant l'un contre l'autre. Je n'ay pas encor lû leur écrits opposés;\n[[861.8]] mais autant que je puis juger par leurs autres ouvrages, le Pere Malebranche a beaucoup\n[[861.9]] d'esprit, mais Mons. Arnaud écrit avec plus de jugement. Il y a quantité de jolies pensées dans\n[[861.10]] la <i>recherche de la verité</i>, mais il s'en faut beaucoup que l'auteur ait penetré bien avant dans\n[[861.11]] l'analyse et generalement dans l'art d'inventer, et je ne pouvois m'empecher de rire, quand je\n[[861.12]] voyois qu'il croit l'Algebre la premiere et la plus sublime des sciences, et que la verité n'est\n[[861.13]] qu'un rapport d'egalité et d'inegalité, que l'Arithmetique et l'Algebre sont les seules sciences\n[[861.14]] qui donnent à l'esprit toute la perfection et toute l'estendue dont il est capable, enfin que\n[[861.15]] l'Arithmetique et l'Algebre sont ensemble la veritable Logique. Et cependant je ne voy pas que\n[[861.16]] luy même ait grande connoissance de l'Algebre. Les louanges qu'il donne à l'Algebre se\n[[861.17]] deuvroient donner à la Symbolique en general, dont l'Algebre n'est qu'un echantillon assés\n[[861.18]] particulier et assés borné. </p>\n","number":"247.","title":"LEIBNIZ AN EHRENFRIED WALTHER VON TSCHIRNHAUS","date":"[Hannover, 17. Oktober 1684.] [237.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

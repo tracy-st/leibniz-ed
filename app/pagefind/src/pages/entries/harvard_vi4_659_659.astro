@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_659","series":"Band VI 4 (1677 - 1690)","seq":659,"text":"[[2847.17]] <b>504₂.  De scientia juris tradenda </p>\n<p> [[2848.1]] Scientiam Juris Naturalis tradere nihil aliud est quam tradere Leges optimae Reipublicae.\n[[2848.2]] Scientiam juris civilis tradere est Leges receptas cum Legibus optimae Reipublicae\n[[2848.3]] conferre. </p>\n<p> [[2848.4]] Optimae Reipublicae finis est, felicitas maxima possibilis singulorum. </p>\n<p> [[2848.5]] <b>Felicitas</b> est status voluptatis duraturae. </p>\n<p> [[2848.6]] <b>Voluptas</b> est sensus crescentis perfectionis. </p>\n<p> [[2848.7]] <b>Perfectio</b> est magna potentia in exiguo volumine, seu multitudo in unitate; sive\n[[2848.8]] essentiae quantitas. Haec enim omnia eodem redeunt intelligenti. </p>\n<p> [[2848.9]] Quaecunque <Fn><i>Diesen Absatz hat Leibniz durch Umranden hervorgehoben.</i></Fn> juvant sentientem faciunt voluptatem; nam quae juvant potentiam\n[[2848.10]] augent, quae potentiam augent, augent perfectionem, ergo quae juvant sentientem augent\n[[2848.11]] sentientis perfectionem. Sensus autem crescentis perfectionis est voluptas. Ergo quae\n[[2848.12]] juvant sentientem faciunt voluptatem. </p>\n<p> [[2848.13]] Itaque de Optimis Legibus acturo quaerendum est, in quo consistat Civium perfectio.\n[[2848.14]] Cumque perfectio in eo consistat, quemadmodum diximus, ut potentia rei augeatur,\n[[2848.15]] quod fit sublatis impedimentis sive aucta libertate (nam ostendi potest ipsam per se\n[[2848.16]] potentiam in rebus augeri non posse, omnemque rem si non ab aliis impediretur, infinitam\n[[2848.17]] virtutem habituram esse) ideoque scire debemus, in quo consistat potentia personae,\n[[2848.18]] et quae sint impedimenta quibus natura ejus velut coercetur. Sed quia id quod\n[[2848.19]] diximus de tollendis tantum impedimentis non satis omnes forte intelligunt; familiarius\n[[2848.20]] nonnihil agendum atque perinde disserendum est, ac si duobus modis augeri posset\n[[2848.21]] potentia, tum in se, tum sublatione impedimentorum. </p>\n<p> [[2848.22]] Considerandum itaque est tum quae sit Potentia Hominum, tum quae sint ejus\n[[2848.23]] impedimenta. Possunt autem homines cogitare et agere extrinsecus. <b>Cogitatio</b> est\n[[2848.24]] activa quaedam repraesentatio multorum simul facta in re per se una. </p>\n<p> [[2848.25]] <b>Repraesentationem</b> intelligo omnem expressionem rei per aliam, ita ut quicquid\n[[2848.26]] assignari potest in uno, ei aliquid respondeat in altero, atque ita possumus devenire\n[[2849.1]] in notitiam alterius. Sic Numeros repraesentamus per characteres, lineas per literas,\n[[2849.2]] corpora solida per figuras in plano delineatas, res per verba et notis istis semel bene\n[[2849.3]] constitutis, saepe ipsis ratiocinando utimur loco rerum. </p>\n<p> [[2849.4]] <b>Activam</b> volo, nam ex omni cogitatione sua natura statim sequitur conatus agendi,\n[[2849.5]] seu <b>voluntas</b> quaedam. Multa simul in re per se una repraesentari necesse est, nimirum\n[[2849.6]] quicquid sit denique id quod appellatur <i>Ego</i>, certe sum unum quoddam per se, et in hoc\n[[2849.7]] uno sunt omnes illae repraesentationes cogitantis. In quo praecipue differt repraesentatio,\n[[2849.8]] quae fit in cogitatione, a repraesentatione, quae contingit in speculo aut pictura. Nam\n[[2849.9]] repraesentatio est aggregatum quoddam ex variis partibus, quae singulae suo subjecto\n[[2849.10]] insunt, ideo si nimis propinque accedamus ad Tabulam totum non videmus. At Ego sum\n[[2849.11]] una quaedam substantia, in qua tota rei quam sentio repraesentatio est. Sentio enim me\n[[2849.12]] unum omnes illas repraesentationis partes percipere. Atque hoc adeo verum est, ut ne\n[[2849.13]] quidem ideam unius substantiae habituri essemus, nisi tale quid in nobis experiremur. </p>\n<p> [[2849.14]] Ex hac jam definitione Cogitationis intelligi potest in quo consistat ejus perfectio,\n[[2849.15]] nimirum ut repraesentatio sit exacta (vel quod idem est ut cogitatio sit distincta), ut sit\n[[2849.16]] valide activa (id est ut voluntas recta ratione quaesita sit firma), denique ut repraesentatio\n[[2849.17]] sit ample diffusa (hoc est, ut multa simul uno mentis ictu comprehendamus). </p>\n","number":"504₂.","title":"De scientia juris tradenda","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

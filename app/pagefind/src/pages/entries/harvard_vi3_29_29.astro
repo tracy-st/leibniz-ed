@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_29","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":29,"text":"[[376.9]] <b>29 Maximes </b> <span>376.9;0:63:029:72       :L:f^</span>.\n[[376.16]] Des Maximes les plus ordinaires du monde, donnent des applications à la morale,\n[[376.17]] assez considerables. Par exemple: c'est une maxime ordinaire, lorsque vous\n[[376.18]] voyez qu'un homme a besoin de vous n'attendez pas qu'il vous prie. Consequence,\n[[377.1]] quand vous entendez qu'un homme conte une histoire, qui est arrivée en vostre\n[[377.2]] presence, n'attendez pas qu'il vous cite, et allez au devant du besoin qu'il peut avoir\n[[377.3]] de vostre témoignage. Item Maxime: il faut jamais se servir des raisons ou la mauvaise\n[[377.4]] consequence est apparente. Consequence: il ne faut pas qu'on cite ses valets\n[[377.5]] pour témoigns, car suspectus est testis domesticus, et cui imperari potest. Pour la\n[[377.6]] precedente j'adjoute une raison pour quoy, il ne faut pas attendre que vostre amy\n[[377.7]] vous cite. Parceque vostre témoignage ne luy sera plus si utile, quand il vous aura cité;\n[[377.8]] car il sera un peu suspect; à cause que vous ne voudriez pas luy donner ny dementi\n[[377.9]] facilement, ny le délaisser au besoin.\n[[377.14]] Il faut tousjours regarder les gens par leur bon costé, excepté, quand on est obligé\n[[377.15]] de s'embarquer avec eux dans quelqu'affaire, car alors il est raisonnable de prendre\n[[377.16]] ses precautions.\n[[377.22]] Il est quelques fois utile que nous souffrions qu'on nous fasse quelque tort dans\n[[377.23]] une matiere de peu de consequence, car si quelque grand y a trempé, cela luy donnera\n[[377.24]] quelque penchant (s'il est d'un bon naturel) à nous faire du bien dans quelque autre\n[[377.25]] rencontre; et on peut menager la chose en sorte, que la seconde soit plus importante à\n[[377.26]] nous, que la premiere.\n[[378.3]] Cavendum est ne his quibus imperamus inutilia ac superflua mandata demus,\n[[378.4]] aut ea minute nimis explicemus, quae ipsi per se judicare debent. Ita enim relaxatur\n","number":"29","title":"Maximes","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

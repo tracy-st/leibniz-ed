@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_214","series":"Band VI 4 (1677 - 1690)","seq":214,"text":"[[829.1]] <b>176.  Discrimen inter ubivis et ubique substitui [Frühjahr 1686 bis Anfang 1687 (?)]</b>\n [[829.2]] <tab/>[Frühjahr 1686 bis Anfang 1687 (?)] </p>\n<p> [[829.18]] Theorema tale formo: <i>Si</i> <i>A ubivis substitui potest in locum ipsius B, etiam B ubivis\n[[829.19]] substitui potest in locum ipsius A; salva veritate</i>. Quod demonstro ope Axiomatis: <i>B\n[[829.20]] ubivis substitui potest in locum ipsius B</i>. Nam si <i>A</i> ubivis substitui potest in locum ipsius\n[[829.21]] <i>B</i> (ex hypothesi) substituatur et in loco posteriore Axiomatis hujus: <i>B ubivis substitui\n[[829.22]] potest in locum ipsius B</i>; et fiet inde: <i>B ubivis substitui potest in locum ipsius A</i>. Quod erat\n[[829.23]] demonstrandum. Hinc ut obiter notem, patet discrimen inter <i>ubivis</i> et <i>ubique</i>. Nam si\n[[829.24]] dixissemus: <i>A ubique</i> <i>substitui posse in locum ipsius B</i>, tunc nihil inde potuisset inferri,\n[[829.25]] nam ex Axiomate: <i>B ubique substitui potest in locum B</i>, factum fuisset: <i>A ubique posse\n[[829.26]] substitui in locum ipsius A</i>, quod per se patet. </p>\n","number":"176.","title":"Discrimen inter ubivis et ubique substitui","date":"[Frühjahr 1686 bis Anfang 1687 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

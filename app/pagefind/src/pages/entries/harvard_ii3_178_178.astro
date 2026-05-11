@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_178","series":"Band II 3 (1695 - 1700)","seq":178,"text":"<p> [[457.1]] <b>178. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[457.2]] Venedig, 12. August 1698. [176.186.]</b></p>\n\n<p> [[457.6]] Ill^#'m^#'o Sig^#'r^#'e, mio Sig^#'r^#'e, Padron Col^#'m^#'o </p>\n<p> [[457.7]] È molto tempo che non ricevo lettere di V. S. Ill^#'m^#'a, il che mi tiene molto turbato, e per\n[[457.8]] vedermi mancare la consolatione de' suoi sospirati caratteri, e per il timore che si sieno smarrite\n[[457.9]] due mie lettere, che l' hò indirizzate, sia come si voglia io l'amo e venero sempre nell'istessa\n[[457.10]] maniera, riconoscendola come mio grand'Amico e generoso Benefattore. In questo mese uscirà\n[[457.11]] dal torchio la mia Opera in foglio, e ne trasmetterò subito una copia a V. S. Ill^#'m^#'a, da me\n[[457.12]] umilmente supplicata a continuarmi il suo stimatissimo patrocinio, e ricordarsi che inalterabilmente\n[[457.13]] sono </p>\n<p> [[457.14]] Di V. S. Ill^#'m^#'a Umil^#'m^#'o, Ob^#'m^#'o, Cord^#'m^#'o S^#'r^#'e vero Michel Angelo Fardella </p>\n<p> [[457.15]] Venetia 12 Agosto 98 </p></p>\n","number":"178.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 12. August 1698. [176.186.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

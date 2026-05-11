@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_165","series":"Band II 2 (1686 - 1694)","seq":165,"text":"<p> [[570.17]] <b>167. ─ (?) AN PAUL PELLISSON-FONTANIER FÜR LEIBNIZ</p>\n<p> [[570.18]] [August 1692.] [161.180.]</b></p>\n<p> [[571.18]] Je n'ay compris qu'imparfaictement cette nouvelle methode des extractions. Je vois bien\n[[571.19]] que cela doit estre fort beau. Mais il faut que je m'abstienne de ces sortes de speculations, car\n[[571.20]] j'ay trop d'inclination à m'en occuper, et cela me fait perdre du temps. Je ne suis pas assez\n[[571.21]] fidelle à conserver cette parole de Saint Augustin <i>Intelligere superflua nihil nocet, sed discere\n[[571.22]] forsitan nocuit cum tempus necessariorum occuparent</i>. Mais je ne vois pas que ce soit pecher\n[[571.23]] contre cette regle de vous dire ma pensée sur ce que je viens de lire dans le <i>Journal des Savans</i>\n[[571.24]] du [12] May p. 206: Que l'essence des corps ne consiste pas dans l'estendue mais dans la force\n[[571.25]] par laquelle les corps peuvent agir et resister. C'est la pensée de M. Leibnitz que Mons.\n[[571.26]] Pellisson approuve, et après eux M. Pirot, et cependant je voy qu'il y a peu de chose que l'on\n[[571.27]] puisse plus facilement demonstrer estre evidemment fausse, pourveu que l'on convienne de ce\n[[571.28]] que signifie le mot d'essence. Car ce doit estre le premier de tous les attributs qui conviennent à\n[[571.29]] une chose, et d'où les autres attributs dépendent. Or je ne voy pas comment on a pû s'imaginer\n[[571.30]] que la force par laquelle les corps peuvent agir et resister soit le premier attribut des corps dont\n[[571.31]] les autres dependent. </p>\n<p> [[572.1]] Car 1. comment peut on concevoir qu'un corps peut agir oû resister sans qu'auparavant on\n[[572.2]] l'ait conçeu étendu, un corps n'est conçeu resister à un autre qu'en ce qu'il ne cede point à cet\n[[572.3]] autre qui agit sur luy pour le deplacer. Il faut donc concevoir l'un et l'autre dans une place, et il\n[[572.4]] n'y a que ce qui est estendu qui occupe une place. </p>\n<p> [[572.5]] 2. Le pouvoir d'agir et de resister dans un corps en suppose d'autres sur qui il agisse oû à\n[[572.6]] qui il resiste. Or ce qui convient essentiellement à tout corps doit estre absolu et non relatif. </p>\n<p> [[572.7]] 3. La plus considerable proprieté du corps c'est d'estre figurable, or on comprend fort bien\n[[572.8]] que cette proprieté est une suitte de ce qui est étendu, car la figure vient de ce que la substance\n[[572.9]] étendue est terminée. Mais comment me pourroit on faire concevoir que la figurabilité du corps\n[[572.10]] vienne de la force. </p>\n<p> [[572.11]] 4. C'est encore une proprieté du corps, d'estre divisible à l'infiny. Or cela vient visiblement\n[[572.12]] de ce qu'il est étendu, sur quoy il y a un fort beau passage de S. Augustin <i>De Gen. ad\n[[572.13]] Litt.</i>[:] <i>Philosophi subtilissima ratione persuadent nullum esse quamlibet exiguum corpusculum\n[[572.14]] in quo divisi</i>[<i>o</i>] <i>finiatur sed infinite omnia dividi quia omnis pars corporis corpus est: et omne\n[[572.15]] corpus habeat necesse est dimidium quantitatis suae.</i> Peut on dire que cette proprieté vienne de\n[[572.16]] la force dans laquelle on veut mettre l'essence du corps. </p>\n<p> [[572.17]] Je scay que M. De Leibnitz a aussi une autre pensée sur les corps. Il croit qu'on ne se peut\n[[572.18]] passer de[s] formes substantielles qu'il dit estre incorruptibles, et indivisibles parce que sans\n[[572.19]] cela on ne pourroit trouver d'unité dans les corps. Puisque je suis en train de vous parler de\n[[572.20]] philosophie, je vous diray que je ne puis assez admirer le peu d'estat qu'on a fait du principe\n[[572.21]] des mechaniques trouvé par M. Des Cartes, et que M. Rohaut mesme ayt continué à se servir du\n[[572.22]] centre de gravité pour expliquer la force des machines, car c'est ce me semble <i>inventis frugibus\n[[572.23]] glande vesci</i>. Et c'est ce qui m'a fait rire en voyant dans <i>l'histoire</i> [<i>des ouvrages</i>] <i>des scavans</i>\n[[572.24]] de Hollande de grandes disputes pour expliquer comment l'eau d'une seringue uniforme haute\n[[572.25]] de six pieds et de dix pouces de diamettre, pouvoit pousser un piston soustenu par une corde\n[[573.1]] autour d'une poulie qui avoit de l'autre un poids proportionné au poid de cette eau, c'est à dire\n[[573.2]] un peu moins pesant que l'eau d'une seringue de mesme hauteur et de mesme diamettre vers le\n[[573.3]] demy-pied d'en bas qui dans tout le reste d'en hault n'avoit qu'un pouce de diamettre d'où il\n[[573.4]] pourroit arriver que cette eau pourroit peser dix fois moins que l'eau de l'autre Seringue, et ne\n[[573.5]] laisseroit pas neantmoins de pouvoir aussy pousser ce piston. Rien n'est plus facile que\n[[573.6]] d'expliquer cela par le principe de M. Des Cartes. Mais rien ce semble n'estoit plus chimerique\n[[573.7]] que ce qu'ils disoient de part et d'autre, par ce qu'ils prenoient d'autre voye. </p>\n","number":"167.","title":"─ (?) AN PAUL PELLISSON-FONTANIER FÜR LEIBNIZ","date":"[August 1692.] [161.180.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

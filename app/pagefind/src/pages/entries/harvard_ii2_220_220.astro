@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_220","series":"Band II 2 (1686 - 1694)","seq":220,"text":"<p> [[707.1]] <b>223. LEIBNIZ AN WILHELM ERNST TENTZEL</p>\n<p> [[707.2]] [Wolfenbüttel,] 19. (29.) Juni 1693.</b></p>\n<p> [[707.15]] [ ... ] Nuper Dn. Hartungus juris apud Jenenses doctor, <i>Metaphysicae juridicae</i> autor ad\n[[707.16]] me scripserat, petieratque ut nescio quae vetera meditata mea ad jurisprudentiam pertinentia ex\n[[707.17]] schedis eruta cum ipso communicarem. Quorum scilicet mentionem ipse feceram in libello ante\n[[707.18]] 25 et amplius annos edito sub titulo <i>Methodi juris.</i> Sed mihi tot aliis distracto post tantum\n[[707.19]] intervallum haec refingere velle difficilius fuerit, quam denuo cudere. Itaque necessaria excusatione\n[[707.20]] usus sum. Caeterum non putaveram lectam ei fuisse <i>Methodum</i> meam, quoniam in ipso\n[[707.21]] opere <i>Metaphysicae</i> suae, nullam mentionem fecerat etiam cum res ita ferre videretur. Et\n[[707.22]] quoniam in Epistola <i>Metaphysicae</i> quoque suae meminerat, non dissimulavi, vocabulorum\n[[707.23]] metaphysicorum usum crebriorem in superioribus disciplinis adeo mihi non probari, ut nec in\n[[707.24]] ipsa philosophia valde probetur. De iis loquor vocabulis, quorum nulla certa constansque\n[[707.25]] habetur definitio, aut quorum vis omnis familiariori sermone commode satis exprimi potest. Et\n[[707.26]] inprimis a distinctionibus scholae abhorreo, ad turbandam rerum intelligentiam natis; cum una\n[[707.27]] bona definitio omnium distinctionum inanem subtilitatem, velut lux illata tenebras tollat. Ego\n[[708.1]] tamen Hartungi et operam et doctrinam probo, nec dubito aliquid recti et praeclari ab eo\n[[708.2]] praestari posse. </p>\n<p> [[708.3]] V. Cl. Erhardi Weigelii ingenium et de studiorum emendatione judicium maximi facio, et\n[[708.4]] vellem plus ei tribui, quam vulgo fieri video. Utinam sua exponeret dilucidius. Nuper certe\n[[708.5]] <i>philosophia Mathematica</i>, quae tandem ad manus meas pervenit, obscuriuscula plerisque videbitur.\n[[708.6]] Vellem descenderet ad specialiora artium Mathematicarum, multaque non vulgaria a se\n[[708.7]] excogitata nobiscum communicaret potius, quam nimis diu haereret in compertis alio verborum\n[[708.8]] rerumque schemate dicendis. Nam quod ipsam inveniendi artem attinet videtur aliquid amplius\n[[708.9]] dici posse, ejusque intima multo adhuc profundius abdita latere et tamen ubi eruta erunt, (quam\n[[708.10]] in rem otio tantum opus puto) multo plus habitura claritatis. Vale. Dabam Guelfebyti 19 Jun.\n[[708.11]] 1693. </p>\n<p> [[708.12]] Cultor studiosissimus Godefr. Guil. Leibnitius. </p>\n<p> [[708.13]] P. S. Illustri Bachovio, et Ampl^#'m^#'o Pfannero, me pariter atque institutum meum ut porro\n[[708.14]] commendes rogo. </p>\n","number":"223.","title":"LEIBNIZ AN WILHELM ERNST TENTZEL","date":"[Wolfenbüttel,] 19. (29.) Juni 1693."}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_116","series":"Band II 2 (1686 - 1694)","seq":116,"text":"<p> [[429.1]] <b>117. LEIBNIZ AN HEINRICH AVEMANN</p>\n<p> [[429.2]] Wolfenbüttel, 1. (11.) Juli 1691. [64.125.]</b></p>\n<p> [[429.11]] [ ... ] <b>Librum</b> nescio cujus <b>Realis de Vienna Thomasianae <i>in Philosophiam</b>,\n[[429.12]] <b><i>Aulicam Introductioni</i> oppositum</b>, ignotum prorsus ante indicium tuum, legi, multaque\n[[429.13]] agnosco acute et ex vero dicta, credoque si autor ipse limam adhibeat sibi, si fervidum et acre\n[[429.14]] dicendi genus temperet, et ut verbo dicam, si ad Judicii maturitatem perveniat, aliquid praeclari\n[[429.15]] nobis daturum. Sed ut nunc scribit, multa neque in dicendi ratione, neque in sententiis probare\n[[429.16]] possum. Quis enim probet <b>Logicam omnem tanquam perniciosam damnari</b>, immortalitatemque\n[[429.17]] animae et divinam providentiam naturali lumine notas negari et de scriptoribus\n[[429.18]] sacris judicari liberius. Interea laudandus est, quod fortiter tuetur <b>Germanicae nationis\n[[429.19]] dignitatem</i>, et Gallicismorum nostrorum ineptias explodit. </p>\n<p> [[429.20]] Nihil magis praeter opinionem evenire mihi potuit, quam quae de me dicta vidi, neque\n[[429.21]] enim laudes mediocritatem supergressas agnosco (ipse mihi non ignotus) multo minus invidendas\n[[429.22]] et prope odiosas. Nec quicquam magis vereor, quam ne me homines conscium suspicentur,\n[[429.23]] et ineptissimae vanitatis accusent, quanquam qui me norunt propius, facile innocentiam\n[[429.24]] meam agnoscent. Volui praestare aliquid in cognitione naturae et matheseos arcanis, et applausum\n[[429.25]] habui insignium etiam apud exteros virorum, visus, eruisse aliqua quae hactenus latebant,\n[[429.26]] quantum tamen absim a desideratis nemo me rectius agnoscit. [ ... ] </p>\n","number":"117.","title":"LEIBNIZ AN HEINRICH AVEMANN","date":"Wolfenbüttel, 1. (11.) Juli 1691. [64.125.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

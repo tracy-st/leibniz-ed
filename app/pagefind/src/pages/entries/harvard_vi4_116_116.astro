@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_116","series":"Band VI 4 (1677 - 1690)","seq":116,"text":"[[386.1]] <b>96.  De methodo synthetica aut anagogica applicanda in algebra [Frühjahr 1680 (?)]</b>\n [[386.3]] <tab/>[Frühjahr 1680 (?)] </p>\n<p> [[386.10]] Methodus synthetica est, cum problema difficile soluturi incipimus a facilioribus. In\n[[386.11]] synthesi per se facili observandum, ut tentemus obtinere elegantes progressiones, quibus\n[[386.12]] Tabularum calculandarum compendia contineantur. Algebra, qua scilicet incognitum pro\n[[386.13]] cognito sumimus, est synthesis quaedam peculiaris problematis propositi, fictitia. Synthesis\n[[386.14]] fictitia generalis, cum generalis expressio habetur rei quae quaeritur, ut in curvis\n[[386.15]] communibus. </p>\n<p> [[386.16]] Analysis pura quae nihil syntheseos habet, est Anagogica, in qua semper procedimus\n[[386.17]] per incognita retro, nempe reducendo problema propositum ad aliud facilius, et hoc\n[[386.18]] iterum ad aliud. Talis est Methodus mea qua utor cum alias aequationes reduco ad\n[[386.19]] aequicompositas, item cum formulas in quibus potentiae, reduco ad illas in quibus sola\n[[386.20]] rectangula. Item cum curvarum ordinatas resolvo in partes seu in duas pluresve ordinatas\n[[386.21]] aliarum curvarum simpliciorum; vel terminos seriei, in plurium serierum terminos, quo\n[[386.22]] facto summam vel dimensionem illarum reduco ad has simpliciores. Eademque methodo\n[[386.23]] pervenio ad seriem summatricem quando aliqua per formulam communem exprimibilis\n[[386.24]] datur, quando scilicet formula resolvitur in differentiam duorum terminorum vicinorum\n[[386.25]] ejusdem seriei. </p>\n<p> [[386.26]] Methodus procedendi per meras cognitas est pure synthetica. Mixtas mixta. <i>Zetetica</i>\n[[386.27]] Vietae pertinent ad Synthesin, est enim percurrere pulchriora problemata. Huc pertinent\n[[387.1]] et factiones Canonicae, seu constructiones quaedam crebro utiles, nam quando forte\n[[387.2]] incidimus in elegantem constructionem, hanc notamus, ut postea jam ad alia applicemus.\n[[387.3]] Est tamen his mixta quaedam Anagogica, dum alia problemata ad ista solennia reducuntur. </p>\n<p> [[387.5]] Data veterum pertinent ad Anagogicam, ut appareat ex problematis recessibus, ex\n[[387.6]] datis quaenam sequantur; et ita problema reducemus ad aliud. Exemplum elegans praebet\n[[387.7]] solutio problematum quorundam quae Batavus proposuit, Monfortius Neapolitanus solvit\n[[387.8]] numerice, ego reduxi ad problemata alia jam constructa. Eadem Methodo tractabitur\n[[387.9]] utiliter problema quod mihi proposuit Fergusonius. Ex duobus punctis <i>A, B</i> datis duas\n[[387.10]] [rectas] ad idem punctum circuli <i>C</i> ita\n[[387.11]] ducere ut comprehensae intra circulum\n[[387.12]] sint aequales. Nam si <i>CD</i>, et <i>CE</i> aequales\n[[387.13]] erit triangulum <i>CDE</i> isosceles. Per\n[[387.14]] punctum <i>C</i> ducatur parallela ipsi <i>DE</i>,\n[[387.15]] nempe <i>FCG</i>, ea circulum tanget, ergo\n[[387.16]] problema habemus simplicius, nam\n[[387.17]] omissa ipsarum <i>CD, CE</i> mentione, tantum\n[[387.18]] quaeritur punctum circuli <i>C</i> tale, ut\n[[387.19]] ex datis punctis <i>A, B</i> ad ipsum ductae\n[[387.20]] rectae faciant angulos ad tangentem aequales, nam ut angulus <i>D</i> aequ. angulo <i>E</i>, ita et\n[[387.21]] angulus <i>ACF</i> aequ. angulo <i>BCG</i>. Itaque res reducta ad hoc problema Catoptricum jam ab\n[[387.22]] aliis solutum. Invenire punctum circuli <i>C</i> quod radium a dato puncto <i>C</i> venientem, ad\n[[387.23]] aliud datum <i>B</i> reflectat. Vel quod eodem redit datis duobus focis <i>A, B</i> describere Ellipsin\n[[387.24]] quae datum circulum <i>CDE</i> tangat et invenire punctum contactus. </p>\n<p> [[387.25]] Notandum quod problemata ideo fiunt difficilia, quod non satis determinata, haec\n[[387.26]] etiam causa irrationalitatis, nam semper in irrationali plures radices. </p>\n","number":"96.","title":"De methodo synthetica aut anagogica applicanda in algebra","date":"[Frühjahr 1680 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

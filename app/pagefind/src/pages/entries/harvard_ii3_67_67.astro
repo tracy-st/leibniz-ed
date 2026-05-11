@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_67","series":"Band II 3 (1695 - 1700)","seq":67,"text":"<p> [[179.1]] <b>67. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[179.2]] [Hannover, Juli 1696.] [65.73.]</b></p>\n\n<p> [[179.18]] Si vous avés encor ma lettre pour Mons. Morel, vous aurés la bonté de me la renvoyer. Je\n[[179.19]] vous supplie d'envoyer mes remarques sur la philosophie de Descartes à Mons. Bernoulli\n[[179.20]] professeur de Mathematiques à Groningue. </p>\n<p> [[179.21]] Autant que j'ay pû juger par la <i>Dioptrique</i> de M. Hartsoeker, il n'est pas tout à fait Cartesien,\n[[179.22]] car il pretend qu'il y a des Atomes nageans au milieu de la matiere subtile. Il pretend donc\n[[179.23]] d'innover, mais je ne sçay si ce sera avec succés. La Physique de M. le Clerc est fort sçavante;\n[[179.24]] il est vray que nous sommes encor fort eloignés de l'interieur de la nature. J'ay fort medité\n[[180.1]] sur la matiere des hazards, ainsi je seray bien aise de voir ce que M. le Clerc aura donné là\n[[180.2]] dessus. J'ay esté surpris de voir qu'on vend les Ms. de feu Mons. Golius. J'avois crû qu'ils\n[[180.3]] appartenoient à l'université de Leiden. C'est dissiper un tresor irrecouvrable. Un Anglois de\n[[180.4]] mes amis a obtenu de moy quelques reflexions que j'avois faites sur l'excellent livre de Mons.\n[[180.5]] Lock, intitulé <i>essay of understanding</i>. Il y a bien des belles choses dans cet ouvrage, mais je ne\n[[180.6]] suis pas quelquefois de son sentiment en certaines choses, qui regarde les fondemens du\n[[180.7]] bastiment. Ce M. Cordemoy qui écrit contre les Sociniens est ce le même, qui a écrit du\n[[180.8]] discernement du corps et de l'ame? On me dit que ce qui se fait à Rome sur la vie de la Reine\n[[180.9]] Christine, est un Poëme Latin Heroique. </p>\n<p> [[180.10]] Je plains M. Tollius qui pouvoit encor donner des belles choses, je voudrois sçavoir où ses\n[[180.11]] papiers sont devenus. Vous aurés vû le premier Tome du Julien de M. de Spanhem, que j'ay eu\n[[180.12]] l'honneur de recevoir de sa part. J'admire comment il a si bien allié l'abondance avec le choix\n[[180.13]] dans les remarques sçavantes qui y paroissent. J'[attends] sur tout avec impatience ce qu'il y\n[[180.14]] aura sur la controverse entre Julien et S. Cyrille. Je voudrois pouvoir retrouver un petit livre que\n[[180.15]] j'ay vû autresfois, qui estoit une Apologie de Nestorius contre ce même Cyrille. Un Protestant\n[[181.1]] françois l'avoit faite. J'en ay marqué le nom quelque part; mais ne le trouvant point presentement\n[[181.2]] et ne doutant point que vous ne le sçachiés, Monsieur, je serois bien aise de le\n[[181.3]] rapprendre par vostre moyen. </p>\n<p> [[181.4]] Nous aurons bientost la conclusion de l'<i>Octavia</i> de Monsgr. le Duc Antoine Ulric de\n[[181.5]] Bronsvic. Il y a plusieurs années que quelques Tomes de ce Roman ont paru, depuis le soin du\n[[181.6]] gouvernement ayant empeché l'auteur de continuer. Tous ceux qui goustent les beautés de\n[[181.7]] nostre langue ont temoigné de l'impatience pour en voir la fin, et j'ay esté un des soliciteurs; de\n[[181.8]] sorte que S.A.S. s'y est enfin resolüe tout de bon pour donner cette satisfaction au public.\n[[181.9]] L'ouvrage est veritablement de ce Prince, et les pensées nobles, qu'il y a, le font assez\n[[181.10]] connoistre. </p>\n<p> [[181.11]] En tournant la feuille vous trouverés mon Epigramme sur feu M. Hugens. J'ay tousjours\n[[181.12]] honnoré son merite eminent, aussi bien que son illustre famille. Feu Monsieur son pere me fit\n[[181.13]] beaucoup de civilités, lorsque je passay à la Haye. Je ne connois Monsieur son frere que de\n[[181.14]] reputation. Cependant si je viens jamais en Hollande, je chercheray l'honneur de sa connoissance\n[[181.15]] et l'exhorteray à faire avancer la publication des posthumes de nostre incomparable amy.\n[[181.16]] Si vous aviés occasion, Monsieur, de le luy temoigner un jour, vous me feriés de la faveur, et\n[[181.17]] rendriés peutestre un service au public. Je suis etc. </p></p>\n","number":"67.","title":"LEIBNIZ AN HENRI BASNAGE DE BAUVAL","date":"[Hannover, Juli 1696.] [65.73.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

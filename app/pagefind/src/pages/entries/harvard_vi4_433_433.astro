@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_433","series":"Band VI 4 (1677 - 1690)","seq":433,"text":"[[1963.1]] <b>355.  De aequipollentia causae et effectus [1677 bis 1678 (?)]</b>\n [[1963.2]] <tab/>[1677 bis 1678 (?)]\n[[1963.10]] <tit2><b>De aequipollentia causae et effectus </b></tit2> </p>\n<p> [[1963.11]] Quia effectus totus involvit causam integram, et vicissim causa integra involvit\n[[1963.12]] effectum totum; id est ut ex sola cognitione effectus possit aliquis venire in cognitionem\n[[1963.13]] causae, et ex sola cognitione causae in cognitionem effectus, hinc sequitur Causam\n[[1963.14]] aliquam non posse producere effectum per omnia similem et sola magnitudine differentem.\n[[1963.15]] Itaque effectus ut <i>a</i> non potest producere causam ut <i>b</i>, posito <i>a</i> et <i>b</i> differre sola\n[[1963.16]] magnitudine, quia duo sola magnitudine differentia non possunt se mutuo\n[[1963.17]] involvere. Eo ipso enim quod similia sunt, non potest magnitudinis defectus\n[[1963.18]] aliunde compensari, nec <i>b</i> potest involvere nisi partem ipsius <i>a.</i> <Fn>Nam ratiocinatio non nisi ex forma qua non differunt aut ex quantitate, sumi potest.</Fn> </p>\n<p> [[1963.19]] Idem aliter probari potest ex eo, quod reddi ratio nulla potest cur <i>a</i>\n[[1963.20]] producat <i>b</i> potius quam <i>c</i>, omnia enim similia sunt, et magnitudine differunt,\n[[1963.21]] itaque aut nihil producet <i>a</i> aut infinitum, quae duo maxime ab ipso\n[[1963.22]] magnitudine differunt, aut id potius quod minime differt magnitudine ab\n[[1963.23]] ipso, id est quod sit aequale. </p>\n<p> [[1964.1]] Hinc jam porro demonstratur causam et effectum omnino aequipollere. Nam potentia\n[[1964.2]] seu quantitas effectus in quodam homogeneo aestimanda est, exempli causa in elevatione\n[[1964.3]] corporis gravis ad certam altitudinem. Et eadem causa diversos effectus homogeneos\n[[1964.4]] seu similes sed inaequales producere non potest; quod ex eo patet, quia si effectus\n[[1964.5]] involvit causam, et causa effectum, sequitur effectus ejusdem causae se involvere mutuo.\n[[1964.6]] Nam sit <i>a</i> causa, et <i>b</i> et <i>c</i> sint effectus. <i>b</i> involvit <i>a</i> (effectus causam), <i>a</i> involvit <i>c</i> (causa\n[[1964.7]] effectum). Ergo <i>b</i> involvit <i>c.</i> Eodem modo diversae causae ejusdem effectus se mutuo\n[[1964.8]] involvunt. Imo amplius diversi effectus diversarum causarum vel diversae causae eorundem\n[[1964.9]] effectuum, si earum fuit vel esse potest effectus vel causa communis. </p>\n<p> [[1964.10]] Si potentia quaedam est certa, id est si aestimari potest quantitas effectus in aliquo\n[[1964.11]] homogeneo, utique necesse est eam in iisdem semper eandem manere. Certam autem in\n[[1964.12]] re quaque esse potentiam non vagam sequitur ex natura Dei; et alioqui nulla erit ratiocinatio\n[[1964.13]] de his. </p>\n","number":"355.","title":"De aequipollentia causae et effectus","date":"[1677 bis 1678 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

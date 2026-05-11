@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_202","series":"Band II 4 (1701 - 1707)","seq":202,"text":"<p> [[627.6]] <b>202. MICHAEL GOTTLIEB HANSCH AN LEIBNIZ</p>\n<p> [[627.7]] Leipzig, 9. Juli 1707. [199.205.] </b></p>\n<p> [[627.12]] Illustris atque Excellentissime VIR, Patrone observanter colende! </p>\n<p> [[627.13]] Executus <Fn><i>Am Kopf des Briefes von Leibniz' Hand</i>: Semiresp</Fn> sum mandata Tua, et Fritschio nostro rem totam sub fide silentii exposui. Sed\n[[627.14]] responsum tuli se nullam apud Batavos officinam habere, at fratrem suum Amstelodami vivere,\n[[627.15]] et hoc ipso tempore Lipsiae agere. Quare confestim occasionem cum ipso colloquendi quaesivi,\n[[627.16]] quam nuper etiam consecutus sum. Postquam vero consilium perceperat, promtitudinem mihi\n[[627.17]] suam Excellentiae Tuae voluntatibus inserviendi multis indiciis luculentissimis comprobavit.\n[[627.18]] Verum id dolebat unice, quid licet Amstelodami sedes suas fixerit, nullos tamen unquam in\n[[627.19]] Batavis Libros imprimendos curaverit, paratum tamen esse reliquorum Cl. Baylii scriptorum\n[[628.1]] editori, ut primum de voluntate Excellentiae Tuae factus esset certior (rogabat autem ut id fieret\n[[628.2]] quam citissime), illud per literas significandi, non dubitans fore hunc virum ad Operis editionem\n[[628.3]] quam promtissimum. Quare non potui quin officio meo satisfacturus Excellentiae Tuae\n[[628.4]] tribus verbis id indicarem; Scriptum meum quod attinet, nisi grave est, vellem Excellentiam\n[[628.5]] Tuam per Postam mittere sub operculo: </p>\n<p> [[628.6]] <i>A Monsieur Mons. Clausnitzer</i> </p>\n<p> [[628.7]] <i>Secretaire de la Poste</i>,\n [[628.8]] tum quod tutius est, tum quod id fieri sine sumtibus Excellentiae T. et meis potest; amicus enim\n[[628.9]] iste lubentissime mihi in hisce gratificabitur. Vehementer autem desidero monita Excellentiae T.,\n[[628.10]] quibus me vel in sententia confirmatum vel meliora edoctum iri spero, et longe\n[[628.11]] amplissimam certa Philosophiae Platonicae, cujus indagini alias deditissimus sum[,] fundamenta\n[[628.12]] eruendi occasionem adepturum esse certo confido. </p>\n<p> [[628.13]] Scribebam de subito MDCCVII. d. 9. Julii Lipsiae. </p>\n<p> [[628.14]] Excellentiae Tuae Submississimus Mich. Gottl. Hanschius </p>\n<p> [[628.15]] A Son Excellence Monseigneur de Leibnitz Conseiller privé de Son Altesse Electorale de\n[[628.16]] Brounsvic et Lunebourg à Hannover </p>\n","number":"202.","title":"MICHAEL GOTTLIEB HANSCH AN LEIBNIZ","date":"Leipzig, 9. Juli 1707. [199.205.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

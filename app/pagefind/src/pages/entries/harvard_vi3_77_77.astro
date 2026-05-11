@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_77","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":77,"text":"[[526.11]] <b>77. Guilielmi Pacidii de rerum arcanis </b> <span>526.11;0:63:077:76       :L:l^</span>.\n[[526.21]] Guilielmi Pacidii de Rerum Arcanis.\n[[526.22]] 1) De Arte Rationis et Methodo inveniendae veritatis.\n[[526.23]] 2) De Lingua Rationali, et de Artibus characteristica et combinatoria.\n[[526.24]] 3) De Algebrae imperfectione et novo quodam Analyseos genere et de abdita\n[[526.25]] Geometria.\n[[526.26]] 4) De vera Metaphysica, deque idea et existentia Dei.\n[[527.1]] 5) De animabus, quod omnia sint animata, sola autem immortalis reminiscatur\n[[527.2]] sui.\n[[527.3]] 6) Labyrinthus prior, seu de Fato, Fortuna, Libertate.\n[[527.4]] 7) Labyrinthus posterior, seu de Compositione continui, tempore, loco, motu\n[[527.5]] atomis, indivisibili et infinito.\n[[527.6]] 8) Geometria motus seu linearum determinationes, centrobaryca, revocatio motus\n[[527.7]] ad calculum.\n[[527.8]] 9) Physica motus seu de potentia et concursu ac reactionibus.\n[[527.9]] 10) De artibus Mechanicis, seu de motuum coordinationibus, pro corporum figura\n[[527.10]] et consistentia et potentia.\n[[527.11]] 11) Hypothesis Physica demonstrativa deque artibus physicis.\n[[527.12]] 12) De abditis rerum causis et Medicina dogmatica constituenda.\n[[527.13]] 13) De Naturae arcanis et corporum exaltatione et Tinctura.\n[[527.14]] 14) De Luce Mentium et Amore Dei super omnia.\n[[527.15]] 15) Demonstrationes Catholicae, seu de vera Ecclesia et Caritate.\n[[527.16]] 16) De Iustitia et novo Codice.\n[[527.17]] 17) De Majestate et Republica.\n[[528.1]] 19) De Prudentia pragmatica, et historia nostri temporis.\n[[528.2]] 20) De rebus Oeconomicis, deque incrementis civitatum, opificiisque et re mercatoria.\n[[528.4]] 21) De arte ac disciplina militari ac bello sacro.\n[[528.5]] 22) De educatione, literis et linguis.\n[[528.6]] 23) De censura morum et casibus conscientiae.\n[[528.7]] 24) De societate Theophilorum et perfectione Christiana.\n[[528.8]] 25) Votum: sive fabula de emendatione rerum generali, et Historia seculi sequentis,\n[[528.9]] incipit anno 1730.\n[[528.10]] 26) Spes sive carmen de futura vita.\n","number":"77.","title":"Guilielmi Pacidii de rerum arcanis","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

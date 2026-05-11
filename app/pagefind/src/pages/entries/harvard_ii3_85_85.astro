@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_85","series":"Band II 3 (1695 - 1700)","seq":85,"text":"<p> [[236.1]] <b>85. CLAUDE NICAISE AN LEIBNIZ</p>\n<p> [[236.2]] Is sur Tille, 28. November 1696. [75.86.]</b></p>\n\n<p> [[236.19]] Is sur Tille le 28. 9^#'b^#'r^#'e <b>1696</b> </p>\n<p> [[236.20]] Je n'aurois pas monsieur tant tardé à repondre à vos excellentes lettres, si j'avois reçû des\n[[236.21]] nouvelles de m^#'r le president Boisot pour vous en faire part. Il a esté malade pendant deux mois,\n[[236.22]] ce qui l'a empeché d'ecrire comme vous le reconnoistrés par celle que Je vous envoye. Il est\n[[236.23]] bien intentionné à vostre egard, et je l'inviteray encore d'exhorter les moines depositaires du\n[[236.24]] tresor que mons^#'r l'abbé son frere leur a laissé en mourant, de faire des memoires de ce qu'ils y\n[[236.25]] ont de plus rare et de plus curieux pour vous le faire scavoir, et vous l'envoyer au cas que vous\n[[236.26]] ne l'ayiés pas déja, comme le cher deffunct en avoit le dessein. Ces mess^#'r^#'s de Hollande n'auront\n[[236.27]] pas bonne grace de ne pas repondre à vos justes intentions dans l'impression des traictés de\n[[236.28]] paix qu'ils meditent de donner au jour; vous me dites mons^#'r de si belles choses sur cela et sur\n[[236.29]] tout ce qui regarde la rep. des lettres, que je ne scaurois y repondre par moy mesme comme Je\n[[236.30]] dois; il fault y employer d'autres plumes qui s'en acquitteront mieux; Je vay me servir pour cela\n[[237.1]] de celle de mons^#'r d'Avranches qui ne vous deplaira pas; vous trouverés icy les copies toutes\n[[237.2]] entieres de deux de ses lettres; la derniere vous regarde mons^#'r et la premiere l'humilité de ce\n[[237.3]] scavant prelat auquel j'ay faict scavoir ce que vous m'avés ordonné touchant son erudition dont\n[[237.4]] il est faict mention dans le premier tome du <i>Julien</i> de mons^#'r de Spanheim. Il est bon mons^#'r que\n[[237.5]] vous scachiés pour l'Intelligence du passage de l'<i>Aeneide</i> heureusement appliqué, que mons^#'r\n[[237.6]] d'Avranches m'avoit invité à retourner à Paris et que je luy avois mandé que toutes mes\n[[237.7]] voyages estoient faictes et qu'à peine pouvois [je] venir à mon Tusculum à quatre lieües de\n[[237.8]] Dijon où je suis presentement sens estre incommodé, et qu'il falloit se contenter de le voir dans\n[[237.9]] son agreable et excellent portraict gravé par Edelink qu'il me donna sortant de Paris, et que\n[[237.10]] j'avois mis dans mon Cabinet parmy ceux de mons^#'r Arnaud, Paschal et La Trappe. Voilà une\n[[237.11]] lettre pour mons^#'r de Spanheim auquel je demande le sien pour l'y placer aussi avec les autres;\n[[237.12]] je vous demande aussi le vostre mons^#'r pour en faire de même. </p>\n<p> [[237.13]] Je n'ecris point à m^#'r Morel je vous prie de luy faire mes complimens et de nous dire de ses\n[[237.14]] nouvelles. L'on a dit icy qu'il s'estoit declaré authentiquement pour les 4 Gordiens ce qui a un\n[[237.15]] peu chagriné l'auteur qui a ecrit contre en faveur des 3. parce qu'il croyoit son parti le plus fort\n[[237.16]] appuyé de l'authorité de m^#'r Morel, qui est un auteur grave et comme le dictateur dans la rep.\n[[237.17]] numismatique. Je croy qu'on vous aura envoyé le <i>portraict</i> <i>de m^#'r de Court</i> par l'abbé Genest; la\n[[237.18]] piêce est fort eloquente, mais il y manque un peu de detail, j'avois envoyé de beaux memoires\n[[237.19]] pour cela, qu'on n'a point suyvi; j'ecrivis encor hier à Paris pour qu'on vous en envoye trois\n[[237.20]] exemplaires l'un pour vous l'autre pour m^#'r de Spanheim et l'autre pour m^#'r Morel. Je suis mons.\n[[237.21]] du meilleur de mon coeur tout à vous </p>\n<p> [[237.22]] Nicaise <Fn><i>Leibniz hat am Fuß von Bl. 69 v^#'o und 70 r^#'o bemerkt</i>: La plaisante maniere de chercher tousjours des liaisons et transitions, que je remarque en quelques ecrivains françois de ce temps les fait pecher contre le bon sens et forcer les choses à dire ce qui a ny rime ny raison: parce que Luther a fait à ce qu'on dit un petit livre de mots propres Allemands et que Cluver a voulu monstrer [que] l'Ancien celte estoit Teutonique; le pere Benier pour passer de l'un à l'autre dit que Cluver a marché sur les Traces de Luther en cela. </Fn> </p>\n","number":"85.","title":"CLAUDE NICAISE AN LEIBNIZ","date":"Is sur Tille, 28. November 1696. [75.86.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

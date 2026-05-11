@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_54","series":"Band II 1 (1663 - 1685)","seq":54,"text":"<p> [[148.1]] <b>47. FRIEDRICH NITZSCH AN LEIBNIZ</p>\n<p> [[148.2]] Gießen, 29. März (8. April) 1671. [45.85.]</b></p>\n<p> [[148.9]] Vir Nobilissime et Consultissime Fautor et Amice Honoratissime. </p>\n<p> [[148.10]] Utrasque Tuas recte accepi una cum inclusa Ephemeridum anni 1670. particula. Quae si\n[[148.11]] totum annum absolvit, dubium nullum est negotium desiisse. Nihil antecessisse ex paginarum\n[[148.12]] numero certum videtur, et nihil subsecutum tuae edocent literae. Interim tamen gratissima est et\n[[148.13]] illa transmissa particula, quod commode Anno 1669. ita subjungi possit. </p>\n<p> [[148.14]] De Cl. Dn. Scheffero quae scripseras ante, jam nota erant, nihil hac quidem vice novi ab\n[[148.15]] Ipso obtineri posse, quandoquidem jam ante exemplar illud ectypon mihi transmiserat. De\n[[148.16]] praerogativa vitrorum ex Conicis figuris constantium prae Sphaericis nullum penes me dubium\n[[148.17]] residet quin pronunciem. Certum enim est in Vitris Opticis praeter alia et hoc requiri, ut plures\n[[148.18]] radii in unum cogi punctum possint, et quod vitrum plures cogat, illud et esse perfectius. In hoc\n[[148.19]] vero sine dubio vincitur Circulus a reliquis sectionibus Conicis curvilineis, cum Circulus non\n[[148.20]] nisi perpendiculariter incidentes ad Centrum deferat, reliquae vero sectiones curvae et parallelas.\n[[148.21]] Ceteris vero paribus ab objecto lucido plures incidere radios para<greek>llelṽw</greek> quam perpendiculares\n[[148.22]] in subjectam lentem ipsae figurae docere possunt. Neque quidquam me movent\n[[148.23]] Hobbianae rationes, cum prima et secunda contra lentes cujuscunque figurae valeant quae\n[[148.24]] tamen ipsi potissimae videntur. Tertia autem obstare non possit propterea, quod Telescopia\n[[148.25]] qua talia parum faciant ad distantias mensurandas, nisi alia applicentur iisdem adminicula. De\n[[148.26]] laternis illis Magicis non succurrit me quicquam legisse, nisi quidem eaedem forte sunt cum\n[[148.27]] capsa Optica Regii. </p>\n<p> [[148.28]] De conjunctione planorum speculorum interrogabo Weigelium. Caeterum nescio qui ex\n[[148.29]] delineatione mea imagines propiores esse possint oculo quam ipsum objectum, cum objectum\n[[148.30]] collocandum sit inter oculum et speculum, cum <i>B</i> sit oculus et <i>A</i> objectum. Et quod reflexiones\n[[149.1]] reflexionum imaginem imminuunt, exinde est quod propter intercedentem\n[[149.2]] distantiam radii reflexi omnes recipi ab alio speculo non possint,\n[[149.3]] quod vero in conjunctione propinqua planorum adeo sensibiliter fieri\n[[149.4]] metuendum non videtur. Pro ratione juncturae esse quidem potest\n[[149.5]] imago, sed non in fissura communi sed in alterutro plano. Sed scribam\n[[149.6]] eam ob rem Dn. Weigelio, neque enim accurate adhuc memini et\n[[149.7]] repraesentatas effigies et ipsam quoque structuram. Siphones (<i>Ventil</i>)\n[[149.8]] alias sunt intra Canales, ut notum in Machinis Hydraulicis, quibus\n[[149.9]] mediantibus aqua attrahitur. Cum vero facile vitium capere possint,\n[[149.10]] igitur non sine multis sumptibus removendi sunt canales. Quod vero ne\n[[149.11]] fieri debeat, aeque bene siphones extra canales applicat Dn. Weigelius,\n[[149.12]] effectu nihilominus eodem sequente. De Werneri Machina nihil amplius\n[[149.13]] audivi, nisi quod olim plagula quaedam Lipsiae impressa cum inscriptione\n[[149.14]] <i>Machina Toreutica</i> cujus Autorem credidi Dn. Titelium nonnulla de eadem dixerit. </p>\n<p> [[149.15]] Scripserunt ad me non ita pridem Eruditi Viri Juvenes Helvetii Dn. Skreta et Dn. Ott, et\n[[149.16]] communicarunt mihi Dissertationes suas Heidelbergae habitas alteram <i>de Visione</i> alteram Dn.\n[[149.17]] Skretae <i>de Auditione</i>, quorum uterque egregie placet. Dissertationem <i>de Visione</i> quam nuper\n[[149.18]] poscebas mitto, addidique aliam <i>de Maris Motu</i>, quam Dn. quidam Respondens elaboravit,\n[[149.19]] hypothesin tamen meam in Explicandis maris motibus secutus est. Vale faveque </p>\n<p> [[149.20]] Vir Nobilissime Cultori Tuo </p>\n<p> [[149.21]] Giessae d. 29. Martii 1671. L. Frid. Nitzschio </p>\n<p> [[149.22]] <i>A Monsieur Monsieur Leibnuz J.U.D. et Conseiller de Son Altesse Electorale de Mayence.\n[[149.23]] à Mayence.</i> </p>\n","number":"47.","title":"FRIEDRICH NITZSCH AN LEIBNIZ","date":"Gießen, 29. März (8. April) 1671. [45.85.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

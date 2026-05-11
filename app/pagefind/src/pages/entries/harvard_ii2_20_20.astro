@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_20","series":"Band II 2 (1686 - 1694)","seq":20,"text":"<p> [[105.1]] <b>21. VINCENT PLACCIUS AN LEIBNIZ</p>\n<p> [[105.2]] Hamburg, 27. November (7. Dezember) 1686. [20.29.]</b></p>\n<p> [[105.11]] I. N. J. C. </p>\n<p> [[105.12]] S. P. Vir Nobilissime, Excellentissime </p>\n<p> [[105.13]] Dⁿ^#'e Fautor et Amice honoratissime </p>\n<p> [[105.14]] Serius respondeo acceptissimis tuis, ut eo cumulatius respondeam, ad quod ipsum\n[[105.15]] adjuncta scheda Vagetiana primum expectanda diutule mihi fuit. In ejus fine cum legerem\n[[105.16]] destinari tibi aliqua Jungiana, renunciavi Te immunem esse a portorio modo ne fasciculus esset\n[[105.17]] nimis magnus, qualis haud ita dudum ad Dⁿ^#'u^#'m Consiliarium Cellensem Schraderum (qui de\n[[105.18]] immunitate tua etiam me fecerat certiorem) mihi mittendus a praefecto litterarum remittebatur.\n[[105.19]] Nihilominus misit mihi Dⁿ^#'u^#'s Vagetius fasces duos, quorum singuli videbantur mihi grandiores\n[[105.20]] quam ut aequo animo eos suscepturus esset postarum praefectus. Itaque uti permissum a Dⁿ^#'o\n[[105.21]] Vagetio erat separaturus fasciculos, rupi ligamentum etiam alterius, quod erat tuum et vidi\n[[105.22]] contineri exemplaria bina duorum librorum Jungiani alterius atque Capelli, quos an magni\n[[105.23]] facturus sis vehementer dubito. Itaque singulos misi, tuae dispositioni reliquos asservans: ut et\n[[105.24]] alterum fasciculum in quo eadem credo contineri Dⁿ^#'o Licentiato Juris von Sode destinata, qui\n[[105.25]] adhuc sigillatus apud me quiescit usque ad mandatum tuum. Addo litteras Vagetianas, quibus\n[[105.26]] ubi respondebis de Sodiano fasce quod volueris me narrabis, de caeteris (ni aliqua ratio alia te\n[[105.27]] contra facere jubet) quod singula pro binis exemplaria acceperis premi malim, varias ob\n[[106.1]] caussas, quarum unam vel inde divinabis quod Capelliana <angle bracket>id est</angle bracket> <i>Bizanntina</i>, necdum ab illo\n[[106.2]] mihi sint donata, cui ego mea tam liberaliter etiam duplicata quandoque obtuli. Ne itaque loco\n[[106.3]] proxenetici habeam suspicionem sinistram cautio est. </p>\n<p> [[106.4]] Puto me <i>Noëmaticas disputationes</i> Jungianas olim describi tibi curavisse, cum alia etiam\n[[106.5]] Feldeniana et nescio quae praeterea M^#'s^#'s^#'t^#'a tibi compararem. Eae meo judicio impressionem\n[[106.6]] longe magis merebantur, ut et alia Logica et Mathematica elaborata, judicium et ingenium tanti\n[[106.7]] viri commendatura, cujus vereor ne nomen hae schedulae, certe non ut imprimerentur ab ipso\n[[106.8]] congestae, deterant nimis. </p>\n<p> [[106.9]] De <greek><i>metabásei eĭw ^%)/allo génow</i></greek>, memini disputationem editam non indoctam Lipsiae, Praes.\n[[106.10]] M. Valent. Friderici 1661. quam credo tibi visam. </p>\n<p> [[106.11]] Feldeni ad <i>ff.</i> vidi, neque tantum ibi, sed et in <i>Elementis</i> suis et <i>ad Grotium</i> nimis ipse\n[[106.12]] Justiniani<greek>zei</i>. Unde potius elementa juris Romani quam universi aliquando nobis dat. Maxime\n[[106.13]] in contractuum materia, ubi proinde in diversa saepius discedere imo in opposita cogor. Utinam\n[[106.14]] vero liceret hac in parte affecta perficere, vel lineis summis ita ductis, ut ex bonis definitionibus\n[[106.15]] et elementis liceret deinde modice laboriosis verum de qualibet quaestione decidere modo\n[[106.16]] attentionem et meditationem comparando invicem dicta praestarent. Sed hoc quidem <greek>Ueoỹ ĕpì\n[[106.17]] goýnasi keĩtai</i>. Cui te commendans et me meaque omnia, ibi qua potero. Vale. </p>\n<p> [[106.18]] Excell. T. N. observantiss^#'i^#'m^#'u^#'s V. Placcius </p>\n<p> [[106.19]] Hamb. 1686 d[.] 27 Nov. </p>\n<p> [[106.20]] P. S. Si ex loco quem Vagetius citat <i>Logices</i> Jungianae lib. 3. c. XXXIII. § 1. et 7.\n[[106.21]] demonstrationem potes elicere consequentiae a rectis ad obliqua, eam, quaeso, imperti mihi,\n[[106.22]] Minerval tibi debituro. Vale iterum.\n [[106.23]] /  <i>A Monsieur Monsieur Leibnütz, Conseiller de son Altesse à Hanover.</i> </p>\n","number":"21.","title":"VINCENT PLACCIUS AN LEIBNIZ","date":"Hamburg, 27. November (7. Dezember) 1686. [20.29.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

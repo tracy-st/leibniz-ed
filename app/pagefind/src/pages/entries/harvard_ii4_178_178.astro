@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_178","series":"Band II 4 (1701 - 1707)","seq":178,"text":"<p> [[551.1]] <b>178. LEIBNIZ AN MICHAEL GOTTLIEB HANSCH</p>\n<p> [[551.2]] Berlin, 15. Februar 1707. [174.180.] </b></p>\n<p> [[551.10]] Vir Nobilissime et Cl^#'m^#'e Fautor et Amice honoratissime </p>\n<p> [[551.11]] Gratias ago, quod meo rogatu, de Dno de Schulenburg Generali peditatus regii praefecto\n[[551.12]] inquirere, et intellecta significare voluisti. Rogo etiam insignibus viris Rechenbergio et\n[[551.13]] Cypriano reddita multa salute agi gratias, quod mei benevole meminere. Gratissimum aliquando\n[[551.14]] erit accipere quae Inclyti Menkenii nostri perennem famam digne ornabunt. </p>\n<p> [[551.15]] Tantum benevolentiae Tuae tribuo ut novum a TE beneficium petere audeam. Thomas\n[[551.16]] Smithus insignis Ecclesiae Anglicanae Theologus, idemque scriptis celeberrimus ad me scribit:\n[[551.17]] ante 14 circiter annos Eduardum Bernardum, Dn. Fritschii Bibliopolae Lipsiensis precibus\n[[551.18]] victum credidisse viro <i>Calendarium Ecclesiasticum et Civile plerarumque Gentium</i>, Manuscriptum,\n[[551.19]] quod hic quam primum edere in se recepit: sed neque edidit neque remisit. Tandem\n[[551.20]] nuperrime intellectum est ab Anglis Manuscriptum, nescio quomodo ad excellentis doctrinae\n[[551.21]] famaeque virum, Dn. Carpzovium, polyhistorem insignem, non ita pridem Lipsiae defunctum,\n[[551.22]] pervenisse. Petit ergo Smithus, petunt amici, quibus cara est tanti viri memoria, quantum omnes\n[[551.23]] scimus Bernardum fuisse, ut in tam pretiosum depositum inquiratur recuperatumque, vel in\n[[551.24]] Germania vel in Anglia quamprimum in commune bonum proferatur. Valde de me, valde de\n[[551.25]] literis merebere, si hac in re favere nobis possis: haeredes Carpzovianos vel propinquos\n[[551.26]] cumulatae virtutis viros, intellecta re, pro certo habeo tam aequae et honestae petitioni non\n[[552.1]] defuturos unde plurimum laudis in ipsos redibit. Neque enim dubito insigne opusculum fore,\n[[552.2]] cum Bernardum in hoc genere doctrinae regnasse constet. Vale et me ama. </p>\n<p> [[552.3]] Dabam Berolini 15. Febr. 1707 </p>\n<p> [[552.4]] deditissimus G. G. Leibnitius </p>\n","number":"178.","title":"LEIBNIZ AN MICHAEL GOTTLIEB HANSCH","date":"Berlin, 15. Februar 1707. [174.180.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

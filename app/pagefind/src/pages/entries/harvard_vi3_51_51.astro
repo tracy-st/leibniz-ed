@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi3_51","series":"Band VI 3 (1672-1676); durchgesehener Nachdruck 1980","seq":51,"text":"[[433.6]] <b>51. De characteribus et compendiis </b> <span>433.6;0:63:051:76?      :L:l^</span>.\n[[433.16]] Illustribus exemplis quotidie disco, omnem solvendi pariter problemata, et inveniendi\n[[433.17]] theoremata artem, tunc cum res ipsa imaginationi non subjacet, aut nimis\n[[433.18]] vasta est, eo redire, ut characteribus sive compendiis imaginationi subjiciatur; atque\n[[433.19]] quae pingi non possunt, qualia sunt intelligibilia, ea pinguntur tamen hieroglyphica\n[[433.20]] quadam ratione, sed eadem et philosophica. Quod fit, si non ut pictores, poetae,\n[[433.21]] mystae Aegyptii aut Sinenses similitudines quasdam sectemur, sed rei ipsius ideam\n[[433.22]] sequamur. Unde eo in loco, ubi ope punctorum mirabiles quasdam figuras geomanticas\n[[433.23]] efficientium Numeris ordine collocatis subscriptorum, clavem ad arcana\n[[433.24]] numerorum et numerorum primitivorum naturam aperui (vide 12. Febr. 1676). Haec\n[[433.25]] ascripsi: Patet hic illustri exemplo artem circa intelligibilia inveniendi praeclara theoremata\n[[433.26]] in eo consistere, ut quoniam ipsa pingi aut audiri non possunt pingamus aut\n[[434.1]] audiamus earum repraesentationes, etiamsi non similes, et in iis sensibiles quasdam\n[[434.2]] pulchritudines observemus, quae in nobis facient intelligi theorema seu proprietatem\n[[434.3]] ipsius rei intelligibilis; vel hanc certe, quod eius natura talis est, ut his characteribus\n[[434.4]] expressa, has producat, ut ita dicam, apparitiones. Quemadmodum si dicamus eam\n[[434.5]] esse formam cuiusdam hominis ut certo habitu indictus placeat; vel eam esse naturam\n[[434.6]] cuiusdam picturae, ut certo vitro in aliam regulariorem colligetur. Quamquam\n[[434.7]] enim vitrum tam sit extraneum Tabulae, quam characteres rebus, utraque tamen\n[[434.8]] naturam rei indicant relatam scilicet ad hoc quod adhibetur instrumentum. Quod vel\n[[434.9]] ideo tolerandum, cum alioquin in universum nullam de rebus experientiam habeamus,\n[[434.10]] nisi ad nos relatam, nec alias earum qualitates sciamus, quam apparentias nobis\n[[434.11]] factas. His recte observatis tum illos confutabimus qui credidere veritates esse sine\n[[434.12]] relatione ad characteres, quam illos, qui credidere non in rebus, sed in characteribus\n[[434.13]] esse veritatem; cum veritas sit in rebus quatenus ad characteres referuntur.\n","number":"51.","title":"De characteribus et compendiis","date":""}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

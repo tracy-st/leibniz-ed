@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_231","series":"Band II 2 (1686 - 1694)","seq":231,"text":"<p> [[728.22]] <b>234. SIMON FOUCHER AN LEIBNIZ</p>\n<p> [[728.23]] [August 1693.] [230.]</b></p>\n<p> [[729.1]] Vostre <i>reponse</i>, Monsieur, est dans le dernier journal du 6 Aoust. Je voudrois bien pouvoir\n[[729.2]] vous satisfaire touchant tous vos chefs, mais cela va à une metaphysique entiere que vous\n[[729.3]] demenderiez aussi bien que M^#'r Lantin. Je vous envoye le 4 livre de mes <i>dissertations sur la\n[[729.4]] Philosophie des Academiciens</i>. Il a esté imprimé et se vendra ches M. Anisson. Je joindray M^#'r\n[[729.5]] de Laloubere et le prieray de vous faire reponse. Je crois que vous aurez receu ma derniere par\n[[729.6]] laquelle je reponds à la vostre où estoit vostre reponse du journal. Ni vous ni moy nous ne\n[[729.7]] parlons point de Politique, ni de Religion et neanmoins nous n'avons pas toute la liberté de\n[[729.8]] nous entretenir que nous pourrions souhaiter. Il faut un peu ceder au tems, <i>silent leges inter\n[[729.9]] arma</i>. M^#'r de Brosseau m'obligera d'attendre une occasion favorable pour vous faire tenir ce\n[[729.10]] petit imprimé. </p>\n<p> [[729.11]] Je suis votre tres humble et tres obeissant Foucher </p>\n<p> [[729.12]] M^#'r d'Avranche fait une 2 edition de sa <i>censure</i> de Descartes. </p>\n","number":"234.","title":"SIMON FOUCHER AN LEIBNIZ","date":"[August 1693.] [230.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

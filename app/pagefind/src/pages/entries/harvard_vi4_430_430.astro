@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_430","series":"Band VI 4 (1677 - 1690)","seq":430,"text":"[[1959.1]] <b>352.  Regulae motus systematicae praestari mechanice [1677 (?)]</b>\n [[1959.2]] <tab/>[1677 (?)] </p>\n<p> [[1959.7]] Diu quaesivi <b>qua ratione regulae motus</b> <b>systematicae praestari</b> <b>mechanice\n[[1959.8]] possent</i> nec regulae sejunctorum violarentur. Id nuper nactus mihi videor,\n[[1959.9]] concipiendo <b>corpus a corpore impelli sine contactu</b>, interventu scilicet Fluidi\n[[1959.10]] elastici, quod celerrime interfluens, motu suo rapido corpora ad se prorsus accedere non\n[[1959.11]] patiatur, et propinquitati solito majori obnitatur. Quodsi ergo ponamus Massam nostri\n[[1959.12]] systematis constare ex oneris globis aequalibus; atque his Aethera disjunctorem interfluere;\n[[1959.13]] fiet ut corpore in corpus incurrente primum duo globi aequales sibi proximi in se\n[[1959.14]] incurrere intelligantur; ita Elasticum interfluens statim unum retardabit, alterum in\n[[1959.15]] motum aget, sed per gradus. Idem paulatim sentient proximi. Nam et primus dum\n[[1959.16]] retardatur urgebitur a sequente, ut reparetur retardatio, sed hoc non efficiet nisi retardatione\n[[1959.17]] sui, atque ita demum in ultimos refundetur retardatio tantundemque globorum\n[[1959.18]] quantum impulerat, impelletur, si soluti sint globi; sed si cohaereant ita ut major massa in\n[[1959.19]] minorem incurrat vel contra, considerari tamen potest, cohaesionem non esse nisi solutorum\n[[1959.20]] ad se invicem attractionem; atque ita easdem servari leges quae in solutis. Est enim\n[[1959.21]] quasi conflictus inter aethera disjunctorem et aliud fluidum conjungens; quo corpora\n[[1959.22]] connexa in ea quae ipsis debetur Distantia servantur, et simul et cohaesionis et concursus\n[[1959.23]] leges observant. </p>\n<p> [[1960.1]] Quodsi globi primarii in proposito systematis gradu ponantur non omnino aequales,\n[[1960.2]] eundum erit ad quoddam inferioris gradus systema, ut magis ad aequalitatem accedatur,\n[[1960.3]] et ne hoc quidem sufficiente, descendetur adhuc ulterius; ita error erit dato minor. Et haec\n[[1960.4]] sectio in aequales partes fere fiet ut in Musicis chordis, quae varios habent tremores sed\n[[1960.5]] praevalent quae fiunt secundum partes aequales. Omnia tamen procedent simplicius si\n[[1960.6]] assumamus materiae inertiam, ut scilicet majus magis resistat. </p>\n","number":"352.","title":"Regulae motus systematicae praestari mechanice","date":"[1677 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

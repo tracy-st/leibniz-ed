@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_372","series":"Band VI 4 (1677 - 1690)","seq":372,"text":"[[1636.1]] <b>315.  Si possibile est ens necessarium, sequitur quod existat [März 1689 bis März 1690 (?)]</b>\n [[1636.2]] <tab/>[März 1689 bis März 1690 (?)] </p>\n<p> [[1636.5]] Haec propositio: <i><b>Si possibile est Ens necessarium, sequitur quod\n[[1636.6]] existat</i> est fastigium doctrinae modalis, et primum facit transitum a posse ad esse, seu\n[[1636.7]] ab essentiis rerum ad existentias. Et quia necessarius est talis transitus, alioqui nihil\n[[1636.8]] existeret, vel hinc sequitur Ens necessarium esse possibile, adeoque existere. Et sane nisi\n[[1636.9]] esset ens necessarium nulla reddi posset ratio existentiae rerum, nec causa esset cur\n[[1636.10]] aliquid existeret. Seu ut brevius dicam Necesse est aliquid existere, atque ideo datur Ens\n[[1636.11]] necessarium. Videndum an haec consequentia sufficiat. Videtur enim hinc saltem sequi\n[[1636.12]] Entia quaedam alternative necessaria esse. Verum alternativa necessitas debet fundari in\n[[1636.13]] aliqua necessitate absoluta. </p>\n","number":"315.","title":"Si possibile est ens necessarium, sequitur quod existat","date":"[März 1689 bis März 1690 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

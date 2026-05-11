@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii1_19","series":"Band II 1 (1663 - 1685)","seq":19,"text":"<p> [[57.1]] <b>17. LEIBNIZ AN JAKOB THOMASIUS</p>\n<p> [[57.2]] Frankfurt, 6./16. April 1670. [14.29.]</b></p>\n<p> [[57.14]] Literae tuae tempestive ad me delatae sunt. Cum enim in eo esset, ut ederetur Nizolius,\n[[57.15]] opportune accidit, ut nonnulla circa ejus Calcagnini et Grifoli lites a te docerer: quae et ex\n[[57.16]] literis tuis excerptorum titulo, libello addidi. Si quid in praefatione mea displicet, aut liberius\n[[57.17]] dictum videtur, id ut moneas, atque emendes, etiam atque etiam rogo. Addidi et epistolam,\n[[57.18]] quam ad te, de Aristotele recentioribus conciliabili scripseram, immutatis nonnullis, ut res\n[[57.19]] ferebat; te tamen non nominato, quemadmodum nec meum nomen alicubi adscriptum est.\n[[57.20]] Henrici Horbii <i>historia Origeniana</i> Francofurti edita est, ab eodem promittitur <i>historia Manichaeorum</i>,\n[[57.21]] et <i>Unitariorum, seu Antitrinitariorum</i>. In Belgio Isaacus Vossius novam editionem\n[[57.22]] Laertii, tum Catulli, Tibulli, Propertii molitur. Octavius Ferrarius scripsit contra Rubenium (qui\n[[57.23]] de lato clavo aliquid ediderat), aliosque <i>rei</i> suae <i>vestiariae</i> impugnatores. Prodiit et liber\n[[57.24]] Chimentelli <i>de sellis</i>. Joh. Webbe, eques Anglus, scripto Anglico tueri conatus est, linguam\n[[57.25]] Sinicam esse primitivam. Et quid mirum, postquam Georg. Stierhelm orbi persuadere conatur,\n[[58.1]] linguam Suecicam, cui Scythicam veterem eandem facit, esse Hebrea priorem. De Gronovii in\n[[58.2]] Tacitum curis quaedam expectantur. Graevium Ciceroni novam operam impendere audio. Cl.\n[[58.3]] Bosius de Reinesianis edendis spem facit: Quid tibi de Barthianis reliquiis, certe non minus\n[[58.4]] aestimandis constat? Cl. Boeclerus inter cetera in eo est, ut Aeneae Sylvii vitam Friderici III. ex\n[[58.5]] MS^#'t^#'o edat; in eo sum, ut copiam ei procurem, alterius MS^#'t^#'i ejusdem libri. Vellem scire, si quod\n[[58.6]] forte eximium MS^#'t^#'u^#'m qualecunque Lipsiae latet: fateor enim, me, etsi Lipsiensem, haec ignorare:\n[[58.7]] Robertus Keuchenius, is qui Cornelium Nepotem, aliosque veteres edidit, nescio quo\n[[58.8]] infortunio, patria Batavia extorris, huc illuc vagabundus discurrit, seque etiam deridendum\n[[58.9]] nonnunquam propinat. Quidam Sandius, homo Arianus libellum <i>de scriptoribus</i> <i>ecclesiasticis</i>\n[[58.10]] sane eruditum edidit, qui fallere incautos possit. Francof. 6/16 April. 1670. </p>\n","number":"17.","title":"LEIBNIZ AN JAKOB THOMASIUS","date":"Frankfurt, 6./16. April 1670. [14.29.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

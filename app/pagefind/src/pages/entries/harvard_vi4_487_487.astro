@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_487","series":"Band VI 4 (1677 - 1690)","seq":487,"text":"[[2152.6]] <b>387₃.  Endgültige Fassung ENDGÜLTIGE FASSUNG\n[[2152.12]] <tit2><b>De obligatione credendi</b>\n [[2152.13]] Ratiocinatio quae pro demonstratione venditatur </tit2>\n[[2152.14]] <b>Definitiones</b> </p>\n<p> [[2152.15]] 1) <b>Obligatio</b> est necessitas imposita sub poenae justae metu. </p>\n<p> [[2152.16]] 2) <b>Credere</b> est conscium esse rationum nobis persuadentium. </p>\n<p> [[2152.17]] 3) <b>In potestate sunt</b>, quae fiunt si velis. </p>\n<p> [[2152.18]] 4) <b>Metus</b> est voluntas evitandi. </p>\n<p> [[2152.19]] 5) <b>Conscientia</b> est nostrarum actionum memoria.\n[[2153.1]] <b>Experimentum</b> </p>\n<p> [[2153.2]] Non est in potestate nostra nunc meminisse alicujus rei praeteritae, aut non meminisse.\n[[2153.4]] <b>Propositio I</b> </p>\n<p> [[2153.5]] <b>Conscientia non est in potestate.</b> </p>\n<p> [[2153.6]] <b>Demonstratio</b>: Nam conscientia est memoria <i>per defin. 5.</i> Memoria non est in\n[[2153.7]] potestate, <b>per experimentum praecedens.</b> Ergo nec conscientia in potestate est.\n[[2153.8]] <b>Propositio II</b> </p>\n<p> [[2153.9]] <b>Credere aliquid aut non credere non est in potestate.</b> </p>\n<p> [[2153.10]] <b>Demonstratio</b>: Nam credere est conscium esse rationum nobis id quod credendum\n[[2153.11]] est persuadentium <i>per def. 2.</i> Conscientia non est in potestate <i>per prop. 1.</i> Ergo nec\n[[2153.12]] credere in potestate est aut non credere.\n[[2153.13]] <b>Propositio III</b> </p>\n<p> [[2153.14]] <b>Eorum quae non sunt in potestate nulla</b> <b>obligatio est.</b> </p>\n<p> [[2154.1]] <b>Demonstratio</b>: Cum metus poenae nihil aliud sit, quam voluntas evitandi poenam\n[[2154.2]] <i>per defin. 4</i>, sequitur nihil aliud in obligato ad obligationis effectum contribuere posse\n[[2154.3]] poenam quam voluntatem ejus evitandae per obedientiam seu praestationem. Quoniam\n[[2154.4]] ergo hinc patet metum poenae nihil aliud efficere debere quam obediendi voluntatem; et\n[[2154.5]] vero obligatio est necessitas quam efficit metus poenae <i>per defin. 1.</i> sequitur obligationem\n[[2154.6]] non esse nisi ad obediendi voluntatem; ac proinde ad ea quae posita etiam obediendi\n[[2154.7]] voluntate non fiunt, seu quae <i>per defin. 3.</i> in potestate non sunt, nullam esse obligationem.\n[[2154.9]] <b>Propositio IV</b> </p>\n<p> [[2154.10]] <b>Nulla</b> <b>est obligatio credendi, sed tantum summo studio inquirendi.</b> </p>\n<p> [[2154.11]] Credere non est in potestate <i>per prop. 2.</i> quae non sunt in potestate, eorum nulla\n[[2154.12]] obligatio est, <i>per prop. 3.</i> Ergo nulla credendi obligatio est. Quod erat demonstrandum.\n[[2154.13]] <b>Corollar.</b> </p>\n<p> [[2154.14]] Hinc patet frustra aliquem juramento obligari ad aliquid imposterum credendum vel\n[[2154.15]] non credendum.\n[[2154.16]] <b>Scholium</b> </p>\n<p> [[2154.17]] Hinc colligo obligationem vel mandatum credendi, nihil aliud inferre quam summum\n[[2154.18]] credendi conatum, id est accuratissimam in credendi rationes inquisitionem: quae\n[[2154.19]] tamen ita moderanda est, ne ab aliquo majus studium desideremus quam cujus per rerum\n[[2154.20]] suarum statum vitaeque genus, capax est. Ut res clarius intelligatur: hoc momento\n[[2155.1]] praesenti non obligor ad credendum, sive ad reminiscendum aliquid, quia id a me non\n[[2155.2]] pendet. Obligor tamen aliquando ut coner invenire rationes, quarum imposterum meminisse,\n[[2155.3]] id est credere, liceat. Simili methodo pleraque in re morali ac naturali theologia\n[[2155.4]] demonstrari possent. Quod maximi foret momenti ad tranquillitatem animi. Sola enim\n[[2155.5]] demonstratio certitudinem parit, sola certitudo tranquillitatem durabilem, sola tranquillitas\n[[2155.6]] felicitatem. tranquillitas felicitatem. </p>\n","number":"387₃.","title":"Endgültige Fassung","date":null}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_43","series":"Band II 3 (1695 - 1700)","seq":43,"text":"<p> [[122.1]] <b>43. LEIBNIZ AN [HENRI BASNAGE DE BAUVAL]</p>\n<p> [[122.2]] [Hannover, 13. Januar 1696.] [42.53.]</b></p>\n\n<p> [[122.17]] Vous sçavés, Monsieur, que ce qu'on appelle les Pietistes fait presque autant de bruit en\n[[122.18]] Allemagne que le Quietisme en a fait en Italie. Mais comme on en parle fort differemment\n[[122.19]] selon les passions des gens, je ne sçay si on vous en aura donné une idée bien nette. Voicy ce\n[[122.20]] qui m'en semble en peu de mots. Quelques personnes, que je croiray tousjours bien intentionnées\n[[122.21]] tant qu'il me le sera permis, ayant travaillé au redressement des moeurs, et à l'étude de\n[[122.22]] l'ecriture, et s'estant servi pour cet effect de certaines assemblées reglées; quelques uns s'y\n[[122.23]] mêlerent qui manquoient de jugement, et peut estre aussi de droiture. Ce qui fit qu'on en\n[[122.24]] apprehenda les suites en quelques endroits sur tout lors que le Chiliasme; et les visions y\n[[122.25]] survinrent, et obligerent des puissances d'en arrester le cours. Mais quelques uns qui\n[[122.26]] monstroient du zele pour cela, tournerent leur efforts contre quelques Theologiens moderés et\n[[123.1]] habiles, qui ne desapprouvoient pas ces <i>Collegia Pietatis</i> ou assemblées, supposé qu'elles\n[[123.2]] fussent bien conduites. Là dessus on leur appliqua le nom de Pietistes, particulierement à\n[[123.3]] M. Spener cy devant premier Theologien du pays de l'Electeur de Saxe et maintenant dans le\n[[123.4]] pays de Brandebourg à l'egard de ceux qui y tiennent la confession d'Augsbourg. On l'accusa\n[[123.5]] d'avoir agi trop mollement contre les Bohmistes, Visionnaires et Chiliastes, et on crut trouver je\n[[123.6]] ne sçay combien d'erreurs dans ses écrits. On luy attribua d'entretenir une espece de cabale, et\n[[123.7]] un Theologien qui ne manque pas d'esprit, publia un livre intitulé <i>Itinerarium Pietisticum</i> où en\n[[123.8]] faisant recit de son voyage aux eaux de Pirmont, il raconte les conversations qu'il a eues\n[[123.9]] touchant les pretendus pietistes, mais d'une maniere un peu passionnée contre M. Spener, et\n[[123.10]] dont quelques uns se plaignent. Enfin la Faculté Theologique de Witenberg en Saxe, qui tient la\n[[123.11]] chaîre de Luther ecrivit contre M. Spener. Mais celuy cy ayant rendu compte de ses sentimens,\n[[123.12]] et le tout ne paroissant fondé que sur des soubçons eloignés, les Electeurs de Saxe et de\n[[123.13]] Brandebourg y ont mis le holà par leur defenses. Nous verrons si la chose en demeurera là. </p>\n","number":"43.","title":"LEIBNIZ AN [HENRI BASNAGE DE BAUVAL]","date":"[Hannover, 13. Januar 1696.] [42.53.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

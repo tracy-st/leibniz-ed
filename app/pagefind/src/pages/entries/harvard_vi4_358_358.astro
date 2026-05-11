@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_358","series":"Band VI 4 (1677 - 1690)","seq":358,"text":"[[1504.8]] <b>300.  De natura sive analogo animae [2. Hälfte 1683 bis Ende 1688 (?)]</b>\n [[1504.9]] <tab/>[2. Hälfte 1683 bis Ende 1688 (?)] </p>\n<p> [[1504.17]] Non adeo ineptae sunt sententiae Aristotelis [et] scholasticorum ac prima fronte\n[[1504.18]] videntur, scilicet in modo applicandi potissimum erratum ab illis. Lib. 2. <i>Phys.</i> text. 1.\n[[1504.19]] Aristoteles disserit Natura esse animalia partesque eorum, et plantas, et <k>Simplicia</k> corpora;\n[[1504.20]] ut terram ignem aërem aquam. Ea quae natura constant principium in se ipsis\n[[1504.21]] habere motus quietis, augmentationis diminutionis, alterationis. At lecticam vestem aliaque\n[[1504.22]] artificialia nullum habere principium mutationis nisi per accidens, quatenus ipsis\n[[1504.23]] accidit ut sint terrea, aut ab his quae principium in se habent mista. Itaque naturam esse\n[[1504.24]] principium et causam ut id moveatur et quiescat in quo primo, per se et non per accidens\n[[1505.1]] inest. Haec videntur absurda et inania, nisi illustrentur ex meis inventis, ex quo\n[[1505.2]] demonstravi, Unumquodque Ens per se seu vere unum habere aliquod in se principium ex\n[[1505.3]] quo omnia quae ipsi contingunt naturaliter et per se, consequuntur idque esse analogum\n[[1505.4]] animae, et hoc est quod Aristoteles naturam dixit. Et Entis per accidens negavit. Verum\n[[1505.5]] est natura cujusque rei individuali omnia consequi etiam quae ipsi accidunt, seu individuo\n[[1505.6]] nihil evenire per accidens, speciei tamen aliquid per accidens evenit, ut homini esse\n[[1505.7]] Musicum, non Petro. D. Thomas in hunc locum commentatus inquirensque quomodo\n[[1505.8]] principium motus gravium sit a natura gravis, ait gravitatem esse a forma substantiali,\n[[1505.9]] motorem vero esse generantem, haec recte intellecta probari possunt, in Metaphysico\n[[1505.10]] scilicet sensu; omnis enim substantia corporea omnes suas operationes exercet a principio\n[[1505.11]] interno, quod omnia involvit, sed primus autor seu motor est is qui substantiam rei\n[[1505.12]] produxit, hic autem revera non alius est nisi Deus, ostendi enim omnem substantiam\n[[1505.13]] veram non aliter quam creatione oriri posse. </p>\n","number":"300.","title":"De natura sive analogo animae","date":"[2. Hälfte 1683 bis Ende 1688 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

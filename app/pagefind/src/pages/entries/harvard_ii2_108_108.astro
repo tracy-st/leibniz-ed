@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_108","series":"Band II 2 (1686 - 1694)","seq":108,"text":"<p> [[406.1]] <b>109. MICHEL ANGELO FARDELLA AN LEIBNIZ</p>\n<p> [[406.2]] Venedig, 27. April [1691]. [107.110.]</b></p>\n<p> [[406.7]] Illu^#'m^#'o Sig^#'r^#'e, mio sig^#'r^#'e, sig^#'r^#'e colend^#'m^#'o </p>\n<p> [[406.8]] Non saprei mai colla penna abastanza esprimere, quanto devo alla generosa bontà di V. S.\n[[406.9]] Illu^#'m^#'a, che mi ama con tanta sincerità, e mi favorisce con tanta cortesia. Mi consola infinitamente\n[[406.10]] la viva speranza, che essa mi dà di potere un giorno godere quella quiete, che tanto\n[[406.11]] sospiro, mettendo in esecutione quanto fin hora è stato da me maturamente deliberato. Quanto\n[[406.12]] viverei contento, se havessi la fortuna di goderla, e riverirla da vicino, con tutta quella libertà,\n[[406.13]] che desidero, per adesso la ringratio col cuore, e priego Dio mi conceda favorevole la congiuntura\n[[406.14]] di farle conoscere la mia gratitudine, e la memoria, che tengo de' suoi pretiosissimi favori. </p>\n<p> [[406.15]] Circa il diploma, il Sig^#'r^#'e Marchese Felice Montecuccoli s'è impegnato di favorirmi, come\n[[406.16]] nella mia passata le scrissi, e domenica mi portarò in Morano per conferire con quell'Abbate\n[[406.17]] quanto essa mi accenna intorno all'errore di confondere un Henrico con l'altro, e trovo le sue\n[[406.18]] raggioni convincenti e veramente giuditiose. Hò finalmente trovato il Sig^#'r^#'e Erbetz il quale mi hà\n[[406.19]] pregato di fare le scuse con V. S. Illu^#'m^#'a non havendo risposto all'ultima sua per ragione, che\n[[406.20]] questi Senatori l' han tenuto sempre sospeso senza mai venire a nessuna deliberatione, non\n[[406.21]] havendo quelli mai spiegato distintamente la loro intentione, perciò l'assicura, che subito\n[[406.22]] ricevuti gl'ordini, le scriverà con ogni particolarità sopra questo affare delle miniere; mi hà\n[[406.23]] imposto perciò di riverirla in suo nome, e mi hà comunicato, che in Morano vi sia un Artefice,\n[[406.24]] il quale hà il secreto di gettare il cristallo, come si fà del bronzo, o altro metallo rendendolo più\n[[406.25]] flessibile, e meno tenace, con fabricare specchi di smisurata grandezza, promettendomi di fare\n[[406.26]] tutto per scuoprirne l'artificio, affine che V. S. Illu^#'m^#'a ne fosse poi pienamente informata. Farò\n[[406.27]] ogni diligenza per sapere quanto vi è di più raro, e curioso così in Morano, come nell'Arsenale,\n[[406.28]] e ne sarà quanto prima distintamente informata. Hò qui qualche volta l'onore dell'erudita, ed\n[[406.29]] amena conversatione del Sig^#'r^#'e Conte Douglas scozzese, e del Sig^#'r^#'e Cuningam adoratori della\n[[407.1]] sua incomparabile virtù, i quali con tutta la divotione possibile la riveriscono, essi parlano di\n[[407.2]] V. S. Illu^#'m^#'a come del primo letterato d'Europa e godono sommamente della buona fortuna, che\n[[407.3]] hò io della sua buona amicitia. Aspetto con impatienza il suo parere circa la propagatione\n[[407.4]] dell'Anima nostra, come anche la priego accennarmi qualche cosa del suo intorno alla costruttione\n[[407.5]] dell'Equationi, e del calcolo per l'Analisi, come anche vorrei sapere il suo sentimento\n[[407.6]] circa l'origine delle nostre Idee, e la natura dello Spatio. Nella settimana vegnente consegnarò\n[[407.7]] al Sig^#'r^#'e Mendelino i miei due primi tometti già perfettionati, travagliando fra tanto a stampare\n[[407.8]] gl'altri due. Sono tanto occupato in queste mie lettioni che appena hò tempo di rispondere\n[[407.9]] agl'amici. La supplico volersi ricordare di me, essendo appoggiate tutte nel suo efficace e\n[[407.10]] cortese patrocinio le speranze della mia quiete. L' hò già abastanza significato i miei pensieri, e\n[[407.11]] mi rimetto tutto nella sua savia, e prudente direttione, restandomi </p>\n<p> [[407.12]] Di V. S. Illu^#'m^#'a Umil^#'m^#'o, Affett^#'m^#'o, Oblig^#'m^#'o S^#'r^#'e </p>\n<p> [[407.13]] Venetia 27 Aprile. Michel Angelo Fardella </p>\n","number":"109.","title":"MICHEL ANGELO FARDELLA AN LEIBNIZ","date":"Venedig, 27. April [1691]. [107.110.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

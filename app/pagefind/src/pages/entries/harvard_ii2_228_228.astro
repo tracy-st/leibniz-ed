@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_228","series":"Band II 2 (1686 - 1694)","seq":228,"text":"<p> [[723.7]] <b>231. LEIBNIZ AN GUILLAUME DE L'HOSPITAL</p>\n<p> [[723.8]] [Hannover, 23. Juli 1693.] [221.280.]</b></p>\n<p> [[724.1]] [ ... ] Ce que vous dites Monsieur, sur mon raisonnement de la force me paroist subtil, et\n[[724.2]] je me reserve aussi de le bien approfondir. Il semble, que vous changés un peu de langage. La\n[[724.3]] question reduite à la practique, pour se degager des varietés de l'expression pourra estre concuë\n[[724.4]] ainsi: soyent deux globes pesans, durs et Elastiques, <i>A</i> et <i>B</i>, qui doivent concourir directement\n[[724.5]] dans un plan horizontal, soit la vistesse d'<i>A</i> avant le choc <i>c</i>, après (<i>c</i>) et celle de <i>B</i> avant le choc\n[[724.6]] <i>v</i>, après le choc (<i>v</i>), selon Descartes <i>Ac</i>+<i>Bv</i> doit estre égal à <i>A</i>(<i>c</i>) + <i>B</i>(<i>v</i>), c'est ce qu'on appelle\n[[724.7]] la quantité du mouvement. Pour moy je nie que cela peut tousjours reussir et au lieu de cela,\n[[724.8]] prenons les hauteurs aux quelles les corps pourroient monter en vertu de leur vitesses, et soit\n[[724.9]] celle d'<i>A</i> avant le choc <i>h</i>, après (<i>h</i>), et celle de <i>B</i> avant le choc <i>t</i>, après (<i>t</i>), je dis que tousjours\n[[724.10]] <i>Ah</i>+<i>Bt</i> sera egal à <i>A</i>(<i>h</i>)+<i>B</i>(<i>t</i>). J'appelle cela la conservation de la même quantité de la force,\n[[724.11]] parce que j'estime <b>la force</b> par l'effect qu'elle peut produire en se consumant. Mais sans\n[[724.12]] disputer sur le langage, je voudrois sçavoir, Monsieur, si vous estes pour mon equation, ou pour\n[[724.13]] celle de Descartes. Je crois de pouvoir prouver que si la regle de Descartes a lieu on pourra\n[[724.14]] parvenir au mouvement perpetuel. Vous proposés l'experience suivante à faire pour mieux\n[[724.15]] decider nostre controverse: Supposons qu'un corps de 4 livres tombe d'une hauteur d'un pied\n[[724.16]] sur un bras d'une balance dont l'autre bras seroit chargé d'un poids soutenu et que cette cheute\n[[724.17]] puisse soulever ce poids. On demande de quelle hauteur devroit tomber un poids d'une livre,\n[[724.18]] pour soulever le même poids. Et vous croyés, Monsieur, que ce poids d'une livre deuvroit\n[[724.19]] tomber de 16 pieds. C'est à peu près la question agitée entre M. Gassendi et le P. Cazré. Voicy\n[[725.1]] mon sentiment là dessus, je dis que toute cheute de tout poids, quelque petit qu'il soit, eleve\n[[725.2]] toute pesanteur soutenuë[,] quelque grande qu'elle soit, mais plus ou moins notablement selon\n[[725.3]] la grandeur de la cheute, et du poids qui tombe. Un poids <i>p</i> tombant de la hauteur <i>q</i>, et elevant\n[[725.4]] le poids <i>r</i> à la hauteur <i>s</i>, il y aura equation entre <i>pq</i> et <i>rs</i>, ou bien les poids seront reciproquement\n[[725.5]] comme les hauteurs. Ainsi pour declarer l'experience en sorte qu'elle soit faisable, il\n[[725.6]] faudra voir de quelle hauteur doit tomber le poids d'une livre, pour soulever le troisieme poids\n[[725.7]] aussi haut que celuy de 4 livres, tombant d'un pied, l'avoit soulevé; et en ce cas je tiens qu'il\n[[725.8]] suffira que celuy d'une livre tombe de 4 pieds de hauteur, et non pas de 16[,] comme vous le\n[[725.9]] jugés, Monsieur, et je ne doute point, s'il tomboit de 16 pieds, qu'il n'elevât le troisieme poids\n[[725.10]] beaucoup plus haut, et presque au quadruple. Pour compter toute la hauteur de la cheute, il faut\n[[725.11]] prendre non seulement la hauteur jusqu'à la balance, mais encor combien le poids après avoir\n[[725.12]] atteint la balance, descend pour soulever l'autre. Au lieu d'un poids on pourroit prendre\n[[725.13]] quelque matiere elastique, et je soutiens que quatre livres tombant d'un pied et une livre\n[[725.14]] tombant de quatre pieds donneront le même degré de tension ou de compression. Et pour mettre\n[[725.15]] à part la consideration de la pesanteur, je dis que deux corps semblables allant sur un plan\n[[725.16]] horizontal <i>A.4</i> avec la vistesse <i>1</i>, et <i>B.1</i> avec la vistesse <i>2</i>, et rencontrant le même ressort d'une\n[[725.17]] même façon luy donneront le même degré de tension ou de compression, les forces de ces deux\n[[725.18]] corps estant egales à cause que les cheutes qui les ont produites sont reciproques aux corps.\n[[725.19]] [ ... ] </p>\n","number":"231.","title":"LEIBNIZ AN GUILLAUME DE L'HOSPITAL","date":"[Hannover, 23. Juli 1693.] [221.280.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

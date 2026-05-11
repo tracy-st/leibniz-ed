@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_268","series":"Band II 2 (1686 - 1694)","seq":268,"text":"<p> [[816.14]] <b>271. LEIBNIZ AN JACQUES-BENIGNE BOSSUET</p>\n<p> [[816.15]] Hannover, 3. Juli 1694. [242.273.]</b></p>\n<p> [[817.1]] Monseigneur. </p>\n<p> [[817.2]] En <Fn><i>Am Kopf in L von Leibniz' Hand</i>: nicht also abgangen <i>und am Kopf in l von Leibniz' Hand</i>: A M. l'Eveque de Meaux <i>und</i> ist nicht abgangen</Fn> attendant ce que Mons. l'Abbé de Loccum m'a promis de nouveau, dont j'espere que\n[[817.3]] vous aurés quelque satisfaction; je vous envoye ces Meditations Philosophiques, que je sousmets\n[[817.4]] à Vostre jugement, qui est des plus eclairés, mais aussi des plus equitables. Si vous ne les\n[[817.5]] trouvés pas entierement rebutables, Monseigneur, je crois que M. le President Cousin les\n[[817.6]] recevant de vostre part, les mettroit bien dans son <i>Journal des Sçavans</i>. Mais je voudrois qu'on\n[[817.7]] n'y mist pas mon nom, pour sonder un peu le guay. D'autant que des Pensées de cette nature,\n[[817.8]] déplaisent pour le moins à neuf dixiêmes des Lecteurs; et leur déplairoient quand elles seroient\n[[817.9]] les plus solides du monde. Le petit nombre de ceux qui les pourra gouter et qui daignera de\n[[817.10]] s'informer de l'auteur, le connoistra aisément par les circomstances. Une partie des fondemens\n[[817.11]] de mes dynamiques y est contenue. Vous serés surpris peutestre vous même de la rehabilitation\n[[817.12]] de la philosophie reçue que j'entreprends en quelque façon. Mais vous verrés, Monseigneur,\n[[817.13]] que ce n'est pas à la legere, ny d'une maniere qui fasse tort aux nouvelles decouvertes. En\n[[817.14]] effect, je trouve que souvent il suffit de bien expliquer les anciens, sans qu'on ait besoin de\n[[817.15]] renverser les dogmes receus. Mais j'ay crû qu'il me seroit permis de bastir quelque chose de\n[[817.16]] nouveau sur leur fondemens. Et c'est ainsi que je crois avoir terminé le grand probleme de\n[[817.17]] l'origine des formes ou ames, en monstrant qu'il faut dire d'elles ce que les Gassendistes disent\n[[817.18]] de leur Atomes, sçavoir qu'elles ont esté créées avec le monde, ou du moins qu'elles ne\n[[817.19]] sçauroient commencer ny finir que par miracle, c'est à dire par creation ou annihilation. Cela se\n[[817.20]] doit dire de toute Substance qui a une veritable unité. Mais quoyqu'il me paroisse ainsi que les\n[[817.21]] ames ou formes enfoncées dans la matiere ont tousjours esté dans leur animal, qui n'est que\n[[817.22]] transformé par ce que nous appellons generation ou mort; j'ay un tout autre sentiment des\n[[817.23]] esprits et de nostre ame, qui en est un, qu'il faut exempter des revolutions de la matiere; Dieu\n[[817.24]] gouvernant les Esprits par des loix particulieres, ou plustost tout le reste de l'univers n'estant\n[[817.25]] fait que pour l'amour d'eux. Enfin je crois avoir resolu le grand probleme de l'union de l'ame et\n[[817.26]] du corps. On prendra mon explication pour une Hypothese, mais je la tiens pour demonstrée, il\n[[817.27]] auroit fallu trop remonter, pour donner cette demonstration. Je suis avec zele et attachement\n [[817.28]] / Monseigneur vostre tres humble et tres obeissant serviteur\n [[817.29]] / à Hanover 3 juillet 1694 Leibniz </p>\n<p> [[818.1]] P. S. Je demande pardon de ce que mes meditations cyjointes ne sont pas assez mises au\n[[818.2]] net. Je me suis avisé des additions, quand tout estoit déjà copié, et alors je n'avois pas à la main\n[[818.3]] un homme propre à les copier de nouveau. </p>\n","number":"271.","title":"LEIBNIZ AN JACQUES-BENIGNE BOSSUET","date":"Hannover, 3. Juli 1694. [242.273.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii2_100","series":"Band II 2 (1686 - 1694)","seq":100,"text":"<p> [[384.1]] <b>101. LEIBNIZ AN MICHEL ANGELO FARDELLA</p>\n<p> [[384.2]] [Hannover, 5. Februar] 1691. [95.103.]</b></p>\n<p> [[384.13]] Extrait <Fn><i>Auf Bl. 10 v^#'o zunächst zwei Notizen ohne Bezug zu unserem Brief</i>: A Dno. Bernoullio viro Cl^#'m^#'o peto quaeri u <i>und</i> reddere aliquem inter philosophos id est referre. sic et referre pro ferre ut acceptum referre</Fn> de ma reponse au R.P. Michel Angelo Fardella Janvier 1691 </p>\n<p> [[384.14]] Je ne crois pas que nous soyons privés de la liberté, ny que cela s'ensuive de mes pensées,\n[[384.15]] comme vous objectés; au contraire je tiens qu'il n'y a point d'hypothese, qui establisse mieux la\n[[384.16]] spontaneité des actions des substances que la mienne. Et je crois aussi quoyque tout soit certain\n[[384.17]] dans l'univers, que cette certitude n'importe aucune necessité dans nos actions, et laisse la\n[[384.18]] contingence dans son entier. Il n'y a rien qui n'ait sa raison, mais cette raison n'est pas\n[[384.19]] tousjours necessitante. Quant à l'image de Dieu, je crois que nostre liberté la represente, non\n[[384.20]] pas entant que nous sommes indifferens (car cette indifference est une imperfection)[,] mais\n[[384.21]] entant que nous agissons suivant la raison. Dieu n'est jamais indifferent, et lorsque nous [le]\n[[384.22]] sommes, c'est nostre ignorance qui en est la cause, puisque alors la raison du choix nous\n[[384.23]] manque. Mais j'attends vos pensées et objections. </p>\n<p> [[385.1]] J'ay mis dans cette lettre ces mots: <i>Vous aurés la bonté de me marquer plus distinctement\n[[385.2]] vos intentions, et peutestre trouverat-on quelque chose qui y soit conforme.</i> </p>\n<p> [[385.3]] Je luy ay marqué que suivant <i>l'Histoire de Camaldoli</i>, Henri Duc de Baviere l'an 1101.\n[[385.4]] avoit donné des bienfaits au monastere de Carceri et je desire qu'il s'informe, comment il\n[[385.5]] faudroit faire pour obtenir la copie du diplome. </p>\n","number":"101.","title":"LEIBNIZ AN MICHEL ANGELO FARDELLA","date":"[Hannover, 5. Februar] 1691. [95.103.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

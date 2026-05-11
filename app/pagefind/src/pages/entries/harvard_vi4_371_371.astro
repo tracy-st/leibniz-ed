@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_371","series":"Band VI 4 (1677 - 1690)","seq":371,"text":"[[1634.1]] <b>314.  De ratione cur haec existant potius quam alia [März bis August 1689 (?)]</b>\n [[1634.2]] <tab/>[März bis August 1689 (?)] </p>\n<p> [[1634.24]] Quae ratio facit ut haec existant potius quam alia, facit etiam ut potius aliquid existat\n[[1634.25]] quam nihil: Nam si ratio reddatur cur haec existant, reddita etiam erit cur aliqua existant.\n[[1634.26]] Haec ratio est in praevalentia rationum ad existendum, prae rationibus ad non existendum\n[[1634.27]] seu ut verbo dicam in Existiturientia Essentiarum, ita ut existitura sint quae non impediantur.\n[[1634.28]] Neque enim si nihil existituriret ratio esset existendi. Jam porro ratio reddi non\n[[1634.29]] potest, cur unum possibile pro alio sit existituriens. Posita vero existiturientia omnium,\n[[1634.30]] sequitur existentia quorundam, cum enim omnia coexistere non possint, sequitur existentia\n[[1634.31]] eorum per quae plurima coexistunt. Veluti si <i>a</i> et <i>b</i>, itemque <i>c</i>, essent paria, et <i>a</i>\n[[1635.1]] esset incompatibile cum <i>b</i> et cum <i>c</i>; sed <i>b</i> incompatibile cum <i>a</i> et compatibile cum <i>c</i>; et\n[[1635.2]] similiter <i>c</i> incompatibile cum <i>a</i>, compatibile cum <i>b</i>, sequeretur non existere omnia tria\n[[1635.3]] simul <i>a, b, c</i>; neque unum tantum <i>a</i>, vel <i>b</i>, vel <i>c</i>, sed bina et ex binionibus non <i>ab</i>, neque\n[[1635.4]] <i>ac</i>, sed sola <i>bc</i>. Hinc patet omne possibile tendere ad existendum ex se, sed per accidens\n[[1635.5]] impediri, nec esse alias rationes non existendi, nisi ex ipsis existendi rationibus conjunctis\n[[1635.6]] natas. </p>\n<p> [[1635.7]] Caeterum existituritionis essentiarum oportet esse radicem existentem, a parte rei;\n[[1635.8]] alioqui nihil prorsus erit in Essentiis nisi animi figmentum, et cum ex nihilo nil sequatur\n[[1635.9]] erit perpetuum et necessarium Nihil. Haec autem radix non potest alia esse quam Ens\n[[1635.10]] necessarium, fundus essentiarum, fons Existentiarum, id est Deus, agens perfectissime,\n[[1635.11]] quia omnia in ipso et ex ipso; adeoque voluntarie, sed tamen ad id quod optimum est\n[[1635.12]] determinate; eligit ergo id ipsum quod postulat major perfectio in concursu [existiturientium],\n[[1635.13]] qui ipse concursus per hoc ipsum, quod talis primae causae sapientia et potentia\n[[1635.14]] est, ut locum det vimque praestet summae rationi, realis est et effectum habet. Neque\n[[1635.15]] enim nisi in Deo et per Deum Essentiae sibi viam faciunt ad existendum, ita ut in Deo sit\n[[1635.16]] realitas essentiarum, seu aeternarum veritatum, et productio existentiarum, seu contingentium\n[[1635.17]] veritatum. </p>\n","number":"314.","title":"De ratione cur haec existant potius quam alia","date":"[März bis August 1689 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

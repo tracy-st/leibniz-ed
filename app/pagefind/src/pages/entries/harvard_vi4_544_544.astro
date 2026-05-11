@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_544","series":"Band VI 4 (1677 - 1690)","seq":544,"text":"[[2514.1]] <b>430.  Aus und zu Friedrich von Spee, Güldenes Tugend-buch [Mai 1677 bis August 1697 (?)]</b>\n [[2514.2]] <tab/>[Mai 1677 bis August 1697 (?)]\n[[2514.3]] <petit> <p>Leibniz hat bereits in seiner Mainzer Zeit Schriften von Spee, besonders aber dessen <i>Güldenes Tugend-Buch</i>,\n[[2514.4]] gekannt und hoch geschätzt (IV, 1 N. 43, S. 534). Kurfürst Johann Friedrich hatte ihm, wie er in einem\n[[2514.5]] Brief an Andreas Morell (20. Dezember 1696, I, 13 N. 259, S. 398 f.; vgl. ferner den Brief an Kurfürstin Sophie\n[[2514.6]] von Mitte August (?) 1697, I, 14 N. 26, S. 59) angibt, sein eigenes Exemplar für die Lektüre zur Verfügung\n[[2514.7]] gestellt. Die Wertschätzung kommt in verschiedenen Perioden seines Schaffens zum Ausdruck, so im Mai 1677\n[[2514.8]] in einer allgemeinen Beurteilung (N. 430₁), deren sorgfältige rhetorische Ausarbeitung auf einen größeren\n[[2514.9]] Rezipientenkreis hinweisen könnte. In diesem Zusammenhang könnte auch die kurze Notiz zu Spees Stil\n[[2514.10]] (N. 430₂) entstanden sein, für deren Datierung zwar keine konkreten Anhaltspunkte vorliegen, die jedoch\n[[2514.11]] inhaltliche Parallelen nicht nur in N. 430₁ besitzt, sondern auch viel später etwa in Briefen an Herzog Rudolf\n[[2514.12]] August (19. Mai 1693, I, 9 N. 34, S. 42) und den bereits genannten an Andreas Morell und Kurfürstin Sophie\n[[2514.13]] wieder anklingt. </p>\n<p> [[2514.14]] Bei N. 430₃ handelt es sich um eine von Leibniz angefertigte französische Übersetzung der Vorrede des\n[[2514.15]] <i>Güldenen Tugend-Buches</i>, deren Konzept nach Ausweis des in diesem Zeitraum häufig belegten Wasserzeichens\n[[2514.16]] im Jahre 1685 entstand. Von diesem Konzept ließ Leibniz im Jahre 1697 zwei Reinschriften anfertigen,\n[[2514.17]] um die Übersetzung Kurfürstin Sophie zugänglich zu machen. Sie dürfte Beilage zu seinem bereits oben\n[[2514.18]] erwähnten Brief wohl von Mitte August gewesen sein (I, 14 N. 26, S. 53-60), in dem er neben einer Bewertung\n[[2514.19]] Spees (S. 59) auch die Übersendung der zu einem früheren Zeitpunkt erstellten Arbeit vermeldet (que j'ay\n[[2514.20]] fait[e] autres fois,« S. 60). Die beiden heute erhaltenen Reinschriften - ob eine von ihnen an die Kurfürstin ging\n[[2514.21]] oder eine weitere, nicht mehr nachweisbare Reinschrift, ist nicht zu ermitteln - wurden auf demselben Papier\n[[2514.22]] und von derselben Schreiberhand wie der begleitende Brief an die Kurfürstin geschrieben und anschließend von\n[[2514.23]] Leibniz korrigiert. Die Art der vorgenommenen Korrekturen läßt darauf schließen, daß LH I 4, 8 Bl. 25-32 als\n[[2514.24]] Vorlage für LH I 4, 8 Bl. 19-24 (unsere Druckvorlage) fungierte. Bei der abschließenden Verbesserung der\n[[2514.25]] Reinschriften hat Leibniz ferner zusätzliche Korrekturen im Manuskript vorgenommen, die er ebenfalls nach <i>l^#'1</i>\n[[2514.26]] und <i>l^#'2</i> übernommen hat. </petit> </p>\n","number":"430.","title":"Aus und zu Friedrich von Spee, Güldenes Tugend-buch","date":"[Mai 1677 bis August 1697 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

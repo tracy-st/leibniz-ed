@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_314","series":"Band VI 4 (1677 - 1690)","seq":314,"text":"[[1368.1]] <b>258.  Distinctio mentis et corporis [Anfang 1677 bis Anfang 1678 (?)]</b>\n [[1368.2]] <tab/>[Anfang 1677 bis Anfang 1678 (?)]\n[[1368.10]] <tit2><b>Distinctio mentis et corporis</b></tit2> </p>\n<p> [[1368.11]] Scio me esse, et nihilominus dubito an ullum sit corpus in rerum natura. Ergo non\n[[1368.12]] sum corpus. Hoc argumentum infirmum est, nisi ostendatur extensionem per se constituere\n[[1368.13]] substantiam completam, hoc enim posito, utique manifestum est ex illa substantia\n[[1368.14]] nunquam posse nasci cogitationem. Sed hoc nondum ostensum est. Itaque hoc quidem\n[[1368.15]] scimus cogitationem non esse modum extensionis, sed nescimus an non sit modus\n[[1368.16]] substantiae, cujus modus alius est ipsa extensio. Sunt enim diversa in corpore, scilicet\n[[1368.17]] extensio et ipsa materia extensa. </p>\n<p> [[1368.18]] Vera igitur methodus distinctionem inter mentem et corpus probandi haec est, quod\n[[1368.19]] impossibile est unquam nobis certo innotescere an detur corpus. Corpus autem voco id\n[[1368.20]] omne quod eis quae sentimus simile est. Impossibile autem hoc esse, ex eo patet, quia\n[[1368.21]] impossibile est ullo modo nos certos reddi posse, de existentia corporum, seu impossibile\n[[1368.22]] esse rationibus philosophicis probari unquam corpora ne sint apparentiae an substantiae. </p>\n<p> [[1369.1]] Non magis certum mihi est alios homines cogitare, quam bruta sentire. </p>\n<p> [[1369.2]] Ex eo quod ego sum, satis intelligi potest, me non esse solum; nam facile intelligo\n[[1369.3]] alios esse posse similes mihi, me multo perfectiores, et me non posse esse causam\n[[1369.4]] quominus et ipsi existant. </p>\n<p> [[1369.5]] Certum est apparentias esse in me, sed non ideo sequitur totidem esse substantias\n[[1369.6]] extra me, quot videntur causae apparentiarum; id est totidem esse corpora. </p>\n<p> [[1369.7]] Nullo modo probari potest ratione naturali, quod dentur substantiae divisibiles seu\n[[1369.8]] corporeae. </p>\n","number":"258.","title":"Distinctio mentis et corporis","date":"[Anfang 1677 bis Anfang 1678 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

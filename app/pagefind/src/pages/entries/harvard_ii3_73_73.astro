@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_73","series":"Band II 3 (1695 - 1700)","seq":73,"text":"<p> [[195.1]] <b>73. LEIBNIZ AN HENRI BASNAGE DE BAUVAL</p>\n<p> [[195.2]] [Hannover,] 8./18. September 1696. [67.91.]</b></p>\n\n<p> [[195.10]] Monsieur </p>\n<p> [[195.11]] Vous <Fn><i>Am Kopf der Seite von Leibniz' Hand</i>: à M. Bauval à la Haye 8/18 Sept. 1696.</Fn> aurés receu ma derniere où j'avois joint des vers sur feu Monsieur Hugens, que je\n[[195.12]] vous envoye de nouveau parce que j'ay changé quelques mots, par exemple au lieu de <i><b>Tutus</i></b> <i>et\n[[195.13]] in mediis navita fertur aquis</i> j'ay mis <i><b>certus</b> et in</b> etc. Car les longitudes qu'on peut connoître\n[[195.14]] en quelque façon par les pendules ne garantissent point le vaisseau des dangers de toute sorte,\n[[195.15]] mais le rendent au moins plus certain de sa route. </p>\n<p> [[195.16]] Mons. Dartis depuis quelque temps ne continue point son <i>Journal</i>, mais en echange\n[[195.17]] M. Chauvin pousse le sien à Berlin. On imprime quelque chose en Italie sous le titre de\n[[195.18]] <i>Galleria di Minerva</i>, qui a l'air d'un Journal. Mons. l'Abbé Fardella professeur à Padoue m'en\n[[195.19]] a envoyé un échantillon, où l'on fait rapport d'un livre qu'il prepare pour nous expliquer <b>la</b>\n[[196.1]] <b>Philosophie de S. Augustin</b> dans son livre <i>de quantitate animae</i> et autres ouvrages. Il\n[[196.2]] pretend que ce pere a mieux rencontré que la plupart des philosophes. Et en effect il a puisé du\n[[196.3]] Platonisme le meilleur et de plus convenable à nôtre religion. Cet habile Abbé qui est Professeur\n[[196.4]] de Mathematiques y mettra beaucoup du sien, et comme en passant autresfois à Venise je\n[[196.5]] luy avois fait connoître quelque chose de mes nouvelles hypotheses de philosophie, autant que\n[[196.6]] l'occasion le pouvoit permettre, il l'entendit avec beaucoup d'applaudissemens, et a marqué\n[[196.7]] depuis d'en avoir fait grand usage, et de vouloir pousser plus avant ces meditations. Je suis avec\n[[196.8]] zele. </p>\n","number":"73.","title":"LEIBNIZ AN HENRI BASNAGE DE BAUVAL","date":"[Hannover,] 8./18. September 1696. [67.91.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

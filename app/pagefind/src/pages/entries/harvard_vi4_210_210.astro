@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_210","series":"Band VI 4 (1677 - 1690)","seq":210,"text":"[[814.4]] <b>172.  Demonstratio axiomatum de identitate ac diversitate [April bis Oktober 1686 (?)]</b>\n [[814.5]] <tab/>[April bis Oktober 1686 (?)] </p>\n<p> [[814.22]] 1) Si sit propositio vera, in quam ingreditur ^&.SD <Leibniz special character> et pro ^&.SD <Leibniz special character> substituendo ^&.za <Leibniz special character> caeteris\n[[814.23]] omnibus manentibus fiat propositio falsa; dicetur ^&.SD <Leibniz special character> et ^&.za <Leibniz special character> <b>discerni</b>. </p>\n<p> [[814.24]] 2) Si ^&.SD <Leibniz special character> et ^&.za <Leibniz special character> possunt discerni, dicuntur <b>diversa</b>. </p>\n<p> [[814.25]] 3) Si ^&.SD <Leibniz special character> et ^&.za <Leibniz special character> non possunt discerni dicuntur <b>eadem</b>. </p>\n<p> [[814.26]] 4) Quae non sunt eadem ea sunt diversa. </p>\n<p> [[814.27]] 5) Quae eadem esse colliguntur, dicimus <b>Coincidentia</b>, exempli causa si duae\n[[814.28]] sint rectae quarum quaelibet circulum bisecat, ostendi potest medium punctum unius\n[[815.1]] idem esse cum medio puncto alterius, ideo dicemus media diametrorum circuli puncta\n[[815.2]] coincidere. </p>\n<p> [[815.3]] 6) ^&.SD <Leibniz special character> et ^&.za <Leibniz special character> esse <b>eadem</b>, ita designo: ^&.SD <Leibniz special character> ^&.SE <Leibniz special character> ^&.za <Leibniz special character>, </p>\n<p> [[815.4]] 7) <b>diversa</b> vero ita: ^&.SD <Leibniz special character> non ^&.SE <Leibniz special character> ^&.za <Leibniz special character> </p>\n<p> [[815.5]] 8) Quae eadem sunt, eorum unum alteri substitui potest salva veritate, </p>\n<p> [[815.6]] (1) Sit ^&.SD <Leibniz special character> ^&.SE <Leibniz special character> ^&.za <Leibniz special character>. </p>\n<p> [[815.7]] (2) Et sit propositio vera ^&.zi <Leibniz special character> </p>\n<p> [[815.8]] (3) in qua ^&.SD <Leibniz special character>. </p>\n<p> [[815.9]] (4) Dico si in ^&.zi <Leibniz special character> pro ^&.SD <Leibniz special character> ponas ^&.za <Leibniz special character> caeteris manentibus </p>\n<p> [[815.10]] (5) tunc fieri ^&.zh <Leibniz special character> veram. </p>\n<p> [[815.11]] (6) Nam alioqui ^&.SD <Leibniz special character> et ^&.za <Leibniz special character> discernentur (per prop. 1). </p>\n<p> [[815.12]] (7) Ergo non sunt eadem (per prop. 3) quod est contra hypothesin (hic 1). </p>\n<p> [[815.13]] 9) Quae eadem sunt uni tertio eadem sunt inter se. </p>\n<p> [[815.14]] (1) Sit ^&.SD <Leibniz special character> ^&.SE <Leibniz special character> ^&.za <Leibniz special character> </p>\n<p> [[815.15]] (2) et ^&.za <Leibniz special character> ^&.SE <Leibniz special character> ^&.zi <Leibniz special character>. </p>\n<p> [[815.16]] (3) Dico esse ^&.SD <Leibniz special character> ^&.SE <Leibniz special character> ^&.zi <Leibniz special character>. </p>\n<p> [[815.17]] (4) Nam in art. 2 vero (ex hyp.) poni potest ^&.SD <Leibniz special character> pro ^&.za <Leibniz special character> ut fiat vera (per prop. 8) </p>\n<p> [[815.18]] (5) fit autem ^&.SD <Leibniz special character> ^&.SE <Leibniz special character> ^&.zi <Leibniz special character> (per autopsiam ipsius 2). </p>\n<p> [[815.19]] (6) Ergo ^&.SD <Leibniz special character> ^&.SE <Leibniz special character> [^&.zi <Leibniz special character>] vera (per 4 et 5) Q. E. D. (per 3). </p>\n<p> [[815.20]] 10) Quod diverso ab alio idem est, ab illo alio diversum est. </p>\n<p> [[815.21]] (1) <i>A</i> ^&.SE <Leibniz special character> <i>B</i> </p>\n<p> [[815.22]] (2) et <i>B</i> non ^&.SE <Leibniz special character> <i>C</i> </p>\n<p> [[815.23]] (3) dico fore <i>A</i> non ^&.SE <Leibniz special character> <i>C</i> </p>\n<p> [[815.24]] (4) Nam si <i>A</i> ^&.SE <Leibniz special character> <i>C</i> erit (per artic. 1. hic et per prop. 9) <i>B</i> ^&.SE <Leibniz special character> <i>C</i>. </p>\n<p> [[815.25]] (5) quod est contra hyp. (art. 2). </p>\n","number":"172.","title":"Demonstratio axiomatum de identitate ac diversitate","date":"[April bis Oktober 1686 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

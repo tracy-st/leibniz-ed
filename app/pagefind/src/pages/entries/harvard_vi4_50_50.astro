@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_50","series":"Band VI 4 (1677 - 1690)","seq":50,"text":"[[123.16]] <b>42.  De principiis [1679 bis 1685 (?)]</b>\n [[123.17]] <tab/>[1679 bis 1685 (?)]\n[[124.1]] <tit2><b>De principiis</b></tit2> </p>\n<p> [[124.2]] <p>Duo illa prima principia: unum rationis: <b>identica</b> <b>sunt vera, et contradictionem\n[[124.3]] implicantia sunt falsa</i>, alterum experientiae: <b>quod varia a me percipiantur</b>,\n[[124.4]] talia sunt, ut de iis demonstrari possit, primo demonstrationem eorum\n[[124.5]] impossibilem esse; secundo omnes alias propositiones ab ipsis pendere, sive si haec duo\n[[124.6]] principia non sunt vera, nullam omnino veritatem et cognitionem locum habere. Itaque\n[[124.7]] aut admittenda sunt sine difficultate, aut omni inquisitioni veritatis renuntiandum est.\n[[124.8]] Accedit quod nulla contra haec Principia afferri posset ratio dubitandi, quae non locum\n[[124.9]] habeat contra alias propositiones omnes. </p>\n<p> [[124.10]] Memini ingeniosum quendam virum (Episcopum Thiniensem) omnem evidentiam\n[[124.11]] revocare velle ad autoritatem, cui objiciebam etiam hominem solum posse habere scientiam.\n[[124.12]] Ille vero ita argumentabatur: Ea quae probantur seu evidentia redduntur vel ex\n[[124.13]] evidentibus probantur vel ex non evidentibus. Si ex non evidentibus, non poterunt inde\n[[124.14]] evidentia reddi. Sin ex jam evidentibus, de his iterum redibit quaestio, vel in infinitum,\n[[124.15]] nullaque erit evidentia; vel erunt quaedam per se evidentia. Sed unde sciemus ista per se\n[[124.16]] esse evidentia nisi hominum consensu, quae scilicet ab omnibus recipiuntur. <Fn><i>Unten auf Bl. 19 r^#'o</i>: Ego etsi concedam omnes homines plerisque in casibus duci autoritate (videatur S. Augustini libellus <i>de</i> [<i>utilitate</i>] <i>credendi</i>) et opinionem communem saepe ultimam esse analysin judiciorum nostrorum practicorum, puto tamen eum qui accurate meditari velit altiora reperturum judicandi principia.</Fn> Respondeo\n[[124.17]] ea per se evidentia esse, quibus sublatis omnis sublata est veritas. Et notabam praeterea\n[[124.18]] me aliqua demonstrare posse, nihil assumendo nisi concessa. Ut si quis opinionem\n[[124.19]] aliquam defendit, quam ego ostendere volo absurdam, assumam propositiones ab illo\n[[124.20]] concessas, et in legitima forma inde concludam contradictorium alicujus quod ipse\n[[124.21]] asseruit; ex quo sequitur falsitatem alicui ex propositionibus ab eo assumtis adesse, id est\n[[124.22]] eas non posse [esse] veras simul. Unde patet etiam non posse quenquam demonstrare\n[[125.1]] absurditatem nisi ejus propositionis quae plures assertiones sive concessiones involvit,\n[[125.2]] dum scilicet ex concessis argumentatus absurdum concludo. Unde revera omnis\n[[125.3]] demonstratio est ad absurdum deductio. Et demonstratio nullis indiget assumtis sive\n[[125.4]] principiis directis, sed tantum reflexis. Et ita cessat illa difficultas quae omnes torquet, de\n[[125.5]] modo quo ipsorum principiorum certi sumus, ex quibus demonstrationes ducuntur.\n[[125.6]] Dicendum enim est demonstrationes ex nullis assertionibus sed ex concessionibus sive\n[[125.7]] hypothesibus procedere, neque aliud agere, quam ut ostenda[n]t Hypotheses quasdam\n[[125.8]] inter se pugnare. Tantum ergo assumo principia reflexa seu indirecta vel formalia, primo\n[[125.9]] quod forma syllogistica sit bona, secundo quod contradictio sit absurda; principia vero\n[[125.10]] materialia seu materiae demonstrationis non alia adhibeo, quam illas ipsas hypotheses\n[[125.11]] adversarii quibus falsitatem inesse ostendo. Unde quodammodo omnis demonstratio est\n[[125.12]] ad hominem. </p>\n","number":"42.","title":"De principiis","date":"[1679 bis 1685 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

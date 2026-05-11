@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii4_104","series":"Band II 4 (1701 - 1707)","seq":104,"text":"<p> [[322.1]] <b>104. LEIBNIZ AN GABRIEL WAGNER</p>\n<p> [[322.2]] [Hannover, nach dem 2. Mai 1705]. [103.161.] </b></p>\n<p> [[322.12]] Insonders Hochgeehrter </p>\n<p> [[322.13]] Sein Schreiben ist mir etwas spat zu kommen, weil ich nicht zu Hause gewesen, ich habe\n[[322.14]] aber auch nicht gleich geantwortet, weil mich in etwas darüber verwundert. Diene zwar ihm\n[[322.15]] und anderen gern, habe es auch allzeit über Schuldigkeit gethan, aber zu einer forderung kan\n[[322.16]] mich nicht verstehen. Hätte er was an die Königin oder an mich zu fordern gehabt, so hätte er es\n[[322.17]] mir zu Berlin oder Lutzenburg andeuten sollen, dergestalt hätte ich sehen können, was bey Ihrer\n[[322.18]] M[ajestä]t zu thun, er ist aber fortgereiset, ohne abschied von mir zu nehmen, hat sich auch\n[[322.19]] meines Raths zu erhaltung seines absehens nie bedienet. Der Hr. Generalfeldmarschall ist mit\n[[322.20]] seinem Bezeigen nicht zufrieden gewesen, würde also die Schuld des Mißschlags nicht auf die\n[[322.21]] Königin oder mich, sondern ihn selbst fallen. Ich habe auch die Reise nicht eingerathen sondern\n[[322.22]] nur M. Hn. von dem so man seinetwegen an mich gelangen laßen nachricht ertheilen wollen\n[[322.23]] und sollen und ihm selbst sich zu entschließen überlaßen. Dergleichen ja wegen des ausgangs\n[[323.1]] zu nichts verbindet. Er hat sich bey der Königin nicht ehe angeben als bis die Sache bey dem\n[[323.2]] Hn Grafen von Fleming verderbt gewesen, und bey mir klagt er da die Königin nicht mehr\n[[323.3]] vorhanden. </p>\n<p> [[323.4]] Braucht er das geld so er verlanget bloß einige bücher von dem Hn. Hofrath Cuno\n[[323.5]] einzulösen, so ist es ein guth Zeichen, und meine Hülfe umb so weniger nöthig. Aber ich\n[[323.6]] wiederhohle sonst, doch mit vorbehalt mich deswegen auf ausgang nicht verbindtlich zu\n[[323.7]] machen, den ehemahls gegebenen Rath und stehe in den Gedancken M. G. H. werde nichts\n[[323.8]] nüzlichers für sich und andere fürnehmen können, als einen Teutschen Sprachschaz zu schreiben.\n[[323.9]] Zu welchem ende man die französische Sprachgesellschaft und des Furetiers Wörterbuch\n[[323.10]] so schohn weit getrieben vornehmen, und teutsche dergleichen oder <angle bracket>viel</angle bracket> mehr etwas beßers\n[[323.11]] thun köndte und zu solchem ende aber müste man sich [in] Nürenberg oder Hamburg, oder\n[[323.12]] einer andren großen Stadt aufhalten, da viel handwerksleute und and[ere] lebens-arthen, also\n[[323.13]] Leute vo[n denen] da die sonderbare Worthe zu erfahren. </p>\n<p> [[323.14]] Ich solte glauben es werden sich leute finden so für einen bogen etwas billiges zuschaffen\n[[323.15]] köndten. </p>\n<p> [[323.16]] Aber es müßte alles wohl abgerundet werden und wohl von statten gehen, denn wenn man\n[[323.17]] alles zu bolzen drehen will, das heißen die Holländer <angle bracket>auch</angle bracket> wohl die Profeten-Kranckheit.\n[[323.18]] Zwischen dieser und der nachlässigen überfahrung ist ein Mittel. </p>\n<p> [[323.19]] Ich wündsche M. G. Hn., daß er bedacht sey, wie er seine gaben sich und andren nuzbar\n[[323.20]] mache, welches nicht geschehen kan, ohne solche Aufführung zu vermeiden darüber man\n[[324.1]] überall anstoßen muß. Mir ist leid gewesen zu sehen wie offt dadurch meine eigene wohlgemeinten\n[[324.2]] bemühungen auch kosten verlohren gangen, auff welchen fall wenig verblieben seyn\n[[324.3]] würden wie ich annoch </p>\n<p> [[324.4]] Meines G. Hrn. dienstwilligster G W v L </p>\n","number":"104.","title":"LEIBNIZ AN GABRIEL WAGNER","date":"[Hannover, nach dem 2. Mai 1705]. [103.161.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

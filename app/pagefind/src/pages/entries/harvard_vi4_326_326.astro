@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_vi4_326","series":"Band VI 4 (1677 - 1690)","seq":326,"text":"[[1442.1]] <b>270.  De veritatibus primis [Mitte bis Ende 1680 (?)]</b>\n [[1442.2]] <tab/>[Mitte bis Ende 1680 (?)] </p>\n<p> [[1442.14]] <b>Veritates</b> <b>absolute primae</b>, <Fn><i>Am Rande</i>: Veritatis definitio realis est. <b>Verum</b> est quod ex identico demonstrabile est per definitiones. Quod demonstratur ex definitionibus nominalibus verum est hypothetice, quod ex realibus, absolute; definitiones non nisi reales earum notionum afferri possunt, quae a nobis immediate percipiuntur, ut cum dico <i>existere, verum esse, extensio, calor</i>; nam huic ipsi quod confuse percipimus, assignandum est ac aliquid distinctum. Definitiones reales a posteriori possunt probari, nempe ab experimentis.</Fn> sunt inter veritates rationis <b>identicae</b> et inter\n[[1442.15]] veritates facti haec ex qua a priori demonstrari possent omnia experimenta, nempe <i>Omne\n[[1442.16]] possibile exigit existere</i>, et proinde existeret nisi aliud impediret, quod etiam existere\n[[1442.17]] exigit, et priori incompatibile est, unde sequitur, semper eam existere rerum combinationem,\n[[1442.18]] qua existunt quam plurima, ut si ponamus <i>A B C D</i> esse aequalia quoad essentiam,\n[[1442.19]] seu aeque perfecta sive aeque existentiam exigentia, et ponamus <i>D</i> esse incompatibile\n[[1443.1]] cum <i>A</i> et cum <i>B, A</i> autem esse compatibile cum quovis praeter cum <i>D</i>, et similiter <i>B</i> et <i>C</i>,\n[[1443.2]] sequitur existere hanc combinationem <i>ABC</i>, excluso <i>D</i>, <Fn><i>Am Rande</i>: Quod omne existens est possibile, debet demonstrari ex definitione existentiae.</Fn> nam si <i>D</i> existere volumus, non\n[[1443.3]] nisi <i>C</i>, ipsi poterit coexistere, ergo existet combinatio <i>CD</i>, quae utique imperfectior est\n[[1443.4]] combinatione <i>ABC.</i> Itaque hinc patet res existere perfectissimo modo. Haec propositio:\n[[1443.5]] <i>omne possibile exigit existere</i>, <Fn><i>Am Rande</i>: Si Existentia esset aliud quiddam quam essentiae exigentia, sequeretur ipsam habere quandam essentiam seu aliquid novum superaddere rebus, de quo rursus quaeri posset an haec essentia existat, an non existat et cur ista potius quam alia. </Fn> probari potest a posteriori posito aliquid existere, nam vel\n[[1443.6]] omnia existunt, et tunc omne possibile adeo exiget existere, ut etiam existat; vel quaedam\n[[1443.7]] non existunt, tunc ratio reddi debet, cur quaedam prae aliis existant. Haec autem aliter\n[[1443.8]] reddi non potest quam ex generali essentiae seu possibilitatis ratione; posito possibile\n[[1443.9]] exigere sua natura existentiam, et quidem pro ratione possibilitatis seu pro essentiae\n[[1443.10]] gradu. Nisi in ipsa Essentiae natura esset quaedam ad existendum inclinatio, nihil existeret;\n[[1443.11]] nam dicere quasdam essentias hanc inclinationem habere, quasdam non habere, est\n[[1443.12]] dicere aliquid sine ratione, cum generaliter videatur existentia referri ad omnem essentiam\n[[1443.13]] eodem modo. <Fn><i>Am Rande</i>: Quoniam vera propositio est, quae vel identica est, vel ex identicis potest demonstrari adhibitis definitionibus; hinc sequitur Existentiae <b>definitionem realem</b> in eo consistere, ut existat quod est maxime perfectum ex iis quae alioqui existere possent, seu quod plus involvit essentiae. Adeo ut natura sit possibilitatis sive essentiae exigere existentiam. Nisi id esset, ratio existentiae rerum reddi non posset.</Fn> Illud tamen adhuc hominibus ignotum est, unde oriatur incompossibilitas\n[[1443.14]] diversarum, seu qui fieri possit ut diversae essentiae invicem pugnent, cum\n[[1443.15]] omnes termini pure positivi videantur esse compatibiles inter se. </p>\n<p> [[1443.16]] <b>Veritates secundum nos primae</b>, sunt experimenta. </p>\n<p> [[1443.17]] Omnis veritas quae non est absolute prima, demonstrari potest ex absolute prima. </p>\n<p> [[1443.18]] Omnis veritas aut demonstrari potest ex absolute primis (quas indemonstrabiles esse\n[[1443.19]] demonstrabile est), aut ipsa est absolute prima. Et hoc est quod dici solet, nihil debere\n[[1443.20]] asseri sine ratione, imo nihil fieri sine ratione. </p>\n","number":"270.","title":"De veritatibus primis","date":"[Mitte bis Ende 1680 (?)]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

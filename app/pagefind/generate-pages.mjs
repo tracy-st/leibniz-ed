@@ -95,6 +95,11 @@ const entry = ${JSON.stringify(entry, null, 2)};
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        ${JSON.stringify(entry)}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -349,15 +354,15 @@ const entry = ${JSON.stringify(entry, null, 2)};
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\\[\\[(\\d+\\.\\d+)\\]\\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\\[\\[([0-9]+\\.[0-9]+)\\]\\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\\[|\\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\\[\\[\\d+\\.\\d+\\]\\]/g, '')
-        .replace(/<\\/?[^>]+(>|$)/g, '')
+        .replace(/\\[\\[[0-9]+\\.[0-9]+\\]\\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\\s+/g, ' ')
         .trim();
 
@@ -383,9 +388,20 @@ const entry = ${JSON.stringify(entry, null, 2)};
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

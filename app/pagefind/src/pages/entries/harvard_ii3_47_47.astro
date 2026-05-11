@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_47","series":"Band II 3 (1695 - 1700)","seq":47,"text":"<p> [[135.6]] <b>47. GERHARD MEIER (HAMBURG) AN LEIBNIZ</p>\n<p> [[135.7]] Hamburg, 14. (24.) Februar 1696. [41.]</b></p>\n\n<p> [[135.12]] Illustris Excellentissimeque Vir, Patrone plurimum colende. </p>\n<p> [[135.13]] Qui <Fn><i>Am Rand oben links wohl von Leibniz' Hand</i>: Mejeri</Fn> proximas reddidit commendatitias, eum consilio juvi, quantum potui. Honesta saltim\n[[135.14]] ac liberali videbatur facie. <i>Specimen historiae</i> anecdotae desiderium apud me concitavit maximum,\n[[135.15]] quippe qui sic me totum dedi Theoreticis, ut historica tamen habere in deliciis non\n[[135.16]] desinam. Epistolam quoque Historicam, ceu indicium benevolentiae luculentissimum, fui exosculatus.\n[[135.17]] <i>Consequentiae</i> <i>a rectis ad obliqua</i> demonstrandi rationem abs Tua Excellentia excogitatam\n[[135.18]] memini me oculis quondam usurpasse, verum tunc temporis nescio quibus negotiis\n[[135.19]] districtus eam in meos referre codicillos neglexi, quae nunc una cum ceteris Vagetianis Vulcano\n[[135.20]] cesserit. Weigelius Mathematum Professor Jenensis haud adeo pridem nos invisit, atque suis de\n[[136.1]] Schola Virtutis consiliis Nob. Dn. Placcium in suam pertraxit sententiam, quippe qui perpetuum\n[[136.2]] inter Weigelii <i>tugendschul</i> suamque Semeioticam parallelismum, adeo ut singulae paragraphi\n[[136.3]] hujus ex illa possint illustrari, depraehendisse sibi videtur. Nunc Havniae degit brevi ad\n[[136.4]] nos reversurus Weigelius. Eodem Nob. Placcio auctore ac instigatore novum in me suscepi onus\n[[136.5]] conscribendae Hamburgensis Gymnasii Historiae. Obrutus collegiis ante Paschatos festum ne\n[[136.6]] minimam quidem huic instituto dicare possum cogitatiunculam, dein manum admoturus operi,\n[[136.7]] modo licuerit subsidia conquirere suffectura. Bibliotheca nostra nunc demum justis exornabitur\n[[136.8]] indicibus, quos iri impressum non doleo, quandoquidem thesaurus alioquin absconditus foret,\n[[136.9]] etiamsi selectioribus libris non esse instructam nobilissimi emporii Bibliothecam exteri sint\n[[136.10]] demiraturi. D. Mayerus bina luci exponet scripta. Alterum de Pietistis Veteris Ecclesiae:\n[[136.11]] Alterum de [Bellarmino] malae fidei postulato a fidei sociis. Deus Te servet, Vir illustris, in Rei\n[[136.12]] Literariae emolumentum. Quae votorum summa est </p>\n<p> [[136.13]] Tuae illustri Excellentiae deditissimi Gerh. Mejeri.\n [[136.14]] L. P.P. </p>\n<p> [[136.15]] Hamburgi A. XCVI. XIV. Febr. </p>\n<p> [[136.16]] Illustri Summoque Viro Dn. Godofrido Guilielmo Leibnitio Potentissimi Electoris Consiliario\n[[136.17]] etc. Patrono meo plurimum colendo. <b>Hanoveram</b>. Francò. </p>\n","number":"47.","title":"GERHARD MEIER (HAMBURG) AN LEIBNIZ","date":"Hamburg, 14. (24.) Februar 1696. [41.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

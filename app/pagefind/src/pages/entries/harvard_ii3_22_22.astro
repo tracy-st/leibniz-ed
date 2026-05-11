@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_22","series":"Band II 3 (1695 - 1700)","seq":22,"text":"<p> [[54.9]] <b>22. LEIBNIZ AN SIMON FOUCHER</p>\n<p> [[54.10]] [Hannover,] 5./15. Juli 1695. [16.]</b></p>\n [[54.11]] <p>\n [[54.12]] 1. <k>Azcárate</i>, <i>Obras de Leibnitz</i>, Bd 4, 1878, S. 90-91. - 2. <k>Wiater</k>, <i>Briefe</i>, 1989, S. 45. </petit> </p>\n<p> [[55.13]] Extrait de ma lettre à M. l'Abbé Foucher 5/15 Juillet 1695 </p>\n<p> [[55.14]] Vous aurés vû que tout mon systeme est fondé sur la consideration de l'unité reelle qui est\n[[55.15]] indestructible et <i>sui juris</i>, et dont chacune exprime l'univers tout entier d'une maniere qui luy\n[[55.16]] est particuliere; et cela par les loix de sa propre nature sans recevoir des influences de dehors,\n[[55.17]] excepté celle de Dieu, qui la fait subsister depuis qu'il l'a créé, par un renouvellement\n[[55.18]] continuel. Si Monsieur Lantin vivoit, je crois qu'il prendroit un plaisir particulier dans ces\n[[55.19]] considerations, comme on peut juger par une lettre qu'il m'écrivit il y a 24 ans ou environ,\n[[55.20]] jugeant deslors que mes meditations dynamiques <i>de conatu</i> pourroient éclaircir encor les\n[[55.21]] matieres de Metaphysique. </p>\n<p> [[55.22]] Si le public reçoit bien ces meditations, on m'encouragera à donner encor des pensées\n[[55.23]] assez singulieres que j'ay pour lever les difficultés <i>de fato et contingentia</i>; et pour éclaircir une\n[[55.24]] différence essentielle qu'on peut concevoir entre les formes materielles et les intelligences ou\n[[55.25]] esprits. Ce qu'on trouvera d'autant plus curieux que les Mathematiques y servent merveilleusement,\n[[55.26]] en sorte que sans en avoir quelque teinture, il seroit difficile de s'en aviser. </p>\n","number":"22.","title":"LEIBNIZ AN SIMON FOUCHER","date":"[Hannover,] 5./15. Juli 1695. [16.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {

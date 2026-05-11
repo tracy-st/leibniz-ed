@@ -65,6 +65,11 @@ const entry = {
         </div>
       </div>
 
+      <!-- Hidden data for JavaScript -->
+      <script type="application/json" id="entry-data">
+        {"id":"harvard_ii3_4","series":"Band II 3 (1695 - 1700)","seq":4,"text":"<p> [[18.1]] <b>4. LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY</p>\n<p> [[18.2]] Hannover, 26. Januar (5. Februar) 1695. [3.6.]</b></p>\n\n<p> [[18.14]] Je vous disois hier, Monsieur, que selon les anciens tout peché se punit luy même. En\n[[18.15]] voicy une preuve. Vostre curiosité est punie par mes incommensurables, qui vous poursuivent\n[[18.16]] jusque chez vous. Car je me suis avisé de mettre nostre dialogue par écrit. Cependant vous avés\n[[18.17]] l'avantage de vous pouvoir affranchir de cette incommodité. Car vous en estes le maistre\n[[18.18]] absolument, et il depend de vous de ne le point lire, ny faire lire; et ce sera comme s'il n'avoit\n[[18.19]] point esté fait. J'auray l'honneur de faire mon devoir au premier jour, et vous porteray le\n[[18.20]] memoire qui servira peutestre à vous faire apprendre des particularites sur des langues. Estant\n[[18.21]] cependant avec zele etc. </p>\n<p> [[18.22]] Monsieur vostre tres humble et tres obeissant serviteur Leibniz </p>\n<p> [[18.23]] Hanover ce 26 janvier 1695\n[[18.24]] <yi>A Monsieur le Baron Dobrzensky Conseiller d'Estat et de Guerre de S.A.E. de Brandebourg </p>\n","number":"4.","title":"LEIBNIZ AN FRIEDRICH BOGUSLAV DOBRZENSKY","date":"Hannover, 26. Januar (5. Februar) 1695. [3.6.]"}
+      </script>
+
       <!-- Detailed scholarly view with line numbers -->
       <div id="scholarly-view" class="text-view">
         <div class="scholarly-notice">
@@ -319,15 +324,15 @@ const entry = {
       const trimmedLine = line.trim();
       if (!trimmedLine) return;
 
-      // Extract line numbers
-      const lineNumberMatch = trimmedLine.match(/\[\[(\d+\.\d+)\]\]/g);
+      // Extract line numbers using proper regex
+      const lineNumberMatch = trimmedLine.match(/\[\[([0-9]+\.[0-9]+)\]\]/g);
       const extractedNumbers = lineNumberMatch ?
         lineNumberMatch.map(m => m.replace(/\[|\]/g, '')) : [];
 
       // Remove line number markers and HTML tags for continuous text
       let contentOnly = trimmedLine
-        .replace(/\[\[\d+\.\d+\]\]/g, '')
-        .replace(/<\/?[^>]+(>|$)/g, '')
+        .replace(/\[\[[0-9]+\.[0-9]+\]\]/g, '')
+        .replace(/<[^>]*>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -353,9 +358,20 @@ const entry = {
     const continuousTextDiv = document.getElementById('continuous-text');
     const lineNumbersRef = document.getElementById('line-numbers-ref');
 
+    // Get entry data from JSON script
+    const entryDataScript = document.getElementById('entry-data');
+    let entryData = null;
+    if (entryDataScript) {
+      try {
+        entryData = JSON.parse(entryDataScript.textContent);
+      } catch (e) {
+        console.error('Failed to parse entry data:', e);
+      }
+    }
+
     // Process the text for translation view
-    if (continuousTextDiv && lineNumbersRef && entry && entry.text) {
-      const processed = processTextForTranslation(entry.text);
+    if (continuousTextDiv && lineNumbersRef && entryData && entryData.text) {
+      const processed = processTextForTranslation(entryData.text);
       continuousTextDiv.textContent = processed.translationText;
 
       if (processed.lineNumbers.length > 0) {
