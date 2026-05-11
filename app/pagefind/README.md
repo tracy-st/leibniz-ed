@@ -22,12 +22,7 @@ A search interface for browsing Leibniz writings using Astro and Pagefind.
    node generate-pages.mjs
    ```
 
-3. **Start development server:**
-   ```bash
-   npm run dev
-   ```
-
-4. **Build for production:**
+3. **Build for production:**
    ```bash
    npm run build
    ```
@@ -37,10 +32,18 @@ A search interface for browsing Leibniz writings using Astro and Pagefind.
    - Generate the Pagefind search index
    - Output everything to `dist/`
 
-5. **Preview the built site:**
+4. **Preview the built site (REQUIRED for search to work):**
    ```bash
    npm run preview
    ```
+
+   **Important:** The search functionality only works in the built version (`npm run preview`), not in development mode (`npm run dev`). This is because Pagefind generates the search index during the build process.
+
+5. **Development mode (no search):**
+   ```bash
+   npm run dev
+   ```
+   Use this for editing layouts and content, but search won't work.
 
 ## Data Structure
 

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Leibniz Search</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .debug-panel {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        .success { background: #dcfce7; color: #166534; }
+        .error { background: #fef2f2; color: #dc2626; }
+        .info { background: #dbeafe; color: #1e40af; }
+        .warning { background: #fef3c7; color: #92400e; }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #1e40af; }
+        pre { background: #f1f5f9; padding: 15px; border-radius: 4px; overflow-x: auto; }
+        #search { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="debug-panel">
+        <h1>🔍 Leibniz Search Diagnostics</h1>
+        <p>This page helps debug the pagefind search interface.</p>
+    </div>
+
+    <div class="debug-panel">
+        <h2>Test Results</h2>
+        <div id="test-results"></div>
+        <button onclick="runTests()">Run Diagnostics</button>
+        <button onclick="clearResults()">Clear</button>
+    </div>
+
+    <div class="debug-panel">
+        <h2>Live Search Test</h2>
+        <div id="search"></div>
+        <button onclick="initializeSearch()">Initialize Search</button>
+    </div>
+
+    <script>
+        const resultsDiv = document.getElementById('test-results');
+
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            resultsDiv.appendChild(div);
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function clearResults() {
+            resultsDiv.innerHTML = '';
+        }
+
+        async function runTests() {
+            clearResults();
+            addResult('Starting diagnostics...', 'info');
+
+            // Test 1: Check if we're on the correct URL
+            addResult(`Current URL: ${window.location.href}`, 'info');
+
+            // Test 2: Check if pagefind files exist
+            try {
+                const response = await fetch('/pagefind/pagefind-ui.js');
+                if (response.ok) {
+                    addResult('✓ pagefind-ui.js is accessible', 'success');
+                } else {
+                    addResult(`✗ pagefind-ui.js returned ${response.status}`, 'error');
+                }
+            } catch (error) {
+                addResult(`✗ Error accessing pagefind-ui.js: ${error.message}`, 'error');
+            }
+
+            // Test 3: Check CSS file
+            try {
+                const response = await fetch('/pagefind/pagefind-ui.css');
+                if (response.ok) {
+                    addResult('✓ pagefind-ui.css is accessible', 'success');
+                } else {
+                    addResult(`✗ pagefind-ui.css returned ${response.status}`, 'error');
+                }
+            } catch (error) {
+                addResult(`✗ Error accessing pagefind-ui.css: ${error.message}`, 'error');
+            }
+
+            // Test 4: Check search index
+            try {
+                const response = await fetch('/pagefind/pagefind.js');
+                if (response.ok) {
+                    addResult('✓ Search index is accessible', 'success');
+                } else {
+                    addResult(`✗ Search index returned ${response.status}`, 'error');
+                }
+            } catch (error) {
+                addResult(`✗ Error accessing search index: ${error.message}`, 'error');
+            }
+
+            // Test 5: Try to load the PagefindUI
+            try {
+                addResult('Attempting to load PagefindUI...', 'info');
+
+                const script = document.createElement('script');
+                script.src = '/pagefind/pagefind-ui.js';
+
+                const loadPromise = new Promise((resolve, reject) => {
+                    script.onload = () => {
+                        if (window.PagefindUI) {
+                            resolve(window.PagefindUI);
+                        } else {
+                            reject(new Error('PagefindUI not found on window'));
+                        }
+                    };
+                    script.onerror = () => reject(new Error('Script failed to load'));
+                });
+
+                document.head.appendChild(script);
+                const PagefindUI = await loadPromise;
+
+                addResult('✓ PagefindUI loaded successfully', 'success');
+                addResult(`PagefindUI constructor: ${typeof PagefindUI}`, 'info');
+
+            } catch (error) {
+                addResult(`✗ Failed to load PagefindUI: ${error.message}`, 'error');
+            }
+
+            addResult('Diagnostics complete!', 'info');
+        }
+
+        async function initializeSearch() {
+            const searchDiv = document.getElementById('search');
+
+            try {
+                addResult('Initializing search interface...', 'info');
+
+                // Clear existing content
+                searchDiv.innerHTML = '<p>Loading search...</p>';
+
+                // Load CSS
+                if (!document.querySelector('link[href="/pagefind/pagefind-ui.css"]')) {
+                    const link = document.createElement('link');
+                    link.href = '/pagefind/pagefind-ui.css';
+                    link.rel = 'stylesheet';
+                    document.head.appendChild(link);
+                }
+
+                // Load and initialize PagefindUI
+                const script = document.createElement('script');
+                script.src = '/pagefind/pagefind-ui.js';
+
+                script.onload = () => {
+                    if (window.PagefindUI) {
+                        try {
+                            new window.PagefindUI({
+                                element: '#search',
+                                showImages: false,
+                                showSubResults: true,
+                                excerptLength: 300
+                            });
+                            addResult('✓ Search interface initialized!', 'success');
+                        } catch (error) {
+                            addResult(`✗ Error initializing search: ${error.message}`, 'error');
+                            searchDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                        }
+                    } else {
+                        addResult('✗ PagefindUI not available after script load', 'error');
+                        searchDiv.innerHTML = '<p style="color: red;">PagefindUI not available</p>';
+                    }
+                };
+
+                script.onerror = () => {
+                    addResult('✗ Failed to load pagefind script', 'error');
+                    searchDiv.innerHTML = '<p style="color: red;">Failed to load search script</p>';
+                };
+
+                document.head.appendChild(script);
+
+            } catch (error) {
+                addResult(`✗ Initialization error: ${error.message}`, 'error');
+                searchDiv.innerHTML = `<p style="color: red;">${error.message}</p>`;
+            }
+        }
+
+        // Auto-run tests on page load
+        window.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>

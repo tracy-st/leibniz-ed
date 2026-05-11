@@ -4,10 +4,18 @@
 
 <div class="search-wrapper">
   <div class="search-container">
-    <div id="search"></div>
+    <div id="search">
+      <div class="loading-message">
+        <input type="text" id="fallback-search" placeholder="Loading search interface..." disabled />
+        <p class="loading-text">Initializing search...</p>
+      </div>
+    </div>
   </div>
   <div id="search-results"></div>
 </div>
+
+<!-- Load Pagefind CSS -->
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 
 <style>
   .search-wrapper {
@@ -105,22 +113,99 @@
     padding: 1px 2px;
     border-radius: 2px;
   }
+
+  .loading-message {
+    text-align: center;
+  }
+
+  .loading-message input {
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--background);
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+  }
+
+  .loading-text {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .error-text {
+    color: #dc2626;
+    margin: 0;
+    font-size: 14px;
+  }
 </style>
 
 <script>
-  // Load pagefind UI after page loads
+  // Load pagefind UI using script tag approach
+  function loadPagefindScript() {
+    return new Promise((resolve, reject) => {
+      // Check if script is already loaded
+      if (window.PagefindUI) {
+        resolve(window.PagefindUI);
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = '/pagefind/pagefind-ui.js';
+      script.onload = () => {
+        if (window.PagefindUI) {
+          resolve(window.PagefindUI);
+        } else {
+          reject(new Error('PagefindUI not found on window object'));
+        }
+      };
+      script.onerror = () => reject(new Error('Failed to load pagefind script'));
+      document.head.appendChild(script);
+    });
+  }
+
+  // Initialize search when page loads
   window.addEventListener('DOMContentLoaded', async () => {
-    if (typeof window !== 'undefined') {
-      try {
-        const { PagefindUI } = await import('/pagefind/pagefind-ui.js');
-        new PagefindUI({
-          element: '#search',
-          showImages: false,
-          showSubResults: true,
-          excerptLength: 300
-        });
-      } catch (error) {
-        console.log('Pagefind not yet available, will load after build');
+    const searchElement = document.getElementById('search');
+    const loadingMessage = searchElement?.querySelector('.loading-message');
+
+    try {
+      console.log('Loading pagefind...');
+
+      // Load pagefind script
+      const PagefindUI = await loadPagefindScript();
+
+      console.log('PagefindUI loaded:', PagefindUI);
+
+      // Clear loading message
+      if (loadingMessage) {
+        loadingMessage.remove();
+      }
+
+      // Initialize pagefind
+      new PagefindUI({
+        element: '#search',
+        showImages: false,
+        showSubResults: true,
+        excerptLength: 300
+      });
+
+      console.log('✅ Pagefind search interface loaded successfully');
+
+    } catch (error) {
+      console.error('❌ Error loading pagefind:', error);
+
+      // Show error message
+      if (searchElement && loadingMessage) {
+        loadingMessage.innerHTML = `
+          <input type="text" placeholder="Search unavailable" disabled />
+          <p class="error-text">
+            Search interface failed to load: ${error.message}<br>
+            <small>Make sure you've run 'npm run build' and are using 'npm run preview'</small>
+          </p>
+        `;
       }
     }
   });
